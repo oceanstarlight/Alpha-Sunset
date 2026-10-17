@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+.streamlit/secrets.toml
+
+# 런타임 데이터 (llm_cache.db 등 재현용 데이터는 커밋 대상)
+data/live.db
+data/sandbox.db
+data/chroma/
