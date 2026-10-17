@@ -1,0 +1,80 @@
+"""환경 설정 로딩. 비밀키는 환경변수(.env) → st.secrets 순으로 조회한다."""
+
+from __future__ import annotations
+
+import os
+from dataclasses import dataclass
+from functools import lru_cache
+from pathlib import Path
+from typing import Any
+
+import yaml
+from dotenv import load_dotenv
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+CONFIG_PATH = ROOT_DIR / "config.yaml"
+
+load_dotenv(ROOT_DIR / ".env")
+
+
+def _secret(name: str, default: str | None = None) -> str | None:
+    value = os.environ.get(name)
+    if value:
+        return value
+    try:
+        import streamlit as st
+
+        if name in st.secrets:
+            return str(st.secrets[name])
+    except Exception:
+        # secrets.toml 없음 / streamlit 런타임 밖
+        pass
+    return default
+
+
+def _flag(value: str | None) -> bool:
+    return (value or "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+@dataclass(frozen=True)
+class Settings:
+    gemini_api_key: str | None
+    gemini_model: str
+    embed_model: str
+    learner_enabled: bool
+    data_dir: Path
+
+    @property
+    def live_db(self) -> Path:
+        return self.data_dir / "live.db"
+
+    @property
+    def sandbox_db(self) -> Path:
+        return self.data_dir / "sandbox.db"
+
+    @property
+    def llm_cache_db(self) -> Path:
+        return self.data_dir / "llm_cache.db"
+
+    @property
+    def chroma_dir(self) -> Path:
+        return self.data_dir / "chroma"
+
+
+def get_settings() -> Settings:
+    """호출 시점의 환경을 읽는다 (테스트에서 env 교체 가능하도록 캐시하지 않음)."""
+    data_dir = _secret("ALPHA_DATA_DIR") or str(ROOT_DIR / "data")
+    return Settings(
+        gemini_api_key=_secret("GEMINI_API_KEY"),
+        gemini_model=_secret("GEMINI_MODEL", "gemini-3.5-flash-lite"),
+        embed_model=_secret("EMBED_MODEL", "gemini-embedding-001"),
+        learner_enabled=_flag(_secret("LEARNER_ENABLED", "false")),
+        data_dir=Path(data_dir),
+    )
+
+
+@lru_cache(maxsize=1)
+def load_config(path: Path = CONFIG_PATH) -> dict[str, Any]:
+    """config.yaml (임계치·가중치)."""
+    with open(path, encoding="utf-8") as f:
+        return yaml.safe_load(f)

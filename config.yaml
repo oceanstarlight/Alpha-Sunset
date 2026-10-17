@@ -1,0 +1,44 @@
+# 임계치·가중치 초기값. P8 백테스트에서 보정한다. (plans.md 5장)
+
+sentinel:
+  market:                     # 시그널 A (FRED)
+    series: [VIXCLS, BAMLH0A0HYM2, T10Y2Y, DGS10, DEXKOUS, DCOILWTICO, DTWEXBGS]
+    lookback_days: 252
+    z_threshold: 2.5
+    min_series: 2
+    z_extreme: 4.0
+  news:                       # 시그널 B (GDELT)
+    baseline_days: 30
+    z_threshold: 3.0
+    min_sources: 20
+  merge_window_hours: 72
+
+matcher:
+  top_k: 30
+  batch_size: 8               # 조항 5~10개씩 배치 판정
+  partial_weight: 0.5
+  requery_fit_below: 0.4
+  low_confidence_below: 0.5
+  max_retries: 2
+
+exposure:
+  top_n: 10
+  uncertainty:
+    direct: 0.0
+    proxy: 0.3
+    counterparty: 0.5
+  uncertainty_penalty: 0.5
+  requery_uncertain_ratio: 0.5
+
+learner:
+  half_life_days: 180
+  explore_c: 0.2
+  weights:
+    cite: 0.4
+    feedback: 0.4
+    recency: 0.2
+  boost: 0.3
+  protected_floor: 0.5
+
+orchestrator:
+  max_steps: 10
