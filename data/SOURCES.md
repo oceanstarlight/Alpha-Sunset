@@ -21,12 +21,18 @@
 | SEC 보도자료 2022-70 (Archegos) | https://www.sec.gov/news/press-release/2022-70 | source_notes |
 | 경향신문 (옵티머스 제재 보도) | khan.co.kr | source_notes |
 
-## FRED (사건 요약 수치·calm 구간 선정)
-- URL: https://fred.stlouisfed.org/series/{VIXCLS, T10Y2Y, DGS10, DEXKOUS, DCOILWTICO, DTWEXBGS}
+## FRED (시그널 A, 사건 요약 수치, calm 구간 선정)
+- URL: https://fred.stlouisfed.org/series/{VIXCLS, T10Y2Y, DGS10, DEXKOUS, DCOILWTICO, DTWEXBGS, BAMLH0A0HYM2, BAA10Y}
+- 캐시: `data/fred/*.csv` (`app/data/fred.py`)
 - 수집일: 2026-10-17, `fredgraph.csv` 다운로드 (API 키 불필요)
 - 약관: FRED 이용약관. 일부 시리즈는 원 제공자 저작권 적용 (예: VIX는 Cboe)
 - 전처리: calm 구간 선정 시 1일 변화의 252영업일 z-score 계산 (`data/events/calm_*.json`의 `selection_method`)
-- 주의: `BAMLH0A0HYM2`(ICE BofA HY 스프레드)는 FRED 공개 범위가 최근 3년뿐이라 과거 백테스트에 사용할 수 없다 → P1에서 대체 시리즈 결정 필요
+- 주의: `BAMLH0A0HYM2`(ICE BofA HY 스프레드)는 FRED 공개 범위가 최근 3년뿐이라 과거 구간은 `BAA10Y`(Moody's Baa 회사채−10년 국채)로 대체
+
+## GDELT DOC 2.0 (라이브 시그널 B)
+- URL: https://api.gdeltproject.org/api/v2/doc/doc (`timelinevolraw`, `artlist` 모드)
+- 약관: GDELT 무료 공개 데이터, 요청 간격 5초당 1회 제한
+- 범위: 최근 약 3개월. 라이브 모드 전용, 데이터 저장 안 함
 
 ## 합성 데이터
 - `data/playbooks/*.json`: `data/source_notes/` 요지를 근거로 Claude가 초안 작성, 사람 검수 대상. 모두 `synthetic: true`

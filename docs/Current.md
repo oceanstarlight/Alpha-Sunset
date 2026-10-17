@@ -16,9 +16,9 @@
 | P | 내용 | 상태 |
 |---|---|---|
 | P0 | 스캐폴딩 | ✅ 완료 |
-| P1 | 외부 데이터 수집 | ⏳ 예정 |
+| P1 | 외부 데이터 수집 | 🔄 진행 중 (FRED·GDELT 완료) |
 | P2 | 합성 코퍼스 | 🔄 진행 중 (라벨·검수 대기) |
-| P3 | Sentinel (상시 감시) | ⏳ 예정 |
+| P3 | Sentinel (상시 감시) | ✅ 완료 |
 | P4 | Matcher (적합도 판단) | ⏳ 예정 |
 | P5 | Exposure (노출 경고) | ⏳ 예정 |
 | P6 | Orchestrator + Briefing | ⏳ 예정 |
@@ -39,11 +39,11 @@
 - ✅ 테스트: 스키마 round-trip, 근거 없는 verdict 거부, live/sandbox 분리, LLM 로깅·캐시·재시도
 - **완료 기준**: `pytest` 통과 (23 passed), LLM 호출이 `llm_calls`에 기록됨 (fake SDK로 검증, 실제 API 호출은 키 설정 후 확인)
 
-## P1 — 외부 데이터 수집 ⏳
-- ⏳ FRED 7개 시리즈 수집 + CSV 캐시
-- ⏳ SEC N-PORT 전처리 → 선택 펀드 parquet
-- ⏳ GDELT DOC 2.0 클라이언트 (조회 가능 기간 확인 필요)
-- ⏳ `data/SOURCES.md` 작성
+## P1 — 외부 데이터 수집 🔄
+- ✅ FRED 8개 시리즈 수집 + CSV 캐시 (`app/data/fred.py`, P3에서 선행 구현, BAA10Y 추가)
+- ⏳ SEC N-PORT 전처리 → 선택 펀드 parquet (gfc_2008 제외)
+- ✅ GDELT DOC 2.0 클라이언트 (`app/data/gdelt.py`, 요청 간격 6초·429 재시도)
+- 🔄 `data/SOURCES.md` 작성 (FRED·GDELT·사건 출처 기록, N-PORT 남음)
 - **완료 기준**: 7개 시리즈 CSV, 선택 펀드 parquet
 
 ## P2 — 합성 코퍼스 🔄
@@ -60,12 +60,16 @@
 - ⚠️ FRED `BAMLH0A0HYM2`(HY 스프레드)는 공개 범위가 최근 3년뿐 → 과거 백테스트용 대체 시리즈 필요
 - ⚠️ SEC N-PORT 공개 데이터는 2019년 이후 → `gfc_2008` 보유내역 스냅샷 확보 불가
 
-## P3 — Sentinel (상시 감시) ⏳
-- ⏳ 시그널 A: FRED z-score (252영업일)
-- ⏳ 시그널 B: GDELT 기사량 z-score + 출처 수 + 군집화
-- ⏳ 이중 트리거 등급 (`ALERT` / `WATCH` / `NONE`), 72h 병합
-- ⏳ 백테스트 모드 미래 정보 누수 차단 + 테스트
-- **완료 기준**: 6개 사건 ALERT 재현 시도, calm 구간 오경보 측정
+## P3 — Sentinel (상시 감시) ✅
+- ✅ 시그널 A: FRED z-score (252영업일, 당일 제외), 신용스프레드 HY OAS→BAA10Y 대체
+- ✅ 시그널 B: 라이브 GDELT 기사량 z-score + 출처 수 + 제목 군집화 / 백테스트 사건 카드
+- ✅ 이중 트리거 등급 (`ALERT` / `WATCH` / `NONE`), 72h 병합
+- ✅ 백테스트 미래 정보 누수 차단 (`AsOfPanel`) + 테스트
+- ✅ 재생 스크립트 `scripts/run_sentinel_backtest.py` → `data/backtest/sentinel_results.json`
+- **완료 기준**: 6개 사건 모두 ALERT 재현 ✅, calm 3구간 ALERT 0·WATCH 0
+- ⚠️ calm 구간은 같은 시그널 A 규칙으로 골랐기 때문에 오경보 0은 순환적 결과. P8에서 무작위 평상 구간 추가 측정 필요
+- ⚠️ 백테스트 B는 카드 date부터 켜지므로 사건일보다 앞선 ALERT는 구조적으로 불가 (사전 경고는 WATCH 일수로 기록)
+- ⚠️ GDELT 실제 호출이 현재 환경에서 429(요청 제한)로 실패 → 응답 형식은 앞선 정상 응답으로 확인, 라이브 검증은 P7 배포 환경에서 재확인
 
 ## P4 — Matcher (적합도 판단) ⏳
 - ⏳ 사건 구조화 (텍스트 → `Event`)

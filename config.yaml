@@ -2,16 +2,38 @@
 
 sentinel:
   market:                     # 시그널 A (FRED)
-    series: [VIXCLS, BAMLH0A0HYM2, T10Y2Y, DGS10, DEXKOUS, DCOILWTICO, DTWEXBGS]
+    series: [VIXCLS, T10Y2Y, DGS10, DEXKOUS, DCOILWTICO, DTWEXBGS]
+    # 신용스프레드: HY OAS(최근 3년만 공개)를 우선, 이력 부족 시 BAA10Y로 대체
+    credit_spread:
+      primary: BAMLH0A0HYM2
+      fallback: BAA10Y
+    diff_series: [T10Y2Y, DGS10, BAMLH0A0HYM2, BAA10Y]   # 수준 차분, 나머지는 변화율
     lookback_days: 252
+    min_history: 200          # z-score 계산에 필요한 최소 관측치
+    stale_days: 5             # 마지막 관측이 이보다 오래되면 제외
     z_threshold: 2.5
     min_series: 2
     z_extreme: 4.0
-  news:                       # 시그널 B (GDELT)
+  news:                       # 시그널 B (라이브: GDELT, 백테스트: 사건 카드)
     baseline_days: 30
     z_threshold: 3.0
     min_sources: 20
+    card_active_days: 14      # 백테스트: 사건 카드 date부터 B 활성 유지 기간
+    cluster_jaccard: 0.5
+    request_interval_sec: 6   # GDELT 요청 간격 제한 (5초당 1회)
+    queries:
+      banking_stress: '"bank run" OR "bank failure" OR "deposit outflow"'
+      credit_event: '"default" OR "bankruptcy filing" OR "chapter 11"'
+      liquidity_crisis: '"liquidity crunch" OR "credit crunch" OR "funding stress"'
+      geopolitical: '"invasion" OR "military strike" OR "sanctions"'
+      trade_policy: '"tariff" OR "trade war" OR "export controls"'
+      pandemic: '"pandemic" OR "outbreak" OR "lockdown"'
+      fx_shock: '"currency crisis" OR "won plunges" OR "currency plunge"'
+      rate_shock: '"bond selloff" OR "yields surge"'
   merge_window_hours: 72
+  replay:                     # P3 재생 범위 (사건일 기준)
+    days_before: 30
+    days_after: 14
 
 matcher:
   top_k: 30
