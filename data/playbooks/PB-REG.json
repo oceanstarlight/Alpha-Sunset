@@ -1,0 +1,211 @@
+{
+  "doc_id": "PB-REG",
+  "title": "위기 시 규제 보고·공시 절차",
+  "version": "3.0",
+  "year": 2024,
+  "origin_event": "none",
+  "synthetic": true,
+  "source_refs": [
+    "data/source_notes/regulatory_reporting.md"
+  ],
+  "clauses": [
+    {
+      "clause_id": "PB-REG-01",
+      "doc_id": "PB-REG",
+      "text": "중대한 손실 또는 한도 위반이 발생하면 정해진 기한 내에 감독기관에 보고한다.",
+      "premises": {
+        "event_types": [],
+        "channels": [],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [],
+        "conditions": [
+          "중대 손실 또는 한도 위반"
+        ]
+      },
+      "actions": [
+        "감독기관 기한 내 보고"
+      ],
+      "owner_role": "준법감시팀",
+      "protected": true,
+      "protected_reason": "regulatory"
+    },
+    {
+      "clause_id": "PB-REG-02",
+      "doc_id": "PB-REG",
+      "text": "공매도 금지 등 시장 조치가 시행되면 위탁운용사와 내부 운용의 준수 여부를 확인한다.",
+      "premises": {
+        "event_types": [
+          "regulatory",
+          "pandemic",
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "equity_vol"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "equity"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "공매도 금지 등 시장 조치 시행"
+        ]
+      },
+      "actions": [
+        "준수 여부 확인",
+        "위탁운용사 통보"
+      ],
+      "owner_role": "준법감시팀",
+      "protected": true,
+      "protected_reason": "regulatory"
+    },
+    {
+      "clause_id": "PB-REG-03",
+      "doc_id": "PB-REG",
+      "text": "제재 대상 지정 시 관련 법령에 따른 보고 의무를 확인하고 이행한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical",
+          "regulatory"
+        ],
+        "channels": [
+          "sanctions_trade"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "shock",
+          "structural"
+        ],
+        "conditions": [
+          "제재 대상 지정"
+        ]
+      },
+      "actions": [
+        "제재 관련 보고 의무 이행"
+      ],
+      "owner_role": "준법감시팀",
+      "protected": true,
+      "protected_reason": "regulatory"
+    },
+    {
+      "clause_id": "PB-REG-04",
+      "doc_id": "PB-REG",
+      "text": "위기 대응을 위한 한도 예외 승인은 사후 7일 이내에 이사회(또는 위원회)에 보고한다.",
+      "premises": {
+        "event_types": [],
+        "channels": [],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [],
+        "conditions": [
+          "한도 예외 승인"
+        ]
+      },
+      "actions": [
+        "이사회 사후 보고"
+      ],
+      "owner_role": "리스크관리팀",
+      "protected": true,
+      "protected_reason": "regulatory"
+    },
+    {
+      "clause_id": "PB-REG-05",
+      "doc_id": "PB-REG",
+      "text": "위기 대응 과정의 의사결정 기록을 보존 기한 동안 보관한다.",
+      "premises": {
+        "event_types": [],
+        "channels": [
+          "operational"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [],
+        "conditions": [
+          "위기 대응 의사결정"
+        ]
+      },
+      "actions": [
+        "의사결정 기록 보관"
+      ],
+      "owner_role": "준법감시팀",
+      "protected": true,
+      "protected_reason": "regulatory"
+    },
+    {
+      "clause_id": "PB-REG-06",
+      "doc_id": "PB-REG",
+      "text": "외부 공시 대상 사안은 공시 담당 부서의 검토를 거쳐 공시한다.",
+      "premises": {
+        "event_types": [],
+        "channels": [],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [],
+        "conditions": [
+          "공시 대상 사안 발생"
+        ]
+      },
+      "actions": [
+        "공시 검토·실행"
+      ],
+      "owner_role": "준법감시팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-REG-07",
+      "doc_id": "PB-REG",
+      "text": "개인정보·내부정보가 포함된 위기 대응 자료의 외부 공유를 제한한다.",
+      "premises": {
+        "event_types": [],
+        "channels": [
+          "operational"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [],
+        "conditions": [
+          "위기 대응 자료 공유"
+        ]
+      },
+      "actions": [
+        "외부 공유 제한"
+      ],
+      "owner_role": "준법감시팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-REG-08",
+      "doc_id": "PB-REG",
+      "text": "위기 종료 후 30일 이내에 사후보고서를 작성해 이사회에 보고한다.",
+      "premises": {
+        "event_types": [],
+        "channels": [],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "months",
+          "structural"
+        ],
+        "conditions": [
+          "위기 종료"
+        ]
+      },
+      "actions": [
+        "사후보고서 작성",
+        "이사회 보고"
+      ],
+      "owner_role": "리스크관리팀",
+      "protected": true,
+      "protected_reason": "regulatory"
+    }
+  ]
+}

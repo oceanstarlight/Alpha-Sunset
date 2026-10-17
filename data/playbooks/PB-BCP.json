@@ -1,0 +1,246 @@
+{
+  "doc_id": "PB-BCP",
+  "title": "팬데믹 업무연속성계획(BCP)",
+  "version": "1.0",
+  "year": 2020,
+  "origin_event": "covid_2020",
+  "synthetic": true,
+  "source_refs": [
+    "data/source_notes/pandemic_bcp2020.md"
+  ],
+  "clauses": [
+    {
+      "clause_id": "PB-BCP-01",
+      "doc_id": "PB-BCP",
+      "text": "감염병 확산으로 사무실 출입이 제한되면 핵심 운용 인력의 분산·재택근무 체계를 가동한다.",
+      "premises": {
+        "event_types": [
+          "pandemic"
+        ],
+        "channels": [
+          "operational"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "감염병 확산",
+          "사무실 출입 제한"
+        ]
+      },
+      "actions": [
+        "분산·재택근무 가동"
+      ],
+      "owner_role": "경영지원팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BCP-02",
+      "doc_id": "PB-BCP",
+      "text": "원격 접속 환경에서도 매매·결제 시스템이 정상 작동하는지 일일 점검한다.",
+      "premises": {
+        "event_types": [
+          "pandemic"
+        ],
+        "channels": [
+          "operational"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "원격 근무 전환"
+        ]
+      },
+      "actions": [
+        "매매·결제 시스템 일일 점검"
+      ],
+      "owner_role": "IT팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BCP-03",
+      "doc_id": "PB-BCP",
+      "text": "핵심 업무별 대체 인력을 지정하고 결재 권한 위임표를 갱신한다.",
+      "premises": {
+        "event_types": [
+          "pandemic",
+          "other"
+        ],
+        "channels": [
+          "operational"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "핵심 인력 결원 가능성"
+        ]
+      },
+      "actions": [
+        "대체 인력 지정",
+        "결재 위임표 갱신"
+      ],
+      "owner_role": "경영지원팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BCP-04",
+      "doc_id": "PB-BCP",
+      "text": "위탁운용사와 수탁기관의 업무연속성 계획 가동 여부를 확인한다.",
+      "premises": {
+        "event_types": [
+          "pandemic"
+        ],
+        "channels": [
+          "operational",
+          "counterparty"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "weeks"
+        ],
+        "conditions": [
+          "외부 기관 업무 차질 가능성"
+        ]
+      },
+      "actions": [
+        "위탁운용사·수탁기관 BCP 확인"
+      ],
+      "owner_role": "위탁운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BCP-05",
+      "doc_id": "PB-BCP",
+      "text": "해외 사무소 소재국의 이동 제한 조치를 모니터링하고 출장을 중단한다.",
+      "premises": {
+        "event_types": [
+          "pandemic"
+        ],
+        "channels": [
+          "operational"
+        ],
+        "regions": [
+          "GLOBAL"
+        ],
+        "asset_classes": [],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "해외 이동 제한"
+        ]
+      },
+      "actions": [
+        "출장 중단",
+        "해외 사무소 근무 체계 점검"
+      ],
+      "owner_role": "경영지원팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BCP-06",
+      "doc_id": "PB-BCP",
+      "text": "원격 근무 중 정보보안 사고를 막기 위해 접속 기록을 점검한다.",
+      "premises": {
+        "event_types": [
+          "pandemic"
+        ],
+        "channels": [
+          "operational"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "원격 근무 장기화"
+        ]
+      },
+      "actions": [
+        "접속 기록 점검",
+        "보안 교육"
+      ],
+      "owner_role": "IT팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BCP-07",
+      "doc_id": "PB-BCP",
+      "text": "임직원 확진 시 접촉자 분리와 사무실 방역 절차를 시행한다.",
+      "premises": {
+        "event_types": [
+          "pandemic"
+        ],
+        "channels": [
+          "operational"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "임직원 확진"
+        ]
+      },
+      "actions": [
+        "접촉자 분리",
+        "방역 시행"
+      ],
+      "owner_role": "경영지원팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BCP-08",
+      "doc_id": "PB-BCP",
+      "text": "투자위원회는 화상회의로 개최하고 의결 기록을 전자 보관한다.",
+      "premises": {
+        "event_types": [
+          "pandemic"
+        ],
+        "channels": [
+          "operational"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "대면 회의 불가"
+        ]
+      },
+      "actions": [
+        "화상 투자위원회 운영",
+        "의결 기록 전자 보관"
+      ],
+      "owner_role": "경영지원팀",
+      "protected": false,
+      "protected_reason": null
+    }
+  ]
+}

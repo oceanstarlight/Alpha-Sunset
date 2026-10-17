@@ -17,7 +17,7 @@
 |---|---|---|
 | P0 | 스캐폴딩 | ✅ 완료 |
 | P1 | 외부 데이터 수집 | ⏳ 예정 |
-| P2 | 합성 코퍼스 | ⏳ 예정 |
+| P2 | 합성 코퍼스 | 🔄 진행 중 (라벨·검수 대기) |
 | P3 | Sentinel (상시 감시) | ⏳ 예정 |
 | P4 | Matcher (적합도 판단) | ⏳ 예정 |
 | P5 | Exposure (노출 경고) | ⏳ 예정 |
@@ -46,13 +46,19 @@
 - ⏳ `data/SOURCES.md` 작성
 - **완료 기준**: 7개 시리즈 CSV, 선택 펀드 parquet
 
-## P2 — 합성 코퍼스 ⏳
-- ⏳ `source_notes/` 공개 보고서 요지 정리
-- ⏳ `scripts/gen_playbooks.py` → 플레이북 12개 (약 100조항, protected 포함) + 사람 검수
-- ⏳ 사건 카드 6개 + calm 구간 3개 (공개 출처 URL 필수)
-- ⏳ 가상 포트폴리오 (`portfolio.json`)
-- ⏳ 백테스트 정답 라벨 (`labels/*.json`)
-- **완료 기준**: 스키마 검증 통과, 전 문서 `synthetic: true`, 출처 URL 기재
+## P2 — 합성 코퍼스 🔄
+- ✅ `source_notes/` 공개 자료 요지 12개 (확인된 사실만 기록)
+- ✅ 플레이북 12개 / 96조항 (protected 10개: regulatory 6, insurance 4) — Claude 초안, `scripts/gen_playbooks.py`로 검증
+- ⏳ 플레이북 사람 검수
+- ✅ 사건 카드 6개 (공개 출처 URL 확인) + calm 구간 3개 (2014Q2, 2017Q4, 2024Q1 — FRED 기준 선정)
+- ✅ 가상 포트폴리오 (직접 6, 위탁운용사 6, 카운터파티 5)
+- ⏳ 백테스트 정답 라벨 — **사용자 직접 설계** (`data/labels/README.md`, `_template.json`)
+- ✅ `app/corpus.py` 로더, `scripts/validate_data.py` 전체 검증, 테스트
+- **완료 기준**: 스키마 검증 통과, 전 문서 `synthetic: true`, 출처 URL 기재 → 라벨·검수 남음
+
+### P2에서 발견한 P1 이슈
+- ⚠️ FRED `BAMLH0A0HYM2`(HY 스프레드)는 공개 범위가 최근 3년뿐 → 과거 백테스트용 대체 시리즈 필요
+- ⚠️ SEC N-PORT 공개 데이터는 2019년 이후 → `gfc_2008` 보유내역 스냅샷 확보 불가
 
 ## P3 — Sentinel (상시 감시) ⏳
 - ⏳ 시그널 A: FRED z-score (252영업일)

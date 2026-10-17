@@ -1,0 +1,274 @@
+{
+  "doc_id": "PB-CPTY",
+  "title": "신용·거래상대방 부도 대응 절차",
+  "version": "1.0",
+  "year": 2009,
+  "origin_event": "gfc_2008",
+  "synthetic": true,
+  "source_refs": [
+    "data/source_notes/counterparty_gfc2008.md"
+  ],
+  "clauses": [
+    {
+      "clause_id": "PB-CPTY-01",
+      "doc_id": "PB-CPTY",
+      "text": "주요 거래상대방의 부도 또는 파산보호 신청이 확인되면 해당 상대방과의 전체 노출을 즉시 집계한다.",
+      "premises": {
+        "event_types": [
+          "credit_event",
+          "banking_stress"
+        ],
+        "channels": [
+          "counterparty"
+        ],
+        "regions": [
+          "GLOBAL"
+        ],
+        "asset_classes": [
+          "derivatives",
+          "repo"
+        ],
+        "duration": [
+          "shock"
+        ],
+        "conditions": [
+          "거래상대방 부도·파산보호 신청"
+        ]
+      },
+      "actions": [
+        "상대방별 총노출 집계",
+        "CIO 보고"
+      ],
+      "owner_role": "거래상대방관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CPTY-02",
+      "doc_id": "PB-CPTY",
+      "text": "부도 상대방과의 장외파생상품 계약은 ISDA 기본계약에 따라 조기종료 및 일괄정산 절차를 개시한다.",
+      "premises": {
+        "event_types": [
+          "credit_event"
+        ],
+        "channels": [
+          "counterparty"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "derivatives"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "ISDA 기본계약 체결 상대방 부도"
+        ]
+      },
+      "actions": [
+        "조기종료 통지",
+        "일괄정산 금액 산정"
+      ],
+      "owner_role": "법무팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CPTY-03",
+      "doc_id": "PB-CPTY",
+      "text": "수취 담보의 처분 가능성과 가치를 재평가하고 부족분은 추가 담보를 요구한다.",
+      "premises": {
+        "event_types": [
+          "credit_event",
+          "banking_stress"
+        ],
+        "channels": [
+          "counterparty",
+          "liquidity"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "derivatives",
+          "repo"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "담보 가치 하락"
+        ]
+      },
+      "actions": [
+        "담보 재평가",
+        "추가 담보 요구"
+      ],
+      "owner_role": "거래상대방관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CPTY-04",
+      "doc_id": "PB-CPTY",
+      "text": "투자은행 섹터의 신용부도스와프(CDS) 프리미엄이 급등하면 동일 섹터 상대방과의 신규 거래를 중단한다.",
+      "premises": {
+        "event_types": [
+          "credit_event"
+        ],
+        "channels": [
+          "counterparty",
+          "credit_spread"
+        ],
+        "regions": [
+          "US",
+          "EU"
+        ],
+        "asset_classes": [
+          "derivatives"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "투자은행 CDS 급등"
+        ]
+      },
+      "actions": [
+        "동일 섹터 상대방 신규 거래 중단"
+      ],
+      "owner_role": "거래상대방관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CPTY-05",
+      "doc_id": "PB-CPTY",
+      "text": "부도 상대방이 발행한 채권·주식 보유분을 확인하고 회수 가능성을 평가한다.",
+      "premises": {
+        "event_types": [
+          "credit_event"
+        ],
+        "channels": [
+          "credit_spread"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "corporate_bond",
+          "equity"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "부도 상대방 발행 증권 보유"
+        ]
+      },
+      "actions": [
+        "보유 증권 확인",
+        "회수율 추정"
+      ],
+      "owner_role": "신용분석팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CPTY-06",
+      "doc_id": "PB-CPTY",
+      "text": "레포 거래 상대방의 신용도가 하락하면 레포 만기를 단축하고 상대방을 분산한다.",
+      "premises": {
+        "event_types": [
+          "credit_event",
+          "liquidity_crisis",
+          "banking_stress"
+        ],
+        "channels": [
+          "counterparty",
+          "liquidity"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "repo",
+          "money_market"
+        ],
+        "duration": [
+          "weeks"
+        ],
+        "conditions": [
+          "레포 상대방 신용도 하락"
+        ]
+      },
+      "actions": [
+        "레포 만기 단축",
+        "상대방 분산"
+      ],
+      "owner_role": "자금운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CPTY-07",
+      "doc_id": "PB-CPTY",
+      "text": "가족계좌(family office) 등 고레버리지 상대방에 대한 프라임브로커 경유 간접 노출을 점검한다.",
+      "premises": {
+        "event_types": [
+          "credit_event"
+        ],
+        "channels": [
+          "counterparty",
+          "equity_vol"
+        ],
+        "regions": [
+          "US"
+        ],
+        "asset_classes": [
+          "equity",
+          "derivatives"
+        ],
+        "duration": [
+          "shock"
+        ],
+        "conditions": [
+          "고레버리지 투자자 마진콜 불이행"
+        ]
+      },
+      "actions": [
+        "프라임브로커 경유 간접 노출 점검"
+      ],
+      "owner_role": "거래상대방관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CPTY-08",
+      "doc_id": "PB-CPTY",
+      "text": "부도 상대방에 대한 손실 추정치를 분기 결산에 반영하도록 회계팀에 통보한다.",
+      "premises": {
+        "event_types": [
+          "credit_event"
+        ],
+        "channels": [
+          "counterparty"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "손실 확정 또는 추정 가능"
+        ]
+      },
+      "actions": [
+        "손실 추정치 산정",
+        "회계팀 통보"
+      ],
+      "owner_role": "재무팀",
+      "protected": false,
+      "protected_reason": null
+    }
+  ]
+}

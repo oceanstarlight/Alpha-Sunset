@@ -1,0 +1,45 @@
+{
+  "id": "ru_ua_2022",
+  "title": "2022 러시아-우크라이나 전쟁과 대러 제재",
+  "date": "2022-02-24",
+  "summary": "2022년 2월 24일 러시아가 우크라이나를 침공했다. 2월 26일 미국·EU 집행위·영국·캐나다 등은 일부 러시아 은행을 SWIFT에서 배제하기로 했고, 2월 28일 미 재무부는 러시아 중앙은행·국부펀드·재무부와의 거래를 금지해 미국 내 러시아 중앙은행 자산을 사실상 동결했다. WTI 유가는 3월 8일 배럴당 123.64달러까지 상승했다.",
+  "type": "geopolitical",
+  "channels": [
+    "sanctions_trade",
+    "commodity",
+    "equity_vol",
+    "fx",
+    "counterparty"
+  ],
+  "regions": [
+    "RU",
+    "UA",
+    "EU",
+    "GLOBAL"
+  ],
+  "sectors": [
+    "energy",
+    "banks",
+    "agriculture",
+    "metals"
+  ],
+  "asset_classes": [
+    "commodity",
+    "equity",
+    "govt_bond",
+    "em_bond",
+    "fx"
+  ],
+  "entities": [
+    "Central Bank of the Russian Federation",
+    "U.S. Department of the Treasury",
+    "SWIFT"
+  ],
+  "duration": "structural",
+  "severity": 4,
+  "sources": [
+    "https://home.treasury.gov/news/press-releases/jy0612",
+    "https://www.gov.uk/government/news/joint-statement-on-further-restrictive-economic-measures-26-february-2022",
+    "https://fred.stlouisfed.org/series/DCOILWTICO"
+  ]
+}

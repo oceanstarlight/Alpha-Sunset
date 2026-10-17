@@ -1,0 +1,50 @@
+{
+  "id": "covid_2020",
+  "title": "2020 코로나19 팬데믹 충격과 한국 공매도 금지",
+  "date": "2020-03-11",
+  "summary": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다. VIX는 3월 16일 82.69까지 상승했다. 한국 금융위원회는 3월 13일 유가증권·코스닥·코넥스 시장 전체에 3월 16일부터 9월 15일까지 6개월간 공매도 금지를 결정했다. 3월 19일 미 연준은 한국은행 등과 통화스와프(한국은행 최대 600억 달러)를 체결했다. WTI 유가(FRED DCOILWTICO)는 4월 20일 배럴당 -36.98달러를 기록했다.",
+  "type": "pandemic",
+  "channels": [
+    "equity_vol",
+    "liquidity",
+    "credit_spread",
+    "fx",
+    "commodity",
+    "operational",
+    "supply_chain"
+  ],
+  "regions": [
+    "GLOBAL",
+    "KR",
+    "US",
+    "CN"
+  ],
+  "sectors": [
+    "energy",
+    "airlines",
+    "travel",
+    "banks"
+  ],
+  "asset_classes": [
+    "equity",
+    "corporate_bond",
+    "high_yield",
+    "commodity",
+    "fx"
+  ],
+  "entities": [
+    "World Health Organization",
+    "Financial Services Commission",
+    "Federal Reserve",
+    "Bank of Korea"
+  ],
+  "duration": "months",
+  "severity": 5,
+  "sources": [
+    "https://www.who.int/news-room/speeches/item/who-director-general-s-opening-remarks-at-the-media-briefing-on-covid-19---11-march-2020",
+    "https://fsc.go.kr/eng/pr010101/22322",
+    "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200319b.htm",
+    "https://fred.stlouisfed.org/series/VIXCLS",
+    "https://fred.stlouisfed.org/series/DCOILWTICO"
+  ]
+}

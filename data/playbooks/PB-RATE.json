@@ -1,0 +1,275 @@
+{
+  "doc_id": "PB-RATE",
+  "title": "금리 급등 대응 지침",
+  "version": "1.0",
+  "year": 2022,
+  "origin_event": "rate_hike_2022",
+  "synthetic": true,
+  "source_refs": [
+    "data/source_notes/rates_2022.md"
+  ],
+  "clauses": [
+    {
+      "clause_id": "PB-RATE-01",
+      "doc_id": "PB-RATE",
+      "text": "장기 국채금리가 단기간 급등하면 채권 포트폴리오의 듀레이션과 평가손실을 일일 산출한다.",
+      "premises": {
+        "event_types": [
+          "rate_shock"
+        ],
+        "channels": [
+          "rates"
+        ],
+        "regions": [
+          "US",
+          "KR"
+        ],
+        "asset_classes": [
+          "govt_bond",
+          "corporate_bond"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "장기 금리 급등"
+        ]
+      },
+      "actions": [
+        "듀레이션·평가손실 일일 산출"
+      ],
+      "owner_role": "채권운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-RATE-02",
+      "doc_id": "PB-RATE",
+      "text": "금리 상승으로 주식·채권 상관관계가 양(+)으로 바뀌면 분산 효과 저하를 반영해 리스크 한도를 재산정한다.",
+      "premises": {
+        "event_types": [
+          "rate_shock"
+        ],
+        "channels": [
+          "rates",
+          "equity_vol"
+        ],
+        "regions": [
+          "GLOBAL"
+        ],
+        "asset_classes": [
+          "equity",
+          "govt_bond"
+        ],
+        "duration": [
+          "months"
+        ],
+        "conditions": [
+          "주식·채권 동반 하락"
+        ]
+      },
+      "actions": [
+        "상관관계 재추정",
+        "리스크 한도 재산정"
+      ],
+      "owner_role": "리스크관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-RATE-03",
+      "doc_id": "PB-RATE",
+      "text": "변동금리 차입 비중이 높은 기업의 신용 노출을 점검한다.",
+      "premises": {
+        "event_types": [
+          "rate_shock",
+          "credit_event"
+        ],
+        "channels": [
+          "rates",
+          "credit_spread"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "corporate_bond",
+          "high_yield"
+        ],
+        "duration": [
+          "months"
+        ],
+        "conditions": [
+          "금리 상승 지속"
+        ]
+      },
+      "actions": [
+        "변동금리 차입 기업 노출 점검"
+      ],
+      "owner_role": "신용분석팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-RATE-04",
+      "doc_id": "PB-RATE",
+      "text": "부동산·인프라 대체투자 자산의 할인율을 재검토하고 평가 반영 시점을 정한다.",
+      "premises": {
+        "event_types": [
+          "rate_shock"
+        ],
+        "channels": [
+          "rates"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "real_estate",
+          "infrastructure"
+        ],
+        "duration": [
+          "months",
+          "structural"
+        ],
+        "conditions": [
+          "할인율 상승"
+        ]
+      },
+      "actions": [
+        "할인율 재검토",
+        "평가 반영 시점 결정"
+      ],
+      "owner_role": "대체투자팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-RATE-05",
+      "doc_id": "PB-RATE",
+      "text": "중앙은행 통화정책 회의 일정과 시장 기대 금리 경로를 추적한다.",
+      "premises": {
+        "event_types": [
+          "rate_shock"
+        ],
+        "channels": [
+          "rates"
+        ],
+        "regions": [
+          "US",
+          "KR"
+        ],
+        "asset_classes": [
+          "govt_bond"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "통화정책 불확실성"
+        ]
+      },
+      "actions": [
+        "정책회의 일정·기대 경로 추적"
+      ],
+      "owner_role": "채권운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-RATE-06",
+      "doc_id": "PB-RATE",
+      "text": "장단기 금리 역전이 지속되면 경기 침체 시나리오를 자산배분 회의에 상정한다.",
+      "premises": {
+        "event_types": [
+          "rate_shock"
+        ],
+        "channels": [
+          "rates"
+        ],
+        "regions": [
+          "US"
+        ],
+        "asset_classes": [
+          "govt_bond"
+        ],
+        "duration": [
+          "months"
+        ],
+        "conditions": [
+          "장단기 금리 역전 지속"
+        ]
+      },
+      "actions": [
+        "침체 시나리오 상정"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-RATE-07",
+      "doc_id": "PB-RATE",
+      "text": "금리 상승기에 보유채권 평가손실이 큰 금융기관과의 거래 노출을 점검한다.",
+      "premises": {
+        "event_types": [
+          "rate_shock",
+          "banking_stress"
+        ],
+        "channels": [
+          "rates",
+          "counterparty"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "corporate_bond",
+          "equity"
+        ],
+        "duration": [
+          "months"
+        ],
+        "conditions": [
+          "금융기관 보유채권 평가손실 확대"
+        ]
+      },
+      "actions": [
+        "금융기관 거래 노출 점검"
+      ],
+      "owner_role": "거래상대방관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-RATE-08",
+      "doc_id": "PB-RATE",
+      "text": "내외 금리차 확대로 원화 약세가 나타나면 환헤지 비용을 재산정한다.",
+      "premises": {
+        "event_types": [
+          "rate_shock",
+          "fx_shock"
+        ],
+        "channels": [
+          "rates",
+          "fx"
+        ],
+        "regions": [
+          "KR",
+          "US"
+        ],
+        "asset_classes": [
+          "fx"
+        ],
+        "duration": [
+          "months"
+        ],
+        "conditions": [
+          "내외 금리차 확대"
+        ]
+      },
+      "actions": [
+        "환헤지 비용 재산정"
+      ],
+      "owner_role": "외환운용팀",
+      "protected": false,
+      "protected_reason": null
+    }
+  ]
+}

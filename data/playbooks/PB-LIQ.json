@@ -1,0 +1,290 @@
+{
+  "doc_id": "PB-LIQ",
+  "title": "유동성 위기 대응 매뉴얼",
+  "version": "2.0",
+  "year": 2020,
+  "origin_event": "covid_2020",
+  "synthetic": true,
+  "source_refs": [
+    "data/source_notes/liquidity_covid2020.md"
+  ],
+  "clauses": [
+    {
+      "clause_id": "PB-LIQ-01",
+      "doc_id": "PB-LIQ",
+      "text": "전 자산군이 동반 하락하고 현금 확보 수요가 급증하면 즉시 유동성 점검 회의를 소집한다.",
+      "premises": {
+        "event_types": [
+          "pandemic",
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "liquidity",
+          "equity_vol"
+        ],
+        "regions": [
+          "GLOBAL"
+        ],
+        "asset_classes": [
+          "equity",
+          "corporate_bond"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "주식·채권 동반 하락",
+          "VIX 급등"
+        ]
+      },
+      "actions": [
+        "유동성 점검 회의 소집",
+        "자산군별 처분 가능 금액 산출"
+      ],
+      "owner_role": "리스크관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-LIQ-02",
+      "doc_id": "PB-LIQ",
+      "text": "현금성 자산 비중이 목표 하한 아래로 내려가면 단기 국채와 MMF로 우선 보충한다.",
+      "premises": {
+        "event_types": [
+          "liquidity_crisis",
+          "pandemic"
+        ],
+        "channels": [
+          "liquidity"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "money_market",
+          "govt_bond"
+        ],
+        "duration": [
+          "shock",
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "현금성 자산 비중 하한 미달"
+        ]
+      },
+      "actions": [
+        "현금성 자산 비중 점검",
+        "단기 국채·MMF 매수"
+      ],
+      "owner_role": "자금운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-LIQ-03",
+      "doc_id": "PB-LIQ",
+      "text": "향후 3개월 내 예정된 출자 요청(capital call)과 지급 일정을 재점검하고 우선순위를 정한다.",
+      "premises": {
+        "event_types": [
+          "liquidity_crisis",
+          "pandemic",
+          "credit_event"
+        ],
+        "channels": [
+          "liquidity"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "private_equity",
+          "real_estate"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "대체투자 출자 약정 존재"
+        ]
+      },
+      "actions": [
+        "capital call 일정 재점검",
+        "지급 우선순위 결정"
+      ],
+      "owner_role": "대체투자팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-LIQ-04",
+      "doc_id": "PB-LIQ",
+      "text": "글로벌 달러 조달 여건이 악화되면 외화 유동성 한도를 하향하고 통화스와프 등 정책 지원 여부를 모니터링한다.",
+      "premises": {
+        "event_types": [
+          "pandemic",
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "liquidity",
+          "fx"
+        ],
+        "regions": [
+          "GLOBAL",
+          "US"
+        ],
+        "asset_classes": [
+          "fx",
+          "money_market"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "달러 조달 비용 급등",
+          "중앙은행 스와프 라인 확대"
+        ]
+      },
+      "actions": [
+        "외화 유동성 한도 하향",
+        "정책 지원 모니터링"
+      ],
+      "owner_role": "외환운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-LIQ-05",
+      "doc_id": "PB-LIQ",
+      "text": "리밸런싱 범위를 일시적으로 확대해 유동성이 낮은 시장에서의 강제 매도를 피한다.",
+      "premises": {
+        "event_types": [
+          "pandemic",
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "liquidity",
+          "equity_vol"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "equity",
+          "corporate_bond"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "시장 유동성 급감"
+        ]
+      },
+      "actions": [
+        "리밸런싱 허용 범위 한시 확대 승인 요청"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-LIQ-06",
+      "doc_id": "PB-LIQ",
+      "text": "봉쇄 조치로 실물 경기 급랭이 예상되면 경기민감 업종의 신규 매수를 보류한다.",
+      "premises": {
+        "event_types": [
+          "pandemic"
+        ],
+        "channels": [
+          "equity_vol",
+          "supply_chain"
+        ],
+        "regions": [
+          "GLOBAL"
+        ],
+        "asset_classes": [
+          "equity"
+        ],
+        "duration": [
+          "months"
+        ],
+        "conditions": [
+          "이동 제한·봉쇄 조치 시행"
+        ]
+      },
+      "actions": [
+        "경기민감 업종 신규 매수 보류"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-LIQ-07",
+      "doc_id": "PB-LIQ",
+      "text": "하이일드 채권 스프레드가 급등하면 투기등급 비중 한도 초과 여부를 일일 점검한다.",
+      "premises": {
+        "event_types": [
+          "pandemic",
+          "credit_event",
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "credit_spread"
+        ],
+        "regions": [
+          "US",
+          "GLOBAL"
+        ],
+        "asset_classes": [
+          "high_yield",
+          "corporate_bond"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "하이일드 스프레드 급등"
+        ]
+      },
+      "actions": [
+        "투기등급 비중 일일 점검",
+        "한도 초과 시 보고"
+      ],
+      "owner_role": "리스크관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-LIQ-08",
+      "doc_id": "PB-LIQ",
+      "text": "중앙은행 유동성 공급이 발표되면 시장 안정 여부를 확인한 뒤 단계적으로 평상 한도로 복귀한다.",
+      "premises": {
+        "event_types": [
+          "pandemic",
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "liquidity"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "money_market"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "중앙은행 유동성 공급 발표"
+        ]
+      },
+      "actions": [
+        "시장 안정 지표 확인",
+        "한도 단계적 정상화"
+      ],
+      "owner_role": "리스크관리팀",
+      "protected": false,
+      "protected_reason": null
+    }
+  ]
+}

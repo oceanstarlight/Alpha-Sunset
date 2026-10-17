@@ -1,0 +1,43 @@
+{
+  "id": "gfc_2008",
+  "title": "2008 리먼 브라더스 파산과 한국 외환시장 불안",
+  "date": "2008-09-15",
+  "summary": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다. 이후 글로벌 달러 유동성이 경색되며 원/달러 환율(FRED DEXKOUS)은 9월 8일 1,081.2원에서 11월 24일 1,507.9원까지 상승했고, VIX는 11월 20일 80.86까지 올랐다. 10월 29일 미 연준은 한국은행 등 4개 중앙은행과 각 최대 300억 달러 규모의 통화스와프를 체결해 달러 유동성을 공급했다.",
+  "type": "credit_event",
+  "channels": [
+    "counterparty",
+    "liquidity",
+    "credit_spread",
+    "fx",
+    "equity_vol"
+  ],
+  "regions": [
+    "US",
+    "KR",
+    "GLOBAL"
+  ],
+  "sectors": [
+    "banks",
+    "broker_dealers"
+  ],
+  "asset_classes": [
+    "equity",
+    "corporate_bond",
+    "money_market",
+    "fx",
+    "derivatives"
+  ],
+  "entities": [
+    "Lehman Brothers",
+    "Federal Reserve",
+    "Bank of Korea"
+  ],
+  "duration": "months",
+  "severity": 5,
+  "sources": [
+    "https://www.sec.gov/Archives/edgar/data/0000806085/000110465908059632/a08-22764_48k.htm",
+    "https://www.federalreserve.gov/newsevents/pressreleases/monetary20081029b.htm",
+    "https://fred.stlouisfed.org/series/DEXKOUS",
+    "https://fred.stlouisfed.org/series/VIXCLS"
+  ]
+}

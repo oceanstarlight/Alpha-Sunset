@@ -1,0 +1,258 @@
+{
+  "doc_id": "PB-MGR",
+  "title": "위탁운용사 사고 대응 절차",
+  "version": "1.2",
+  "year": 2021,
+  "origin_event": "optimus_2020",
+  "synthetic": true,
+  "source_refs": [
+    "data/source_notes/manager_incident_optimus.md"
+  ],
+  "clauses": [
+    {
+      "clause_id": "PB-MGR-01",
+      "doc_id": "PB-MGR",
+      "text": "위탁운용사의 환매중단 또는 운용 부실이 확인되면 해당 운용사에 위탁한 전체 자산을 즉시 동결 점검한다.",
+      "premises": {
+        "event_types": [
+          "other",
+          "credit_event"
+        ],
+        "channels": [
+          "operational",
+          "counterparty"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "shock",
+          "weeks",
+          "months",
+          "structural"
+        ],
+        "conditions": [
+          "위탁운용사 환매중단·운용 부실"
+        ]
+      },
+      "actions": [
+        "위탁 자산 동결 점검",
+        "CIO 보고"
+      ],
+      "owner_role": "위탁운용팀",
+      "protected": true,
+      "protected_reason": "insurance"
+    },
+    {
+      "clause_id": "PB-MGR-02",
+      "doc_id": "PB-MGR",
+      "text": "수탁기관과 사무관리회사에 실제 편입 자산 내역을 독립적으로 확인 요청한다.",
+      "premises": {
+        "event_types": [
+          "other",
+          "credit_event"
+        ],
+        "channels": [
+          "operational"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "운용사 보고 자산과 실제 자산 불일치 의심"
+        ]
+      },
+      "actions": [
+        "수탁기관·사무관리사 독립 확인"
+      ],
+      "owner_role": "위탁운용팀",
+      "protected": true,
+      "protected_reason": "insurance"
+    },
+    {
+      "clause_id": "PB-MGR-03",
+      "doc_id": "PB-MGR",
+      "text": "위기 국면에서 위탁운용사의 레버리지와 파생상품 노출이 한도를 넘는지 점검한다.",
+      "premises": {
+        "event_types": [
+          "liquidity_crisis",
+          "credit_event",
+          "banking_stress",
+          "pandemic"
+        ],
+        "channels": [
+          "counterparty",
+          "liquidity"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "derivatives"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "시장 급변"
+        ]
+      },
+      "actions": [
+        "위탁운용사 레버리지 점검"
+      ],
+      "owner_role": "위탁운용팀",
+      "protected": true,
+      "protected_reason": "insurance"
+    },
+    {
+      "clause_id": "PB-MGR-04",
+      "doc_id": "PB-MGR",
+      "text": "위탁운용사 핵심 인력 이탈이나 감독기관 제재가 확인되면 운용사 평가를 즉시 재실시한다.",
+      "premises": {
+        "event_types": [
+          "regulatory",
+          "other"
+        ],
+        "channels": [
+          "operational"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "핵심 인력 이탈",
+          "감독기관 제재"
+        ]
+      },
+      "actions": [
+        "운용사 수시 평가"
+      ],
+      "owner_role": "위탁운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-MGR-05",
+      "doc_id": "PB-MGR",
+      "text": "손실 회수를 위해 판매사·수탁사·운용사의 책임 관계를 법무팀이 검토한다.",
+      "premises": {
+        "event_types": [
+          "other",
+          "regulatory"
+        ],
+        "channels": [
+          "operational",
+          "counterparty"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [],
+        "duration": [
+          "months",
+          "structural"
+        ],
+        "conditions": [
+          "투자 손실 발생"
+        ]
+      },
+      "actions": [
+        "책임 관계 법률 검토"
+      ],
+      "owner_role": "법무팀",
+      "protected": true,
+      "protected_reason": "insurance"
+    },
+    {
+      "clause_id": "PB-MGR-06",
+      "doc_id": "PB-MGR",
+      "text": "위탁 자산의 일부를 다른 운용사로 이관하는 비상 이관 계획을 가동한다.",
+      "premises": {
+        "event_types": [
+          "other"
+        ],
+        "channels": [
+          "operational"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "운용사 운용 지속 불가"
+        ]
+      },
+      "actions": [
+        "비상 이관 계획 가동"
+      ],
+      "owner_role": "위탁운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-MGR-07",
+      "doc_id": "PB-MGR",
+      "text": "위탁운용사 사고 내용과 조치 결과를 투자위원회에 보고한다.",
+      "premises": {
+        "event_types": [
+          "other",
+          "regulatory"
+        ],
+        "channels": [
+          "operational"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "위탁운용사 사고 발생"
+        ]
+      },
+      "actions": [
+        "투자위원회 보고"
+      ],
+      "owner_role": "위탁운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-MGR-08",
+      "doc_id": "PB-MGR",
+      "text": "유사 전략을 운용하는 다른 위탁운용사에 대해 동일 위험 여부를 점검한다.",
+      "premises": {
+        "event_types": [
+          "other",
+          "credit_event"
+        ],
+        "channels": [
+          "operational",
+          "counterparty"
+        ],
+        "regions": [],
+        "asset_classes": [],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "특정 전략에서 사고 발생"
+        ]
+      },
+      "actions": [
+        "유사 전략 운용사 점검"
+      ],
+      "owner_role": "위탁운용팀",
+      "protected": false,
+      "protected_reason": null
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "event_id": "svb_2023",
+  "reaction_date": "2023-03-10",
+  "expected_docs": ["PB-XXX"],
+  "expected_inapplicable_clauses": ["PB-XXX-01"],
+  "expected_gap_channels": ["liquidity"],
+  "expected_exposure_paths": ["M-XXX"],
+  "synthetic": true,
+  "notes": "라벨 설계 근거를 한두 줄로 적는다"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "calm_2017q4",
+  "start": "2017-10-01",
+  "end": "2017-12-31",
+  "selection_method": "FRED 6개 시리즈(VIXCLS, T10Y2Y, DGS10, DEXKOUS, DCOILWTICO, DTWEXBGS) 1일 변화의 252영업일 z-score로 Sentinel 시그널 A 규칙(|z|≥2.5 시리즈 2개 이상 또는 |z|≥4)을 적용해 경보 발생일 0일인 분기 중, 백테스트 사건일과 1년 이상 떨어지고 분기 최대 VIX가 낮은 분기를 선정. BAMLH0A0HYM2는 FRED 공개 범위가 최근 3년이라 제외.",
+  "stats": {
+    "vix_max": 13.13,
+    "alert_days": 0
+  },
+  "sources": [
+    "https://fred.stlouisfed.org/series/VIXCLS",
+    "https://fred.stlouisfed.org/series/T10Y2Y",
+    "https://fred.stlouisfed.org/series/DGS10",
+    "https://fred.stlouisfed.org/series/DEXKOUS",
+    "https://fred.stlouisfed.org/series/DCOILWTICO",
+    "https://fred.stlouisfed.org/series/DTWEXBGS"
+  ]
+}

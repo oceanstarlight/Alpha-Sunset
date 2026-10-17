@@ -181,3 +181,77 @@ class Feedback(BaseModel):
     label: Literal["useful", "not_fit"]
     user_id: str
     ts: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+# --- P2 코퍼스 스키마 ---
+
+
+class CalmWindow(BaseModel):
+    """오경보 측정용 평상 구간 (사건 없는 분기)."""
+
+    id: str = Field(pattern=r"^calm_")
+    start: date
+    end: date
+    selection_method: str
+    stats: dict[str, float] = {}
+    sources: list[str] = Field(min_length=1)
+
+
+class ProxyFund(BaseModel):
+    """위탁운용 mandate를 대신하는 공개 펀드. N-PORT series_id는 P1에서 채운다."""
+
+    name: str
+    ticker: str
+    sponsor: str
+    nport_series_id: str | None = None
+
+
+class PortfolioNode(BaseModel):
+    id: str
+    name: str
+    kind: Literal["direct", "manager", "counterparty"]
+    instrument: str  # 예: etf, bond, mmf, fund, swap, repo
+    weight: Score  # 총자산 대비 비중 (counterparty는 노출 금액 비중)
+    uncertainty: Score
+    regions: list[str] = []
+    sectors: list[str] = []
+    asset_classes: list[str] = []
+    proxy_fund: ProxyFund | None = None
+    note: str = ""
+
+    @model_validator(mode="after")
+    def _kind_rules(self) -> PortfolioNode:
+        if self.kind == "manager" and self.proxy_fund is None:
+            raise ValueError("manager 노드는 proxy_fund가 필요하다")
+        return self
+
+
+class Portfolio(BaseModel):
+    institution: str
+    as_of: date
+    base_currency: str
+    synthetic: bool
+    nodes: list[PortfolioNode]
+
+    @model_validator(mode="after")
+    def _weights(self) -> Portfolio:
+        ids = [n.id for n in self.nodes]
+        if len(ids) != len(set(ids)):
+            raise ValueError("노드 id 중복")
+        total = sum(n.weight for n in self.nodes if n.kind != "counterparty")
+        if abs(total - 1.0) > 1e-6:
+            raise ValueError(f"direct+manager 비중 합이 1이 아니다: {total}")
+        return self
+
+
+class Label(BaseModel):
+    """백테스트 정답 (사용자가 직접 설계한 합성 라벨)."""
+
+    event_id: str
+    reaction_date: date
+    expected_docs: list[str]
+    expected_inapplicable_clauses: list[str] = []
+    expected_gap_channels: list[Channel] = []
+    expected_exposure_paths: list[str] = []  # 포트폴리오 노드 id
+    synthetic: bool = True
+    notes: str = ""
