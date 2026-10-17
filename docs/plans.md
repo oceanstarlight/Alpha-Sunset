@@ -117,7 +117,7 @@ Enum
 ### 4.1 소스
 | 용도 | 소스 | 비고 |
 |---|---|---|
-| 시장 신호 A | FRED API | 시리즈: `VIXCLS`, `BAMLH0A0HYM2`, `T10Y2Y`, `DGS10`, `DEXKOUS`, `DCOILWTICO`, `DTWEXBGS`. 로컬 CSV 캐시 |
+| 시장 신호 A | FRED API | 시리즈: `VIXCLS`, `BAMLH0A0HYM2`(최근 3년, 이전은 `BAA10Y`), `T10Y2Y`, `DGS10`, `DEXKOUS`, `DCOILWTICO`, `DTWEXBGS`. 로컬 CSV 캐시 |
 | 사건 신호 B (라이브) | GDELT DOC 2.0 API | **최근 약 3개월만 조회 가능(확인할 것)**. 라이브 모드 전용 |
 | 사건 (백테스트) | `data/events/*.json` 큐레이션 | 공개 출처 요약+URL. GDELT 대체 |
 | 펀드 보유 | SEC EDGAR N-PORT 분기 데이터셋 | 요청 시 User-Agent에 연락처 포함. 필요한 펀드만 추출해 parquet화 |
@@ -256,6 +256,9 @@ Enum
 - 배포 호스트: Streamlit Community Cloud (확정).
 - 서비스명 표기: Alpha Sunset.
 - 임계치·가중치는 초기값으로 시작, M8에서 조정.
+- 신용스프레드 신호: `BAMLH0A0HYM2`(HY OAS)는 FRED 공개 범위가 최근 3년뿐 → 이력이 충분한 시점(최근 3년)에는 HY OAS, 그 이전은 `BAA10Y`(Moody's Baa−10년물)로 대체.
+- `gfc_2008`은 N-PORT 공개 데이터(2019년~)가 없어 노출 분석(Exposure)에서 제외. Sentinel·Matcher 백테스트에는 포함.
+- 백테스트 시그널 B는 사건 카드 `date`부터 14일간 활성(`card_active_days`).
 
 ## 12. 보류 사항 (MVP 제외)
 - 자금 유출입(ETF flow 등) 감시 신호: 무료·안정적 공개 데이터 미정. 현재는 자금시장 지표(신용스프레드, 금리, 환율)로 대체.
