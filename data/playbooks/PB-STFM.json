@@ -1,0 +1,283 @@
+{
+  "doc_id": "PB-STFM",
+  "title": "국내 단기자금시장 경색 대응 지침",
+  "version": "1.0",
+  "year": 2022,
+  "origin_event": "legoland_2022",
+  "synthetic": true,
+  "source_refs": [
+    "data/source_notes/stfm_legoland2022.md"
+  ],
+  "clauses": [
+    {
+      "clause_id": "PB-STFM-01",
+      "doc_id": "PB-STFM",
+      "text": "지자체·공기업 보증 채무의 부도 또는 회생 신청이 발생하면 관련 CP·ABCP 보유 현황을 즉시 집계한다.",
+      "premises": {
+        "event_types": [
+          "liquidity_crisis",
+          "credit_event"
+        ],
+        "channels": [
+          "liquidity",
+          "credit_spread"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "commercial_paper"
+        ],
+        "duration": [
+          "shock"
+        ],
+        "conditions": [
+          "지자체 보증 채무 부도",
+          "공공 보증 신뢰 훼손"
+        ]
+      },
+      "actions": [
+        "CP·ABCP 보유 현황 집계"
+      ],
+      "owner_role": "자금운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-STFM-02",
+      "doc_id": "PB-STFM",
+      "text": "CP 금리가 급등하고 차환 발행이 어려워지면 단기물 신규 매수를 보류하고 만기 도래분을 현금화한다.",
+      "premises": {
+        "event_types": [
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "liquidity",
+          "credit_spread"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "commercial_paper",
+          "money_market"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "CP 금리 급등",
+          "차환 발행 곤란"
+        ]
+      },
+      "actions": [
+        "단기물 신규 매수 보류",
+        "만기분 현금화"
+      ],
+      "owner_role": "자금운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-STFM-03",
+      "doc_id": "PB-STFM",
+      "text": "부동산 PF 유동화증권 노출을 증권사·건설사별로 점검한다.",
+      "premises": {
+        "event_types": [
+          "liquidity_crisis",
+          "credit_event"
+        ],
+        "channels": [
+          "credit_spread",
+          "counterparty"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "commercial_paper",
+          "real_estate"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "부동산 PF 우발채무 확대"
+        ]
+      },
+      "actions": [
+        "PF 유동화증권 노출 점검"
+      ],
+      "owner_role": "신용분석팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-STFM-04",
+      "doc_id": "PB-STFM",
+      "text": "현금성 자산 비중이 목표 하한 아래로 내려가면 단기 국채와 MMF로 우선 보충한다.",
+      "premises": {
+        "event_types": [
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "liquidity"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "money_market",
+          "govt_bond"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "현금성 자산 비중 하한 미달"
+        ]
+      },
+      "actions": [
+        "현금성 자산 비중 점검",
+        "단기 국채·MMF 매수"
+      ],
+      "owner_role": "자금운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-STFM-05",
+      "doc_id": "PB-STFM",
+      "text": "정부의 채권시장안정펀드·회사채 매입 프로그램 발표 시 시장 금리 안정 여부를 확인한다.",
+      "premises": {
+        "event_types": [
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "liquidity",
+          "credit_spread"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "corporate_bond",
+          "commercial_paper"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "정부 유동성 공급 프로그램 발표"
+        ]
+      },
+      "actions": [
+        "시장 금리 안정 확인"
+      ],
+      "owner_role": "채권운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-STFM-06",
+      "doc_id": "PB-STFM",
+      "text": "증권사의 유동성 부족 징후가 있으면 해당 증권사와의 레포·RP 거래 노출을 점검한다.",
+      "premises": {
+        "event_types": [
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "counterparty",
+          "liquidity"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "repo"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "증권사 유동성 부족"
+        ]
+      },
+      "actions": [
+        "증권사 레포·RP 노출 점검"
+      ],
+      "owner_role": "거래상대방관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-STFM-07",
+      "doc_id": "PB-STFM",
+      "text": "공사채·은행채 발행이 늘어 회사채 수요를 구축하는지 발행시장을 모니터링한다.",
+      "premises": {
+        "event_types": [
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "credit_spread"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "corporate_bond"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "공공·은행채 발행 급증"
+        ]
+      },
+      "actions": [
+        "발행시장 모니터링"
+      ],
+      "owner_role": "채권운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-STFM-08",
+      "doc_id": "PB-STFM",
+      "text": "한국은행의 적격담보 확대 등 유동성 조치가 발표되면 담보로 활용 가능한 보유 채권을 확인한다.",
+      "premises": {
+        "event_types": [
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "liquidity"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "govt_bond",
+          "corporate_bond"
+        ],
+        "duration": [
+          "weeks"
+        ],
+        "conditions": [
+          "중앙은행 적격담보 확대"
+        ]
+      },
+      "actions": [
+        "담보 활용 가능 채권 확인"
+      ],
+      "owner_role": "자금운용팀",
+      "protected": false,
+      "protected_reason": null
+    }
+  ]
+}

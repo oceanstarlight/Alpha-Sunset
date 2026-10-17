@@ -1,0 +1,290 @@
+{
+  "doc_id": "PB-FX",
+  "title": "환율 급변 대응 지침 (원화 약세)",
+  "version": "1.0",
+  "year": 2009,
+  "origin_event": "gfc_2008",
+  "synthetic": true,
+  "source_refs": [
+    "data/source_notes/fx_korea2008.md"
+  ],
+  "clauses": [
+    {
+      "clause_id": "PB-FX-01",
+      "doc_id": "PB-FX",
+      "text": "원/달러 환율이 단기간에 급등하면 외환 유동성 점검 회의를 소집한다.",
+      "premises": {
+        "event_types": [
+          "fx_shock",
+          "credit_event",
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "fx",
+          "liquidity"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "fx"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "원/달러 환율 급등"
+        ]
+      },
+      "actions": [
+        "외환 유동성 점검 회의 소집"
+      ],
+      "owner_role": "외환운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-FX-02",
+      "doc_id": "PB-FX",
+      "text": "국내 은행의 외화차입 상환 압력이 커지면 외화 조달 상대방과 만기 구조를 점검한다.",
+      "premises": {
+        "event_types": [
+          "fx_shock",
+          "credit_event"
+        ],
+        "channels": [
+          "fx",
+          "liquidity",
+          "counterparty"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "money_market",
+          "fx"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "국내 은행 외화차입 상환 압력"
+        ]
+      },
+      "actions": [
+        "외화 조달 만기 구조 점검"
+      ],
+      "owner_role": "자금운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-FX-03",
+      "doc_id": "PB-FX",
+      "text": "외국인 증권자금 유출이 지속되면 원화 자산 비중과 환노출 한도를 재점검한다.",
+      "premises": {
+        "event_types": [
+          "fx_shock",
+          "credit_event"
+        ],
+        "channels": [
+          "fx",
+          "equity_vol"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "equity",
+          "govt_bond",
+          "fx"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "외국인 증권자금 유출 지속"
+        ]
+      },
+      "actions": [
+        "환노출 한도 재점검"
+      ],
+      "owner_role": "리스크관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-FX-04",
+      "doc_id": "PB-FX",
+      "text": "환헤지 계약 만기 시 롤오버 비용이 급등하면 헤지 비율 하향 여부를 검토한다.",
+      "premises": {
+        "event_types": [
+          "fx_shock"
+        ],
+        "channels": [
+          "fx"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "fx",
+          "derivatives"
+        ],
+        "duration": [
+          "weeks"
+        ],
+        "conditions": [
+          "스왑 포인트 급변"
+        ]
+      },
+      "actions": [
+        "롤오버 비용 산정",
+        "헤지 비율 검토"
+      ],
+      "owner_role": "외환운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-FX-05",
+      "doc_id": "PB-FX",
+      "text": "한미 통화스와프 등 정책 대응 발표 시 외환시장 안정 여부를 확인하고 헤지 정책을 정상화한다.",
+      "premises": {
+        "event_types": [
+          "fx_shock",
+          "credit_event"
+        ],
+        "channels": [
+          "fx",
+          "liquidity"
+        ],
+        "regions": [
+          "KR",
+          "US"
+        ],
+        "asset_classes": [
+          "fx"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "중앙은행 간 통화스와프 체결"
+        ]
+      },
+      "actions": [
+        "외환시장 안정 확인",
+        "헤지 정책 정상화"
+      ],
+      "owner_role": "외환운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-FX-06",
+      "doc_id": "PB-FX",
+      "text": "외화 키코(KIKO) 등 환율 연계 파생상품을 보유한 국내 기업에 대한 신용 노출을 점검한다.",
+      "premises": {
+        "event_types": [
+          "fx_shock",
+          "credit_event"
+        ],
+        "channels": [
+          "fx",
+          "credit_spread"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "corporate_bond",
+          "equity"
+        ],
+        "duration": [
+          "months"
+        ],
+        "conditions": [
+          "환율 연계 파생상품 손실 확대"
+        ]
+      },
+      "actions": [
+        "관련 기업 신용 노출 점검"
+      ],
+      "owner_role": "신용분석팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-FX-07",
+      "doc_id": "PB-FX",
+      "text": "원/달러 환율이 급등하면 외환 유동성 점검 회의를 소집하고 외화 현금 보유를 늘린다.",
+      "premises": {
+        "event_types": [
+          "fx_shock"
+        ],
+        "channels": [
+          "fx",
+          "liquidity"
+        ],
+        "regions": [
+          "KR"
+        ],
+        "asset_classes": [
+          "fx"
+        ],
+        "duration": [
+          "shock"
+        ],
+        "conditions": [
+          "원/달러 환율 급등"
+        ]
+      },
+      "actions": [
+        "외환 유동성 점검 회의 소집",
+        "외화 현금 확대"
+      ],
+      "owner_role": "외환운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-FX-08",
+      "doc_id": "PB-FX",
+      "text": "해외 투자 자산의 원화 환산 평가액 변동을 일일 보고한다.",
+      "premises": {
+        "event_types": [
+          "fx_shock"
+        ],
+        "channels": [
+          "fx"
+        ],
+        "regions": [
+          "KR",
+          "GLOBAL"
+        ],
+        "asset_classes": [
+          "fx"
+        ],
+        "duration": [
+          "shock",
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "환율 급변"
+        ]
+      },
+      "actions": [
+        "원화 환산 평가액 일일 보고"
+      ],
+      "owner_role": "재무팀",
+      "protected": false,
+      "protected_reason": null
+    }
+  ]
+}

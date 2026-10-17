@@ -1,0 +1,39 @@
+{
+  "id": "tariff_2025",
+  "title": "2025 미국 상호관세 충격",
+  "date": "2025-04-02",
+  "summary": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다. VIX는 4월 8일 52.33까지 상승했다.",
+  "type": "trade_policy",
+  "channels": [
+    "sanctions_trade",
+    "supply_chain",
+    "equity_vol",
+    "fx"
+  ],
+  "regions": [
+    "US",
+    "CN",
+    "KR",
+    "GLOBAL"
+  ],
+  "sectors": [
+    "manufacturing",
+    "autos",
+    "semiconductors",
+    "retail"
+  ],
+  "asset_classes": [
+    "equity",
+    "fx",
+    "corporate_bond"
+  ],
+  "entities": [
+    "The White House"
+  ],
+  "duration": "months",
+  "severity": 4,
+  "sources": [
+    "https://www.whitehouse.gov/fact-sheets/2025/04/fact-sheet-president-donald-j-trump-declares-national-emergency-to-increase-our-competitive-edge-protect-our-sovereignty-and-strengthen-our-national-and-economic-security/",
+    "https://fred.stlouisfed.org/series/VIXCLS"
+  ]
+}

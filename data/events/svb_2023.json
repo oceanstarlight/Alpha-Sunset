@@ -1,0 +1,38 @@
+{
+  "id": "svb_2023",
+  "title": "2023 실리콘밸리은행(SVB) 파산",
+  "date": "2023-03-10",
+  "summary": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다. 3월 12일 미 재무부·연준·FDIC는 SVB와 시그니처은행의 예금을 부보 여부와 무관하게 전액 보호하기로 했고, 연준은 국채·MBS 등을 액면가로 담보 인정하는 최장 1년 만기 대출 프로그램(BTFP)을 신설했다. VIX는 3월 13일 26.52까지 상승했다.",
+  "type": "banking_stress",
+  "channels": [
+    "liquidity",
+    "counterparty",
+    "rates",
+    "equity_vol"
+  ],
+  "regions": [
+    "US"
+  ],
+  "sectors": [
+    "regional_banks",
+    "technology"
+  ],
+  "asset_classes": [
+    "equity",
+    "govt_bond",
+    "corporate_bond"
+  ],
+  "entities": [
+    "Silicon Valley Bank",
+    "Signature Bank",
+    "FDIC",
+    "Federal Reserve"
+  ],
+  "duration": "weeks",
+  "severity": 4,
+  "sources": [
+    "https://www.federalreserve.gov/newsevents/pressreleases/monetary20230312a.htm",
+    "https://www.nbcbayarea.com/news/business/money-report/silicon-valley-bank-is-shut-down-by-regulators-fdic-to-protect-insured-deposits/3176655/",
+    "https://fred.stlouisfed.org/series/VIXCLS"
+  ]
+}

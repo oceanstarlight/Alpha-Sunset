@@ -1,0 +1,284 @@
+{
+  "doc_id": "PB-GEO",
+  "title": "지정학 위기·제재 대응 매뉴얼",
+  "version": "1.1",
+  "year": 2022,
+  "origin_event": "ru_ua_2022",
+  "synthetic": true,
+  "source_refs": [
+    "data/source_notes/geopolitical_ruua2022.md"
+  ],
+  "clauses": [
+    {
+      "clause_id": "PB-GEO-01",
+      "doc_id": "PB-GEO",
+      "text": "군사 충돌 발생 시 분쟁 당사국 및 인접국 소재 자산의 노출을 국가별로 집계한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical"
+        ],
+        "channels": [
+          "sanctions_trade",
+          "equity_vol"
+        ],
+        "regions": [
+          "RU",
+          "UA",
+          "EU"
+        ],
+        "asset_classes": [
+          "equity",
+          "govt_bond",
+          "em_bond"
+        ],
+        "duration": [
+          "shock"
+        ],
+        "conditions": [
+          "군사 충돌 발생"
+        ]
+      },
+      "actions": [
+        "국가별 노출 집계",
+        "CIO 보고"
+      ],
+      "owner_role": "리스크관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-GEO-02",
+      "doc_id": "PB-GEO",
+      "text": "제재 대상 국가·기관이 지정되면 해당 자산의 신규 매수를 금지하고 보유분은 준법감시팀 검토 후 처리한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical",
+          "regulatory"
+        ],
+        "channels": [
+          "sanctions_trade"
+        ],
+        "regions": [
+          "RU"
+        ],
+        "asset_classes": [
+          "equity",
+          "govt_bond",
+          "em_bond"
+        ],
+        "duration": [
+          "shock",
+          "structural"
+        ],
+        "conditions": [
+          "제재 대상 지정"
+        ]
+      },
+      "actions": [
+        "신규 매수 금지",
+        "보유분 준법 검토"
+      ],
+      "owner_role": "준법감시팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-GEO-03",
+      "doc_id": "PB-GEO",
+      "text": "제재 대상 은행이 국제 결제망에서 배제되면 해당 은행을 경유하는 결제·수탁 경로를 점검한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical"
+        ],
+        "channels": [
+          "sanctions_trade",
+          "operational"
+        ],
+        "regions": [
+          "RU"
+        ],
+        "asset_classes": [],
+        "duration": [
+          "shock",
+          "structural"
+        ],
+        "conditions": [
+          "국제 결제망(SWIFT) 배제"
+        ]
+      },
+      "actions": [
+        "결제·수탁 경로 점검",
+        "대체 경로 확보"
+      ],
+      "owner_role": "운영지원팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-GEO-04",
+      "doc_id": "PB-GEO",
+      "text": "분쟁으로 에너지·곡물 공급 차질이 예상되면 원자재 가격 급등에 따른 포트폴리오 영향을 분석한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical",
+          "supply_chain"
+        ],
+        "channels": [
+          "commodity",
+          "supply_chain"
+        ],
+        "regions": [
+          "RU",
+          "UA",
+          "EU",
+          "GLOBAL"
+        ],
+        "asset_classes": [
+          "commodity",
+          "equity"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "에너지·곡물 수출국 분쟁"
+        ]
+      },
+      "actions": [
+        "원자재 가격 시나리오 분석"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-GEO-05",
+      "doc_id": "PB-GEO",
+      "text": "제재로 거래가 중단된 자산은 공정가치 평가 방법을 재검토하고 평가위원회에 상정한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical",
+          "regulatory"
+        ],
+        "channels": [
+          "sanctions_trade"
+        ],
+        "regions": [
+          "RU"
+        ],
+        "asset_classes": [
+          "equity",
+          "govt_bond"
+        ],
+        "duration": [
+          "structural"
+        ],
+        "conditions": [
+          "거래 중단 자산 발생"
+        ]
+      },
+      "actions": [
+        "공정가치 재평가",
+        "평가위원회 상정"
+      ],
+      "owner_role": "재무팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-GEO-06",
+      "doc_id": "PB-GEO",
+      "text": "위탁운용사에 제재 대상 자산 보유 현황과 처리 계획을 제출하도록 요청한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical"
+        ],
+        "channels": [
+          "sanctions_trade",
+          "counterparty"
+        ],
+        "regions": [
+          "RU"
+        ],
+        "asset_classes": [],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "위탁운용 자산 중 제재 대상 포함 가능"
+        ]
+      },
+      "actions": [
+        "위탁운용사 보유 현황 요청"
+      ],
+      "owner_role": "위탁운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-GEO-07",
+      "doc_id": "PB-GEO",
+      "text": "안전자산 선호로 달러 강세가 나타나면 환헤지 비율을 점검한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical"
+        ],
+        "channels": [
+          "fx"
+        ],
+        "regions": [
+          "GLOBAL"
+        ],
+        "asset_classes": [
+          "fx"
+        ],
+        "duration": [
+          "weeks"
+        ],
+        "conditions": [
+          "달러 강세"
+        ]
+      },
+      "actions": [
+        "환헤지 비율 점검"
+      ],
+      "owner_role": "외환운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-GEO-08",
+      "doc_id": "PB-GEO",
+      "text": "분쟁 장기화가 예상되면 국가 리스크 등급을 재산정하고 전략적 자산배분 회의에 상정한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical"
+        ],
+        "channels": [
+          "sanctions_trade",
+          "commodity"
+        ],
+        "regions": [
+          "GLOBAL"
+        ],
+        "asset_classes": [],
+        "duration": [
+          "months",
+          "structural"
+        ],
+        "conditions": [
+          "분쟁 장기화"
+        ]
+      },
+      "actions": [
+        "국가 리스크 등급 재산정",
+        "자산배분 회의 상정"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    }
+  ]
+}

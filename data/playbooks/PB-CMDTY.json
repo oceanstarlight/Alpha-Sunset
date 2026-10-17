@@ -1,0 +1,287 @@
+{
+  "doc_id": "PB-CMDTY",
+  "title": "원자재 가격 충격 대응 지침",
+  "version": "1.0",
+  "year": 2022,
+  "origin_event": "ru_ua_2022",
+  "synthetic": true,
+  "source_refs": [
+    "data/source_notes/commodity_2020_2022.md"
+  ],
+  "clauses": [
+    {
+      "clause_id": "PB-CMDTY-01",
+      "doc_id": "PB-CMDTY",
+      "text": "유가가 단기간 급등하거나 급락하면 에너지 업종과 원자재 관련 자산의 노출을 집계한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical",
+          "supply_chain",
+          "pandemic"
+        ],
+        "channels": [
+          "commodity"
+        ],
+        "regions": [
+          "GLOBAL"
+        ],
+        "asset_classes": [
+          "commodity",
+          "equity",
+          "high_yield"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "유가 급변"
+        ]
+      },
+      "actions": [
+        "에너지·원자재 노출 집계"
+      ],
+      "owner_role": "리스크관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CMDTY-02",
+      "doc_id": "PB-CMDTY",
+      "text": "선물 만기 직전 극단적 가격 왜곡이 나타나면 원자재 선물·ETF의 롤오버 일정을 점검한다.",
+      "premises": {
+        "event_types": [
+          "pandemic",
+          "supply_chain"
+        ],
+        "channels": [
+          "commodity",
+          "liquidity"
+        ],
+        "regions": [
+          "US"
+        ],
+        "asset_classes": [
+          "commodity",
+          "derivatives"
+        ],
+        "duration": [
+          "shock"
+        ],
+        "conditions": [
+          "선물 만기 가격 왜곡",
+          "저장 공간 부족"
+        ]
+      },
+      "actions": [
+        "롤오버 일정 점검"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CMDTY-03",
+      "doc_id": "PB-CMDTY",
+      "text": "유가 급락으로 에너지 기업의 하이일드 채권 부도 위험이 커지면 해당 노출을 줄인다.",
+      "premises": {
+        "event_types": [
+          "pandemic",
+          "credit_event"
+        ],
+        "channels": [
+          "commodity",
+          "credit_spread"
+        ],
+        "regions": [
+          "US"
+        ],
+        "asset_classes": [
+          "high_yield",
+          "corporate_bond"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "유가 급락",
+          "에너지 하이일드 스프레드 확대"
+        ]
+      },
+      "actions": [
+        "에너지 하이일드 노출 축소 검토"
+      ],
+      "owner_role": "신용분석팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CMDTY-04",
+      "doc_id": "PB-CMDTY",
+      "text": "공급 차질로 원자재 가격이 급등하면 인플레이션 시나리오를 채권 전략에 반영한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical",
+          "supply_chain"
+        ],
+        "channels": [
+          "commodity",
+          "rates"
+        ],
+        "regions": [
+          "GLOBAL"
+        ],
+        "asset_classes": [
+          "govt_bond",
+          "commodity"
+        ],
+        "duration": [
+          "months"
+        ],
+        "conditions": [
+          "공급 차질에 따른 가격 급등"
+        ]
+      },
+      "actions": [
+        "인플레이션 시나리오 반영"
+      ],
+      "owner_role": "채권운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CMDTY-05",
+      "doc_id": "PB-CMDTY",
+      "text": "원자재 수입 의존도가 높은 국가의 통화 약세 위험을 점검한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical",
+          "supply_chain"
+        ],
+        "channels": [
+          "commodity",
+          "fx"
+        ],
+        "regions": [
+          "KR",
+          "EM"
+        ],
+        "asset_classes": [
+          "fx"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "원자재 가격 급등"
+        ]
+      },
+      "actions": [
+        "수입국 통화 위험 점검"
+      ],
+      "owner_role": "외환운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CMDTY-06",
+      "doc_id": "PB-CMDTY",
+      "text": "원자재 가격 급등 시 원자재 상품 거래 상대방의 증거금 부담과 신용 위험을 점검한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical"
+        ],
+        "channels": [
+          "commodity",
+          "counterparty"
+        ],
+        "regions": [
+          "EU",
+          "GLOBAL"
+        ],
+        "asset_classes": [
+          "derivatives",
+          "commodity"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "증거금 급증"
+        ]
+      },
+      "actions": [
+        "거래 상대방 증거금·신용 점검"
+      ],
+      "owner_role": "거래상대방관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CMDTY-07",
+      "doc_id": "PB-CMDTY",
+      "text": "곡물 가격 급등이 신흥국 물가에 미치는 영향을 점검한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical",
+          "supply_chain"
+        ],
+        "channels": [
+          "commodity"
+        ],
+        "regions": [
+          "EM"
+        ],
+        "asset_classes": [
+          "em_bond"
+        ],
+        "duration": [
+          "months"
+        ],
+        "conditions": [
+          "곡물 수출 차질"
+        ]
+      },
+      "actions": [
+        "신흥국 물가 영향 점검"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-CMDTY-08",
+      "doc_id": "PB-CMDTY",
+      "text": "원자재 가격이 안정되면 전술적 조정 포지션을 단계적으로 해소한다.",
+      "premises": {
+        "event_types": [
+          "geopolitical",
+          "supply_chain",
+          "pandemic"
+        ],
+        "channels": [
+          "commodity"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "commodity"
+        ],
+        "duration": [
+          "months"
+        ],
+        "conditions": [
+          "원자재 가격 안정"
+        ]
+      },
+      "actions": [
+        "전술 포지션 단계적 해소"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    }
+  ]
+}

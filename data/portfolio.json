@@ -1,0 +1,368 @@
+{
+  "institution": "가상 기관투자자 (Alpha Sunset 데모)",
+  "as_of": "2025-01-01",
+  "base_currency": "KRW",
+  "synthetic": true,
+  "nodes": [
+    {
+      "id": "D-UST",
+      "name": "미국 국채 (7~10년)",
+      "kind": "direct",
+      "instrument": "bond",
+      "weight": 0.15,
+      "uncertainty": 0.0,
+      "regions": [
+        "US"
+      ],
+      "sectors": [
+        "sovereign"
+      ],
+      "asset_classes": [
+        "govt_bond"
+      ]
+    },
+    {
+      "id": "D-KTB",
+      "name": "한국 국고채",
+      "kind": "direct",
+      "instrument": "bond",
+      "weight": 0.15,
+      "uncertainty": 0.0,
+      "regions": [
+        "KR"
+      ],
+      "sectors": [
+        "sovereign"
+      ],
+      "asset_classes": [
+        "govt_bond"
+      ]
+    },
+    {
+      "id": "D-USEQ",
+      "name": "미국 대형주 ETF",
+      "kind": "direct",
+      "instrument": "etf",
+      "weight": 0.12,
+      "uncertainty": 0.0,
+      "regions": [
+        "US"
+      ],
+      "sectors": [
+        "broad_market"
+      ],
+      "asset_classes": [
+        "equity"
+      ],
+      "proxy_fund": {
+        "name": "iShares Core S&P 500 ETF",
+        "ticker": "IVV",
+        "sponsor": "BlackRock (iShares)",
+        "nport_series_id": null
+      },
+      "note": "proxy_fund는 보유내역(look-through) 조회용"
+    },
+    {
+      "id": "D-KREQ",
+      "name": "한국 주식 ETF",
+      "kind": "direct",
+      "instrument": "etf",
+      "weight": 0.06,
+      "uncertainty": 0.0,
+      "regions": [
+        "KR"
+      ],
+      "sectors": [
+        "broad_market",
+        "semiconductors",
+        "autos"
+      ],
+      "asset_classes": [
+        "equity"
+      ],
+      "proxy_fund": {
+        "name": "iShares MSCI South Korea ETF",
+        "ticker": "EWY",
+        "sponsor": "BlackRock (iShares)",
+        "nport_series_id": null
+      },
+      "note": "proxy_fund는 보유내역(look-through) 조회용"
+    },
+    {
+      "id": "D-MMF",
+      "name": "국내 MMF·단기자금",
+      "kind": "direct",
+      "instrument": "mmf",
+      "weight": 0.07,
+      "uncertainty": 0.0,
+      "regions": [
+        "KR"
+      ],
+      "sectors": [
+        "broker_dealers",
+        "banks"
+      ],
+      "asset_classes": [
+        "money_market",
+        "commercial_paper"
+      ]
+    },
+    {
+      "id": "D-RE",
+      "name": "국내 부동산 펀드",
+      "kind": "direct",
+      "instrument": "fund",
+      "weight": 0.1,
+      "uncertainty": 0.0,
+      "regions": [
+        "KR"
+      ],
+      "sectors": [
+        "real_estate"
+      ],
+      "asset_classes": [
+        "real_estate"
+      ]
+    },
+    {
+      "id": "M-HANBIT",
+      "name": "한빛자산운용 (미국 지역은행 전략)",
+      "kind": "manager",
+      "instrument": "fund",
+      "weight": 0.05,
+      "uncertainty": 0.3,
+      "regions": [
+        "US"
+      ],
+      "sectors": [
+        "regional_banks",
+        "banks"
+      ],
+      "asset_classes": [
+        "equity"
+      ],
+      "proxy_fund": {
+        "name": "SPDR S&P Regional Banking ETF",
+        "ticker": "KRE",
+        "sponsor": "State Street (SPDR)",
+        "nport_series_id": null
+      }
+    },
+    {
+      "id": "M-CHEONGRAM",
+      "name": "청람인베스트 (신흥국 달러채권)",
+      "kind": "manager",
+      "instrument": "fund",
+      "weight": 0.07,
+      "uncertainty": 0.3,
+      "regions": [
+        "EM",
+        "KR",
+        "CN"
+      ],
+      "sectors": [
+        "sovereign"
+      ],
+      "asset_classes": [
+        "em_bond"
+      ],
+      "proxy_fund": {
+        "name": "iShares J.P. Morgan USD Emerging Markets Bond ETF",
+        "ticker": "EMB",
+        "sponsor": "BlackRock (iShares)",
+        "nport_series_id": null
+      }
+    },
+    {
+      "id": "M-DAON",
+      "name": "다온캐피탈 (미국 하이일드)",
+      "kind": "manager",
+      "instrument": "fund",
+      "weight": 0.07,
+      "uncertainty": 0.3,
+      "regions": [
+        "US"
+      ],
+      "sectors": [
+        "energy",
+        "telecom",
+        "consumer"
+      ],
+      "asset_classes": [
+        "high_yield",
+        "corporate_bond"
+      ],
+      "proxy_fund": {
+        "name": "iShares iBoxx $ High Yield Corporate Bond ETF",
+        "ticker": "HYG",
+        "sponsor": "BlackRock (iShares)",
+        "nport_series_id": null
+      }
+    },
+    {
+      "id": "M-NURI",
+      "name": "누리에셋 (미국 에너지주)",
+      "kind": "manager",
+      "instrument": "fund",
+      "weight": 0.05,
+      "uncertainty": 0.3,
+      "regions": [
+        "US"
+      ],
+      "sectors": [
+        "energy"
+      ],
+      "asset_classes": [
+        "equity",
+        "commodity"
+      ],
+      "proxy_fund": {
+        "name": "Energy Select Sector SPDR Fund",
+        "ticker": "XLE",
+        "sponsor": "State Street (Select Sector SPDR)",
+        "nport_series_id": null
+      }
+    },
+    {
+      "id": "M-SEOGYEONG",
+      "name": "서경파트너스 (중국 주식)",
+      "kind": "manager",
+      "instrument": "fund",
+      "weight": 0.05,
+      "uncertainty": 0.3,
+      "regions": [
+        "CN"
+      ],
+      "sectors": [
+        "technology",
+        "consumer",
+        "manufacturing"
+      ],
+      "asset_classes": [
+        "equity"
+      ],
+      "proxy_fund": {
+        "name": "iShares MSCI China ETF",
+        "ticker": "MCHI",
+        "sponsor": "BlackRock (iShares)",
+        "nport_series_id": null
+      }
+    },
+    {
+      "id": "M-MIR",
+      "name": "미르글로벌 (유럽 주식)",
+      "kind": "manager",
+      "instrument": "fund",
+      "weight": 0.06,
+      "uncertainty": 0.3,
+      "regions": [
+        "EU"
+      ],
+      "sectors": [
+        "banks",
+        "energy",
+        "manufacturing"
+      ],
+      "asset_classes": [
+        "equity"
+      ],
+      "proxy_fund": {
+        "name": "Vanguard FTSE Europe ETF",
+        "ticker": "VGK",
+        "sponsor": "Vanguard",
+        "nport_series_id": null
+      }
+    },
+    {
+      "id": "C-ATLAS",
+      "name": "아틀라스 글로벌증권 (미국 투자은행)",
+      "kind": "counterparty",
+      "instrument": "swap",
+      "weight": 0.02,
+      "uncertainty": 0.5,
+      "regions": [
+        "US",
+        "GLOBAL"
+      ],
+      "sectors": [
+        "broker_dealers"
+      ],
+      "asset_classes": [
+        "derivatives"
+      ]
+    },
+    {
+      "id": "C-RHEIN",
+      "name": "라인방크 (유럽 은행)",
+      "kind": "counterparty",
+      "instrument": "swap",
+      "weight": 0.015,
+      "uncertainty": 0.5,
+      "regions": [
+        "EU"
+      ],
+      "sectors": [
+        "banks"
+      ],
+      "asset_classes": [
+        "derivatives",
+        "fx"
+      ]
+    },
+    {
+      "id": "C-PACIFICA",
+      "name": "퍼시피카 뱅크 (미국 지역은행)",
+      "kind": "counterparty",
+      "instrument": "swap",
+      "weight": 0.01,
+      "uncertainty": 0.5,
+      "regions": [
+        "US"
+      ],
+      "sectors": [
+        "regional_banks",
+        "banks"
+      ],
+      "asset_classes": [
+        "derivatives"
+      ]
+    },
+    {
+      "id": "C-HANGANG",
+      "name": "한강증권 (국내 증권사)",
+      "kind": "counterparty",
+      "instrument": "repo",
+      "weight": 0.02,
+      "uncertainty": 0.5,
+      "regions": [
+        "KR"
+      ],
+      "sectors": [
+        "broker_dealers",
+        "real_estate"
+      ],
+      "asset_classes": [
+        "repo",
+        "commercial_paper"
+      ]
+    },
+    {
+      "id": "C-SEORAE",
+      "name": "서래은행 (국내 은행)",
+      "kind": "counterparty",
+      "instrument": "repo",
+      "weight": 0.01,
+      "uncertainty": 0.5,
+      "regions": [
+        "KR"
+      ],
+      "sectors": [
+        "banks"
+      ],
+      "asset_classes": [
+        "repo",
+        "fx"
+      ]
+    }
+  ]
+}

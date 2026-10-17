@@ -1,0 +1,277 @@
+{
+  "doc_id": "PB-BANK",
+  "title": "은행 시스템 위기 대응 지침",
+  "version": "1.0",
+  "year": 2023,
+  "origin_event": "svb_2023",
+  "synthetic": true,
+  "source_refs": [
+    "data/source_notes/banking_svb2023.md"
+  ],
+  "clauses": [
+    {
+      "clause_id": "PB-BANK-01",
+      "doc_id": "PB-BANK",
+      "text": "예치 은행의 폐쇄 또는 뱅크런 징후가 확인되면 해당 은행 예금·결제계좌 잔액을 즉시 확인한다.",
+      "premises": {
+        "event_types": [
+          "banking_stress"
+        ],
+        "channels": [
+          "counterparty",
+          "liquidity"
+        ],
+        "regions": [
+          "US"
+        ],
+        "asset_classes": [
+          "money_market"
+        ],
+        "duration": [
+          "shock"
+        ],
+        "conditions": [
+          "예치 은행 폐쇄·뱅크런"
+        ]
+      },
+      "actions": [
+        "은행별 예금 잔액 확인",
+        "부보 한도 초과분 산출"
+      ],
+      "owner_role": "자금운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BANK-02",
+      "doc_id": "PB-BANK",
+      "text": "단일 은행 예치 한도를 초과한 예금은 신용등급이 높은 복수 은행으로 분산한다.",
+      "premises": {
+        "event_types": [
+          "banking_stress"
+        ],
+        "channels": [
+          "counterparty"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "money_market"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "단일 은행 예치 집중"
+        ]
+      },
+      "actions": [
+        "예치 한도 점검",
+        "복수 은행 분산 이체"
+      ],
+      "owner_role": "자금운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BANK-03",
+      "doc_id": "PB-BANK",
+      "text": "보유 채권의 미실현 평가손실이 큰 지역은행을 식별하고 해당 은행 주식·채권 노출을 점검한다.",
+      "premises": {
+        "event_types": [
+          "banking_stress",
+          "rate_shock"
+        ],
+        "channels": [
+          "rates",
+          "counterparty"
+        ],
+        "regions": [
+          "US"
+        ],
+        "asset_classes": [
+          "equity",
+          "corporate_bond"
+        ],
+        "duration": [
+          "weeks"
+        ],
+        "conditions": [
+          "금리 상승으로 은행 보유채권 평가손실 확대"
+        ]
+      },
+      "actions": [
+        "취약 지역은행 식별",
+        "노출 점검"
+      ],
+      "owner_role": "신용분석팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BANK-04",
+      "doc_id": "PB-BANK",
+      "text": "정부의 예금 전액 보호 또는 긴급 대출 프로그램 발표 시 시장 안정 여부를 확인하고 추가 매도를 보류한다.",
+      "premises": {
+        "event_types": [
+          "banking_stress"
+        ],
+        "channels": [
+          "liquidity"
+        ],
+        "regions": [
+          "US"
+        ],
+        "asset_classes": [
+          "equity",
+          "corporate_bond"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "정부 예금보호·긴급대출 발표"
+        ]
+      },
+      "actions": [
+        "정책 효과 모니터링",
+        "추가 매도 보류 판단"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BANK-05",
+      "doc_id": "PB-BANK",
+      "text": "은행 섹터 주가 변동성이 급등하면 은행 섹터 비중을 벤치마크 대비 중립 이하로 조정한다.",
+      "premises": {
+        "event_types": [
+          "banking_stress"
+        ],
+        "channels": [
+          "equity_vol"
+        ],
+        "regions": [
+          "US",
+          "EU"
+        ],
+        "asset_classes": [
+          "equity"
+        ],
+        "duration": [
+          "weeks"
+        ],
+        "conditions": [
+          "은행 섹터 변동성 급등"
+        ]
+      },
+      "actions": [
+        "은행 섹터 비중 조정"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BANK-06",
+      "doc_id": "PB-BANK",
+      "text": "현금성 자산 비중이 목표 하한 아래로 내려가면 단기 국채와 MMF로 우선 보충한다.",
+      "premises": {
+        "event_types": [
+          "banking_stress",
+          "liquidity_crisis"
+        ],
+        "channels": [
+          "liquidity"
+        ],
+        "regions": [],
+        "asset_classes": [
+          "money_market",
+          "govt_bond"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "현금성 자산 비중 하한 미달"
+        ]
+      },
+      "actions": [
+        "현금성 자산 비중 점검",
+        "단기 국채·MMF 매수"
+      ],
+      "owner_role": "자금운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BANK-07",
+      "doc_id": "PB-BANK",
+      "text": "벤처·기술 기업 예금 비중이 높은 은행과 거래하는 위탁운용사에 결제계좌 현황을 확인 요청한다.",
+      "premises": {
+        "event_types": [
+          "banking_stress"
+        ],
+        "channels": [
+          "counterparty",
+          "operational"
+        ],
+        "regions": [
+          "US"
+        ],
+        "asset_classes": [],
+        "duration": [
+          "shock"
+        ],
+        "conditions": [
+          "특정 업종 예금 집중 은행 부실"
+        ]
+      },
+      "actions": [
+        "위탁운용사 결제계좌 현황 확인"
+      ],
+      "owner_role": "위탁운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-BANK-08",
+      "doc_id": "PB-BANK",
+      "text": "은행 위기가 해외 은행으로 전이되는지 확인하기 위해 주요 은행 CDS와 단기자금 금리를 일일 모니터링한다.",
+      "premises": {
+        "event_types": [
+          "banking_stress"
+        ],
+        "channels": [
+          "credit_spread",
+          "liquidity"
+        ],
+        "regions": [
+          "GLOBAL",
+          "EU"
+        ],
+        "asset_classes": [
+          "derivatives",
+          "money_market"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "은행 위기 전이 가능성"
+        ]
+      },
+      "actions": [
+        "주요 은행 CDS 모니터링",
+        "단기자금 금리 모니터링"
+      ],
+      "owner_role": "리스크관리팀",
+      "protected": false,
+      "protected_reason": null
+    }
+  ]
+}

@@ -1,0 +1,283 @@
+{
+  "doc_id": "PB-TRADE",
+  "title": "무역정책 충격 대응 지침",
+  "version": "1.0",
+  "year": 2025,
+  "origin_event": "tariff_2025",
+  "synthetic": true,
+  "source_refs": [
+    "data/source_notes/trade_tariff2025.md"
+  ],
+  "clauses": [
+    {
+      "clause_id": "PB-TRADE-01",
+      "doc_id": "PB-TRADE",
+      "text": "대규모 관세 부과가 발표되면 관세 대상국 소재 기업과 수출 의존 업종의 노출을 집계한다.",
+      "premises": {
+        "event_types": [
+          "trade_policy"
+        ],
+        "channels": [
+          "sanctions_trade",
+          "equity_vol"
+        ],
+        "regions": [
+          "US",
+          "CN",
+          "KR",
+          "GLOBAL"
+        ],
+        "asset_classes": [
+          "equity",
+          "corporate_bond"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "대규모 관세 부과 발표"
+        ]
+      },
+      "actions": [
+        "관세 대상국·업종 노출 집계"
+      ],
+      "owner_role": "리스크관리팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-TRADE-02",
+      "doc_id": "PB-TRADE",
+      "text": "관세로 공급망 재편이 예상되면 자동차·반도체 등 대미 수출 업종의 실적 영향을 분석한다.",
+      "premises": {
+        "event_types": [
+          "trade_policy",
+          "supply_chain"
+        ],
+        "channels": [
+          "supply_chain",
+          "sanctions_trade"
+        ],
+        "regions": [
+          "KR",
+          "CN"
+        ],
+        "asset_classes": [
+          "equity"
+        ],
+        "duration": [
+          "months",
+          "structural"
+        ],
+        "conditions": [
+          "공급망 재편"
+        ]
+      },
+      "actions": [
+        "업종별 실적 영향 분석"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-TRADE-03",
+      "doc_id": "PB-TRADE",
+      "text": "관세 발효일과 유예 조치를 추적해 시나리오별 대응안을 갱신한다.",
+      "premises": {
+        "event_types": [
+          "trade_policy"
+        ],
+        "channels": [
+          "sanctions_trade"
+        ],
+        "regions": [
+          "US"
+        ],
+        "asset_classes": [],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "관세 발효·유예 일정 변동"
+        ]
+      },
+      "actions": [
+        "관세 일정 추적",
+        "시나리오 갱신"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-TRADE-04",
+      "doc_id": "PB-TRADE",
+      "text": "무역 갈등으로 신흥국 통화가 약세를 보이면 신흥국 자산의 환노출을 점검한다.",
+      "premises": {
+        "event_types": [
+          "trade_policy",
+          "fx_shock"
+        ],
+        "channels": [
+          "fx"
+        ],
+        "regions": [
+          "EM",
+          "CN",
+          "KR"
+        ],
+        "asset_classes": [
+          "em_bond",
+          "fx",
+          "equity"
+        ],
+        "duration": [
+          "weeks"
+        ],
+        "conditions": [
+          "신흥국 통화 약세"
+        ]
+      },
+      "actions": [
+        "신흥국 환노출 점검"
+      ],
+      "owner_role": "외환운용팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-TRADE-05",
+      "doc_id": "PB-TRADE",
+      "text": "주식시장 변동성이 급등하면 리밸런싱 실행을 분할하고 거래 비용을 점검한다.",
+      "premises": {
+        "event_types": [
+          "trade_policy",
+          "geopolitical"
+        ],
+        "channels": [
+          "equity_vol"
+        ],
+        "regions": [
+          "GLOBAL"
+        ],
+        "asset_classes": [
+          "equity"
+        ],
+        "duration": [
+          "shock",
+          "weeks"
+        ],
+        "conditions": [
+          "주식 변동성 급등"
+        ]
+      },
+      "actions": [
+        "리밸런싱 분할 실행",
+        "거래 비용 점검"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-TRADE-06",
+      "doc_id": "PB-TRADE",
+      "text": "보복 관세가 예고되면 상대국 수입 의존 업종의 2차 영향을 점검한다.",
+      "premises": {
+        "event_types": [
+          "trade_policy"
+        ],
+        "channels": [
+          "sanctions_trade",
+          "supply_chain"
+        ],
+        "regions": [
+          "CN",
+          "EU"
+        ],
+        "asset_classes": [
+          "equity"
+        ],
+        "duration": [
+          "weeks",
+          "months"
+        ],
+        "conditions": [
+          "보복 관세 예고"
+        ]
+      },
+      "actions": [
+        "2차 영향 업종 점검"
+      ],
+      "owner_role": "운용전략팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-TRADE-07",
+      "doc_id": "PB-TRADE",
+      "text": "관세 관련 법적 근거와 소송 동향을 준법감시팀이 정리해 보고한다.",
+      "premises": {
+        "event_types": [
+          "trade_policy",
+          "regulatory"
+        ],
+        "channels": [
+          "sanctions_trade"
+        ],
+        "regions": [
+          "US"
+        ],
+        "asset_classes": [],
+        "duration": [
+          "months"
+        ],
+        "conditions": [
+          "관세 법적 다툼"
+        ]
+      },
+      "actions": [
+        "법적 근거·소송 동향 보고"
+      ],
+      "owner_role": "준법감시팀",
+      "protected": false,
+      "protected_reason": null
+    },
+    {
+      "clause_id": "PB-TRADE-08",
+      "doc_id": "PB-TRADE",
+      "text": "관세에 따른 물가·금리 경로 변화를 반영해 채권 듀레이션 전략을 재검토한다.",
+      "premises": {
+        "event_types": [
+          "trade_policy",
+          "rate_shock"
+        ],
+        "channels": [
+          "rates"
+        ],
+        "regions": [
+          "US"
+        ],
+        "asset_classes": [
+          "govt_bond",
+          "corporate_bond"
+        ],
+        "duration": [
+          "months"
+        ],
+        "conditions": [
+          "관세발 물가 상승 우려"
+        ]
+      },
+      "actions": [
+        "듀레이션 전략 재검토"
+      ],
+      "owner_role": "채권운용팀",
+      "protected": false,
+      "protected_reason": null
+    }
+  ]
+}
