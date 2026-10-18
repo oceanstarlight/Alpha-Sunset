@@ -220,10 +220,18 @@ def tool_build_briefing(ctx: RunContext, **_) -> dict:
         exposure_entities=ctx.exposure.entity_paths if ctx.exposure else [],
         exposure_note=ctx.exposure_note, actions_to_check=actions, evidence_refs=evidence, trace_id=ctx.trace_id,
     )
+    now = datetime.now(timezone.utc).isoformat()
+    shadow_mode = "live" if ctx.mode == "live" else "backtest"
     conn = connect(ctx.mode)
     with conn:
         conn.execute("INSERT OR REPLACE INTO briefings (run_id, event_id, payload, ts) VALUES (?, ?, ?, ?)",
-                     (ctx.run_id, event.id, ctx.briefing.model_dump_json(), datetime.now(timezone.utc).isoformat()))
+                     (ctx.run_id, event.id, ctx.briefing.model_dump_json(), now))
+        # 학습 층 입력: 플래그와 무관하게 항상 기록 (5.4)
+        conn.executemany(
+            "INSERT INTO shadow_log (event_id, doc_id, event_type, cited, rank, feedback, mode, ts) VALUES (?, ?, ?, ?, ?, NULL, ?, ?)",
+            [(event.id, f.doc_id, event.type.value, int(f.n_applicable + f.n_partial > 0), rank, shadow_mode, now)
+             for rank, f in enumerate(ctx.match.doc_fits, start=1)],
+        )
     conn.close()
     return {"run_id": ctx.run_id, "alert_level": level.value, "n_actions": len(actions)}
 
@@ -334,6 +342,16 @@ def run_replay(event_id: str, llm: LLMClient | None = None) -> Briefing:
     ctx = new_context(mode="sandbox", as_of=target.date, events=[target], portfolio=load_portfolio(),
                       index=ClauseIndex(load_playbooks(), llm), llm=llm, panel=panel)
     return orchestrate(ctx, f"{target.date.isoformat()} 기준으로 사건을 탐지하고 대응문서 적합도와 노출을 분석해 브리핑을 만들어라.")
+
+
+def run_live_briefing(event: Event, panel: dict, llm: LLMClient | None = None) -> Briefing:
+    """라이브 사건(뉴스 군집을 구조화한 Event)으로 브리핑 생성 (live DB, 최신 보유내역)."""
+    from app.corpus import load_playbooks, load_portfolio
+
+    llm = llm or LLMClient(db_mode="live")
+    ctx = new_context(mode="live", as_of=event.date, events=[event], portfolio=load_portfolio(),
+                      index=ClauseIndex(load_playbooks(), llm), llm=llm, panel=panel, live=True)
+    return orchestrate(ctx, f"{event.date.isoformat()} 현재 탐지된 사건의 대응문서 적합도와 노출을 분석해 브리핑을 만들어라.")
 
 
 def get_trace(trace_id: str, mode: DbMode = "sandbox") -> list[dict]:

@@ -21,4 +21,12 @@ Python 3.11 · Streamlit · Gemini API · ChromaDB · SQLite
 - 진행 현황: [`docs/Current.md`](docs/Current.md)
 - MVP는 합성 데이터(가상 포트폴리오·재구성 대응문서)로 동작한다.
 
-> 실행 방법 등 상세 내용은 추후 작성 예정.
+## 로컬 실행
+```bash
+python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt
+cp .env.example .env   # GEMINI_API_KEY, SEC_USER_AGENT 입력 (백테스트 재생은 키 없이도 캐시로 동작)
+.venv/bin/streamlit run ui/streamlit_app.py
+.venv/bin/pytest -q
+```
+
+> 상세 내용(데이터 출처·합성 명시·백테스트 결과)은 제출 단계(P10)에서 보강 예정.

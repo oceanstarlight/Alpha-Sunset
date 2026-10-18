@@ -17,7 +17,7 @@ CONFIG_PATH = ROOT_DIR / "config.yaml"
 load_dotenv(ROOT_DIR / ".env")
 
 
-def _secret(name: str, default: str | None = None) -> str | None:
+def get_secret(name: str, default: str | None = None) -> str | None:
     value = os.environ.get(name)
     if value:
         return value
@@ -63,12 +63,12 @@ class Settings:
 
 def get_settings() -> Settings:
     """호출 시점의 환경을 읽는다 (테스트에서 env 교체 가능하도록 캐시하지 않음)."""
-    data_dir = _secret("ALPHA_DATA_DIR") or str(ROOT_DIR / "data")
+    data_dir = get_secret("ALPHA_DATA_DIR") or str(ROOT_DIR / "data")
     return Settings(
-        gemini_api_key=_secret("GEMINI_API_KEY"),
-        gemini_model=_secret("GEMINI_MODEL", "gemini-3.5-flash-lite"),
-        embed_model=_secret("EMBED_MODEL", "gemini-embedding-001"),
-        learner_enabled=_flag(_secret("LEARNER_ENABLED", "false")),
+        gemini_api_key=get_secret("GEMINI_API_KEY"),
+        gemini_model=get_secret("GEMINI_MODEL", "gemini-3.5-flash-lite"),
+        embed_model=get_secret("EMBED_MODEL", "gemini-embedding-001"),
+        learner_enabled=_flag(get_secret("LEARNER_ENABLED", "false")),
         data_dir=Path(data_dir),
     )
 
