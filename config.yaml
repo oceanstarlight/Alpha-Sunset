@@ -138,6 +138,7 @@ korea:                        # 로컬(대한민국) 상시 감시 — 사전 �
     window: 252
     history_years: 5
     weak_abs_corr: 0.2
+    lag: 1                    # v5.1: 해외 t−1 ↔ 한국 t (장 시간 차이)
     pairs:
       - [VIXCLS, KOSPI]
       - [CREDIT_GLOBAL, CREDIT_KR]

@@ -1,6 +1,9 @@
 {
   "generated_at": "2026-10-18",
-  "preregistration": "data/backtest/ablation/preregistration_v5_kr.json",
+  "preregistration": [
+    "data/backtest/ablation/preregistration_v5_kr.json",
+    "data/backtest/ablation/preregistration_v5_1_kr_linkage.json"
+  ],
   "data": {
     "CD91": {
       "start": "1995-01-03",
@@ -129,29 +132,29 @@
         "historical_link": [
           {
             "pair": "VIX(변동성) ↔ 코스피",
-            "corr": -0.043,
-            "percentile": 15.6,
+            "corr": -0.311,
+            "percentile": 66.9,
             "n": 252,
             "note": ""
           },
           {
             "pair": "미 신용스프레드(HY·Baa) ↔ 회사채AA−국고채 3년 금리차",
-            "corr": -0.048,
-            "percentile": 53.1,
+            "corr": 0.044,
+            "percentile": 44.4,
             "n": 252,
             "note": ""
           },
           {
             "pair": "미 10년물 금리 ↔ 국고채 3년",
-            "corr": 0.017,
-            "percentile": 6.2,
+            "corr": 0.211,
+            "percentile": 36.3,
             "n": 252,
             "note": ""
           },
           {
             "pair": "달러 인덱스 ↔ 원/달러",
-            "corr": -0.009,
-            "percentile": 6.7,
+            "corr": 0.269,
+            "percentile": 33.3,
             "n": 252,
             "note": ""
           }
@@ -160,8 +163,38 @@
           "kr_weight": 0.4099,
           "kr_impact": 0.162
         },
-        "weak": true,
-        "caveat": "상관은 인과가 아니다. 판단 보조 근거이며 최종 결정은 사람이 한다."
+        "weak": false,
+        "caveat": "상관은 인과가 아니다. 판단 보조 근거이며 최종 결정은 사람이 한다.",
+        "historical_link_same_day_v5": [
+          {
+            "pair": "VIX(변동성) ↔ 코스피",
+            "corr": -0.043,
+            "percentile": 16.8,
+            "n": 252,
+            "note": ""
+          },
+          {
+            "pair": "미 신용스프레드(HY·Baa) ↔ 회사채AA−국고채 3년 금리차",
+            "corr": -0.049,
+            "percentile": 54.7,
+            "n": 252,
+            "note": ""
+          },
+          {
+            "pair": "미 10년물 금리 ↔ 국고채 3년",
+            "corr": 0.047,
+            "percentile": 10.9,
+            "n": 252,
+            "note": ""
+          },
+          {
+            "pair": "달러 인덱스 ↔ 원/달러",
+            "corr": 0.012,
+            "percentile": 11.2,
+            "n": 252,
+            "note": ""
+          }
+        ]
       }
     },
     {
@@ -221,6 +254,6 @@
     "임계치는 글로벌 A·C와 같고 사건 성적으로 조정하지 않았다 (사전 등록 v5).",
     "사건 신호(B)는 사건 카드 기준(사건일부터 14일). 2단계 = 그 기간 중 A_kr ∨ C_kr가 처음 활성인 날.",
     "kr_events_with_prior_warning은 kr_base_rate(평상일 기준 같은 비율)와 비교해야 한다. 차이가 작으면 선행 알림은 우연일 수 있다.",
-    "연관성 근거는 지역에 KR이 없는 해외 사건에만 첨부한다. 상관은 인과가 아니다."
+    "연관성 근거는 지역에 KR이 없는 해외 사건에만 첨부한다. v5.1부터 해외 t−1 ↔ 한국 t로 정렬 (v5 같은 날 상관은 historical_link_same_day_v5에 비교용으로 남김). 상관은 인과가 아니다."
   ]
 }

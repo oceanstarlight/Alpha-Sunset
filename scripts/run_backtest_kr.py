@@ -41,9 +41,13 @@ def main() -> None:
         if not row["kr_in_regions"] and row["first_kr_alert"]:
             d = date.fromisoformat(row["first_kr_alert"])
             gm = sentinel.market_signal(sentinel.AsOfPanel(fred, as_of=d), d)
+            prev = (pd.Timestamp(d) - pd.offsets.BDay(1)).date()
+            gm_prev = sentinel.market_signal(sentinel.AsOfPanel(fred, as_of=prev), prev)
             km = local.kr_market_signal(panel, d)
-            links = local.historical_link({k: v.loc[: pd.Timestamp(d)] for k, v in fred.items()},
-                                          {k: v.loc[: pd.Timestamp(d)] for k, v in panel.items()}, d)
+            g_upto = {k: v.loc[: pd.Timestamp(d)] for k, v in fred.items()}
+            k_upto = {k: v.loc[: pd.Timestamp(d)] for k, v in panel.items()}
+            links = local.historical_link(g_upto, k_upto, d)  # v5.1 시차 1일
+            same_day = local.historical_link(g_upto, k_upto, d, lag=0)  # v5 (비교용)
             try:  # 노출 경로: 사건일 이전 공시 스냅샷 기준 한국 노출 비중·영향도
                 from app import geo
                 from app.corpus import load_portfolio
@@ -53,7 +57,8 @@ def main() -> None:
             except Exception:
                 exp = imp = None
             row["linkage"] = local.linkage_evidence(gm, km, links, kr_exposure=round(exp, 4) if exp else None,
-                                                    kr_impact=round(imp, 4) if imp else None)
+                                                    kr_impact=round(imp, 4) if imp else None, global_prev=gm_prev)
+            row["linkage"]["historical_link_same_day_v5"] = same_day
         rows.append(row)
 
     rc = cfg["backtest"]["random_calm"]
@@ -72,7 +77,7 @@ def main() -> None:
     }
     out = {
         "generated_at": date.today().isoformat(),
-        "preregistration": "data/backtest/ablation/preregistration_v5_kr.json",
+        "preregistration": ["data/backtest/ablation/preregistration_v5_kr.json", "data/backtest/ablation/preregistration_v5_1_kr_linkage.json"],
         "data": {sid: {"start": s.index[0].date().isoformat(), "end": s.index[-1].date().isoformat(), "n": int(len(s))}
                  for sid, s in panel.items()},
         "summary": summary,
@@ -81,7 +86,7 @@ def main() -> None:
             "임계치는 글로벌 A·C와 같고 사건 성적으로 조정하지 않았다 (사전 등록 v5).",
             "사건 신호(B)는 사건 카드 기준(사건일부터 14일). 2단계 = 그 기간 중 A_kr ∨ C_kr가 처음 활성인 날.",
             "kr_events_with_prior_warning은 kr_base_rate(평상일 기준 같은 비율)와 비교해야 한다. 차이가 작으면 선행 알림은 우연일 수 있다.",
-            "연관성 근거는 지역에 KR이 없는 해외 사건에만 첨부한다. 상관은 인과가 아니다.",
+            "연관성 근거는 지역에 KR이 없는 해외 사건에만 첨부한다. v5.1부터 해외 t−1 ↔ 한국 t로 정렬 (v5 같은 날 상관은 historical_link_same_day_v5에 비교용으로 남김). 상관은 인과가 아니다.",
         ],
     }
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2, default=str) + "\n", encoding="utf-8")

@@ -207,8 +207,12 @@ def global_credit(panel: dict[str, pd.Series]) -> pd.Series | None:
     return None
 
 
-def historical_link(global_panel: dict[str, pd.Series], kr: dict[str, pd.Series], as_of: date) -> list[dict]:
-    """쌍별 기준일 전날까지 window 영업일 일변화 상관과 최근 history_years년 분위수 (미래 데이터 미사용)."""
+def historical_link(global_panel: dict[str, pd.Series], kr: dict[str, pd.Series], as_of: date, lag: int | None = None) -> list[dict]:
+    """쌍별 기준일 전날까지 window 영업일 일변화 상관과 최근 history_years년 분위수 (미래 데이터 미사용).
+
+    v5.1: 해외 t−lag 변화 ↔ 한국 t 변화 (미국 장은 한국 장 마감 뒤에 열린다). lag=0이면 v5(같은 날).
+    """
+    lag = _cfg()["linkage"]["lag"] if lag is None else lag
     cfg = _cfg()["linkage"]
     g = dict(global_panel)
     credit = global_credit(global_panel)
@@ -220,7 +224,9 @@ def historical_link(global_panel: dict[str, pd.Series], kr: dict[str, pd.Series]
         if gid not in g or kid not in kr:
             out.append({"pair": f"{_label(gid)} ↔ {_label(kid)}", "corr": None, "percentile": None, "n": 0, "note": "데이터 없음"})
             continue
-        df = pd.concat([_changes(g[gid], gid), _changes(kr[kid], kid)], axis=1, join="inner").loc[:cutoff].dropna()
+        df = pd.concat([_changes(g[gid], gid), _changes(kr[kid], kid)], axis=1, join="outer")
+        df.iloc[:, 0] = df.iloc[:, 0].ffill(limit=3).shift(lag)  # 해외 직전 관측을 한국 다음 거래일에 맞춘다
+        df = df.dropna(subset=[df.columns[1]]).loc[:cutoff].dropna()
         if len(df) < cfg["window"]:
             out.append({"pair": f"{_label(gid)} ↔ {_label(kid)}", "corr": None, "percentile": None, "n": len(df), "note": "관측 부족"})
             continue
@@ -233,12 +239,14 @@ def historical_link(global_panel: dict[str, pd.Series], kr: dict[str, pd.Series]
 
 
 def linkage_evidence(global_market: MarketSignal, kr_market: MarketSignal, links: list[dict],
-                     kr_exposure: float | None = None, kr_impact: float | None = None) -> dict:
+                     kr_exposure: float | None = None, kr_impact: float | None = None,
+                     global_prev: MarketSignal | None = None) -> dict:
     """대응안에 붙일 연관성 근거 (v5: 해외 사건으로 로컬 대응안이 나갈 때 필수 첨부)."""
     weak = _cfg()["linkage"]["weak_abs_corr"]
     corrs = [abs(x["corr"]) for x in links if x["corr"] is not None]
     return {
-        "co_movement": {"global": {k: round(global_market.zscores[k], 2) for k in global_market.triggered},
+        "co_movement": {"global": {**({f"{k}(t-1)": round(global_prev.zscores[k], 2) for k in global_prev.triggered} if global_prev else {}),
+                                   **{k: round(global_market.zscores[k], 2) for k in global_market.triggered}},
                         "korea": {k: round(kr_market.zscores[k], 2) for k in kr_market.triggered}},
         "historical_link": links,
         "exposure_link": {"kr_weight": kr_exposure, "kr_impact": kr_impact},
@@ -325,7 +333,7 @@ def explain_local(r: LocalResult) -> list[dict[str, str]]:
                       "결과": "사건 확정" if w.confirmed else "사건 경고 (대응안 없음, 알림만)"})
     if r.global_news_active and r.linkage:
         lk = r.linkage
-        links = "; ".join(f"{x['pair']} ρ={x['corr']} (최근 5년 {x['percentile']}분위)" for x in lk["historical_link"] if x["corr"] is not None)
+        links = "; ".join(f"{x['pair']} ρ={x['corr']} (최근 5년 {x['percentile']}분위, 해외 1일 시차)" for x in lk["historical_link"] if x["corr"] is not None)
         chain.append({"단계": "해외-한국 연관성",
                       "원인": f"해외 사건 신호 활성 · 동시 반응 해외 {lk['co_movement']['global'] or '-'} / 한국 {lk['co_movement']['korea'] or '-'}",
                       "근거": (links or "상관 데이터 없음") + f" · 한국 노출 비중 {lk['exposure_link']['kr_weight']}. {lk['caveat']}",
