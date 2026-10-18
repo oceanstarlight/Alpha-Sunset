@@ -50,9 +50,9 @@ def test_dart_warning_only_until_news_confirms():
     unlisted = Disclosure("마바", "", "E", "주요사항보고서(부도발생)", "20261019000003", date(2026, 10, 19))
     ws = local.dart_warnings([d, other, unlisted])
     assert [w.keyword for w in ws] == ["회생절차개시신청"]
-    few = [NewsItem("가나건설 회생 신청", f"https://a{i}.kr", f"a{i}.kr", NOW, "naver") for i in range(3)]
+    few = [NewsItem("가나건설 회생 신청", f"https://a{i}.kr", f"a{i}.kr", NOW, "google") for i in range(3)]
     assert not local.confirm_warning(ws[0], few, NOW).confirmed
-    many = [NewsItem("가나건설 회생 신청", f"https://a{i}.kr", f"a{i}.kr", NOW, "naver") for i in range(12)]
+    many = [NewsItem("가나건설 회생 신청", f"https://a{i}.kr", f"a{i}.kr", NOW, "google") for i in range(12)]
     w = local.confirm_warning(ws[0], many, NOW)
     assert w.confirmed and w.n_sources == 12
     # 경고만 있으면 WATCH, 확정 + 한국 시장 반응이면 ALERT
@@ -114,12 +114,12 @@ def test_dart_client_paginates_and_parses():
     assert [d.corp_name for d in out] == ["c1", "c2"] and out[0].url.endswith("20261019000001")
 
 
-def test_search_news_records_missing_keys_and_dedupes(monkeypatch):
-    monkeypatch.delenv("NAVER_CLIENT_ID", raising=False)
-
+def test_search_news_dedupes_and_records_failures():
     class FakeGoogle:
         def search(self, q, since):
+            if q == "디폴트":
+                raise RuntimeError("timeout")
             return [NewsItem("같은 제목", "u1", "A", NOW, "google"), NewsItem("같은 제목", "u2", "B", NOW, "google")]
 
-    items, notes = korea.search_news("부도 | 디폴트", NOW - timedelta(days=1), korea.NaverNewsClient(), FakeGoogle())
-    assert len(items) == 1 and notes == ["NAVER_CLIENT_ID 미설정"]
+    items, notes = korea.search_news("부도 | 디폴트", NOW - timedelta(days=1), FakeGoogle())
+    assert len(items) == 1 and notes == ["google '디폴트': timeout"]
