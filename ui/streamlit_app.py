@@ -7,7 +7,26 @@ from collections import defaultdict
 from datetime import timedelta
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # Streamlit Cloud: 저장소 루트를 import 경로에
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))  # Streamlit Cloud: 저장소 루트를 import 경로에
+
+
+def _code_stamp() -> str:
+    """app/ 코드와 config.yaml의 수정 상태. 바뀌면 app 모듈을 새로 불러온다.
+
+    Streamlit은 메인 스크립트 폴더(ui/) 밖 모듈을 다시 불러오지 않아, 새 커밋을 받아도 예전 app 코드가 메모리에 남는다.
+    """
+    files = sorted(ROOT.joinpath("app").rglob("*.py")) + [ROOT / "config.yaml"]
+    return str(hash(tuple((str(p), p.stat().st_mtime_ns, p.stat().st_size) for p in files if p.exists())))
+
+
+_STAMP = _code_stamp()
+if "app" in sys.modules and getattr(sys.modules["app"], "_code_stamp", _STAMP) != _STAMP:  # UI가 불러온 뒤 코드가 바뀐 경우만
+    for _name in [m for m in sys.modules if m == "app" or m.startswith("app.")]:
+        del sys.modules[_name]
+    _RELOADED = True
+else:
+    _RELOADED = False
 
 import pandas as pd
 import pydeck as pdk
@@ -19,6 +38,12 @@ from app.agents import sentinel
 from app.agents.exposure import ExposureUnavailable
 from app.corpus import load_events, load_playbooks, load_portfolio
 from app.schemas import AlertLevel, Briefing, Event, Feedback, Verdict
+
+sys.modules["app"]._code_stamp = _STAMP
+if _RELOADED:
+    load_config.cache_clear()
+    st.cache_data.clear()
+    st.cache_resource.clear()
 
 st.set_page_config(page_title="Alpha Sunset", page_icon="🌅", layout="wide")
 
@@ -108,6 +133,7 @@ event_id = st.sidebar.selectbox(
 user_id = st.sidebar.text_input("검토자", value="reviewer")
 st.sidebar.divider()
 st.sidebar.caption("에이전트는 제안만 하고 최종 결정은 사람이 승인한다. 문서를 삭제·폐기하지 않는다.")
+st.sidebar.caption(f"코드 버전 {abs(int(_STAMP)) % 10**8:08d}" + (" · 새 코드 반영됨" if _RELOADED else ""))
 
 
 def current_briefing() -> Briefing | None:
