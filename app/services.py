@@ -49,15 +49,16 @@ def compute_signals(gdelt_client: Any = None, fred_cache_dir: Path | None = None
 
             # 빠른 조회: 요청당 최대 2번 시도, 응답 대기 10초 → 최악에도 약 1분 안에 끝난다
             gdelt_client = GdeltClient(http=httpx.Client(timeout=10), max_attempts=2) if quick else GdeltClient()
-        if quick:  # 직접 조회: 요청 2회 (전체 기사량 + 기사 목록)
+        if quick:  # 직접 조회: 요청 2회 (GDELT 전체 기사량 + Google 뉴스 RSS 기사 목록)
             news, quick_info = sentinel.quick_news_signal(gdelt_client, today)
-            coverage_data = quick_info["coverage"]
+            prev = load_collected_signals(with_panel=False)  # 보도 국가 지도는 수집기 결과를 그대로 쓴다
+            coverage_data = (prev or {}).get("news", {}).get("coverage")
         else:
             news = sentinel.live_news_signal(gdelt_client, today)
     news_out = {"active": news.active, "status": news.status, "n_queries": news.n_queries, "errors": news.errors,
                 "clusters": [c.__dict__ for c in news.clusters]}
     if quick_info is not None:
-        news_out["quick"] = {k: v for k, v in quick_info.items() if k != "coverage"}
+        news_out["quick"] = quick_info
     if coverage_data is not None:
         news_out["coverage"] = coverage_data
     elif coverage:

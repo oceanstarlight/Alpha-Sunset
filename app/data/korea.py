@@ -104,13 +104,15 @@ class DartClient:
 class GoogleNewsRss:
     URL = "https://news.google.com/rss/search"
 
-    def __init__(self, http: httpx.Client | None = None):
+    def __init__(self, http: httpx.Client | None = None, lang: str = "ko", region: str = "KR"):
         self._http = http or httpx.Client(timeout=30, follow_redirects=True)
+        self._lang, self._region = lang, region
 
     def search(self, query: str, since: datetime) -> list[NewsItem]:
-        """한국어·한국판 검색 RSS (최대 약 100건). 언론사는 <source> 이름."""
+        """검색 RSS (최대 약 100건, 기본 한국어·한국판). 언론사는 <source> 이름."""
         days = max(1, -(-int((datetime.now(timezone.utc) - since).total_seconds()) // 86400))  # 올림
-        resp = self._http.get(self.URL, params={"q": f"{query} when:{days}d", "hl": "ko", "gl": "KR", "ceid": "KR:ko"})
+        resp = self._http.get(self.URL, params={"q": f"{query} when:{days}d", "hl": self._lang, "gl": self._region,
+                                                "ceid": f"{self._region}:{self._lang.split('-')[0]}"})
         resp.raise_for_status()
         out = []
         for item in ET.fromstring(resp.content).iter("item"):

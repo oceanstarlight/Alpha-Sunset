@@ -50,6 +50,8 @@ class GdeltClient:
                 last_error = httpx.HTTPStatusError("429 Too Many Requests", request=resp.request, response=resp)
                 continue
             resp.raise_for_status()
+            if "too short or too long" in resp.text:  # 다시 보내도 같은 결과 → 바로 중단
+                raise RuntimeError("GDELT: 쿼리 길이 제한 초과 (too short or too long)")
             try:
                 return resp.json()
             except ValueError as e:

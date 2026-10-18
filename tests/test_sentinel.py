@@ -329,21 +329,27 @@ def test_combined_coverage_single_request():
 
 
 def test_quick_news_signal_uses_two_requests():
-    from app.agents.sentinel import quick_news_signal
+    from app.agents.sentinel import GDELT_MAX_QUERY, combined_query, quick_news_signal
+    from app.config import load_config
+    from app.data.korea import NewsItem
 
+    q = combined_query(load_config()["sentinel"]["news"]["queries"])
+    assert len(q) <= GDELT_MAX_QUERY and '"bank run"' in q and '"tariff"' in q  # 주제마다 첫 키워드는 꼭 담는다
     calls = []
+    now = datetime(2024, 6, 28, 12, tzinfo=timezone.utc)
 
-    class Two(FakeGdelt):
+    class Vol(FakeGdelt):
         def daily_volume(self, query):
-            calls.append("vol")
+            calls.append("gdelt")
             return super().daily_volume(query)  # 결합 쿼리에 "bank run" 포함 → 급증
 
-        def articles(self, query, timespan="1d"):
-            calls.append("art")
-            return super().articles(query, timespan)
+    class Rss:
+        def search(self, query, since):
+            calls.append("rss")
+            return [NewsItem(f"Bank run hits lender {i % 2}", f"u{i}", f"src{i}", now, "google") for i in range(25)]
 
-    sig, info = quick_news_signal(Two(spike=True, n_domains=25), END)
-    assert calls == ["vol", "art"]
+    sig, info = quick_news_signal(Vol(spike=True, n_domains=25), END, rss=Rss(), now=now)
+    assert calls == ["gdelt", "rss"]
     assert [c.event_type for c in sig.clusters] == ["banking_stress"] and info["combined_z"] > 3
     assert sig.status == "ok" and info["by_topic"]["banking_stress"]["n_sources"] == 25
 
@@ -351,8 +357,38 @@ def test_quick_news_signal_uses_two_requests():
         def daily_volume(self, query):
             raise RuntimeError("429")
 
-        def articles(self, query, timespan="1d"):
-            raise RuntimeError("429")
+    class RssDown:
+        def search(self, query, since):
+            raise RuntimeError("timeout")
 
-    sig, info = quick_news_signal(Down(spike=False, n_domains=1), END)
-    assert sig.status == "unavailable" and info["coverage"]["status"] == "unavailable"
+    sig, _ = quick_news_signal(Down(spike=False, n_domains=1), END, rss=RssDown(), now=now)
+    assert sig.status == "unavailable" and len(sig.errors) == 2
+
+
+def test_gdelt_query_too_long_is_not_retried():
+    import httpx
+
+    from app.data.gdelt import GdeltClient
+
+    calls = []
+
+    def handler(request):
+        calls.append(1)
+        return httpx.Response(200, text="Your query was too short or too long.")
+
+    client = GdeltClient(http=httpx.Client(transport=httpx.MockTransport(handler)), interval_sec=0)
+    with pytest.raises(RuntimeError, match="길이 제한"):
+        client.articles("x")
+    assert len(calls) == 1
+
+
+def test_volume_z_projects_partial_today():
+    from app.agents.sentinel import volume_z
+
+    idx = pd.date_range(end="2026-10-18", periods=40, freq="D")
+    vol = pd.Series([100.0 + (i % 3) for i in range(40)], index=idx)
+    vol.iloc[-1] = 60.0  # 오늘 12시까지 60건 → 하루치 120건으로 환산하면 급증
+    z, note = volume_z(vol, 30, now=datetime(2026, 10, 18, 12))
+    assert z > 3 and "환산" in note
+    z_early, note_early = volume_z(vol, 30, now=datetime(2026, 10, 18, 3))
+    assert "어제" in note_early and abs(z_early) < 3  # 6시간 미만이면 어제(평범한 날) 기준

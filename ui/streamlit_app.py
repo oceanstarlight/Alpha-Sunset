@@ -272,7 +272,7 @@ with tab_watch:
     else:
         st.subheader("라이브 감시")
         st.caption("기본은 GitHub Actions 수집기가 3시간마다 주제별로 나눠 모은 결과를 보여준다 (요청 제한 회피). "
-                   "'지금 직접 조회'는 빠른 조회다: FRED 병렬 + GDELT 요청 2회(전체 위기 기사량 + 기사 목록, 간격 5초). "
+                   "'지금 직접 조회'는 빠른 조회다: FRED 병렬 + 요청 2회(GDELT 전체 위기 기사량 + Google 뉴스 RSS 기사 목록, 간격 5초). "
                    "주제별 기사량 z 대신 전체 기사량 급증 + 주제별 출처 수로 판단한다 (1시간 캐시).")
         b1, b2 = st.columns(2)
         if b1.button("수집 결과 보기", type="primary"):
@@ -311,8 +311,8 @@ with tab_watch:
                 c2.error("판단 불가 (조회 실패)")
             if news.get("quick"):
                 qk = news["quick"]
-                c2.caption(f"빠른 조회: 전체 위기 기사량 z = {qk['combined_z'] if qk['combined_z'] is not None else '-'}, "
-                           f"최근 1일 기사 {qk['n_articles']}건")
+                c2.caption(f"빠른 조회: 전체 위기 기사량 z = {qk['combined_z'] if qk['combined_z'] is not None else '-'}"
+                           f" ({qk.get('z_note', '')}), Google 뉴스 최근 1일 기사 {qk['n_articles']}건")
             if news.get("topics"):
                 with c2.expander("주제별 수집 상태 (3시간마다 나눠 수집)"):
                     st.dataframe(pd.DataFrame([{"주제": k, "마지막 성공(UTC)": v["ok_at"] or "-", "기사량 z": v["z"],
