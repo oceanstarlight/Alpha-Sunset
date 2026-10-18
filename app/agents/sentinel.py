@@ -87,6 +87,47 @@ def market_signal(panel: AsOfPanel, as_of: date) -> MarketSignal:
     return MarketSignal(as_of=as_of, zscores=zscores, triggered=triggered, active=active)
 
 
+# ---------- 시그널 C (자금 흐름) ----------
+
+
+@dataclass
+class FlowSignal:
+    as_of: date
+    zscores: dict[str, float]
+    triggered: list[str]
+    active: bool
+
+
+def flow_signal(panel: AsOfPanel, as_of: date) -> FlowSignal:
+    """공표 시차를 반영해 as_of에 이미 공개된 관측만으로 주간 자금 흐름 변화율의 z-score를 본다."""
+    cfg = _sentinel_cfg()["flow"]
+    zscores: dict[str, float] = {}
+    for sid in cfg["series"]:
+        s = panel.series(sid, as_of)
+        if s is None:
+            continue
+        s = s.loc[: pd.Timestamp(as_of) - pd.Timedelta(days=cfg["publication_lag_days"][sid])]
+        chg = s.pct_change().replace([float("inf"), float("-inf")], float("nan")).dropna()
+        hist = chg.iloc[-(cfg["lookback_obs"] + 1) : -1]
+        if len(hist) < cfg["min_obs"] or not hist.std():
+            continue
+        zscores[sid] = float((chg.iloc[-1] - hist.mean()) / hist.std())
+    triggered = [sid for sid, z in zscores.items() if abs(z) >= cfg["z_threshold"]]
+    return FlowSignal(as_of=as_of, zscores=zscores, triggered=triggered, active=bool(triggered))
+
+
+def panel_series_ids() -> list[str]:
+    """Sentinel이 쓰는 FRED 시리즈 전체 (시장 + 신용스프레드 + 자금 흐름)."""
+    cfg = _sentinel_cfg()
+    m = cfg["market"]
+    ids = m["series"] + [m["credit_spread"]["primary"], m["credit_spread"]["fallback"]]
+    return ids + (cfg["flow"]["series"] if cfg.get("flow", {}).get("enabled") else [])
+
+
+def flow_enabled() -> bool:
+    return bool(_sentinel_cfg().get("flow", {}).get("enabled"))
+
+
 # ---------- 시그널 B ----------
 
 
@@ -188,23 +229,27 @@ class SentinelResult:
     level: AlertLevel
     market: MarketSignal
     news: NewsSignal
+    flow: FlowSignal | None = None
 
     @property
     def keys(self) -> list[str]:
         return [c.key for c in self.news.clusters] or ["market"]
 
 
-def grade(market: MarketSignal, news: NewsSignal) -> AlertLevel:
-    if market.active and news.active:
+def grade(market: MarketSignal, news: NewsSignal, flow: FlowSignal | None = None) -> AlertLevel:
+    """ALERT = B ∧ (A ∨ C), WATCH = 하나 이상 활성, NONE = 모두 비활성 (사전 등록 v2)."""
+    money = market.active or (flow is not None and flow.active)
+    if money and news.active:
         return AlertLevel.ALERT
-    if market.active or news.active:
+    if money or news.active:
         return AlertLevel.WATCH
     return AlertLevel.NONE
 
 
 def evaluate(panel: AsOfPanel, news: NewsSignal, as_of: date) -> SentinelResult:
     market = market_signal(panel, as_of)
-    return SentinelResult(as_of=as_of, level=grade(market, news), market=market, news=news)
+    flow = flow_signal(panel, as_of) if flow_enabled() else None
+    return SentinelResult(as_of=as_of, level=grade(market, news, flow), market=market, news=news, flow=flow)
 
 
 @dataclass

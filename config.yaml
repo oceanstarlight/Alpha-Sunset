@@ -30,6 +30,13 @@ sentinel:
       pandemic: '"pandemic" OR "outbreak" OR "lockdown"'
       fx_shock: '"currency crisis" OR "won plunges" OR "currency plunge"'
       rate_shock: '"bond selloff" OR "yields surge"'
+  flow:                       # 시그널 C (자금 흐름, 사전 등록 v2)
+    enabled: true
+    series: [WRMFNS, WIMFNS, DPSACBW027SBOG, WMTSECL1, WRESBAL]
+    publication_lag_days: {WRMFNS: 45, WIMFNS: 45, DPSACBW027SBOG: 10, WMTSECL1: 3, WRESBAL: 3}
+    lookback_obs: 52
+    min_obs: 40
+    z_threshold: 3.0
   merge_window_hours: 72
   replay:                     # P3 재생 범위 (사건일 기준)
     days_before: 30
@@ -64,6 +71,7 @@ exposure:
   min_relevance: 0.05
   entity_candidates_max: 300      # LLM 이름 매칭에 넘길 최대 발행자 수
   excluded_asset_cats: [STIV]     # 증권대여 담보 등 단기투자기구는 노출에서 제외
+  core_paths_max: 5               # 핵심 경로(구체 지역 일치) 별도 표시 개수
 
 backtest:
   random_calm:                # 무작위 평상 구간 (오경보 측정)

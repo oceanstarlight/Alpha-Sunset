@@ -192,18 +192,33 @@ def build_doc_fits(judgments: list[ClauseJudgment], clauses: dict[str, Clause]) 
     return fits
 
 
+def covers(j: ClauseJudgment, clause: Clause, event: Event) -> bool:
+    """공백 규칙 v2 (사전 등록): applicable이거나, partial이면서 조항 전제 사건유형에 이번 사건 유형이 있을 때만 채널을 다룬 것으로 본다."""
+    if j.verdict == Verdict.applicable:
+        return True
+    return j.verdict == Verdict.partial and event.type in clause.premises.event_types
+
+
 def find_gaps(event: Event, judgments: list[ClauseJudgment], clauses: dict[str, Clause]) -> list[Channel]:
-    covered = {ch for j in judgments if j.verdict in (Verdict.applicable, Verdict.partial)
+    covered = {ch for j in judgments if covers(j, clauses[j.clause_id], event)
                for ch in clauses[j.clause_id].premises.channels}
     return [ch for ch in event.channels if ch not in covered]
 
 
-def rank_doc_fits(fits: list[DocFit], learner_enabled: bool | None = None) -> list[DocFit]:
-    """LEARNER_ENABLED=false면 fit_score 순. 학습 층 보정은 P9에서 연결한다."""
+def protected_only(fit: DocFit, clauses: dict[str, Clause]) -> bool:
+    """판정된 조항이 모두 protected인 문서 (순위 하단, '필수 확인'으로 별도 표시)."""
+    return all(clauses[j.clause_id].protected for j in fit.judgments)
+
+
+def rank_doc_fits(fits: list[DocFit], learner_enabled: bool | None = None,
+                  clauses: dict[str, Clause] | None = None) -> list[DocFit]:
+    """LEARNER_ENABLED=false면 fit_score 순. protected 조항만 판정된 문서는 후보에 남기되 하단으로 보낸다.
+    학습 층 보정은 P9에서 연결한다."""
     enabled = get_settings().learner_enabled if learner_enabled is None else learner_enabled
     if enabled:
         raise NotImplementedError("Learner 보정은 P9에서 구현")
-    return sorted(fits, key=lambda f: (-f.fit_score, -f.n_applicable, f.doc_id))
+    tail = (lambda f: protected_only(f, clauses)) if clauses else (lambda f: False)
+    return sorted(fits, key=lambda f: (tail(f), -f.fit_score, -f.n_applicable, f.doc_id))
 
 
 # ---------- 전체 ----------
@@ -234,7 +249,7 @@ def finalize_match(event: Event, judgments: list[ClauseJudgment], clauses: dict[
     confidences = [j.confidence for j in judgments]
     return MatchResult(
         event_id=event.id,
-        doc_fits=rank_doc_fits(build_doc_fits(judgments, clauses)),
+        doc_fits=rank_doc_fits(build_doc_fits(judgments, clauses), clauses=clauses),
         gaps=find_gaps(event, judgments, clauses),
         low_confidence=(sum(confidences) / len(confidences) if confidences else 0.0)
         < load_config()["matcher"]["low_confidence_below"],

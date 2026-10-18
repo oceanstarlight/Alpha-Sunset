@@ -1,6 +1,6 @@
 {
   "briefing": {
-    "run_id": "run-313e92dd582a",
+    "run_id": "run-aefdd5271ec8",
     "event": {
       "id": "ru_ua_2022",
       "title": "2022 러시아-우크라이나 전쟁과 대러 제재",
@@ -174,69 +174,6 @@
               ],
               "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
               "confidence": 0.85
-            }
-          ]
-        },
-        {
-          "doc_id": "PB-REG",
-          "fit_score": 0.3333,
-          "n_applicable": 1,
-          "n_partial": 0,
-          "n_not": 2,
-          "n_uncertain": 3,
-          "judgments": [
-            {
-              "clause_id": "PB-REG-01",
-              "verdict": "uncertain",
-              "mismatch_reasons": [
-                "중대한 손실 또는 한도 위반이 발생했다는 정보가 사건 요약에 명시되어 있지 않습니다."
-              ],
-              "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-              "confidence": 0.8
-            },
-            {
-              "clause_id": "PB-REG-02",
-              "verdict": "not_applicable",
-              "mismatch_reasons": [
-                "이번 사건은 geopolitical 유형이며 전제의 사건유형(regulatory, pandemic, liquidity_crisis)과 다릅니다.",
-                "전제의 지역은 KR로 한정되어 있으나 이번 사건 지역은 RU, UA, EU, GLOBAL입니다."
-              ],
-              "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-              "confidence": 0.9
-            },
-            {
-              "clause_id": "PB-REG-03",
-              "verdict": "applicable",
-              "mismatch_reasons": [],
-              "evidence_quote": "제재 대상 지정 시 관련 법령에 따른 보고 의무를 확인하고 이행한다.",
-              "confidence": 0.95
-            },
-            {
-              "clause_id": "PB-REG-04",
-              "verdict": "uncertain",
-              "mismatch_reasons": [
-                "한도 예외 승인이 이루어졌다는 조건에 대한 정보가 사건 요약에 없습니다."
-              ],
-              "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-              "confidence": 0.8
-            },
-            {
-              "clause_id": "PB-REG-05",
-              "verdict": "uncertain",
-              "mismatch_reasons": [
-                "사건 요약 및 채널 정보에 operational 채널과 위기 대응 의사결정 기록 보관에 대한 직접적인 언급이 부족하다."
-              ],
-              "evidence_quote": "위기 대응 과정의 의사결정 기록을 보존 기한 동안 보관한다.",
-              "confidence": 0.6
-            },
-            {
-              "clause_id": "PB-REG-08",
-              "verdict": "not_applicable",
-              "mismatch_reasons": [
-                "위기가 종료되지 않았고 진행 중인 사건이므로 위기 종료 전제에 부합하지 않습니다."
-              ],
-              "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-              "confidence": 0.95
             }
           ]
         },
@@ -441,6 +378,89 @@
           ]
         },
         {
+          "doc_id": "PB-STFM",
+          "fit_score": 0.0,
+          "n_applicable": 0,
+          "n_partial": 0,
+          "n_not": 1,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-STFM-05",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 liquidity_crisis가 아니라 geopolitical이다.",
+                "지역이 KR 전용이 아니라 GLOBAL 및 복수 지역이다."
+              ],
+              "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+              "confidence": 0.95
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-REG",
+          "fit_score": 0.3333,
+          "n_applicable": 1,
+          "n_partial": 0,
+          "n_not": 2,
+          "n_uncertain": 3,
+          "judgments": [
+            {
+              "clause_id": "PB-REG-01",
+              "verdict": "uncertain",
+              "mismatch_reasons": [
+                "중대한 손실 또는 한도 위반이 발생했다는 정보가 사건 요약에 명시되어 있지 않습니다."
+              ],
+              "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+              "confidence": 0.8
+            },
+            {
+              "clause_id": "PB-REG-02",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "이번 사건은 geopolitical 유형이며 전제의 사건유형(regulatory, pandemic, liquidity_crisis)과 다릅니다.",
+                "전제의 지역은 KR로 한정되어 있으나 이번 사건 지역은 RU, UA, EU, GLOBAL입니다."
+              ],
+              "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+              "confidence": 0.9
+            },
+            {
+              "clause_id": "PB-REG-03",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "제재 대상 지정 시 관련 법령에 따른 보고 의무를 확인하고 이행한다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-REG-04",
+              "verdict": "uncertain",
+              "mismatch_reasons": [
+                "한도 예외 승인이 이루어졌다는 조건에 대한 정보가 사건 요약에 없습니다."
+              ],
+              "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+              "confidence": 0.8
+            },
+            {
+              "clause_id": "PB-REG-05",
+              "verdict": "uncertain",
+              "mismatch_reasons": [
+                "사건 요약 및 채널 정보에 operational 채널과 위기 대응 의사결정 기록 보관에 대한 직접적인 언급이 부족하다."
+              ],
+              "evidence_quote": "위기 대응 과정의 의사결정 기록을 보존 기한 동안 보관한다.",
+              "confidence": 0.6
+            },
+            {
+              "clause_id": "PB-REG-08",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "위기가 종료되지 않았고 진행 중인 사건이므로 위기 종료 전제에 부합하지 않습니다."
+              ],
+              "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+              "confidence": 0.95
+            }
+          ]
+        },
+        {
           "doc_id": "PB-MGR",
           "fit_score": 0.0,
           "n_applicable": 0,
@@ -485,26 +505,6 @@
               "mismatch_reasons": [
                 "이번 사건은 geopolitical 유형이며 전제의 사건유형(other, regulatory)과 다릅니다.",
                 "전제의 지역은 KR로 한정되나 이번 사건은 RU, UA, EU, GLOBAL입니다."
-              ],
-              "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-              "confidence": 0.95
-            }
-          ]
-        },
-        {
-          "doc_id": "PB-STFM",
-          "fit_score": 0.0,
-          "n_applicable": 0,
-          "n_partial": 0,
-          "n_not": 1,
-          "n_uncertain": 0,
-          "judgments": [
-            {
-              "clause_id": "PB-STFM-05",
-              "verdict": "not_applicable",
-              "mismatch_reasons": [
-                "사건유형이 liquidity_crisis가 아니라 geopolitical이다.",
-                "지역이 KR 전용이 아니라 GLOBAL 및 복수 지역이다."
               ],
               "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
               "confidence": 0.95
@@ -650,34 +650,104 @@
       }
     ],
     "exposure_entities": [],
+    "exposure_core": [
+      {
+        "nodes": [
+          "기관",
+          "C-RHEIN",
+          "EU · banks"
+        ],
+        "weight": 0.015,
+        "relevance": 1.0,
+        "uncertainty": 0.5,
+        "risk_score": 0.01125,
+        "why": "거래상대방 라인방크 (유럽 은행) (swap) → EU · banks: 비중 1.50%, 지역 EU, 업종 banks, 자산군 fx (불확실성 0.5)"
+      },
+      {
+        "nodes": [
+          "기관",
+          "M-MIR",
+          "VGK",
+          "VGK GB 보유 295종목",
+          "GB · banks/energy/manufacturing"
+        ],
+        "weight": 0.013047,
+        "relevance": 1.0,
+        "uncertainty": 0.3,
+        "risk_score": 0.01109,
+        "why": "위탁운용사 미르글로벌 (유럽 주식) (fund) → 프록시 펀드 Vanguard FTSE Europe ETF → VGK GB 보유 295종목 → GB · banks/energy/manufacturing: 비중 1.30%, 지역 EU, 업종 banks,energy, 자산군 equity (불확실성 0.3)"
+      },
+      {
+        "nodes": [
+          "기관",
+          "M-MIR",
+          "VGK",
+          "VGK FR 보유 142종목",
+          "FR · banks/energy/manufacturing"
+        ],
+        "weight": 0.008094,
+        "relevance": 1.0,
+        "uncertainty": 0.3,
+        "risk_score": 0.00688,
+        "why": "위탁운용사 미르글로벌 (유럽 주식) (fund) → 프록시 펀드 Vanguard FTSE Europe ETF → VGK FR 보유 142종목 → FR · banks/energy/manufacturing: 비중 0.81%, 지역 EU, 업종 banks,energy, 자산군 equity (불확실성 0.3)"
+      },
+      {
+        "nodes": [
+          "기관",
+          "M-MIR",
+          "VGK",
+          "VGK CH 보유 114종목",
+          "CH · banks/energy/manufacturing"
+        ],
+        "weight": 0.008066,
+        "relevance": 1.0,
+        "uncertainty": 0.3,
+        "risk_score": 0.006856,
+        "why": "위탁운용사 미르글로벌 (유럽 주식) (fund) → 프록시 펀드 Vanguard FTSE Europe ETF → VGK CH 보유 114종목 → CH · banks/energy/manufacturing: 비중 0.81%, 지역 EU, 업종 banks,energy, 자산군 equity (불확실성 0.3)"
+      },
+      {
+        "nodes": [
+          "기관",
+          "M-MIR",
+          "VGK",
+          "VGK DE 보유 166종목",
+          "DE · banks/energy/manufacturing"
+        ],
+        "weight": 0.008015,
+        "relevance": 1.0,
+        "uncertainty": 0.3,
+        "risk_score": 0.006813,
+        "why": "위탁운용사 미르글로벌 (유럽 주식) (fund) → 프록시 펀드 Vanguard FTSE Europe ETF → VGK DE 보유 166종목 → DE · banks/energy/manufacturing: 비중 0.80%, 지역 EU, 업종 banks,energy, 자산군 equity (불확실성 0.3)"
+      }
+    ],
     "exposure_note": "",
     "actions_to_check": [
-      "[리스크관리팀] 국가별 노출 현황 집계 (PB-GEO-01·부분)",
-      "[리스크관리팀] 최고투자책임자(CIO) 보고 (PB-GEO-01·부분)",
+      "[리스크관리팀] 국가별 노출 집계 (PB-GEO-01·부분)",
+      "[리스크관리팀] CIO 보고 (PB-GEO-01·부분)",
       "[운용전략팀] 원자재 가격 시나리오 분석 (PB-GEO-04·부분)",
       "[운영지원팀] 결제 및 수탁 경로 점검 (PB-GEO-03)",
-      "[운영지원팀] 대체 결제 경로 확보 (PB-GEO-03)",
-      "[재무팀] 공정가치 재평가 실시 (PB-GEO-05)",
-      "[재무팀] 평가위원회 안건 상정 (PB-GEO-05)",
-      "[준법감시팀] 신규 매수 제한 조치 (PB-GEO-02)",
-      "[준법감시팀] 보유 자산 준법 여부 검토 (PB-GEO-02)",
-      "[외환운용팀] 환헤지 비율 적정성 점검 (PB-GEO-07·부분)",
-      "[위탁운용팀] 위탁운용사 자산 보유 현황 요청 (PB-GEO-06·부분)",
-      "[운용전략팀] 국가별 리스크 등급 재산정 (PB-GEO-08)",
-      "[운용전략팀] 자산배분 회의 안건 상정 (PB-GEO-08)",
-      "[외환운용팀] 주요 수입국 통화 위험 점검 (PB-CMDTY-05·부분)",
+      "[운영지원팀] 대체 경로 확보 (PB-GEO-03)",
+      "[재무팀] 공정가치 재평가 (PB-GEO-05)",
+      "[재무팀] 평가위원회 상정 (PB-GEO-05)",
+      "[준법감시팀] 신규 매수 금지 (PB-GEO-02)",
+      "[준법감시팀] 보유 자산 준법 검토 (PB-GEO-02)",
+      "[외환운용팀] 환헤지 비율 점검 (PB-GEO-07·부분)",
+      "[위탁운용팀] 위탁운용사 보유 현황 요청 (PB-GEO-06·부분)",
+      "[운용전략팀] 국가 리스크 등급 재산정 (PB-GEO-08)",
+      "[운용전략팀] 자산배분 회의 상정 (PB-GEO-08)",
+      "[외환운용팀] 수입국 통화 위험 점검 (PB-CMDTY-05·부분)",
       "[리스크관리팀] 에너지 및 원자재 노출 집계 (PB-CMDTY-01·부분)",
-      "[운용전략팀] 신흥국 물가 상승 영향 점검 (PB-CMDTY-07·부분)",
-      "[거래상대방관리팀] 거래 상대방 증거금 및 신용도 점검 (PB-CMDTY-06·부분)",
+      "[운용전략팀] 신흥국 물가 영향 점검 (PB-CMDTY-07·부분)",
+      "[거래상대방관리팀] 거래 상대방 증거금 및 신용 점검 (PB-CMDTY-06·부분)",
       "[채권운용팀] 인플레이션 시나리오 반영 (PB-CMDTY-04·부분)",
-      "[준법감시팀] 제재 관련 보고 의무 이행 (PB-REG-03)",
       "[외환운용팀] 외환 유동성 점검 회의 소집 (PB-FX-01·부분, PB-FX-07·부분)",
-      "[외환운용팀] 외화 현금성 자산 확대 (PB-FX-07·부분)",
+      "[외환운용팀] 외화 현금 확대 (PB-FX-07·부분)",
       "[재무팀] 원화 환산 평가액 일일 보고 (PB-FX-08·부분)",
       "[리스크관리팀] 환노출 한도 재점검 (PB-FX-03·부분)",
       "[외환운용팀] 환헤지 비용 재산정 (PB-RATE-08·부분)",
-      "[운용전략팀] 포트폴리오 리밸런싱 분할 실행 (PB-TRADE-05·부분)",
-      "[운용전략팀] 거래 비용 점검 (PB-TRADE-05·부분)"
+      "[운용전략팀] 리밸런싱 분할 실행 (PB-TRADE-05·부분)",
+      "[운용전략팀] 거래 비용 점검 (PB-TRADE-05·부분)",
+      "[준법감시팀] 제재 관련 보고 의무 이행 (PB-REG-03)"
     ],
     "evidence_refs": [
       "PB-GEO-01",
@@ -693,12 +763,6 @@
       "PB-CMDTY-07",
       "PB-CMDTY-06",
       "PB-CMDTY-04",
-      "PB-REG-01",
-      "PB-REG-02",
-      "PB-REG-03",
-      "PB-REG-04",
-      "PB-REG-05",
-      "PB-REG-08",
       "PB-FX-01",
       "PB-FX-07",
       "PB-FX-08",
@@ -715,16 +779,22 @@
       "PB-BANK-05",
       "PB-LIQ-04",
       "PB-LIQ-01",
+      "PB-STFM-05",
+      "PB-REG-01",
+      "PB-REG-02",
+      "PB-REG-03",
+      "PB-REG-04",
+      "PB-REG-05",
+      "PB-REG-08",
       "PB-MGR-01",
       "PB-MGR-02",
       "PB-MGR-03",
       "PB-MGR-05",
-      "PB-STFM-05",
       "https://home.treasury.gov/news/press-releases/jy0612",
       "https://www.gov.uk/government/news/joint-statement-on-further-restrictive-economic-measures-26-february-2022",
       "https://fred.stlouisfed.org/series/DCOILWTICO"
     ],
-    "trace_id": "trace-c7af6dc9544b"
+    "trace_id": "trace-1e043a8e74bc"
   },
   "trace": [
     {

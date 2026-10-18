@@ -10,18 +10,13 @@ import argparse
 import json
 from datetime import timedelta
 
-from app.agents.sentinel import merge_alerts, replay
+from app.agents.sentinel import merge_alerts, panel_series_ids, replay
 from app.config import ROOT_DIR, load_config
 from app.corpus import load_calm_windows, load_events
 from app.data.fred import load_panel
 from app.schemas import AlertLevel
 
 OUT = ROOT_DIR / "data" / "backtest" / "sentinel_results.json"
-
-
-def _series_ids() -> list[str]:
-    m = load_config()["sentinel"]["market"]
-    return m["series"] + [m["credit_spread"]["primary"], m["credit_spread"]["fallback"]]
 
 
 def _first(results, level):
@@ -35,20 +30,20 @@ def main() -> None:
     args = parser.parse_args()
 
     cfg = load_config()["sentinel"]["replay"]
-    panel = load_panel(_series_ids(), refresh=args.refresh)
+    panel = load_panel(panel_series_ids(), refresh=args.refresh)
     events = load_events()
 
     event_rows = []
     for e in sorted(events, key=lambda e: e.date):
         results = replay(panel, events, e.date - timedelta(days=cfg["days_before"]), e.date + timedelta(days=cfg["days_after"]))
         own = [r for r in results if e.id in r.keys]
-        pre_watch = [r for r in results if r.as_of < e.date and r.market.active]
+        pre_watch = [r for r in results if r.as_of < e.date and (r.market.active or (r.flow and r.flow.active))]
         first_alert = next((r for r in own if r.level == AlertLevel.ALERT), None)
         event_rows.append({
             "event_id": e.id,
             "event_date": e.date.isoformat(),
             "first_alert": first_alert.as_of.isoformat() if first_alert else None,
-            "alert_triggered_by": first_alert.market.triggered if first_alert else [],
+            "alert_triggered_by": (first_alert.market.triggered + (first_alert.flow.triggered if first_alert.flow else [])) if first_alert else [],
             "alert_days": sum(r.level == AlertLevel.ALERT for r in own),
             "merged_alerts": len([m for m in merge_alerts(own) if m.key == e.id]),
             "market_active_days_before_event": len(pre_watch),
@@ -67,7 +62,7 @@ def main() -> None:
         })
 
     out = {
-        "note": "백테스트 B는 사건 카드 기반. calm 구간에는 카드가 없어 ALERT가 구조적으로 0이며, WATCH(시장 신호 단독)를 오경보 지표로 함께 기록한다.",
+        "note": "등급 v2: ALERT = B ∧ (A ∨ C). 백테스트 B는 사건 카드 기반. calm 구간에는 카드가 없어 ALERT가 구조적으로 0이며, WATCH(시장 신호 단독)를 오경보 지표로 함께 기록한다.",
         "config": {"replay": cfg, "market": load_config()["sentinel"]["market"], "card_active_days": load_config()["sentinel"]["news"]["card_active_days"]},
         "events": event_rows,
         "calm": calm_rows,

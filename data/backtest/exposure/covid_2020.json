@@ -150,5 +150,69 @@
       "why": "위탁운용사 서경파트너스 펀드를 통해 CN 지역 및 equity 자산군과 일치하며, 프록시 추정으로 실제와 다를 수 있습니다."
     }
   ],
-  "entity_paths": []
+  "entity_paths": [],
+  "core_paths": [
+    {
+      "nodes": [
+        "기관",
+        "C-SEORAE",
+        "KR · banks"
+      ],
+      "weight": 0.01,
+      "relevance": 1.0,
+      "uncertainty": 0.5,
+      "risk_score": 0.0075,
+      "why": "거래상대방 서래은행 (국내 은행) (repo) → KR · banks: 비중 1.00%, 지역 KR, 업종 banks, 자산군 fx (불확실성 0.5)"
+    },
+    {
+      "nodes": [
+        "기관",
+        "C-ATLAS",
+        "US/GLOBAL · broker_dealers"
+      ],
+      "weight": 0.02,
+      "relevance": 0.4,
+      "uncertainty": 0.5,
+      "risk_score": 0.006,
+      "why": "거래상대방 아틀라스 글로벌증권 (미국 투자은행) (swap) → US/GLOBAL · broker_dealers: 비중 2.00%, 지역 GLOBAL,US (불확실성 0.5)"
+    },
+    {
+      "nodes": [
+        "기관",
+        "C-HANGANG",
+        "KR · broker_dealers/real_estate"
+      ],
+      "weight": 0.02,
+      "relevance": 0.4,
+      "uncertainty": 0.5,
+      "risk_score": 0.006,
+      "why": "거래상대방 한강증권 (국내 증권사) (repo) → KR · broker_dealers/real_estate: 비중 2.00%, 지역 KR (불확실성 0.5)"
+    },
+    {
+      "nodes": [
+        "기관",
+        "C-PACIFICA",
+        "US · regional_banks/banks"
+      ],
+      "weight": 0.01,
+      "relevance": 0.75,
+      "uncertainty": 0.5,
+      "risk_score": 0.005625,
+      "why": "거래상대방 퍼시피카 뱅크 (미국 지역은행) (swap) → US · regional_banks/banks: 비중 1.00%, 지역 US, 업종 banks (불확실성 0.5)"
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-CHEONGRAM",
+        "EMB",
+        "EMB CN 보유 11종목",
+        "CN · sovereign"
+      ],
+      "weight": 0.000745,
+      "relevance": 0.4,
+      "uncertainty": 0.3,
+      "risk_score": 0.000253,
+      "why": "위탁운용사 청람인베스트 (신흥국 달러채권) (fund) → 프록시 펀드 iShares J.P. Morgan USD Emerging Markets Bond ETF → EMB CN 보유 11종목 → CN · sovereign: 비중 0.07%, 지역 CN (불확실성 0.3)"
+    }
+  ]
 }

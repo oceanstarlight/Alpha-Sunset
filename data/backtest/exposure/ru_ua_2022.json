@@ -150,5 +150,75 @@
       "why": "위탁운용사 서경파트너스 (중국 주식) 경로의 펀드를 통해 지역 및 자산군이 일치하며, 프록시 추정으로 인해 실제와 다를 수 있습니다."
     }
   ],
-  "entity_paths": []
+  "entity_paths": [],
+  "core_paths": [
+    {
+      "nodes": [
+        "기관",
+        "C-RHEIN",
+        "EU · banks"
+      ],
+      "weight": 0.015,
+      "relevance": 1.0,
+      "uncertainty": 0.5,
+      "risk_score": 0.01125,
+      "why": "거래상대방 라인방크 (유럽 은행) (swap) → EU · banks: 비중 1.50%, 지역 EU, 업종 banks, 자산군 fx (불확실성 0.5)"
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-MIR",
+        "VGK",
+        "VGK GB 보유 295종목",
+        "GB · banks/energy/manufacturing"
+      ],
+      "weight": 0.013047,
+      "relevance": 1.0,
+      "uncertainty": 0.3,
+      "risk_score": 0.01109,
+      "why": "위탁운용사 미르글로벌 (유럽 주식) (fund) → 프록시 펀드 Vanguard FTSE Europe ETF → VGK GB 보유 295종목 → GB · banks/energy/manufacturing: 비중 1.30%, 지역 EU, 업종 banks,energy, 자산군 equity (불확실성 0.3)"
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-MIR",
+        "VGK",
+        "VGK FR 보유 142종목",
+        "FR · banks/energy/manufacturing"
+      ],
+      "weight": 0.008094,
+      "relevance": 1.0,
+      "uncertainty": 0.3,
+      "risk_score": 0.00688,
+      "why": "위탁운용사 미르글로벌 (유럽 주식) (fund) → 프록시 펀드 Vanguard FTSE Europe ETF → VGK FR 보유 142종목 → FR · banks/energy/manufacturing: 비중 0.81%, 지역 EU, 업종 banks,energy, 자산군 equity (불확실성 0.3)"
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-MIR",
+        "VGK",
+        "VGK CH 보유 114종목",
+        "CH · banks/energy/manufacturing"
+      ],
+      "weight": 0.008066,
+      "relevance": 1.0,
+      "uncertainty": 0.3,
+      "risk_score": 0.006856,
+      "why": "위탁운용사 미르글로벌 (유럽 주식) (fund) → 프록시 펀드 Vanguard FTSE Europe ETF → VGK CH 보유 114종목 → CH · banks/energy/manufacturing: 비중 0.81%, 지역 EU, 업종 banks,energy, 자산군 equity (불확실성 0.3)"
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-MIR",
+        "VGK",
+        "VGK DE 보유 166종목",
+        "DE · banks/energy/manufacturing"
+      ],
+      "weight": 0.008015,
+      "relevance": 1.0,
+      "uncertainty": 0.3,
+      "risk_score": 0.006813,
+      "why": "위탁운용사 미르글로벌 (유럽 주식) (fund) → 프록시 펀드 Vanguard FTSE Europe ETF → VGK DE 보유 166종목 → DE · banks/energy/manufacturing: 비중 0.80%, 지역 EU, 업종 banks,energy, 자산군 equity (불확실성 0.3)"
+    }
+  ]
 }

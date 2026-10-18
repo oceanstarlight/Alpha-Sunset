@@ -20,6 +20,11 @@ DIR = ROOT_DIR / "data" / "backtest" / "ablation"
 
 
 def main() -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--out", default="results.json", help="결과 파일 이름 (규칙 버전별로 분리)")
+    args = parser.parse_args()
     reg = json.loads((DIR / "preregistration.json").read_text(encoding="utf-8"))
     events = {e.id: e.as_of_view() for e in load_events()}
     llm = LLMClient(db_mode="sandbox")
@@ -37,7 +42,7 @@ def main() -> None:
     out = {"preregistration_registered_at": reg["registered_at"], "events": rows,
            "summary": {"gap_precision": mean_or_none([x["precision"] for x in rows]),
                        "gap_recall": mean_or_none([x["recall"] for x in rows])}}
-    (DIR / "results.json").write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (DIR / args.out).write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(out["summary"])
 
 

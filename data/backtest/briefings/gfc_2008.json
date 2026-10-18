@@ -1,6 +1,6 @@
 {
   "briefing": {
-    "run_id": "run-ba8cc397fa8c",
+    "run_id": "run-03be3bf1f121",
     "event": {
       "id": "gfc_2008",
       "title": "2008 리먼 브라더스 파산과 한국 외환시장 불안",
@@ -175,50 +175,6 @@
           ]
         },
         {
-          "doc_id": "PB-MGR",
-          "fit_score": 0.5,
-          "n_applicable": 1,
-          "n_partial": 2,
-          "n_not": 1,
-          "n_uncertain": 0,
-          "judgments": [
-            {
-              "clause_id": "PB-MGR-01",
-              "verdict": "applicable",
-              "mismatch_reasons": [],
-              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-              "confidence": 0.8
-            },
-            {
-              "clause_id": "PB-MGR-02",
-              "verdict": "partial",
-              "mismatch_reasons": [
-                "운용사 보고 자산과 실제 자산 불일치 의심 조건에 대한 정보가 부족하다."
-              ],
-              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-              "confidence": 0.65
-            },
-            {
-              "clause_id": "PB-MGR-03",
-              "verdict": "partial",
-              "mismatch_reasons": [
-                "지속기간 전제(shock, weeks)와 이번 사건의 지속기간(months)이 다릅니다."
-              ],
-              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-              "confidence": 0.85
-            },
-            {
-              "clause_id": "PB-MGR-05",
-              "verdict": "not_applicable",
-              "mismatch_reasons": [
-                "사건유형이 credit_event이나, 해당 조항은 other 또는 regulatory를 전제로 합니다."
-              ],
-              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-              "confidence": 0.95
-            }
-          ]
-        },
-        {
           "doc_id": "PB-BANK",
           "fit_score": 0.5,
           "n_applicable": 0,
@@ -274,68 +230,6 @@
               ],
               "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
               "confidence": 0.7
-            }
-          ]
-        },
-        {
-          "doc_id": "PB-REG",
-          "fit_score": 0.25,
-          "n_applicable": 1,
-          "n_partial": 0,
-          "n_not": 3,
-          "n_uncertain": 2,
-          "judgments": [
-            {
-              "clause_id": "PB-REG-01",
-              "verdict": "uncertain",
-              "mismatch_reasons": [
-                "이번 사건 요약에 중대한 손실이나 한도 위반 발생 여부에 대한 정보가 없습니다."
-              ],
-              "evidence_quote": "원/달러 환율은 1,117.85원(전일 1,106.50원)이었다",
-              "confidence": 0.5
-            },
-            {
-              "clause_id": "PB-REG-02",
-              "verdict": "not_applicable",
-              "mismatch_reasons": [
-                "사건유형이 credit_event이며, 공매도 금지 등 시장 조치 시행에 대한 내용이 사건 요약에 없습니다."
-              ],
-              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-              "confidence": 0.95
-            },
-            {
-              "clause_id": "PB-REG-03",
-              "verdict": "not_applicable",
-              "mismatch_reasons": [
-                "사건유형이 credit_event이며, 제재 대상 지정과 관련된 전제가 이번 사건에 포함되어 있지 않습니다."
-              ],
-              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-              "confidence": 0.95
-            },
-            {
-              "clause_id": "PB-REG-04",
-              "verdict": "uncertain",
-              "mismatch_reasons": [
-                "이번 사건에서 한도 예외 승인이 발생했는지에 대한 정보가 없습니다."
-              ],
-              "evidence_quote": "원/달러 환율은 1,117.85원(전일 1,106.50원)이었다",
-              "confidence": 0.5
-            },
-            {
-              "clause_id": "PB-REG-05",
-              "verdict": "applicable",
-              "mismatch_reasons": [],
-              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-              "confidence": 0.95
-            },
-            {
-              "clause_id": "PB-REG-08",
-              "verdict": "not_applicable",
-              "mismatch_reasons": [
-                "지속기간이 months이나, 위기가 종료되지 않고 현재 진행 중인 사건 상황입니다."
-              ],
-              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-              "confidence": 0.9
             }
           ]
         },
@@ -511,6 +405,112 @@
               "confidence": 0.95
             }
           ]
+        },
+        {
+          "doc_id": "PB-MGR",
+          "fit_score": 0.5,
+          "n_applicable": 1,
+          "n_partial": 2,
+          "n_not": 1,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-MGR-01",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+              "confidence": 0.8
+            },
+            {
+              "clause_id": "PB-MGR-02",
+              "verdict": "partial",
+              "mismatch_reasons": [
+                "운용사 보고 자산과 실제 자산 불일치 의심 조건에 대한 정보가 부족하다."
+              ],
+              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+              "confidence": 0.65
+            },
+            {
+              "clause_id": "PB-MGR-03",
+              "verdict": "partial",
+              "mismatch_reasons": [
+                "지속기간 전제(shock, weeks)와 이번 사건의 지속기간(months)이 다릅니다."
+              ],
+              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+              "confidence": 0.85
+            },
+            {
+              "clause_id": "PB-MGR-05",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 credit_event이나, 해당 조항은 other 또는 regulatory를 전제로 합니다."
+              ],
+              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+              "confidence": 0.95
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-REG",
+          "fit_score": 0.25,
+          "n_applicable": 1,
+          "n_partial": 0,
+          "n_not": 3,
+          "n_uncertain": 2,
+          "judgments": [
+            {
+              "clause_id": "PB-REG-01",
+              "verdict": "uncertain",
+              "mismatch_reasons": [
+                "이번 사건 요약에 중대한 손실이나 한도 위반 발생 여부에 대한 정보가 없습니다."
+              ],
+              "evidence_quote": "원/달러 환율은 1,117.85원(전일 1,106.50원)이었다",
+              "confidence": 0.5
+            },
+            {
+              "clause_id": "PB-REG-02",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 credit_event이며, 공매도 금지 등 시장 조치 시행에 대한 내용이 사건 요약에 없습니다."
+              ],
+              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-REG-03",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 credit_event이며, 제재 대상 지정과 관련된 전제가 이번 사건에 포함되어 있지 않습니다."
+              ],
+              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-REG-04",
+              "verdict": "uncertain",
+              "mismatch_reasons": [
+                "이번 사건에서 한도 예외 승인이 발생했는지에 대한 정보가 없습니다."
+              ],
+              "evidence_quote": "원/달러 환율은 1,117.85원(전일 1,106.50원)이었다",
+              "confidence": 0.5
+            },
+            {
+              "clause_id": "PB-REG-05",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-REG-08",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "지속기간이 months이나, 위기가 종료되지 않고 현재 진행 중인 사건 상황입니다."
+              ],
+              "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+              "confidence": 0.9
+            }
+          ]
         }
       ],
       "gaps": [],
@@ -518,40 +518,41 @@
     },
     "exposure_top": [],
     "exposure_entities": [],
+    "exposure_core": [],
     "exposure_note": "노출 분석 불가: IVV gfc_2008 스냅샷 없음",
     "actions_to_check": [
-      "[거래상대방관리팀] 거래상대방별 총 익스포저 집계 (PB-CPTY-01)",
-      "[거래상대방관리팀] CIO 보고 실시 (PB-CPTY-01)",
-      "[거래상대방관리팀] 동일 섹터 내 상대방과의 신규 거래 중단 (PB-CPTY-04)",
-      "[법무팀] 조기종료 통지서 발송 (PB-CPTY-02)",
+      "[거래상대방관리팀] 상대방별 총노출 집계 (PB-CPTY-01)",
+      "[거래상대방관리팀] CIO 보고 (PB-CPTY-01)",
+      "[거래상대방관리팀] 동일 섹터 상대방 신규 거래 중단 (PB-CPTY-04)",
+      "[법무팀] 조기종료 통지 (PB-CPTY-02)",
       "[법무팀] 일괄정산 금액 산정 (PB-CPTY-02)",
-      "[거래상대방관리팀] 프라임브로커를 경유한 간접 익스포저 점검 (PB-CPTY-07·부분)",
-      "[자금운용팀] 레포(RP) 만기 단축 (PB-CPTY-06)",
-      "[자금운용팀] 거래상대방 다변화 (PB-CPTY-06)",
+      "[거래상대방관리팀] 프라임브로커 경유 간접 노출 점검 (PB-CPTY-07·부분)",
+      "[자금운용팀] 레포 만기 단축 (PB-CPTY-06)",
+      "[자금운용팀] 상대방 분산 (PB-CPTY-06)",
       "[외환운용팀] 외환 유동성 점검 회의 소집 (PB-FX-01, PB-FX-07·부분)",
-      "[외환운용팀] 외화 현금성 자산 확대 (PB-FX-07·부분)",
-      "[신용분석팀] 관련 기업의 신용 익스포저 점검 (PB-FX-06)",
+      "[외환운용팀] 외화 현금 확대 (PB-FX-07·부분)",
+      "[신용분석팀] 관련 기업 신용 노출 점검 (PB-FX-06)",
       "[자금운용팀] 외화 조달 만기 구조 점검 (PB-FX-02)",
       "[재무팀] 원화 환산 평가액 일일 보고 (PB-FX-08·부분)",
       "[리스크관리팀] 환노출 한도 재점검 (PB-FX-03·부분)",
       "[외환운용팀] 롤오버 비용 산정 (PB-FX-04·부분)",
-      "[외환운용팀] 헤지 비율 적정성 검토 (PB-FX-04·부분)",
-      "[위탁운용팀] 위탁 자산 동결 여부 점검 (PB-MGR-01)",
-      "[위탁운용팀] CIO 보고 실시 (PB-MGR-01)",
-      "[위탁운용팀] 수탁기관 및 사무관리사 독립성 확인 (PB-MGR-02·부분)",
-      "[위탁운용팀] 위탁운용사의 레버리지 수준 점검 (PB-MGR-03·부분)",
-      "[리스크관리팀] 주요 은행 CDS 스프레드 모니터링 (PB-BANK-08·부분)",
-      "[리스크관리팀] 단기자금 시장 금리 모니터링 (PB-BANK-08·부분)",
-      "[외환운용팀] 외화 유동성 한도 하향 조정 (PB-LIQ-04·부분)",
-      "[외환운용팀] 정책적 지원 방안 모니터링 (PB-LIQ-04·부분)",
-      "[리스크관리팀] 투기등급 자산 비중 일일 점검 (PB-LIQ-07·부분)",
-      "[리스크관리팀] 한도 초과 시 관련 내용 보고 (PB-LIQ-07·부분)",
-      "[준법감시팀] 주요 의사결정 사항 기록 및 보관 (PB-REG-05)",
-      "[채권운용팀] 시장 금리 안정세 확인 (PB-STFM-05·부분)",
-      "[자금운용팀] 담보로 활용 가능한 채권 식별 (PB-STFM-08·부분)",
+      "[외환운용팀] 헤지 비율 검토 (PB-FX-04·부분)",
+      "[리스크관리팀] 주요 은행 CDS 모니터링 (PB-BANK-08·부분)",
+      "[리스크관리팀] 단기자금 금리 모니터링 (PB-BANK-08·부분)",
+      "[외환운용팀] 외화 유동성 한도 하향 (PB-LIQ-04·부분)",
+      "[외환운용팀] 정책 지원 모니터링 (PB-LIQ-04·부분)",
+      "[리스크관리팀] 투기등급 비중 일일 점검 (PB-LIQ-07·부분)",
+      "[리스크관리팀] 한도 초과 시 보고 (PB-LIQ-07·부분)",
+      "[채권운용팀] 시장 금리 안정 확인 (PB-STFM-05·부분)",
+      "[자금운용팀] 담보 활용 가능 채권 확인 (PB-STFM-08·부분)",
       "[자금운용팀] 단기물 신규 매수 보류 (PB-STFM-02·부분)",
-      "[자금운용팀] 도래하는 만기 자금의 현금화 (PB-STFM-02·부분)",
-      "[외환운용팀] 환헤지 비용 재산정 (PB-RATE-08·부분)"
+      "[자금운용팀] 만기분 현금화 (PB-STFM-02·부분)",
+      "[외환운용팀] 환헤지 비용 재산정 (PB-RATE-08·부분)",
+      "[위탁운용팀] 위탁 자산 동결 점검 (PB-MGR-01)",
+      "[위탁운용팀] CIO 보고 (PB-MGR-01)",
+      "[위탁운용팀] 수탁기관·사무관리사 독립 확인 (PB-MGR-02·부분)",
+      "[위탁운용팀] 위탁운용사 레버리지 점검 (PB-MGR-03·부분)",
+      "[준법감시팀] 의사결정 기록 보관 (PB-REG-05)"
     ],
     "evidence_refs": [
       "PB-CPTY-01",
@@ -567,20 +568,10 @@
       "PB-FX-08",
       "PB-FX-03",
       "PB-FX-04",
-      "PB-MGR-01",
-      "PB-MGR-02",
-      "PB-MGR-03",
-      "PB-MGR-05",
       "PB-BANK-08",
       "PB-LIQ-04",
       "PB-LIQ-01",
       "PB-LIQ-07",
-      "PB-REG-01",
-      "PB-REG-02",
-      "PB-REG-03",
-      "PB-REG-04",
-      "PB-REG-05",
-      "PB-REG-08",
       "PB-STFM-05",
       "PB-STFM-01",
       "PB-STFM-03",
@@ -594,12 +585,22 @@
       "PB-CMDTY-05",
       "PB-GEO-07",
       "PB-TRADE-04",
+      "PB-MGR-01",
+      "PB-MGR-02",
+      "PB-MGR-03",
+      "PB-MGR-05",
+      "PB-REG-01",
+      "PB-REG-02",
+      "PB-REG-03",
+      "PB-REG-04",
+      "PB-REG-05",
+      "PB-REG-08",
       "https://www.sec.gov/Archives/edgar/data/0000806085/000110465908059632/a08-22764_48k.htm",
       "https://www.federalreserve.gov/newsevents/pressreleases/monetary20081029b.htm",
       "https://fred.stlouisfed.org/series/DEXKOUS",
       "https://fred.stlouisfed.org/series/VIXCLS"
     ],
-    "trace_id": "trace-017751de1507"
+    "trace_id": "trace-4609531919ca"
   },
   "trace": [
     {

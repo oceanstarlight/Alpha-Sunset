@@ -1,6 +1,6 @@
 {
   "briefing": {
-    "run_id": "run-ada04c8085d3",
+    "run_id": "run-ada97ed2aa2c",
     "event": {
       "id": "legoland_2022",
       "title": "2022 레고랜드 사태와 국내 단기자금시장 경색",
@@ -118,62 +118,6 @@
           ]
         },
         {
-          "doc_id": "PB-REG",
-          "fit_score": 0.75,
-          "n_applicable": 4,
-          "n_partial": 1,
-          "n_not": 1,
-          "n_uncertain": 0,
-          "judgments": [
-            {
-              "clause_id": "PB-REG-01",
-              "verdict": "applicable",
-              "mismatch_reasons": [],
-              "evidence_quote": "중대한 손실 또는 한도 위반이 발생하면 정해진 기한 내에 감독기관에 보고한다.",
-              "confidence": 0.9
-            },
-            {
-              "clause_id": "PB-REG-02",
-              "verdict": "partial",
-              "mismatch_reasons": [
-                "자산군 전제에 equity가 있으나 이번 사건의 자산군은 채권 및 단기자금시장 중심이다."
-              ],
-              "evidence_quote": "공매도 금지 등 시장 조치가 시행되면 위탁운용사와 내부 운용의 준수 여부를 확인한다.",
-              "confidence": 0.75
-            },
-            {
-              "clause_id": "PB-REG-03",
-              "verdict": "not_applicable",
-              "mismatch_reasons": [
-                "이번 사건은 제재(sanctions)나 지정학적 사건이 아니라 단기자금시장 경색 및 유동성 위기이다."
-              ],
-              "evidence_quote": "제재 대상 지정 시 관련 법령에 따른 보고 의무를 확인하고 이행한다.",
-              "confidence": 0.95
-            },
-            {
-              "clause_id": "PB-REG-04",
-              "verdict": "applicable",
-              "mismatch_reasons": [],
-              "evidence_quote": "위기 대응을 위한 한도 예외 승인은 사후 7일 이내에 이사회(또는 위원회)에 보고한다.",
-              "confidence": 0.9
-            },
-            {
-              "clause_id": "PB-REG-05",
-              "verdict": "applicable",
-              "mismatch_reasons": [],
-              "evidence_quote": "위기 대응 과정의 의사결정 기록을 보존 기한 동안 보관한다.",
-              "confidence": 0.9
-            },
-            {
-              "clause_id": "PB-REG-08",
-              "verdict": "applicable",
-              "mismatch_reasons": [],
-              "evidence_quote": "위기 종료 후 30일 이내에 사후보고서를 작성해 이사회에 보고한다.",
-              "confidence": 0.9
-            }
-          ]
-        },
-        {
           "doc_id": "PB-CPTY",
           "fit_score": 0.5,
           "n_applicable": 0,
@@ -208,52 +152,6 @@
               ],
               "evidence_quote": "원/달러 환율은 1,440.50원(전일 1,422.39원)이었다",
               "confidence": 0.7
-            }
-          ]
-        },
-        {
-          "doc_id": "PB-MGR",
-          "fit_score": 0.5,
-          "n_applicable": 0,
-          "n_partial": 2,
-          "n_not": 0,
-          "n_uncertain": 2,
-          "judgments": [
-            {
-              "clause_id": "PB-MGR-01",
-              "verdict": "uncertain",
-              "mismatch_reasons": [
-                "위탁운용사의 환매중단 또는 운용 부실에 대한 구체적인 정보가 사건 요약에 포함되어 있지 않습니다."
-              ],
-              "evidence_quote": "2022 레고랜드 사태와 국내 단기자금시장 경색",
-              "confidence": 0.7
-            },
-            {
-              "clause_id": "PB-MGR-02",
-              "verdict": "uncertain",
-              "mismatch_reasons": [
-                "운용사 보고 자산과 실제 자산 간 불일치 의심에 대한 정보가 사건 요약에 없습니다."
-              ],
-              "evidence_quote": "2022 레고랜드 사태와 국내 단기자금시장 경색",
-              "confidence": 0.7
-            },
-            {
-              "clause_id": "PB-MGR-03",
-              "verdict": "partial",
-              "mismatch_reasons": [
-                "자산군 전제에 derivatives가 포함되어 있으나 이번 사건의 자산군은 commercial_paper, corporate_bond, money_market이다."
-              ],
-              "evidence_quote": "위기 국면에서 위탁운용사의 레버리지와 파생상품 노출이 한도를 넘는지 점검한다.",
-              "confidence": 0.8
-            },
-            {
-              "clause_id": "PB-MGR-05",
-              "verdict": "partial",
-              "mismatch_reasons": [
-                "사건유형과 채널 전제가 이번 사건(liquidity_crisis, liquidity/counterparty)과 다르고 지속기간도 구조적(structural)이 아닌 수개월(months)이다."
-              ],
-              "evidence_quote": "손실 회수를 위해 판매사·수탁사·운용사의 책임 관계를 법무팀이 검토한다.",
-              "confidence": 0.8
             }
           ]
         },
@@ -496,6 +394,108 @@
               "confidence": 0.95
             }
           ]
+        },
+        {
+          "doc_id": "PB-REG",
+          "fit_score": 0.75,
+          "n_applicable": 4,
+          "n_partial": 1,
+          "n_not": 1,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-REG-01",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "중대한 손실 또는 한도 위반이 발생하면 정해진 기한 내에 감독기관에 보고한다.",
+              "confidence": 0.9
+            },
+            {
+              "clause_id": "PB-REG-02",
+              "verdict": "partial",
+              "mismatch_reasons": [
+                "자산군 전제에 equity가 있으나 이번 사건의 자산군은 채권 및 단기자금시장 중심이다."
+              ],
+              "evidence_quote": "공매도 금지 등 시장 조치가 시행되면 위탁운용사와 내부 운용의 준수 여부를 확인한다.",
+              "confidence": 0.75
+            },
+            {
+              "clause_id": "PB-REG-03",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "이번 사건은 제재(sanctions)나 지정학적 사건이 아니라 단기자금시장 경색 및 유동성 위기이다."
+              ],
+              "evidence_quote": "제재 대상 지정 시 관련 법령에 따른 보고 의무를 확인하고 이행한다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-REG-04",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "위기 대응을 위한 한도 예외 승인은 사후 7일 이내에 이사회(또는 위원회)에 보고한다.",
+              "confidence": 0.9
+            },
+            {
+              "clause_id": "PB-REG-05",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "위기 대응 과정의 의사결정 기록을 보존 기한 동안 보관한다.",
+              "confidence": 0.9
+            },
+            {
+              "clause_id": "PB-REG-08",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "위기 종료 후 30일 이내에 사후보고서를 작성해 이사회에 보고한다.",
+              "confidence": 0.9
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-MGR",
+          "fit_score": 0.5,
+          "n_applicable": 0,
+          "n_partial": 2,
+          "n_not": 0,
+          "n_uncertain": 2,
+          "judgments": [
+            {
+              "clause_id": "PB-MGR-01",
+              "verdict": "uncertain",
+              "mismatch_reasons": [
+                "위탁운용사의 환매중단 또는 운용 부실에 대한 구체적인 정보가 사건 요약에 포함되어 있지 않습니다."
+              ],
+              "evidence_quote": "2022 레고랜드 사태와 국내 단기자금시장 경색",
+              "confidence": 0.7
+            },
+            {
+              "clause_id": "PB-MGR-02",
+              "verdict": "uncertain",
+              "mismatch_reasons": [
+                "운용사 보고 자산과 실제 자산 간 불일치 의심에 대한 정보가 사건 요약에 없습니다."
+              ],
+              "evidence_quote": "2022 레고랜드 사태와 국내 단기자금시장 경색",
+              "confidence": 0.7
+            },
+            {
+              "clause_id": "PB-MGR-03",
+              "verdict": "partial",
+              "mismatch_reasons": [
+                "자산군 전제에 derivatives가 포함되어 있으나 이번 사건의 자산군은 commercial_paper, corporate_bond, money_market이다."
+              ],
+              "evidence_quote": "위기 국면에서 위탁운용사의 레버리지와 파생상품 노출이 한도를 넘는지 점검한다.",
+              "confidence": 0.8
+            },
+            {
+              "clause_id": "PB-MGR-05",
+              "verdict": "partial",
+              "mismatch_reasons": [
+                "사건유형과 채널 전제가 이번 사건(liquidity_crisis, liquidity/counterparty)과 다르고 지속기간도 구조적(structural)이 아닌 수개월(months)이다."
+              ],
+              "evidence_quote": "손실 회수를 위해 판매사·수탁사·운용사의 책임 관계를 법무팀이 검토한다.",
+              "confidence": 0.8
+            }
+          ]
         }
       ],
       "gaps": [],
@@ -632,34 +632,35 @@
       }
     ],
     "exposure_entities": [],
+    "exposure_core": [],
     "exposure_note": "",
     "actions_to_check": [
-      "[채권운용팀] 시장 금리 안정 확인 (PB-STFM-05)",
-      "[자금운용팀] 단기물 신규 매수 보류 (PB-STFM-02)",
-      "[자금운용팀] 만기 도래분 현금화 (PB-STFM-02)",
+      "[채권운용팀] 시장 금리 안정세 확인 (PB-STFM-05)",
+      "[자금운용팀] 단기물 신규 매수 잠정 보류 (PB-STFM-02)",
+      "[자금운용팀] 만기 도래분 현금화 처리 (PB-STFM-02)",
       "[자금운용팀] CP 및 ABCP 보유 현황 집계 (PB-STFM-01·부분)",
       "[채권운용팀] 발행시장 동향 모니터링 (PB-STFM-07)",
-      "[신용분석팀] PF 유동화증권 노출도 점검 (PB-STFM-03)",
-      "[거래상대방관리팀] 증권사 레포 및 RP 노출도 점검 (PB-STFM-06)",
-      "[자금운용팀] 현금성 자산 비중 점검 (PB-STFM-04)",
-      "[자금운용팀] 단기 국채 및 MMF 매수 (PB-STFM-04)",
-      "[준법감시팀] 감독기관 기한 내 보고 (PB-REG-01)",
-      "[준법감시팀] 규정 준수 여부 확인 (PB-REG-02·부분)",
-      "[준법감시팀] 위탁운용사 통보 (PB-REG-02·부분)",
-      "[리스크관리팀] 이사회 사후 보고 (PB-REG-04)",
-      "[준법감시팀] 의사결정 기록 보관 (PB-REG-05)",
-      "[리스크관리팀] 사후보고서 작성 (PB-REG-08)",
-      "[리스크관리팀] 이사회 보고 (PB-REG-08)",
-      "[자금운용팀] 레포 만기 단축 (PB-CPTY-06·부분)",
-      "[자금운용팀] 거래상대방 분산 (PB-CPTY-06·부분)",
-      "[외환운용팀] 환헤지 비율 점검 (PB-GEO-07·부분)",
-      "[위탁운용팀] 위탁운용사 레버리지 점검 (PB-MGR-03·부분)",
-      "[법무팀] 책임 관계 법률 검토 (PB-MGR-05·부분)",
-      "[리스크관리팀] 투기등급 비중 일일 점검 (PB-LIQ-07·부분)",
-      "[리스크관리팀] 한도 초과 시 보고 (PB-LIQ-07·부분)",
+      "[신용분석팀] PF 유동화증권 위험 노출액 점검 (PB-STFM-03)",
+      "[거래상대방관리팀] 증권사 레포 및 RP 거래 노출 점검 (PB-STFM-06)",
+      "[자금운용팀] 현금성 자산 비중 적정성 점검 (PB-STFM-04)",
+      "[자금운용팀] 단기 국채 및 MMF 매수 집행 (PB-STFM-04)",
+      "[자금운용팀] 레포 만기 단축 설정 (PB-CPTY-06·부분)",
+      "[자금운용팀] 거래상대방 분산 관리 (PB-CPTY-06·부분)",
+      "[외환운용팀] 환헤지 비율 적정성 점검 (PB-GEO-07·부분)",
+      "[리스크관리팀] 투기등급 자산 비중 일일 점검 (PB-LIQ-07·부분)",
+      "[리스크관리팀] 한도 초과 발생 시 즉시 보고 (PB-LIQ-07·부분)",
       "[외환운용팀] 외환 유동성 점검 회의 소집 (PB-FX-01·부분, PB-FX-07·부분)",
-      "[외환운용팀] 외화 현금성 자산 확대 (PB-FX-07·부분)",
-      "[재무팀] 원화 환산 평가액 일일 보고 (PB-FX-08·부분)"
+      "[외환운용팀] 외화 현금 자산 확대 (PB-FX-07·부분)",
+      "[재무팀] 원화 환산 평가액 일일 보고 (PB-FX-08·부분)",
+      "[준법감시팀] 감독기관 기한 내 보고 완료 (PB-REG-01)",
+      "[준법감시팀] 규정 준수 여부 최종 확인 (PB-REG-02·부분)",
+      "[준법감시팀] 위탁운용사 대상 관련 내용 통보 (PB-REG-02·부분)",
+      "[리스크관리팀] 이사회 대상 사후 보고 (PB-REG-04)",
+      "[준법감시팀] 주요 의사결정 사항 기록 보관 (PB-REG-05)",
+      "[리스크관리팀] 위기 대응 사후보고서 작성 (PB-REG-08)",
+      "[리스크관리팀] 이사회 보고 실시 (PB-REG-08)",
+      "[위탁운용팀] 위탁운용사 레버리지 현황 점검 (PB-MGR-03·부분)",
+      "[법무팀] 법적 책임 관계 면밀 검토 (PB-MGR-05·부분)"
     ],
     "evidence_refs": [
       "PB-STFM-05",
@@ -670,18 +671,8 @@
       "PB-STFM-06",
       "PB-STFM-08",
       "PB-STFM-04",
-      "PB-REG-01",
-      "PB-REG-02",
-      "PB-REG-03",
-      "PB-REG-04",
-      "PB-REG-05",
-      "PB-REG-08",
       "PB-CPTY-06",
       "PB-GEO-07",
-      "PB-MGR-01",
-      "PB-MGR-02",
-      "PB-MGR-03",
-      "PB-MGR-05",
       "PB-LIQ-04",
       "PB-LIQ-08",
       "PB-LIQ-07",
@@ -700,12 +691,22 @@
       "PB-RATE-05",
       "PB-RATE-01",
       "PB-TRADE-04",
+      "PB-REG-01",
+      "PB-REG-02",
+      "PB-REG-03",
+      "PB-REG-04",
+      "PB-REG-05",
+      "PB-REG-08",
+      "PB-MGR-01",
+      "PB-MGR-02",
+      "PB-MGR-03",
+      "PB-MGR-05",
       "https://www.asiapacific.ca/publication/liquidity-crunch-gangwon-province-legoland-project-rattles",
       "https://www.hankyung.com/article/2022102369157",
       "https://view.asiae.co.kr/en/article/2022102706003479418",
       "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156533311"
     ],
-    "trace_id": "trace-95b6f70f9a80"
+    "trace_id": "trace-60fd06b6b7d4"
   },
   "trace": [
     {

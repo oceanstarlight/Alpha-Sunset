@@ -23,7 +23,7 @@
 | P5 | Exposure (노출 경고) | ✅ 완료 |
 | P6 | Orchestrator + Briefing | ✅ 완료 |
 | P7 | 서비스 계층 + UI + 배포 | ✅ 완료 |
-| P8 | 백테스트 | 🔄 진행 중 (라벨 대기) |
+| P8 | 백테스트 | ✅ 완료 (KRX 데이터·임계치 결정 대기) |
 | P9 | Learner (알파 썬셋) | ⏳ 예정 |
 | P10 | 제출물 | ⏳ 예정 |
 
@@ -121,16 +121,36 @@
 - ⏳ 라이브 GDELT 호출을 배포 환경에서 재확인 (현재 세션은 429)
 - **완료 기준**: 외부 접속 가능한 데모 URL ✅, 재시작 후에도 정상 기동 (콜드 스타트 로컬 검증 ✅, 배포 환경 Reboot 확인 대기)
 
-## P8 — 백테스트 🔄
-- ✅ 사건일 시점 요약 분리: 카드에 `summary_as_of`·`entities_as_of` 추가, 백테스트 입력은 `Event.as_of_view()`만 사용 (사후 정보 누수 제거) → 판정·노출·브리핑 재생성
-- ✅ 지표 엔진 `app/backtest.py` + `scripts/run_backtest.py` → `data/backtest_results.json` (라벨 없는 지표는 null)
-- ✅ 무작위 평상 구간: 사건 ±180일 제외 영업일 3,658일 중 시그널 A 단독 발동률 4.13%, 무작위 10개 분기 표본 기록
-- ✅ 라벨 작성 틀·참고표 (`data/labels/GUIDE.md`)
-- ⏳ 라벨 6개 작성 (사용자)
-- ⏳ 라벨 기반 지표 산출: lead_time, doc_top3_hit, clause_PR, gap_PR, path_recall
-- ⏳ 보정 (라벨 후): 공백 채널 규칙(partial 포함 여부), protected 문서 순위 영향, Exposure 순위(GLOBAL 점수·핵심 경로), Sentinel 임계치
-- **완료 기준**: `backtest_results.json` 생성 ✅ (라벨 기반 지표는 라벨 작성 후)
-- ⚠️ 사건일 시점 요약으로 바꾼 뒤 tariff_2025 1위가 PB-REG(protected)로 바뀜: protected 조항만 판정된 문서는 판정 조항 수가 적어 fit_score가 들쭉날쭉함 → 라벨 보고 보정
+## P8 — 백테스트 ✅
+- ✅ 사건일 시점 요약 분리 (`summary_as_of`·`entities_as_of`, 백테스트 입력은 `as_of_view()`)
+- ✅ 지표 엔진 `app/backtest.py` + `scripts/run_backtest.py` → `data/backtest_results.json`
+- ✅ 라벨 6개: 격리 폴더의 Sonnet 서브에이전트 초안 + 사용자 검수 (정책 대응 조항은 보수적으로 부적용, covid 대응일은 기계적 규칙으로 교체)
+- ✅ 사전 등록 v1·v2 (`data/backtest/ablation/preregistration*.json`): 실행 전에 규칙·정답을 커밋으로 고정
+- ✅ 자금 흐름 신호 C (FRED 주간 5종, 공표 시차 반영) + 등급 v2 (ALERT = B ∧ (A ∨ C))
+- ✅ 데이터 품질 보고서 `data/backtest/flow_quality.json`: WIMFNS(2021 중단) 제외 권고, 나머지 4종 유지
+- ✅ 기계적 대응일(`reaction_date_flow`)과 `lead_time_flow` 지표
+- ✅ 공백 규칙 v2 (partial은 전제 사건유형이 일치할 때만 '다룸') → 문서 제거 검증 재현율 0.625 → 0.75, 정밀도 1.0
+- ✅ protected 조항만 판정된 문서는 순위 하단(후보 유지)
+- ✅ 노출 핵심 경로(`exposure_core`): 사건의 구체 지역과 일치하지만 상위 10 밖인 경로 별도 표시
+- ✅ 임계치·가중치는 라벨로 튜닝하지 않음 (과적합 방지, 사전 등록)
+
+### 지표 (실제 실행값, 라벨 6개)
+| 지표 | 값 | 비고 |
+|---|---|---|
+| doc_top3_hit | 0.72 | |
+| clause precision / recall | 0.07 / 0.22 | 라벨은 '헷갈리는' 조항 일부만 담아 precision이 구조적으로 낮음 |
+| gap P/R (라벨) | 1.0 / 1.0 | 라벨이 모두 '공백 없음'이라 변별력 없음 → 문서 제거 검증 사용 |
+| gap P/R (문서 제거 검증, v2) | 1.0 / 0.75 | |
+| path_recall | 0.75 | gfc_2008 제외 |
+| lead_time (라벨 대응일) | −6.3일 | covid −41일 |
+| lead_time_flow (기계적 대응일) | −24.2일 | 자금·시장 이상 신호보다 경보가 평균 24일 늦음 |
+| 무작위 평상 구간 발동률 A / C | 4.13% / 5.19% | |
+| 경보 재현 | 6/6 | calm ALERT 0 |
+
+### 남은 결정·작업
+- ⏳ KRX 외국인 순매수: KRX가 로그인 필요로 바뀜 → KRX Open API 또는 ECOS 무료 인증키 필요 (사용자)
+- ⏳ WIMFNS 제외 여부 결정 (사용자, 품질 보고서 기준 제외 권고)
+- ⏳ 경보가 늦다는 결과(lead_time_flow −24일) 대응: 백테스트 B가 사건 카드 날짜에 묶여 있어서 생기는 구조적 한계 → 조기 사건(예: 우한 봉쇄, 한국 심각 격상) 카드 추가 여부 결정 (사용자)
 
 ## P9 — Learner (알파 썬셋) ⏳
 - ⏳ 우선순위 점수 엔진 (cite_norm + fb + recency + explore, protected 하한)
@@ -148,7 +168,7 @@
 ---
 
 ## ⏸️ 보류 (MVP 제외 — plans.md 12장)
-- ⏸️ 자금 유출입(ETF flow 등) 감시 신호 — 무료·안정적 공개 데이터 미정, 자금시장 지표로 대체
+- ✅ ~~자금 유출입 감시 신호~~ → P8에서 FRED 주간 자금 흐름(시그널 C)으로 구현 (한국 일간 데이터만 인증키 대기)
 - ⏸️ 피드백·`shadow_log` 영속 저장소 — 데모는 비영속
 - ⏸️ 실제 기관 문서·포트폴리오 연동
 

@@ -126,3 +126,42 @@ def random_calm(panel: dict[str, pd.Series], event_dates: list[date], seed: int,
         mask = (calm_days.year == y) & (calm_days.quarter == q)
         rows.append({"quarter": f"{y}Q{q}", "days": int(mask.sum()), "market_active_days": int(active[mask].sum())})
     return RandomCalmResult(n_days=len(calm_days), active_rate=round(float(active.mean()), 4), quarters=rows)
+
+
+# ---------- 시그널 C 전 구간 계산 (사전 등록 v2) ----------
+
+
+def flow_zscores(s: pd.Series, cfg: dict) -> pd.Series:
+    """관측별 주간 변화율 z-score (직전 lookback_obs개, 당일 제외)."""
+    chg = s.pct_change().replace([np.inf, -np.inf], np.nan).dropna()
+    prior = chg.shift(1).rolling(cfg["lookback_obs"], min_periods=cfg["min_obs"])
+    return ((chg - prior.mean()) / prior.std()).replace([np.inf, -np.inf], np.nan)
+
+
+def flow_series_active(panel: dict[str, pd.Series], days: pd.DatetimeIndex) -> pd.DataFrame:
+    """영업일별·시리즈별 C 활성 여부. 관측일 + 공표 시차 이후에만 값이 보인다."""
+    cfg = load_config()["sentinel"]["flow"]
+    out = {}
+    for sid in cfg["series"]:
+        if sid not in panel:
+            continue
+        z = flow_zscores(panel[sid], cfg)
+        z.index = z.index + pd.Timedelta(days=cfg["publication_lag_days"][sid])  # 공개 시점으로 이동
+        out[sid] = (z.abs() >= cfg["z_threshold"]).reindex(days, method="ffill").fillna(False).astype(bool)
+    return pd.DataFrame(out, index=days)
+
+
+def flow_active_days(panel: dict[str, pd.Series], days: pd.DatetimeIndex) -> pd.Series:
+    df = flow_series_active(panel, days)
+    return df.any(axis=1) if not df.empty else pd.Series(False, index=days)
+
+
+def reaction_date_flow(panel: dict[str, pd.Series], event_date: date, lookback_days: int = 60,
+                       window: int = 5, min_active: int = 2) -> date:
+    """사전 등록 v2: 사건일 60일 전~사건일 중, 끝나는 5영업일 중 2일 이상 A 또는 C 활성인 첫 날. 없으면 사건일."""
+    start = pd.Timestamp(event_date) - pd.Timedelta(days=lookback_days)
+    days = pd.bdate_range(start - pd.Timedelta(days=14), event_date)
+    active = market_active_days(panel, days) | flow_active_days(panel, days)
+    rolling = active.astype(int).rolling(window, min_periods=window).sum()
+    hits = rolling[(rolling.index >= start) & (rolling >= min_active)]
+    return hits.index[0].date() if len(hits) else event_date

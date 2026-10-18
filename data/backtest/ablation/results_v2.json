@@ -1,0 +1,104 @@
+{
+  "preregistration_registered_at": "2026-10-18T07:10:56.987621+00:00",
+  "events": [
+    {
+      "event_id": "gfc_2008",
+      "removed_doc": "PB-CPTY",
+      "oracle_gaps": [],
+      "predicted_gaps": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "top3": [
+        "PB-FX",
+        "PB-LIQ",
+        "PB-RATE"
+      ]
+    },
+    {
+      "event_id": "covid_2020",
+      "removed_doc": "PB-LIQ",
+      "oracle_gaps": [
+        "fx",
+        "supply_chain"
+      ],
+      "predicted_gaps": [
+        "supply_chain"
+      ],
+      "precision": 1.0,
+      "recall": 0.5,
+      "top3": [
+        "PB-BCP",
+        "PB-FX",
+        "PB-CMDTY"
+      ]
+    },
+    {
+      "event_id": "ru_ua_2022",
+      "removed_doc": "PB-GEO",
+      "oracle_gaps": [],
+      "predicted_gaps": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "top3": [
+        "PB-CMDTY",
+        "PB-FX",
+        "PB-TRADE"
+      ]
+    },
+    {
+      "event_id": "legoland_2022",
+      "removed_doc": "PB-STFM",
+      "oracle_gaps": [],
+      "predicted_gaps": [],
+      "precision": 1.0,
+      "recall": 1.0,
+      "top3": [
+        "PB-LIQ",
+        "PB-BANK",
+        "PB-FX"
+      ]
+    },
+    {
+      "event_id": "svb_2023",
+      "removed_doc": "PB-BANK",
+      "oracle_gaps": [
+        "equity_vol"
+      ],
+      "predicted_gaps": [],
+      "precision": null,
+      "recall": 0.0,
+      "top3": [
+        "PB-CPTY",
+        "PB-LIQ",
+        "PB-RATE"
+      ]
+    },
+    {
+      "event_id": "tariff_2025",
+      "removed_doc": "PB-TRADE",
+      "oracle_gaps": [
+        "sanctions_trade",
+        "supply_chain",
+        "equity_vol",
+        "fx"
+      ],
+      "predicted_gaps": [
+        "equity_vol",
+        "fx",
+        "sanctions_trade",
+        "supply_chain"
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "top3": [
+        "PB-FX",
+        "PB-GEO",
+        "PB-LIQ"
+      ]
+    }
+  ],
+  "summary": {
+    "gap_precision": 1.0,
+    "gap_recall": 0.75
+  }
+}

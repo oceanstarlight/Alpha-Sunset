@@ -131,69 +131,6 @@
       ]
     },
     {
-      "doc_id": "PB-REG",
-      "fit_score": 0.3333,
-      "n_applicable": 1,
-      "n_partial": 0,
-      "n_not": 2,
-      "n_uncertain": 3,
-      "judgments": [
-        {
-          "clause_id": "PB-REG-01",
-          "verdict": "uncertain",
-          "mismatch_reasons": [
-            "중대한 손실 또는 한도 위반이 발생했다는 정보가 사건 요약에 명시되어 있지 않습니다."
-          ],
-          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.8
-        },
-        {
-          "clause_id": "PB-REG-02",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "이번 사건은 geopolitical 유형이며 전제의 사건유형(regulatory, pandemic, liquidity_crisis)과 다릅니다.",
-            "전제의 지역은 KR로 한정되어 있으나 이번 사건 지역은 RU, UA, EU, GLOBAL입니다."
-          ],
-          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.9
-        },
-        {
-          "clause_id": "PB-REG-03",
-          "verdict": "applicable",
-          "mismatch_reasons": [],
-          "evidence_quote": "제재 대상 지정 시 관련 법령에 따른 보고 의무를 확인하고 이행한다.",
-          "confidence": 0.95
-        },
-        {
-          "clause_id": "PB-REG-04",
-          "verdict": "uncertain",
-          "mismatch_reasons": [
-            "한도 예외 승인이 이루어졌다는 조건에 대한 정보가 사건 요약에 없습니다."
-          ],
-          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.8
-        },
-        {
-          "clause_id": "PB-REG-05",
-          "verdict": "uncertain",
-          "mismatch_reasons": [
-            "사건 요약 및 채널 정보에 operational 채널과 위기 대응 의사결정 기록 보관에 대한 직접적인 언급이 부족하다."
-          ],
-          "evidence_quote": "위기 대응 과정의 의사결정 기록을 보존 기한 동안 보관한다.",
-          "confidence": 0.6
-        },
-        {
-          "clause_id": "PB-REG-08",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "위기가 종료되지 않았고 진행 중인 사건이므로 위기 종료 전제에 부합하지 않습니다."
-          ],
-          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.95
-        }
-      ]
-    },
-    {
       "doc_id": "PB-FX",
       "fit_score": 0.3333,
       "n_applicable": 0,
@@ -394,6 +331,89 @@
       ]
     },
     {
+      "doc_id": "PB-STFM",
+      "fit_score": 0.0,
+      "n_applicable": 0,
+      "n_partial": 0,
+      "n_not": 1,
+      "n_uncertain": 0,
+      "judgments": [
+        {
+          "clause_id": "PB-STFM-05",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "사건유형이 liquidity_crisis가 아니라 geopolitical이다.",
+            "지역이 KR 전용이 아니라 GLOBAL 및 복수 지역이다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.95
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-REG",
+      "fit_score": 0.3333,
+      "n_applicable": 1,
+      "n_partial": 0,
+      "n_not": 2,
+      "n_uncertain": 3,
+      "judgments": [
+        {
+          "clause_id": "PB-REG-01",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "중대한 손실 또는 한도 위반이 발생했다는 정보가 사건 요약에 명시되어 있지 않습니다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.8
+        },
+        {
+          "clause_id": "PB-REG-02",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "이번 사건은 geopolitical 유형이며 전제의 사건유형(regulatory, pandemic, liquidity_crisis)과 다릅니다.",
+            "전제의 지역은 KR로 한정되어 있으나 이번 사건 지역은 RU, UA, EU, GLOBAL입니다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-REG-03",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "제재 대상 지정 시 관련 법령에 따른 보고 의무를 확인하고 이행한다.",
+          "confidence": 0.95
+        },
+        {
+          "clause_id": "PB-REG-04",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "한도 예외 승인이 이루어졌다는 조건에 대한 정보가 사건 요약에 없습니다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.8
+        },
+        {
+          "clause_id": "PB-REG-05",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "사건 요약 및 채널 정보에 operational 채널과 위기 대응 의사결정 기록 보관에 대한 직접적인 언급이 부족하다."
+          ],
+          "evidence_quote": "위기 대응 과정의 의사결정 기록을 보존 기한 동안 보관한다.",
+          "confidence": 0.6
+        },
+        {
+          "clause_id": "PB-REG-08",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "위기가 종료되지 않았고 진행 중인 사건이므로 위기 종료 전제에 부합하지 않습니다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.95
+        }
+      ]
+    },
+    {
       "doc_id": "PB-MGR",
       "fit_score": 0.0,
       "n_applicable": 0,
@@ -438,26 +458,6 @@
           "mismatch_reasons": [
             "이번 사건은 geopolitical 유형이며 전제의 사건유형(other, regulatory)과 다릅니다.",
             "전제의 지역은 KR로 한정되나 이번 사건은 RU, UA, EU, GLOBAL입니다."
-          ],
-          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.95
-        }
-      ]
-    },
-    {
-      "doc_id": "PB-STFM",
-      "fit_score": 0.0,
-      "n_applicable": 0,
-      "n_partial": 0,
-      "n_not": 1,
-      "n_uncertain": 0,
-      "judgments": [
-        {
-          "clause_id": "PB-STFM-05",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "사건유형이 liquidity_crisis가 아니라 geopolitical이다.",
-            "지역이 KR 전용이 아니라 GLOBAL 및 복수 지역이다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
           "confidence": 0.95
