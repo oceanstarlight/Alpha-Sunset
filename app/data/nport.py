@@ -6,7 +6,6 @@ SEC 요청은 User-Agent에 연락처가 필수(`SEC_USER_AGENT`)이고 초당 1
 
 from __future__ import annotations
 
-import os
 import re
 import time
 import xml.etree.ElementTree as ET
@@ -36,7 +35,9 @@ class Filing:
 
 class SecClient:
     def __init__(self, user_agent: str | None = None, http: httpx.Client | None = None, interval_sec: float = REQUEST_INTERVAL_SEC):
-        ua = user_agent or os.environ.get("SEC_USER_AGENT")
+        from app.config import get_secret
+
+        ua = user_agent or get_secret("SEC_USER_AGENT")
         if not ua:
             raise RuntimeError("SEC_USER_AGENT(이름 + 이메일)가 필요하다")
         self._http = http or httpx.Client(timeout=120, headers={"User-Agent": ua}, follow_redirects=True)
