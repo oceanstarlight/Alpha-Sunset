@@ -106,7 +106,7 @@ def get_signals(refresh: bool = False, gdelt_client: Any = None) -> dict:
     return result
 
 
-def run_live(signals: dict | None = None) -> Briefing | None:
+def run_live(signals: dict | None = None, portfolio=None, holdings: list[dict] | None = None) -> Briefing | None:
     """현재 사건 탐지 → Briefing. 사건 신호(B)가 없으면 None."""
     signals = signals or get_signals()
     clusters = signals["news"]["clusters"]
@@ -116,12 +116,12 @@ def run_live(signals: dict | None = None) -> Briefing | None:
     llm = LLMClient(db_mode="live")
     text = f"{top['label']}\n(뉴스 군집: {top['event_type']}, 기사 {top['n_articles']}건, 출처 {top['n_sources']}곳)"
     event = structure_event(llm, text, f"live_{date.today():%Y%m%d}_{top['event_type']}", date.today())
-    return orchestrator.run_live_briefing(event, signals["panel"], llm)
+    return orchestrator.run_live_briefing(event, signals["panel"], llm, portfolio=portfolio, holdings=holdings)
 
 
-def run_replay(event_id: str) -> Briefing:
-    """백테스트 사건 재생 → Briefing (sandbox)."""
-    return orchestrator.run_replay(event_id)
+def run_replay(event_id: str, portfolio=None, holdings: list[dict] | None = None) -> Briefing:
+    """백테스트 사건 재생 → Briefing (sandbox). portfolio를 주면 업로드 포트폴리오로 가정 분석."""
+    return orchestrator.run_replay(event_id, portfolio=portfolio, holdings=holdings)
 
 
 def load_saved_briefing(event_id: str) -> Briefing | None:

@@ -131,3 +131,27 @@ def test_gfc_briefing_without_exposure(tmp_path):
                            index=ClauseIndex(playbooks, llm, path=tmp_path / "c"), llm=llm, panel={})
     b = orch.orchestrate(ctx, "task")
     assert b.exposure_top == [] and "노출 분석 불가" in b.exposure_note
+
+
+def test_uploaded_portfolio_and_holdings_flow_into_briefing(tmp_path):
+    """업로드 포트폴리오로 노출 분석, 보유 종목명은 규칙으로만 사건 기관과 대조, 가정 분석 고지."""
+    from pathlib import Path
+
+    from app.ingest.pipeline import ingest
+    from app.ingest.transform import to_portfolio
+
+    res, _ = ingest(Path(__file__).resolve().parent.parent / "data" / "ingest" / "samples" / "broker_balance.xlsx",
+                    use_preset=False)
+    pf = to_portfolio(res.holdings, institution="업로드테스트")
+    holdings = [{"name": "SILICON VALLEY BANK", "weight": 0.01, "country": "US", "sector": "Financials", "source_row": 7},
+                {"name": "Federal Reserve Bank", "weight": 0.02}]  # 공공기관은 매칭하지 않는다
+    llm = FakeLLM()
+    playbooks = [Playbook(doc_id="A", title="A", version="1", year=2020, origin_event="x", synthetic=True, clauses=CLAUSES[:2])]
+    svb = SVB.as_of_view()
+    ctx = orch.new_context(mode="sandbox", as_of=svb.date, events=[svb], portfolio=pf,
+                           index=ClauseIndex(playbooks, llm, path=tmp_path / "c"), llm=llm, panel={}, holdings=holdings,
+                           portfolio_note="업로드 가정 분석")
+    b = orch.orchestrate(ctx, "task")
+    assert all(p.nodes[1].startswith("U-") for p in b.exposure_top)  # 업로드 노드로 노출 계산
+    assert [p.nodes[2] for p in b.exposure_entities if p.nodes[1] == "업로드 직접 보유"] == ["SILICON VALLEY BANK"]
+    assert b.exposure_note.startswith("업로드 가정 분석")
