@@ -22,6 +22,8 @@ OUT = ROOT_DIR / "data" / "backtest_results.json"
 
 def main() -> None:
     labels = {lb.event_id: lb for lb in load_labels()}
+    lpath = BT / "learner_results.json"
+    learner = json.loads(lpath.read_text(encoding="utf-8")) if lpath.exists() else {}
     sentinel = json.loads((BT / "sentinel_results.json").read_text(encoding="utf-8"))
     first_alert = {r["event_id"]: r["first_alert"] for r in sentinel["events"]}
 
@@ -67,7 +69,8 @@ def main() -> None:
            "false_alarms_calm_alert": sum(c["alert_days"] for c in sentinel["calm"]),
            "random_calm_market_active_rate": rc.active_rate, "calm_money_alert_rate": money_alert_rate,
            "events_with_prior_warning": round(events_with_warning, 4), "warning_base_rate_60d": warning_base_rate,
-           "learner_delta": None},
+           "learner_delta": learner.get("pass_A", {}).get("learner_delta"),
+           "learner_delta_sim": learner.get("pass_B", {}).get("learner_delta_sim")},
         "events": rows,
         "false_alarms": {
             "calm_windows": sentinel["calm"],
@@ -78,7 +81,7 @@ def main() -> None:
             "라벨은 사용자가 직접 설계한 합성 라벨이다.",
             "gap_precision/recall: 예측·정답 공백이 모두 없으면 1.0으로 계산.",
             "path_recall은 gfc_2008(보유내역 없음)에서 계산하지 않는다.",
-            "learner_delta는 P9에서 산출.",
+            "learner_delta: P9 시뮬레이션(사전 등록 v4) 실제 순서 1회 재생, learner_delta_sim: 같은 사건 2회 반복의 2회차. 라벨 기반 피드백이라 순환 위험이 있다.",
             "lead_time_flow: 사전 등록 v2 기계적 대응일(사건일 60일 전~사건일, 5영업일 중 2일 이상 A 또는 C 활성인 첫 날) − 첫 ALERT. 음수면 자금·시장 이상 신호보다 경보가 늦음.",
             "ablation(공백 탐지) 결과는 data/backtest/ablation/ 참고.",
             "events_with_prior_warning(사건 전 60일 내 알림이 있었던 사건 비율)은 warning_base_rate_60d(평상일 기준 같은 비율)와 비교해야 한다. 차이가 작으면 선행 알림은 우연일 수 있다.",

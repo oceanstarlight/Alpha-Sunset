@@ -1,0 +1,563 @@
+{
+  "preregistration": "data/backtest/ablation/preregistration_v4_learner.json",
+  "pass_A": {
+    "description": "실제 날짜 순 1회 재생",
+    "doc_top3_hit_off": 0.7222,
+    "doc_top3_hit_on": 0.7222,
+    "learner_delta": 0.0,
+    "events": [
+      {
+        "event_id": "gfc_2008",
+        "as_of": "2008-09-15",
+        "top3_off": [
+          "PB-CPTY",
+          "PB-FX",
+          "PB-BANK"
+        ],
+        "top3_on": [
+          "PB-CPTY",
+          "PB-FX",
+          "PB-BANK"
+        ],
+        "hit_off": 0.6666666666666666,
+        "hit_on": 0.6666666666666666,
+        "priority_top": [
+          [
+            "PB-MGR",
+            0.5
+          ],
+          [
+            "PB-REG",
+            0.5
+          ],
+          [
+            "PB-CPTY",
+            0.2
+          ]
+        ]
+      },
+      {
+        "event_id": "covid_2020",
+        "as_of": "2020-03-11",
+        "top3_off": [
+          "PB-LIQ",
+          "PB-BCP",
+          "PB-CMDTY"
+        ],
+        "top3_on": [
+          "PB-LIQ",
+          "PB-BCP",
+          "PB-CMDTY"
+        ],
+        "hit_off": 1.0,
+        "hit_on": 1.0,
+        "priority_top": [
+          [
+            "PB-REG",
+            0.5
+          ],
+          [
+            "PB-MGR",
+            0.5
+          ],
+          [
+            "PB-LIQ",
+            0.2
+          ]
+        ]
+      },
+      {
+        "event_id": "ru_ua_2022",
+        "as_of": "2022-02-24",
+        "top3_off": [
+          "PB-GEO",
+          "PB-CMDTY",
+          "PB-FX"
+        ],
+        "top3_on": [
+          "PB-GEO",
+          "PB-CMDTY",
+          "PB-FX"
+        ],
+        "hit_off": 0.6666666666666666,
+        "hit_on": 0.6666666666666666,
+        "priority_top": [
+          [
+            "PB-REG",
+            0.5
+          ],
+          [
+            "PB-MGR",
+            0.5
+          ],
+          [
+            "PB-GEO",
+            0.2
+          ]
+        ]
+      },
+      {
+        "event_id": "legoland_2022",
+        "as_of": "2022-09-28",
+        "top3_off": [
+          "PB-STFM",
+          "PB-CPTY",
+          "PB-GEO"
+        ],
+        "top3_on": [
+          "PB-STFM",
+          "PB-CPTY",
+          "PB-GEO"
+        ],
+        "hit_off": 0.5,
+        "hit_on": 0.5,
+        "priority_top": [
+          [
+            "PB-REG",
+            0.5
+          ],
+          [
+            "PB-MGR",
+            0.5
+          ],
+          [
+            "PB-STFM",
+            0.2
+          ]
+        ]
+      },
+      {
+        "event_id": "svb_2023",
+        "as_of": "2023-03-10",
+        "top3_off": [
+          "PB-BANK",
+          "PB-LIQ",
+          "PB-CPTY"
+        ],
+        "top3_on": [
+          "PB-BANK",
+          "PB-LIQ",
+          "PB-CPTY"
+        ],
+        "hit_off": 0.5,
+        "hit_on": 0.5,
+        "priority_top": [
+          [
+            "PB-MGR",
+            0.5
+          ],
+          [
+            "PB-REG",
+            0.5
+          ],
+          [
+            "PB-BANK",
+            0.2
+          ]
+        ]
+      },
+      {
+        "event_id": "tariff_2025",
+        "as_of": "2025-04-02",
+        "top3_off": [
+          "PB-TRADE",
+          "PB-FX",
+          "PB-LIQ"
+        ],
+        "top3_on": [
+          "PB-TRADE",
+          "PB-FX",
+          "PB-LIQ"
+        ],
+        "hit_off": 1.0,
+        "hit_on": 1.0,
+        "priority_top": [
+          [
+            "PB-REG",
+            0.5
+          ],
+          [
+            "PB-MGR",
+            0.5
+          ],
+          [
+            "PB-TRADE",
+            0.2
+          ]
+        ]
+      }
+    ]
+  },
+  "pass_B": {
+    "description": "같은 순서 2회 반복(가상 시간 60일 간격), 2회차로 평가",
+    "doc_top3_hit_off": 0.7222,
+    "doc_top3_hit_on": 0.7222,
+    "learner_delta_sim": 0.0,
+    "events": [
+      {
+        "event_id": "gfc_2008",
+        "as_of": "2000-01-03",
+        "top3_off": [
+          "PB-CPTY",
+          "PB-FX",
+          "PB-BANK"
+        ],
+        "top3_on": [
+          "PB-CPTY",
+          "PB-FX",
+          "PB-BANK"
+        ],
+        "hit_off": 0.6666666666666666,
+        "hit_on": 0.6666666666666666,
+        "priority_top": [
+          [
+            "PB-MGR",
+            0.5
+          ],
+          [
+            "PB-REG",
+            0.5
+          ],
+          [
+            "PB-CPTY",
+            0.2
+          ]
+        ]
+      },
+      {
+        "event_id": "covid_2020",
+        "as_of": "2000-03-03",
+        "top3_off": [
+          "PB-LIQ",
+          "PB-BCP",
+          "PB-CMDTY"
+        ],
+        "top3_on": [
+          "PB-LIQ",
+          "PB-BCP",
+          "PB-CMDTY"
+        ],
+        "hit_off": 1.0,
+        "hit_on": 1.0,
+        "priority_top": [
+          [
+            "PB-REG",
+            0.5
+          ],
+          [
+            "PB-MGR",
+            0.5
+          ],
+          [
+            "PB-LIQ",
+            0.2
+          ]
+        ]
+      },
+      {
+        "event_id": "ru_ua_2022",
+        "as_of": "2000-05-02",
+        "top3_off": [
+          "PB-GEO",
+          "PB-CMDTY",
+          "PB-FX"
+        ],
+        "top3_on": [
+          "PB-GEO",
+          "PB-CMDTY",
+          "PB-FX"
+        ],
+        "hit_off": 0.6666666666666666,
+        "hit_on": 0.6666666666666666,
+        "priority_top": [
+          [
+            "PB-REG",
+            0.5
+          ],
+          [
+            "PB-MGR",
+            0.5
+          ],
+          [
+            "PB-GEO",
+            0.2
+          ]
+        ]
+      },
+      {
+        "event_id": "legoland_2022",
+        "as_of": "2000-07-01",
+        "top3_off": [
+          "PB-STFM",
+          "PB-CPTY",
+          "PB-GEO"
+        ],
+        "top3_on": [
+          "PB-STFM",
+          "PB-CPTY",
+          "PB-GEO"
+        ],
+        "hit_off": 0.5,
+        "hit_on": 0.5,
+        "priority_top": [
+          [
+            "PB-REG",
+            0.5
+          ],
+          [
+            "PB-MGR",
+            0.5
+          ],
+          [
+            "PB-STFM",
+            0.2
+          ]
+        ]
+      },
+      {
+        "event_id": "svb_2023",
+        "as_of": "2000-08-30",
+        "top3_off": [
+          "PB-BANK",
+          "PB-LIQ",
+          "PB-CPTY"
+        ],
+        "top3_on": [
+          "PB-BANK",
+          "PB-LIQ",
+          "PB-CPTY"
+        ],
+        "hit_off": 0.5,
+        "hit_on": 0.5,
+        "priority_top": [
+          [
+            "PB-MGR",
+            0.5
+          ],
+          [
+            "PB-REG",
+            0.5
+          ],
+          [
+            "PB-BANK",
+            0.2
+          ]
+        ]
+      },
+      {
+        "event_id": "tariff_2025",
+        "as_of": "2000-10-29",
+        "top3_off": [
+          "PB-TRADE",
+          "PB-FX",
+          "PB-LIQ"
+        ],
+        "top3_on": [
+          "PB-TRADE",
+          "PB-FX",
+          "PB-LIQ"
+        ],
+        "hit_off": 1.0,
+        "hit_on": 1.0,
+        "priority_top": [
+          [
+            "PB-REG",
+            0.5
+          ],
+          [
+            "PB-MGR",
+            0.5
+          ],
+          [
+            "PB-TRADE",
+            0.2
+          ]
+        ]
+      },
+      {
+        "event_id": "gfc_2008",
+        "as_of": "2000-12-28",
+        "top3_off": [
+          "PB-CPTY",
+          "PB-FX",
+          "PB-BANK"
+        ],
+        "top3_on": [
+          "PB-CPTY",
+          "PB-FX",
+          "PB-BANK"
+        ],
+        "hit_off": 0.6666666666666666,
+        "hit_on": 0.6666666666666666,
+        "priority_top": [
+          [
+            "PB-CPTY",
+            0.8115
+          ],
+          [
+            "PB-FX",
+            0.8115
+          ],
+          [
+            "PB-LIQ",
+            0.8115
+          ]
+        ]
+      },
+      {
+        "event_id": "covid_2020",
+        "as_of": "2001-02-26",
+        "top3_off": [
+          "PB-LIQ",
+          "PB-BCP",
+          "PB-CMDTY"
+        ],
+        "top3_on": [
+          "PB-LIQ",
+          "PB-BCP",
+          "PB-CMDTY"
+        ],
+        "hit_off": 1.0,
+        "hit_on": 1.0,
+        "priority_top": [
+          [
+            "PB-LIQ",
+            0.8115
+          ],
+          [
+            "PB-BCP",
+            0.8115
+          ],
+          [
+            "PB-CMDTY",
+            0.8115
+          ]
+        ]
+      },
+      {
+        "event_id": "ru_ua_2022",
+        "as_of": "2001-04-27",
+        "top3_off": [
+          "PB-GEO",
+          "PB-CMDTY",
+          "PB-FX"
+        ],
+        "top3_on": [
+          "PB-GEO",
+          "PB-CMDTY",
+          "PB-FX"
+        ],
+        "hit_off": 0.6666666666666666,
+        "hit_on": 0.6666666666666666,
+        "priority_top": [
+          [
+            "PB-GEO",
+            0.8115
+          ],
+          [
+            "PB-CMDTY",
+            0.8115
+          ],
+          [
+            "PB-REG",
+            0.8115
+          ]
+        ]
+      },
+      {
+        "event_id": "legoland_2022",
+        "as_of": "2001-06-26",
+        "top3_off": [
+          "PB-STFM",
+          "PB-CPTY",
+          "PB-GEO"
+        ],
+        "top3_on": [
+          "PB-STFM",
+          "PB-CPTY",
+          "PB-GEO"
+        ],
+        "hit_off": 0.5,
+        "hit_on": 0.5,
+        "priority_top": [
+          [
+            "PB-STFM",
+            0.8115
+          ],
+          [
+            "PB-LIQ",
+            0.8115
+          ],
+          [
+            "PB-FX",
+            0.7448
+          ]
+        ]
+      },
+      {
+        "event_id": "svb_2023",
+        "as_of": "2001-08-25",
+        "top3_off": [
+          "PB-BANK",
+          "PB-LIQ",
+          "PB-CPTY"
+        ],
+        "top3_on": [
+          "PB-BANK",
+          "PB-LIQ",
+          "PB-CPTY"
+        ],
+        "hit_off": 0.5,
+        "hit_on": 0.5,
+        "priority_top": [
+          [
+            "PB-BANK",
+            0.8115
+          ],
+          [
+            "PB-RATE",
+            0.8115
+          ],
+          [
+            "PB-MGR",
+            0.7448
+          ]
+        ]
+      },
+      {
+        "event_id": "tariff_2025",
+        "as_of": "2001-10-24",
+        "top3_off": [
+          "PB-TRADE",
+          "PB-FX",
+          "PB-LIQ"
+        ],
+        "top3_on": [
+          "PB-TRADE",
+          "PB-FX",
+          "PB-LIQ"
+        ],
+        "hit_off": 1.0,
+        "hit_on": 1.0,
+        "priority_top": [
+          [
+            "PB-TRADE",
+            0.8115
+          ],
+          [
+            "PB-FX",
+            0.8115
+          ],
+          [
+            "PB-REG",
+            0.7448
+          ]
+        ]
+      }
+    ]
+  },
+  "caveats": [
+    "시뮬레이션 기반: 피드백은 라벨(expected_docs)에서 생성되어 순환 위험이 있다.",
+    "pass_B는 같은 사건을 반복하므로 실제 성능이 아니라 학습 메커니즘 작동 확인이다."
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "briefing": {
-    "run_id": "run-ebdaf4590321",
+    "run_id": "run-54e573de9952",
     "event": {
       "id": "ru_ua_2022",
       "title": "2022 러시아-우크라이나 전쟁과 대러 제재",
@@ -794,7 +794,7 @@
       "https://www.gov.uk/government/news/joint-statement-on-further-restrictive-economic-measures-26-february-2022",
       "https://fred.stlouisfed.org/series/DCOILWTICO"
     ],
-    "trace_id": "trace-470fe8fe80f0"
+    "trace_id": "trace-a85e9e9cddff"
   },
   "trace": [
     {

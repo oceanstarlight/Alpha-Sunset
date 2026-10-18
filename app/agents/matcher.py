@@ -212,11 +212,8 @@ def protected_only(fit: DocFit, clauses: dict[str, Clause]) -> bool:
 
 def rank_doc_fits(fits: list[DocFit], learner_enabled: bool | None = None,
                   clauses: dict[str, Clause] | None = None) -> list[DocFit]:
-    """LEARNER_ENABLED=false면 fit_score 순. protected 조항만 판정된 문서는 후보에 남기되 하단으로 보낸다.
-    학습 층 보정은 P9에서 연결한다."""
-    enabled = get_settings().learner_enabled if learner_enabled is None else learner_enabled
-    if enabled:
-        raise NotImplementedError("Learner 보정은 P9에서 구현")
+    """fit_score 순. protected 조항만 판정된 문서는 후보에 남기되 하단으로 보낸다.
+    Learner 보정(ON일 때)은 Orchestrator의 get_priority 단계에서 learner.rerank로 적용한다."""
     tail = (lambda f: protected_only(f, clauses)) if clauses else (lambda f: False)
     return sorted(fits, key=lambda f: (tail(f), -f.fit_score, -f.n_applicable, f.doc_id))
 

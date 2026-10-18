@@ -1,6 +1,6 @@
 {
   "briefing": {
-    "run_id": "run-035310ee11b9",
+    "run_id": "run-52268739abdc",
     "event": {
       "id": "tariff_2025",
       "title": "2025 미국 상호관세 충격",
@@ -756,7 +756,7 @@
       "https://www.whitehouse.gov/fact-sheets/2025/04/fact-sheet-president-donald-j-trump-declares-national-emergency-to-increase-our-competitive-edge-protect-our-sovereignty-and-strengthen-our-national-and-economic-security/",
       "https://fred.stlouisfed.org/series/VIXCLS"
     ],
-    "trace_id": "trace-a9da48c2f18c"
+    "trace_id": "trace-6b48b6d7fbe7"
   },
   "trace": [
     {

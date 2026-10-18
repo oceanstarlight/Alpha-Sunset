@@ -24,7 +24,7 @@
 | P6 | Orchestrator + Briefing | ✅ 완료 |
 | P7 | 서비스 계층 + UI + 배포 | ✅ 완료 |
 | P8 | 백테스트 | ✅ 완료 (KRX 데이터·임계치 결정 대기) |
-| P9 | Learner (알파 썬셋) | ⏳ 예정 |
+| P9 | Learner (알파 썬셋) | ✅ 완료 (효과 0, 설계 결정 대기) |
 | P10 | 제출물 | ⏳ 예정 |
 
 ---
@@ -160,13 +160,17 @@
 - ✅ WIMFNS 제외 (사용자 결정, 사전 등록 v3)
 - ✅ 조기 사건 카드는 추가하지 않음 (사용자 결정: 특정 사건 맞춤 데이터 금지) → 2단계 운영(자금 이상 알림 → 사건 확정 시 대응안)으로 평가 체계 전환
 
-## P9 — Learner (알파 썬셋) ⏳
-- ⏳ 우선순위 점수 엔진 (cite_norm + fb + recency + explore, protected 하한)
-- ⏳ `shadow_log` 상시 기록 (모드별 분리 집계)
-- ⏳ `set_learner_enabled` 토글 + 변경 이력
-- ⏳ ON/OFF 비교 → `learner_delta`
-- ⏳ 테스트: OFF 시 순위 = `fit_score`, sandbox 로그 라이브 미유입
-- **완료 기준**: `learner_delta` 산출, 라이브 점수에 sandbox 미유입 테스트 통과
+## P9 — Learner (알파 썬셋) ✅
+- ✅ 점수 엔진 `app/agents/learner.py` (plans.md 5.4 그대로, 사전 등록 v4): cite_norm·fb·recency·explore, protected 하한 0.5
+- ✅ `shadow_log` 상시 기록, 모드별 분리 집계 (live는 live.db, backtest·sim은 sandbox.db)
+- ✅ 토글: UI·`set_learner_enabled`, 변경 이력 `learner_toggle_log`, ON이면 Orchestrator `get_priority`에서 순위 보정
+- ✅ ON/OFF 비교 `scripts/run_learner_sim.py` → `data/backtest/learner_results.json`
+- ✅ 테스트: OFF 시 순위 = fit_score, 라이브 점수에 sandbox 로그 미유입, 공식 검증, protected 하한
+- **완료 기준**: `learner_delta` 산출 ✅, sandbox 미유입 테스트 ✅
+- ⚠️ 결과: learner_delta = 0.0 (실제 순서 1회), learner_delta_sim = 0.0 (같은 사건 2회 반복)
+  - 1회 재생: 사건 유형이 모두 달라 유형별 이력이 없음 → 구조적으로 효과 없음
+  - 반복 재생: Learner가 놓친 정답 문서의 priority를 올렸지만(예: svb PB-RATE 0.81), 보정 폭이 최대 ±15%(boost 0.3)라 fit 차이를 못 넘음. ru_ua PB-REG는 protected 조항만 판정된 문서라 하단 규칙에 걸림
+  - 사전 등록대로 가중치는 조정하지 않음 → boost·하단 규칙 변경 여부는 사용자 결정
 
 ## P10 — 제출물 ⏳
 - ⏳ README 정식본 (실행법·환경·데이터 출처·합성 명시·라벨 순환 위험 명시)
