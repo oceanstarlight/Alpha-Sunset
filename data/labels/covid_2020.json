@@ -1,0 +1,10 @@
+{
+  "event_id": "covid_2020",
+  "reaction_date": "YYYY-MM-DD",
+  "expected_docs": [],
+  "expected_inapplicable_clauses": [],
+  "expected_gap_channels": [],
+  "expected_exposure_paths": [],
+  "synthetic": true,
+  "notes": ""
+}
