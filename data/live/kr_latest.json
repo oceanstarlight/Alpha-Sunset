@@ -1,16 +1,35 @@
 {
-  "as_of": "2026-10-18T21:29+09:00",
+  "as_of": "2026-10-18T21:33+09:00",
   "level": "WATCH",
   "money_alert": false,
   "event_confirmed": false,
-  "kr_market": null,
-  "kr_flow": null,
+  "kr_market": {
+    "as_of": "2026-10-18",
+    "zscores": {
+      "KOSPI": 0.5200490134187152,
+      "USDKRW": 1.3109324484107945,
+      "KTB3Y": -0.3791985072147251,
+      "CREDIT_KR": -0.7892445901514195,
+      "CD91": -0.17849310041499686
+    },
+    "triggered": [],
+    "active": false
+  },
+  "kr_flow": {
+    "as_of": "2026-10-18",
+    "zscores": {
+      "FOREIGN_NET_KOSPI": 0.5396002474529261,
+      "FOREIGN_NET_5D": -1.2825796168124404
+    },
+    "triggered": [],
+    "active": false
+  },
   "kr_news": {
     "status": "unavailable",
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 5,
+        "n_articles": 4,
         "n_sources": 4,
         "z": null,
         "baseline_points": 0
@@ -22,32 +41,32 @@
         "baseline_points": 0
       },
       "liquidity_crisis": {
-        "n_articles": 10,
+        "n_articles": 9,
         "n_sources": 7,
         "z": null,
         "baseline_points": 0
       },
       "fx_shock": {
-        "n_articles": 52,
+        "n_articles": 54,
         "n_sources": 35,
         "z": null,
         "baseline_points": 0
       },
       "trade_policy": {
         "n_articles": 61,
-        "n_sources": 31,
+        "n_sources": 30,
         "z": null,
         "baseline_points": 0
       },
       "geopolitical": {
-        "n_articles": 84,
-        "n_sources": 61,
+        "n_articles": 82,
+        "n_sources": 62,
         "z": null,
         "baseline_points": 0
       },
       "pandemic": {
         "n_articles": 35,
-        "n_sources": 18,
+        "n_sources": 16,
         "z": null,
         "baseline_points": 0
       }
@@ -80,9 +99,15 @@
   "chain": [
     {
       "단계": "한국 시장(A_kr)",
-      "원인": "데이터 없음",
-      "근거": "ECOS 키 미설정 또는 조회 실패",
-      "결과": "판단 불가"
+      "원인": "임계 초과 지표 없음",
+      "근거": "ECOS 일별 1일 변화 z (기준일 2026-10-18), 규칙 |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0 (사전 등록 v5). 관측: 코스피 z=+0.52, 원/달러 z=+1.31, 국고채 3년 z=-0.38, 회사채AA−국고채 3년 금리차 z=-0.79, CD 91일 z=-0.18",
+      "결과": "비활성"
+    },
+    {
+      "단계": "외국인 자금(C_kr)",
+      "원인": "임계 초과 없음",
+      "근거": "외국인 순매수 수준 z, 규칙 |z| ≥ 3.0 (사전 등록 v5)",
+      "결과": "비활성"
     },
     {
       "단계": "한국 사건(B_kr)",
