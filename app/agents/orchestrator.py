@@ -336,6 +336,7 @@ def run_replay(event_id: str, llm: LLMClient | None = None) -> Briefing:
     target = next((e for e in events if e.id == event_id), None)
     if target is None:
         raise ValueError(f"알 수 없는 사건: {event_id}")
+    target = target.as_of_view()  # 사건일 당일까지 알려진 사실만 입력 (사후 정보 누수 방지)
     llm = llm or LLMClient(db_mode="sandbox")
     m = load_config()["sentinel"]["market"]
     panel = load_panel(m["series"] + [m["credit_spread"]["primary"], m["credit_spread"]["fallback"]])

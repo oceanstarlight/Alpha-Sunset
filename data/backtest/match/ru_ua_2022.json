@@ -10,55 +10,39 @@
       "n_uncertain": 0,
       "judgments": [
         {
-          "clause_id": "PB-GEO-04",
-          "verdict": "partial",
-          "mismatch_reasons": [
-            "지속기간 전제가 'weeks', 'months'로 되어 있으나 이번 사건은 'structural'로 장기적 성격을 가집니다."
-          ],
-          "evidence_quote": "WTI 유가는 3월 8일 배럴당 123.64달러까지 상승했다.",
-          "confidence": 0.85
-        },
-        {
           "clause_id": "PB-GEO-01",
           "verdict": "partial",
           "mismatch_reasons": [
-            "지속기간 전제가 'shock'로 단기 충격에 국한되어 있으나 이번 사건은 'structural' 지속기간을 가집니다."
+            "조항의 지속기간 전제는 shock이나 이번 사건의 지속기간은 structural이다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.85
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-GEO-04",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "조항의 지속기간 전제는 weeks 또는 months이나 이번 사건의 지속기간은 structural이다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.9
         },
         {
           "clause_id": "PB-GEO-03",
           "verdict": "applicable",
           "mismatch_reasons": [],
-          "evidence_quote": "미국·EU 집행위·영국·캐나다 등은 일부 러시아 은행을 SWIFT에서 배제하기로 했고",
-          "confidence": 0.95
-        },
-        {
-          "clause_id": "PB-GEO-02",
-          "verdict": "applicable",
-          "mismatch_reasons": [],
-          "evidence_quote": "미 재무부는 러시아 중앙은행·국부펀드·재무부와의 거래를 금지해 미국 내 러시아 중앙은행 자산을 사실상 동결했다.",
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
           "confidence": 0.95
         },
         {
           "clause_id": "PB-GEO-05",
           "verdict": "applicable",
           "mismatch_reasons": [],
-          "evidence_quote": "미 재무부는 러시아 중앙은행·국부펀드·재무부와의 거래를 금지해 미국 내 러시아 중앙은행 자산을 사실상 동결했다.",
-          "confidence": 0.9
-        },
-        {
-          "clause_id": "PB-GEO-06",
-          "verdict": "partial",
-          "mismatch_reasons": [
-            "지속기간 전제가 'shock', 'weeks'로 설정되어 있으나 이번 사건은 'structural'에 해당합니다."
-          ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.85
+          "confidence": 0.95
         },
         {
-          "clause_id": "PB-GEO-08",
+          "clause_id": "PB-GEO-02",
           "verdict": "applicable",
           "mismatch_reasons": [],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
@@ -68,7 +52,78 @@
           "clause_id": "PB-GEO-07",
           "verdict": "partial",
           "mismatch_reasons": [
-            "사건의 지속기간이 structural로 전제의 weeks와 다릅니다."
+            "지속기간 전제가 weeks이나 이번 사건은 structural이다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-GEO-06",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "지속기간 전제가 shock 또는 weeks이나 이번 사건은 structural이다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-GEO-08",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-CMDTY",
+      "fit_score": 0.5,
+      "n_applicable": 0,
+      "n_partial": 5,
+      "n_not": 0,
+      "n_uncertain": 0,
+      "judgments": [
+        {
+          "clause_id": "PB-CMDTY-05",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "조항의 지속기간 전제는 weeks 또는 months이나 이번 사건의 지속기간은 structural이다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-CMDTY-01",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "조항의 지속기간 전제는 shock 또는 weeks이나 이번 사건의 지속기간은 structural이다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-CMDTY-07",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "지속기간 전제가 months이나 이번 사건은 structural이다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.85
+        },
+        {
+          "clause_id": "PB-CMDTY-06",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "사건의 지속기간이 structural로 전제의 shock, weeks와 다름"
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.85
+        },
+        {
+          "clause_id": "PB-CMDTY-04",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "사건의 지속기간이 structural로 전제의 months와 다름"
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
           "confidence": 0.85
@@ -77,131 +132,63 @@
     },
     {
       "doc_id": "PB-REG",
-      "fit_score": 0.5833,
-      "n_applicable": 3,
-      "n_partial": 1,
+      "fit_score": 0.3333,
+      "n_applicable": 1,
+      "n_partial": 0,
       "n_not": 2,
-      "n_uncertain": 0,
+      "n_uncertain": 3,
       "judgments": [
-        {
-          "clause_id": "PB-REG-03",
-          "verdict": "applicable",
-          "mismatch_reasons": [],
-          "evidence_quote": "2월 28일 미 재무부는 러시아 중앙은행·국부펀드·재무부와의 거래를 금지해 미국 내 러시아 중앙은행 자산을 사실상 동결했다.",
-          "confidence": 0.95
-        },
         {
           "clause_id": "PB-REG-01",
-          "verdict": "applicable",
-          "mismatch_reasons": [],
-          "evidence_quote": "중대한 손실 또는 한도 위반이 발생하면 정해진 기한 내에 감독기관에 보고한다.",
-          "confidence": 0.9
-        },
-        {
-          "clause_id": "PB-REG-02",
-          "verdict": "not_applicable",
+          "verdict": "uncertain",
           "mismatch_reasons": [
-            "사건유형이 geopolitical이며 지역이 KR이 아닌 RU, UA, EU, GLOBAL입니다."
-          ],
-          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.95
-        },
-        {
-          "clause_id": "PB-REG-04",
-          "verdict": "applicable",
-          "mismatch_reasons": [],
-          "evidence_quote": "위기 대응을 위한 한도 예외 승인은 사후 7일 이내에 이사회(또는 위원회)에 보고한다.",
-          "confidence": 0.9
-        },
-        {
-          "clause_id": "PB-REG-05",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "채널에 operational이 포함되어 있지 않습니다."
-          ],
-          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.9
-        },
-        {
-          "clause_id": "PB-REG-08",
-          "verdict": "partial",
-          "mismatch_reasons": [
-            "위기가 아직 종료되지 않아 위기 종료 후 실행해야 하는 조치를 즉시 적용하기 어렵습니다."
-          ],
-          "evidence_quote": "위기 종료 후 30일 이내에 사후보고서를 작성해 이사회에 보고한다.",
-          "confidence": 0.9
-        }
-      ]
-    },
-    {
-      "doc_id": "PB-CMDTY",
-      "fit_score": 0.4286,
-      "n_applicable": 0,
-      "n_partial": 6,
-      "n_not": 1,
-      "n_uncertain": 0,
-      "judgments": [
-        {
-          "clause_id": "PB-CMDTY-01",
-          "verdict": "partial",
-          "mismatch_reasons": [
-            "지속기간 전제가 'shock', 'weeks'로 단기적이나 이번 사건은 'structural' 지속기간을 가집니다."
-          ],
-          "evidence_quote": "WTI 유가는 3월 8일 배럴당 123.64달러까지 상승했다.",
-          "confidence": 0.85
-        },
-        {
-          "clause_id": "PB-CMDTY-06",
-          "verdict": "partial",
-          "mismatch_reasons": [
-            "지속기간 전제가 'shock', 'weeks'로 단기 위주이나 이번 사건은 구조적(structural) 지속기간을 가집니다."
-          ],
-          "evidence_quote": "WTI 유가는 3월 8일 배럴당 123.64달러까지 상승했다.",
-          "confidence": 0.85
-        },
-        {
-          "clause_id": "PB-CMDTY-05",
-          "verdict": "partial",
-          "mismatch_reasons": [
-            "지속기간 전제가 이번 사건의 structural과 다르고 지역 전제에 KR과 EM이 포함되어 있음"
-          ],
-          "evidence_quote": "WTI 유가는 3월 8일 배럴당 123.64달러까지 상승했다.",
-          "confidence": 0.85
-        },
-        {
-          "clause_id": "PB-CMDTY-07",
-          "verdict": "partial",
-          "mismatch_reasons": [
-            "지속기간이 months로 한정되어 있고 자산군이 em_bond로 지정되어 있음"
+            "중대한 손실 또는 한도 위반이 발생했다는 정보가 사건 요약에 명시되어 있지 않습니다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
           "confidence": 0.8
         },
         {
-          "clause_id": "PB-CMDTY-04",
-          "verdict": "partial",
-          "mismatch_reasons": [
-            "이번 사건의 지속기간은 structural이나 조항의 전제는 months임"
-          ],
-          "evidence_quote": "WTI 유가는 3월 8일 배럴당 123.64달러까지 상승했다.",
-          "confidence": 0.9
-        },
-        {
-          "clause_id": "PB-CMDTY-02",
-          "verdict": "partial",
-          "mismatch_reasons": [
-            "사건 유형과 지역 전제가 이번 사건의 지정학적 제재 및 글로벌 원자재 상승과 일부 상이합니다."
-          ],
-          "evidence_quote": "WTI 유가는 3월 8일 배럴당 123.64달러까지 상승했다.",
-          "confidence": 0.9
-        },
-        {
-          "clause_id": "PB-CMDTY-03",
+          "clause_id": "PB-REG-02",
           "verdict": "not_applicable",
           "mismatch_reasons": [
-            "이번 사건은 유가 급락이 아니라 유가 상승(WTI 배럴당 123.64달러) 상황이며, 사건 유형도 지정학적 리스크로 전제와 다릅니다."
+            "이번 사건은 geopolitical 유형이며 전제의 사건유형(regulatory, pandemic, liquidity_crisis)과 다릅니다.",
+            "전제의 지역은 KR로 한정되어 있으나 이번 사건 지역은 RU, UA, EU, GLOBAL입니다."
           ],
-          "evidence_quote": "WTI 유가는 3월 8일 배럴당 123.64달러까지 상승했다.",
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-REG-03",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "제재 대상 지정 시 관련 법령에 따른 보고 의무를 확인하고 이행한다.",
+          "confidence": 0.95
+        },
+        {
+          "clause_id": "PB-REG-04",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "한도 예외 승인이 이루어졌다는 조건에 대한 정보가 사건 요약에 없습니다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.8
+        },
+        {
+          "clause_id": "PB-REG-05",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "사건 요약 및 채널 정보에 operational 채널과 위기 대응 의사결정 기록 보관에 대한 직접적인 언급이 부족하다."
+          ],
+          "evidence_quote": "위기 대응 과정의 의사결정 기록을 보존 기한 동안 보관한다.",
+          "confidence": 0.6
+        },
+        {
+          "clause_id": "PB-REG-08",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "위기가 종료되지 않았고 진행 중인 사건이므로 위기 종료 전제에 부합하지 않습니다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
           "confidence": 0.95
         }
       ]
@@ -210,33 +197,61 @@
       "doc_id": "PB-FX",
       "fit_score": 0.3333,
       "n_applicable": 0,
-      "n_partial": 2,
-      "n_not": 1,
+      "n_partial": 4,
+      "n_not": 2,
       "n_uncertain": 0,
       "judgments": [
-        {
-          "clause_id": "PB-FX-05",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "사건 유형과 지속기간 등 핵심 전제가 이번 사건과 다릅니다."
-          ],
-          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.95
-        },
         {
           "clause_id": "PB-FX-01",
           "verdict": "partial",
           "mismatch_reasons": [
-            "원/달러 환율 급등에 대한 직접적인 언급이 사건 요약에 명시되지 않고 광범위한 제재와 원자재 가격 상승이 중심입니다."
+            "사건유형이 geopolitical이며 외환 유동성 위기 전용 조항의 전제와 일부 상이함"
           ],
-          "evidence_quote": "WTI 유가는 3월 8일 배럴당 123.64달러까지 상승했다.",
-          "confidence": 0.85
+          "evidence_quote": "원/달러 환율은 1,202.34원(전일 1,193.42원)",
+          "confidence": 0.8
+        },
+        {
+          "clause_id": "PB-FX-07",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "사건유형이 fx_shock가 아니라 geopolitical이다.",
+            "지속기간이 shock가 아니라 structural이다."
+          ],
+          "evidence_quote": "원/달러 환율은 1,202.34원(전일 1,193.42원)이었다",
+          "confidence": 0.8
         },
         {
           "clause_id": "PB-FX-08",
           "verdict": "partial",
           "mismatch_reasons": [
-            "사건의 지속기간이 structural로 전제의 shock, weeks, months와 다릅니다."
+            "사건유형 전제가 fx_shock이나 이번 사건은 geopolitical이다."
+          ],
+          "evidence_quote": "원/달러 환율은 1,202.34원(전일 1,193.42원)이었다",
+          "confidence": 0.85
+        },
+        {
+          "clause_id": "PB-FX-06",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "이번 사건은 지정학적 충돌이며 환율 연계 파생상품 손실 확대 전제가 포함되어 있지 않다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-FX-05",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "통화스와프 체결 등의 정책 대응 발표 전제가 이번 사건에 존재하지 않음"
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-FX-03",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "사건의 지속기간이 structural로 전제의 weeks, months와 다름"
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
           "confidence": 0.85
@@ -244,18 +259,67 @@
       ]
     },
     {
-      "doc_id": "PB-TRADE",
-      "fit_score": 0.3333,
+      "doc_id": "PB-RATE",
+      "fit_score": 0.1667,
       "n_applicable": 0,
-      "n_partial": 2,
-      "n_not": 1,
+      "n_partial": 1,
+      "n_not": 2,
+      "n_uncertain": 0,
+      "judgments": [
+        {
+          "clause_id": "PB-RATE-05",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "사건유형이 rate_shock가 아니라 geopolitical이다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.95
+        },
+        {
+          "clause_id": "PB-RATE-08",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "내외 금리차 확대라는 전제 대신 지정학적 사건에 따른 환율 변동이 발생했다."
+          ],
+          "evidence_quote": "원/달러 환율은 1,202.34원(전일 1,193.42원)이었다(FRED).",
+          "confidence": 0.8
+        },
+        {
+          "clause_id": "PB-RATE-01",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "사건유형이 rate_shock가 아니라 geopolitical이다.",
+            "채널이 rates가 아니라 sanctions_trade, commodity, equity_vol, fx, counterparty이다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.95
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-TRADE",
+      "fit_score": 0.1667,
+      "n_applicable": 0,
+      "n_partial": 1,
+      "n_not": 2,
       "n_uncertain": 0,
       "judgments": [
         {
           "clause_id": "PB-TRADE-01",
           "verdict": "not_applicable",
           "mismatch_reasons": [
-            "사건유형이 trade_policy가 아니라 geopolitical이며 관세 부과 사건이 아님"
+            "사건유형이 trade_policy가 아니라 geopolitical이다.",
+            "지속기간 전제가 shock 또는 weeks이나 이번 사건은 structural이다."
+          ],
+          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
+          "confidence": 0.95
+        },
+        {
+          "clause_id": "PB-TRADE-04",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "사건유형이 trade_policy, fx_shock가 아니라 geopolitical이다.",
+            "지속기간이 weeks가 아니라 structural이다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
           "confidence": 0.95
@@ -264,16 +328,7 @@
           "clause_id": "PB-TRADE-05",
           "verdict": "partial",
           "mismatch_reasons": [
-            "사건의 지속기간이 structural로 전제의 shock, weeks와 다릅니다."
-          ],
-          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.85
-        },
-        {
-          "clause_id": "PB-TRADE-04",
-          "verdict": "partial",
-          "mismatch_reasons": [
-            "전제는 무역 갈등과 신흥국 통화 약세를 가정하고 있으나, 이번 사건은 러시아-우크라이나 전쟁 및 대러 제재에 따른 지정학적 충격입니다."
+            "지속기간 전제가 이번 사건의 structural과 일치하지 않고 shock 또는 weeks로 설정되어 있습니다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
           "confidence": 0.85
@@ -285,33 +340,24 @@
       "fit_score": 0.0,
       "n_applicable": 0,
       "n_partial": 0,
-      "n_not": 3,
+      "n_not": 2,
       "n_uncertain": 0,
       "judgments": [
         {
           "clause_id": "PB-BANK-08",
           "verdict": "not_applicable",
           "mismatch_reasons": [
-            "사건유형이 banking_stress가 아니라 geopolitical임"
+            "은행 위기가 주된 사건 전제가 아니라 지정학적 제재 사건이다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.95
+          "confidence": 0.9
         },
         {
           "clause_id": "PB-BANK-05",
           "verdict": "not_applicable",
           "mismatch_reasons": [
-            "사건유형이 banking_stress가 아니며 지속기간이 weeks가 아님"
-          ],
-          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.95
-        },
-        {
-          "clause_id": "PB-BANK-03",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "핵심 전제가 금리 상승에 따른 미국 지역은행의 평가손실인 반면, 이번 사건은 지정학적 충돌과 대러 제재로 인한 구조적 위기이다.",
-            "지역 및 채널 전제가 현재 사건과 일치하지 않는다."
+            "사건유형이 banking_stress가 아니라 geopolitical이다.",
+            "지역이 US, EU가 아니라 RU, UA, EU, GLOBAL이다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
           "confidence": 0.95
@@ -323,35 +369,27 @@
       "fit_score": 0.0,
       "n_applicable": 0,
       "n_partial": 0,
-      "n_not": 3,
+      "n_not": 2,
       "n_uncertain": 0,
       "judgments": [
         {
           "clause_id": "PB-LIQ-04",
           "verdict": "not_applicable",
           "mismatch_reasons": [
-            "사건유형이 pandemic 또는 liquidity_crisis가 아니며 지속기간이 shock/weeks가 아님"
+            "이번 사건은 지정학적 사건이며 펀데믹 또는 유동성 위기 전제가 다르다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.95
-        },
-        {
-          "clause_id": "PB-LIQ-06",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "이번 사건은 지정학적 위기 및 대러 제재이며, 봉쇄 조치나 팬데믹 관련 전제와 일치하지 않습니다."
-          ],
-          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.95
+          "confidence": 0.9
         },
         {
           "clause_id": "PB-LIQ-01",
           "verdict": "not_applicable",
           "mismatch_reasons": [
-            "전제는 팬데믹 또는 유동성 위기 상황에서 전 자산군 동반 하락을 가정하고 있으나 이번 사건은 지정학적 제재 중심입니다."
+            "사건유형이 pandemic 또는 liquidity_crisis가 아니라 geopolitical이다.",
+            "지속기간이 shock, weeks가 아니라 structural이다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.9
+          "confidence": 0.95
         }
       ]
     },
@@ -367,65 +405,62 @@
           "clause_id": "PB-MGR-01",
           "verdict": "not_applicable",
           "mismatch_reasons": [
-            "위탁운용사의 환매중단 또는 운용 부실에 대한 사건 요약 내용이 없습니다."
+            "사건유형이 other, credit_event가 아니라 geopolitical이다.",
+            "조건인 위탁운용사 환매중단·운용 부실에 대한 내용이 없다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.9
+          "confidence": 0.95
         },
         {
           "clause_id": "PB-MGR-02",
           "verdict": "not_applicable",
           "mismatch_reasons": [
-            "운용사 보고 자산과 실제 자산 불일치 의심에 대한 내용이 이번 사건에 포함되어 있지 않습니다."
+            "사건유형이 other, credit_event가 아니라 geopolitical이다.",
+            "조건인 운용사 보고 자산과 실제 자산 불일치 의심에 대한 내용이 없다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.9
+          "confidence": 0.95
         },
         {
           "clause_id": "PB-MGR-03",
           "verdict": "not_applicable",
           "mismatch_reasons": [
-            "사건유형이 geopolitical이며, 채널에 counterparty는 포함되나 liquidity는 포함되지 않고, 지속기간이 structural로 전제와 다릅니다."
+            "이번 사건은 geopolitical 유형이며, 전제의 사건유형(liquidity_crisis, credit_event 등)과 일치하지 않습니다.",
+            "전제의 채널에 counterparty는 포함되나 liquidity는 이번 사건의 채널에 포함되지 않습니다.",
+            "전제의 자산군에 derivatives가 지정되어 있으나 이번 사건의 자산군에는 없습니다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.95
+          "confidence": 0.9
         },
         {
           "clause_id": "PB-MGR-05",
           "verdict": "not_applicable",
           "mismatch_reasons": [
-            "사건유형이 geopolitical이고 지역이 GLOBAL/RU 등으로 KR이 포함되지 않으며, 채널에 operational이 없습니다."
+            "이번 사건은 geopolitical 유형이며 전제의 사건유형(other, regulatory)과 다릅니다.",
+            "전제의 지역은 KR로 한정되나 이번 사건은 RU, UA, EU, GLOBAL입니다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.9
+          "confidence": 0.95
         }
       ]
     },
     {
-      "doc_id": "PB-RATE",
+      "doc_id": "PB-STFM",
       "fit_score": 0.0,
       "n_applicable": 0,
       "n_partial": 0,
       "n_not": 1,
-      "n_uncertain": 1,
+      "n_uncertain": 0,
       "judgments": [
         {
-          "clause_id": "PB-RATE-05",
+          "clause_id": "PB-STFM-05",
           "verdict": "not_applicable",
           "mismatch_reasons": [
-            "사건 유형이 지정학적 리스크이며 채널과 자산군 전제가 이번 사건과 다릅니다."
+            "사건유형이 liquidity_crisis가 아니라 geopolitical이다.",
+            "지역이 KR 전용이 아니라 GLOBAL 및 복수 지역이다."
           ],
           "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
           "confidence": 0.95
-        },
-        {
-          "clause_id": "PB-RATE-01",
-          "verdict": "uncertain",
-          "mismatch_reasons": [
-            "이번 사건 요약에 장기 국채금리 급등에 대한 직접적인 언급이 없어 정보가 부족합니다."
-          ],
-          "evidence_quote": "2022년 2월 24일 러시아가 우크라이나를 침공했다.",
-          "confidence": 0.8
         }
       ]
     }

@@ -1,0 +1,285 @@
+{
+  "generated_at": "2026-10-18",
+  "labeled_events": [],
+  "unlabeled_events": [
+    "covid_2020",
+    "gfc_2008",
+    "legoland_2022",
+    "ru_ua_2022",
+    "svb_2023",
+    "tariff_2025"
+  ],
+  "summary": {
+    "lead_time": null,
+    "doc_top3_hit": null,
+    "clause_precision": null,
+    "clause_recall": null,
+    "gap_precision": null,
+    "gap_recall": null,
+    "path_recall": null,
+    "alerts_reproduced": 6,
+    "n_events": 6,
+    "false_alarms_calm_alert": 0,
+    "random_calm_market_active_rate": 0.0413,
+    "learner_delta": null
+  },
+  "events": [
+    {
+      "event_id": "gfc_2008",
+      "first_alert": "2008-09-15",
+      "top3": [
+        "PB-CPTY",
+        "PB-FX",
+        "PB-MGR"
+      ],
+      "gaps": [],
+      "exposure_nodes": [],
+      "labeled": false,
+      "lead_time": null,
+      "doc_top3_hit": null,
+      "clause_precision": null,
+      "clause_recall": null,
+      "gap_precision": null,
+      "gap_recall": null,
+      "path_recall": null
+    },
+    {
+      "event_id": "covid_2020",
+      "first_alert": "2020-03-12",
+      "top3": [
+        "PB-LIQ",
+        "PB-BCP",
+        "PB-REG"
+      ],
+      "gaps": [],
+      "exposure_nodes": [
+        "D-USEQ",
+        "D-UST",
+        "D-KTB",
+        "D-MMF",
+        "M-DAON",
+        "M-HANBIT",
+        "M-NURI",
+        "D-RE",
+        "D-KREQ",
+        "M-SEOGYEONG"
+      ],
+      "labeled": false,
+      "lead_time": null,
+      "doc_top3_hit": null,
+      "clause_precision": null,
+      "clause_recall": null,
+      "gap_precision": null,
+      "gap_recall": null,
+      "path_recall": null
+    },
+    {
+      "event_id": "ru_ua_2022",
+      "first_alert": "2022-02-24",
+      "top3": [
+        "PB-GEO",
+        "PB-CMDTY",
+        "PB-REG"
+      ],
+      "gaps": [],
+      "exposure_nodes": [
+        "D-UST",
+        "D-KTB",
+        "D-USEQ",
+        "D-MMF",
+        "M-HANBIT",
+        "M-NURI",
+        "D-KREQ",
+        "M-DAON",
+        "D-RE",
+        "M-SEOGYEONG"
+      ],
+      "labeled": false,
+      "lead_time": null,
+      "doc_top3_hit": null,
+      "clause_precision": null,
+      "clause_recall": null,
+      "gap_precision": null,
+      "gap_recall": null,
+      "path_recall": null
+    },
+    {
+      "event_id": "legoland_2022",
+      "first_alert": "2022-09-28",
+      "top3": [
+        "PB-STFM",
+        "PB-REG",
+        "PB-CPTY"
+      ],
+      "gaps": [],
+      "exposure_nodes": [
+        "D-RE",
+        "D-MMF",
+        "D-KTB",
+        "D-KREQ",
+        "C-HANGANG",
+        "M-DAON",
+        "C-ATLAS",
+        "C-SEORAE",
+        "M-DAON",
+        "M-DAON"
+      ],
+      "labeled": false,
+      "lead_time": null,
+      "doc_top3_hit": null,
+      "clause_precision": null,
+      "clause_recall": null,
+      "gap_precision": null,
+      "gap_recall": null,
+      "path_recall": null
+    },
+    {
+      "event_id": "svb_2023",
+      "first_alert": "2023-03-10",
+      "top3": [
+        "PB-BANK",
+        "PB-LIQ",
+        "PB-MGR"
+      ],
+      "gaps": [],
+      "exposure_nodes": [
+        "D-UST",
+        "D-USEQ",
+        "M-HANBIT",
+        "D-KTB",
+        "M-DAON",
+        "M-NURI",
+        "D-KREQ",
+        "M-SEOGYEONG",
+        "M-SEOGYEONG",
+        "C-ATLAS"
+      ],
+      "labeled": false,
+      "lead_time": null,
+      "doc_top3_hit": null,
+      "clause_precision": null,
+      "clause_recall": null,
+      "gap_precision": null,
+      "gap_recall": null,
+      "path_recall": null
+    },
+    {
+      "event_id": "tariff_2025",
+      "first_alert": "2025-04-03",
+      "top3": [
+        "PB-REG",
+        "PB-TRADE",
+        "PB-FX"
+      ],
+      "gaps": [],
+      "exposure_nodes": [
+        "D-USEQ",
+        "D-UST",
+        "D-KTB",
+        "D-KREQ",
+        "D-RE",
+        "M-DAON",
+        "D-MMF",
+        "M-HANBIT",
+        "M-NURI",
+        "M-SEOGYEONG"
+      ],
+      "labeled": false,
+      "lead_time": null,
+      "doc_top3_hit": null,
+      "clause_precision": null,
+      "clause_recall": null,
+      "gap_precision": null,
+      "gap_recall": null,
+      "path_recall": null
+    }
+  ],
+  "false_alarms": {
+    "calm_windows": [
+      {
+        "window_id": "calm_2014q2",
+        "days": 65,
+        "alert_days": 0,
+        "watch_days": 0,
+        "first_watch": null
+      },
+      {
+        "window_id": "calm_2017q4",
+        "days": 65,
+        "alert_days": 0,
+        "watch_days": 0,
+        "first_watch": null
+      },
+      {
+        "window_id": "calm_2024q1",
+        "days": 65,
+        "alert_days": 0,
+        "watch_days": 0,
+        "first_watch": null
+      }
+    ],
+    "random_calm": {
+      "n_days": 3658,
+      "market_active_rate": 0.0413,
+      "quarters": [
+        {
+          "quarter": "2008Q1",
+          "days": 56,
+          "market_active_days": 10
+        },
+        {
+          "quarter": "2009Q1",
+          "days": 12,
+          "market_active_days": 2
+        },
+        {
+          "quarter": "2010Q4",
+          "days": 66,
+          "market_active_days": 3
+        },
+        {
+          "quarter": "2013Q4",
+          "days": 66,
+          "market_active_days": 2
+        },
+        {
+          "quarter": "2016Q3",
+          "days": 66,
+          "market_active_days": 1
+        },
+        {
+          "quarter": "2018Q1",
+          "days": 65,
+          "market_active_days": 4
+        },
+        {
+          "quarter": "2020Q3",
+          "days": 17,
+          "market_active_days": 0
+        },
+        {
+          "quarter": "2024Q1",
+          "days": 65,
+          "market_active_days": 0
+        },
+        {
+          "quarter": "2024Q3",
+          "days": 66,
+          "market_active_days": 5
+        },
+        {
+          "quarter": "2024Q4",
+          "days": 3,
+          "market_active_days": 0
+        }
+      ],
+      "note": "백테스트 시그널 B(사건 카드)가 없는 구간이라 ALERT는 구조적으로 0. 시그널 A 단독 발동(WATCH)률을 오경보 대리 지표로 기록."
+    }
+  },
+  "notes": [
+    "라벨은 사용자가 직접 설계한 합성 라벨이다.",
+    "gap_precision/recall: 예측·정답 공백이 모두 없으면 1.0으로 계산.",
+    "path_recall은 gfc_2008(보유내역 없음)에서 계산하지 않는다.",
+    "learner_delta는 P9에서 산출."
+  ]
+}

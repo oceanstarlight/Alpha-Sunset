@@ -31,7 +31,7 @@ def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     summary = []
-    for e in sorted(events, key=lambda e: e.date):
+    for e in sorted((e.as_of_view() for e in events), key=lambda e: e.date):  # 사건일 시점 정보만
         card_check = verify_card(llm, e)
         result = match(e, index, llm)
         (OUT_DIR / f"{e.id}.json").write_text(result.model_dump_json(indent=2) + "\n", encoding="utf-8")

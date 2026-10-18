@@ -73,6 +73,18 @@ class Event(BaseModel):
     duration: Duration
     severity: int = Field(ge=1, le=5)
     sources: list[str] = []
+    # 백테스트 입력용: 사건일 당일까지 알려진 사실만 담은 요약·기관 (summary에는 사후 사실이 섞여 있음)
+    summary_as_of: str | None = None
+    entities_as_of: list[str] | None = None
+
+    def as_of_view(self) -> Event:
+        """사건일 시점 정보만 남긴 사본. 백테스트 에이전트 입력은 이것을 쓴다."""
+        update: dict = {}
+        if self.summary_as_of is not None:
+            update["summary"] = self.summary_as_of
+        if self.entities_as_of is not None:
+            update["entities"] = self.entities_as_of
+        return self.model_copy(update=update)
 
 
 class Premises(BaseModel):

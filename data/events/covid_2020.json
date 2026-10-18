@@ -46,5 +46,9 @@
     "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200319b.htm",
     "https://fred.stlouisfed.org/series/VIXCLS",
     "https://fred.stlouisfed.org/series/DCOILWTICO"
+  ],
+  "summary_as_of": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다. 같은 날 VIX는 53.90(전일 47.30), WTI 유가는 배럴당 33.13달러(전일 34.47달러)였다(FRED).",
+  "entities_as_of": [
+    "World Health Organization"
   ]
 }

@@ -26,7 +26,7 @@ def main() -> None:
     llm = LLMClient(db_mode="sandbox")
     portfolio = load_portfolio()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    for e in sorted(load_events(), key=lambda e: e.date):
+    for e in sorted((e.as_of_view() for e in load_events()), key=lambda e: e.date):  # 사건일 시점 정보만
         if args.event and e.id != args.event:
             continue
         try:

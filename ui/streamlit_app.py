@@ -252,6 +252,17 @@ with tab_bt:
     res = services.get_backtest_results()
     st.subheader("백테스트 결과")
     st.caption("실제 실행값만 표시한다. 정답 라벨 기반 지표(top3 적중, P/R)는 라벨 작성 후 P8에서 산출한다.")
+    if res["backtest"]:
+        bt = res["backtest"]
+        st.markdown("**지표 요약** (`data/backtest_results.json`)")
+        if bt["unlabeled_events"]:
+            st.info("라벨 미작성 사건: " + ", ".join(bt["unlabeled_events"]) + " — 해당 사건의 라벨 기반 지표는 비어 있다.")
+        st.dataframe(pd.DataFrame([bt["summary"]]), hide_index=True, width="stretch")
+        st.dataframe(pd.DataFrame(bt["events"]), hide_index=True, width="stretch")
+        rc = bt["false_alarms"]["random_calm"]
+        st.markdown(f"**무작위 평상 구간**: 영업일 {rc['n_days']}일 중 시그널 A 단독 발동률 {rc['market_active_rate']:.2%}")
+        st.dataframe(pd.DataFrame(rc["quarters"]), hide_index=True, width="stretch")
+        st.caption(rc["note"])
     if res["sentinel"]:
         st.markdown("**Sentinel 경보 재현**")
         st.dataframe(pd.DataFrame(res["sentinel"]["events"]), hide_index=True, width="stretch")
