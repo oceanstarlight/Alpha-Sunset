@@ -1,0 +1,227 @@
+[
+  {
+    "event_id": "gfc_2008",
+    "n_judged": 40,
+    "verdicts": {
+      "applicable": 13,
+      "partial": 11,
+      "not_applicable": 13,
+      "uncertain": 3
+    },
+    "no_evidence_judgments": 0,
+    "top3": [
+      [
+        "PB-CPTY",
+        0.8
+      ],
+      [
+        "PB-FX",
+        0.7857
+      ],
+      [
+        "PB-REG",
+        0.6667
+      ]
+    ],
+    "gaps": [],
+    "low_confidence": false,
+    "card_check": {
+      "type_match": false,
+      "channel_jaccard": 0.8,
+      "extracted_type": "liquidity_crisis",
+      "extracted_channels": [
+        "counterparty",
+        "equity_vol",
+        "fx",
+        "liquidity"
+      ]
+    }
+  },
+  {
+    "event_id": "covid_2020",
+    "n_judged": 39,
+    "verdicts": {
+      "applicable": 10,
+      "partial": 14,
+      "not_applicable": 8,
+      "uncertain": 7
+    },
+    "no_evidence_judgments": 0,
+    "top3": [
+      [
+        "PB-BCP",
+        1.0
+      ],
+      [
+        "PB-LIQ",
+        0.8333
+      ],
+      [
+        "PB-REG",
+        0.75
+      ]
+    ],
+    "gaps": [],
+    "low_confidence": false,
+    "card_check": {
+      "type_match": true,
+      "channel_jaccard": 0.571,
+      "extracted_type": "pandemic",
+      "extracted_channels": [
+        "commodity",
+        "equity_vol",
+        "fx",
+        "liquidity"
+      ]
+    }
+  },
+  {
+    "event_id": "ru_ua_2022",
+    "n_judged": 39,
+    "verdicts": {
+      "applicable": 7,
+      "partial": 15,
+      "not_applicable": 16,
+      "uncertain": 1
+    },
+    "no_evidence_judgments": 0,
+    "top3": [
+      [
+        "PB-GEO",
+        0.75
+      ],
+      [
+        "PB-REG",
+        0.5833
+      ],
+      [
+        "PB-CMDTY",
+        0.4286
+      ]
+    ],
+    "gaps": [],
+    "low_confidence": false,
+    "card_check": {
+      "type_match": true,
+      "channel_jaccard": 0.5,
+      "extracted_type": "geopolitical",
+      "extracted_channels": [
+        "commodity",
+        "credit_spread",
+        "fx",
+        "sanctions_trade"
+      ]
+    }
+  },
+  {
+    "event_id": "legoland_2022",
+    "n_judged": 39,
+    "verdicts": {
+      "applicable": 14,
+      "partial": 7,
+      "not_applicable": 14,
+      "uncertain": 4
+    },
+    "no_evidence_judgments": 0,
+    "top3": [
+      [
+        "PB-STFM",
+        1.0
+      ],
+      [
+        "PB-LIQ",
+        0.6667
+      ],
+      [
+        "PB-CPTY",
+        0.625
+      ]
+    ],
+    "gaps": [],
+    "low_confidence": false,
+    "card_check": {
+      "type_match": true,
+      "channel_jaccard": 1.0,
+      "extracted_type": "liquidity_crisis",
+      "extracted_channels": [
+        "counterparty",
+        "credit_spread",
+        "liquidity"
+      ]
+    }
+  },
+  {
+    "event_id": "svb_2023",
+    "n_judged": 40,
+    "verdicts": {
+      "applicable": 11,
+      "partial": 10,
+      "not_applicable": 14,
+      "uncertain": 5
+    },
+    "no_evidence_judgments": 0,
+    "top3": [
+      [
+        "PB-BANK",
+        0.875
+      ],
+      [
+        "PB-CPTY",
+        0.8
+      ],
+      [
+        "PB-RATE",
+        0.6667
+      ]
+    ],
+    "gaps": [],
+    "low_confidence": false,
+    "card_check": {
+      "type_match": true,
+      "channel_jaccard": 0.6,
+      "extracted_type": "banking_stress",
+      "extracted_channels": [
+        "counterparty",
+        "credit_spread",
+        "equity_vol",
+        "liquidity"
+      ]
+    }
+  },
+  {
+    "event_id": "tariff_2025",
+    "n_judged": 38,
+    "verdicts": {
+      "applicable": 2,
+      "partial": 7,
+      "not_applicable": 25,
+      "uncertain": 4
+    },
+    "no_evidence_judgments": 0,
+    "top3": [
+      [
+        "PB-TRADE",
+        0.5
+      ],
+      [
+        "PB-REG",
+        0.25
+      ],
+      [
+        "PB-LIQ",
+        0.1667
+      ]
+    ],
+    "gaps": [],
+    "low_confidence": false,
+    "card_check": {
+      "type_match": true,
+      "channel_jaccard": 0.5,
+      "extracted_type": "trade_policy",
+      "extracted_channels": [
+        "equity_vol",
+        "sanctions_trade"
+      ]
+    }
+  }
+]

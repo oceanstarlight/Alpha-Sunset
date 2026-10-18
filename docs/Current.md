@@ -16,10 +16,10 @@
 | P | 내용 | 상태 |
 |---|---|---|
 | P0 | 스캐폴딩 | ✅ 완료 |
-| P1 | 외부 데이터 수집 | 🔄 진행 중 (FRED·GDELT 완료) |
+| P1 | 외부 데이터 수집 | ✅ 완료 |
 | P2 | 합성 코퍼스 | 🔄 진행 중 (라벨·검수 대기) |
 | P3 | Sentinel (상시 감시) | ✅ 완료 |
-| P4 | Matcher (적합도 판단) | ⏳ 예정 |
+| P4 | Matcher (적합도 판단) | ✅ 완료 (라벨 채점 대기) |
 | P5 | Exposure (노출 경고) | ⏳ 예정 |
 | P6 | Orchestrator + Briefing | ⏳ 예정 |
 | P7 | 서비스 계층 + UI + 배포 | ⏳ 예정 |
@@ -39,12 +39,13 @@
 - ✅ 테스트: 스키마 round-trip, 근거 없는 verdict 거부, live/sandbox 분리, LLM 로깅·캐시·재시도
 - **완료 기준**: `pytest` 통과 (23 passed), LLM 호출이 `llm_calls`에 기록됨 (fake SDK로 검증, 실제 API 호출은 키 설정 후 확인)
 
-## P1 — 외부 데이터 수집 🔄
-- ✅ FRED 8개 시리즈 수집 + CSV 캐시 (`app/data/fred.py`, P3에서 선행 구현, BAA10Y 추가)
-- ⏳ SEC N-PORT 전처리 → 선택 펀드 parquet (gfc_2008 제외)
+## P1 — 외부 데이터 수집 ✅
+- ✅ FRED 8개 시리즈 수집 + CSV 캐시 (`app/data/fred.py`, BAA10Y 포함)
+- ✅ SEC N-PORT: 프록시 펀드 8개 × 스냅샷 6개(사건 5 + live) = 48개 parquet (`app/data/nport.py`, `scripts/build_holdings.py`)
+  - 분기 데이터셋(수백 MB) 대신 펀드별 NPORT-P XML만 수집, 사건일 이전 공시만 사용(누수 방지), gfc_2008 제외
 - ✅ GDELT DOC 2.0 클라이언트 (`app/data/gdelt.py`, 요청 간격 6초·429 재시도)
-- 🔄 `data/SOURCES.md` 작성 (FRED·GDELT·사건 출처 기록, N-PORT 남음)
-- **완료 기준**: 7개 시리즈 CSV, 선택 펀드 parquet
+- ✅ `data/SOURCES.md` 작성
+- **완료 기준**: 시리즈 CSV ✅, 선택 펀드 parquet ✅
 
 ## P2 — 합성 코퍼스 🔄
 - ✅ `source_notes/` 공개 자료 요지 12개 (확인된 사실만 기록)
@@ -71,13 +72,17 @@
 - ⚠️ 백테스트 B는 카드 date부터 켜지므로 사건일보다 앞선 ALERT는 구조적으로 불가 (사전 경고는 WATCH 일수로 기록)
 - ⚠️ GDELT 실제 호출이 현재 환경에서 429(요청 제한)로 실패 → 응답 형식은 앞선 정상 응답으로 확인, 라이브 검증은 P7 배포 환경에서 재확인
 
-## P4 — Matcher (적합도 판단) ⏳
-- ⏳ 사건 구조화 (텍스트 → `Event`)
-- ⏳ ChromaDB 임베딩 검색 top-30 + protected 조항 항상 포함
-- ⏳ 조항별 판정 (배치, 근거 인용 필수, 실패 시 재시도 2회 → `uncertain`)
-- ⏳ `fit_score` 계산, 공백(gap) 채널 탐지
-- ⏳ 분기: `fit_score < 0.4` 재검색, `low_confidence` 플래그
-- **완료 기준**: 6개 사건 MatchResult 생성, 근거 없는 판정 0건
+## P4 — Matcher (적합도 판단) ✅
+- ✅ 사건 구조화 (`structure_event`) + 백테스트 카드 재추출 검증 (`verify_card`, 카드 값으로 판정)
+- ✅ ChromaDB 검색 top-30 + protected 조항 항상 포함 (`app/retrieval.py`, 코퍼스 지문 바뀌면 재색인)
+- ✅ 조항별 배치 판정: 근거 인용문이 조항 원문·사건 요약의 실제 문구인지 검증, 실패 조항만 재시도 2회 → `uncertain`
+- ✅ `fit_score`, 공백 채널, `fit_score < 0.4` 재검색, `low_confidence`, 순위(Learner OFF = fit_score 순)
+- ✅ `scripts/run_matcher.py` → `data/backtest/match/*.json`, `match_summary.json`
+- ✅ LLM 래퍼에 무료 등급 분당 요청 제한(14회)·429 대기 재시도 추가, 캐시로 키 없이 재현 확인
+- **완료 기준**: 6개 사건 MatchResult 생성 ✅, 근거 없는 판정 0건 ✅
+- ⚠️ 6개 사건 모두 공백 채널 0 → partial도 '다룸'으로 보는 규칙이 느슨할 수 있음. 라벨 나오면 P8에서 조정
+- ⚠️ 판정 품질(top3 적중, 부적합 조항 P/R)은 라벨이 있어야 채점 가능
+- ⚠️ 사건 카드 요약에 사건일 이후 사실(예: 11월 환율 고점)이 포함됨 → 판정 입력 누수 가능, P8에서 사건일 기준 요약 분리 검토
 
 ## P5 — Exposure (노출 경고) ⏳
 - ⏳ networkx 보유 경로 그래프 구성

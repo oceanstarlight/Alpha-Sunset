@@ -35,6 +35,10 @@ sentinel:
     days_before: 30
     days_after: 14
 
+llm:
+  requests_per_minute: 14   # Gemini 무료 등급 분당 15회 제한
+  rate_limit_retries: 5     # 429 응답 시 서버가 알려준 시간만큼 대기 후 재시도
+
 matcher:
   top_k: 30
   batch_size: 8               # 조항 5~10개씩 배치 판정

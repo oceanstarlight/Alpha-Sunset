@@ -58,7 +58,7 @@
         "name": "iShares Core S&P 500 ETF",
         "ticker": "IVV",
         "sponsor": "BlackRock (iShares)",
-        "nport_series_id": null
+        "nport_series_id": "S000004310"
       },
       "note": "proxy_fund는 보유내역(look-through) 조회용"
     },
@@ -84,7 +84,7 @@
         "name": "iShares MSCI South Korea ETF",
         "ticker": "EWY",
         "sponsor": "BlackRock (iShares)",
-        "nport_series_id": null
+        "nport_series_id": "S000004258"
       },
       "note": "proxy_fund는 보유내역(look-through) 조회용"
     },
@@ -145,7 +145,7 @@
         "name": "SPDR S&P Regional Banking ETF",
         "ticker": "KRE",
         "sponsor": "State Street (SPDR)",
-        "nport_series_id": null
+        "nport_series_id": "S000012325"
       }
     },
     {
@@ -170,7 +170,7 @@
         "name": "iShares J.P. Morgan USD Emerging Markets Bond ETF",
         "ticker": "EMB",
         "sponsor": "BlackRock (iShares)",
-        "nport_series_id": null
+        "nport_series_id": "S000019798"
       }
     },
     {
@@ -196,7 +196,7 @@
         "name": "iShares iBoxx $ High Yield Corporate Bond ETF",
         "ticker": "HYG",
         "sponsor": "BlackRock (iShares)",
-        "nport_series_id": null
+        "nport_series_id": "S000016772"
       }
     },
     {
@@ -220,7 +220,7 @@
         "name": "Energy Select Sector SPDR Fund",
         "ticker": "XLE",
         "sponsor": "State Street (Select Sector SPDR)",
-        "nport_series_id": null
+        "nport_series_id": "S000006410"
       }
     },
     {
@@ -245,7 +245,7 @@
         "name": "iShares MSCI China ETF",
         "ticker": "MCHI",
         "sponsor": "BlackRock (iShares)",
-        "nport_series_id": null
+        "nport_series_id": "S000031717"
       }
     },
     {
@@ -270,7 +270,7 @@
         "name": "Vanguard FTSE Europe ETF",
         "ticker": "VGK",
         "sponsor": "Vanguard",
-        "nport_series_id": null
+        "nport_series_id": "S000005787"
       }
     },
     {

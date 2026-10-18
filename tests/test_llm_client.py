@@ -32,7 +32,9 @@ class FakeModels:
 
 def make_client(texts=(), mode="live"):
     fake = FakeModels(list(texts))
-    return LLMClient(db_mode=mode, sdk_client=SimpleNamespace(models=fake)), fake
+    client = LLMClient(db_mode=mode, sdk_client=SimpleNamespace(models=fake))
+    client.min_interval = 0  # 테스트에서는 요청 간격 대기 생략
+    return client, fake
 
 
 def llm_calls(mode="live"):
@@ -98,3 +100,26 @@ def test_sandbox_calls_logged_to_sandbox_only():
     client.generate("q", purpose="backtest", response_schema=Answer)
     assert len(llm_calls("sandbox")) == 1
     assert llm_calls("live") == []
+
+
+def test_rate_limit_error_is_retried(monkeypatch):
+    import app.llm.client as mod
+
+    monkeypatch.setattr(mod.time, "sleep", lambda s: None)
+    client, fake = make_client(['{"value": 4}'])
+
+    class RateLimited(Exception):
+        code = 429
+
+    calls = {"n": 0}
+    original = fake.generate_content
+
+    def flaky(**kw):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            raise RateLimited("Please retry in 1.5s.")
+        return original(**kw)
+
+    fake.generate_content = flaky
+    assert client.generate("q", purpose="test", response_schema=Answer) == Answer(value=4)
+    assert calls["n"] == 2

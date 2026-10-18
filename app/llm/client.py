@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import re
+import time
 from datetime import datetime, timezone
 from typing import Any, TypeVar
 
@@ -37,7 +39,11 @@ class LLMClient:
         self.model = model or settings.gemini_model
         self.embed_model = embed_model or settings.embed_model
         self.cache = cache or LLMCache(settings.llm_cache_db)
-        self.max_retries = load_config()["matcher"]["max_retries"]
+        cfg = load_config()
+        self.max_retries = cfg["matcher"]["max_retries"]
+        self.min_interval = 60.0 / cfg["llm"]["requests_per_minute"]
+        self.rate_limit_retries = cfg["llm"]["rate_limit_retries"]
+        self._last_call = 0.0
         self._sdk = sdk_client
         self._api_key = settings.gemini_api_key
 
@@ -50,6 +56,21 @@ class LLMClient:
 
             self._sdk = genai.Client(api_key=self._api_key)
         return self._sdk
+
+    def _call(self, fn, **kwargs) -> Any:
+        """무료 등급 분당 요청 제한을 지키고, 429면 서버가 알려준 시간만큼 기다렸다 재시도한다."""
+        for attempt in range(self.rate_limit_retries + 1):
+            wait = self.min_interval - (time.monotonic() - self._last_call)
+            if wait > 0:
+                time.sleep(wait)
+            self._last_call = time.monotonic()
+            try:
+                return fn(**kwargs)
+            except Exception as e:
+                if getattr(e, "code", None) != 429 or attempt == self.rate_limit_retries:
+                    raise
+                m = re.search(r"retry in ([\d.]+)s", str(e))
+                time.sleep(float(m.group(1)) + 1 if m else 30)
 
     def _log(self, model: str, purpose: str, cache_hit: bool, in_tokens: int = 0, out_tokens: int = 0) -> None:
         conn = connect(self.db_mode)
@@ -90,7 +111,7 @@ class LLMClient:
         )
         last_error: Exception | None = None
         for _ in range(self.max_retries + 1):
-            resp = self.sdk.models.generate_content(model=self.model, contents=prompt, config=config)
+            resp = self._call(self.sdk.models.generate_content, model=self.model, contents=prompt, config=config)
             usage = getattr(resp, "usage_metadata", None)
             self._log(
                 self.model,
@@ -124,7 +145,7 @@ class LLMClient:
         if len(miss_idx) < len(texts):
             self._log(self.embed_model, purpose, cache_hit=True)
         if miss_idx:
-            resp = self.sdk.models.embed_content(model=self.embed_model, contents=[texts[i] for i in miss_idx])
+            resp = self._call(self.sdk.models.embed_content, model=self.embed_model, contents=[texts[i] for i in miss_idx])
             # 임베딩 API는 출력 토큰이 없고 입력 토큰 수를 응답에 주지 않는다
             self._log(self.embed_model, purpose, cache_hit=False)
             for i, emb in zip(miss_idx, resp.embeddings):
