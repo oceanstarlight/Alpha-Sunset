@@ -14,6 +14,7 @@ import pydeck as pdk
 import streamlit as st
 
 from app import geo, services
+from app.config import load_config
 from app.agents import sentinel
 from app.agents.exposure import ExposureUnavailable
 from app.corpus import load_events, load_playbooks, load_portfolio
@@ -64,6 +65,26 @@ def replay_signals(event_id: str) -> pd.DataFrame:
                           "트리거": ", ".join(r.market.triggered + (r.flow.triggered if r.flow else []))} for r in results])
 
 
+@st.cache_data(show_spinner=False)
+def replay_chains(event_id: str) -> dict[str, list[dict]]:
+    """재생 구간의 첫 자금 이상 알림일·첫 ALERT일 판단 근거."""
+    e = events_by_id()[event_id]
+    results = sentinel.replay(market_panel(), [e], e.date - timedelta(days=30), e.date + timedelta(days=14))
+    out = {}
+    first_money = next((r for r in results if r.market.active or (r.flow and r.flow.active)), None)
+    first_alert = next((r for r in results if r.level == AlertLevel.ALERT), None)
+    for name, r in [("첫 자금 이상 알림", first_money), ("첫 ALERT", first_alert)]:
+        if r:
+            out[f"{name} ({r.as_of})"] = sentinel.explain(r)
+    return out
+
+
+def show_chain(chain: list[dict]) -> None:
+    """원인 → 근거 → 결과 표."""
+    st.dataframe(pd.DataFrame(chain), hide_index=True, width="stretch",
+                 column_config={"근거": st.column_config.TextColumn(width="large")})
+
+
 def synthetic_badge():
     st.badge("합성 데이터: 대응문서·포트폴리오·라벨은 가상으로 재구성", icon="⚠️", color="orange")
 
@@ -72,6 +93,12 @@ def synthetic_badge():
 
 st.sidebar.title("🌅 Alpha Sunset")
 st.sidebar.caption("위기 사건 ↔ 대응문서 적합도 판단 + 보유 자산 노출 경고")
+LOCAL = load_config()["markets"]["local"]
+market_view = st.sidebar.radio(
+    "시장", ["local", "global"], horizontal=True, help="데이터는 로컬·글로벌 모두 수집하고, 화면에 보여줄 범위만 고른다.",
+    format_func=lambda v: f"로컬 ({LOCAL['name']})" if v == "local" else "글로벌",
+    index=0 if load_config()["markets"]["default_view"] == "local" else 1)
+is_local = market_view == "local"
 mode = st.sidebar.radio("모드", ["백테스트 재생", "라이브"], horizontal=True)
 event_ids = list(events_by_id())
 event_id = st.sidebar.selectbox(
@@ -113,7 +140,7 @@ def map_impact(event_json: str, snapshot: str) -> dict[str, float] | None:
 
 
 with tab_map:
-    st.subheader("세계 금융 지도")
+    st.subheader(f"금융 지도 · {LOCAL['name']} 중심" if is_local else "세계 금융 지도")
     live = mode == "라이브"
     b = current_briefing()
     map_event = (b.event if b else None) if live else events_by_id()[event_id]
@@ -140,7 +167,9 @@ with tab_map:
                          line_width_min_pixels=3 if ring else 1, radius_min_pixels=3)
 
     layers = [scatter(k, v) for k, v in geo.LAYERS.items() if not df.empty and v["label"] in set(df["layer"])]
-    st.pydeck_chart(pdk.Deck(layers=layers, initial_view_state=pdk.ViewState(latitude=25, longitude=30, zoom=0.9),
+    st.pydeck_chart(pdk.Deck(layers=layers, initial_view_state=(
+                                 pdk.ViewState(latitude=LOCAL["lat"], longitude=LOCAL["lon"], zoom=3.2) if is_local
+                                 else pdk.ViewState(latitude=25, longitude=30, zoom=0.9)),
                              tooltip={"text": "{tooltip}"}), height=520)
     st.markdown(" · ".join(f":{c}[{m}] {geo.LAYERS[k]['label']}" for k, c, m in
                            [("event", "red", "○"), ("exposure", "blue", "●"), ("impact", "orange", "●"),
@@ -159,6 +188,12 @@ with tab_map:
     elif coverage:
         st.caption(f"GDELT 수집 상태: {coverage['status']} · 기간 {coverage['timespan']}"
                    + (f" · 실패 {len(coverage['errors'])}건" if coverage["errors"] else ""))
+    if is_local and not df.empty:
+        loc = df[df["code"] == LOCAL["code"]].set_index("layer")["value"]
+        m1, m2, m3 = st.columns(3)
+        m1.metric(f"{LOCAL['name']} 보유 비중", f"{loc.get(geo.LAYERS['exposure']['label'], 0):.1%}")
+        m2.metric(f"{LOCAL['name']} 영향도", f"{loc.get(geo.LAYERS['impact']['label'], 0):.4f}")
+        m3.metric(f"{LOCAL['name']} 사건 지역", "예" if geo.LAYERS["event"]["label"] in loc.index else "아니오")
     if not df.empty:
         top = (df.sort_values("value", ascending=False).groupby("layer").head(5)
                [["layer", "name", "code", "value"]].rename(columns={"layer": "레이어", "name": "국가", "code": "코드", "value": "값"}))
@@ -169,6 +204,9 @@ with tab_map:
 # ---------- 1. 감시 ----------
 
 with tab_watch:
+    if is_local:
+        st.info(f"{LOCAL['name']} 시장 신호(ECOS·KRX 지수/금리/외국인 순매수, 네이버·Google 뉴스, DART 공시)는 "
+                "사전 등록 v5 검토와 API 키 발급 후 수집을 시작한다. 그전까지 아래는 글로벌 신호다.")
     if mode == "백테스트 재생":
         e = events_by_id()[event_id]
         st.subheader(f"{e.title} 전후 경보 재생")
@@ -185,7 +223,12 @@ with tab_watch:
         for col, sid, label in [(cols[0], "VIXCLS", "VIX"), (cols[1], "BAA10Y" if e.date.year < 2024 else "BAMLH0A0HYM2", "신용스프레드")]:
             col.caption(f"{label} ({sid})")
             col.line_chart(panel[sid].loc[window])
-        st.dataframe(df, hide_index=True, width="stretch")
+        st.markdown("#### 판단 근거 (원인 → 근거 → 결과)")
+        for name, chain in replay_chains(event_id).items():
+            st.caption(name)
+            show_chain(chain)
+        with st.expander("일자별 재생 표"):
+            st.dataframe(df, hide_index=True, width="stretch")
     else:
         st.subheader("라이브 감시")
         st.caption("기본은 매일 07시경(KST) GitHub Actions 수집기가 커밋한 결과를 보여준다. "
@@ -204,6 +247,9 @@ with tab_watch:
             src = "일일 수집기" if sig.get("source") == "collector" else "직접 조회"
             st.markdown(f"### 등급: :{LEVEL_COLOR[level]}[{level.value}]  (기준일 {sig['as_of']})")
             st.caption(f"출처: {src} · 조회 시각(UTC) {sig.get('collected_at', '-')}")
+            if sig.get("chain"):
+                st.markdown("#### 판단 근거 (원인 → 근거 → 결과)")
+                show_chain(sig["chain"])
             if status == "unavailable":
                 st.error("사건 신호(B) 판단 불가: GDELT 조회가 모두 실패했다. 등급의 '사건 없음'은 확인된 결과가 아니다.")
             if sig.get("money_alert"):

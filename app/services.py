@@ -50,11 +50,14 @@ def compute_signals(gdelt_client: Any = None, fred_cache_dir: Path | None = None
         from app import geo
 
         news_out["coverage"] = geo.gdelt_coverage(gdelt_client)
+    level = sentinel.grade(market, news, flow)
+    chain = sentinel.explain(sentinel.SentinelResult(as_of=last_obs, level=level, market=market, news=news, flow=flow))
     return {
         "fetched_at": time.time(),
         "collected_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "as_of": last_obs.isoformat(),
-        "level": sentinel.grade(market, news, flow).value,
+        "level": level.value,
+        "chain": chain,  # 원인-근거-결과
         # 1단계: 자금·시장 이상 알림 (사건 확정 전), 2단계: 사건 확정 시 대응안(ALERT)
         "money_alert": market.active or bool(flow and flow.active),
         "market": {"active": market.active, "triggered": market.triggered,
