@@ -193,19 +193,35 @@ def cluster_titles(titles: list[str], threshold: float) -> list[list[int]]:
     return sorted((m for _, m in clusters), key=len, reverse=True)
 
 
+def volume_z(vol: pd.Series, baseline_days: int, now: datetime | None = None) -> tuple[float | None, str]:
+    """마지막 날 기사량의 z. 오늘(UTC)이 진행 중이면 경과 비율로 하루치를 환산하고, 6시간 미만이면 어제를 쓴다."""
+    if len(vol) < baseline_days + 2:
+        return None, f"기사량 이력 부족 ({len(vol)}일)"
+    now = now or datetime.utcnow()
+    last_day = vol.index[-1]
+    if last_day.date() == now.date():
+        frac = (now - datetime.combine(now.date(), time())).total_seconds() / 86400
+        if frac < 0.25:
+            vol, note = vol.iloc[:-1], "오늘 6시간 미만 → 어제 기준"
+            cur = vol.iloc[-1]
+        else:
+            cur, note = vol.iloc[-1] / frac, f"오늘 {frac:.0%} 경과분을 하루치로 환산"
+    else:
+        cur, note = vol.iloc[-1], "마지막 완결일 기준"
+    base = vol.iloc[-(baseline_days + 1) : -1]
+    if not base.std():
+        return None, "기준선 변동 없음"
+    return float((cur - base.mean()) / base.std()), note
+
+
 def news_topic(client: Any, event_type: str, query: str, as_of: date) -> dict:
     """주제 하나의 라이브 B 판정 (요청 1~2회). 조회 실패는 예외로 올린다."""
     cfg = _sentinel_cfg()["news"]
     out = {"event_type": event_type, "z": None, "n_articles": 0, "n_sources": 0, "cluster": None, "note": ""}
     vol = client.daily_volume(query).loc[: pd.Timestamp(as_of)]
-    if len(vol) < cfg["baseline_days"] + 1:
-        out["note"] = "기사량 이력 부족"
+    z, out["note"] = volume_z(vol, cfg["baseline_days"])
+    if z is None:
         return out
-    base = vol.iloc[-(cfg["baseline_days"] + 1) : -1]
-    if not base.std():
-        out["note"] = "기준선 변동 없음"
-        return out
-    z = float((vol.iloc[-1] - base.mean()) / base.std())
     out["z"] = round(z, 3)
     if z < cfg["z_threshold"]:
         return out
@@ -237,58 +253,67 @@ def live_news_signal(client: Any, as_of: date) -> NewsSignal:
     return NewsSignal(as_of=as_of, clusters=clusters, errors=errors, n_queries=len(cfg["queries"]))
 
 
-def combined_query(queries: dict[str, str]) -> str:
-    """주제 쿼리들의 키워드를 하나의 OR 쿼리로 (요청 1회)."""
-    terms = []
-    for q in queries.values():
-        terms += [t.strip() for t in q.strip("()").split(" OR ") if t.strip()]
-    return "(" + " OR ".join(dict.fromkeys(terms)) + ")"
+GDELT_MAX_QUERY = 190  # 실측: 195자 통과, 265자 'too short or too long' 거부 (2026-10-18)
+
+
+def combined_query(queries: dict[str, str], max_len: int = GDELT_MAX_QUERY) -> str:
+    """주제 쿼리들의 키워드를 하나의 OR 쿼리로 (요청 1회). 길이 제한 안에서 주제마다 첫 키워드부터 고르게 담는다."""
+    per_topic = [[t.strip() for t in q.strip("()").split(" OR ") if t.strip()] for q in queries.values()]
+    chosen: list[str] = []
+    for depth in range(max(len(t) for t in per_topic)):
+        for terms in per_topic:
+            if depth < len(terms) and terms[depth] not in chosen:
+                trial = "(" + " OR ".join(chosen + [terms[depth]]) + ")"
+                if len(trial) <= max_len:
+                    chosen.append(terms[depth])
+    return "(" + " OR ".join(chosen) + ")"
 
 
 def topic_keywords(query: str) -> list[str]:
     return [t.strip().strip('"').lower() for t in query.strip("()").split(" OR ") if t.strip()]
 
 
-def quick_news_signal(client: Any, as_of: date) -> tuple[NewsSignal, dict]:
-    """빠른 조회 (요청 2회): ① 위기 키워드 전체 OR 쿼리의 일별 기사량 z ② 같은 쿼리 최근 1일 기사 목록.
+def quick_news_signal(client: Any, as_of: date, rss: Any = None, now: datetime | None = None) -> tuple[NewsSignal, dict]:
+    """빠른 조회 (요청 2회): ① GDELT 위기 키워드 OR 쿼리의 일별 기사량 z ② Google 뉴스 RSS(영문) 최근 1일 기사.
 
-    ②의 제목을 주제 키워드로 나눠, 전체 기사량이 급증(z ≥ 3)했을 때 출처 ≥ 20곳인 주제를 군집으로 본다.
-    주제별 기사량 z는 보지 않는다 (그건 3시간마다 주제별로 나눠 모으는 수집기가 한다). 보도 국가 분포도 ②로 함께 낸다.
+    GDELT 기사 목록 요청은 공유 IP에서 429가 잦아 ②는 요청 제한이 없는 RSS로 받는다.
+    ②의 제목을 주제 키워드로 나눠, 전체 기사량이 급증(z ≥ 3)했을 때 출처(언론사) ≥ 20곳인 주제를 군집으로 본다.
+    주제별 기사량 z는 보지 않는다 (3시간마다 주제별로 나눠 모으는 수집기가 한다).
     """
     cfg = _sentinel_cfg()["news"]
     queries = cfg["queries"]
     q = combined_query(queries)
     errors, z, arts = [], None, []
+    z_note = ""
     try:
         vol = client.daily_volume(q).loc[: pd.Timestamp(as_of)]
-        base = vol.iloc[-(cfg["baseline_days"] + 1) : -1]
-        if len(vol) >= cfg["baseline_days"] + 1 and base.std():
-            z = float((vol.iloc[-1] - base.mean()) / base.std())
+        z, z_note = volume_z(vol, cfg["baseline_days"])
+        if z is None:
+            errors.append(f"GDELT 전체 기사량: {z_note}")
     except Exception as e:
-        errors.append(f"전체 기사량: {e}")
+        errors.append(f"GDELT 전체 기사량: {e}")
+    if rss is None:
+        from app.data.korea import GoogleNewsRss
+
+        rss = GoogleNewsRss(lang="en-US", region="US")
+    now = now or datetime.now().astimezone()
     try:
-        arts = client.articles(q, timespan="1d")
+        arts = rss.search(q.strip("()"), now - timedelta(days=1))
     except Exception as e:
-        errors.append(f"기사 목록: {e}")
+        errors.append(f"Google 뉴스 RSS: {e}")
     clusters, by_topic = [], {}
     for event_type, tq in queries.items():
         kws = topic_keywords(tq)
         hit = [a for a in arts if any(k in a.title.lower() for k in kws)]
-        n_src = len({a.domain for a in hit})
+        n_src = len({a.source for a in hit})
         by_topic[event_type] = {"n_articles": len(hit), "n_sources": n_src, "top_titles": [a.title for a in hit[:3]]}
         if z is not None and z >= cfg["z_threshold"] and n_src >= cfg["min_sources"]:
             groups = cluster_titles([a.title for a in hit], cfg["cluster_jaccard"])
             top = hit[groups[0][0]].title if groups else event_type
             clusters.append(NewsCluster(key=" ".join(sorted(_tokens(top))[:5]) or event_type, label=top, event_type=event_type,
                                         n_articles=len(hit), n_sources=n_src, z=z))
-    countries: dict[str, int] = {}
-    for a in arts:
-        if getattr(a, "source_country", ""):
-            countries[a.source_country] = countries.get(a.source_country, 0) + 1
-    info = {"mode": "quick", "combined_z": None if z is None else round(z, 3), "n_articles": len(arts), "by_topic": by_topic,
-            "coverage": {"timespan": "1d", "countries": countries, "by_query": by_topic, "errors": [e for e in errors if e.startswith("기사 목록")],
-                         "method": "combined",
-                         "status": "ok" if arts else "unavailable"}}
+    info = {"mode": "quick", "query": q, "combined_z": None if z is None else round(z, 3), "z_note": z_note, "n_articles": len(arts),
+            "by_topic": by_topic}
     return NewsSignal(as_of=as_of, clusters=clusters, errors=errors, n_queries=2), info
 
 
