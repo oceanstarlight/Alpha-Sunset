@@ -1,0 +1,58 @@
+{
+  "registered_at": "2026-10-18T07:10:56.987621+00:00",
+  "design": {
+    "purpose": "공백 채널 탐지 검증 (사전 등록: 실행 전에 설계·정답을 고정, 결과를 보고 바꾸지 않는다)",
+    "removed_doc": "각 사건 라벨 expected_docs의 첫 번째 문서를 코퍼스에서 제거",
+    "oracle_rule": "사건 채널 c가 공백 ⇔ 남은 조항 중 (사건 유형 ∈ premises.event_types) 그리고 (c ∈ premises.channels)인 조항이 하나도 없음",
+    "metric": "에이전트 공백(MatchResult.gaps) vs oracle_gaps 의 precision/recall, 사건 평균",
+    "no_tuning": "이번 실행 결과로 규칙·임계치를 바꾸지 않는다. 바꾸면 새 사전 등록을 만든다"
+  },
+  "events": [
+    {
+      "event_id": "gfc_2008",
+      "removed_doc": "PB-CPTY",
+      "oracle_gaps": [],
+      "oracle_gaps_full_corpus": []
+    },
+    {
+      "event_id": "covid_2020",
+      "removed_doc": "PB-LIQ",
+      "oracle_gaps": [
+        "fx",
+        "supply_chain"
+      ],
+      "oracle_gaps_full_corpus": []
+    },
+    {
+      "event_id": "ru_ua_2022",
+      "removed_doc": "PB-GEO",
+      "oracle_gaps": [],
+      "oracle_gaps_full_corpus": []
+    },
+    {
+      "event_id": "legoland_2022",
+      "removed_doc": "PB-STFM",
+      "oracle_gaps": [],
+      "oracle_gaps_full_corpus": []
+    },
+    {
+      "event_id": "svb_2023",
+      "removed_doc": "PB-BANK",
+      "oracle_gaps": [
+        "equity_vol"
+      ],
+      "oracle_gaps_full_corpus": []
+    },
+    {
+      "event_id": "tariff_2025",
+      "removed_doc": "PB-TRADE",
+      "oracle_gaps": [
+        "sanctions_trade",
+        "supply_chain",
+        "equity_vol",
+        "fx"
+      ],
+      "oracle_gaps_full_corpus": []
+    }
+  ]
+}
