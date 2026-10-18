@@ -10,3 +10,6 @@ data/live.db
 data/sandbox.db
 data/chroma/
 data/chroma_ablation/
+
+# 로컬 감시 상태 (GitHub Actions 캐시)
+.kr_state/

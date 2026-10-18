@@ -1,0 +1,114 @@
+{
+  "as_of": "2026-10-18T19:42+09:00",
+  "level": "WATCH",
+  "money_alert": false,
+  "event_confirmed": false,
+  "kr_market": null,
+  "kr_flow": null,
+  "kr_news": {
+    "status": "unavailable",
+    "clusters": [],
+    "observations": {
+      "banking_stress": {
+        "n_articles": 4,
+        "n_sources": 4,
+        "z": null,
+        "baseline_points": 0
+      },
+      "credit_event": {
+        "n_articles": 26,
+        "n_sources": 14,
+        "z": null,
+        "baseline_points": 0
+      },
+      "liquidity_crisis": {
+        "n_articles": 7,
+        "n_sources": 7,
+        "z": null,
+        "baseline_points": 0
+      },
+      "fx_shock": {
+        "n_articles": 56,
+        "n_sources": 35,
+        "z": null,
+        "baseline_points": 0
+      },
+      "trade_policy": {
+        "n_articles": 66,
+        "n_sources": 34,
+        "z": null,
+        "baseline_points": 0
+      },
+      "geopolitical": {
+        "n_articles": 78,
+        "n_sources": 61,
+        "z": null,
+        "baseline_points": 0
+      },
+      "pandemic": {
+        "n_articles": 40,
+        "n_sources": 19,
+        "z": null,
+        "baseline_points": 0
+      }
+    },
+    "notes": [
+      "NAVER_CLIENT_ID 미설정",
+      "banking_stress: 기준선 축적 중 (0/20)",
+      "credit_event: 기준선 축적 중 (0/20)",
+      "liquidity_crisis: 기준선 축적 중 (0/20)",
+      "fx_shock: 기준선 축적 중 (0/20)",
+      "trade_policy: 기준선 축적 중 (0/20)",
+      "geopolitical: 기준선 축적 중 (0/20)",
+      "pandemic: 기준선 축적 중 (0/20)"
+    ]
+  },
+  "warnings": [
+    {
+      "corp_name": "삼부토건",
+      "stock_code": "001470",
+      "corp_cls": "Y",
+      "report_nm": "[기재정정]주요사항보고서(영업정지)",
+      "rcept_no": "20261016000376",
+      "rcept_dt": "2026-10-16",
+      "url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261016000376",
+      "keyword": "영업정지",
+      "confirmed": false,
+      "n_sources": 3
+    }
+  ],
+  "linkage": null,
+  "chain": [
+    {
+      "단계": "한국 시장(A_kr)",
+      "원인": "데이터 없음",
+      "근거": "ECOS 키 미설정 또는 조회 실패",
+      "결과": "판단 불가"
+    },
+    {
+      "단계": "한국 사건(B_kr)",
+      "원인": "판단 불가 (NAVER_CLIENT_ID 미설정; banking_stress: 기준선 축적 중 (0/20); credit_event: 기준선 축적 중 (0/20))",
+      "근거": "규칙: 최근 24시간 기사 수 z ≥ 3.0 (직전 30일 같은 시간대) AND 언론사 ≥ 10곳 (사전 등록 v5). 출처: 네이버 뉴스·Google 뉴스",
+      "결과": "판단 불가"
+    },
+    {
+      "단계": "DART 신용 공시",
+      "원인": "삼부토건(001470) [기재정정]주요사항보고서(영업정지) (2026-10-16)",
+      "근거": "공시 원문 https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261016000376 · 키워드 '영업정지' · 기업명 기사 언론사 3곳 (확정 기준 48시간 내 10곳, 사전 등록 v5)",
+      "결과": "사건 경고 (대응안 없음, 알림만)"
+    },
+    {
+      "단계": "로컬 종합 등급",
+      "원인": "A_kr/C_kr=비활성, 사건(B_any)=미확정, DART 경고 1건",
+      "근거": "로컬 ALERT = (한국 사건 ∨ 해외 사건 ∨ 확정 DART) ∧ (A_kr ∨ C_kr) (사전 등록 v5)",
+      "결과": "WATCH → 사건 경고 알림"
+    }
+  ],
+  "notes": [
+    "NAVER_CLIENT_ID 미설정"
+  ],
+  "alerts_sent": {
+    "dart:20261016000376:False": "not_configured"
+  },
+  "report": null
+}

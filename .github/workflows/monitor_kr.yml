@@ -1,0 +1,71 @@
+name: monitor-kr
+
+# 로컬(대한민국) 상시 감시 — 사전 등록 v5
+# 평일 08:00~19:30 KST 30분마다 뉴스·DART, 16:40·07:00 KST에 ECOS 시장·외국인 순매수(--daily)
+on:
+  schedule:
+    - cron: "0,30 23 * * 0-4"   # 08:00, 08:30 KST (월~금)
+    - cron: "0,30 0-10 * * 1-5" # 09:00~19:30 KST
+    - cron: "40 7 * * 1-5"      # 16:40 KST 장 마감 후 (daily)
+    - cron: "0 22 * * 0-4"      # 07:00 KST 아침 (daily)
+  workflow_dispatch:
+    inputs:
+      daily:
+        description: "ECOS 시장·자금 갱신 포함"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monitor-kr
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install
+        run: pip install -r requirements.txt
+      - name: Restore state (뉴스 기준선·알림 중복 방지)
+        uses: actions/cache/restore@v4
+        with:
+          path: .kr_state
+          key: kr-state-${{ github.run_id }}
+          restore-keys: kr-state-
+      - name: Monitor
+        id: monitor
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+          ECOS_API_KEY: ${{ secrets.ECOS_API_KEY }}
+          KRX_API_KEY: ${{ secrets.KRX_API_KEY }}
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DAILY: ${{ github.event.schedule == '40 7 * * 1-5' || github.event.schedule == '0 22 * * 0-4' || inputs.daily }}
+        run: python scripts/monitor_kr.py $([ "$DAILY" = "true" ] && echo --daily)
+      - name: Save state
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .kr_state
+          key: kr-state-${{ github.run_id }}
+      - name: Commit
+        if: steps.monitor.outputs.commit == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/live
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "chore: 로컬 감시 결과 $(TZ=Asia/Seoul date +'%F %H:%M')"
+          for i in 1 2 3; do git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0; sleep $((i*5)); done
+          exit 1

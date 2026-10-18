@@ -205,8 +205,34 @@ with tab_map:
 
 with tab_watch:
     if is_local:
-        st.info(f"{LOCAL['name']} 시장 신호(ECOS·KRX 지수/금리/외국인 순매수, 네이버·Google 뉴스, DART 공시)는 "
-                "사전 등록 v5 검토와 API 키 발급 후 수집을 시작한다. 그전까지 아래는 글로벌 신호다.")
+        st.subheader(f"{LOCAL['name']} 상시 감시")
+        st.caption("GitHub Actions가 평일 30분마다 뉴스·DART 공시를, 하루 2회 ECOS 시장·외국인 순매수를 확인한다 (사전 등록 v5). "
+                   "판단은 모두 원인 → 근거 → 결과로 남긴다.")
+        loc = services.load_local_signals()
+        if not loc:
+            st.info("아직 로컬 감시 결과가 없다. 수집기가 처음 실행되면 표시된다.")
+        else:
+            lv = AlertLevel(loc["level"])
+            st.markdown(f"### 로컬 등급: :{LEVEL_COLOR[lv]}[{lv.value}]  (기준 {loc['as_of']} KST)")
+            if loc.get("money_alert"):
+                st.warning("1단계 자금 이상 알림 (한국 시장·외국인 자금)")
+            for w in loc.get("warnings", []):
+                (st.error if w["confirmed"] else st.warning)(
+                    f"{'사건 확정' if w['confirmed'] else '사건 경고'}: {w['corp_name']} — {w['report_nm']} ({w['rcept_dt']}) · [공시 원문]({w['url']})")
+            show_chain(loc["chain"])
+            if loc.get("kr_news"):
+                with st.expander("한국 뉴스 주제별 관측"):
+                    obs = pd.DataFrame(loc["kr_news"]["observations"]).T.reset_index(names="주제")
+                    st.dataframe(obs.astype(str), hide_index=True, width="stretch")
+            if loc.get("notes"):
+                st.caption("미설정·실패: " + "; ".join(loc["notes"]))
+            reports = services.list_local_reports()
+            if reports:
+                with st.expander(f"대응안 리포트 {len(reports)}건"):
+                    pick = st.selectbox("리포트", reports, format_func=lambda p: p.stem)
+                    st.markdown(pick.read_text(encoding="utf-8"))
+        st.divider()
+        st.markdown("#### 글로벌 신호 (참고)")
     if mode == "백테스트 재생":
         e = events_by_id()[event_id]
         st.subheader(f"{e.title} 전후 경보 재생")

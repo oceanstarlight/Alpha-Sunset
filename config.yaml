@@ -98,3 +98,51 @@ learner:
 
 orchestrator:
   max_steps: 10
+
+korea:                        # 로컬(대한민국) 상시 감시 — 사전 등록 v5
+  market:                     # A_kr (ECOS 일별). 항목 코드는 키 발급 후 StatisticItemList로 확인 (verified: false)
+    verified: false
+    series:
+      KOSPI:  {stat: 802Y001, item: "0001000", change: pct}
+      USDKRW: {stat: 731Y001, item: "0000001", change: pct}
+      KTB3Y:  {stat: 817Y002, item: "010200000", change: diff}
+      CORP_AA3Y: {stat: 817Y002, item: "010300000", change: diff}
+      CD91:   {stat: 817Y002, item: "010502000", change: diff}
+    derived:
+      CREDIT_KR: [CORP_AA3Y, KTB3Y]   # 회사채 AA- 3년 − 국고채 3년
+    signal_series: [KOSPI, USDKRW, KTB3Y, CREDIT_KR, CD91]
+  flow:                       # C_kr: 외국인 순매수 (공식 무료 소스 확인 후 활성)
+    verified: false
+    series:
+      FOREIGN_NET_KOSPI: {stat: 802Y001, item: "0030000", change: level}
+    cumulative_days: 5
+  news:                       # B_kr: 네이버 뉴스 + Google 뉴스 RSS (30분마다)
+    window_hours: 24
+    baseline_days: 30
+    baseline_min_points: 20   # 같은 시간대(±1시간) 기준점이 이만큼 쌓이기 전에는 판단 불가
+    z_threshold: 3.0
+    min_sources: 10           # 사용자 결정 (v5 Q2)
+    queries:
+      banking_stress: 뱅크런 | 예금 인출 사태 | 은행 파산
+      credit_event: 부도 | 디폴트 | 회생 신청 | 채무불이행
+      liquidity_crisis: 유동성 위기 | 자금 경색 | 단기자금시장 경색
+      fx_shock: 환율 급등 | 원화 급락 | 외환위기
+      trade_policy: 관세 부과 | 수출 규제 | 무역 분쟁
+      geopolitical: 전쟁 | 군사 도발 | 대북 제재
+      pandemic: 팬데믹 | 감염병 확산 | 봉쇄 조치
+  dart:                       # 신용 공시 → 사건 경고 (v5 Q3: 단독은 경고만)
+    report_keywords: [부도발생, 회생절차개시신청, 회생절차개시결정, 기한의이익상실, 영업정지, 채권은행, 해산사유발생, 파산신청]
+    listed_classes: [Y, K]     # 유가증권·코스닥
+    confirm_hours: 48          # 이 시간 안에 기업명 기사 언론사 min_sources곳 이상이면 사건 확정으로 승격
+  linkage:                    # 해외-한국 연관성 근거 (v5 linkage_evidence)
+    window: 252
+    history_years: 5
+    weak_abs_corr: 0.2
+    pairs:
+      - [VIXCLS, KOSPI]
+      - [CREDIT_GLOBAL, CREDIT_KR]
+      - [DGS10, KTB3Y]
+      - [DTWEXBGS, USDKRW]
+  alerts:
+    dedupe_hours: 24
+    failure_streak_warn: 3
