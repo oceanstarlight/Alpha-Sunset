@@ -20,7 +20,7 @@
 | P2 | 합성 코퍼스 | 🔄 진행 중 (라벨·검수 대기) |
 | P3 | Sentinel (상시 감시) | ✅ 완료 |
 | P4 | Matcher (적합도 판단) | ✅ 완료 (라벨 채점 대기) |
-| P5 | Exposure (노출 경고) | ⏳ 예정 |
+| P5 | Exposure (노출 경고) | ✅ 완료 (순위 설계 확인 필요) |
 | P6 | Orchestrator + Briefing | ⏳ 예정 |
 | P7 | 서비스 계층 + UI + 배포 | ⏳ 예정 |
 | P8 | 백테스트 | ⏳ 예정 |
@@ -84,11 +84,16 @@
 - ⚠️ 판정 품질(top3 적중, 부적합 조항 P/R)은 라벨이 있어야 채점 가능
 - ⚠️ 사건 카드 요약에 사건일 이후 사실(예: 11월 환율 고점)이 포함됨 → 판정 입력 누수 가능, P8에서 사건일 기준 요약 분리 검토
 
-## P5 — Exposure (노출 경고) ⏳
-- ⏳ networkx 보유 경로 그래프 구성
-- ⏳ 규칙 기반 `relevance` (+ 이름 매칭 실패 시 LLM 보조)
-- ⏳ `risk_score` 계산, 상위 10개 경로 + `why` 생성
-- **완료 기준**: 사건별 상위 경로와 `why` 생성
+## P5 — Exposure (노출 경고) ✅
+- ✅ networkx 그래프: 기관 → 직접/위탁운용사/카운터파티 → 프록시 펀드 → 보유(발행자·국가별 묶음) → 지역·업종
+- ✅ 규칙 기반 `relevance` (지역 0.4·업종 0.35·자산군 0.25, 유럽·신흥국 지역 그룹 매핑)
+- ✅ 이름 매칭: 규칙(토큰 완전 일치) → 실패한 민간 기관만 LLM 보조, 공공기관(중앙은행·정부·감독기관) 매칭 제외
+- ✅ `risk_score = weight × relevance × (1 − 0.5·uncertainty)`, 상위 10개 + `why`(LLM, 경로 속성만 입력)
+- ✅ 사건 기관과 같은 발행자 보유는 `entity_paths`로 별도 표시 (예: svb_2023 → KRE의 SVB Financial Group, Signature Bank)
+- ✅ 불확실 경로 비율 계산 (`needs_requery`) — 추가 조회 후 재계산은 P6 Orchestrator에서 연결
+- ✅ `scripts/run_exposure.py` → `data/backtest/exposure/*.json` (gfc_2008 제외)
+- **완료 기준**: 사건별 상위 경로와 `why` 생성 ✅ (5개 사건)
+- ⚠️ 순위가 큰 직접 보유(국채·대형주 ETF)에 쏠림: 사건 지역에 GLOBAL이 있으면 모든 노드가 지역 일치로 잡힘. ru_ua_2022에서 EMB의 러시아·우크라이나 국채 경로가 30위·38위
 
 ## P6 — Orchestrator + Briefing ⏳
 - ⏳ Gemini function calling 루프 (`max_steps=10`, 도구 7개)

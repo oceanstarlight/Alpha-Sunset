@@ -1,0 +1,154 @@
+{
+  "event_id": "tariff_2025",
+  "snapshot": "tariff_2025",
+  "uncertain_ratio": 0.0,
+  "needs_requery": false,
+  "entity_matches": {},
+  "portfolio_nodes": [
+    "D-USEQ",
+    "D-UST",
+    "D-KTB",
+    "D-KREQ",
+    "D-RE",
+    "M-DAON",
+    "D-MMF",
+    "M-HANBIT",
+    "M-NURI",
+    "M-SEOGYEONG"
+  ],
+  "paths": [
+    {
+      "nodes": [
+        "기관",
+        "D-USEQ",
+        "IVV",
+        "IVV US 보유 475종목",
+        "US · broad_market"
+      ],
+      "weight": 0.116152,
+      "relevance": 0.65,
+      "uncertainty": 0.0,
+      "risk_score": 0.075499,
+      "why": "직접 보유, 프록시 펀드를 통해 미국 지역 및 자산군 equity와 일치하므로 이번 사건과 관련해 확인해야 한다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-UST",
+        "US · sovereign"
+      ],
+      "weight": 0.15,
+      "relevance": 0.4,
+      "uncertainty": 0.0,
+      "risk_score": 0.06,
+      "why": "직접 보유를 통해 지역 US와 일치하므로 이번 사건과 관련해 확인해야 한다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-KTB",
+        "KR · sovereign"
+      ],
+      "weight": 0.15,
+      "relevance": 0.4,
+      "uncertainty": 0.0,
+      "risk_score": 0.06,
+      "why": "직접 보유를 통해 지역 KR과 일치하므로 이번 사건과 관련해 확인해야 한다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-KREQ",
+        "EWY",
+        "EWY KR 보유 93종목",
+        "KR · broad_market/semiconductors/autos"
+      ],
+      "weight": 0.059792,
+      "relevance": 1.0,
+      "uncertainty": 0.0,
+      "risk_score": 0.059792,
+      "why": "직접 보유, 프록시 펀드를 통해 지역 KR, 업종 autos,semiconductors 및 자산군 equity와 일치하므로 이번 사건과 관련해 확인해야 한다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-RE",
+        "KR · real_estate"
+      ],
+      "weight": 0.1,
+      "relevance": 0.4,
+      "uncertainty": 0.0,
+      "risk_score": 0.04,
+      "why": "직접 보유를 통해 지역 KR과 일치하므로 이번 사건과 관련해 확인해야 한다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-DAON",
+        "HYG",
+        "HYG US 보유 1012종목",
+        "US · energy/telecom/consumer"
+      ],
+      "weight": 0.055155,
+      "relevance": 0.65,
+      "uncertainty": 0.3,
+      "risk_score": 0.030473,
+      "why": "위탁운용사를 거쳐 프록시 펀드로 보유하며 지역 US 및 자산군 corporate_bond와 일치하나, 불확실성이 존재하여 프록시 추정으로 인해 실제와 다를 수 있다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-MMF",
+        "KR · broker_dealers/banks"
+      ],
+      "weight": 0.07,
+      "relevance": 0.4,
+      "uncertainty": 0.0,
+      "risk_score": 0.028,
+      "why": "직접 보유를 통해 지역 KR과 일치하므로 이번 사건과 관련해 확인해야 한다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-HANBIT",
+        "KRE",
+        "KRE US 보유 140종목",
+        "US · regional_banks/banks"
+      ],
+      "weight": 0.048465,
+      "relevance": 0.65,
+      "uncertainty": 0.3,
+      "risk_score": 0.026777,
+      "why": "위탁운용사를 거쳐 프록시 펀드로 보유하며 지역 US 및 자산군 equity와 일치하나, 불확실성이 존재하여 프록시 추정으로 인해 실제와 다를 수 있다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-NURI",
+        "XLE",
+        "XLE US 보유 21종목",
+        "US · energy"
+      ],
+      "weight": 0.047853,
+      "relevance": 0.65,
+      "uncertainty": 0.3,
+      "risk_score": 0.026439,
+      "why": "위탁운용사를 거쳐 프록시 펀드로 보유하며 지역 US 및 자산군 equity와 일치하나, 불확실성이 존재하여 프록시 추정으로 인해 실제와 다를 수 있다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-SEOGYEONG",
+        "MCHI",
+        "MCHI KY 보유 71종목",
+        "KY · technology/consumer/manufacturing"
+      ],
+      "weight": 0.028161,
+      "relevance": 0.8,
+      "uncertainty": 0.3,
+      "risk_score": 0.019149,
+      "why": "위탁운용사를 거쳐 프록시 펀드로 보유하며 지역 GLOBAL, 업종 manufacturing 및 자산군 equity와 일치하나, 불확실성이 존재하여 프록시 추정으로 인해 실제와 다를 수 있다."
+    }
+  ],
+  "entity_paths": []
+}

@@ -1,0 +1,150 @@
+{
+  "event_id": "legoland_2022",
+  "snapshot": "legoland_2022",
+  "uncertain_ratio": 0.3,
+  "needs_requery": false,
+  "entity_matches": {},
+  "portfolio_nodes": [
+    "D-RE",
+    "D-MMF",
+    "D-KTB",
+    "D-KREQ",
+    "C-HANGANG",
+    "M-DAON",
+    "C-ATLAS",
+    "C-SEORAE",
+    "M-DAON",
+    "M-DAON"
+  ],
+  "paths": [
+    {
+      "nodes": [
+        "기관",
+        "D-RE",
+        "KR · real_estate"
+      ],
+      "weight": 0.1,
+      "relevance": 0.75,
+      "uncertainty": 0.0,
+      "risk_score": 0.075,
+      "why": "직접 보유한 국내 부동산 펀드를 통해 지역 KR 및 업종 real_estate 항목이 일치하여 이번 사건과 관련해 확인해야 합니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-MMF",
+        "KR · broker_dealers/banks"
+      ],
+      "weight": 0.07,
+      "relevance": 1.0,
+      "uncertainty": 0.0,
+      "risk_score": 0.07,
+      "why": "직접 보유한 국내 MMF·단기자금을 통해 지역 KR, 업종 broker_dealers, 자산군 commercial_paper, money_market 항목이 일치하여 이번 사건과 관련해 확인해야 합니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-KTB",
+        "KR · sovereign"
+      ],
+      "weight": 0.15,
+      "relevance": 0.4,
+      "uncertainty": 0.0,
+      "risk_score": 0.06,
+      "why": "직접 보유한 한국 국고채를 통해 지역 KR 항목이 일치하여 이번 사건과 관련해 확인해야 합니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-KREQ",
+        "EWY",
+        "EWY KR 보유 112종목",
+        "KR · broad_market/semiconductors/autos"
+      ],
+      "weight": 0.05972,
+      "relevance": 0.4,
+      "uncertainty": 0.0,
+      "risk_score": 0.023888,
+      "why": "직접 보유한 한국 주식 ETF를 통해 지역 KR 항목이 일치하여 이번 사건과 관련해 확인해야 합니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "C-HANGANG",
+        "KR · broker_dealers/real_estate"
+      ],
+      "weight": 0.02,
+      "relevance": 1.0,
+      "uncertainty": 0.5,
+      "risk_score": 0.015,
+      "why": "거래상대방 한강증권을 통해 지역 KR, 업종 broker_dealers, real_estate, 자산군 commercial_paper 항목이 일치하여 이번 사건과 관련해 확인해야 하며, 불확실성이 존재하여 거래상대방 노출이라 실제와 다를 수 있습니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-DAON",
+        "HYG",
+        "HYG US 보유 1041종목",
+        "US · energy/telecom/consumer"
+      ],
+      "weight": 0.055356,
+      "relevance": 0.25,
+      "uncertainty": 0.3,
+      "risk_score": 0.011763,
+      "why": "위탁운용사 다온캐피탈을 통해 자산군 corporate_bond 항목이 일치하여 이번 사건과 관련해 확인해야 하며, 불확실성이 존재하여 프록시 추정이라 실제와 다를 수 있습니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "C-ATLAS",
+        "US/GLOBAL · broker_dealers"
+      ],
+      "weight": 0.02,
+      "relevance": 0.55,
+      "uncertainty": 0.5,
+      "risk_score": 0.00825,
+      "why": "거래상대방 아틀라스 글로벌증권을 통해 지역 GLOBAL 및 업종 broker_dealers 항목이 일치하여 이번 사건과 관련해 확인해야 하며, 불확실성이 존재하여 거래상대방 노출이라 실제와 다를 수 있습니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "C-SEORAE",
+        "KR · banks"
+      ],
+      "weight": 0.01,
+      "relevance": 0.4,
+      "uncertainty": 0.5,
+      "risk_score": 0.003,
+      "why": "거래상대방 서래은행을 통해 지역 KR 항목이 일치하여 이번 사건과 관련해 확인해야 하며, 불확실성이 존재하여 거래상대방 노출이라 실제와 다를 수 있습니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-DAON",
+        "HYG",
+        "HYG CA 보유 59종목",
+        "CA · energy/telecom/consumer"
+      ],
+      "weight": 0.002978,
+      "relevance": 0.25,
+      "uncertainty": 0.3,
+      "risk_score": 0.000633,
+      "why": "위탁운용사 다온캐피탈을 통해 자산군 corporate_bond 항목이 일치하여 이번 사건과 관련해 확인해야 하며, 불확실성이 존재하여 프록시 추정이라 실제와 다를 수 있습니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-DAON",
+        "HYG",
+        "HYG NL 보유 24종목",
+        "NL · energy/telecom/consumer"
+      ],
+      "weight": 0.001436,
+      "relevance": 0.25,
+      "uncertainty": 0.3,
+      "risk_score": 0.000305,
+      "why": "위탁운용사 다온캐피탈을 통해 자산군 corporate_bond 항목이 일치하여 이번 사건과 관련해 확인해야 하며, 불확실성이 존재하여 프록시 추정이라 실제와 다를 수 있습니다."
+    }
+  ],
+  "entity_paths": []
+}

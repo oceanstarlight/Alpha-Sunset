@@ -1,0 +1,154 @@
+{
+  "event_id": "ru_ua_2022",
+  "snapshot": "ru_ua_2022",
+  "uncertain_ratio": 0.0,
+  "needs_requery": false,
+  "entity_matches": {},
+  "portfolio_nodes": [
+    "D-UST",
+    "D-KTB",
+    "D-USEQ",
+    "D-MMF",
+    "M-HANBIT",
+    "M-NURI",
+    "D-KREQ",
+    "M-DAON",
+    "D-RE",
+    "M-SEOGYEONG"
+  ],
+  "paths": [
+    {
+      "nodes": [
+        "기관",
+        "D-UST",
+        "US · sovereign"
+      ],
+      "weight": 0.15,
+      "relevance": 0.45,
+      "uncertainty": 0.0,
+      "risk_score": 0.0675,
+      "why": "직접 보유 미국 국채 (7~10년) 경로를 통해 지역 및 자산군이 일치하므로 이번 사건과 관련해 확인해야 합니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-KTB",
+        "KR · sovereign"
+      ],
+      "weight": 0.15,
+      "relevance": 0.45,
+      "uncertainty": 0.0,
+      "risk_score": 0.0675,
+      "why": "직접 보유 한국 국고채 경로를 통해 지역 및 자산군이 일치하므로 이번 사건과 관련해 확인해야 합니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-USEQ",
+        "IVV",
+        "IVV US 보유 481종목",
+        "US · broad_market"
+      ],
+      "weight": 0.11572,
+      "relevance": 0.45,
+      "uncertainty": 0.0,
+      "risk_score": 0.052074,
+      "why": "직접 보유 미국 대형주 ETF 경로를 통해 지역 및 자산군이 일치하므로 이번 사건과 관련해 확인해야 합니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-MMF",
+        "KR · broker_dealers/banks"
+      ],
+      "weight": 0.07,
+      "relevance": 0.55,
+      "uncertainty": 0.0,
+      "risk_score": 0.0385,
+      "why": "직접 보유 국내 MMF·단기자금 경로를 통해 지역 및 업종이 일치하므로 이번 사건과 관련해 확인해야 합니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-HANBIT",
+        "KRE",
+        "KRE US 보유 130종목",
+        "US · regional_banks/banks"
+      ],
+      "weight": 0.048334,
+      "relevance": 0.8,
+      "uncertainty": 0.3,
+      "risk_score": 0.032867,
+      "why": "위탁운용사 한빛자산운용 (미국 지역은행 전략) 경로의 펀드를 통해 지역, 업종, 자산군이 일치하며, 프록시 추정으로 인해 실제와 다를 수 있습니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-NURI",
+        "XLE",
+        "XLE US 보유 21종목",
+        "US · energy"
+      ],
+      "weight": 0.047619,
+      "relevance": 0.8,
+      "uncertainty": 0.3,
+      "risk_score": 0.032381,
+      "why": "위탁운용사 누리에셋 (미국 에너지주) 경로의 펀드를 통해 지역, 업종, 자산군이 일치하며, 프록시 추정으로 인해 실제와 다를 수 있습니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-KREQ",
+        "EWY",
+        "EWY KR 보유 107종목",
+        "KR · broad_market/semiconductors/autos"
+      ],
+      "weight": 0.059911,
+      "relevance": 0.45,
+      "uncertainty": 0.0,
+      "risk_score": 0.02696,
+      "why": "직접 보유 한국 주식 ETF 경로를 통해 지역 및 자산군이 일치하므로 이번 사건과 관련해 확인해야 합니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-DAON",
+        "HYG",
+        "HYG US 보유 1106종목",
+        "US · energy/telecom/consumer"
+      ],
+      "weight": 0.055936,
+      "relevance": 0.55,
+      "uncertainty": 0.3,
+      "risk_score": 0.02615,
+      "why": "위탁운용사 다온캐피탈 (미국 하이일드) 경로의 펀드를 통해 지역 및 업종이 일치하며, 프록시 추정으로 인해 실제와 다를 수 있습니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-RE",
+        "KR · real_estate"
+      ],
+      "weight": 0.1,
+      "relevance": 0.2,
+      "uncertainty": 0.0,
+      "risk_score": 0.02,
+      "why": "직접 보유 국내 부동산 펀드 경로를 통해 지역이 일치하므로 이번 사건과 관련해 확인해야 합니다."
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-SEOGYEONG",
+        "MCHI",
+        "MCHI KY 보유 129종목",
+        "KY · technology/consumer/manufacturing"
+      ],
+      "weight": 0.029896,
+      "relevance": 0.45,
+      "uncertainty": 0.3,
+      "risk_score": 0.011435,
+      "why": "위탁운용사 서경파트너스 (중국 주식) 경로의 펀드를 통해 지역 및 자산군이 일치하며, 프록시 추정으로 인해 실제와 다를 수 있습니다."
+    }
+  ],
+  "entity_paths": []
+}
