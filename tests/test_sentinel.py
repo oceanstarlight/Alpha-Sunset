@@ -14,11 +14,10 @@ from app.agents.sentinel import (
     card_news_signal,
     cluster_titles,
     grade,
-    live_news_signal,
     market_signal,
     merge_alerts,
 )
-from app.data.gdelt import Article
+from app.data.korea import NewsItem
 from app.schemas import AlertLevel, Channel, Duration, Event, EventType
 
 END = date(2024, 6, 28)
@@ -155,7 +154,7 @@ def test_gap_over_72h_or_other_cluster_is_separate():
     assert sorted((m.key, m.count) for m in merged) == [("a", 1), ("a", 1), ("b", 1)]
 
 
-# ---------- 라이브 B (GDELT) ----------
+# ---------- 라이브 B (Google 뉴스 RSS) ----------
 
 
 def test_cluster_titles_groups_similar():
@@ -164,97 +163,53 @@ def test_cluster_titles_groups_similar():
     assert sorted(groups[0]) == [0, 1]
 
 
-class FakeGdelt:
-    def __init__(self, spike: bool, n_domains: int):
-        self.spike, self.n_domains = spike, n_domains
-
-    def daily_volume(self, query):
-        idx = pd.date_range(end=pd.Timestamp(END), periods=40, freq="D")
-        vals = [10.0 + (i % 3) for i in range(40)]
-        if self.spike and "bank run" in query:
-            vals[-1] = 100.0
-        return pd.Series(vals, index=idx)
-
-    def articles(self, query, timespan="1d"):
-        now = datetime(2024, 6, 28, tzinfo=timezone.utc)
-        return [Article(title=f"Bank run hits lender {i % 2}", url=f"https://s{i}.com/a", domain=f"s{i}.com", seen=now)
-                for i in range(self.n_domains)]
+NOW = datetime(2024, 6, 28, 12, tzinfo=timezone.utc)
 
 
-def test_live_news_requires_volume_spike_and_sources():
-    sig = live_news_signal(FakeGdelt(spike=True, n_domains=25), END)
-    assert [c.event_type for c in sig.clusters] == ["banking_stress"]
-    assert sig.clusters[0].n_sources == 25
-    assert not live_news_signal(FakeGdelt(spike=True, n_domains=5), END).active
-    assert not live_news_signal(FakeGdelt(spike=False, n_domains=25), END).active
+def _items(n, n_src, title="Bank run hits lender"):
+    return [NewsItem(f"{title} {i % 2}", f"https://s{i}.com/a", f"src{i % n_src}", NOW, "google") for i in range(n)]
 
 
-def test_gdelt_client_parses_responses():
-    import httpx
-
-    from app.data.gdelt import GdeltClient
-
-    def handler(request: httpx.Request) -> httpx.Response:
-        assert request.url.params["query"] == '("a" OR "b")'
-        if request.url.params["mode"] == "timelinevolraw":
-            return httpx.Response(200, json={"timeline": [{"data": [
-                {"date": "20240627T100000Z", "value": 2}, {"date": "20240627T110000Z", "value": 3},
-                {"date": "20240628T100000Z", "value": 7}]}]})
-        return httpx.Response(200, json={"articles": [
-            {"url": "https://x.com/1", "title": "t", "seendate": "20240628T010000Z", "domain": "x.com"}]})
-
-    client = GdeltClient(http=httpx.Client(transport=httpx.MockTransport(handler)), interval_sec=0)
-    vol = client.daily_volume('"a" OR "b"')
-    assert vol.tolist() == [5.0, 7.0]
-    arts = client.articles('"a" OR "b"')
-    assert arts[0].domain == "x.com"
+def _history(event_type="banking_stress", n=10, days=25):
+    return [{"ts": (NOW - timedelta(days=d)).isoformat(), "event_type": event_type, "n_articles": n + d % 3, "n_sources": 8}
+            for d in range(1, days + 1)]
 
 
-def test_live_news_records_query_errors():
-    class Failing(FakeGdelt):
-        def daily_volume(self, query):
-            raise RuntimeError("429")
+def test_rss_news_requires_spike_vs_baseline_and_sources():
+    from app.agents.sentinel import rss_news_signal
 
-    sig = live_news_signal(Failing(spike=True, n_domains=25), END)
-    assert not sig.active and len(sig.errors) == 8
-    assert sig.status == "unavailable"  # 전부 실패 = '사건 없음'이 아니라 '판단 불가'
+    sig, rows, obs = rss_news_signal({"banking_stress": _items(60, 25)}, _history(), NOW)
+    assert [c.event_type for c in sig.clusters] == ["banking_stress"] and obs["banking_stress"]["z"] > 3
+    assert rows[0]["n_articles"] == 60  # 이번 관측은 기준선 이력에 쌓인다
+    assert not rss_news_signal({"banking_stress": _items(60, 10)}, _history(), NOW)[0].active  # 언론사 20곳 미만
+    assert not rss_news_signal({"banking_stress": _items(11, 25)}, _history(), NOW)[0].active  # 평소 수준
 
 
-def test_news_status_partial_and_ok():
-    class HalfFailing(FakeGdelt):
-        def daily_volume(self, query):
+def test_rss_news_unavailable_while_baseline_accumulates():
+    from app.agents.sentinel import rss_news_signal
+
+    sig, _, obs = rss_news_signal({"banking_stress": _items(60, 25)}, _history(days=5), NOW)
+    assert not sig.active and "기준선 축적 중" in sig.errors[0] and obs["banking_stress"]["baseline_points"] == 5
+
+
+def test_fetch_rss_topics_records_failures():
+    from app.agents.sentinel import fetch_rss_topics
+
+    class Half:
+        def search(self, query, since):
             if "bank run" in query:
-                raise RuntimeError("Server disconnected")
-            return super().daily_volume(query)
+                raise RuntimeError("timeout")
+            assert " OR " in query and not query.startswith("(")
+            return _items(3, 3)
 
-    assert live_news_signal(HalfFailing(spike=False, n_domains=25), END).status == "partial"
-    assert live_news_signal(FakeGdelt(spike=False, n_domains=25), END).status == "ok"
+    arts, errors = fetch_rss_topics(Half(), NOW)
+    assert "banking_stress" not in arts and len(arts) == 7 and "RSS 실패" in errors[0]
 
 
-def test_gdelt_client_retries_disconnect_and_429():
-    import httpx
-
-    from app.data.gdelt import GdeltClient
-
-    calls = []
-
-    def handler(request: httpx.Request) -> httpx.Response:
-        calls.append(1)
-        if len(calls) == 1:
-            raise httpx.RemoteProtocolError("Server disconnected without sending a response.")
-        if len(calls) == 2:
-            return httpx.Response(429, text="Please limit requests")
-        return httpx.Response(200, json={"articles": [
-            {"url": "https://x.com/1", "title": "t", "seendate": "20240628T010000Z", "domain": "x.com",
-             "sourcecountry": "South Korea"}]})
-
-    client = GdeltClient(http=httpx.Client(transport=httpx.MockTransport(handler)), interval_sec=0)
-    arts = client.articles("x")
-    assert len(calls) == 3 and arts[0].source_country == "South Korea"
-
-    always = GdeltClient(http=httpx.Client(transport=httpx.MockTransport(lambda r: httpx.Response(429))), interval_sec=0)
-    with pytest.raises(RuntimeError, match="4회 시도 실패"):
-        always.articles("x")
+def test_signal_status_partial_and_unavailable():
+    assert NewsSignal(as_of=END, errors=["x"], n_queries=8).status == "partial"
+    assert NewsSignal(as_of=END, errors=["x"] * 8, n_queries=8).status == "unavailable"
+    assert NewsSignal(as_of=END, n_queries=8).status == "ok"
 
 
 def test_explain_gives_cause_evidence_result_for_every_stage():
@@ -266,129 +221,6 @@ def test_explain_gives_cause_evidence_result_for_every_stage():
     chain = explain(SentinelResult(as_of=END, level=grade(m, n), market=m, news=n))
     assert [c["단계"] for c in chain] == ["시장 신호(A)", "사건 신호(B)", "종합 등급"]
     assert all(set(c) == {"단계", "원인", "근거", "결과"} and c["원인"] and c["근거"] for c in chain)
-    assert "VIXCLS" in chain[0]["원인"] and "출처 25곳" in chain[1]["근거"] and chain[2]["결과"].startswith("ALERT")
+    assert "VIXCLS" in chain[0]["원인"] and "언론사 25곳" in chain[1]["근거"] and chain[2]["결과"].startswith("ALERT")
     failed = NewsSignal(as_of=END, clusters=[], errors=["x"] * 8, n_queries=8)
     assert explain(SentinelResult(as_of=END, level=grade(m, failed), market=m, news=failed))[1]["결과"] == "판단 불가"
-
-
-def test_topics_state_builds_signal_with_staleness():
-    from app.agents.sentinel import news_signal_from_topics, news_topic
-
-    now = datetime(2024, 6, 28, 12, tzinfo=timezone.utc)
-    hit = news_topic(FakeGdelt(spike=True, n_domains=25), "banking_stress", '"bank run" OR "bank failure"', END)
-    assert hit["cluster"] and hit["z"] > 3
-    state = {
-        "banking_stress": {"ok_at": (now - timedelta(hours=2)).isoformat(), "result": hit},
-        "credit_event": {"ok_at": (now - timedelta(hours=40)).isoformat(), "result": {"cluster": None}, "error": "429"},
-    }
-    sig = news_signal_from_topics(state, END, now)
-    assert [c.event_type for c in sig.clusters] == ["banking_stress"]
-    assert sig.status == "partial" and any("40시간 전" in e for e in sig.errors)
-    assert any("성공 이력 없음" in e for e in sig.errors)  # 한 번도 못 받은 주제
-
-
-def test_collector_skips_fresh_topics_and_respects_budget():
-    import importlib.util
-    from pathlib import Path
-
-    spec = importlib.util.spec_from_file_location("collect", Path(__file__).resolve().parent.parent / "scripts" / "collect_signals.py")
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    now = datetime(2024, 6, 28, 12, tzinfo=timezone.utc)
-    calls = []
-
-    class Counting(FakeGdelt):
-        def daily_volume(self, query):
-            calls.append(query)
-            return super().daily_volume(query)
-
-    state = {"banking_stress": {"ok_at": (now - timedelta(hours=1)).isoformat(), "result": {"cluster": None}}}
-    out = mod.collect_topics(Counting(spike=False, n_domains=25), state, END, now, budget_sec=3600)
-    assert len(calls) == 7 and all(v.get("ok_at") for v in out.values())  # 1시간 전 성공한 주제는 다시 안 받음
-    calls.clear()
-    mod.collect_topics(Counting(spike=False, n_domains=25), {}, END, now, budget_sec=-1)
-    assert calls == []  # 예산 0이면 다음 실행으로 미룸
-
-
-def test_combined_coverage_single_request():
-    from app import geo
-
-    class One(FakeGdelt):
-        n = 0
-
-        def articles(self, query, timespan="1d"):
-            One.n += 1
-            assert query.startswith("(") and "bank run" in query and "tariff" in query
-            now = datetime(2024, 6, 28, tzinfo=timezone.utc)
-            return [Article("Tariff war escalates", "u1", "a.com", now, "United States"),
-                    Article("Bank run fears", "u2", "b.com", now, "Germany")]
-
-    cov = geo.gdelt_coverage_combined(One(spike=False, n_domains=1))
-    assert One.n == 1 and cov["countries"] == {"United States": 1, "Germany": 1}
-    assert cov["by_query"]["trade_policy"]["n_articles"] == 1 and cov["by_query"]["banking_stress"]["n_articles"] == 1
-
-
-def test_quick_news_signal_uses_two_requests():
-    from app.agents.sentinel import GDELT_MAX_QUERY, combined_query, quick_news_signal
-    from app.config import load_config
-    from app.data.korea import NewsItem
-
-    q = combined_query(load_config()["sentinel"]["news"]["queries"])
-    assert len(q) <= GDELT_MAX_QUERY and '"bank run"' in q and '"tariff"' in q  # 주제마다 첫 키워드는 꼭 담는다
-    calls = []
-    now = datetime(2024, 6, 28, 12, tzinfo=timezone.utc)
-
-    class Vol(FakeGdelt):
-        def daily_volume(self, query):
-            calls.append("gdelt")
-            return super().daily_volume(query)  # 결합 쿼리에 "bank run" 포함 → 급증
-
-    class Rss:
-        def search(self, query, since):
-            calls.append("rss")
-            return [NewsItem(f"Bank run hits lender {i % 2}", f"u{i}", f"src{i}", now, "google") for i in range(25)]
-
-    sig, info = quick_news_signal(Vol(spike=True, n_domains=25), END, rss=Rss(), now=now)
-    assert calls == ["gdelt", "rss"]
-    assert [c.event_type for c in sig.clusters] == ["banking_stress"] and info["combined_z"] > 3
-    assert sig.status == "ok" and info["by_topic"]["banking_stress"]["n_sources"] == 25
-
-    class Down(FakeGdelt):
-        def daily_volume(self, query):
-            raise RuntimeError("429")
-
-    class RssDown:
-        def search(self, query, since):
-            raise RuntimeError("timeout")
-
-    sig, _ = quick_news_signal(Down(spike=False, n_domains=1), END, rss=RssDown(), now=now)
-    assert sig.status == "unavailable" and len(sig.errors) == 2
-
-
-def test_gdelt_query_too_long_is_not_retried():
-    import httpx
-
-    from app.data.gdelt import GdeltClient
-
-    calls = []
-
-    def handler(request):
-        calls.append(1)
-        return httpx.Response(200, text="Your query was too short or too long.")
-
-    client = GdeltClient(http=httpx.Client(transport=httpx.MockTransport(handler)), interval_sec=0)
-    with pytest.raises(RuntimeError, match="길이 제한"):
-        client.articles("x")
-    assert len(calls) == 1
-
-
-def test_volume_z_projects_partial_today():
-    from app.agents.sentinel import volume_z
-
-    idx = pd.date_range(end="2026-10-18", periods=40, freq="D")
-    vol = pd.Series([100.0 + (i % 3) for i in range(40)], index=idx)
-    vol.iloc[-1] = 60.0  # 오늘 12시까지 60건 → 하루치 120건으로 환산하면 급증
-    z, note = volume_z(vol, 30, now=datetime(2026, 10, 18, 12))
-    assert z > 3 and "환산" in note
-    z_early, note_early = volume_z(vol, 30, now=datetime(2026, 10, 18, 3))
-    assert "어제" in note_early and abs(z_early) < 3  # 6시간 미만이면 어제(평범한 날) 기준

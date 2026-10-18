@@ -34,7 +34,13 @@
 - 수집일: 2026-10-18, `fredgraph.csv` (키 불필요). 공표 시차는 사전 등록 v2에 고정 (45/45/10/3/3일)
 - 품질 보고서: `data/backtest/flow_quality.json`
 
-## GDELT DOC 2.0 (라이브 시그널 B)
+## GDELT DOC 2.0 (사용 중단)
+- 공유 IP 요청 제한(429)이 반복돼 라이브에서 제거 (사용자 결정, 2026-10-18). 아래는 이전 기록
+
+## Google 뉴스 RSS (라이브 시그널 B, 글로벌)
+- https://news.google.com/rss/search (hl=en-US, gl=US), 키 불필요. 주제별 기사 수·언론사명·상위 제목만 저장 (`data/live/global_news_history.jsonl`, `signals_latest.json`)
+
+## (이전) GDELT DOC 2.0
 - URL: https://api.gdeltproject.org/api/v2/doc/doc (`timelinevolraw`, `artlist` 모드)
 - 약관: GDELT 무료 공개 데이터, 요청 간격 5초당 1회 제한 (클라이언트는 10초 간격 + 429·연결 끊김 재시도)
 - 범위: 최근 약 3개월. 라이브 모드 전용, 데이터 저장 안 함

@@ -119,9 +119,11 @@ class KrNewsSignal:
         return "partial" if any(o.get("z") is None for o in obs) else "ok"
 
 
-def baseline_z(history: list[dict], event_type: str, now: datetime, count: int) -> tuple[float | None, int]:
-    """직전 baseline_days일 같은 시간대(±1시간) 기사 수 대비 z. 기준점 부족이면 (None, 개수)."""
-    cfg = _cfg()["news"]
+def baseline_z(history: list[dict], event_type: str, now: datetime, count: int,
+               cfg: dict | None = None) -> tuple[float | None, int]:
+    """직전 baseline_days일 같은 시간대(±baseline_window_min분, 기본 60) 기사 수 대비 z. 기준점 부족이면 (None, 개수)."""
+    cfg = cfg or _cfg()["news"]
+    window = cfg.get("baseline_window_min", 60)
     start = now - timedelta(days=cfg["baseline_days"])
     pts = []
     for h in history:
@@ -129,7 +131,7 @@ def baseline_z(history: list[dict], event_type: str, now: datetime, count: int) 
         if h["event_type"] != event_type or not (start <= ts < now - timedelta(hours=1)):
             continue
         minutes = abs((ts.hour * 60 + ts.minute) - (now.hour * 60 + now.minute))
-        if min(minutes, 1440 - minutes) <= 60:
+        if min(minutes, 1440 - minutes) <= window:
             pts.append(h["n_articles"])
     if len(pts) < cfg["baseline_min_points"]:
         return None, len(pts)

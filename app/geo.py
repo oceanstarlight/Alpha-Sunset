@@ -1,4 +1,4 @@
-"""세계 금융 지도용 국가별 집계 (사건 지역 · 보유 비중 · 영향도 · GDELT 보도 국가)."""
+"""세계 금융 지도용 국가별 집계 (사건 지역 · 보유 비중 · 영향도)."""
 
 from __future__ import annotations
 
@@ -17,8 +17,8 @@ CENTROIDS_PATH = ROOT_DIR / "data" / "geo" / "country_centroids.csv"
 # 국가 하나로 찍을 수 없는 지역 묶음. EU만 대표 좌표(브뤼셀)에 표시하고, EM·GLOBAL은 표로만 보여준다.
 GROUP_ANCHORS = {"EU": (50.85, 4.35, "유럽(EU 묶음)")}
 
-# GDELT sourcecountry 표기 → ISO 코드 (중심 좌표 표의 이름과 다른 것만)
-GDELT_ALIASES = {
+# 영문 국가명 표기 → ISO 코드 (중심 좌표 표의 이름과 다른 것만)
+NAME_ALIASES = {
     "Czech Republic": "CZ", "Ivory Coast": "CI", "Cote d'Ivoire": "CI", "Burma": "MM", "Macedonia": "MK",
     "Congo": "CG", "Democratic Republic of the Congo": "CD", "Korea, South": "KR", "Korea, North": "KP",
     "Bahamas, The": "BS", "Gambia, The": "GM", "Vatican City": "VA", "Palestine": "PS", "Timor-Leste": "TL",
@@ -28,7 +28,6 @@ LAYERS = {
     "event": {"label": "사건 지역", "color": [220, 38, 38, 150]},
     "exposure": {"label": "보유 비중", "color": [37, 99, 235, 110]},
     "impact": {"label": "영향도 (비중×연관도)", "color": [249, 115, 22, 170]},
-    "coverage": {"label": "GDELT 보도 국가", "color": [147, 51, 234, 120]},
 }
 
 
@@ -48,8 +47,8 @@ def locate(code: str) -> tuple[float, float, str] | None:
 
 
 def code_for_name(name: str) -> str | None:
-    if name in GDELT_ALIASES:
-        return GDELT_ALIASES[name]
+    if name in NAME_ALIASES:
+        return NAME_ALIASES[name]
     hit = centroids().index[centroids()["name"] == name]
     return str(hit[0]) if len(hit) else None
 
@@ -83,52 +82,6 @@ def country_impact(event: Event, portfolio: Portfolio, snapshot: str) -> dict[st
     return dict(out)
 
 
-from app.agents.sentinel import combined_query  # noqa: E402  (하위 호환)
-
-
-def gdelt_coverage_combined(client: Any, timespan: str = "1d") -> dict:
-    """위기 키워드 전체를 한 번에 조회해 보도 매체 국가 분포를 낸다 (요청 1회, 최대 250건).
-
-    주제별 분류는 제목 키워드로 한다. 사건 발생 위치가 아니다 (GDELT GEO API는 404).
-    """
-    queries = load_config()["sentinel"]["news"]["queries"]
-    try:
-        arts = client.articles(combined_query(queries), timespan=timespan)
-    except Exception as e:
-        return {"timespan": timespan, "countries": {}, "by_query": {}, "errors": [f"combined: {e}"], "status": "unavailable",
-                "method": "combined"}
-    countries: dict[str, int] = defaultdict(int)
-    by_query: dict[str, dict] = {}
-    for a in arts:
-        if a.source_country:
-            countries[a.source_country] += 1
-    for event_type, q in queries.items():
-        kws = [t.strip().strip('"').lower() for t in q.strip("()").split(" OR ")]
-        hit = [a for a in arts if any(k in a.title.lower() for k in kws)]
-        by_query[event_type] = {"n_articles": len(hit), "top_titles": [a.title for a in hit[:3]]}
-    return {"timespan": timespan, "countries": dict(countries), "by_query": by_query, "errors": [], "status": "ok",
-            "method": "combined", "n_articles": len(arts)}
-
-
-def gdelt_coverage(client: Any, timespan: str = "1d") -> dict:
-    """주제 쿼리별 최근 기사의 보도 매체 국가 분포 (사건 발생 위치가 아니다. GDELT GEO API는 404라 사용 불가)."""
-    queries = load_config()["sentinel"]["news"]["queries"]
-    countries: dict[str, int] = defaultdict(int)
-    by_query, errors = {}, []
-    for event_type, query in queries.items():
-        try:
-            arts = client.articles(query, timespan=timespan)
-        except Exception as e:
-            errors.append(f"{event_type}: {e}")
-            continue
-        for a in arts:
-            if a.source_country:
-                countries[a.source_country] += 1
-        by_query[event_type] = {"n_articles": len(arts), "top_titles": [a.title for a in arts[:3]]}
-    return {"timespan": timespan, "countries": dict(countries), "by_query": by_query, "errors": errors,
-            "status": "unavailable" if len(errors) >= len(queries) else ("partial" if errors else "ok")}
-
-
 # ---------- 지도 행 ----------
 
 
@@ -149,20 +102,12 @@ def _rows(layer: str, values: dict[str, float], max_radius_m: float, fmt) -> tup
 
 
 def map_rows(event: Event | None = None, exposure_by_country: dict[str, float] | None = None,
-             impact_by_country: dict[str, float] | None = None,
-             coverage_by_name: dict[str, int] | None = None) -> tuple[pd.DataFrame, dict[str, list[str]]]:
+             impact_by_country: dict[str, float] | None = None) -> tuple[pd.DataFrame, dict[str, list[str]]]:
     """지도 원 데이터. 반환: (행, 레이어별 좌표 없는 지역 코드)."""
     rows: list[dict] = []
     unmapped: dict[str, list[str]] = {}
     if exposure_by_country:
         r, unmapped["exposure"] = _rows("exposure", exposure_by_country, 1_200_000, lambda v: f"{v:.2%}")
-        rows += r
-    if coverage_by_name:
-        by_code: dict[str, float] = defaultdict(float)
-        for name, n in coverage_by_name.items():
-            code = code_for_name(name)
-            by_code[code or name] += n
-        r, unmapped["coverage"] = _rows("coverage", dict(by_code), 1_000_000, lambda v: f"기사 {v:.0f}건")
         rows += r
     if impact_by_country:
         r, unmapped["impact"] = _rows("impact", impact_by_country, 900_000, lambda v: f"{v:.4f}")
