@@ -116,7 +116,7 @@ korea:                        # 로컬(대한민국) 상시 감시 — 사전 �
     series:
       FOREIGN_NET_KOSPI: {stat: 802Y001, item: "0030000", change: level}
     cumulative_days: 5
-  news:                       # B_kr: 네이버 뉴스 + Google 뉴스 RSS (30분마다)
+  news:                       # B_kr: Google 뉴스 RSS (30분마다)
     window_hours: 24
     baseline_days: 30
     baseline_min_points: 20   # 같은 시간대(±1시간) 기준점이 이만큼 쌓이기 전에는 판단 불가

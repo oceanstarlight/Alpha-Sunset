@@ -188,19 +188,20 @@
 - ✅ 사전 등록 v5 확정 `data/backtest/ablation/preregistration_v5_kr.json` (사용자 결정 반영)
   - 로컬 대응안에 해외 사건 포함 + 해외-한국 연관성 근거(동시 반응·과거 상관·노출 경로) 필수 첨부
   - 한국 뉴스 최소 언론사 10곳 / DART 신용 공시 단독은 경고만, 뉴스 교차 확인 + 로컬 1단계일 때 대응안
-  - A_kr: ECOS 코스피·원달러·국고채3년·회사채AA−국고채 스프레드·CD91 / C_kr: 외국인 순매수 / B_kr: 네이버·Google 뉴스 + DART 신용 공시
+  - A_kr: ECOS 코스피·원달러·국고채3년·회사채AA−국고채 스프레드·CD91 / C_kr: 외국인 순매수 / B_kr: Google 뉴스 RSS + DART 신용 공시
   - 공식 무료 소스만 (사용자 결정), 임계치는 글로벌과 동일, 알림은 텔레그램
 - ✅ 모든 경보 판단에 원인→근거→결과 표 (`sentinel.explain`): 감시 탭 라이브·백테스트(첫 알림일·첫 ALERT일)
 - ✅ UI 시장 선택: 로컬(대한민국, 기본) / 글로벌 — 수집은 항상 둘 다, 표시 범위만 변경
 - ✅ 로컬 감시 뼈대
-  - 데이터 클라이언트 `app/data/korea.py`: DART·네이버·Google RSS·ECOS
+  - 데이터 클라이언트 `app/data/korea.py`: DART·Google RSS·ECOS
   - 로컬 Sentinel `app/agents/local.py`: A_kr·C_kr·B_kr, DART 경고·확정, 연관성 근거, 원인-근거-결과
   - 알림·리포트: `app/notify.py`(텔레그램, 24시간 중복 방지), `app/report.py`(대응안 리포트)
   - 실행: `scripts/monitor_kr.py`, `.github/workflows/monitor_kr.yml`(평일 30분마다 + 하루 2회 daily)
   - 감시 탭(로컬)에 결과·경고·리포트 표시
   - 실제 확인: DART 연결됨 (삼부토건 영업정지 정정 공시 → 사건 경고), Google 뉴스 RSS 연결됨
 - 🗑️ KRX Open API 제외 (약관: 비상업적 목적만, 대가 청구 금지 — 사용자 결정)
-- ⏳ 키: DART ✅(세션) / ECOS·네이버·텔레그램 대기 / GitHub Secrets 등록 필요
+- 🗑️ 네이버 검색 API 제외 (유료 전환 — 사용자 결정)
+- ⏳ 키: DART·ECOS·텔레그램 ✅(세션) / GitHub Secrets 등록 필요
 - ⏳ ECOS 항목 코드 검증 (`config.yaml` korea.market.verified=false) → 키 발급 후 StatisticItemList로 확인
 - ⏳ 한국 신호 백테스트 (ECOS 이력, 사건 6개 + 평상 구간)
 - ⚠️ 뉴스 기준선은 30분 간격 관측이 같은 시간대 20개 쌓여야 판단 (약 3~4주), 그전엔 '판단 불가'로 표시

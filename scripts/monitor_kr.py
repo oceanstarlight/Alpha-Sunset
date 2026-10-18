@@ -119,11 +119,11 @@ def main() -> int:
     kr_flow = local.kr_flow_signal(panel, now.date()) if panel else None
 
     # B_kr 뉴스
-    naver, google = korea.NaverNewsClient(), korea.GoogleNewsRss()
+    google = korea.GoogleNewsRss()
     since = now - timedelta(hours=cfg["news"]["window_hours"])
     articles, news_notes = {}, []
     for event_type, query in cfg["news"]["queries"].items():
-        items, n = korea.search_news(query, since, naver, google)
+        items, n = korea.search_news(query, since, google)
         articles[event_type], news_notes = items, news_notes + n
     history = _read_jsonl(NEWS_HISTORY)
     kr_news, rows = local.kr_news_signal(articles, history, now, sorted(set(news_notes)))
@@ -135,7 +135,7 @@ def main() -> int:
     try:
         disclosures = korea.DartClient().disclosures(now.date() - timedelta(days=2), now.date())
         for w in local.dart_warnings(disclosures):
-            corp_items, n = korea.search_news(w.disclosure.corp_name, now - timedelta(hours=cfg["dart"]["confirm_hours"] + 24), naver, google)
+            corp_items, n = korea.search_news(w.disclosure.corp_name, now - timedelta(hours=cfg["dart"]["confirm_hours"] + 24), google)
             notes += n
             warnings.append(local.confirm_warning(w, corp_items, now))
     except korea.KeyMissing as e:

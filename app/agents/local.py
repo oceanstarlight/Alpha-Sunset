@@ -312,7 +312,7 @@ def explain_local(r: LocalResult) -> list[dict[str, str]]:
             cause = "급증 군집 없음" if n.status != "unavailable" else "판단 불가 (" + "; ".join(n.notes[:3]) + ")"
             ev = ""
         ev += f" 규칙: 최근 {cfg['news']['window_hours']}시간 기사 수 z ≥ {cfg['news']['z_threshold']} (직전 {cfg['news']['baseline_days']}일 같은 시간대) " \
-              f"AND 언론사 ≥ {cfg['news']['min_sources']}곳 ({RULE}). 출처: 네이버 뉴스·Google 뉴스"
+              f"AND 언론사 ≥ {cfg['news']['min_sources']}곳 ({RULE}). 출처: Google 뉴스 RSS"
         chain.append({"단계": "한국 사건(B_kr)", "원인": cause, "근거": ev.strip(),
                       "결과": {"ok": "활성" if n.active else "비활성", "partial": ("활성" if n.active else "비활성") + " (일부 판단 불가)",
                              "unavailable": "판단 불가"}[n.status]})

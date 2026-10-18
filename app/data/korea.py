@@ -1,11 +1,10 @@
 """한국(로컬) 시장 데이터 클라이언트 — 공식 무료 소스만 (사전 등록 v5).
 
 - OpenDART: 상장사 공시 목록 (신용 사건 경고)
-- 네이버 검색 API: 뉴스 검색
 - Google 뉴스 RSS: 뉴스 검색 (키 불필요)
 - ECOS(한국은행): 지수·환율·금리·외국인 순매수 일별
 
-KRX Open API는 약관(비상업적 목적만 이용, 결과에 대한 대가 청구 금지)으로 사용하지 않는다 (사용자 결정).
+네이버 검색 API는 유료 전환으로, KRX Open API는 약관(비상업적 목적만 이용, 결과에 대한 대가 청구 금지)으로 사용하지 않는다 (사용자 결정).
 
 키가 없으면 KeyMissing을 던진다. 호출부는 '미설정'으로 기록하고 건너뛴다.
 """
@@ -53,7 +52,7 @@ class NewsItem:
     url: str
     source: str  # 언론사 도메인 또는 이름
     published: datetime
-    provider: str  # naver | google
+    provider: str  # google
 
 
 @dataclass(frozen=True)
@@ -102,32 +101,6 @@ class DartClient:
 # ---------- 뉴스 ----------
 
 
-class NaverNewsClient:
-    URL = "https://openapi.naver.com/v1/search/news.json"
-
-    def __init__(self, http: httpx.Client | None = None):
-        self._http = http or httpx.Client(timeout=30)
-
-    def search(self, query: str, since: datetime, max_items: int = 1000) -> list[NewsItem]:
-        """최신순으로 since 이후 기사만 (API 한도: start ≤ 1000, display ≤ 100)."""
-        headers = {"X-Naver-Client-Id": _key("NAVER_CLIENT_ID"), "X-Naver-Client-Secret": _key("NAVER_CLIENT_SECRET")}
-        out: list[NewsItem] = []
-        for start in range(1, max_items + 1, 100):
-            resp = self._http.get(self.URL, params={"query": query, "display": 100, "start": start, "sort": "date"},
-                                  headers=headers)
-            resp.raise_for_status()
-            items = resp.json().get("items", [])
-            for it in items:
-                published = email.utils.parsedate_to_datetime(it["pubDate"])
-                if published < since:
-                    return out
-                url = it.get("originallink") or it["link"]
-                out.append(NewsItem(_strip_tags(it["title"]), url, _domain(url), published, "naver"))
-            if len(items) < 100:
-                break
-        return out
-
-
 class GoogleNewsRss:
     URL = "https://news.google.com/rss/search"
 
@@ -150,21 +123,21 @@ class GoogleNewsRss:
         return out
 
 
-def search_news(query: str, since: datetime, naver: NaverNewsClient | None, google: GoogleNewsRss | None) -> tuple[list[NewsItem], list[str]]:
-    """'A | B | C' 쿼리를 나눠 두 소스에서 검색하고 제목 기준으로 중복 제거. 반환: (기사, 실패·미설정 사유)."""
+def search_news(query: str, since: datetime, google: GoogleNewsRss | None) -> tuple[list[NewsItem], list[str]]:
+    """'A | B | C' 쿼리를 나눠 검색하고 제목 기준으로 중복 제거. 반환: (기사, 실패 사유).
+
+    Google 뉴스 RSS는 검색어당 최대 약 100건이라, 매우 큰 사건에서는 기사 수가 상한에 걸려 z가 눌릴 수 있다.
+    """
     items: dict[str, NewsItem] = {}
     notes: list[str] = []
+    if google is None:
+        return [], ["Google 뉴스 RSS 미사용"]
     for term in [t.strip() for t in query.split("|") if t.strip()]:
-        for name, client in (("naver", naver), ("google", google)):
-            if client is None:
-                continue
-            try:
-                for it in client.search(term, since):
-                    items.setdefault(re.sub(r"\W+", "", it.title)[:60], it)
-            except KeyMissing as e:
-                notes.append(str(e))
-            except Exception as e:  # 한 소스 실패는 기록하고 계속
-                notes.append(f"{name} '{term}': {e}")
+        try:
+            for it in google.search(term, since):
+                items.setdefault(re.sub(r"\W+", "", it.title)[:60], it)
+        except Exception as e:  # 한 검색어 실패는 기록하고 계속
+            notes.append(f"google '{term}': {e}")
     return list(items.values()), sorted(set(notes))
 
 

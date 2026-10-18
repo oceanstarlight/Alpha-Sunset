@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-18T19:42+09:00",
+  "as_of": "2026-10-18T21:29+09:00",
   "level": "WATCH",
   "money_alert": false,
   "event_confirmed": false,
@@ -10,50 +10,49 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 4,
+        "n_articles": 5,
         "n_sources": 4,
         "z": null,
         "baseline_points": 0
       },
       "credit_event": {
-        "n_articles": 26,
+        "n_articles": 22,
         "n_sources": 14,
         "z": null,
         "baseline_points": 0
       },
       "liquidity_crisis": {
-        "n_articles": 7,
+        "n_articles": 10,
         "n_sources": 7,
         "z": null,
         "baseline_points": 0
       },
       "fx_shock": {
-        "n_articles": 56,
+        "n_articles": 52,
         "n_sources": 35,
         "z": null,
         "baseline_points": 0
       },
       "trade_policy": {
-        "n_articles": 66,
-        "n_sources": 34,
+        "n_articles": 61,
+        "n_sources": 31,
         "z": null,
         "baseline_points": 0
       },
       "geopolitical": {
-        "n_articles": 78,
+        "n_articles": 84,
         "n_sources": 61,
         "z": null,
         "baseline_points": 0
       },
       "pandemic": {
-        "n_articles": 40,
-        "n_sources": 19,
+        "n_articles": 35,
+        "n_sources": 18,
         "z": null,
         "baseline_points": 0
       }
     },
     "notes": [
-      "NAVER_CLIENT_ID 미설정",
       "banking_stress: 기준선 축적 중 (0/20)",
       "credit_event: 기준선 축적 중 (0/20)",
       "liquidity_crisis: 기준선 축적 중 (0/20)",
@@ -87,8 +86,8 @@
     },
     {
       "단계": "한국 사건(B_kr)",
-      "원인": "판단 불가 (NAVER_CLIENT_ID 미설정; banking_stress: 기준선 축적 중 (0/20); credit_event: 기준선 축적 중 (0/20))",
-      "근거": "규칙: 최근 24시간 기사 수 z ≥ 3.0 (직전 30일 같은 시간대) AND 언론사 ≥ 10곳 (사전 등록 v5). 출처: 네이버 뉴스·Google 뉴스",
+      "원인": "판단 불가 (banking_stress: 기준선 축적 중 (0/20); credit_event: 기준선 축적 중 (0/20); liquidity_crisis: 기준선 축적 중 (0/20))",
+      "근거": "규칙: 최근 24시간 기사 수 z ≥ 3.0 (직전 30일 같은 시간대) AND 언론사 ≥ 10곳 (사전 등록 v5). 출처: Google 뉴스 RSS",
       "결과": "판단 불가"
     },
     {
@@ -104,11 +103,9 @@
       "결과": "WATCH → 사건 경고 알림"
     }
   ],
-  "notes": [
-    "NAVER_CLIENT_ID 미설정"
-  ],
+  "notes": [],
   "alerts_sent": {
-    "dart:20261016000376:False": "not_configured"
+    "dart:20261016000376:False": "sent"
   },
   "report": null
 }
