@@ -58,7 +58,7 @@
 - 전처리: 국가코드(ISO 3166-1 alpha-2)·위도·경도·영문명 244행을 `data/geo/country_centroids.csv`로 저장
 
 ## 일일 시그널 수집 (`data/live/`)
-- `scripts/collect_signals.py`를 GitHub Actions(`.github/workflows/collect_signals.yml`)가 매일 22:07 UTC(07:07 KST)에 실행해 커밋
+- `scripts/collect_signals.py`를 GitHub Actions(`.github/workflows/collect_signals.yml`)가 3시간마다 실행해 커밋. GDELT는 주제별 결과를 `gdelt_topics.json`에 쌓는다
 - `signals_latest.json`: FRED 시장·자금 흐름 z-score, GDELT 주제별 기사량 신호와 조회 상태, 최근 1일 위기 주제 기사의 보도 매체 국가(`sourcecountry`) 분포. 기사 본문·URL은 저장하지 않고 주제별 상위 제목 3개만 저장
 - `signals_history.jsonl`: 일별 요약 1줄씩 누적
 - FRED는 임시 폴더에 내려받아 커밋된 `data/fred/` 캐시(백테스트 재현용)를 바꾸지 않는다

@@ -271,7 +271,7 @@ with tab_watch:
             st.dataframe(df, hide_index=True, width="stretch")
     else:
         st.subheader("라이브 감시")
-        st.caption("기본은 매일 07시경(KST) GitHub Actions 수집기가 커밋한 결과를 보여준다. "
+        st.caption("기본은 GitHub Actions 수집기가 3시간마다 주제별로 나눠 모은 결과를 보여준다 (요청 제한 회피). "
                    "'지금 직접 조회'는 FRED·GDELT를 바로 부른다 (GDELT 요청 간격 10초, 수 분 소요, 1시간 캐시).")
         b1, b2 = st.columns(2)
         if b1.button("수집 결과 보기", type="primary"):
@@ -308,6 +308,11 @@ with tab_watch:
                 c2.info(f"조회된 주제에서는 급증 군집 없음 (주제 {news.get('n_queries', '?')}개 중 {len(news['errors'])}개 조회 실패)")
             else:
                 c2.error("판단 불가 (조회 실패)")
+            if news.get("topics"):
+                with c2.expander("주제별 수집 상태 (3시간마다 나눠 수집)"):
+                    st.dataframe(pd.DataFrame([{"주제": k, "마지막 성공(UTC)": v["ok_at"] or "-", "기사량 z": v["z"],
+                                                "최근 오류": (v["error"] or "")[:60]} for k, v in news["topics"].items()]).astype(str),
+                                 hide_index=True, width="stretch")
             if news["errors"]:
                 with c2.expander(f"GDELT 조회 실패 {len(news['errors'])}건 원인"):
                     for err in news["errors"]:

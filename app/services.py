@@ -27,7 +27,8 @@ def market_panel(refresh: bool = False) -> dict:
     return load_panel(sentinel.panel_series_ids(), refresh=refresh)
 
 
-def compute_signals(gdelt_client: Any = None, fred_cache_dir: Path | None = None, coverage: bool = False) -> dict:
+def compute_signals(gdelt_client: Any = None, fred_cache_dir: Path | None = None, coverage: bool = False,
+                    news: Any = None, coverage_data: dict | None = None) -> dict:
     """최신 시그널 A/B/C와 등급을 계산한다. coverage=True면 GDELT 보도 국가 분포도 모은다 (요청 수 2배)."""
     try:
         panel = load_panel(sentinel.panel_series_ids(), **({"cache_dir": fred_cache_dir} if fred_cache_dir else {}),
@@ -39,14 +40,17 @@ def compute_signals(gdelt_client: Any = None, fred_cache_dir: Path | None = None
     last_obs = max(s.index[-1] for s in panel.values()).date()
     market = sentinel.market_signal(sentinel.AsOfPanel(panel), last_obs)
     flow = sentinel.flow_signal(sentinel.AsOfPanel(panel), today) if sentinel.flow_enabled() else None
-    if gdelt_client is None:
-        from app.data.gdelt import GdeltClient
+    if news is None:  # 수집기는 주제별로 나눠 모은 결과(news)를 넘긴다
+        if gdelt_client is None:
+            from app.data.gdelt import GdeltClient
 
-        gdelt_client = GdeltClient()
-    news = sentinel.live_news_signal(gdelt_client, today)
+            gdelt_client = GdeltClient()
+        news = sentinel.live_news_signal(gdelt_client, today)
     news_out = {"active": news.active, "status": news.status, "n_queries": news.n_queries, "errors": news.errors,
                 "clusters": [c.__dict__ for c in news.clusters]}
-    if coverage:
+    if coverage_data is not None:
+        news_out["coverage"] = coverage_data
+    elif coverage:
         from app import geo
 
         news_out["coverage"] = geo.gdelt_coverage(gdelt_client)

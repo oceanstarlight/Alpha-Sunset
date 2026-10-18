@@ -193,39 +193,65 @@ def cluster_titles(titles: list[str], threshold: float) -> list[list[int]]:
     return sorted((m for _, m in clusters), key=len, reverse=True)
 
 
+def news_topic(client: Any, event_type: str, query: str, as_of: date) -> dict:
+    """주제 하나의 라이브 B 판정 (요청 1~2회). 조회 실패는 예외로 올린다."""
+    cfg = _sentinel_cfg()["news"]
+    out = {"event_type": event_type, "z": None, "n_articles": 0, "n_sources": 0, "cluster": None, "note": ""}
+    vol = client.daily_volume(query).loc[: pd.Timestamp(as_of)]
+    if len(vol) < cfg["baseline_days"] + 1:
+        out["note"] = "기사량 이력 부족"
+        return out
+    base = vol.iloc[-(cfg["baseline_days"] + 1) : -1]
+    if not base.std():
+        out["note"] = "기준선 변동 없음"
+        return out
+    z = float((vol.iloc[-1] - base.mean()) / base.std())
+    out["z"] = round(z, 3)
+    if z < cfg["z_threshold"]:
+        return out
+    articles = client.articles(query, timespan="1d")
+    n_sources = len({a.domain for a in articles})
+    out["n_articles"], out["n_sources"] = len(articles), n_sources
+    if n_sources < cfg["min_sources"]:
+        return out
+    groups = cluster_titles([a.title for a in articles], cfg["cluster_jaccard"])
+    top = articles[groups[0][0]].title if groups else event_type
+    key = " ".join(sorted(_tokens(top))[:5]) or event_type
+    out["cluster"] = NewsCluster(key=key, label=top, event_type=event_type, n_articles=len(articles),
+                                 n_sources=n_sources, z=z).__dict__
+    return out
+
+
 def live_news_signal(client: Any, as_of: date) -> NewsSignal:
     """라이브용 B: 주제 쿼리별 기사량 z ≥ 3 AND 서로 다른 출처 ≥ 20."""
     cfg = _sentinel_cfg()["news"]
     clusters, errors = [], []
     for event_type, query in cfg["queries"].items():
         try:
-            vol = client.daily_volume(query).loc[: pd.Timestamp(as_of)]
+            t = news_topic(client, event_type, query, as_of)
         except Exception as e:
             errors.append(f"{event_type}: {e}")
             continue
-        if len(vol) < cfg["baseline_days"] + 1:
-            continue
-        base = vol.iloc[-(cfg["baseline_days"] + 1) : -1]
-        if not base.std():
-            continue
-        z = float((vol.iloc[-1] - base.mean()) / base.std())
-        if z < cfg["z_threshold"]:
-            continue
-        try:
-            articles = client.articles(query, timespan="1d")
-        except Exception as e:
-            errors.append(f"{event_type}: {e}")
-            continue
-        n_sources = len({a.domain for a in articles})
-        if n_sources < cfg["min_sources"]:
-            continue
-        groups = cluster_titles([a.title for a in articles], cfg["cluster_jaccard"])
-        top = articles[groups[0][0]].title if groups else event_type
-        key = " ".join(sorted(_tokens(top))[:5]) or event_type
-        clusters.append(
-            NewsCluster(key=key, label=top, event_type=event_type, n_articles=len(articles), n_sources=n_sources, z=z)
-        )
+        if t["cluster"]:
+            clusters.append(NewsCluster(**t["cluster"]))
     return NewsSignal(as_of=as_of, clusters=clusters, errors=errors, n_queries=len(cfg["queries"]))
+
+
+def news_signal_from_topics(state: dict[str, dict], as_of: date, now: datetime, max_age_hours: float = 26) -> NewsSignal:
+    """주제별로 나눠 모은 결과(state)로 B를 만든다. 오래됐거나 한 번도 성공 못 한 주제는 '판단 불가' 사유로 남긴다."""
+    queries = _sentinel_cfg()["news"]["queries"]
+    clusters, errors = [], []
+    for event_type in queries:
+        t = state.get(event_type)
+        ok_at = datetime.fromisoformat(t["ok_at"]) if t and t.get("ok_at") else None
+        if ok_at is None or (now - ok_at).total_seconds() > max_age_hours * 3600:
+            last_err = (t or {}).get("error") or "아직 수집 안 됨"
+            age = f"마지막 성공 {(now - ok_at).total_seconds() / 3600:.0f}시간 전" if ok_at else "성공 이력 없음"
+            errors.append(f"{event_type}: {age} ({last_err})")
+            continue
+        if t["result"].get("cluster"):
+            clusters.append(NewsCluster(**t["result"]["cluster"]))
+    return NewsSignal(as_of=as_of, clusters=clusters, errors=errors, n_queries=len(queries))
 
 
 # ---------- 등급·병합 ----------
