@@ -1,4 +1,4 @@
-"""Alpha Sunset — Streamlit UI (5탭: 감시 / 브리핑 / 승인 / 백테스트 / 학습 층)."""
+"""Alpha Sunset — Streamlit UI (6탭: 세계 금융 지도 / 감시 / 브리핑 / 승인 / 백테스트 / 학습 층)."""
 
 from __future__ import annotations
 
@@ -10,12 +10,14 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # Streamlit Cloud: 저장소 루트를 import 경로에
 
 import pandas as pd
+import pydeck as pdk
 import streamlit as st
 
-from app import services
+from app import geo, services
 from app.agents import sentinel
-from app.corpus import load_events, load_playbooks
-from app.schemas import AlertLevel, Briefing, Feedback, Verdict
+from app.agents.exposure import ExposureUnavailable
+from app.corpus import load_events, load_playbooks, load_portfolio
+from app.schemas import AlertLevel, Briefing, Event, Feedback, Verdict
 
 st.set_page_config(page_title="Alpha Sunset", page_icon="🌅", layout="wide")
 
@@ -88,7 +90,81 @@ def current_briefing() -> Briefing | None:
     return st.session_state.get(key)
 
 
-tab_watch, tab_brief, tab_approve, tab_bt, tab_learn = st.tabs(["감시", "브리핑", "승인", "백테스트", "학습 층"])
+tab_map, tab_watch, tab_brief, tab_approve, tab_bt, tab_learn = st.tabs(
+    ["세계 금융 지도", "감시", "브리핑", "승인", "백테스트", "학습 층"])
+
+# ---------- 0. 세계 금융 지도 ----------
+
+
+@st.cache_data(show_spinner=False)
+def map_exposure(snapshot: str) -> dict[str, float] | None:
+    try:
+        return geo.country_exposure(load_portfolio(), snapshot)
+    except ExposureUnavailable:
+        return None
+
+
+@st.cache_data(show_spinner=False)
+def map_impact(event_json: str, snapshot: str) -> dict[str, float] | None:
+    try:
+        return geo.country_impact(Event.model_validate_json(event_json), load_portfolio(), snapshot)
+    except ExposureUnavailable:
+        return None
+
+
+with tab_map:
+    st.subheader("세계 금융 지도")
+    live = mode == "라이브"
+    b = current_briefing()
+    map_event = (b.event if b else None) if live else events_by_id()[event_id]
+    snapshot = "live" if live else event_id
+    coverage = None
+    if live:
+        sig = st.session_state.get("signals") or services.load_collected_signals(with_panel=False)
+        coverage = (sig or {}).get("news", {}).get("coverage")
+    options = [v["label"] for k, v in geo.LAYERS.items() if live or k != "coverage"]  # 보도 국가는 라이브 전용
+    shown = st.pills("표시", options, selection_mode="multi", default=options) or []
+    exp = map_exposure(snapshot)
+    imp = map_impact(map_event.model_dump_json(), snapshot) if map_event else None
+    df, unmapped = geo.map_rows(
+        event=map_event if geo.LAYERS["event"]["label"] in shown else None,
+        exposure_by_country=exp if geo.LAYERS["exposure"]["label"] in shown else None,
+        impact_by_country=imp if geo.LAYERS["impact"]["label"] in shown else None,
+        coverage_by_name=coverage["countries"] if coverage and geo.LAYERS["coverage"]["label"] in shown else None,
+    )
+    def scatter(k: str, v: dict) -> pdk.Layer:
+        ring = k == "event"  # 사건은 빨간 테두리 원으로 그려 아래 원(비중·영향도)이 가려지지 않게
+        return pdk.Layer("ScatterplotLayer", data=df[df["layer"] == v["label"]], get_position=["lon", "lat"],
+                         get_radius="radius", get_fill_color="color", filled=not ring, stroked=True, pickable=True,
+                         get_line_color=v["color"][:3] + [230] if ring else [255, 255, 255, 160],
+                         line_width_min_pixels=3 if ring else 1, radius_min_pixels=3)
+
+    layers = [scatter(k, v) for k, v in geo.LAYERS.items() if not df.empty and v["label"] in set(df["layer"])]
+    st.pydeck_chart(pdk.Deck(layers=layers, initial_view_state=pdk.ViewState(latitude=25, longitude=30, zoom=0.9),
+                             tooltip={"text": "{tooltip}"}), height=520)
+    st.markdown(" · ".join(f":{c}[{m}] {geo.LAYERS[k]['label']}" for k, c, m in
+                           [("event", "red", "○"), ("exposure", "blue", "●"), ("impact", "orange", "●"),
+                            ("coverage", "violet", "●")] if geo.LAYERS[k]["label"] in options))
+    st.caption("원 크기: 사건(빨간 테두리) = 심각도, 보유 비중 = 국가별 노드 비중(프록시 펀드 보유 국가 반영, 거래상대방 포함), "
+               "영향도 = 노출 경로 risk_score 합(비중×연관도×불확실성 감점, LLM 없이 규칙 매칭), "
+               "GDELT 보도 국가 = 최근 1일 위기 주제 기사의 **보도 매체 국가** (사건 발생 위치 아님).")
+    if map_event:
+        st.markdown(f"**사건**: {map_event.title} ({map_event.date}) · 지역 {', '.join(map_event.regions)} · 심각도 {map_event.severity}/5")
+    elif live:
+        st.info("라이브 사건 브리핑이 없어 사건·영향도 원은 표시하지 않는다 (감시 탭에서 사건 탐지 시 생성).")
+    if exp is None:
+        st.warning(f"{snapshot} 시점 보유 스냅샷이 없어 보유 비중·영향도를 그릴 수 없다 (N-PORT 2019년 이전 미공개).")
+    if live and not coverage:
+        st.info("GDELT 보도 국가 데이터가 없다. 매일 07시경 GitHub Actions 수집기가 갱신한다.")
+    elif coverage:
+        st.caption(f"GDELT 수집 상태: {coverage['status']} · 기간 {coverage['timespan']}"
+                   + (f" · 실패 {len(coverage['errors'])}건" if coverage["errors"] else ""))
+    if not df.empty:
+        top = (df.sort_values("value", ascending=False).groupby("layer").head(5)
+               [["layer", "name", "code", "value"]].rename(columns={"layer": "레이어", "name": "국가", "code": "코드", "value": "값"}))
+        st.dataframe(top, hide_index=True, width="stretch")
+    if unmapped:
+        st.caption("좌표로 표시하지 못한 지역(묶음·미상): " + "; ".join(f"{geo.LAYERS[k]['label']} {', '.join(v)}" for k, v in unmapped.items()))
 
 # ---------- 1. 감시 ----------
 
@@ -112,14 +188,24 @@ with tab_watch:
         st.dataframe(df, hide_index=True, width="stretch")
     else:
         st.subheader("라이브 감시")
-        st.caption("FRED 최신값과 GDELT 기사량을 조회한다. GDELT는 5초당 1회 제한이라 1분 가량 걸린다 (1시간 캐시).")
-        if st.button("신호 조회", type="primary"):
+        st.caption("기본은 매일 07시경(KST) GitHub Actions 수집기가 커밋한 결과를 보여준다. "
+                   "'지금 직접 조회'는 FRED·GDELT를 바로 부른다 (GDELT 요청 간격 10초, 수 분 소요, 1시간 캐시).")
+        b1, b2 = st.columns(2)
+        if b1.button("수집 결과 보기", type="primary"):
+            st.session_state["signals"] = services.get_signals()
+        if b2.button("지금 직접 조회"):
             with st.spinner("FRED·GDELT 조회 중…"):
-                st.session_state["signals"] = services.get_signals()
+                st.session_state["signals"] = services.get_signals(refresh=True)
         sig = st.session_state.get("signals")
         if sig:
             level = AlertLevel(sig["level"])
+            news = sig["news"]
+            status = news.get("status", "ok")
+            src = "일일 수집기" if sig.get("source") == "collector" else "직접 조회"
             st.markdown(f"### 등급: :{LEVEL_COLOR[level]}[{level.value}]  (기준일 {sig['as_of']})")
+            st.caption(f"출처: {src} · 조회 시각(UTC) {sig.get('collected_at', '-')}")
+            if status == "unavailable":
+                st.error("사건 신호(B) 판단 불가: GDELT 조회가 모두 실패했다. 등급의 '사건 없음'은 확인된 결과가 아니다.")
             if sig.get("money_alert"):
                 st.warning("1단계 자금 이상 알림: 시장 또는 자금 흐름에서 이상이 감지됐다. 사건이 확정되면 대응안을 생성한다.")
             if sig.get("flow"):
@@ -128,15 +214,21 @@ with tab_watch:
             c1.write("**시그널 A (시장)**")
             c1.dataframe(pd.DataFrame(sig["market"]["zscores"].items(), columns=["시리즈", "z-score"]), hide_index=True)
             c2.write("**시그널 B (뉴스)**")
-            if sig["news"]["clusters"]:
-                c2.dataframe(pd.DataFrame(sig["news"]["clusters"]), hide_index=True)
-            else:
+            if news["clusters"]:
+                c2.dataframe(pd.DataFrame(news["clusters"]), hide_index=True)
+            elif status == "ok":
                 c2.info("기사량 급증 군집 없음")
-            if sig["news"]["errors"]:
-                c2.warning(f"GDELT 조회 실패 {len(sig['news']['errors'])}건 (요청 제한 등)")
+            elif status == "partial":
+                c2.info(f"조회된 주제에서는 급증 군집 없음 (주제 {news.get('n_queries', '?')}개 중 {len(news['errors'])}개 조회 실패)")
+            else:
+                c2.error("판단 불가 (조회 실패)")
+            if news["errors"]:
+                with c2.expander(f"GDELT 조회 실패 {len(news['errors'])}건 원인"):
+                    for err in news["errors"]:
+                        st.text(err)
             if sig["fred_error"]:
                 st.warning(f"FRED 갱신 실패, 커밋된 캐시 사용: {sig['fred_error']}")
-            if sig["news"]["clusters"] and st.button("탐지 사건 브리핑 생성"):
+            if news["clusters"] and st.button("탐지 사건 브리핑 생성"):
                 with st.spinner("에이전트 실행 중…"):
                     st.session_state["live_briefing"] = services.run_live(sig)
 

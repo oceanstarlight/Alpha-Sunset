@@ -36,7 +36,7 @@
 
 ## GDELT DOC 2.0 (라이브 시그널 B)
 - URL: https://api.gdeltproject.org/api/v2/doc/doc (`timelinevolraw`, `artlist` 모드)
-- 약관: GDELT 무료 공개 데이터, 요청 간격 5초당 1회 제한
+- 약관: GDELT 무료 공개 데이터, 요청 간격 5초당 1회 제한 (클라이언트는 10초 간격 + 429·연결 끊김 재시도)
 - 범위: 최근 약 3개월. 라이브 모드 전용, 데이터 저장 안 함
 
 ## SEC EDGAR N-PORT (프록시 펀드 보유내역)
@@ -51,3 +51,14 @@
 - `data/playbooks/*.json`: `data/source_notes/` 요지를 근거로 Claude가 초안 작성, 사람 검수 대상. 모두 `synthetic: true`
 - `data/portfolio.json`: 가상 기관·가상 운용사·가상 카운터파티. 비중 모두 가상값. 프록시 펀드(KRE, EMB, HYG, XLE, MCHI, VGK, IVV, EWY)는 실존 공개 펀드이며 보유내역은 SEC N-PORT로 수집(위 항목)
 - `data/labels/*.json`: 사용자가 직접 설계한 합성 라벨
+
+## 국가 중심 좌표 (세계 금융 지도)
+- 출처: Google Developers Public Data — Canonical countries (https://developers.google.com/public-data/docs/canonical/countries_csv)
+- 수집일: 2026-10-18. 약관: CC BY 4.0 (Google Developers 사이트 콘텐츠 라이선스)
+- 전처리: 국가코드(ISO 3166-1 alpha-2)·위도·경도·영문명 244행을 `data/geo/country_centroids.csv`로 저장
+
+## 일일 시그널 수집 (`data/live/`)
+- `scripts/collect_signals.py`를 GitHub Actions(`.github/workflows/collect_signals.yml`)가 매일 22:07 UTC(07:07 KST)에 실행해 커밋
+- `signals_latest.json`: FRED 시장·자금 흐름 z-score, GDELT 주제별 기사량 신호와 조회 상태, 최근 1일 위기 주제 기사의 보도 매체 국가(`sourcecountry`) 분포. 기사 본문·URL은 저장하지 않고 주제별 상위 제목 3개만 저장
+- `signals_history.jsonl`: 일별 요약 1줄씩 누적
+- FRED는 임시 폴더에 내려받아 커밋된 `data/fred/` 캐시(백테스트 재현용)를 바꾸지 않는다

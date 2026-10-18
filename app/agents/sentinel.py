@@ -146,10 +146,18 @@ class NewsSignal:
     as_of: date
     clusters: list[NewsCluster] = field(default_factory=list)
     errors: list[str] = field(default_factory=list)  # 조회 실패한 쿼리 (예: GDELT 요청 제한)
+    n_queries: int = 0  # 조회한 주제 수 (라이브)
 
     @property
     def active(self) -> bool:
         return bool(self.clusters)
+
+    @property
+    def status(self) -> str:
+        """ok: 모두 조회 / partial: 일부 실패 / unavailable: 전부 실패 → '사건 없음'이 아니라 '판단 불가'."""
+        if not self.n_queries or not self.errors:
+            return "ok"
+        return "unavailable" if len(self.errors) >= self.n_queries else "partial"
 
 
 def card_news_signal(events: list[Event], as_of: date) -> NewsSignal:
@@ -217,7 +225,7 @@ def live_news_signal(client: Any, as_of: date) -> NewsSignal:
         clusters.append(
             NewsCluster(key=key, label=top, event_type=event_type, n_articles=len(articles), n_sources=n_sources, z=z)
         )
-    return NewsSignal(as_of=as_of, clusters=clusters, errors=errors)
+    return NewsSignal(as_of=as_of, clusters=clusters, errors=errors, n_queries=len(cfg["queries"]))
 
 
 # ---------- 등급·병합 ----------

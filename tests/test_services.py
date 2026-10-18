@@ -54,7 +54,7 @@ def test_ui_renders_without_exceptions():
     app = Path(__file__).resolve().parent.parent / "ui" / "streamlit_app.py"
     at = AppTest.from_file(str(app), default_timeout=120).run()
     assert not at.exception
-    assert len(at.tabs) == 5
+    assert len(at.tabs) == 6
     at.sidebar.selectbox[0].set_value("svb_2023").run()
     assert not at.exception
     assert any("SVB" in m.value or "실리콘밸리" in m.value for m in at.markdown)
@@ -83,3 +83,30 @@ def test_all_ui_tables_serialize_to_arrow(monkeypatch):
     at = AppTest.from_file(str(app), default_timeout=120).run()
     at.sidebar.selectbox[0].set_value("svb_2023").run()
     assert seen and not bad, bad
+
+
+def test_ui_live_mode_renders_map_with_collected_signals(monkeypatch, tmp_path):
+    """라이브 모드: 수집기 파일이 있으면 지도·감시 탭이 그 결과로 그려진다."""
+    import json
+
+    from streamlit.testing.v1 import AppTest
+
+    path = tmp_path / "signals_latest.json"
+    path.write_text(json.dumps({
+        "collected_at": "2026-10-18T22:07:00+00:00", "as_of": "2026-10-16", "level": "NONE", "money_alert": False,
+        "market": {"active": False, "triggered": [], "zscores": {"VIXCLS": 0.1}}, "flow": None, "fred_error": None,
+        "news": {"active": False, "status": "unavailable", "n_queries": 8, "errors": ["pandemic: 429"], "clusters": [],
+                 "coverage": {"timespan": "1d", "countries": {"United States": 5}, "by_query": {}, "errors": [],
+                              "status": "ok"}},
+    }), encoding="utf-8")
+    monkeypatch.setattr(services, "LIVE_SIGNALS_PATH", path)
+    sig = services.get_signals()
+    assert sig["source"] == "collector" and sig["news"]["status"] == "unavailable" and sig["panel"]
+
+    app = Path(__file__).resolve().parent.parent / "ui" / "streamlit_app.py"
+    at = AppTest.from_file(str(app), default_timeout=120).run()
+    at.sidebar.radio[0].set_value("라이브").run()
+    assert not at.exception
+    at.button[0].click().run()  # 감시 탭 '수집 결과 보기'
+    assert not at.exception
+    assert any("판단 불가" in e.value for e in at.error)
