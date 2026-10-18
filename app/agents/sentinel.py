@@ -299,3 +299,62 @@ def replay(panel: dict[str, pd.Series], events: list[Event], start: date, end: d
         view = AsOfPanel(panel, as_of=as_of)
         results.append(evaluate(view, card_news_signal(events, as_of), as_of))
     return results
+
+
+# ---------- 원인-근거-결과 ----------
+
+SERIES_LABEL = {
+    "VIXCLS": "VIX(변동성)", "T10Y2Y": "미 장단기 금리차", "DGS10": "미 10년물 금리", "DEXKOUS": "원/달러 환율",
+    "DCOILWTICO": "WTI 유가", "DTWEXBGS": "달러 인덱스", "BAMLH0A0HYM2": "미 하이일드 스프레드",
+    "BAA10Y": "Baa 회사채 스프레드", "WRMFNS": "개인 MMF 잔액", "DPSACBW027SBOG": "미 은행 예금",
+    "WMTSECL1": "해외 공적 미국채 보관", "WRESBAL": "지급준비금",
+}
+
+
+def _z_text(zscores: dict[str, float], ids: list[str]) -> str:
+    return ", ".join(f"{SERIES_LABEL.get(s, s)}({s}) z={zscores[s]:+.2f}" for s in ids)
+
+
+def explain(result: SentinelResult) -> list[dict[str, str]]:
+    """경보 판단을 단계별 원인-근거-결과로 풀어 쓴다 (사용자 요구: 모든 판단에 근거 첨부)."""
+    cfg = _sentinel_cfg()
+    m, f, n = result.market, result.flow, result.news
+    chain = []
+    top = sorted(m.zscores, key=lambda s: -abs(m.zscores[s]))[:3]
+    chain.append({
+        "단계": "시장 신호(A)",
+        "원인": _z_text(m.zscores, m.triggered) if m.triggered else "임계 초과 지표 없음",
+        "근거": f"FRED 1일 변화 z-score (직전 {cfg['market']['lookback_days']}영업일 기준), 규칙: |z| ≥ "
+                f"{cfg['market']['z_threshold']} 지표 {cfg['market']['min_series']}개 이상 또는 |z| ≥ {cfg['market']['z_extreme']}. "
+                f"상위: {_z_text(m.zscores, top) or '-'}",
+        "결과": "활성" if m.active else "비활성",
+    })
+    if f is not None:
+        chain.append({
+            "단계": "자금 흐름(C)",
+            "원인": _z_text(f.zscores, f.triggered) if f.triggered else "임계 초과 지표 없음",
+            "근거": f"FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ {cfg['flow']['z_threshold']} 하나 이상. "
+                    f"관측: {_z_text(f.zscores, list(f.zscores)) or '-'}",
+            "결과": "활성" if f.active else "비활성",
+        })
+    if n.clusters:
+        cause = "; ".join(c.label for c in n.clusters[:3])
+        evidence = "; ".join(
+            f"{c.event_type or '-'}: 기사 {c.n_articles}건 · 출처 {c.n_sources}곳 · 기사량 z={c.z:.1f} (GDELT)" if c.z is not None
+            else f"사건 카드 기준 (백테스트: 카드 날짜부터 {cfg['news']['card_active_days']}일 활성)" for c in n.clusters[:3])
+    else:
+        cause = "사건 군집 없음" if n.status == "ok" else f"조회 실패 {len(n.errors)}/{n.n_queries}건"
+        evidence = f"규칙: 기사량 z ≥ {cfg['news']['z_threshold']} AND 출처 ≥ {cfg['news']['min_sources']}곳"
+    chain.append({"단계": "사건 신호(B)", "원인": cause, "근거": evidence,
+                  "결과": {"ok": "활성" if n.active else "비활성", "partial": ("활성" if n.active else "비활성") + " (일부 조회 실패)",
+                         "unavailable": "판단 불가"}[n.status]})
+    money = m.active or bool(f and f.active)
+    action = {AlertLevel.ALERT: "2단계: 대응안(브리핑) 생성", AlertLevel.WATCH:
+              "1단계: 자금 이상 알림" if money else "사건 관찰 (시장 반응 대기)", AlertLevel.NONE: "조치 없음"}[result.level]
+    chain.append({
+        "단계": "종합 등급",
+        "원인": f"A={'활성' if m.active else '비활성'}, C={'활성' if f and f.active else '비활성'}, B={'활성' if n.active else '비활성'}",
+        "근거": "등급 규칙(사전 등록 v2·v3): ALERT = B ∧ (A ∨ C), WATCH = 하나 이상 활성",
+        "결과": f"{result.level.value} → {action}",
+    })
+    return chain

@@ -36,6 +36,8 @@
 | **세계 금융 지도** (메인 탭) | 세계 지도 위 원으로 사건 지역(심각도)·국가별 보유 비중·영향도(노출 경로 risk 합)·GDELT 보도 매체 국가를 표시 |
 | **Learner** (알파 썬셋) | 인용·피드백 이력으로 문서 검색 우선순위를 보정 (최대 ±15%, protected 하한, 기본 OFF) |
 
+모든 경보 판단은 **원인 → 근거 → 결과** 표로 남긴다 (어떤 지표가 몇 z로 움직였고, 어떤 규칙·임계치에 걸려, 어떤 등급·조치가 나왔는지).
+
 ## 3. 백테스트 결과 (실제 실행값)
 사건 6개: 2008 리먼, 2020 코로나, 2022 러시아-우크라이나, 2022 레고랜드, 2023 SVB, 2025 미국 관세.
 전체 수치는 [`data/backtest_results.json`](data/backtest_results.json).
@@ -73,7 +75,7 @@
 python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 .venv/bin/streamlit run ui/streamlit_app.py
-.venv/bin/pytest -q       # 118개 테스트
+.venv/bin/pytest -q       # 119개 테스트
 ```
 - **API 키 없이도** 백테스트 재생은 동작한다. 커밋된 LLM 응답 캐시(`data/llm_cache.db`)로 같은 결과를 재현한다.
 - 배포: Streamlit Community Cloud (`ui/streamlit_app.py`, Python 3.11, Secrets에 `GEMINI_API_KEY`·`SEC_USER_AGENT`).

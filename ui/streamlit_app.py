@@ -65,6 +65,26 @@ def replay_signals(event_id: str) -> pd.DataFrame:
                           "트리거": ", ".join(r.market.triggered + (r.flow.triggered if r.flow else []))} for r in results])
 
 
+@st.cache_data(show_spinner=False)
+def replay_chains(event_id: str) -> dict[str, list[dict]]:
+    """재생 구간의 첫 자금 이상 알림일·첫 ALERT일 판단 근거."""
+    e = events_by_id()[event_id]
+    results = sentinel.replay(market_panel(), [e], e.date - timedelta(days=30), e.date + timedelta(days=14))
+    out = {}
+    first_money = next((r for r in results if r.market.active or (r.flow and r.flow.active)), None)
+    first_alert = next((r for r in results if r.level == AlertLevel.ALERT), None)
+    for name, r in [("첫 자금 이상 알림", first_money), ("첫 ALERT", first_alert)]:
+        if r:
+            out[f"{name} ({r.as_of})"] = sentinel.explain(r)
+    return out
+
+
+def show_chain(chain: list[dict]) -> None:
+    """원인 → 근거 → 결과 표."""
+    st.dataframe(pd.DataFrame(chain), hide_index=True, width="stretch",
+                 column_config={"근거": st.column_config.TextColumn(width="large")})
+
+
 def synthetic_badge():
     st.badge("합성 데이터: 대응문서·포트폴리오·라벨은 가상으로 재구성", icon="⚠️", color="orange")
 
@@ -203,7 +223,12 @@ with tab_watch:
         for col, sid, label in [(cols[0], "VIXCLS", "VIX"), (cols[1], "BAA10Y" if e.date.year < 2024 else "BAMLH0A0HYM2", "신용스프레드")]:
             col.caption(f"{label} ({sid})")
             col.line_chart(panel[sid].loc[window])
-        st.dataframe(df, hide_index=True, width="stretch")
+        st.markdown("#### 판단 근거 (원인 → 근거 → 결과)")
+        for name, chain in replay_chains(event_id).items():
+            st.caption(name)
+            show_chain(chain)
+        with st.expander("일자별 재생 표"):
+            st.dataframe(df, hide_index=True, width="stretch")
     else:
         st.subheader("라이브 감시")
         st.caption("기본은 매일 07시경(KST) GitHub Actions 수집기가 커밋한 결과를 보여준다. "
@@ -222,6 +247,9 @@ with tab_watch:
             src = "일일 수집기" if sig.get("source") == "collector" else "직접 조회"
             st.markdown(f"### 등급: :{LEVEL_COLOR[level]}[{level.value}]  (기준일 {sig['as_of']})")
             st.caption(f"출처: {src} · 조회 시각(UTC) {sig.get('collected_at', '-')}")
+            if sig.get("chain"):
+                st.markdown("#### 판단 근거 (원인 → 근거 → 결과)")
+                show_chain(sig["chain"])
             if status == "unavailable":
                 st.error("사건 신호(B) 판단 불가: GDELT 조회가 모두 실패했다. 등급의 '사건 없음'은 확인된 결과가 아니다.")
             if sig.get("money_alert"):

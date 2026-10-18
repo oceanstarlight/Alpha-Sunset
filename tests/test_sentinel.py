@@ -255,3 +255,17 @@ def test_gdelt_client_retries_disconnect_and_429():
     always = GdeltClient(http=httpx.Client(transport=httpx.MockTransport(lambda r: httpx.Response(429))), interval_sec=0)
     with pytest.raises(RuntimeError, match="4회 시도 실패"):
         always.articles("x")
+
+
+def test_explain_gives_cause_evidence_result_for_every_stage():
+    from app.agents.sentinel import explain
+
+    m = MarketSignal(as_of=END, zscores={"VIXCLS": 3.1, "BAA10Y": 2.7, "DGS10": 0.2}, triggered=["VIXCLS", "BAA10Y"], active=True)
+    n = NewsSignal(as_of=END, clusters=[NewsCluster(key="k", label="Bank run", event_type="banking_stress",
+                                                    n_articles=40, n_sources=25, z=4.2)], n_queries=8)
+    chain = explain(SentinelResult(as_of=END, level=grade(m, n), market=m, news=n))
+    assert [c["단계"] for c in chain] == ["시장 신호(A)", "사건 신호(B)", "종합 등급"]
+    assert all(set(c) == {"단계", "원인", "근거", "결과"} and c["원인"] and c["근거"] for c in chain)
+    assert "VIXCLS" in chain[0]["원인"] and "출처 25곳" in chain[1]["근거"] and chain[2]["결과"].startswith("ALERT")
+    failed = NewsSignal(as_of=END, clusters=[], errors=["x"] * 8, n_queries=8)
+    assert explain(SentinelResult(as_of=END, level=grade(m, failed), market=m, news=failed))[1]["결과"] == "판단 불가"
