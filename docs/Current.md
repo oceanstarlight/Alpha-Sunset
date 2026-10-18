@@ -192,8 +192,17 @@
   - 공식 무료 소스만 (사용자 결정), 임계치는 글로벌과 동일, 알림은 텔레그램
 - ✅ 모든 경보 판단에 원인→근거→결과 표 (`sentinel.explain`): 감시 탭 라이브·백테스트(첫 알림일·첫 ALERT일)
 - ✅ UI 시장 선택: 로컬(대한민국, 기본) / 글로벌 — 수집은 항상 둘 다, 표시 범위만 변경
-- ⏳ API 키 발급 (KRX·ECOS·DART·네이버·텔레그램) → GitHub Secrets + 세션 환경 변수
-- ⏳ v5 확정 후: 한국 신호 수집기·백테스트·텔레그램 알림·대응안 리포트 자동 생성
+- ✅ 로컬 감시 뼈대
+  - 데이터 클라이언트 `app/data/korea.py`: DART·네이버·Google RSS·ECOS·KRX
+  - 로컬 Sentinel `app/agents/local.py`: A_kr·C_kr·B_kr, DART 경고·확정, 연관성 근거, 원인-근거-결과
+  - 알림·리포트: `app/notify.py`(텔레그램, 24시간 중복 방지), `app/report.py`(대응안 리포트)
+  - 실행: `scripts/monitor_kr.py`, `.github/workflows/monitor_kr.yml`(평일 30분마다 + 하루 2회 daily)
+  - 감시 탭(로컬)에 결과·경고·리포트 표시
+  - 실제 확인: DART 연결됨 (삼부토건 영업정지 정정 공시 → 사건 경고), Google 뉴스 RSS 연결됨
+- ⏳ 키: DART ✅(세션) / ECOS·KRX·네이버·텔레그램 대기 / GitHub Secrets 등록 필요
+- ⏳ ECOS 항목 코드 검증 (`config.yaml` korea.market.verified=false) → 키 발급 후 StatisticItemList로 확인
+- ⏳ 한국 신호 백테스트 (ECOS 이력, 사건 6개 + 평상 구간)
+- ⚠️ 뉴스 기준선은 30분 간격 관측이 같은 시간대 20개 쌓여야 판단 (약 3~4주), 그전엔 '판단 불가'로 표시
 
 ---
 

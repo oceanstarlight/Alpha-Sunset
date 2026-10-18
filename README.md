@@ -68,14 +68,14 @@
 - 라벨과 Learner 시뮬레이션 피드백이 같은 출처(라벨)에서 나와 순환 위험이 있다.
 - 백테스트의 사건 신호(B)는 사건 카드 날짜에 묶여 있어, 사건 확정 전 경보(ALERT)는 구조적으로 불가능하다. 사건 전에는 1단계 알림만 낸다.
 - 위탁운용사 노출은 공개 펀드를 프록시로 추정한다 (불확실성 0.3 반영).
-- 한국 일간 자금 흐름(KRX 외국인 순매수)은 인증키 확보 후 추가 예정이다.
+- 한국 시장(ECOS·KRX)·네이버 뉴스·텔레그램 알림은 인증키 확보 후 활성화된다 (DART·Google 뉴스는 연결 확인). 한국 뉴스 급증 판단은 기준선이 쌓이는 약 3~4주 뒤부터 가능하다.
 
 ## 6. 실행 방법
 ```bash
 python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 .venv/bin/streamlit run ui/streamlit_app.py
-.venv/bin/pytest -q       # 119개 테스트
+.venv/bin/pytest -q       # 126개 테스트
 ```
 - **API 키 없이도** 백테스트 재생은 동작한다. 커밋된 LLM 응답 캐시(`data/llm_cache.db`)로 같은 결과를 재현한다.
 - 배포: Streamlit Community Cloud (`ui/streamlit_app.py`, Python 3.11, Secrets에 `GEMINI_API_KEY`·`SEC_USER_AGENT`).
@@ -91,7 +91,8 @@ cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 | `scripts/run_learner_sim.py` | Learner ON/OFF 비교 |
 | `scripts/run_backtest.py` | 지표 산출 → `data/backtest_results.json` |
 | `scripts/validate_data.py` | 코퍼스·라벨 스키마·참조 검증 |
-| `scripts/collect_signals.py` | 일일 라이브 시그널 수집 (GitHub Actions, `data/live/`) |
+| `scripts/collect_signals.py` | 일일 글로벌 시그널 수집 (GitHub Actions, `data/live/`) |
+| `scripts/monitor_kr.py` | 로컬(대한민국) 상시 감시: 뉴스·DART 30분마다, ECOS 하루 2회 → 텔레그램 알림·대응안 리포트 |
 
 ## 7. 기술 스택과 비용
 - Python 3.11 · Streamlit · Pydantic v2 · Gemini API(`gemini-3.5-flash-lite`, `gemini-embedding-001`) · ChromaDB · SQLite · networkx · pandas

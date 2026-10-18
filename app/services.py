@@ -81,6 +81,16 @@ def load_collected_signals(with_panel: bool = True) -> dict | None:
     return data
 
 
+def load_local_signals() -> dict | None:
+    """로컬(대한민국) 감시 결과 (scripts/monitor_kr.py, GitHub Actions)."""
+    path = LIVE_SIGNALS_PATH.parent / "kr_latest.json"
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+
+
+def list_local_reports() -> list[Path]:
+    return sorted((LIVE_SIGNALS_PATH.parent / "reports").glob("*.md"), reverse=True)
+
+
 def get_signals(refresh: bool = False, gdelt_client: Any = None) -> dict:
     """refresh=False면 일일 수집 결과를 쓰고, 없거나 refresh=True면 직접 조회한다 (1시간 캐시)."""
     if not refresh:
