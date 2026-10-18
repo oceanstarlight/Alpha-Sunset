@@ -1,7 +1,33 @@
 {
-  "collected_at": "2026-10-18T10:43:47+00:00",
+  "collected_at": "2026-10-18T16:34:44+00:00",
   "as_of": "2026-10-16",
   "level": "NONE",
+  "chain": [
+    {
+      "단계": "시장 신호(A)",
+      "원인": "임계 초과 지표 없음",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=-2.23, 미 장단기 금리차(T10Y2Y) z=+0.76, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.42",
+      "결과": "비활성"
+    },
+    {
+      "단계": "자금 흐름(C)",
+      "원인": "임계 초과 지표 없음",
+      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.0 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.61, 미 은행 예금(DPSACBW027SBOG) z=+1.04, 해외 공적 미국채 보관(WMTSECL1) z=-0.55, 지급준비금(WRESBAL) z=-0.14",
+      "결과": "비활성"
+    },
+    {
+      "단계": "사건 신호(B)",
+      "원인": "조회 실패 8/8건",
+      "근거": "규칙: 최근 24시간 기사 수 z ≥ 3.0 (직전 30일 관측 기준선) AND 언론사 ≥ 20곳, 출처 Google 뉴스 RSS",
+      "결과": "판단 불가"
+    },
+    {
+      "단계": "종합 등급",
+      "원인": "A=비활성, C=비활성, B=비활성",
+      "근거": "등급 규칙(사전 등록 v2·v3): ALERT = B ∧ (A ∨ C), WATCH = 하나 이상 활성",
+      "결과": "NONE → 조치 없음"
+    }
+  ],
   "money_alert": false,
   "market": {
     "active": false,
@@ -26,119 +52,104 @@
   },
   "news": {
     "active": false,
-    "status": "partial",
+    "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "credit_event: GDELT 4회 시도 실패: 429 Too Many Requests",
-      "liquidity_crisis: GDELT 4회 시도 실패: 429 Too Many Requests",
-      "trade_policy: GDELT 4회 시도 실패: 429 Too Many Requests",
-      "fx_shock: GDELT 4회 시도 실패: 429 Too Many Requests",
-      "rate_shock: GDELT 4회 시도 실패: 429 Too Many Requests"
+      "banking_stress: 기준선 축적 중 (0/20)",
+      "credit_event: 기준선 축적 중 (0/20)",
+      "liquidity_crisis: 기준선 축적 중 (0/20)",
+      "geopolitical: 기준선 축적 중 (0/20)",
+      "trade_policy: 기준선 축적 중 (0/20)",
+      "pandemic: 기준선 축적 중 (0/20)",
+      "fx_shock: 기준선 축적 중 (0/20)",
+      "rate_shock: 기준선 축적 중 (0/20)"
     ],
     "clusters": [],
-    "coverage": {
-      "timespan": "1d",
-      "countries": {
-        "Russia": 14,
-        "United States": 71,
-        "Malaysia": 3,
-        "India": 32,
-        "Bangladesh": 5,
-        "France": 29,
-        "South Korea": 10,
-        "Vietnam": 35,
-        "Pakistan": 3,
-        "Croatia": 2,
-        "Mexico": 8,
-        "Australia": 24,
-        "Ukraine": 1,
-        "China": 36,
-        "Brazil": 21,
-        "Germany": 18,
-        "Japan": 1,
-        "Serbia": 2,
-        "Taiwan": 12,
-        "Spain": 12,
-        "Argentina": 7,
-        "Turkey": 8,
-        "Moldova": 2,
-        "Indonesia": 3,
-        "Lithuania": 5,
-        "Italy": 9,
-        "Singapore": 3,
-        "Canada": 12,
-        "Romania": 15,
-        "Netherlands": 2,
-        "Venezuela": 1,
-        "Senegal": 1,
-        "Poland": 1,
-        "Belgium": 2,
-        "Cuba": 1,
-        "Finland": 1,
-        "Colombia": 1,
-        "Chile": 1,
-        "Paraguay": 1,
-        "United Kingdom": 14,
-        "Ghana": 1,
-        "Ireland": 1,
-        "Greece": 23,
-        "Austria": 2,
-        "Switzerland": 2,
-        "Lebanon": 1,
-        "Egypt": 9,
-        "Czech Republic": 2,
-        "United Arab Emirates": 1,
-        "Philippines": 1,
-        "Uganda": 1,
-        "Nigeria": 4,
-        "Saudi Arabia": 2,
-        "Jamaica": 1,
-        "Slovak Republic": 1,
-        "Kenya": 1,
-        "Libya": 1,
-        "New Zealand": 1,
-        "Estonia": 1,
-        "Mongolia": 1,
-        "Cyprus": 2,
-        "Israel": 3,
-        "Hungary": 1,
-        "Macedonia": 1,
-        "Denmark": 1,
-        "Algeria": 1,
-        "Syria": 2,
-        "Jordan": 1
+    "observations": {
+      "banking_stress": {
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": null,
+        "baseline_points": 0,
+        "top_titles": [
+          "A U.S. Bank Just Failed — It’s The 6th In 2026 Paolo Mieli (GL35MMwDnc) - Unisba Media",
+          "Can M&T Bank (MTB) Keep Earning Enough to Justify Its Price? - Simply Wall Street",
+          "South Korean Banks Link Savings Rates to Health Activities - 조선일보"
+        ]
       },
-      "by_query": {
-        "trade_policy": {
-          "n_articles": 250,
-          "top_titles": [
-            "Торговые войны : Пекин вдвое урежет экспорт гибридных авто в Европу",
-            "Taiwan targets illicit AI server exports to China with five - year prison terms strict new controls follow US tariff deal and Super Micro raid",
-            "China proposes export controls on solar - manufacturing technologies"
-          ]
-        },
-        "pandemic": {
-          "n_articles": 250,
-          "top_titles": [
-            "CDC to send  disease detective  to help tackle Pennsylvania measles outbreak",
-            "CDC to send  disease detective  to help tackle Pennsylvania measles outbreak | Pennsylvania",
-            "Coronavirus has destroyed the institution of marriage ; Covid time matrimonial disputes must be dealt with separately : Madras high court"
-          ]
-        },
-        "rate_shock": {
-          "n_articles": 0,
-          "top_titles": []
-        }
+      "credit_event": {
+        "n_articles": 48,
+        "n_sources": 36,
+        "z": null,
+        "baseline_points": 0,
+        "top_titles": [
+          "Replit makes OpenAI its default over Anthropic, CEO says - TechCrunch",
+          "California Wyndham hotel operator files for Chapter 11 bankruptcy - TheStreet",
+          "Lincoln, NE - PBR | Professional Bull Riders"
+        ]
       },
-      "errors": [
-        "banking_stress: GDELT 4회 시도 실패: 429 Too Many Requests",
-        "credit_event: GDELT 4회 시도 실패: 429 Too Many Requests",
-        "liquidity_crisis: GDELT 4회 시도 실패: 429 Too Many Requests",
-        "geopolitical: GDELT 4회 시도 실패: 429 Too Many Requests",
-        "fx_shock: GDELT 4회 시도 실패: 429 Too Many Requests"
-      ],
-      "status": "partial"
-    }
+      "liquidity_crisis": {
+        "n_articles": 5,
+        "n_sources": 4,
+        "z": null,
+        "baseline_points": 0,
+        "top_titles": [
+          "Nvidia's Product Blitz Faces a Funding Stress Test - ad-hoc-news.de",
+          "Nebius Stock Faces Funding Pressure As AI Cloud Debt Concerns Spread - Simply Wall Street",
+          "IREN (IREN) Dropped, What Is Behind The Move? - Simply Wall Street"
+        ]
+      },
+      "geopolitical": {
+        "n_articles": 100,
+        "n_sources": 76,
+        "z": null,
+        "baseline_points": 0,
+        "top_titles": [
+          "Trump waives new Russia sanctions in the \"national interests\" - Axios",
+          "Wright defends waiving sanctions: ‘It’s not an economic lifeline for Russia’ - The Hill",
+          "Zelenskyy says waived Russian sanctions are 'strengthening Putin's war against us' - NBC News"
+        ]
+      },
+      "trade_policy": {
+        "n_articles": 56,
+        "n_sources": 47,
+        "z": null,
+        "baseline_points": 0,
+        "top_titles": [
+          "China proposes export controls on solar-manufacturing technologies - Reuters",
+          "Tariff refund class action lawsuits target Walmart, Puma, others - Top Class Actions",
+          "Some Republican lawmakers skewer Trump's beef imports, slam Canada trade war - ABC News - Breaking News, Latest News and Videos"
+        ]
+      },
+      "pandemic": {
+        "n_articles": 37,
+        "n_sources": 35,
+        "z": null,
+        "baseline_points": 0,
+        "top_titles": [
+          "At the center of the state’s growing measles outbreak, it’s business as usual - Inquirer.com",
+          "Ebola outbreak update as of October 16 - Outbreak News Today",
+          "Health officials report 74 new measles cases in Pennsylvania - ABC News - Breaking News, Latest News and Videos"
+        ]
+      },
+      "fx_shock": {
+        "n_articles": 1,
+        "n_sources": 1,
+        "z": null,
+        "baseline_points": 0,
+        "top_titles": [
+          "Why Is the IMF, the “Grim Reaper” of Korea’s Currency Crisis 30 Years Ago, Envious of South Korea? - 아시아경제"
+        ]
+      },
+      "rate_shock": {
+        "n_articles": 0,
+        "n_sources": 0,
+        "z": null,
+        "baseline_points": 0,
+        "top_titles": []
+      }
+    },
+    "source": "Google 뉴스 RSS"
   },
   "fred_error": null
 }
