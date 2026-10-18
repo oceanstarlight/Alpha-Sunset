@@ -55,6 +55,15 @@ exposure:
     counterparty: 0.5
   uncertainty_penalty: 0.5
   requery_uncertain_ratio: 0.5
+  uncertain_path_threshold: 0.5   # 이 값 이상 uncertainty 경로를 '불확실 경로'로 집계
+  relevance_weights:              # 규칙 기반 연관도 가중치 (합 1)
+    region: 0.4
+    sector: 0.35
+    asset_class: 0.25
+  global_region_score: 0.5        # 사건 지역에 GLOBAL이 있으면 지역 일치 점수
+  min_relevance: 0.05
+  entity_candidates_max: 300      # LLM 이름 매칭에 넘길 최대 발행자 수
+  excluded_asset_cats: [STIV]     # 증권대여 담보 등 단기투자기구는 노출에서 제외
 
 learner:
   half_life_days: 180
