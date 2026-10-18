@@ -57,7 +57,7 @@ def build_report(title: str, as_of: datetime, chain: list[dict[str, str]], linka
         md += ["", "## 7. 담당별 확인 항목", ""] + [f"- [ ] {a}" for a in briefing.actions_to_check]
         if briefing.evidence_refs:
             md += ["", "## 8. 출처", ""] + [f"- {r}" for r in briefing.evidence_refs]
-    md += ["", "---", "※ 대응문서·포트폴리오는 합성 데이터다. 수치는 공개 데이터(FRED·ECOS·KRX·DART·뉴스)의 기준 시각 값이다.", ""]
+    md += ["", "---", "※ 대응문서·포트폴리오는 합성 데이터다. 수치는 공개 데이터(FRED·ECOS·DART·뉴스)의 기준 시각 값이다.", ""]
     return "\n".join(md)
 
 

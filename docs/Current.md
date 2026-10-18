@@ -23,7 +23,7 @@
 | P5 | Exposure (노출 경고) | ✅ 완료 |
 | P6 | Orchestrator + Briefing | ✅ 완료 |
 | P7 | 서비스 계층 + UI + 배포 | ✅ 완료 |
-| P8 | 백테스트 | ✅ 완료 (KRX 데이터·임계치 결정 대기) |
+| P8 | 백테스트 | ✅ 완료 |
 | P9 | Learner (알파 썬셋) | ✅ 완료 |
 | P10 | 제출물 | 🔄 진행 중 (README 완료) |
 
@@ -156,7 +156,7 @@
 | 경보 재현 | 6/6 | calm ALERT 0 |
 
 ### 남은 결정·작업
-- ⏳ KRX 외국인 순매수: KRX가 로그인 필요로 바뀜 → KRX Open API 또는 ECOS 무료 인증키 필요 (사용자)
+- 🔁 KRX 외국인 순매수 → ECOS로 대체 (KRX Open API는 약관 문제로 제외)
 - ✅ WIMFNS 제외 (사용자 결정, 사전 등록 v3)
 - ✅ 조기 사건 카드는 추가하지 않음 (사용자 결정: 특정 사건 맞춤 데이터 금지) → 2단계 운영(자금 이상 알림 → 사건 확정 시 대응안)으로 평가 체계 전환
 
@@ -193,13 +193,14 @@
 - ✅ 모든 경보 판단에 원인→근거→결과 표 (`sentinel.explain`): 감시 탭 라이브·백테스트(첫 알림일·첫 ALERT일)
 - ✅ UI 시장 선택: 로컬(대한민국, 기본) / 글로벌 — 수집은 항상 둘 다, 표시 범위만 변경
 - ✅ 로컬 감시 뼈대
-  - 데이터 클라이언트 `app/data/korea.py`: DART·네이버·Google RSS·ECOS·KRX
+  - 데이터 클라이언트 `app/data/korea.py`: DART·네이버·Google RSS·ECOS
   - 로컬 Sentinel `app/agents/local.py`: A_kr·C_kr·B_kr, DART 경고·확정, 연관성 근거, 원인-근거-결과
   - 알림·리포트: `app/notify.py`(텔레그램, 24시간 중복 방지), `app/report.py`(대응안 리포트)
   - 실행: `scripts/monitor_kr.py`, `.github/workflows/monitor_kr.yml`(평일 30분마다 + 하루 2회 daily)
   - 감시 탭(로컬)에 결과·경고·리포트 표시
   - 실제 확인: DART 연결됨 (삼부토건 영업정지 정정 공시 → 사건 경고), Google 뉴스 RSS 연결됨
-- ⏳ 키: DART ✅(세션) / ECOS·KRX·네이버·텔레그램 대기 / GitHub Secrets 등록 필요
+- 🗑️ KRX Open API 제외 (약관: 비상업적 목적만, 대가 청구 금지 — 사용자 결정)
+- ⏳ 키: DART ✅(세션) / ECOS·네이버·텔레그램 대기 / GitHub Secrets 등록 필요
 - ⏳ ECOS 항목 코드 검증 (`config.yaml` korea.market.verified=false) → 키 발급 후 StatisticItemList로 확인
 - ⏳ 한국 신호 백테스트 (ECOS 이력, 사건 6개 + 평상 구간)
 - ⚠️ 뉴스 기준선은 30분 간격 관측이 같은 시간대 20개 쌓여야 판단 (약 3~4주), 그전엔 '판단 불가'로 표시

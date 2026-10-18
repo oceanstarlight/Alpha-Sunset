@@ -4,7 +4,8 @@
 - 네이버 검색 API: 뉴스 검색
 - Google 뉴스 RSS: 뉴스 검색 (키 불필요)
 - ECOS(한국은행): 지수·환율·금리·외국인 순매수 일별
-- KRX Open API: 지수 일별 (ECOS 보조)
+
+KRX Open API는 약관(비상업적 목적만 이용, 결과에 대한 대가 청구 금지)으로 사용하지 않는다 (사용자 결정).
 
 키가 없으면 KeyMissing을 던진다. 호출부는 '미설정'으로 기록하고 건너뛴다.
 """
@@ -167,7 +168,7 @@ def search_news(query: str, since: datetime, naver: NaverNewsClient | None, goog
     return list(items.values()), sorted(set(notes))
 
 
-# ---------- ECOS · KRX ----------
+# ---------- ECOS ----------
 
 
 class EcosClient:
@@ -186,20 +187,3 @@ class EcosClient:
                       dtype="float64").sort_index()
         s.index.name = "date"
         return s
-
-
-class KrxClient:
-    """KRX Open API (AUTH_KEY 헤더). 일별 지수 — ECOS 보조·교차 확인용."""
-
-    URL = "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd"
-
-    def __init__(self, http: httpx.Client | None = None):
-        self._http = http or httpx.Client(timeout=30)
-
-    def kospi(self, day: date) -> dict[str, float]:
-        resp = self._http.get(self.URL, params={"basDd": f"{day:%Y%m%d}"}, headers={"AUTH_KEY": _key("KRX_API_KEY")})
-        data = resp.json()
-        if "OutBlock_1" not in data:
-            raise RuntimeError(f"KRX 오류: {data.get('respMsg', data)}")
-        return {r["IDX_NM"]: float(str(r["CLSPRC_IDX"]).replace(",", "")) for r in data["OutBlock_1"]
-                if r.get("CLSPRC_IDX") not in (None, "", "-")}

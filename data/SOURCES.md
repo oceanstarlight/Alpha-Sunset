@@ -68,5 +68,5 @@
 - 네이버 검색 API 뉴스 (https://openapi.naver.com/v1/search/news.json): 무료 키, 일 25,000회. 기사 수·언론사 도메인·상위 제목만 저장
 - Google 뉴스 RSS (https://news.google.com/rss/search, hl=ko): 키 불필요. 기사 수·언론사명·상위 제목만 저장
 - 한국은행 ECOS Open API (https://ecos.bok.or.kr/api): 코스피·원/달러·국고채 3년·회사채 AA- 3년·CD 91일·외국인 순매수 일별. 항목 코드는 키 발급 후 검증
-- KRX Open API (https://openapi.krx.co.kr): 지수 일별 (ECOS 교차 확인용)
+- KRX Open API: 사용하지 않음 — 약관상 비상업적 목적만 이용 가능하고 결과에 대한 대가 청구 금지 (사용자 결정, 2026-10-18)
 - 비공식 시세(Yahoo 등)는 사용자 결정으로 사용하지 않는다
