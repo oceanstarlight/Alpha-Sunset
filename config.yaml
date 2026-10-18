@@ -20,7 +20,7 @@ sentinel:
     min_sources: 20
     card_active_days: 14      # 백테스트: 사건 카드 date부터 B 활성 유지 기간
     cluster_jaccard: 0.5
-    request_interval_sec: 6   # GDELT 요청 간격 제한 (5초당 1회)
+    request_interval_sec: 10  # GDELT 요청 간격 (5초당 1회 제한, 공유 IP 대비 여유)
     queries:
       banking_stress: '"bank run" OR "bank failure" OR "deposit outflow"'
       credit_event: '"default" OR "bankruptcy filing" OR "chapter 11"'

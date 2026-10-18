@@ -217,3 +217,41 @@ def test_live_news_records_query_errors():
 
     sig = live_news_signal(Failing(spike=True, n_domains=25), END)
     assert not sig.active and len(sig.errors) == 8
+    assert sig.status == "unavailable"  # 전부 실패 = '사건 없음'이 아니라 '판단 불가'
+
+
+def test_news_status_partial_and_ok():
+    class HalfFailing(FakeGdelt):
+        def daily_volume(self, query):
+            if "bank run" in query:
+                raise RuntimeError("Server disconnected")
+            return super().daily_volume(query)
+
+    assert live_news_signal(HalfFailing(spike=False, n_domains=25), END).status == "partial"
+    assert live_news_signal(FakeGdelt(spike=False, n_domains=25), END).status == "ok"
+
+
+def test_gdelt_client_retries_disconnect_and_429():
+    import httpx
+
+    from app.data.gdelt import GdeltClient
+
+    calls = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(1)
+        if len(calls) == 1:
+            raise httpx.RemoteProtocolError("Server disconnected without sending a response.")
+        if len(calls) == 2:
+            return httpx.Response(429, text="Please limit requests")
+        return httpx.Response(200, json={"articles": [
+            {"url": "https://x.com/1", "title": "t", "seendate": "20240628T010000Z", "domain": "x.com",
+             "sourcecountry": "South Korea"}]})
+
+    client = GdeltClient(http=httpx.Client(transport=httpx.MockTransport(handler)), interval_sec=0)
+    arts = client.articles("x")
+    assert len(calls) == 3 and arts[0].source_country == "South Korea"
+
+    always = GdeltClient(http=httpx.Client(transport=httpx.MockTransport(lambda r: httpx.Response(429))), interval_sec=0)
+    with pytest.raises(RuntimeError, match="4회 시도 실패"):
+        always.articles("x")

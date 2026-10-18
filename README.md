@@ -29,10 +29,11 @@
 
 | 구성 요소 | 내용 |
 |---|---|
-| **Sentinel** (상시 감시) | A: FRED 시장 지표 1일 변화 z-score / C: FRED 주간 자금 흐름(MMF·예금·해외 공적 미국채·지준, 공표 시차 반영) / B: 라이브 GDELT 기사량 급증·출처 수, 백테스트는 사건 카드 |
+| **Sentinel** (상시 감시) | A: FRED 시장 지표 1일 변화 z-score / C: FRED 주간 자금 흐름(MMF·예금·해외 공적 미국채·지준, 공표 시차 반영) / B: 라이브 GDELT 기사량 급증·출처 수, 백테스트는 사건 카드. 라이브는 GitHub Actions가 매일 07시(KST) 수집해 커밋하고, GDELT 조회 실패는 '판단 불가'로 구분 표시 |
 | **Matcher** (적합도 판단) | 조항 검색(ChromaDB, protected 조항 항상 포함) → 조항별 적용/부분적용/부적용 판정(Gemini). 근거 인용문이 조항 원문·사건 요약의 실제 문구인지 코드로 검증, 실패 시 `uncertain` |
 | **Exposure** (노출 경고) | 기관 → 직접·위탁운용사·거래상대방 → 프록시 펀드(SEC N-PORT 보유내역) → 발행자·국가 그래프. 사건 기관과 같은 발행자, 사건 지역과 직접 겹치는 핵심 경로는 별도 표시 |
 | **Orchestrator** | Gemini 함수 호출로 도구 순서를 정한다. 도구 입력·상태는 코드가 보유(LLM이 데이터를 조작하지 못함). 판정·노출 분석 전 브리핑 생성은 코드로 거부. 모든 호출은 trace로 저장 |
+| **세계 금융 지도** (메인 탭) | 세계 지도 위 원으로 사건 지역(심각도)·국가별 보유 비중·영향도(노출 경로 risk 합)·GDELT 보도 매체 국가를 표시 |
 | **Learner** (알파 썬셋) | 인용·피드백 이력으로 문서 검색 우선순위를 보정 (최대 ±15%, protected 하한, 기본 OFF) |
 
 ## 3. 백테스트 결과 (실제 실행값)
@@ -72,7 +73,7 @@
 python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 .venv/bin/streamlit run ui/streamlit_app.py
-.venv/bin/pytest -q       # 110개 테스트
+.venv/bin/pytest -q       # 118개 테스트
 ```
 - **API 키 없이도** 백테스트 재생은 동작한다. 커밋된 LLM 응답 캐시(`data/llm_cache.db`)로 같은 결과를 재현한다.
 - 배포: Streamlit Community Cloud (`ui/streamlit_app.py`, Python 3.11, Secrets에 `GEMINI_API_KEY`·`SEC_USER_AGENT`).
@@ -88,6 +89,7 @@ cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 | `scripts/run_learner_sim.py` | Learner ON/OFF 비교 |
 | `scripts/run_backtest.py` | 지표 산출 → `data/backtest_results.json` |
 | `scripts/validate_data.py` | 코퍼스·라벨 스키마·참조 검증 |
+| `scripts/collect_signals.py` | 일일 라이브 시그널 수집 (GitHub Actions, `data/live/`) |
 
 ## 7. 기술 스택과 비용
 - Python 3.11 · Streamlit · Pydantic v2 · Gemini API(`gemini-3.5-flash-lite`, `gemini-embedding-001`) · ChromaDB · SQLite · networkx · pandas
@@ -100,8 +102,8 @@ app/
   agents/      sentinel · matcher · exposure · orchestrator · learner
   data/        fred · gdelt · nport 클라이언트
   llm/         단일 LLM 래퍼 + 응답 캐시
-  backtest.py  지표 · schemas.py · services.py(UI 진입 함수)
-ui/streamlit_app.py   5탭 UI (감시 / 브리핑 / 승인 / 백테스트 / 학습 층)
+  backtest.py  지표 · geo.py(지도 집계) · schemas.py · services.py(UI 진입 함수)
+ui/streamlit_app.py   6탭 UI (세계 금융 지도 / 감시 / 브리핑 / 승인 / 백테스트 / 학습 층)
 data/          사건 카드 · 플레이북 · 포트폴리오 · 라벨 · FRED · N-PORT · 백테스트 결과
 docs/          plans.md(계획·결정 기록) · Current.md(진행 현황)
 ```
