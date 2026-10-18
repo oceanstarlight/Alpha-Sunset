@@ -20,7 +20,7 @@
 | P2 | 합성 코퍼스 | 🔄 진행 중 (라벨·검수 대기) |
 | P3 | Sentinel (상시 감시) | ✅ 완료 |
 | P4 | Matcher (적합도 판단) | ✅ 완료 (라벨 채점 대기) |
-| P5 | Exposure (노출 경고) | ✅ 완료 (순위 설계 확인 필요) |
+| P5 | Exposure (노출 경고) | ✅ 완료 |
 | P6 | Orchestrator + Briefing | ⏳ 예정 |
 | P7 | 서비스 계층 + UI + 배포 | ⏳ 예정 |
 | P8 | 백테스트 | ⏳ 예정 |
@@ -93,7 +93,7 @@
 - ✅ 불확실 경로 비율 계산 (`needs_requery`) — 추가 조회 후 재계산은 P6 Orchestrator에서 연결
 - ✅ `scripts/run_exposure.py` → `data/backtest/exposure/*.json` (gfc_2008 제외)
 - **완료 기준**: 사건별 상위 경로와 `why` 생성 ✅ (5개 사건)
-- ⚠️ 순위가 큰 직접 보유(국채·대형주 ETF)에 쏠림: 사건 지역에 GLOBAL이 있으면 모든 노드가 지역 일치로 잡힘. ru_ua_2022에서 EMB의 러시아·우크라이나 국채 경로가 30위·38위
+- ⚠️ 순위가 큰 직접 보유(국채·대형주 ETF)에 쏠림: 사건 지역에 GLOBAL이 있으면 모든 노드가 지역 일치로 잡힘. ru_ua_2022에서 EMB의 러시아·우크라이나 국채 경로가 30위·38위 → **P8에서 라벨 기준으로 조정 (사용자 결정)**
 
 ## P6 — Orchestrator + Briefing ⏳
 - ⏳ Gemini function calling 루프 (`max_steps=10`, 도구 7개)
@@ -110,6 +110,7 @@
 - **완료 기준**: 외부 접속 가능한 데모 URL, 재시작 후에도 정상 기동
 
 ## P8 — 백테스트 ⏳
+- ⏳ (P3·P4·P5 이월) 무작위 평상 구간 오경보 측정, 공백 채널 규칙, 사건일 기준 요약 분리, Exposure 순위(GLOBAL 점수·핵심 경로 표시) 조정
 - ⏳ `scripts/run_backtest.py` 지표 산출 (lead_time, doc_top3_hit, clause_PR, gap_PR, path_recall, false_alarms)
 - ⏳ 임계치·가중치 보정 (`config.yaml`)
 - **완료 기준**: `backtest_results.json` 생성 (실제 실행값만 기록)
