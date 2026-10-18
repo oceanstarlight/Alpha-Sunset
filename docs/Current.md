@@ -22,7 +22,7 @@
 | P4 | Matcher (적합도 판단) | ✅ 완료 (라벨 채점 대기) |
 | P5 | Exposure (노출 경고) | ✅ 완료 |
 | P6 | Orchestrator + Briefing | ✅ 완료 |
-| P7 | 서비스 계층 + UI + 배포 | 🔄 진행 중 (배포 대기) |
+| P7 | 서비스 계층 + UI + 배포 | ✅ 완료 |
 | P8 | 백테스트 | ⏳ 예정 |
 | P9 | Learner (알파 썬셋) | ⏳ 예정 |
 | P10 | 제출물 | ⏳ 예정 |
@@ -107,7 +107,7 @@
 - ⚠️ 재생 기준일 = 사건 카드 date라 covid_2020·tariff_2025는 WATCH (시장 신호가 다음 날 켜짐, P3 결과와 동일)
 - ⚠️ 확인 항목이 사건당 12~35개로 많음 → UI(P7)에서 담당 역할별 묶음 표시 예정
 
-## P7 — 서비스 계층 + UI + 배포 🔄
+## P7 — 서비스 계층 + UI + 배포 ✅
 - ✅ `app/services.py` 9개 함수 + `load_saved_briefing`, `record_approval`
   - `run_live`: FRED 갱신 + GDELT 뉴스 군집 → LLM 구조화 → 라이브 브리핑 (live DB, 최신 보유내역)
   - `submit_feedback`: feedback + shadow_log (브리핑 모드에 맞춰 live/backtest 분리)
@@ -116,9 +116,10 @@
 - ✅ Streamlit 5탭 (`ui/streamlit_app.py`): 감시(경보 재생·FRED 차트·라이브 조회) / 브리핑(적합도·근거·공백·노출 그래프·담당별 확인 항목·출처·trace) / 승인(문서 피드백·승인/반려) / 백테스트 / 학습 층, 합성 데이터 배지
 - ✅ 콜드 스타트 확인: 새로 받은 저장소에서 키 없이 `run_replay` 성공 (Chroma·sandbox.db 자동 재구성)
 - ✅ AppTest·서비스 테스트 추가
-- ⏳ Streamlit Community Cloud 배포 (사용자), 외부 접속 URL 확인, 재시작 후 정상 기동 확인
+- ✅ Streamlit Community Cloud 배포: https://alpha-sunset.streamlit.app (사용자 확인)
+- ⏳ 재시작(Reboot) 후 정상 기동 재확인
 - ⏳ 라이브 GDELT 호출을 배포 환경에서 재확인 (현재 세션은 429)
-- **완료 기준**: 외부 접속 가능한 데모 URL, 재시작 후에도 정상 기동
+- **완료 기준**: 외부 접속 가능한 데모 URL ✅, 재시작 후에도 정상 기동 (콜드 스타트 로컬 검증 ✅, 배포 환경 Reboot 확인 대기)
 
 ## P8 — 백테스트 ⏳
 - ⏳ (P3·P4·P5 이월) 무작위 평상 구간 오경보 측정, 공백 채널 규칙, 사건일 기준 요약 분리, Exposure 순위(GLOBAL 점수·핵심 경로 표시) 조정

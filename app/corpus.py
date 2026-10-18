@@ -37,8 +37,13 @@ def load_portfolio() -> Portfolio:
     return Portfolio.model_validate(_load(DATA_DIR / "portfolio.json"))
 
 
+UNFILLED_DATE = "YYYY-MM-DD"
+
+
 def load_labels() -> list[Label]:
-    return [Label.model_validate(_load(p)) for p in _files("labels")]
+    """작성된 라벨만 반환한다. reaction_date가 비어 있는(YYYY-MM-DD) 빈 틀은 건너뛴다."""
+    raw = [_load(p) for p in _files("labels")]
+    return [Label.model_validate(d) for d in raw if d.get("reaction_date") != UNFILLED_DATE]
 
 
 def check_label_refs(label: Label, playbooks: list[Playbook], events: list[Event], portfolio: Portfolio) -> list[str]:
