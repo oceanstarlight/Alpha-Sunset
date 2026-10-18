@@ -21,7 +21,7 @@
 | P3 | Sentinel (상시 감시) | ✅ 완료 |
 | P4 | Matcher (적합도 판단) | ✅ 완료 (라벨 채점 대기) |
 | P5 | Exposure (노출 경고) | ✅ 완료 |
-| P6 | Orchestrator + Briefing | ⏳ 예정 |
+| P6 | Orchestrator + Briefing | ✅ 완료 |
 | P7 | 서비스 계층 + UI + 배포 | ⏳ 예정 |
 | P8 | 백테스트 | ⏳ 예정 |
 | P9 | Learner (알파 썬셋) | ⏳ 예정 |
@@ -95,12 +95,17 @@
 - **완료 기준**: 사건별 상위 경로와 `why` 생성 ✅ (5개 사건)
 - ⚠️ 순위가 큰 직접 보유(국채·대형주 ETF)에 쏠림: 사건 지역에 GLOBAL이 있으면 모든 노드가 지역 일치로 잡힘. ru_ua_2022에서 EMB의 러시아·우크라이나 국채 경로가 30위·38위 → **P8에서 라벨 기준으로 조정 (사용자 결정)**
 
-## P6 — Orchestrator + Briefing ⏳
-- ⏳ Gemini function calling 루프 (`max_steps=10`, 도구 7개)
-- ⏳ 하드 제약: `build_briefing` 선행 도구 강제 + 테스트
-- ⏳ `traces` 테이블 저장
-- ⏳ `Briefing` 생성 (`actions_to_check` 집계)
-- **완료 기준**: `run_replay(event_id)`가 Briefing 반환
+## P6 — Orchestrator + Briefing ✅
+- ✅ Gemini 함수 호출 루프 (`max_steps=10`, 도구 7개). LLM은 호출 순서만 정하고 도구 입력·상태는 코드가 보유
+- ✅ 하드 제약: `build_briefing`은 `judge_clauses`·`compute_exposure` 실행 후에만 허용 + 테스트
+- ✅ 분기 규칙: fit_score < 0.4 확장 재검색 1회, 불확실 경로 비율 > 0.5 보유내역 재조회 1회(백테스트는 추가 공시 없음을 기록)
+- ✅ LLM이 브리핑까지 못 가면 남은 단계를 코드가 정해진 순서로 실행 (trace에 `fallback` 기록)
+- ✅ `traces`·`briefings` 테이블 저장, `get_trace`·`get_briefing`
+- ✅ `actions_to_check`: applicable/partial 조항의 조치를 담당 역할별로 모으고 중복 조치는 조항 번호만 합침, LLM은 문장 정리만
+- ✅ `scripts/run_replay.py` → `data/backtest/briefings/*.json`, 캐시로 키 없이 재현 확인
+- **완료 기준**: `run_replay(event_id)`가 Briefing 반환 ✅ (6개 사건, LLM이 7단계 모두 권장 순서로 호출, fallback 0회)
+- ⚠️ 재생 기준일 = 사건 카드 date라 covid_2020·tariff_2025는 WATCH (시장 신호가 다음 날 켜짐, P3 결과와 동일)
+- ⚠️ 확인 항목이 사건당 12~35개로 많음 → UI(P7)에서 담당 역할별 묶음 표시 예정
 
 ## P7 — 서비스 계층 + UI + 배포 ⏳
 - ⏳ `app/services.py` 9개 함수

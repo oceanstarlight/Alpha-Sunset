@@ -170,6 +170,8 @@ class Briefing(BaseModel):
     alert_level: AlertLevel
     match: MatchResult
     exposure_top: list[ExposurePath] = []
+    exposure_entities: list[ExposurePath] = []  # 사건 기관과 같은 발행자 보유 (순위와 별도)
+    exposure_note: str = ""  # 예: 보유내역 스냅샷 없음
     actions_to_check: list[str] = []
     evidence_refs: list[str] = []
     trace_id: str
