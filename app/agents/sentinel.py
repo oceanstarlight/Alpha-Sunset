@@ -237,6 +237,61 @@ def live_news_signal(client: Any, as_of: date) -> NewsSignal:
     return NewsSignal(as_of=as_of, clusters=clusters, errors=errors, n_queries=len(cfg["queries"]))
 
 
+def combined_query(queries: dict[str, str]) -> str:
+    """주제 쿼리들의 키워드를 하나의 OR 쿼리로 (요청 1회)."""
+    terms = []
+    for q in queries.values():
+        terms += [t.strip() for t in q.strip("()").split(" OR ") if t.strip()]
+    return "(" + " OR ".join(dict.fromkeys(terms)) + ")"
+
+
+def topic_keywords(query: str) -> list[str]:
+    return [t.strip().strip('"').lower() for t in query.strip("()").split(" OR ") if t.strip()]
+
+
+def quick_news_signal(client: Any, as_of: date) -> tuple[NewsSignal, dict]:
+    """빠른 조회 (요청 2회): ① 위기 키워드 전체 OR 쿼리의 일별 기사량 z ② 같은 쿼리 최근 1일 기사 목록.
+
+    ②의 제목을 주제 키워드로 나눠, 전체 기사량이 급증(z ≥ 3)했을 때 출처 ≥ 20곳인 주제를 군집으로 본다.
+    주제별 기사량 z는 보지 않는다 (그건 3시간마다 주제별로 나눠 모으는 수집기가 한다). 보도 국가 분포도 ②로 함께 낸다.
+    """
+    cfg = _sentinel_cfg()["news"]
+    queries = cfg["queries"]
+    q = combined_query(queries)
+    errors, z, arts = [], None, []
+    try:
+        vol = client.daily_volume(q).loc[: pd.Timestamp(as_of)]
+        base = vol.iloc[-(cfg["baseline_days"] + 1) : -1]
+        if len(vol) >= cfg["baseline_days"] + 1 and base.std():
+            z = float((vol.iloc[-1] - base.mean()) / base.std())
+    except Exception as e:
+        errors.append(f"전체 기사량: {e}")
+    try:
+        arts = client.articles(q, timespan="1d")
+    except Exception as e:
+        errors.append(f"기사 목록: {e}")
+    clusters, by_topic = [], {}
+    for event_type, tq in queries.items():
+        kws = topic_keywords(tq)
+        hit = [a for a in arts if any(k in a.title.lower() for k in kws)]
+        n_src = len({a.domain for a in hit})
+        by_topic[event_type] = {"n_articles": len(hit), "n_sources": n_src, "top_titles": [a.title for a in hit[:3]]}
+        if z is not None and z >= cfg["z_threshold"] and n_src >= cfg["min_sources"]:
+            groups = cluster_titles([a.title for a in hit], cfg["cluster_jaccard"])
+            top = hit[groups[0][0]].title if groups else event_type
+            clusters.append(NewsCluster(key=" ".join(sorted(_tokens(top))[:5]) or event_type, label=top, event_type=event_type,
+                                        n_articles=len(hit), n_sources=n_src, z=z))
+    countries: dict[str, int] = {}
+    for a in arts:
+        if getattr(a, "source_country", ""):
+            countries[a.source_country] = countries.get(a.source_country, 0) + 1
+    info = {"mode": "quick", "combined_z": None if z is None else round(z, 3), "n_articles": len(arts), "by_topic": by_topic,
+            "coverage": {"timespan": "1d", "countries": countries, "by_query": by_topic, "errors": [e for e in errors if e.startswith("기사 목록")],
+                         "method": "combined",
+                         "status": "ok" if arts else "unavailable"}}
+    return NewsSignal(as_of=as_of, clusters=clusters, errors=errors, n_queries=2), info
+
+
 def news_signal_from_topics(state: dict[str, dict], as_of: date, now: datetime, max_age_hours: float = 26) -> NewsSignal:
     """주제별로 나눠 모은 결과(state)로 B를 만든다. 오래됐거나 한 번도 성공 못 한 주제는 '판단 불가' 사유로 남긴다."""
     queries = _sentinel_cfg()["news"]["queries"]

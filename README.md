@@ -86,7 +86,7 @@
 python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 .venv/bin/streamlit run ui/streamlit_app.py
-.venv/bin/pytest -q       # 144개 테스트
+.venv/bin/pytest -q       # 145개 테스트
 ```
 - **API 키 없이도** 백테스트 재생은 동작한다. 커밋된 LLM 응답 캐시(`data/llm_cache.db`)로 같은 결과를 재현한다.
 - 배포: Streamlit Community Cloud (`ui/streamlit_app.py`, Python 3.11, Secrets에 `GEMINI_API_KEY`·`SEC_USER_AGENT`).

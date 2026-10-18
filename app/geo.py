@@ -83,12 +83,7 @@ def country_impact(event: Event, portfolio: Portfolio, snapshot: str) -> dict[st
     return dict(out)
 
 
-def combined_query(queries: dict[str, str]) -> str:
-    """주제 쿼리들의 키워드를 하나의 OR 쿼리로 (요청 1회)."""
-    terms = []
-    for q in queries.values():
-        terms += [t.strip() for t in q.strip("()").split(" OR ") if t.strip()]
-    return "(" + " OR ".join(dict.fromkeys(terms)) + ")"
+from app.agents.sentinel import combined_query  # noqa: E402  (하위 호환)
 
 
 def gdelt_coverage_combined(client: Any, timespan: str = "1d") -> dict:

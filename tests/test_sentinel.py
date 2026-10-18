@@ -326,3 +326,33 @@ def test_combined_coverage_single_request():
     cov = geo.gdelt_coverage_combined(One(spike=False, n_domains=1))
     assert One.n == 1 and cov["countries"] == {"United States": 1, "Germany": 1}
     assert cov["by_query"]["trade_policy"]["n_articles"] == 1 and cov["by_query"]["banking_stress"]["n_articles"] == 1
+
+
+def test_quick_news_signal_uses_two_requests():
+    from app.agents.sentinel import quick_news_signal
+
+    calls = []
+
+    class Two(FakeGdelt):
+        def daily_volume(self, query):
+            calls.append("vol")
+            return super().daily_volume(query)  # 결합 쿼리에 "bank run" 포함 → 급증
+
+        def articles(self, query, timespan="1d"):
+            calls.append("art")
+            return super().articles(query, timespan)
+
+    sig, info = quick_news_signal(Two(spike=True, n_domains=25), END)
+    assert calls == ["vol", "art"]
+    assert [c.event_type for c in sig.clusters] == ["banking_stress"] and info["combined_z"] > 3
+    assert sig.status == "ok" and info["by_topic"]["banking_stress"]["n_sources"] == 25
+
+    class Down(FakeGdelt):
+        def daily_volume(self, query):
+            raise RuntimeError("429")
+
+        def articles(self, query, timespan="1d"):
+            raise RuntimeError("429")
+
+    sig, info = quick_news_signal(Down(spike=False, n_domains=1), END)
+    assert sig.status == "unavailable" and info["coverage"]["status"] == "unavailable"
