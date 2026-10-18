@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-18T20:32:55+00:00",
+  "collected_at": "2026-10-18T23:01:39+00:00",
   "as_of": "2026-10-16",
   "level": "NONE",
   "chain": [
@@ -55,33 +55,33 @@
     "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "banking_stress: 기준선 축적 중 (1/20)",
-      "credit_event: 기준선 축적 중 (1/20)",
-      "liquidity_crisis: 기준선 축적 중 (1/20)",
-      "geopolitical: 기준선 축적 중 (1/20)",
-      "trade_policy: 기준선 축적 중 (1/20)",
-      "pandemic: 기준선 축적 중 (1/20)",
-      "fx_shock: 기준선 축적 중 (1/20)",
-      "rate_shock: 기준선 축적 중 (1/20)"
+      "banking_stress: 기준선 축적 중 (2/20)",
+      "credit_event: 기준선 축적 중 (2/20)",
+      "liquidity_crisis: 기준선 축적 중 (2/20)",
+      "geopolitical: 기준선 축적 중 (2/20)",
+      "trade_policy: 기준선 축적 중 (2/20)",
+      "pandemic: 기준선 축적 중 (2/20)",
+      "fx_shock: 기준선 축적 중 (2/20)",
+      "rate_shock: 기준선 축적 중 (2/20)"
     ],
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 4,
-        "n_sources": 4,
+        "n_articles": 3,
+        "n_sources": 3,
         "z": null,
-        "baseline_points": 1,
+        "baseline_points": 2,
         "top_titles": [
           "South Korean Banks Link Savings Rates to Health Activities - 조선일보",
-          "Can M&T Bank (MTB) Keep Earning Enough to Justify Its Price? - Simply Wall Street",
-          "Frgmnt CEO Says Fiat-Backed Stablecoins May Remain Exposed to Banking Risks - TOKENPOST"
+          "Nearly $1 Million In 48 Hours: BankSocial Says Credit Unions Can Turn Crypto Into A New Lending Business - CU Today",
+          "Stablecoin Risk Hits Crypto Banking: What Firms Must Know - OneSafe"
         ]
       },
       "credit_event": {
-        "n_articles": 45,
-        "n_sources": 34,
+        "n_articles": 44,
+        "n_sources": 33,
         "z": null,
-        "baseline_points": 1,
+        "baseline_points": 2,
         "top_titles": [
           "Character.ai Maker Files for Chapter 11 Bankruptcy - WSJ",
           "LCPS may act on lease default, sublease request at Alma d'Arte property - Organ Mountain News",
@@ -89,46 +89,46 @@
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 5,
-        "n_sources": 5,
+        "n_articles": 4,
+        "n_sources": 4,
         "z": null,
-        "baseline_points": 1,
+        "baseline_points": 2,
         "top_titles": [
           "Manufacturers Face Tighter Credit Crunch As Bank Loans Drop 27% - LEADERSHIP Newspapers",
           "Nvidia's Product Blitz Faces a Funding Stress Test - ad-hoc-news.de",
-          "IREN (IREN) Dropped, What Is Behind The Move? - Simply Wall Street"
+          "AI trade reversal pierces Asia’s star picks-and-shovels stocks - The Straits Times"
         ]
       },
       "geopolitical": {
         "n_articles": 100,
-        "n_sources": 78,
+        "n_sources": 74,
         "z": null,
-        "baseline_points": 1,
+        "baseline_points": 2,
         "top_titles": [
-          "Trump waives new Russia sanctions in the \"national interests\" - Axios",
-          "Energy secretary defends waiving sanctions on Russia: 'It’s not an economic lifeline' - ABC News - Breaking News, Latest News and Videos",
-          "Zelenskyy urges support for new US sanctions on Russia after Trump puts them on hold - Texas Public Radio | TPR"
+          "Congress reacts to executive order exempting Russia from economic sanctions - NPR",
+          "Trump Offers Putin Economic Relief in Hopes That Russia Will Return the Favor - The New York Times",
+          "Rubio says Trump to take up to 60 days to weigh Russia sanctions - Reuters"
         ]
       },
       "trade_policy": {
         "n_articles": 61,
-        "n_sources": 52,
+        "n_sources": 54,
         "z": null,
-        "baseline_points": 1,
+        "baseline_points": 2,
         "top_titles": [
           "China Proposes Expanded Export Controls on AI, Biopharma and Solar Energy Technologies - Global Sanctions and Export Controls Blog",
           "China proposes export controls on solar-manufacturing technologies - Reuters",
-          "Appeal of foreign trade zones grows amid tariff uncertainty - Daily Journal"
+          "Trump Waives Russia Sanctions, Tariff Law After Fuel Deal - Law360"
         ]
       },
       "pandemic": {
-        "n_articles": 67,
-        "n_sources": 60,
+        "n_articles": 87,
+        "n_sources": 72,
         "z": null,
-        "baseline_points": 1,
+        "baseline_points": 2,
         "top_titles": [
-          "Congo confirms Ebola outbreak has spread to eighth province - Reuters",
-          "Deadly feline disease outbreak kills 20 cats in Rivière-du-Loup, Que. - CBC",
+          "Kenya confirms eighth Ebola case as regional outbreak spreads - Reuters",
+          "Congo’s fast-moving Ebola outbreak spreads to eighth province - Los Angeles Times",
           "Kenya Confirms Four New Ebola Cases - The New York Times"
         ]
       },
@@ -136,7 +136,7 @@
         "n_articles": 2,
         "n_sources": 2,
         "z": null,
-        "baseline_points": 1,
+        "baseline_points": 2,
         "top_titles": [
           "Why Is the IMF, the “Grim Reaper” of Korea’s Currency Crisis 30 Years Ago, Envious of South Korea? - 아시아경제",
           "Britain needs a bonds crisis It would end the inertia - UnHerd"
@@ -146,7 +146,7 @@
         "n_articles": 2,
         "n_sources": 2,
         "z": null,
-        "baseline_points": 1,
+        "baseline_points": 2,
         "top_titles": [
           "Spinach Yields Surge 62.5% as Urban Waste and Poultry Manure Replace Fertiliser - cristinaiglesias.com",
           "Bloomberg Strategist Warns Bitcoin Could Crash to $10,000 if US Stocks Fall 20% as Bond Yields Surge - Coinpaper"
