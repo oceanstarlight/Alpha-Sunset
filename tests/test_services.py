@@ -54,7 +54,7 @@ def test_ui_renders_without_exceptions():
     app = Path(__file__).resolve().parent.parent / "ui" / "streamlit_app.py"
     at = AppTest.from_file(str(app), default_timeout=120).run()
     assert not at.exception
-    assert len(at.tabs) == 6
+    assert len(at.tabs) == 7
     at.sidebar.selectbox[0].set_value("svb_2023").run()
     assert not at.exception
     assert any("SVB" in m.value or "실리콘밸리" in m.value for m in at.markdown)
@@ -114,3 +114,32 @@ def test_ui_live_mode_renders_map_with_collected_signals(monkeypatch, tmp_path):
     assert any("판단 불가" in e.value for e in at.error)
     {r.label: r for r in at.sidebar.radio}["시장"].set_value("global").run()  # 표시 범위만 바뀌고 데이터는 그대로
     assert not at.exception and any("판단 불가" in e.value for e in at.error)
+
+
+def test_ui_data_input_tab_converts_sample_and_applies_portfolio():
+    from streamlit.testing.v1 import AppTest
+
+    app = Path(__file__).resolve().parent.parent / "ui" / "streamlit_app.py"
+    at = AppTest.from_file(str(app), default_timeout=120).run()
+    box = next(s for s in at.selectbox if s.label == "또는 예시 파일")
+    box.set_value("broker_balance.xlsx").run()
+    assert not at.exception
+    next(b for b in at.button if b.label == "이 포트폴리오로 분석").click().run()
+    assert not at.exception
+    assert at.session_state["uploaded_portfolio"].nodes
+    at.run()  # 지도 탭은 입력 탭보다 먼저 그려지므로 다음 실행에서 반영
+    assert any("업로드" in c.value for c in at.caption)  # 지도 탭이 업로드 포트폴리오를 쓴다
+
+
+def test_briefing_excel_export_has_evidence_sheets():
+    import io
+
+    from openpyxl import load_workbook
+
+    from app import export
+
+    b = services.load_saved_briefing("svb_2023")
+    chain = [{"단계": "A", "원인": "c", "근거": "e", "결과": "r"}]
+    wb = load_workbook(io.BytesIO(export.briefing_xlsx(b, chain)))
+    assert {"요약", "판단 근거", "문서 적합도", "조항 판정", "노출 경로", "확인 항목"} <= set(wb.sheetnames)
+    assert wb["조항 판정"].max_row > 1
