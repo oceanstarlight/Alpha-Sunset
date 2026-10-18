@@ -67,7 +67,12 @@ def test_dart_warning_only_until_news_confirms():
 def test_global_event_alert_attaches_linkage_evidence():
     g = {"VIXCLS": _series(seed=7), "DGS10": _series(seed=8)}
     kr = {"KOSPI": 300 - g["VIXCLS"] + _series(seed=9) * 0.1, "KTB3Y": _series(seed=10)}
-    links = local.historical_link(g, kr, date(2026, 10, 19))
+    same_day = local.historical_link(g, kr, date(2026, 10, 19), lag=0)
+    assert next(x for x in same_day if x["pair"].startswith("VIX"))["corr"] < -0.3
+    # v5.1: 한국이 해외를 하루 늦게 따라가면 시차 1일 정렬에서만 상관이 잡힌다
+    kr_lagged = {"KOSPI": 300 - g["VIXCLS"].shift(1).bfill() + _series(seed=9) * 0.1, "KTB3Y": _series(seed=10)}
+    assert abs(next(x for x in local.historical_link(g, kr_lagged, date(2026, 10, 19), lag=0) if x["pair"].startswith("VIX"))["corr"]) < 0.2
+    links = local.historical_link(g, kr_lagged, date(2026, 10, 19))
     vix = next(x for x in links if x["pair"].startswith("VIX"))
     assert vix["corr"] < -0.3 and vix["percentile"] is not None
     assert next(x for x in links if "달러 인덱스" in x["pair"])["note"] == "데이터 없음"

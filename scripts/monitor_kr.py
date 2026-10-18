@@ -151,7 +151,7 @@ def main() -> int:
         from app.agents import sentinel
 
         links = local.historical_link(load_panel(sentinel.panel_series_ids()), panel, now.date())
-        linkage = local.linkage_evidence(global_market, kr_market, links)
+        linkage = local.linkage_evidence(global_market, kr_market, links)  # 글로벌 수집은 하루 1회라 t−1 신호는 global_market 자체
 
     level = local.local_grade(kr_market, kr_flow, kr_news, global_active, warnings)
     result = local.LocalResult(now, level, kr_market, kr_flow, kr_news, global_active, warnings, linkage)
