@@ -201,8 +201,8 @@
   - 실제 확인: DART 연결됨 (삼부토건 영업정지 정정 공시 → 사건 경고), Google 뉴스 RSS 연결됨
 - 🗑️ KRX Open API 제외 (약관: 비상업적 목적만, 대가 청구 금지 — 사용자 결정)
 - 🗑️ 네이버 검색 API 제외 (유료 전환 — 사용자 결정)
-- ⏳ 키: DART·ECOS·텔레그램 ✅(세션) / GitHub Secrets 등록 필요
-- ⏳ ECOS 항목 코드 검증 (`config.yaml` korea.market.verified=false) → 키 발급 후 StatisticItemList로 확인
+- ✅ 키: DART·ECOS·텔레그램 (세션 + GitHub Secrets), 텔레그램 실제 발송 확인 / GitHub Secrets 등록 필요
+- ✅ ECOS 항목 코드 검증 완료 (check-ecos 워크플로, 6개 모두 일치: 코스피·외국인 순매수(유가증권)·원/달러·국고채 3년·회사채 AA- 3년·CD 91일)
 - ⏳ 한국 신호 백테스트 (ECOS 이력, 사건 6개 + 평상 구간)
 - ⚠️ 뉴스 기준선은 30분 간격 관측이 같은 시간대 20개 쌓여야 판단 (약 3~4주), 그전엔 '판단 불가'로 표시
 
