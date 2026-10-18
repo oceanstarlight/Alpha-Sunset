@@ -184,6 +184,14 @@
 - ✅ GitHub Actions 일일 수집기 (`scripts/collect_signals.py`, 매일 07:07 KST) → `data/live/` 커밋, UI는 수집 결과 기본 + 직접 조회 보조
 - ⚠️ GDELT GEO 2.0 API는 404 → 지도의 GDELT 원은 사건 위치가 아니라 **보도 매체 국가**
 
+## 추가 — 한국(로컬) 시장 상시 감시 🔄
+- ✅ 사전 등록 v5 초안 `data/backtest/ablation/preregistration_v5_kr.json` (status: draft, 사용자 검토 대기)
+  - A_kr: ECOS 코스피·원달러·국고채3년·회사채AA−국고채 스프레드·CD91 / C_kr: 외국인 순매수 / B_kr: 네이버·Google 뉴스 + DART 신용 공시
+  - 공식 무료 소스만 (사용자 결정), 임계치는 글로벌과 동일, 알림은 텔레그램
+- ✅ UI 시장 선택: 로컬(대한민국, 기본) / 글로벌 — 수집은 항상 둘 다, 표시 범위만 변경
+- ⏳ API 키 발급 (KRX·ECOS·DART·네이버·텔레그램) → GitHub Secrets + 세션 환경 변수
+- ⏳ v5 확정 후: 한국 신호 수집기·백테스트·텔레그램 알림·대응안 리포트 자동 생성
+
 ---
 
 ## ⏸️ 보류 (MVP 제외 — plans.md 12장)

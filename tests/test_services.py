@@ -105,8 +105,12 @@ def test_ui_live_mode_renders_map_with_collected_signals(monkeypatch, tmp_path):
 
     app = Path(__file__).resolve().parent.parent / "ui" / "streamlit_app.py"
     at = AppTest.from_file(str(app), default_timeout=120).run()
-    at.sidebar.radio[0].set_value("라이브").run()
+    radio = {r.label: r for r in at.sidebar.radio}
+    assert radio["시장"].value == "local"  # 기본은 로컬(대한민국)
+    radio["모드"].set_value("라이브").run()
     assert not at.exception
     at.button[0].click().run()  # 감시 탭 '수집 결과 보기'
     assert not at.exception
     assert any("판단 불가" in e.value for e in at.error)
+    {r.label: r for r in at.sidebar.radio}["시장"].set_value("global").run()  # 표시 범위만 바뀌고 데이터는 그대로
+    assert not at.exception and any("판단 불가" in e.value for e in at.error)

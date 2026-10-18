@@ -14,6 +14,7 @@ import pydeck as pdk
 import streamlit as st
 
 from app import geo, services
+from app.config import load_config
 from app.agents import sentinel
 from app.agents.exposure import ExposureUnavailable
 from app.corpus import load_events, load_playbooks, load_portfolio
@@ -72,6 +73,12 @@ def synthetic_badge():
 
 st.sidebar.title("🌅 Alpha Sunset")
 st.sidebar.caption("위기 사건 ↔ 대응문서 적합도 판단 + 보유 자산 노출 경고")
+LOCAL = load_config()["markets"]["local"]
+market_view = st.sidebar.radio(
+    "시장", ["local", "global"], horizontal=True, help="데이터는 로컬·글로벌 모두 수집하고, 화면에 보여줄 범위만 고른다.",
+    format_func=lambda v: f"로컬 ({LOCAL['name']})" if v == "local" else "글로벌",
+    index=0 if load_config()["markets"]["default_view"] == "local" else 1)
+is_local = market_view == "local"
 mode = st.sidebar.radio("모드", ["백테스트 재생", "라이브"], horizontal=True)
 event_ids = list(events_by_id())
 event_id = st.sidebar.selectbox(
@@ -113,7 +120,7 @@ def map_impact(event_json: str, snapshot: str) -> dict[str, float] | None:
 
 
 with tab_map:
-    st.subheader("세계 금융 지도")
+    st.subheader(f"금융 지도 · {LOCAL['name']} 중심" if is_local else "세계 금융 지도")
     live = mode == "라이브"
     b = current_briefing()
     map_event = (b.event if b else None) if live else events_by_id()[event_id]
@@ -140,7 +147,9 @@ with tab_map:
                          line_width_min_pixels=3 if ring else 1, radius_min_pixels=3)
 
     layers = [scatter(k, v) for k, v in geo.LAYERS.items() if not df.empty and v["label"] in set(df["layer"])]
-    st.pydeck_chart(pdk.Deck(layers=layers, initial_view_state=pdk.ViewState(latitude=25, longitude=30, zoom=0.9),
+    st.pydeck_chart(pdk.Deck(layers=layers, initial_view_state=(
+                                 pdk.ViewState(latitude=LOCAL["lat"], longitude=LOCAL["lon"], zoom=3.2) if is_local
+                                 else pdk.ViewState(latitude=25, longitude=30, zoom=0.9)),
                              tooltip={"text": "{tooltip}"}), height=520)
     st.markdown(" · ".join(f":{c}[{m}] {geo.LAYERS[k]['label']}" for k, c, m in
                            [("event", "red", "○"), ("exposure", "blue", "●"), ("impact", "orange", "●"),
@@ -159,6 +168,12 @@ with tab_map:
     elif coverage:
         st.caption(f"GDELT 수집 상태: {coverage['status']} · 기간 {coverage['timespan']}"
                    + (f" · 실패 {len(coverage['errors'])}건" if coverage["errors"] else ""))
+    if is_local and not df.empty:
+        loc = df[df["code"] == LOCAL["code"]].set_index("layer")["value"]
+        m1, m2, m3 = st.columns(3)
+        m1.metric(f"{LOCAL['name']} 보유 비중", f"{loc.get(geo.LAYERS['exposure']['label'], 0):.1%}")
+        m2.metric(f"{LOCAL['name']} 영향도", f"{loc.get(geo.LAYERS['impact']['label'], 0):.4f}")
+        m3.metric(f"{LOCAL['name']} 사건 지역", "예" if geo.LAYERS["event"]["label"] in loc.index else "아니오")
     if not df.empty:
         top = (df.sort_values("value", ascending=False).groupby("layer").head(5)
                [["layer", "name", "code", "value"]].rename(columns={"layer": "레이어", "name": "국가", "code": "코드", "value": "값"}))
@@ -169,6 +184,9 @@ with tab_map:
 # ---------- 1. 감시 ----------
 
 with tab_watch:
+    if is_local:
+        st.info(f"{LOCAL['name']} 시장 신호(ECOS·KRX 지수/금리/외국인 순매수, 네이버·Google 뉴스, DART 공시)는 "
+                "사전 등록 v5 검토와 API 키 발급 후 수집을 시작한다. 그전까지 아래는 글로벌 신호다.")
     if mode == "백테스트 재생":
         e = events_by_id()[event_id]
         st.subheader(f"{e.title} 전후 경보 재생")

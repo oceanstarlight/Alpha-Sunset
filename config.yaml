@@ -1,5 +1,9 @@
 # 임계치·가중치 초기값. P8 백테스트에서 보정한다. (plans.md 5장)
 
+markets:                      # 표시 범위 선택 (수집은 로컬·글로벌 모두 항상 수행)
+  local: {code: KR, name: 대한민국, lat: 36.0, lon: 127.8}
+  default_view: local
+
 sentinel:
   market:                     # 시그널 A (FRED)
     series: [VIXCLS, T10Y2Y, DGS10, DEXKOUS, DCOILWTICO, DTWEXBGS]
