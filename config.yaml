@@ -18,13 +18,15 @@ sentinel:
     z_threshold: 2.5
     min_series: 2
     z_extreme: 4.0
-  news:                       # 시그널 B (라이브: GDELT, 백테스트: 사건 카드)
+  news:                       # 시그널 B (라이브: Google 뉴스 RSS, 백테스트: 사건 카드)
+    window_hours: 24          # 라이브: 최근 24시간 기사 수
     baseline_days: 30
+    baseline_min_points: 20   # 같은 시간대 기준점이 이만큼 쌓여야 z 계산 (수집기 3시간마다)
+    baseline_window_min: 720  # 최근 24시간 누적 기사 수라 시간대 영향이 작다 → 30일 안 모든 관측을 기준점으로 (3시간마다 8개/일, 약 2.5일이면 20개)
     z_threshold: 3.0
     min_sources: 20
     card_active_days: 14      # 백테스트: 사건 카드 date부터 B 활성 유지 기간
     cluster_jaccard: 0.5
-    request_interval_sec: 5   # GDELT 요청 간격 (5초당 1회 제한). 수집기는 --interval 60으로 따로 늦춘다
     queries:
       banking_stress: '"bank run" OR "bank failure" OR "deposit outflow"'
       credit_event: '"default" OR "bankruptcy filing" OR "chapter 11"'

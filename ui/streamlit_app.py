@@ -153,11 +153,7 @@ with tab_map:
     b = current_briefing()
     map_event = (b.event if b else None) if live else events_by_id()[event_id]
     snapshot = "live" if live else event_id
-    coverage = None
-    if live:
-        sig = st.session_state.get("signals") or services.load_collected_signals(with_panel=False)
-        coverage = (sig or {}).get("news", {}).get("coverage")
-    options = [v["label"] for k, v in geo.LAYERS.items() if live or k != "coverage"]  # 보도 국가는 라이브 전용
+    options = [v["label"] for v in geo.LAYERS.values()]
     shown = st.pills("표시", options, selection_mode="multi", default=options) or []
     uploaded = st.session_state.get("uploaded_portfolio")
     if uploaded is not None:  # 데이터 입력 탭에서 올린 실제 보유내역
@@ -171,7 +167,6 @@ with tab_map:
         event=map_event if geo.LAYERS["event"]["label"] in shown else None,
         exposure_by_country=exp if geo.LAYERS["exposure"]["label"] in shown else None,
         impact_by_country=imp if geo.LAYERS["impact"]["label"] in shown else None,
-        coverage_by_name=coverage["countries"] if coverage and geo.LAYERS["coverage"]["label"] in shown else None,
     )
     def scatter(k: str, v: dict) -> pdk.Layer:
         ring = k == "event"  # 사건은 빨간 테두리 원으로 그려 아래 원(비중·영향도)이 가려지지 않게
@@ -186,22 +181,15 @@ with tab_map:
                                  else pdk.ViewState(latitude=25, longitude=30, zoom=0.9)),
                              tooltip={"text": "{tooltip}"}), height=520)
     st.markdown(" · ".join(f":{c}[{m}] {geo.LAYERS[k]['label']}" for k, c, m in
-                           [("event", "red", "○"), ("exposure", "blue", "●"), ("impact", "orange", "●"),
-                            ("coverage", "violet", "●")] if geo.LAYERS[k]["label"] in options))
+                           [("event", "red", "○"), ("exposure", "blue", "●"), ("impact", "orange", "●")]))
     st.caption("원 크기: 사건(빨간 테두리) = 심각도, 보유 비중 = 국가별 노드 비중(프록시 펀드 보유 국가 반영, 거래상대방 포함), "
-               "영향도 = 노출 경로 risk_score 합(비중×연관도×불확실성 감점, LLM 없이 규칙 매칭), "
-               "GDELT 보도 국가 = 최근 1일 위기 주제 기사의 **보도 매체 국가** (사건 발생 위치 아님).")
+               "영향도 = 노출 경로 risk_score 합(비중×연관도×불확실성 감점, LLM 없이 규칙 매칭).")
     if map_event:
         st.markdown(f"**사건**: {map_event.title} ({map_event.date}) · 지역 {', '.join(map_event.regions)} · 심각도 {map_event.severity}/5")
     elif live:
         st.info("라이브 사건 브리핑이 없어 사건·영향도 원은 표시하지 않는다 (감시 탭에서 사건 탐지 시 생성).")
     if exp is None:
         st.warning(f"{snapshot} 시점 보유 스냅샷이 없어 보유 비중·영향도를 그릴 수 없다 (N-PORT 2019년 이전 미공개).")
-    if live and not coverage:
-        st.info("GDELT 보도 국가 데이터가 없다. 매일 07시경 GitHub Actions 수집기가 갱신한다.")
-    elif coverage:
-        st.caption(f"GDELT 수집 상태: {coverage['status']} · 기간 {coverage['timespan']}"
-                   + (f" · 실패 {len(coverage['errors'])}건" if coverage["errors"] else ""))
     if is_local and not df.empty:
         loc = df[df["code"] == LOCAL["code"]].set_index("layer")["value"]
         m1, m2, m3 = st.columns(3)
@@ -271,14 +259,14 @@ with tab_watch:
             st.dataframe(df, hide_index=True, width="stretch")
     else:
         st.subheader("라이브 감시")
-        st.caption("기본은 GitHub Actions 수집기가 3시간마다 주제별로 나눠 모은 결과를 보여준다 (요청 제한 회피). "
-                   "'지금 직접 조회'는 빠른 조회다: FRED 병렬 + 요청 2회(GDELT 전체 위기 기사량 + Google 뉴스 RSS 기사 목록, 간격 5초). "
-                   "주제별 기사량 z 대신 전체 기사량 급증 + 주제별 출처 수로 판단한다 (1시간 캐시).")
+        st.caption("기본은 GitHub Actions 수집기가 3시간마다 모은 결과를 보여준다. '지금 직접 조회'는 FRED(병렬)와 "
+                   "Google 뉴스 RSS(주제 8개, 키·요청 제한 없음)를 바로 부른다 (보통 10~20초, 1시간 캐시). "
+                   "사건 신호는 주제별 최근 24시간 기사 수를 수집기가 3시간마다 쌓은 직전 30일 기준선과 비교한다 (기준점 20개, 약 2.5일 필요).")
         b1, b2 = st.columns(2)
         if b1.button("수집 결과 보기", type="primary"):
             st.session_state["signals"] = services.get_signals()
         if b2.button("지금 직접 조회"):
-            with st.spinner("FRED·GDELT 조회 중…"):
+            with st.spinner("FRED·Google 뉴스 조회 중…"):
                 st.session_state["signals"] = services.get_signals(refresh=True)
         sig = st.session_state.get("signals")
         if sig:
@@ -292,7 +280,7 @@ with tab_watch:
                 st.markdown("#### 판단 근거 (원인 → 근거 → 결과)")
                 show_chain(sig["chain"])
             if status == "unavailable":
-                st.error("사건 신호(B) 판단 불가: GDELT 조회가 모두 실패했다. 등급의 '사건 없음'은 확인된 결과가 아니다.")
+                st.error("사건 신호(B) 판단 불가: 뉴스 조회 실패 또는 기준선 축적 중이다. 등급의 '사건 없음'은 확인된 결과가 아니다.")
             if sig.get("money_alert"):
                 st.warning("1단계 자금 이상 알림: 시장 또는 자금 흐름에서 이상이 감지됐다. 사건이 확정되면 대응안을 생성한다.")
             if sig.get("flow"):
@@ -306,20 +294,17 @@ with tab_watch:
             elif status == "ok":
                 c2.info("기사량 급증 군집 없음")
             elif status == "partial":
-                c2.info(f"조회된 주제에서는 급증 군집 없음 (주제 {news.get('n_queries', '?')}개 중 {len(news['errors'])}개 조회 실패)")
+                c2.info(f"판단된 주제에서는 급증 군집 없음 (주제 {news.get('n_queries', '?')}개 중 {len(news['errors'])}개 판단 불가)")
             else:
-                c2.error("판단 불가 (조회 실패)")
-            if news.get("quick"):
-                qk = news["quick"]
-                c2.caption(f"빠른 조회: 전체 위기 기사량 z = {qk['combined_z'] if qk['combined_z'] is not None else '-'}"
-                           f" ({qk.get('z_note', '')}), Google 뉴스 최근 1일 기사 {qk['n_articles']}건")
-            if news.get("topics"):
-                with c2.expander("주제별 수집 상태 (3시간마다 나눠 수집)"):
-                    st.dataframe(pd.DataFrame([{"주제": k, "마지막 성공(UTC)": v["ok_at"] or "-", "기사량 z": v["z"],
-                                                "최근 오류": (v["error"] or "")[:60]} for k, v in news["topics"].items()]).astype(str),
+                c2.error("판단 불가 (조회 실패 또는 기준선 축적 중)")
+            if news.get("observations"):
+                with c2.expander("주제별 관측 (Google 뉴스 최근 24시간)"):
+                    st.dataframe(pd.DataFrame([{"주제": k, "기사": v["n_articles"], "언론사": v["n_sources"], "z": v["z"],
+                                                "기준점": v["baseline_points"], "대표 기사": (v["top_titles"] or [""])[0][:60]}
+                                               for k, v in news["observations"].items()]).astype(str),
                                  hide_index=True, width="stretch")
             if news["errors"]:
-                with c2.expander(f"GDELT 조회 실패 {len(news['errors'])}건 원인"):
+                with c2.expander(f"판단 불가 {len(news['errors'])}건 원인"):
                     for err in news["errors"]:
                         st.text(err)
             if sig["fred_error"]:

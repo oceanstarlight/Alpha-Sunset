@@ -1,7 +1,7 @@
 """Sentinel: 시장 신호(A) + 사건 신호(B) 이중 조건 경보 (plans.md 5.1).
 
 - A: FRED 시리즈 1일 변화의 z-score (trailing 252영업일, 당일 제외)
-- B: 라이브는 GDELT 기사량 급증 + 출처 수, 백테스트는 사건 카드(date 이후만 공개)
+- B: 라이브는 Google 뉴스 RSS 주제별 기사 수 급증 + 언론사 수, 백테스트는 사건 카드(date 이후만 공개)
 - 등급: A+B = ALERT, 하나만 = WATCH, 없음 = NONE. 같은 군집은 72h 내 1건으로 병합.
 """
 
@@ -145,7 +145,7 @@ class NewsCluster:
 class NewsSignal:
     as_of: date
     clusters: list[NewsCluster] = field(default_factory=list)
-    errors: list[str] = field(default_factory=list)  # 조회 실패한 쿼리 (예: GDELT 요청 제한)
+    errors: list[str] = field(default_factory=list)  # 조회 실패·기준선 축적 중인 주제
     n_queries: int = 0  # 조회한 주제 수 (라이브)
 
     @property
@@ -193,145 +193,50 @@ def cluster_titles(titles: list[str], threshold: float) -> list[list[int]]:
     return sorted((m for _, m in clusters), key=len, reverse=True)
 
 
-def volume_z(vol: pd.Series, baseline_days: int, now: datetime | None = None) -> tuple[float | None, str]:
-    """마지막 날 기사량의 z. 오늘(UTC)이 진행 중이면 경과 비율로 하루치를 환산하고, 6시간 미만이면 어제를 쓴다."""
-    if len(vol) < baseline_days + 2:
-        return None, f"기사량 이력 부족 ({len(vol)}일)"
-    now = now or datetime.utcnow()
-    last_day = vol.index[-1]
-    if last_day.date() == now.date():
-        frac = (now - datetime.combine(now.date(), time())).total_seconds() / 86400
-        if frac < 0.25:
-            vol, note = vol.iloc[:-1], "오늘 6시간 미만 → 어제 기준"
-            cur = vol.iloc[-1]
-        else:
-            cur, note = vol.iloc[-1] / frac, f"오늘 {frac:.0%} 경과분을 하루치로 환산"
-    else:
-        cur, note = vol.iloc[-1], "마지막 완결일 기준"
-    base = vol.iloc[-(baseline_days + 1) : -1]
-    if not base.std():
-        return None, "기준선 변동 없음"
-    return float((cur - base.mean()) / base.std()), note
+def rss_query(query: str) -> str:
+    """주제 쿼리('"a" OR "b"')를 Google 뉴스 검색어로 (OR 문법 그대로 지원)."""
+    return query.strip("()")
 
 
-def news_topic(client: Any, event_type: str, query: str, as_of: date) -> dict:
-    """주제 하나의 라이브 B 판정 (요청 1~2회). 조회 실패는 예외로 올린다."""
+def fetch_rss_topics(rss: Any, now: datetime) -> tuple[dict[str, list], list[str]]:
+    """주제별 최근 window_hours 기사 (Google 뉴스 RSS, 키·요청 제한 없음). 반환: (주제→기사, 실패 사유)."""
     cfg = _sentinel_cfg()["news"]
-    out = {"event_type": event_type, "z": None, "n_articles": 0, "n_sources": 0, "cluster": None, "note": ""}
-    vol = client.daily_volume(query).loc[: pd.Timestamp(as_of)]
-    z, out["note"] = volume_z(vol, cfg["baseline_days"])
-    if z is None:
-        return out
-    out["z"] = round(z, 3)
-    if z < cfg["z_threshold"]:
-        return out
-    articles = client.articles(query, timespan="1d")
-    n_sources = len({a.domain for a in articles})
-    out["n_articles"], out["n_sources"] = len(articles), n_sources
-    if n_sources < cfg["min_sources"]:
-        return out
-    groups = cluster_titles([a.title for a in articles], cfg["cluster_jaccard"])
-    top = articles[groups[0][0]].title if groups else event_type
-    key = " ".join(sorted(_tokens(top))[:5]) or event_type
-    out["cluster"] = NewsCluster(key=key, label=top, event_type=event_type, n_articles=len(articles),
-                                 n_sources=n_sources, z=z).__dict__
-    return out
-
-
-def live_news_signal(client: Any, as_of: date) -> NewsSignal:
-    """라이브용 B: 주제 쿼리별 기사량 z ≥ 3 AND 서로 다른 출처 ≥ 20."""
-    cfg = _sentinel_cfg()["news"]
-    clusters, errors = [], []
+    since = now - timedelta(hours=cfg["window_hours"])
+    out, errors = {}, []
     for event_type, query in cfg["queries"].items():
         try:
-            t = news_topic(client, event_type, query, as_of)
+            out[event_type] = rss.search(rss_query(query), since)
         except Exception as e:
-            errors.append(f"{event_type}: {e}")
-            continue
-        if t["cluster"]:
-            clusters.append(NewsCluster(**t["cluster"]))
-    return NewsSignal(as_of=as_of, clusters=clusters, errors=errors, n_queries=len(cfg["queries"]))
+            errors.append(f"{event_type}: Google 뉴스 RSS 실패 ({type(e).__name__})")
+    return out, errors
 
 
-GDELT_MAX_QUERY = 190  # 실측: 195자 통과, 265자 'too short or too long' 거부 (2026-10-18)
+def rss_news_signal(articles: dict[str, list], history: list[dict], now: datetime,
+                    fetch_errors: list[str] | None = None) -> tuple[NewsSignal, list[dict], dict]:
+    """라이브 B (글로벌): 주제별 최근 24시간 기사 수가 직전 30일 관측 대비 z ≥ 3 AND 언론사 ≥ 20곳.
 
-
-def combined_query(queries: dict[str, str], max_len: int = GDELT_MAX_QUERY) -> str:
-    """주제 쿼리들의 키워드를 하나의 OR 쿼리로 (요청 1회). 길이 제한 안에서 주제마다 첫 키워드부터 고르게 담는다."""
-    per_topic = [[t.strip() for t in q.strip("()").split(" OR ") if t.strip()] for q in queries.values()]
-    chosen: list[str] = []
-    for depth in range(max(len(t) for t in per_topic)):
-        for terms in per_topic:
-            if depth < len(terms) and terms[depth] not in chosen:
-                trial = "(" + " OR ".join(chosen + [terms[depth]]) + ")"
-                if len(trial) <= max_len:
-                    chosen.append(terms[depth])
-    return "(" + " OR ".join(chosen) + ")"
-
-
-def topic_keywords(query: str) -> list[str]:
-    return [t.strip().strip('"').lower() for t in query.strip("()").split(" OR ") if t.strip()]
-
-
-def quick_news_signal(client: Any, as_of: date, rss: Any = None, now: datetime | None = None) -> tuple[NewsSignal, dict]:
-    """빠른 조회 (요청 2회): ① GDELT 위기 키워드 OR 쿼리의 일별 기사량 z ② Google 뉴스 RSS(영문) 최근 1일 기사.
-
-    GDELT 기사 목록 요청은 공유 IP에서 429가 잦아 ②는 요청 제한이 없는 RSS로 받는다.
-    ②의 제목을 주제 키워드로 나눠, 전체 기사량이 급증(z ≥ 3)했을 때 출처(언론사) ≥ 20곳인 주제를 군집으로 본다.
-    주제별 기사량 z는 보지 않는다 (3시간마다 주제별로 나눠 모으는 수집기가 한다).
+    기준선은 수집기가 3시간마다 쌓는 data/live/global_news_history.jsonl. 기준점이 부족한 주제는 '판단 불가'.
+    반환: (신호, 이번 관측 행, 주제별 관측).
     """
+    from app.agents.local import baseline_z
+
     cfg = _sentinel_cfg()["news"]
-    queries = cfg["queries"]
-    q = combined_query(queries)
-    errors, z, arts = [], None, []
-    z_note = ""
-    try:
-        vol = client.daily_volume(q).loc[: pd.Timestamp(as_of)]
-        z, z_note = volume_z(vol, cfg["baseline_days"])
+    clusters, errors, rows, obs = [], list(fetch_errors or []), [], {}
+    for event_type, items in articles.items():
+        n, sources = len(items), len({a.source for a in items})
+        z, n_base = baseline_z(history, event_type, now, n, cfg)
+        obs[event_type] = {"n_articles": n, "n_sources": sources, "z": None if z is None else round(z, 3),
+                           "baseline_points": n_base, "top_titles": [a.title for a in items[:3]]}
+        rows.append({"ts": now.isoformat(), "event_type": event_type, "n_articles": n, "n_sources": sources})
         if z is None:
-            errors.append(f"GDELT 전체 기사량: {z_note}")
-    except Exception as e:
-        errors.append(f"GDELT 전체 기사량: {e}")
-    if rss is None:
-        from app.data.korea import GoogleNewsRss
-
-        rss = GoogleNewsRss(lang="en-US", region="US")
-    now = now or datetime.now().astimezone()
-    try:
-        arts = rss.search(q.strip("()"), now - timedelta(days=1))
-    except Exception as e:
-        errors.append(f"Google 뉴스 RSS: {e}")
-    clusters, by_topic = [], {}
-    for event_type, tq in queries.items():
-        kws = topic_keywords(tq)
-        hit = [a for a in arts if any(k in a.title.lower() for k in kws)]
-        n_src = len({a.source for a in hit})
-        by_topic[event_type] = {"n_articles": len(hit), "n_sources": n_src, "top_titles": [a.title for a in hit[:3]]}
-        if z is not None and z >= cfg["z_threshold"] and n_src >= cfg["min_sources"]:
-            groups = cluster_titles([a.title for a in hit], cfg["cluster_jaccard"])
-            top = hit[groups[0][0]].title if groups else event_type
-            clusters.append(NewsCluster(key=" ".join(sorted(_tokens(top))[:5]) or event_type, label=top, event_type=event_type,
-                                        n_articles=len(hit), n_sources=n_src, z=z))
-    info = {"mode": "quick", "query": q, "combined_z": None if z is None else round(z, 3), "z_note": z_note, "n_articles": len(arts),
-            "by_topic": by_topic}
-    return NewsSignal(as_of=as_of, clusters=clusters, errors=errors, n_queries=2), info
-
-
-def news_signal_from_topics(state: dict[str, dict], as_of: date, now: datetime, max_age_hours: float = 26) -> NewsSignal:
-    """주제별로 나눠 모은 결과(state)로 B를 만든다. 오래됐거나 한 번도 성공 못 한 주제는 '판단 불가' 사유로 남긴다."""
-    queries = _sentinel_cfg()["news"]["queries"]
-    clusters, errors = [], []
-    for event_type in queries:
-        t = state.get(event_type)
-        ok_at = datetime.fromisoformat(t["ok_at"]) if t and t.get("ok_at") else None
-        if ok_at is None or (now - ok_at).total_seconds() > max_age_hours * 3600:
-            last_err = (t or {}).get("error") or "아직 수집 안 됨"
-            age = f"마지막 성공 {(now - ok_at).total_seconds() / 3600:.0f}시간 전" if ok_at else "성공 이력 없음"
-            errors.append(f"{event_type}: {age} ({last_err})")
+            errors.append(f"{event_type}: 기준선 축적 중 ({n_base}/{cfg['baseline_min_points']})")
             continue
-        if t["result"].get("cluster"):
-            clusters.append(NewsCluster(**t["result"]["cluster"]))
-    return NewsSignal(as_of=as_of, clusters=clusters, errors=errors, n_queries=len(queries))
+        if z >= cfg["z_threshold"] and sources >= cfg["min_sources"]:
+            groups = cluster_titles([a.title for a in items], cfg["cluster_jaccard"])
+            top = items[groups[0][0]].title if groups else event_type
+            clusters.append(NewsCluster(key=" ".join(sorted(_tokens(top))[:5]) or event_type, label=top,
+                                        event_type=event_type, n_articles=n, n_sources=sources, z=z))
+    return NewsSignal(as_of=now.date(), clusters=clusters, errors=errors, n_queries=len(cfg["queries"])), rows, obs
 
 
 # ---------- 등급·병합 ----------
@@ -446,11 +351,11 @@ def explain(result: SentinelResult) -> list[dict[str, str]]:
     if n.clusters:
         cause = "; ".join(c.label for c in n.clusters[:3])
         evidence = "; ".join(
-            f"{c.event_type or '-'}: 기사 {c.n_articles}건 · 출처 {c.n_sources}곳 · 기사량 z={c.z:.1f} (GDELT)" if c.z is not None
+            f"{c.event_type or '-'}: 기사 {c.n_articles}건 · 언론사 {c.n_sources}곳 · 기사 수 z={c.z:.1f} (Google 뉴스)" if c.z is not None
             else f"사건 카드 기준 (백테스트: 카드 날짜부터 {cfg['news']['card_active_days']}일 활성)" for c in n.clusters[:3])
     else:
         cause = "사건 군집 없음" if n.status == "ok" else f"조회 실패 {len(n.errors)}/{n.n_queries}건"
-        evidence = f"규칙: 기사량 z ≥ {cfg['news']['z_threshold']} AND 출처 ≥ {cfg['news']['min_sources']}곳"
+        evidence = f"규칙: 최근 {cfg['news']['window_hours']}시간 기사 수 z ≥ {cfg['news']['z_threshold']} (직전 30일 관측 기준선) AND 언론사 ≥ {cfg['news']['min_sources']}곳, 출처 Google 뉴스 RSS"
     chain.append({"단계": "사건 신호(B)", "원인": cause, "근거": evidence,
                   "결과": {"ok": "활성" if n.active else "비활성", "partial": ("활성" if n.active else "비활성") + " (일부 조회 실패)",
                          "unavailable": "판단 불가"}[n.status]})

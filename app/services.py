@@ -27,9 +27,17 @@ def market_panel(refresh: bool = False) -> dict:
     return load_panel(sentinel.panel_series_ids(), refresh=refresh)
 
 
-def compute_signals(gdelt_client: Any = None, fred_cache_dir: Path | None = None, coverage: bool = False,
-                    news: Any = None, coverage_data: dict | None = None, quick: bool = False) -> dict:
-    """최신 시그널 A/B/C와 등급을 계산한다. coverage=True면 GDELT 보도 국가 분포도 모은다 (요청 수 2배)."""
+GLOBAL_NEWS_HISTORY = ROOT_DIR / "data" / "live" / "global_news_history.jsonl"
+
+
+def read_global_history() -> list[dict]:
+    if not GLOBAL_NEWS_HISTORY.exists():
+        return []
+    return [json.loads(x) for x in GLOBAL_NEWS_HISTORY.read_text(encoding="utf-8").splitlines() if x.strip()]
+
+
+def compute_signals(rss: Any = None, fred_cache_dir: Path | None = None, now: datetime | None = None) -> dict:
+    """최신 시그널 A/B/C와 등급. B는 Google 뉴스 RSS 주제별 기사 수 (기준선은 수집기 누적 이력)."""
     try:
         panel = load_panel(sentinel.panel_series_ids(), **({"cache_dir": fred_cache_dir} if fred_cache_dir else {}),
                            refresh=True)
@@ -40,36 +48,18 @@ def compute_signals(gdelt_client: Any = None, fred_cache_dir: Path | None = None
     last_obs = max(s.index[-1] for s in panel.values()).date()
     market = sentinel.market_signal(sentinel.AsOfPanel(panel), last_obs)
     flow = sentinel.flow_signal(sentinel.AsOfPanel(panel), today) if sentinel.flow_enabled() else None
-    quick_info = None
-    if news is None:  # 수집기는 주제별로 나눠 모은 결과(news)를 넘긴다
-        if gdelt_client is None:
-            from app.data.gdelt import GdeltClient
+    if rss is None:
+        from app.data.korea import GoogleNewsRss
 
-            import httpx
-
-            # 빠른 조회: 요청당 최대 2번 시도, 응답 대기 10초 → 최악에도 약 1분 안에 끝난다
-            gdelt_client = GdeltClient(http=httpx.Client(timeout=10), max_attempts=2) if quick else GdeltClient()
-        if quick:  # 직접 조회: 요청 2회 (GDELT 전체 기사량 + Google 뉴스 RSS 기사 목록)
-            news, quick_info = sentinel.quick_news_signal(gdelt_client, today)
-            prev = load_collected_signals(with_panel=False)  # 보도 국가 지도는 수집기 결과를 그대로 쓴다
-            coverage_data = (prev or {}).get("news", {}).get("coverage")
-        else:
-            news = sentinel.live_news_signal(gdelt_client, today)
-    news_out = {"active": news.active, "status": news.status, "n_queries": news.n_queries, "errors": news.errors,
-                "clusters": [c.__dict__ for c in news.clusters]}
-    if quick_info is not None:
-        news_out["quick"] = quick_info
-    if coverage_data is not None:
-        news_out["coverage"] = coverage_data
-    elif coverage:
-        from app import geo
-
-        news_out["coverage"] = geo.gdelt_coverage(gdelt_client)
+        rss = GoogleNewsRss(http=__import__("httpx").Client(timeout=10, follow_redirects=True), lang="en-US", region="US")
+    now = now or datetime.now(timezone.utc)
+    articles, fetch_errors = sentinel.fetch_rss_topics(rss, now)
+    news, rows, obs = sentinel.rss_news_signal(articles, read_global_history(), now, fetch_errors)
     level = sentinel.grade(market, news, flow)
     chain = sentinel.explain(sentinel.SentinelResult(as_of=last_obs, level=level, market=market, news=news, flow=flow))
     return {
         "fetched_at": time.time(),
-        "collected_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "collected_at": now.isoformat(timespec="seconds"),
         "as_of": last_obs.isoformat(),
         "level": level.value,
         "chain": chain,  # 원인-근거-결과
@@ -79,7 +69,9 @@ def compute_signals(gdelt_client: Any = None, fred_cache_dir: Path | None = None
                    "zscores": {k: round(v, 2) for k, v in market.zscores.items()}},
         "flow": {"active": flow.active, "triggered": flow.triggered,
                  "zscores": {k: round(v, 2) for k, v in flow.zscores.items()}} if flow else None,
-        "news": news_out,
+        "news": {"active": news.active, "status": news.status, "n_queries": news.n_queries, "errors": news.errors,
+                 "clusters": [c.__dict__ for c in news.clusters], "observations": obs, "source": "Google 뉴스 RSS"},
+        "news_rows": rows,  # 수집기가 기준선 이력에 덧붙이는 이번 관측
         "fred_error": fred_error,
         "panel": panel,
     }
@@ -106,7 +98,7 @@ def list_local_reports() -> list[Path]:
     return sorted((LIVE_SIGNALS_PATH.parent / "reports").glob("*.md"), reverse=True)
 
 
-def get_signals(refresh: bool = False, gdelt_client: Any = None) -> dict:
+def get_signals(refresh: bool = False, rss: Any = None) -> dict:
     """refresh=False면 일일 수집 결과를 쓰고, 없거나 refresh=True면 직접 조회한다 (1시간 캐시)."""
     if not refresh:
         collected = load_collected_signals()
@@ -115,7 +107,7 @@ def get_signals(refresh: bool = False, gdelt_client: Any = None) -> dict:
     cached = _signal_cache.get("signals")
     if cached and not refresh and time.time() - cached["fetched_at"] < SIGNAL_TTL_SEC:
         return cached
-    result = compute_signals(gdelt_client, quick=True)
+    result = compute_signals(rss)
     result["source"] = "live"
     _signal_cache["signals"] = result
     return result
