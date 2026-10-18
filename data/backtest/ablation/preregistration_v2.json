@@ -1,0 +1,48 @@
+{
+  "registered_at": "2026-10-18T07:22:24.488991+00:00",
+  "purpose": "자금 흐름 신호·기계적 대응일·데이터 품질 기준·공백 규칙 v2를 결과를 보기 전에 고정한다. 결과를 보고 바꾸면 v3로 새로 등록한다.",
+  "flow_signal_C": {
+    "series": {
+      "WRMFNS": "리테일 MMF 잔고",
+      "WIMFNS": "기관 MMF 잔고(2021 중단)",
+      "DPSACBW027SBOG": "미국 상업은행 예금",
+      "WMTSECL1": "해외 공적기관 미국채 보관액",
+      "WRESBAL": "지급준비금"
+    },
+    "publication_lag_days": {
+      "WRMFNS": 45,
+      "WIMFNS": 45,
+      "DPSACBW027SBOG": 10,
+      "WMTSECL1": 3,
+      "WRESBAL": 3
+    },
+    "lag_note": "관측일 t의 값은 t + lag일부터 사용 가능 (현재 공표 지연 기준의 보수적 값)",
+    "transform": "직전 관측 대비 변화율",
+    "zscore": "직전 52개 관측(당일 제외)의 평균·표준편차, 최소 40개",
+    "active_rule": "사용 가능한 최신 관측 중 하나라도 |z| ≥ 3.0",
+    "korea": "KRX 외국인 순매수(일간)는 접근 키 확보 후 같은 규칙(일간: 직전 252영업일, |z| ≥ 3.0, 시차 1일)으로 추가"
+  },
+  "grade_v2": "ALERT = B ∧ (A ∨ C), WATCH = A·B·C 중 하나 이상(ALERT 아님), NONE = 모두 비활성",
+  "reaction_date_flow": {
+    "rule": "사건일 60일 전 ~ 사건일 사이에서, 그날까지 끝나는 5영업일 중 2일 이상 A 또는 C가 활성인 첫 날. 없으면 사건일",
+    "use": "모든 사건에 대해 lead_time_flow = reaction_date_flow − 첫 ALERT 를 별도 지표로 보고. covid_2020 라벨의 reaction_date는 사용자 결정에 따라 이 값으로 교체"
+  },
+  "data_quality": {
+    "metrics": [
+      "관측 시작·종료일과 백테스트 기간(2007-01~2025-12) 포함 여부",
+      "명목 주기 대비 최대 관측 공백",
+      "공표 지연(lag)",
+      "중단 여부",
+      "평상 구간(사건 ±180일 제외) C 단독 발동률"
+    ],
+    "exclude_recommendation": "다음 중 하나면 제외 권고: (1) 사건일이 관측 범위 밖인 사건이 3개 이상 (2) 평상 구간 발동률 > 10% (3) 최대 관측 공백이 명목 주기의 3배 초과",
+    "decision": "최종 제외 여부는 사용자가 품질 보고서를 보고 결정. 사건 적중 성적은 제외 판단에 쓰지 않는다"
+  },
+  "gap_rule_v2": {
+    "rule": "사건 채널 c가 '다뤄짐' ⇔ c를 전제 채널로 가진 조항 중 applicable 판정이 있거나, partial 판정이면서 그 조항의 전제 사건유형에 이번 사건 유형이 포함된 경우. 그 외는 공백",
+    "evaluation": "preregistration.json(v1)과 같은 문서 제거·같은 oracle 정답으로 재검증, 결과로 규칙을 다시 바꾸지 않는다"
+  },
+  "protected_ranking": "판정된 조항이 모두 protected인 문서는 순위 하단으로 보내고(후보에는 유지) '필수 확인'으로 별도 표시",
+  "exposure_core_paths": "상위 N과 별도로, 사건 지역과 GLOBAL이 아닌 구체 지역이 일치하는 경로를 '핵심 경로'로 표시 (가중치·GLOBAL 점수는 변경하지 않음)",
+  "no_metric_tuning": "Sentinel 임계치·노출 가중치는 라벨 6개로 튜닝하지 않는다 (과적합 방지). 성적은 보고만 한다"
+}
