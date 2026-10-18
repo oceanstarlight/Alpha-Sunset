@@ -311,7 +311,12 @@ with tab_learn:
                   help=f"OFF {lr['pass_A']['doc_top3_hit_off']} / ON {lr['pass_A']['doc_top3_hit_on']}")
         c2.metric("반복 2회차 delta", lr["pass_B"]["learner_delta_sim"],
                   help=f"OFF {lr['pass_B']['doc_top3_hit_off']} / ON {lr['pass_B']['doc_top3_hit_on']}")
-        st.dataframe(pd.DataFrame(lr["pass_B"]["events"])[["event_id", "as_of", "top3_off", "top3_on", "hit_off", "hit_on", "priority_top"]],
+        sim = pd.DataFrame(lr["pass_B"]["events"])[["event_id", "as_of", "top3_off", "top3_on", "hit_off", "hit_on", "priority_top"]]
+        # [문서, 점수] 쌍 목록은 Arrow 직렬화가 안 되므로 문자열로 표시
+        sim["priority_top"] = sim["priority_top"].map(lambda xs: ", ".join(f"{d}({p:.2f})" for d, p in xs))
+        for col in ("top3_off", "top3_on"):
+            sim[col] = sim[col].map(", ".join)
+        st.dataframe(sim,
                      hide_index=True, width="stretch")
         for c in lr["caveats"]:
             st.caption("⚠️ " + c)

@@ -58,3 +58,28 @@ def test_ui_renders_without_exceptions():
     at.sidebar.selectbox[0].set_value("svb_2023").run()
     assert not at.exception
     assert any("SVB" in m.value or "실리콘밸리" in m.value for m in at.markdown)
+
+
+def test_all_ui_tables_serialize_to_arrow(monkeypatch):
+    """UI 표가 Arrow로 직렬화되는지 확인 (실패 시 Streamlit이 경고를 내고 자동 변환함)."""
+    import pandas as pd
+    import pyarrow as pa
+    import streamlit as st
+    from streamlit.testing.v1 import AppTest
+
+    original, seen, bad = st.dataframe, [], []
+
+    def checked(df, *args, **kwargs):
+        if isinstance(df, pd.DataFrame):
+            seen.append(list(df.columns))
+            try:
+                pa.Table.from_pandas(df, preserve_index=False)
+            except Exception as e:  # noqa: BLE001
+                bad.append((list(df.columns), str(e)[:100]))
+        return original(df, *args, **kwargs)
+
+    monkeypatch.setattr(st, "dataframe", checked)
+    app = Path(__file__).resolve().parent.parent / "ui" / "streamlit_app.py"
+    at = AppTest.from_file(str(app), default_timeout=120).run()
+    at.sidebar.selectbox[0].set_value("svb_2023").run()
+    assert seen and not bad, bad

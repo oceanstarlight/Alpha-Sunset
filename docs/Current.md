@@ -117,9 +117,9 @@
 - ✅ 콜드 스타트 확인: 새로 받은 저장소에서 키 없이 `run_replay` 성공 (Chroma·sandbox.db 자동 재구성)
 - ✅ AppTest·서비스 테스트 추가
 - ✅ Streamlit Community Cloud 배포: https://alpha-sunset.streamlit.app (사용자 확인)
-- ⏳ 재시작(Reboot) 후 정상 기동 재확인
+- ✅ 배포 환경 Reboot 후 정상 기동 (사용자 확인)
 - ⏳ 라이브 GDELT 호출을 배포 환경에서 재확인 (현재 세션은 429)
-- **완료 기준**: 외부 접속 가능한 데모 URL ✅, 재시작 후에도 정상 기동 (콜드 스타트 로컬 검증 ✅, 배포 환경 Reboot 확인 대기)
+- **완료 기준**: 외부 접속 가능한 데모 URL ✅, 재시작 후에도 정상 기동 (콜드 스타트 로컬 검증 ✅, 배포 환경 Reboot ✅)
 
 ## P8 — 백테스트 ✅
 - ✅ 사건일 시점 요약 분리 (`summary_as_of`·`entities_as_of`, 백테스트 입력은 `as_of_view()`)
