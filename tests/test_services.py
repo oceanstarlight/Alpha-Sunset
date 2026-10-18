@@ -129,6 +129,8 @@ def test_ui_data_input_tab_converts_sample_and_applies_portfolio():
     assert at.session_state["uploaded_portfolio"].nodes
     at.run()  # 지도 탭은 입력 탭보다 먼저 그려지므로 다음 실행에서 반영
     assert any("업로드" in c.value for c in at.caption)  # 지도 탭이 업로드 포트폴리오를 쓴다
+    assert any(r.label == "포트폴리오" for r in at.radio)  # 브리핑 탭에 업로드 가정 분석 선택이 생긴다
+    assert at.session_state["uploaded_holdings"][0]["name"]
 
 
 def test_briefing_excel_export_has_evidence_sheets():

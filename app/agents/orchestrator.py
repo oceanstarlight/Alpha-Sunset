@@ -56,6 +56,8 @@ class RunContext:
     llm: LLMClient
     panel: dict
     live: bool = False
+    holdings: list[dict] | None = None  # 업로드 보유 종목 (사건 기관 동일 이름 확인용)
+    portfolio_note: str = ""  # 예: 업로드 포트폴리오 가정 분석
     executed: list[str] = field(default_factory=list)
     step: int = 0
     # 도구 결과
@@ -164,6 +166,8 @@ def tool_compute_exposure(ctx: RunContext, **_) -> dict:
             rep = exposure_agent.compute_exposure(event, ctx.portfolio, ctx.llm, live=True)
         else:
             ctx.exposure_note = "불확실 경로 비율이 높지만 백테스트 시점에 추가 공개된 보유내역이 없다"
+    if ctx.holdings:
+        rep.entity_paths = exposure_agent.holding_entity_paths(event, ctx.holdings) + rep.entity_paths
     ctx.exposure = rep
     return {"available": True, "uncertain_ratio": rep.uncertain_ratio, "requeried": ctx.requeried_exposure,
             "top_paths": [" → ".join(p.nodes[1:]) for p in rep.paths[:5]],
@@ -334,13 +338,17 @@ def orchestrate(ctx: RunContext, task: str) -> Briefing:
         complete_deterministically(ctx)
     if ctx.briefing is None:
         raise RuntimeError("브리핑 생성 실패")
+    if ctx.portfolio_note:
+        note = " · ".join(x for x in (ctx.portfolio_note, ctx.briefing.exposure_note) if x)
+        ctx.briefing = ctx.briefing.model_copy(update={"exposure_note": note})
     return ctx.briefing
 
 
 # ---------- 진입점 ----------
 
 
-def run_replay(event_id: str, llm: LLMClient | None = None) -> Briefing:
+def run_replay(event_id: str, llm: LLMClient | None = None, portfolio: Portfolio | None = None,
+               holdings: list[dict] | None = None) -> Briefing:
     """백테스트 사건 재생 → Briefing (sandbox DB). 기준일 = 사건 카드 date."""
     from app.corpus import load_events, load_playbooks, load_portfolio
     from app.data.fred import load_panel
@@ -352,18 +360,23 @@ def run_replay(event_id: str, llm: LLMClient | None = None) -> Briefing:
     target = target.as_of_view()  # 사건일 당일까지 알려진 사실만 입력 (사후 정보 누수 방지)
     llm = llm or LLMClient(db_mode="sandbox")
     panel = load_panel(sentinel_agent.panel_series_ids())
-    ctx = new_context(mode="sandbox", as_of=target.date, events=[target], portfolio=load_portfolio(),
-                      index=ClauseIndex(load_playbooks(), llm), llm=llm, panel=panel)
+    note = (f"업로드 포트폴리오 '{portfolio.institution}'(현재 보유)를 과거 사건에 적용한 가정 분석 — 사건 당시 보유와 다르다"
+            if portfolio is not None else "")
+    ctx = new_context(mode="sandbox", as_of=target.date, events=[target], portfolio=portfolio or load_portfolio(),
+                      index=ClauseIndex(load_playbooks(), llm), llm=llm, panel=panel, holdings=holdings, portfolio_note=note)
     return orchestrate(ctx, f"{target.date.isoformat()} 기준으로 사건을 탐지하고 대응문서 적합도와 노출을 분석해 브리핑을 만들어라.")
 
 
-def run_live_briefing(event: Event, panel: dict, llm: LLMClient | None = None) -> Briefing:
+def run_live_briefing(event: Event, panel: dict, llm: LLMClient | None = None, portfolio: Portfolio | None = None,
+                      holdings: list[dict] | None = None) -> Briefing:
     """라이브 사건(뉴스 군집을 구조화한 Event)으로 브리핑 생성 (live DB, 최신 보유내역)."""
     from app.corpus import load_playbooks, load_portfolio
 
     llm = llm or LLMClient(db_mode="live")
-    ctx = new_context(mode="live", as_of=event.date, events=[event], portfolio=load_portfolio(),
-                      index=ClauseIndex(load_playbooks(), llm), llm=llm, panel=panel, live=True)
+    note = f"업로드 포트폴리오 '{portfolio.institution}' 기준" if portfolio is not None else ""
+    ctx = new_context(mode="live", as_of=event.date, events=[event], portfolio=portfolio or load_portfolio(),
+                      index=ClauseIndex(load_playbooks(), llm), llm=llm, panel=panel, live=True, holdings=holdings,
+                      portfolio_note=note)
     return orchestrate(ctx, f"{event.date.isoformat()} 현재 탐지된 사건의 대응문서 적합도와 노출을 분석해 브리핑을 만들어라.")
 
 

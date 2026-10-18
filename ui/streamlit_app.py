@@ -112,9 +112,17 @@ st.sidebar.caption("에이전트는 제안만 하고 최종 결정은 사람이 
 
 def current_briefing() -> Briefing | None:
     key = "live_briefing" if mode == "라이브" else f"briefing_{event_id}"
+    if mode != "라이브" and st.session_state.get("portfolio_choice") == "업로드" and f"{key}_upload" in st.session_state:
+        return st.session_state[f"{key}_upload"]  # 업로드 포트폴리오 가정 분석 결과
     if key not in st.session_state and mode != "라이브":
         st.session_state[key] = services.load_saved_briefing(event_id)
     return st.session_state.get(key)
+
+
+def uploaded_args() -> dict:
+    """업로드 포트폴리오가 있으면 브리핑 실행에 넘길 인자."""
+    pf = st.session_state.get("uploaded_portfolio")
+    return {"portfolio": pf, "holdings": st.session_state.get("uploaded_holdings")} if pf is not None else {}
 
 
 tab_map, tab_watch, tab_brief, tab_approve, tab_bt, tab_learn, tab_input = st.tabs(
@@ -308,7 +316,7 @@ with tab_watch:
                 st.warning(f"FRED 갱신 실패, 커밋된 캐시 사용: {sig['fred_error']}")
             if news["clusters"] and st.button("탐지 사건 브리핑 생성"):
                 with st.spinner("에이전트 실행 중…"):
-                    st.session_state["live_briefing"] = services.run_live(sig)
+                    st.session_state["live_briefing"] = services.run_live(sig, **uploaded_args())
 
 # ---------- 2. 브리핑 ----------
 
@@ -331,6 +339,19 @@ with tab_brief:
         if c2.button("재생 다시 실행"):
             with st.spinner("에이전트 실행 중…"):
                 st.session_state[f"briefing_{event_id}"] = b = services.run_replay(event_id)
+    if mode == "백테스트 재생" and st.session_state.get("uploaded_portfolio") is not None:
+        pf = st.session_state["uploaded_portfolio"]
+        u1, u2 = st.columns([2, 1])
+        if st.session_state.pop("_choose_upload", False):  # 위젯 생성 전에만 값을 바꿀 수 있다
+            st.session_state["portfolio_choice"] = "업로드"
+        u1.radio("포트폴리오", ["기본(합성)", "업로드"], horizontal=True, key="portfolio_choice",
+                 help="업로드는 현재 보유를 과거 사건에 적용한 가정 분석이다 (사건 당시 보유와 다름).")
+        if u2.button(f"업로드 포트폴리오로 분석 ({pf.institution})"):
+            with st.spinner("에이전트 실행 중 (업로드 포트폴리오)…"):
+                st.session_state[f"briefing_{event_id}_upload"] = services.run_replay(event_id, **uploaded_args())
+                st.session_state["_choose_upload"] = True
+            st.rerun()
+        b = current_briefing()
     if b is None:
         st.info("브리핑이 없다. 라이브 모드는 감시 탭에서 신호 조회 후 생성한다.")
     else:
@@ -373,7 +394,7 @@ with tab_brief:
         if b.exposure_note:
             st.info(b.exposure_note)
         if b.exposure_entities:
-            st.error("사건 기관과 같은 발행자를 보유: " + ", ".join(p.nodes[3] for p in b.exposure_entities))
+            st.error("사건 기관과 같은 발행자를 보유: " + ", ".join(p.nodes[-2] for p in b.exposure_entities))
         if b.exposure_core:
             st.warning("핵심 경로 (사건 지역과 직접 겹치지만 비중이 작아 상위 10 밖): "
                        + " / ".join(" → ".join(p.nodes[1:]) for p in b.exposure_core))
@@ -586,6 +607,8 @@ with tab_input:
             st.success(f"저장: {save_preset(prof, spec, name).name}")
         if c3.button("이 포트폴리오로 분석", type="primary", disabled=res.holdings.empty):
             st.session_state["uploaded_portfolio"] = to_portfolio(res.holdings, institution=name)
-            st.success("세계 금융 지도에 업로드 포트폴리오를 반영했다.")
+            st.session_state["uploaded_holdings"] = res.holdings[["name", "isin", "weight", "country", "sector", "source_row"]] \
+                .astype(object).where(res.holdings.notna(), None).to_dict("records")
+            st.success("세계 금융 지도와 브리핑(가정 분석·라이브)에 업로드 포트폴리오를 반영했다.")
     if st.session_state.get("uploaded_portfolio") is not None and st.button("업로드 포트폴리오 해제"):
         del st.session_state["uploaded_portfolio"]

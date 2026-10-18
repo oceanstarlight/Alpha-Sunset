@@ -287,6 +287,26 @@ def explain(paths: list[PathDetail], llm: LLMClient | None) -> list[str]:
 # ---------- 전체 ----------
 
 
+def holding_entity_paths(event: Event, holdings: list[dict]) -> list[ExposurePath]:
+    """업로드 직접 보유 종목 중 사건 기관과 같은 이름 (법인 접미사 뗀 토큰 완전 일치, 공공기관 제외).
+
+    보유 종목명은 외부 LLM에 보내지 않는다 (실제 보유내역 보안).
+    """
+    names = [h["name"] for h in holdings if h.get("name")]
+    out = []
+    for ent in event.entities:
+        if is_public_body(ent):
+            continue
+        for name in rule_match(ent, names):
+            for h in (x for x in holdings if x.get("name") == name):
+                w = float(h.get("weight") or 0.0)
+                leaf = _leaf([h.get("country") or "-"], [h.get("sector") or "-"])
+                out.append(ExposurePath(nodes=[ROOT, "업로드 직접 보유", name, leaf], weight=round(min(max(w, 0.0), 1.0), 6),
+                                        relevance=1.0, uncertainty=0.0, risk_score=round(min(max(w, 0.0), 1.0), 6),
+                                        why=f"업로드 보유 종목 '{name}'이 사건 기관 '{ent}'과 같은 이름 (비중 {w:.2%}, 원본 {h.get('source_row', '-')}행)"))
+    return sorted(out, key=lambda p: p.risk_score, reverse=True)
+
+
 def snapshot_for(event: Event, live: bool = False) -> str:
     return "live" if live else event.id
 
