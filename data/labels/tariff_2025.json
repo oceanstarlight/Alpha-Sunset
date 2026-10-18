@@ -1,10 +1,25 @@
 {
   "event_id": "tariff_2025",
-  "reaction_date": "YYYY-MM-DD",
-  "expected_docs": [],
-  "expected_inapplicable_clauses": [],
+  "reaction_date": "2025-04-03",
+  "expected_docs": [
+    "PB-TRADE",
+    "PB-FX"
+  ],
+  "expected_inapplicable_clauses": [
+    "PB-GEO-02",
+    "PB-REG-03",
+    "PB-GEO-01",
+    "PB-TRADE-06",
+    "PB-TRADE-08",
+    "PB-LIQ-06"
+  ],
   "expected_gap_channels": [],
-  "expected_exposure_paths": [],
+  "expected_exposure_paths": [
+    "D-KREQ",
+    "M-SEOGYEONG",
+    "D-USEQ",
+    "M-CHEONGRAM"
+  ],
   "synthetic": true,
-  "notes": ""
+  "notes": "reaction_date: 발표가 미 동부 4/2 장 마감 후이므로 한국 시장 첫 반응일 4/3(목). docs: 무역정책 TRADE, 원화 약세 FX. 부적용: 제재 지정 조항(GEO-02, REG-03)은 관세와 다름, 분쟁 국가 집계(GEO-01), 보복관세 미예고(TRADE-06), 금리 경로 변화는 당일 근거 부족(TRADE-08), 봉쇄(LIQ-06). gap: sanctions_trade는 TRADE, fx는 TRADE-04/FX가 부분 적용돼 []. exposure: 한국 수출주, 중국 주식, 미국 주식, 신흥국 채권."
 }

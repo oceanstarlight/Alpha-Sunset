@@ -1,10 +1,21 @@
 {
   "event_id": "gfc_2008",
-  "reaction_date": "YYYY-MM-DD",
-  "expected_docs": [],
-  "expected_inapplicable_clauses": [],
+  "reaction_date": "2008-09-15",
+  "expected_docs": [
+    "PB-CPTY",
+    "PB-FX",
+    "PB-LIQ"
+  ],
+  "expected_inapplicable_clauses": [
+    "PB-CPTY-07",
+    "PB-FX-05",
+    "PB-FX-04",
+    "PB-LIQ-06",
+    "PB-LIQ-08",
+    "PB-BANK-04"
+  ],
   "expected_gap_channels": [],
   "expected_exposure_paths": [],
   "synthetic": true,
-  "notes": ""
+  "notes": "reaction_date: 리먼 파산보호 신청일(월요일) 당일. docs: 거래상대방 부도(CPTY), 원화 약세(FX), 유동성(LIQ). 부적용: 가족계좌 PB 간접노출(CPTY-07)은 Archegos형, 통화스와프/중앙은행 공급/예금보호는 당일 미발표, 헤지 롤오버 비용(FX-04)은 근거 없음, 봉쇄 조치(LIQ-06)는 팬데믹 전제. gap: 5개 채널 모두 CPTY/FX/LIQ가 다룸이라 []. exposure: 보유내역 데이터 없어 [] (규칙)."
 }
