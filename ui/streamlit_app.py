@@ -426,6 +426,24 @@ with tab_bt:
     res = services.get_backtest_results()
     st.subheader("백테스트 결과")
     st.caption("실제 실행값만 표시한다. 정답 라벨 기반 지표(top3 적중, P/R)는 라벨 작성 후 P8에서 산출한다.")
+    if is_local and res.get("kr"):
+        kr = res["kr"]
+        st.markdown(f"**{LOCAL['name']} 신호 백테스트** (사전 등록 v5, `data/backtest/kr_results.json`)")
+        ks = kr["summary"]
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("사건 전 알림 선행일", f"{ks['kr_warning_lead_days']}일")
+        c2.metric("사건 → 대응안", f"{ks['kr_briefing_delay_days']}일")
+        c3.metric("평상시 알림 비율", f"{ks['kr_calm_money_alert_rate']:.2%}")
+        c4.metric("사전 알림 사건 / 기준선", f"{ks['kr_events_with_prior_warning']:.0%} / {ks['kr_base_rate']:.0%}")
+        st.dataframe(pd.DataFrame([{
+            "사건": r["event_id"], "첫 자금 이상 알림": r["first_kr_money_alert"], "선행일": r["kr_warning_lead_days"],
+            "원인(알림)": ", ".join(f"{k} z={v:+.2f}" for k, v in r["kr_money_alert_cause"].items()),
+            "첫 대응안": r["first_kr_alert"], "지연": r["kr_briefing_delay_days"],
+            "원인(대응안)": ", ".join(f"{k} z={v:+.2f}" for k, v in r["kr_alert_cause"].items()),
+            "글로벌 선행일": r["global_warning_lead_days"]} for r in kr["events"]]).astype(str), hide_index=True, width="stretch")
+        for note in kr["notes"]:
+            st.caption(note)
+        st.divider()
     if res["backtest"]:
         bt = res["backtest"]
         st.markdown("**지표 요약** (`data/backtest_results.json`)")

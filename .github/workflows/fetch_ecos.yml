@@ -1,0 +1,31 @@
+name: fetch-ecos
+
+# ECOS 일별 이력을 받아 data/ecos/에 커밋 (한국 신호 백테스트용)
+on:
+  workflow_dispatch:
+  push:
+    paths: [scripts/fetch_ecos.py]
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install httpx==0.28.1 pyyaml==6.0.3 python-dotenv==1.2.4 pandas==3.0.6
+      - run: python scripts/fetch_ecos.py
+        env:
+          ECOS_API_KEY: ${{ secrets.ECOS_API_KEY }}
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ecos
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "data: ECOS 일별 이력 $(date -u +%F)"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

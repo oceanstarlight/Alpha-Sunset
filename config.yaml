@@ -100,8 +100,8 @@ orchestrator:
   max_steps: 10
 
 korea:                        # 로컬(대한민국) 상시 감시 — 사전 등록 v5
-  market:                     # A_kr (ECOS 일별). 항목 코드는 키 발급 후 StatisticItemList로 확인 (verified: false)
-    verified: false
+  market:                     # A_kr (ECOS 일별). 항목 코드는 scripts/check_ecos.py로 확인 완료 (2026-10-18)
+    verified: true
     series:
       KOSPI:  {stat: 802Y001, item: "0001000", change: pct}
       USDKRW: {stat: 731Y001, item: "0000001", change: pct}
@@ -112,7 +112,7 @@ korea:                        # 로컬(대한민국) 상시 감시 — 사전 �
       CREDIT_KR: [CORP_AA3Y, KTB3Y]   # 회사채 AA- 3년 − 국고채 3년
     signal_series: [KOSPI, USDKRW, KTB3Y, CREDIT_KR, CD91]
   flow:                       # C_kr: 외국인 순매수 (공식 무료 소스 확인 후 활성)
-    verified: false
+    verified: true
     series:
       FOREIGN_NET_KOSPI: {stat: 802Y001, item: "0030000", change: level}
     cumulative_days: 5

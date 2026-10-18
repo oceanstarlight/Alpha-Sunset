@@ -55,6 +55,16 @@
 | 근거 없는 판정 | 0건 | |
 | Learner ON − OFF (top3 적중) | 0.0 | 사건 유형별 이력이 없고, 보정 폭(±15%)이 보수적이라 순위 변화 없음 (설계 의도대로 유지) |
 
+### 로컬(대한민국) 신호 백테스트 (사전 등록 v5, ECOS)
+| 지표 | 로컬 | 글로벌 |
+|---|---|---|
+| 사건 전 자금 이상 알림 선행일 | 19.8일 (5/6) | 28.6일 (5/6) |
+| 사건 → 대응안 | 0.8일 (5/6 재현, SVB는 한국 반응 없음) | 0.33일 |
+| 평상시 알림 비율 | 7.57% | 9.19% |
+| 사건 전 알림 사건 비율 / 평상일 기준선 | 83% / 51% | 83% / 42% |
+
+전체 수치는 [`data/backtest/kr_results.json`](data/backtest/kr_results.json). 파이프라인 그림은 [`docs/pipeline.png`](docs/pipeline.png).
+
 ## 4. 검증 원칙 (편향 방지)
 - **사건일 시점 정보만 사용**: 백테스트 입력은 사건 카드의 `summary_as_of`(사건일 당일까지 알려진 사실)만 쓴다. 보유내역도 사건일 이전에 공시된 것만 쓴다.
 - **사전 등록**: 검증 규칙·정답·지표 정의를 실행 전에 커밋으로 고정했다 ([`data/backtest/ablation/preregistration*.json`](data/backtest/ablation/)). 결과를 보고 바꾸려면 새 버전으로 등록한다.
@@ -75,7 +85,7 @@
 python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 .venv/bin/streamlit run ui/streamlit_app.py
-.venv/bin/pytest -q       # 126개 테스트
+.venv/bin/pytest -q       # 129개 테스트
 ```
 - **API 키 없이도** 백테스트 재생은 동작한다. 커밋된 LLM 응답 캐시(`data/llm_cache.db`)로 같은 결과를 재현한다.
 - 배포: Streamlit Community Cloud (`ui/streamlit_app.py`, Python 3.11, Secrets에 `GEMINI_API_KEY`·`SEC_USER_AGENT`).
