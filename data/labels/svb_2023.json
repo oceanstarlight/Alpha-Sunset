@@ -1,10 +1,25 @@
 {
   "event_id": "svb_2023",
-  "reaction_date": "YYYY-MM-DD",
-  "expected_docs": [],
-  "expected_inapplicable_clauses": [],
+  "reaction_date": "2023-03-13",
+  "expected_docs": [
+    "PB-BANK",
+    "PB-RATE"
+  ],
+  "expected_inapplicable_clauses": [
+    "PB-BANK-04",
+    "PB-CPTY-02",
+    "PB-CPTY-07",
+    "PB-MGR-01",
+    "PB-RATE-06",
+    "PB-RATE-08"
+  ],
   "expected_gap_channels": [],
-  "expected_exposure_paths": [],
+  "expected_exposure_paths": [
+    "M-HANBIT",
+    "C-PACIFICA",
+    "D-UST",
+    "D-USEQ"
+  ],
   "synthetic": true,
-  "notes": ""
+  "notes": "reaction_date: 금요일 폐쇄이므로 주말 지나 첫 영업일(월) 개장 전까지 (예금보호 발표는 일요일이나 당일 사실 아님). docs: 은행 위기 BANK, 금리 평가손실 RATE. 부적용: 예금보호 발표 이후 조항(BANK-04), 파생 부도 정산·가족계좌 PB, 운용사 환매중단, 장단기 역전·원화 약세 비용은 전제 불일치. gap: 4개 채널 모두 BANK/RATE가 다룸이라 []. exposure: 미국 지역은행 전략, 미국 지역은행 상대방, 미국 국채, 미국 주식."
 }

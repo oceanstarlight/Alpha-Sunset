@@ -156,6 +156,7 @@ class PathDetail:
     relevance: float
     uncertainty: float
     reasons: list[str]
+    regions: list[str] = field(default_factory=list)
 
     @property
     def risk_score(self) -> float:
@@ -172,6 +173,7 @@ class ExposureReport:
     needs_requery: bool
     entity_matches: dict[str, str] = field(default_factory=dict)
     entity_paths: list[ExposurePath] = field(default_factory=list)  # 사건 기관과 같은 발행자 보유 (순위와 별도 표시)
+    core_paths: list[ExposurePath] = field(default_factory=list)  # 사건의 구체 지역(GLOBAL 제외)과 일치하는 경로 (상위 N 밖)
     graph: nx.DiGraph | None = None
 
 
@@ -211,7 +213,8 @@ def build_paths(event: Event, portfolio: Portfolio, snapshot: str, llm: LLMClien
             rel, reasons = relevance(n.regions, n.sectors, n.asset_classes, event)
             leaf = _leaf(n.regions, n.sectors)
             g.add_edge(n.id, leaf, weight=n.weight)
-            paths.append(PathDetail([ROOT, n.id, leaf], n.id, [_kind_label(n), leaf], n.weight, rel, n.uncertainty, reasons))
+            paths.append(PathDetail([ROOT, n.id, leaf], n.id, [_kind_label(n), leaf], n.weight, rel, n.uncertainty, reasons,
+                                    list(n.regions)))
             continue
         paths += _fund_paths(g, n, holdings[n.id], matches, event)
 
@@ -233,7 +236,7 @@ def _fund_paths(g: nx.DiGraph, n: PortfolioNode, df: pd.DataFrame, matches: dict
         g.add_edge(issuer, leaf, weight=w)
         out.append(PathDetail([ROOT, n.id, fund, issuer, leaf], n.id,
                               [_kind_label(n), f"프록시 펀드 {n.proxy_fund.name}", f"보유 발행자 {issuer}", leaf],
-                              w, 1.0, n.uncertainty, [f"사건 기관 '{matches[issuer]}'과 동일 발행자"]))
+                              w, 1.0, n.uncertainty, [f"사건 기관 '{matches[issuer]}'과 동일 발행자"], [country]))
     # 나머지는 국가별 묶음 경로
     for country, grp in df[~is_entity].groupby("country"):
         w = min(n.weight * grp["pct_val"].sum() / 100, n.weight)
@@ -244,7 +247,7 @@ def _fund_paths(g: nx.DiGraph, n: PortfolioNode, df: pd.DataFrame, matches: dict
         g.add_edge(holding, leaf, weight=w)
         out.append(PathDetail([ROOT, n.id, fund, holding, leaf], n.id,
                               [_kind_label(n), f"프록시 펀드 {n.proxy_fund.name}", holding, leaf],
-                              w, rel, n.uncertainty, reasons))
+                              w, rel, n.uncertainty, reasons, [country]))
     return out
 
 
@@ -295,6 +298,14 @@ def uncertain_ratio(paths: list[PathDetail]) -> float:
     return sum(p.uncertainty >= th for p in paths) / len(paths)
 
 
+def core_paths(paths: list[PathDetail], top: list[PathDetail], event: Event, limit: int) -> list[PathDetail]:
+    """사전 등록 v2: 상위 N 밖에서, 사건의 구체 지역(GLOBAL 제외)과 지역이 일치하는 경로를 risk 순으로."""
+    specific = set(event.regions) - {"GLOBAL"}
+    in_top = {id(p) for p in top}
+    hits = [p for p in paths if id(p) not in in_top and region_tags(p.regions) & specific]
+    return sorted(hits, key=lambda p: p.risk_score, reverse=True)[:limit]
+
+
 def _to_path(p: PathDetail, why: str) -> ExposurePath:
     return ExposurePath(nodes=p.nodes, weight=round(p.weight, 6), relevance=round(p.relevance, 4),
                         uncertainty=p.uncertainty, risk_score=round(p.risk_score, 6), why=why)
@@ -310,6 +321,7 @@ def compute_exposure(event: Event, portfolio: Portfolio, llm: LLMClient | None, 
                      and p.reasons[0].startswith("사건 기관")), key=lambda p: p.risk_score, reverse=True)
     whys = explain(top, llm)
     ratio = uncertain_ratio(top)
+    core = core_paths(paths, top, event, cfg.get("core_paths_max", 5))
     return ExposureReport(
         event_id=event.id,
         snapshot=snapshot,
@@ -319,5 +331,6 @@ def compute_exposure(event: Event, portfolio: Portfolio, llm: LLMClient | None, 
         needs_requery=ratio > cfg["requery_uncertain_ratio"],
         entity_matches=matches,
         entity_paths=[_to_path(p, _fallback_why(p)) for p in entity],
+        core_paths=[_to_path(p, _fallback_why(p)) for p in core],
         graph=g,
     )

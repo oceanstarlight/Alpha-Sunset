@@ -126,50 +126,6 @@
       ]
     },
     {
-      "doc_id": "PB-MGR",
-      "fit_score": 0.5,
-      "n_applicable": 1,
-      "n_partial": 2,
-      "n_not": 1,
-      "n_uncertain": 0,
-      "judgments": [
-        {
-          "clause_id": "PB-MGR-01",
-          "verdict": "applicable",
-          "mismatch_reasons": [],
-          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-          "confidence": 0.8
-        },
-        {
-          "clause_id": "PB-MGR-02",
-          "verdict": "partial",
-          "mismatch_reasons": [
-            "운용사 보고 자산과 실제 자산 불일치 의심 조건에 대한 정보가 부족하다."
-          ],
-          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-          "confidence": 0.65
-        },
-        {
-          "clause_id": "PB-MGR-03",
-          "verdict": "partial",
-          "mismatch_reasons": [
-            "지속기간 전제(shock, weeks)와 이번 사건의 지속기간(months)이 다릅니다."
-          ],
-          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-          "confidence": 0.85
-        },
-        {
-          "clause_id": "PB-MGR-05",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "사건유형이 credit_event이나, 해당 조항은 other 또는 regulatory를 전제로 합니다."
-          ],
-          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-          "confidence": 0.95
-        }
-      ]
-    },
-    {
       "doc_id": "PB-BANK",
       "fit_score": 0.5,
       "n_applicable": 0,
@@ -225,68 +181,6 @@
           ],
           "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
           "confidence": 0.7
-        }
-      ]
-    },
-    {
-      "doc_id": "PB-REG",
-      "fit_score": 0.25,
-      "n_applicable": 1,
-      "n_partial": 0,
-      "n_not": 3,
-      "n_uncertain": 2,
-      "judgments": [
-        {
-          "clause_id": "PB-REG-01",
-          "verdict": "uncertain",
-          "mismatch_reasons": [
-            "이번 사건 요약에 중대한 손실이나 한도 위반 발생 여부에 대한 정보가 없습니다."
-          ],
-          "evidence_quote": "원/달러 환율은 1,117.85원(전일 1,106.50원)이었다",
-          "confidence": 0.5
-        },
-        {
-          "clause_id": "PB-REG-02",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "사건유형이 credit_event이며, 공매도 금지 등 시장 조치 시행에 대한 내용이 사건 요약에 없습니다."
-          ],
-          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-          "confidence": 0.95
-        },
-        {
-          "clause_id": "PB-REG-03",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "사건유형이 credit_event이며, 제재 대상 지정과 관련된 전제가 이번 사건에 포함되어 있지 않습니다."
-          ],
-          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-          "confidence": 0.95
-        },
-        {
-          "clause_id": "PB-REG-04",
-          "verdict": "uncertain",
-          "mismatch_reasons": [
-            "이번 사건에서 한도 예외 승인이 발생했는지에 대한 정보가 없습니다."
-          ],
-          "evidence_quote": "원/달러 환율은 1,117.85원(전일 1,106.50원)이었다",
-          "confidence": 0.5
-        },
-        {
-          "clause_id": "PB-REG-05",
-          "verdict": "applicable",
-          "mismatch_reasons": [],
-          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-          "confidence": 0.95
-        },
-        {
-          "clause_id": "PB-REG-08",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "지속기간이 months이나, 위기가 종료되지 않고 현재 진행 중인 사건 상황입니다."
-          ],
-          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
-          "confidence": 0.9
         }
       ]
     },
@@ -460,6 +354,112 @@
           ],
           "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
           "confidence": 0.95
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-MGR",
+      "fit_score": 0.5,
+      "n_applicable": 1,
+      "n_partial": 2,
+      "n_not": 1,
+      "n_uncertain": 0,
+      "judgments": [
+        {
+          "clause_id": "PB-MGR-01",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+          "confidence": 0.8
+        },
+        {
+          "clause_id": "PB-MGR-02",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "운용사 보고 자산과 실제 자산 불일치 의심 조건에 대한 정보가 부족하다."
+          ],
+          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+          "confidence": 0.65
+        },
+        {
+          "clause_id": "PB-MGR-03",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "지속기간 전제(shock, weeks)와 이번 사건의 지속기간(months)이 다릅니다."
+          ],
+          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+          "confidence": 0.85
+        },
+        {
+          "clause_id": "PB-MGR-05",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "사건유형이 credit_event이나, 해당 조항은 other 또는 regulatory를 전제로 합니다."
+          ],
+          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+          "confidence": 0.95
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-REG",
+      "fit_score": 0.25,
+      "n_applicable": 1,
+      "n_partial": 0,
+      "n_not": 3,
+      "n_uncertain": 2,
+      "judgments": [
+        {
+          "clause_id": "PB-REG-01",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "이번 사건 요약에 중대한 손실이나 한도 위반 발생 여부에 대한 정보가 없습니다."
+          ],
+          "evidence_quote": "원/달러 환율은 1,117.85원(전일 1,106.50원)이었다",
+          "confidence": 0.5
+        },
+        {
+          "clause_id": "PB-REG-02",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "사건유형이 credit_event이며, 공매도 금지 등 시장 조치 시행에 대한 내용이 사건 요약에 없습니다."
+          ],
+          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+          "confidence": 0.95
+        },
+        {
+          "clause_id": "PB-REG-03",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "사건유형이 credit_event이며, 제재 대상 지정과 관련된 전제가 이번 사건에 포함되어 있지 않습니다."
+          ],
+          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+          "confidence": 0.95
+        },
+        {
+          "clause_id": "PB-REG-04",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "이번 사건에서 한도 예외 승인이 발생했는지에 대한 정보가 없습니다."
+          ],
+          "evidence_quote": "원/달러 환율은 1,117.85원(전일 1,106.50원)이었다",
+          "confidence": 0.5
+        },
+        {
+          "clause_id": "PB-REG-05",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+          "confidence": 0.95
+        },
+        {
+          "clause_id": "PB-REG-08",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "지속기간이 months이나, 위기가 종료되지 않고 현재 진행 중인 사건 상황입니다."
+          ],
+          "evidence_quote": "2008년 9월 15일 리먼 브라더스 홀딩스가 미국 뉴욕 남부 파산법원에 챕터11 파산보호를 신청했다.",
+          "confidence": 0.9
         }
       ]
     }

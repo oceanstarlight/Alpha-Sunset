@@ -1,10 +1,25 @@
 {
   "event_id": "legoland_2022",
-  "reaction_date": "YYYY-MM-DD",
-  "expected_docs": [],
-  "expected_inapplicable_clauses": [],
+  "reaction_date": "2022-09-28",
+  "expected_docs": [
+    "PB-STFM",
+    "PB-LIQ"
+  ],
+  "expected_inapplicable_clauses": [
+    "PB-STFM-05",
+    "PB-STFM-08",
+    "PB-STFM-07",
+    "PB-LIQ-04",
+    "PB-CPTY-02",
+    "PB-BANK-01"
+  ],
   "expected_gap_channels": [],
-  "expected_exposure_paths": [],
+  "expected_exposure_paths": [
+    "D-MMF",
+    "C-HANGANG",
+    "D-RE",
+    "C-SEORAE"
+  ],
   "synthetic": true,
-  "notes": ""
+  "notes": "reaction_date: 회생 발표일(수요일) 당일, CP 시장 반응 전. docs: 단기자금시장 STFM(원 사건), 일반 유동성 LIQ. 부적용: 채안펀드·한은 담보 확대·발행시장 구축은 당일 미발표, 글로벌 달러 조달(LIQ-04), 파생 ISDA 정산, 은행 뱅크런은 전제 불일치. gap: liquidity/credit_spread/counterparty 모두 STFM이 다뤄 []. exposure: MMF·CP, 국내 증권사, 부동산 펀드, 국내 은행."
 }

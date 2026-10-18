@@ -1,0 +1,84 @@
+{
+  "preregistration": "data/backtest/ablation/preregistration_v2.json",
+  "calm_days": 3658,
+  "series": [
+    {
+      "series": "WRMFNS",
+      "first_obs": "1980-02-04",
+      "last_obs": "2026-08-31",
+      "first_usable": "1981-01-01",
+      "publication_lag_days": 45,
+      "max_gap_days": 7,
+      "discontinued": false,
+      "events_out_of_range": [],
+      "calm_active_rate": 0.0164,
+      "exclude_recommended": false,
+      "reasons": []
+    },
+    {
+      "series": "WIMFNS",
+      "first_obs": "1980-02-04",
+      "last_obs": "2021-02-01",
+      "first_usable": "1981-01-01",
+      "publication_lag_days": 45,
+      "max_gap_days": 7,
+      "discontinued": true,
+      "events_out_of_range": [
+        "legoland_2022",
+        "ru_ua_2022",
+        "svb_2023",
+        "tariff_2025"
+      ],
+      "calm_active_rate": 0.0123,
+      "exclude_recommended": true,
+      "reasons": [
+        "관측 범위 밖 사건 4개"
+      ]
+    },
+    {
+      "series": "DPSACBW027SBOG",
+      "first_obs": "1973-01-03",
+      "last_obs": "2026-10-07",
+      "first_usable": "1973-10-27",
+      "publication_lag_days": 10,
+      "max_gap_days": 7,
+      "discontinued": false,
+      "events_out_of_range": [],
+      "calm_active_rate": 0.0041,
+      "exclude_recommended": false,
+      "reasons": []
+    },
+    {
+      "series": "WMTSECL1",
+      "first_obs": "2002-12-18",
+      "last_obs": "2026-10-14",
+      "first_usable": "2008-04-19",
+      "publication_lag_days": 3,
+      "max_gap_days": 7,
+      "discontinued": false,
+      "events_out_of_range": [],
+      "calm_active_rate": 0.0109,
+      "exclude_recommended": false,
+      "reasons": []
+    },
+    {
+      "series": "WRESBAL",
+      "first_obs": "2002-12-18",
+      "last_obs": "2026-10-14",
+      "first_usable": "2003-10-04",
+      "publication_lag_days": 3,
+      "max_gap_days": 7,
+      "discontinued": false,
+      "events_out_of_range": [],
+      "calm_active_rate": 0.0109,
+      "exclude_recommended": false,
+      "reasons": []
+    }
+  ],
+  "korea": {
+    "series": "KRX 외국인 순매수 (코스피, 일간)",
+    "status": "미수집",
+    "reason": "KRX 정보데이터시스템이 로그인 필요(응답 LOGOUT)로 바뀜. KRX Open API 또는 한국은행 ECOS 무료 인증키 필요"
+  },
+  "combined_calm_active_rate": 0.0519
+}

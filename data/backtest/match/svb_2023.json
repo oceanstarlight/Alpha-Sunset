@@ -101,50 +101,6 @@
       ]
     },
     {
-      "doc_id": "PB-MGR",
-      "fit_score": 0.5,
-      "n_applicable": 1,
-      "n_partial": 0,
-      "n_not": 1,
-      "n_uncertain": 2,
-      "judgments": [
-        {
-          "clause_id": "PB-MGR-01",
-          "verdict": "uncertain",
-          "mismatch_reasons": [
-            "위탁운용사의 환매중단 또는 운용 부실에 대한 정보가 사건 요약에 명시되지 않았다."
-          ],
-          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
-          "confidence": 0.75
-        },
-        {
-          "clause_id": "PB-MGR-02",
-          "verdict": "uncertain",
-          "mismatch_reasons": [
-            "운용사 보고 자산과 실제 자산 불일치 의심 여부에 대한 정보가 없다."
-          ],
-          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
-          "confidence": 0.75
-        },
-        {
-          "clause_id": "PB-MGR-03",
-          "verdict": "applicable",
-          "mismatch_reasons": [],
-          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
-          "confidence": 0.9
-        },
-        {
-          "clause_id": "PB-MGR-05",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "전제된 지역(KR)이 이번 사건의 지역(US)과 일치하지 않습니다."
-          ],
-          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
-          "confidence": 0.95
-        }
-      ]
-    },
-    {
       "doc_id": "PB-CPTY",
       "fit_score": 0.375,
       "n_applicable": 0,
@@ -196,68 +152,6 @@
           ],
           "evidence_quote": "",
           "confidence": 0.0
-        }
-      ]
-    },
-    {
-      "doc_id": "PB-REG",
-      "fit_score": 0.25,
-      "n_applicable": 1,
-      "n_partial": 0,
-      "n_not": 3,
-      "n_uncertain": 2,
-      "judgments": [
-        {
-          "clause_id": "PB-REG-01",
-          "verdict": "uncertain",
-          "mismatch_reasons": [
-            "이번 사건 요약에 중대한 손실이나 한도 위반 발생 여부가 명시되어 있지 않습니다."
-          ],
-          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
-          "confidence": 0.7
-        },
-        {
-          "clause_id": "PB-REG-02",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "전제된 지역(KR)이 이번 사건의 지역(US)과 다릅니다."
-          ],
-          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
-          "confidence": 0.95
-        },
-        {
-          "clause_id": "PB-REG-03",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "이번 사건은 뱅크런 및 은행 파산 사건으로 제재 대상 지정과 관련된 전제에 부합하지 않습니다."
-          ],
-          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
-          "confidence": 0.9
-        },
-        {
-          "clause_id": "PB-REG-04",
-          "verdict": "uncertain",
-          "mismatch_reasons": [
-            "이번 사건에서 한도 예외 승인이 발생했는지에 대한 정보가 없습니다."
-          ],
-          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
-          "confidence": 0.7
-        },
-        {
-          "clause_id": "PB-REG-05",
-          "verdict": "applicable",
-          "mismatch_reasons": [],
-          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
-          "confidence": 0.85
-        },
-        {
-          "clause_id": "PB-REG-08",
-          "verdict": "not_applicable",
-          "mismatch_reasons": [
-            "조항의 전제 지속기간은 months 또는 structural이나, 이번 사건의 지속기간은 weeks이다."
-          ],
-          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
-          "confidence": 0.95
         }
       ]
     },
@@ -426,6 +320,112 @@
           ],
           "evidence_quote": "",
           "confidence": 0.0
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-MGR",
+      "fit_score": 0.5,
+      "n_applicable": 1,
+      "n_partial": 0,
+      "n_not": 1,
+      "n_uncertain": 2,
+      "judgments": [
+        {
+          "clause_id": "PB-MGR-01",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "위탁운용사의 환매중단 또는 운용 부실에 대한 정보가 사건 요약에 명시되지 않았다."
+          ],
+          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
+          "confidence": 0.75
+        },
+        {
+          "clause_id": "PB-MGR-02",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "운용사 보고 자산과 실제 자산 불일치 의심 여부에 대한 정보가 없다."
+          ],
+          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
+          "confidence": 0.75
+        },
+        {
+          "clause_id": "PB-MGR-03",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-MGR-05",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "전제된 지역(KR)이 이번 사건의 지역(US)과 일치하지 않습니다."
+          ],
+          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
+          "confidence": 0.95
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-REG",
+      "fit_score": 0.25,
+      "n_applicable": 1,
+      "n_partial": 0,
+      "n_not": 3,
+      "n_uncertain": 2,
+      "judgments": [
+        {
+          "clause_id": "PB-REG-01",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "이번 사건 요약에 중대한 손실이나 한도 위반 발생 여부가 명시되어 있지 않습니다."
+          ],
+          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
+          "confidence": 0.7
+        },
+        {
+          "clause_id": "PB-REG-02",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "전제된 지역(KR)이 이번 사건의 지역(US)과 다릅니다."
+          ],
+          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
+          "confidence": 0.95
+        },
+        {
+          "clause_id": "PB-REG-03",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "이번 사건은 뱅크런 및 은행 파산 사건으로 제재 대상 지정과 관련된 전제에 부합하지 않습니다."
+          ],
+          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-REG-04",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "이번 사건에서 한도 예외 승인이 발생했는지에 대한 정보가 없습니다."
+          ],
+          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
+          "confidence": 0.7
+        },
+        {
+          "clause_id": "PB-REG-05",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
+          "confidence": 0.85
+        },
+        {
+          "clause_id": "PB-REG-08",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "조항의 전제 지속기간은 months 또는 structural이나, 이번 사건의 지속기간은 weeks이다."
+          ],
+          "evidence_quote": "2023년 3월 10일 캘리포니아 금융보호혁신국(DFPI)이 실리콘밸리은행을 폐쇄하고 FDIC를 관재인으로 지정했다.",
+          "confidence": 0.95
         }
       ]
     }

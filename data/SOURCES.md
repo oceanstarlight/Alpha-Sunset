@@ -29,6 +29,11 @@
 - 전처리: calm 구간 선정 시 1일 변화의 252영업일 z-score 계산 (`data/events/calm_*.json`의 `selection_method`)
 - 주의: `BAMLH0A0HYM2`(ICE BofA HY 스프레드)는 FRED 공개 범위가 최근 3년뿐이라 과거 구간은 `BAA10Y`(Moody's Baa 회사채−10년 국채)로 대체
 
+## FRED 자금 흐름 (시그널 C)
+- 시리즈: `WRMFNS`(리테일 MMF), `WIMFNS`(기관 MMF, 2021 중단), `DPSACBW027SBOG`(미국 상업은행 예금, H.8), `WMTSECL1`(해외 공적기관 미국채 보관액, H.4.1), `WRESBAL`(지급준비금, H.4.1)
+- 수집일: 2026-10-18, `fredgraph.csv` (키 불필요). 공표 시차는 사전 등록 v2에 고정 (45/45/10/3/3일)
+- 품질 보고서: `data/backtest/flow_quality.json`
+
 ## GDELT DOC 2.0 (라이브 시그널 B)
 - URL: https://api.gdeltproject.org/api/v2/doc/doc (`timelinevolraw`, `artlist` 모드)
 - 약관: GDELT 무료 공개 데이터, 요청 간격 5초당 1회 제한

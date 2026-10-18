@@ -1,10 +1,26 @@
 {
   "event_id": "ru_ua_2022",
-  "reaction_date": "YYYY-MM-DD",
-  "expected_docs": [],
-  "expected_inapplicable_clauses": [],
+  "reaction_date": "2022-02-24",
+  "expected_docs": [
+    "PB-GEO",
+    "PB-CMDTY",
+    "PB-REG"
+  ],
+  "expected_inapplicable_clauses": [
+    "PB-CMDTY-02",
+    "PB-CMDTY-03",
+    "PB-CMDTY-08",
+    "PB-GEO-03",
+    "PB-GEO-05",
+    "PB-GEO-08"
+  ],
   "expected_gap_channels": [],
-  "expected_exposure_paths": [],
+  "expected_exposure_paths": [
+    "M-MIR",
+    "M-NURI",
+    "M-CHEONGRAM",
+    "C-RHEIN"
+  ],
   "synthetic": true,
-  "notes": ""
+  "notes": "reaction_date: 침공 당일(목요일). docs: 지정학 GEO, 원자재 CMDTY, 제재 보고 의무 REG-03. 부적용: 선물 롤오버(팬데믹), 유가 급락 하이일드(방향 반대), 가격 안정 후 해소(시기 아님), SWIFT 배제(당일 미발생, 2/26 이후), 거래중단 자산 평가(당일 미발생), 장기화 국가등급 재산정(당일 이른 판단). gap: 모든 채널에 적용 조항 있어 []. exposure: 유럽 주식, 미국 에너지, 신흥국 달러채, 유럽 은행."
 }

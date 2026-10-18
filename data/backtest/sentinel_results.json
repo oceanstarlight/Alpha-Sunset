@@ -1,5 +1,5 @@
 {
-  "note": "백테스트 B는 사건 카드 기반. calm 구간에는 카드가 없어 ALERT가 구조적으로 0이며, WATCH(시장 신호 단독)를 오경보 지표로 함께 기록한다.",
+  "note": "등급 v2: ALERT = B ∧ (A ∨ C). 백테스트 B는 사건 카드 기반. calm 구간에는 카드가 없어 ALERT가 구조적으로 0이며, WATCH(시장 신호 단독)를 오경보 지표로 함께 기록한다.",
   "config": {
     "replay": {
       "days_before": 30,
@@ -45,7 +45,7 @@
         "DCOILWTICO",
         "BAA10Y"
       ],
-      "alert_days": 7,
+      "alert_days": 10,
       "merged_alerts": 1,
       "market_active_days_before_event": 2,
       "first_market_active_before_event": "2008-09-02"
@@ -74,7 +74,7 @@
       ],
       "alert_days": 6,
       "merged_alerts": 3,
-      "market_active_days_before_event": 2,
+      "market_active_days_before_event": 5,
       "first_market_active_before_event": "2022-02-10"
     },
     {
@@ -85,8 +85,8 @@
         "DGS10",
         "BAA10Y"
       ],
-      "alert_days": 1,
-      "merged_alerts": 1,
+      "alert_days": 6,
+      "merged_alerts": 2,
       "market_active_days_before_event": 2,
       "first_market_active_before_event": "2022-09-13"
     },
@@ -98,10 +98,10 @@
         "DGS10",
         "BAA10Y"
       ],
-      "alert_days": 3,
-      "merged_alerts": 1,
-      "market_active_days_before_event": 0,
-      "first_market_active_before_event": null
+      "alert_days": 7,
+      "merged_alerts": 2,
+      "market_active_days_before_event": 5,
+      "first_market_active_before_event": "2023-02-23"
     },
     {
       "event_id": "tariff_2025",
@@ -124,8 +124,8 @@
       "window_id": "calm_2014q2",
       "days": 65,
       "alert_days": 0,
-      "watch_days": 0,
-      "first_watch": null
+      "watch_days": 4,
+      "first_watch": "2014-04-01"
     },
     {
       "window_id": "calm_2017q4",

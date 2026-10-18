@@ -39,6 +39,7 @@ def main() -> None:
             "needs_requery": rep.needs_requery, "entity_matches": rep.entity_matches,
             "portfolio_nodes": rep.portfolio_nodes, "paths": [p.model_dump() for p in rep.paths],
             "entity_paths": [p.model_dump() for p in rep.entity_paths],
+            "core_paths": [p.model_dump() for p in rep.core_paths],
         }
         (OUT_DIR / f"{e.id}.json").write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(f"\n{e.id}  불확실 비율 {rep.uncertain_ratio}  이름매칭 {rep.entity_matches}")

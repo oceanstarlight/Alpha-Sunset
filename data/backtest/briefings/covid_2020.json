@@ -1,6 +1,6 @@
 {
   "briefing": {
-    "run_id": "run-37f545d9a19c",
+    "run_id": "run-e0ed59740265",
     "event": {
       "id": "covid_2020",
       "title": "2020 코로나19 팬데믹 충격과 한국 공매도 금지",
@@ -128,60 +128,6 @@
               "verdict": "applicable",
               "mismatch_reasons": [],
               "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
-              "confidence": 0.95
-            }
-          ]
-        },
-        {
-          "doc_id": "PB-REG",
-          "fit_score": 0.8333,
-          "n_applicable": 5,
-          "n_partial": 0,
-          "n_not": 1,
-          "n_uncertain": 0,
-          "judgments": [
-            {
-              "clause_id": "PB-REG-02",
-              "verdict": "applicable",
-              "mismatch_reasons": [],
-              "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
-              "confidence": 0.95
-            },
-            {
-              "clause_id": "PB-REG-01",
-              "verdict": "applicable",
-              "mismatch_reasons": [],
-              "evidence_quote": "중대한 손실 또는 한도 위반이 발생하면 정해진 기한 내에 감독기관에 보고한다.",
-              "confidence": 0.95
-            },
-            {
-              "clause_id": "PB-REG-03",
-              "verdict": "not_applicable",
-              "mismatch_reasons": [
-                "사건유형 전제가 geopolitical, regulatory로 지정되어 있어 이번 사건의 pandemic과 다릅니다."
-              ],
-              "evidence_quote": "제재 대상 지정 시 관련 법령에 따른 보고 의무를 확인하고 이행한다.",
-              "confidence": 0.95
-            },
-            {
-              "clause_id": "PB-REG-04",
-              "verdict": "applicable",
-              "mismatch_reasons": [],
-              "evidence_quote": "위기 대응을 위한 한도 예외 승인은 사후 7일 이내에 이사회(또는 위원회)에 보고한다.",
-              "confidence": 0.95
-            },
-            {
-              "clause_id": "PB-REG-05",
-              "verdict": "applicable",
-              "mismatch_reasons": [],
-              "evidence_quote": "위기 대응 과정의 의사결정 기록을 보존 기한 동안 보관한다.",
-              "confidence": 0.95
-            },
-            {
-              "clause_id": "PB-REG-08",
-              "verdict": "applicable",
-              "mismatch_reasons": [],
-              "evidence_quote": "위기 종료 후 30일 이내에 사후보고서를 작성해 이사회에 보고한다.",
               "confidence": 0.95
             }
           ]
@@ -315,52 +261,6 @@
           ]
         },
         {
-          "doc_id": "PB-MGR",
-          "fit_score": 0.125,
-          "n_applicable": 0,
-          "n_partial": 1,
-          "n_not": 3,
-          "n_uncertain": 0,
-          "judgments": [
-            {
-              "clause_id": "PB-MGR-01",
-              "verdict": "not_applicable",
-              "mismatch_reasons": [
-                "사건유형이 other 또는 credit_event가 아니라 pandemic이며, 위탁운용사의 환매중단 또는 운용 부실과 관련된 조건이 없습니다."
-              ],
-              "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
-              "confidence": 0.95
-            },
-            {
-              "clause_id": "PB-MGR-02",
-              "verdict": "not_applicable",
-              "mismatch_reasons": [
-                "사건유형이 other 또는 credit_event가 아니라 pandemic이며, 자산 불일치 의심 조건이 충족되지 않았습니다."
-              ],
-              "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
-              "confidence": 0.95
-            },
-            {
-              "clause_id": "PB-MGR-03",
-              "verdict": "partial",
-              "mismatch_reasons": [
-                "채널 전제에 counterparty, liquidity가 포함되어 있으나 이번 사건의 채널에는 포함되지 않았거나 일부만 일치합니다."
-              ],
-              "evidence_quote": "위기 국면에서 위탁운용사의 레버리지와 파생상품 노출이 한도를 넘는지 점검한다.",
-              "confidence": 0.8
-            },
-            {
-              "clause_id": "PB-MGR-05",
-              "verdict": "not_applicable",
-              "mismatch_reasons": [
-                "사건유형 전제가 other, regulatory로 지정되어 있어 이번 사건의 pandemic 유형과 다릅니다."
-              ],
-              "evidence_quote": "손실 회수를 위해 판매사·수탁사·운용사의 책임 관계를 법무팀이 검토한다.",
-              "confidence": 0.9
-            }
-          ]
-        },
-        {
           "doc_id": "PB-BANK",
           "fit_score": 0.0,
           "n_applicable": 0,
@@ -467,6 +367,106 @@
                 "전제된 사건유형이 trade_policy 또는 fx_shock이나 이번 사건은 pandemic이다."
               ],
               "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+              "confidence": 0.9
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-REG",
+          "fit_score": 0.8333,
+          "n_applicable": 5,
+          "n_partial": 0,
+          "n_not": 1,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-REG-02",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-REG-01",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "중대한 손실 또는 한도 위반이 발생하면 정해진 기한 내에 감독기관에 보고한다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-REG-03",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형 전제가 geopolitical, regulatory로 지정되어 있어 이번 사건의 pandemic과 다릅니다."
+              ],
+              "evidence_quote": "제재 대상 지정 시 관련 법령에 따른 보고 의무를 확인하고 이행한다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-REG-04",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "위기 대응을 위한 한도 예외 승인은 사후 7일 이내에 이사회(또는 위원회)에 보고한다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-REG-05",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "위기 대응 과정의 의사결정 기록을 보존 기한 동안 보관한다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-REG-08",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "위기 종료 후 30일 이내에 사후보고서를 작성해 이사회에 보고한다.",
+              "confidence": 0.95
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-MGR",
+          "fit_score": 0.125,
+          "n_applicable": 0,
+          "n_partial": 1,
+          "n_not": 3,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-MGR-01",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 other 또는 credit_event가 아니라 pandemic이며, 위탁운용사의 환매중단 또는 운용 부실과 관련된 조건이 없습니다."
+              ],
+              "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-MGR-02",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 other 또는 credit_event가 아니라 pandemic이며, 자산 불일치 의심 조건이 충족되지 않았습니다."
+              ],
+              "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-MGR-03",
+              "verdict": "partial",
+              "mismatch_reasons": [
+                "채널 전제에 counterparty, liquidity가 포함되어 있으나 이번 사건의 채널에는 포함되지 않았거나 일부만 일치합니다."
+              ],
+              "evidence_quote": "위기 국면에서 위탁운용사의 레버리지와 파생상품 노출이 한도를 넘는지 점검한다.",
+              "confidence": 0.8
+            },
+            {
+              "clause_id": "PB-MGR-05",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형 전제가 other, regulatory로 지정되어 있어 이번 사건의 pandemic 유형과 다릅니다."
+              ],
+              "evidence_quote": "손실 회수를 위해 판매사·수탁사·운용사의 책임 관계를 법무팀이 검토한다.",
               "confidence": 0.9
             }
           ]
@@ -610,6 +610,70 @@
       }
     ],
     "exposure_entities": [],
+    "exposure_core": [
+      {
+        "nodes": [
+          "기관",
+          "C-SEORAE",
+          "KR · banks"
+        ],
+        "weight": 0.01,
+        "relevance": 1.0,
+        "uncertainty": 0.5,
+        "risk_score": 0.0075,
+        "why": "거래상대방 서래은행 (국내 은행) (repo) → KR · banks: 비중 1.00%, 지역 KR, 업종 banks, 자산군 fx (불확실성 0.5)"
+      },
+      {
+        "nodes": [
+          "기관",
+          "C-ATLAS",
+          "US/GLOBAL · broker_dealers"
+        ],
+        "weight": 0.02,
+        "relevance": 0.4,
+        "uncertainty": 0.5,
+        "risk_score": 0.006,
+        "why": "거래상대방 아틀라스 글로벌증권 (미국 투자은행) (swap) → US/GLOBAL · broker_dealers: 비중 2.00%, 지역 GLOBAL,US (불확실성 0.5)"
+      },
+      {
+        "nodes": [
+          "기관",
+          "C-HANGANG",
+          "KR · broker_dealers/real_estate"
+        ],
+        "weight": 0.02,
+        "relevance": 0.4,
+        "uncertainty": 0.5,
+        "risk_score": 0.006,
+        "why": "거래상대방 한강증권 (국내 증권사) (repo) → KR · broker_dealers/real_estate: 비중 2.00%, 지역 KR (불확실성 0.5)"
+      },
+      {
+        "nodes": [
+          "기관",
+          "C-PACIFICA",
+          "US · regional_banks/banks"
+        ],
+        "weight": 0.01,
+        "relevance": 0.75,
+        "uncertainty": 0.5,
+        "risk_score": 0.005625,
+        "why": "거래상대방 퍼시피카 뱅크 (미국 지역은행) (swap) → US · regional_banks/banks: 비중 1.00%, 지역 US, 업종 banks (불확실성 0.5)"
+      },
+      {
+        "nodes": [
+          "기관",
+          "M-CHEONGRAM",
+          "EMB",
+          "EMB CN 보유 11종목",
+          "CN · sovereign"
+        ],
+        "weight": 0.000745,
+        "relevance": 0.4,
+        "uncertainty": 0.3,
+        "risk_score": 0.000253,
+        "why": "위탁운용사 청람인베스트 (신흥국 달러채권) (fund) → 프록시 펀드 iShares J.P. Morgan USD Emerging Markets Bond ETF → EMB CN 보유 11종목 → CN · sovereign: 비중 0.07%, 지역 CN (불확실성 0.3)"
+      }
+    ],
     "exposure_note": "",
     "actions_to_check": [
       "[리스크관리팀] 유동성 점검 회의 소집 (PB-LIQ-01)",
@@ -619,18 +683,11 @@
       "[외환운용팀] 외화 유동성 한도 하향 조정 (PB-LIQ-04)",
       "[외환운용팀] 정책 지원 사항 모니터링 (PB-LIQ-04)",
       "[리스크관리팀] 투기등급 비중 일일 점검 (PB-LIQ-07)",
-      "[리스크관리팀] 한도 초과 시 즉시 보고 (PB-LIQ-07)",
+      "[리스크관리팀] 한도 초과 발생 시 보고 (PB-LIQ-07)",
       "[자금운용팀] 현금성 자산 비중 점검 (PB-LIQ-02)",
       "[자금운용팀] 단기 국채 및 MMF 매수 (PB-LIQ-02)",
-      "[경영지원팀] 임직원 출장 중단 (PB-BCP-05)",
+      "[경영지원팀] 출장 전면 중단 (PB-BCP-05)",
       "[경영지원팀] 해외 사무소 근무 체계 점검 (PB-BCP-05)",
-      "[준법감시팀] 규정 준수 여부 확인 (PB-REG-02)",
-      "[준법감시팀] 위탁운용사 통보 (PB-REG-02)",
-      "[준법감시팀] 감독기관 기한 내 보고 (PB-REG-01)",
-      "[리스크관리팀] 이사회 사후 보고 (PB-REG-04)",
-      "[준법감시팀] 의사결정 기록 보관 (PB-REG-05)",
-      "[리스크관리팀] 사후보고서 작성 (PB-REG-08)",
-      "[리스크관리팀] 이사회 보고 (PB-REG-08)",
       "[리스크관리팀] 에너지 및 원자재 노출 집계 (PB-CMDTY-01)",
       "[운용전략팀] 롤오버 일정 점검 (PB-CMDTY-02·부분)",
       "[신용분석팀] 에너지 하이일드 노출 축소 검토 (PB-CMDTY-03)",
@@ -641,7 +698,14 @@
       "[재무팀] 원화 환산 평가액 일일 보고 (PB-FX-08)",
       "[리스크관리팀] 환노출 한도 재점검 (PB-FX-03·부분)",
       "[외환운용팀] 외화 현금 자산 확대 (PB-FX-07·부분)",
-      "[위탁운용팀] 위탁운용사 레버리지 점검 (PB-MGR-03·부분)"
+      "[준법감시팀] 규정 준수 여부 확인 (PB-REG-02)",
+      "[준법감시팀] 위탁운용사 대상 통보 (PB-REG-02)",
+      "[준법감시팀] 감독기관 기한 내 보고 (PB-REG-01)",
+      "[리스크관리팀] 이사회 사후 보고 실시 (PB-REG-04)",
+      "[준법감시팀] 주요 의사결정 기록 보관 (PB-REG-05)",
+      "[리스크관리팀] 사후보고서 작성 (PB-REG-08)",
+      "[리스크관리팀] 이사회 보고 진행 (PB-REG-08)",
+      "[위탁운용팀] 위탁운용사 레버리지 현황 점검 (PB-MGR-03·부분)"
     ],
     "evidence_refs": [
       "PB-LIQ-01",
@@ -652,12 +716,6 @@
       "PB-LIQ-08",
       "PB-LIQ-02",
       "PB-BCP-05",
-      "PB-REG-02",
-      "PB-REG-01",
-      "PB-REG-03",
-      "PB-REG-04",
-      "PB-REG-05",
-      "PB-REG-08",
       "PB-CMDTY-01",
       "PB-CMDTY-02",
       "PB-CMDTY-03",
@@ -670,10 +728,6 @@
       "PB-FX-08",
       "PB-FX-03",
       "PB-FX-07",
-      "PB-MGR-01",
-      "PB-MGR-02",
-      "PB-MGR-03",
-      "PB-MGR-05",
       "PB-BANK-08",
       "PB-BANK-04",
       "PB-BANK-05",
@@ -683,13 +737,23 @@
       "PB-RATE-02",
       "PB-TRADE-01",
       "PB-TRADE-04",
+      "PB-REG-02",
+      "PB-REG-01",
+      "PB-REG-03",
+      "PB-REG-04",
+      "PB-REG-05",
+      "PB-REG-08",
+      "PB-MGR-01",
+      "PB-MGR-02",
+      "PB-MGR-03",
+      "PB-MGR-05",
       "https://www.who.int/news-room/speeches/item/who-director-general-s-opening-remarks-at-the-media-briefing-on-covid-19---11-march-2020",
       "https://fsc.go.kr/eng/pr010101/22322",
       "https://www.federalreserve.gov/newsevents/pressreleases/monetary20200319b.htm",
       "https://fred.stlouisfed.org/series/VIXCLS",
       "https://fred.stlouisfed.org/series/DCOILWTICO"
     ],
-    "trace_id": "trace-1b4c0eaea8f3"
+    "trace_id": "trace-420cc1690079"
   },
   "trace": [
     {

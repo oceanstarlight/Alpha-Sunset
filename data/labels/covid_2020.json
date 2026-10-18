@@ -1,10 +1,27 @@
 {
   "event_id": "covid_2020",
-  "reaction_date": "YYYY-MM-DD",
-  "expected_docs": [],
-  "expected_inapplicable_clauses": [],
+  "reaction_date": "2020-01-31",
+  "expected_docs": [
+    "PB-LIQ",
+    "PB-BCP",
+    "PB-CMDTY"
+  ],
+  "expected_inapplicable_clauses": [
+    "PB-CMDTY-02",
+    "PB-CMDTY-04",
+    "PB-CMDTY-06",
+    "PB-CMDTY-07",
+    "PB-LIQ-08",
+    "PB-REG-02",
+    "PB-BCP-07"
+  ],
   "expected_gap_channels": [],
-  "expected_exposure_paths": [],
+  "expected_exposure_paths": [
+    "D-USEQ",
+    "D-KREQ",
+    "M-DAON",
+    "M-NURI"
+  ],
   "synthetic": true,
-  "notes": ""
+  "notes": "reaction_date: WHO 팬데믹 선언일(수요일, 한국은 다음날 장 반응 가능하나 당일 준비 필요). docs: 유동성 LIQ, 업무연속성 BCP(operational), 유가 급락 CMDTY. 부적용: 선물 롤오버 왜곡(CMDTY-02)은 당일 미발생, 인플레/지정학/곡물 조항은 유가 하락·팬데믹과 방향 불일치, 중앙은행 공급(LIQ-08)·공매도 금지(REG-02)는 당일 미발표, 확진자 대응(BCP-07)은 개별 사실 없음. gap: 모든 채널에 적용 조항 존재해 []. exposure: 주식 전반, 에너지 하이일드, 미국 에너지주. | reaction_date: 사용자 결정에 따라 사전 등록 v2 기계적 규칙(자금 흐름·시장 신호)으로 교체 (2020-03-11 → 2020-01-31)."
 }

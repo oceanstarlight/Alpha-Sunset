@@ -1,7 +1,6 @@
 {
   "generated_at": "2026-10-18",
-  "labeled_events": [],
-  "unlabeled_events": [
+  "labeled_events": [
     "covid_2020",
     "gfc_2008",
     "legoland_2022",
@@ -9,18 +8,21 @@
     "svb_2023",
     "tariff_2025"
   ],
+  "unlabeled_events": [],
   "summary": {
-    "lead_time": null,
-    "doc_top3_hit": null,
-    "clause_precision": null,
-    "clause_recall": null,
-    "gap_precision": null,
-    "gap_recall": null,
-    "path_recall": null,
+    "lead_time": -6.3333,
+    "lead_time_flow": -24.1667,
+    "doc_top3_hit": 0.7222,
+    "clause_precision": 0.0727,
+    "clause_recall": 0.2222,
+    "gap_precision": 1.0,
+    "gap_recall": 1.0,
+    "path_recall": 0.75,
     "alerts_reproduced": 6,
     "n_events": 6,
     "false_alarms_calm_alert": 0,
     "random_calm_market_active_rate": 0.0413,
+    "random_calm_flow_active_rate": 0.0519,
     "learner_delta": null
   },
   "events": [
@@ -30,18 +32,20 @@
       "top3": [
         "PB-CPTY",
         "PB-FX",
-        "PB-MGR"
+        "PB-BANK"
       ],
       "gaps": [],
       "exposure_nodes": [],
-      "labeled": false,
-      "lead_time": null,
-      "doc_top3_hit": null,
-      "clause_precision": null,
-      "clause_recall": null,
-      "gap_precision": null,
-      "gap_recall": null,
-      "path_recall": null
+      "labeled": true,
+      "lead_time": 0,
+      "doc_top3_hit": 0.6666666666666666,
+      "clause_precision": 0.06666666666666667,
+      "clause_recall": 0.16666666666666666,
+      "gap_precision": 1.0,
+      "gap_recall": 1.0,
+      "path_recall": null,
+      "reaction_date_flow": "2008-09-08",
+      "lead_time_flow": -7
     },
     {
       "event_id": "covid_2020",
@@ -49,7 +53,7 @@
       "top3": [
         "PB-LIQ",
         "PB-BCP",
-        "PB-REG"
+        "PB-CMDTY"
       ],
       "gaps": [],
       "exposure_nodes": [
@@ -64,14 +68,16 @@
         "D-KREQ",
         "M-SEOGYEONG"
       ],
-      "labeled": false,
-      "lead_time": null,
-      "doc_top3_hit": null,
-      "clause_precision": null,
-      "clause_recall": null,
-      "gap_precision": null,
-      "gap_recall": null,
-      "path_recall": null
+      "labeled": true,
+      "lead_time": -41,
+      "doc_top3_hit": 1.0,
+      "clause_precision": 0.0,
+      "clause_recall": 0.0,
+      "gap_precision": 1.0,
+      "gap_recall": 1.0,
+      "path_recall": 1.0,
+      "reaction_date_flow": "2020-01-31",
+      "lead_time_flow": -41
     },
     {
       "event_id": "ru_ua_2022",
@@ -79,7 +85,7 @@
       "top3": [
         "PB-GEO",
         "PB-CMDTY",
-        "PB-REG"
+        "PB-FX"
       ],
       "gaps": [],
       "exposure_nodes": [
@@ -94,22 +100,24 @@
         "D-RE",
         "M-SEOGYEONG"
       ],
-      "labeled": false,
-      "lead_time": null,
-      "doc_top3_hit": null,
-      "clause_precision": null,
-      "clause_recall": null,
-      "gap_precision": null,
-      "gap_recall": null,
-      "path_recall": null
+      "labeled": true,
+      "lead_time": 0,
+      "doc_top3_hit": 0.6666666666666666,
+      "clause_precision": 0.0,
+      "clause_recall": 0.0,
+      "gap_precision": 1.0,
+      "gap_recall": 1.0,
+      "path_recall": 0.25,
+      "reaction_date_flow": "2022-01-11",
+      "lead_time_flow": -44
     },
     {
       "event_id": "legoland_2022",
       "first_alert": "2022-09-28",
       "top3": [
         "PB-STFM",
-        "PB-REG",
-        "PB-CPTY"
+        "PB-CPTY",
+        "PB-GEO"
       ],
       "gaps": [],
       "exposure_nodes": [
@@ -124,14 +132,16 @@
         "M-DAON",
         "M-DAON"
       ],
-      "labeled": false,
-      "lead_time": null,
-      "doc_top3_hit": null,
-      "clause_precision": null,
-      "clause_recall": null,
-      "gap_precision": null,
-      "gap_recall": null,
-      "path_recall": null
+      "labeled": true,
+      "lead_time": 0,
+      "doc_top3_hit": 0.5,
+      "clause_precision": 0.13333333333333333,
+      "clause_recall": 0.3333333333333333,
+      "gap_precision": 1.0,
+      "gap_recall": 1.0,
+      "path_recall": 1.0,
+      "reaction_date_flow": "2022-09-28",
+      "lead_time_flow": 0
     },
     {
       "event_id": "svb_2023",
@@ -139,7 +149,7 @@
       "top3": [
         "PB-BANK",
         "PB-LIQ",
-        "PB-MGR"
+        "PB-CPTY"
       ],
       "gaps": [],
       "exposure_nodes": [
@@ -154,22 +164,24 @@
         "M-SEOGYEONG",
         "C-ATLAS"
       ],
-      "labeled": false,
-      "lead_time": null,
-      "doc_top3_hit": null,
-      "clause_precision": null,
-      "clause_recall": null,
-      "gap_precision": null,
-      "gap_recall": null,
-      "path_recall": null
+      "labeled": true,
+      "lead_time": 3,
+      "doc_top3_hit": 0.5,
+      "clause_precision": 0.0625,
+      "clause_recall": 0.16666666666666666,
+      "gap_precision": 1.0,
+      "gap_recall": 1.0,
+      "path_recall": 0.75,
+      "reaction_date_flow": "2023-01-17",
+      "lead_time_flow": -52
     },
     {
       "event_id": "tariff_2025",
       "first_alert": "2025-04-03",
       "top3": [
-        "PB-REG",
         "PB-TRADE",
-        "PB-FX"
+        "PB-FX",
+        "PB-LIQ"
       ],
       "gaps": [],
       "exposure_nodes": [
@@ -184,14 +196,16 @@
         "M-NURI",
         "M-SEOGYEONG"
       ],
-      "labeled": false,
-      "lead_time": null,
-      "doc_top3_hit": null,
-      "clause_precision": null,
-      "clause_recall": null,
-      "gap_precision": null,
-      "gap_recall": null,
-      "path_recall": null
+      "labeled": true,
+      "lead_time": 0,
+      "doc_top3_hit": 1.0,
+      "clause_precision": 0.17391304347826086,
+      "clause_recall": 0.6666666666666666,
+      "gap_precision": 1.0,
+      "gap_recall": 1.0,
+      "path_recall": 0.75,
+      "reaction_date_flow": "2025-04-02",
+      "lead_time_flow": -1
     }
   ],
   "false_alarms": {
@@ -200,8 +214,8 @@
         "window_id": "calm_2014q2",
         "days": 65,
         "alert_days": 0,
-        "watch_days": 0,
-        "first_watch": null
+        "watch_days": 4,
+        "first_watch": "2014-04-01"
       },
       {
         "window_id": "calm_2017q4",
@@ -280,6 +294,8 @@
     "라벨은 사용자가 직접 설계한 합성 라벨이다.",
     "gap_precision/recall: 예측·정답 공백이 모두 없으면 1.0으로 계산.",
     "path_recall은 gfc_2008(보유내역 없음)에서 계산하지 않는다.",
-    "learner_delta는 P9에서 산출."
+    "learner_delta는 P9에서 산출.",
+    "lead_time_flow: 사전 등록 v2 기계적 대응일(사건일 60일 전~사건일, 5영업일 중 2일 이상 A 또는 C 활성인 첫 날) − 첫 ALERT. 음수면 자금·시장 이상 신호보다 경보가 늦음.",
+    "ablation(공백 탐지) 결과는 data/backtest/ablation/ 참고."
   ]
 }

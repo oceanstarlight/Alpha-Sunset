@@ -60,6 +60,7 @@ class RunContext:
     step: int = 0
     # 도구 결과
     market: sentinel_agent.MarketSignal | None = None
+    flow: sentinel_agent.FlowSignal | None = None
     news: sentinel_agent.NewsSignal | None = None
     event: Event | None = None
     candidates: list[Clause] = field(default_factory=list)
@@ -98,11 +99,13 @@ def record_trace(ctx: RunContext, tool: str, args: dict, output: Any) -> None:
 def tool_get_market_signals(ctx: RunContext, **_) -> dict:
     view = sentinel_agent.AsOfPanel(ctx.panel, as_of=None if ctx.live else ctx.as_of)
     ctx.market = sentinel_agent.market_signal(view, ctx.as_of)
+    ctx.flow = sentinel_agent.flow_signal(view, ctx.as_of) if sentinel_agent.flow_enabled() else None
     ctx.news = sentinel_agent.card_news_signal(ctx.events, ctx.as_of)
-    level = sentinel_agent.grade(ctx.market, ctx.news)
+    level = sentinel_agent.grade(ctx.market, ctx.news, ctx.flow)
     return {"as_of": ctx.as_of.isoformat(), "level": level.value, "market_active": ctx.market.active,
             "triggered_series": ctx.market.triggered,
             "zscores": {k: round(v, 2) for k, v in ctx.market.zscores.items()},
+            "flow_active": bool(ctx.flow and ctx.flow.active), "flow_triggered": ctx.flow.triggered if ctx.flow else [],
             "news_clusters": [c.key for c in ctx.news.clusters]}
 
 
@@ -211,13 +214,14 @@ def tool_build_briefing(ctx: RunContext, **_) -> dict:
     if missing:
         raise ToolError(f"build_briefing 거부: {', '.join(missing)} 미실행")
     event = _require_event(ctx)
-    level = sentinel_agent.grade(ctx.market, ctx.news) if ctx.market and ctx.news else AlertLevel.NONE
+    level = sentinel_agent.grade(ctx.market, ctx.news, ctx.flow) if ctx.market and ctx.news else AlertLevel.NONE
     actions = clean_actions(ctx.llm, aggregate_actions(ctx.match, ctx.index.clauses))
     evidence = [j.clause_id for f in ctx.match.doc_fits for j in f.judgments if j.evidence_quote] + event.sources
     ctx.briefing = Briefing(
         run_id=ctx.run_id, event=event, alert_level=level, match=ctx.match,
         exposure_top=ctx.exposure.paths if ctx.exposure else [],
         exposure_entities=ctx.exposure.entity_paths if ctx.exposure else [],
+        exposure_core=ctx.exposure.core_paths if ctx.exposure else [],
         exposure_note=ctx.exposure_note, actions_to_check=actions, evidence_refs=evidence, trace_id=ctx.trace_id,
     )
     now = datetime.now(timezone.utc).isoformat()
@@ -338,8 +342,7 @@ def run_replay(event_id: str, llm: LLMClient | None = None) -> Briefing:
         raise ValueError(f"알 수 없는 사건: {event_id}")
     target = target.as_of_view()  # 사건일 당일까지 알려진 사실만 입력 (사후 정보 누수 방지)
     llm = llm or LLMClient(db_mode="sandbox")
-    m = load_config()["sentinel"]["market"]
-    panel = load_panel(m["series"] + [m["credit_spread"]["primary"], m["credit_spread"]["fallback"]])
+    panel = load_panel(sentinel_agent.panel_series_ids())
     ctx = new_context(mode="sandbox", as_of=target.date, events=[target], portfolio=load_portfolio(),
                       index=ClauseIndex(load_playbooks(), llm), llm=llm, panel=panel)
     return orchestrate(ctx, f"{target.date.isoformat()} 기준으로 사건을 탐지하고 대응문서 적합도와 노출을 분석해 브리핑을 만들어라.")

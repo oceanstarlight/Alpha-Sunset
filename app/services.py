@@ -22,13 +22,8 @@ _signal_cache: dict[str, Any] = {}
 _learner_override: bool | None = None
 
 
-def _series_ids() -> list[str]:
-    m = load_config()["sentinel"]["market"]
-    return m["series"] + [m["credit_spread"]["primary"], m["credit_spread"]["fallback"]]
-
-
 def market_panel(refresh: bool = False) -> dict:
-    return load_panel(_series_ids(), refresh=refresh)
+    return load_panel(sentinel.panel_series_ids(), refresh=refresh)
 
 
 def get_signals(refresh: bool = False, gdelt_client: Any = None) -> dict:
@@ -44,6 +39,7 @@ def get_signals(refresh: bool = False, gdelt_client: Any = None) -> dict:
     today = date.today()
     last_obs = max(s.index[-1] for s in panel.values()).date()
     market = sentinel.market_signal(sentinel.AsOfPanel(panel), last_obs)
+    flow = sentinel.flow_signal(sentinel.AsOfPanel(panel), today) if sentinel.flow_enabled() else None
     if gdelt_client is None:
         from app.data.gdelt import GdeltClient
 
@@ -52,9 +48,11 @@ def get_signals(refresh: bool = False, gdelt_client: Any = None) -> dict:
     result = {
         "fetched_at": time.time(),
         "as_of": last_obs.isoformat(),
-        "level": sentinel.grade(market, news).value,
+        "level": sentinel.grade(market, news, flow).value,
         "market": {"active": market.active, "triggered": market.triggered,
                    "zscores": {k: round(v, 2) for k, v in market.zscores.items()}},
+        "flow": {"active": flow.active, "triggered": flow.triggered,
+                 "zscores": {k: round(v, 2) for k, v in flow.zscores.items()}} if flow else None,
         "news": {"active": news.active, "errors": news.errors,
                  "clusters": [c.__dict__ for c in news.clusters]},
         "fred_error": fred_error,

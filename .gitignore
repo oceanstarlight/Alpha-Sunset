@@ -9,3 +9,4 @@ __pycache__/
 data/live.db
 data/sandbox.db
 data/chroma/
+data/chroma_ablation/

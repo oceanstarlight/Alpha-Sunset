@@ -139,7 +139,7 @@ with tab_watch:
 def exposure_dot(b: Briefing) -> str:
     lines = ['digraph G { rankdir=LR; node [shape=box, style=rounded, fontsize=10];']
     edges = set()
-    for p in b.exposure_entities + b.exposure_top:
+    for p in b.exposure_entities + b.exposure_core + b.exposure_top:
         for a, c in zip(p.nodes, p.nodes[1:]):
             edges.add((a, c))
     lines += [f'"{a}" -> "{c}";' for a, c in sorted(edges)]
@@ -194,6 +194,9 @@ with tab_brief:
             st.info(b.exposure_note)
         if b.exposure_entities:
             st.error("사건 기관과 같은 발행자를 보유: " + ", ".join(p.nodes[3] for p in b.exposure_entities))
+        if b.exposure_core:
+            st.warning("핵심 경로 (사건 지역과 직접 겹치지만 비중이 작아 상위 10 밖): "
+                       + " / ".join(" → ".join(p.nodes[1:]) for p in b.exposure_core))
         if b.exposure_top:
             st.dataframe(pd.DataFrame([{"경로": " → ".join(p.nodes[1:]), "risk_score": p.risk_score, "비중": p.weight,
                                         "연관도": p.relevance, "불확실성": p.uncertainty, "이유": p.why}

@@ -183,5 +183,75 @@
       "risk_score": 5.1e-05,
       "why": "직접 보유 미국 대형주 ETF (etf) → 프록시 펀드 iShares Core S&P 500 ETF → 보유 발행자 SVB Financial Group → US · broad_market: 비중 0.01%, 사건 기관 'Silicon Valley Bank'과 동일 발행자 (불확실성 0.0)"
     }
+  ],
+  "core_paths": [
+    {
+      "nodes": [
+        "기관",
+        "C-PACIFICA",
+        "US · regional_banks/banks"
+      ],
+      "weight": 0.01,
+      "relevance": 0.75,
+      "uncertainty": 0.5,
+      "risk_score": 0.005625,
+      "why": "거래상대방 퍼시피카 뱅크 (미국 지역은행) (swap) → US · regional_banks/banks: 비중 1.00%, 지역 US, 업종 regional_banks (불확실성 0.5)"
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-HANBIT",
+        "KRE",
+        "SVB Financial Group",
+        "US · regional_banks/banks"
+      ],
+      "weight": 0.000967,
+      "relevance": 1.0,
+      "uncertainty": 0.3,
+      "risk_score": 0.000822,
+      "why": "위탁운용사 한빛자산운용 (미국 지역은행 전략) (fund) → 프록시 펀드 SPDR S&P Regional Banking ETF → 보유 발행자 SVB Financial Group → US · regional_banks/banks: 비중 0.10%, 사건 기관 'Silicon Valley Bank'과 동일 발행자 (불확실성 0.3)"
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-SEOGYEONG",
+        "MCHI",
+        "MCHI US 보유 1종목",
+        "US · technology/consumer/manufacturing"
+      ],
+      "weight": 0.000585,
+      "relevance": 1.0,
+      "uncertainty": 0.3,
+      "risk_score": 0.000497,
+      "why": "위탁운용사 서경파트너스 (중국 주식) (fund) → 프록시 펀드 iShares MSCI China ETF → MCHI US 보유 1종목 → US · technology/consumer/manufacturing: 비중 0.06%, 지역 US, 업종 technology, 자산군 equity (불확실성 0.3)"
+    },
+    {
+      "nodes": [
+        "기관",
+        "D-USEQ",
+        "IVV",
+        "SVB Financial Group",
+        "US · broad_market"
+      ],
+      "weight": 5.1e-05,
+      "relevance": 1.0,
+      "uncertainty": 0.0,
+      "risk_score": 5.1e-05,
+      "why": "직접 보유 미국 대형주 ETF (etf) → 프록시 펀드 iShares Core S&P 500 ETF → 보유 발행자 SVB Financial Group → US · broad_market: 비중 0.01%, 사건 기관 'Silicon Valley Bank'과 동일 발행자 (불확실성 0.0)"
+    },
+    {
+      "nodes": [
+        "기관",
+        "M-MIR",
+        "VGK",
+        "VGK US 보유 2종목",
+        "US · banks/energy/manufacturing"
+      ],
+      "weight": 2e-06,
+      "relevance": 0.65,
+      "uncertainty": 0.3,
+      "risk_score": 1e-06,
+      "why": "위탁운용사 미르글로벌 (유럽 주식) (fund) → 프록시 펀드 Vanguard FTSE Europe ETF → VGK US 보유 2종목 → US · banks/energy/manufacturing: 비중 0.00%, 지역 US, 자산군 equity (불확실성 0.3)"
+    }
   ]
 }

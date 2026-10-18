@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 from datetime import date
 
-from app.backtest import event_metrics, mean_or_none, random_calm
+from app.backtest import event_metrics, flow_active_days, mean_or_none, random_calm, reaction_date_flow
 from app.config import ROOT_DIR, load_config
 from app.corpus import load_events, load_labels
 from app.schemas import Briefing
@@ -25,17 +25,30 @@ def main() -> None:
     sentinel = json.loads((BT / "sentinel_results.json").read_text(encoding="utf-8"))
     first_alert = {r["event_id"]: r["first_alert"] for r in sentinel["events"]}
 
+    panel = market_panel()
     rows = []
     for e in sorted(load_events(), key=lambda e: e.date):
         b = Briefing.model_validate(json.loads((BT / "briefings" / f"{e.id}.json").read_text(encoding="utf-8"))["briefing"])
         fa = first_alert.get(e.id)
-        rows.append(event_metrics(b, labels.get(e.id), date.fromisoformat(fa) if fa else None))
+        fa_date = date.fromisoformat(fa) if fa else None
+        row = event_metrics(b, labels.get(e.id), fa_date)
+        rdf = reaction_date_flow(panel, e.date)  # 사전 등록 v2 기계적 대응일
+        row["reaction_date_flow"] = rdf.isoformat()
+        row["lead_time_flow"] = (rdf - fa_date).days if fa_date else None
+        rows.append(row)
 
     cfg = load_config()["backtest"]["random_calm"]
-    rc = random_calm(market_panel(), [e.date for e in load_events()], cfg["seed"], cfg["n_quarters"],
+    rc = random_calm(panel, [e.date for e in load_events()], cfg["seed"], cfg["n_quarters"],
                      cfg["exclude_days"], cfg["start"], cfg["end"])
+    import numpy as np
+    import pandas as pd
+    calm = pd.bdate_range(cfg["start"], cfg["end"])
+    near = np.zeros(len(calm), dtype=bool)
+    for e in load_events():
+        near |= np.abs((calm - pd.Timestamp(e.date)).days) <= cfg["exclude_days"]
+    flow_rate = round(float(flow_active_days(panel, calm[~near]).mean()), 4)
 
-    metric_keys = ["lead_time", "doc_top3_hit", "clause_precision", "clause_recall", "gap_precision", "gap_recall", "path_recall"]
+    metric_keys = ["lead_time", "lead_time_flow", "doc_top3_hit", "clause_precision", "clause_recall", "gap_precision", "gap_recall", "path_recall"]
     out = {
         "generated_at": date.today().isoformat(),
         "labeled_events": sorted(labels),
@@ -43,7 +56,8 @@ def main() -> None:
         "summary": {k: mean_or_none([r[k] for r in rows]) for k in metric_keys}
         | {"alerts_reproduced": sum(r["first_alert"] is not None for r in rows), "n_events": len(rows),
            "false_alarms_calm_alert": sum(c["alert_days"] for c in sentinel["calm"]),
-           "random_calm_market_active_rate": rc.active_rate, "learner_delta": None},
+           "random_calm_market_active_rate": rc.active_rate, "random_calm_flow_active_rate": flow_rate,
+           "learner_delta": None},
         "events": rows,
         "false_alarms": {
             "calm_windows": sentinel["calm"],
@@ -55,6 +69,8 @@ def main() -> None:
             "gap_precision/recall: 예측·정답 공백이 모두 없으면 1.0으로 계산.",
             "path_recall은 gfc_2008(보유내역 없음)에서 계산하지 않는다.",
             "learner_delta는 P9에서 산출.",
+            "lead_time_flow: 사전 등록 v2 기계적 대응일(사건일 60일 전~사건일, 5영업일 중 2일 이상 A 또는 C 활성인 첫 날) − 첫 ALERT. 음수면 자금·시장 이상 신호보다 경보가 늦음.",
+            "ablation(공백 탐지) 결과는 data/backtest/ablation/ 참고.",
         ],
     }
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
