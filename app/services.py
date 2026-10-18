@@ -212,6 +212,7 @@ def get_backtest_results() -> dict:
         "exposure": exposure,
         "backtest": read("../backtest_results.json"),
         "learner": read("learner_results.json"),
+        "kr": read("kr_results.json"),
     }
 
 

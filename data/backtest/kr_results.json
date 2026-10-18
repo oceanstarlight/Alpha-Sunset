@@ -1,0 +1,226 @@
+{
+  "generated_at": "2026-10-18",
+  "preregistration": "data/backtest/ablation/preregistration_v5_kr.json",
+  "data": {
+    "CD91": {
+      "start": "1995-01-03",
+      "end": "2026-10-16",
+      "n": 8068
+    },
+    "CORP_AA3Y": {
+      "start": "1995-01-03",
+      "end": "2026-10-16",
+      "n": 8068
+    },
+    "FOREIGN_NET_KOSPI": {
+      "start": "2003-01-02",
+      "end": "2026-10-16",
+      "n": 5870
+    },
+    "KOSPI": {
+      "start": "1995-01-03",
+      "end": "2026-10-16",
+      "n": 8035
+    },
+    "KTB3Y": {
+      "start": "1998-11-13",
+      "end": "2026-10-16",
+      "n": 6918
+    },
+    "USDKRW": {
+      "start": "1995-01-03",
+      "end": "2026-10-16",
+      "n": 8421
+    },
+    "CREDIT_KR": {
+      "start": "1998-11-13",
+      "end": "2026-10-16",
+      "n": 6918
+    }
+  },
+  "summary": {
+    "kr_warning_lead_days": 19.8,
+    "kr_briefing_delay_days": 0.8,
+    "kr_events_with_prior_warning": 0.8333,
+    "kr_alerts_reproduced": 5,
+    "n_events": 6,
+    "n_calm_days": 3658,
+    "kr_calm_money_alert_rate": 0.0757,
+    "kr_calm_market_active_rate": 0.0372,
+    "kr_calm_flow_active_rate": 0.0372,
+    "kr_base_rate": 0.5066,
+    "global_reference": {
+      "warning_lead_days": 28.6,
+      "briefing_delay_days": 0.3333,
+      "events_with_prior_warning": 0.8333,
+      "calm_money_alert_rate": 0.0919,
+      "warning_base_rate_60d": 0.4226
+    }
+  },
+  "events": [
+    {
+      "event_id": "gfc_2008",
+      "date": "2008-09-15",
+      "kr_in_regions": true,
+      "first_kr_money_alert": "2008-08-19",
+      "kr_warning_lead_days": 27,
+      "kr_money_alert_cause": {
+        "CREDIT_KR": 5.38
+      },
+      "first_kr_alert": "2008-09-16",
+      "kr_briefing_delay_days": 1,
+      "kr_alert_cause": {
+        "KOSPI": -3.86,
+        "KTB3Y": -2.53
+      },
+      "pre_event_money_alert_days": 6,
+      "global_warning_lead_days": 7,
+      "global_briefing_delay_days": 0
+    },
+    {
+      "event_id": "covid_2020",
+      "date": "2020-03-11",
+      "kr_in_regions": true,
+      "first_kr_money_alert": "2020-02-27",
+      "kr_warning_lead_days": 13,
+      "kr_money_alert_cause": {
+        "FOREIGN_NET_5D": -3.19
+      },
+      "first_kr_alert": "2020-03-12",
+      "kr_briefing_delay_days": 1,
+      "kr_alert_cause": {
+        "KOSPI": -3.92,
+        "CREDIT_KR": 4.01,
+        "FOREIGN_NET_5D": -3.02
+      },
+      "pre_event_money_alert_days": 9,
+      "global_warning_lead_days": 40,
+      "global_briefing_delay_days": 1
+    },
+    {
+      "event_id": "ru_ua_2022",
+      "date": "2022-02-24",
+      "kr_in_regions": false,
+      "first_kr_money_alert": "2022-01-28",
+      "kr_warning_lead_days": 27,
+      "kr_money_alert_cause": {
+        "FOREIGN_NET_5D": -4.15
+      },
+      "first_kr_alert": "2022-02-24",
+      "kr_briefing_delay_days": 0,
+      "kr_alert_cause": {
+        "KOSPI": -2.67,
+        "KTB3Y": -2.75
+      },
+      "pre_event_money_alert_days": 8,
+      "global_warning_lead_days": 44,
+      "global_briefing_delay_days": 0,
+      "linkage": {
+        "co_movement": {
+          "global": {
+            "DTWEXBGS": 4.2,
+            "BAA10Y": 5.89
+          },
+          "korea": {
+            "KOSPI": -2.67,
+            "KTB3Y": -2.75
+          }
+        },
+        "historical_link": [
+          {
+            "pair": "VIX(변동성) ↔ 코스피",
+            "corr": -0.043,
+            "percentile": 15.6,
+            "n": 252,
+            "note": ""
+          },
+          {
+            "pair": "미 신용스프레드(HY·Baa) ↔ 회사채AA−국고채 3년 금리차",
+            "corr": -0.048,
+            "percentile": 53.1,
+            "n": 252,
+            "note": ""
+          },
+          {
+            "pair": "미 10년물 금리 ↔ 국고채 3년",
+            "corr": 0.017,
+            "percentile": 6.2,
+            "n": 252,
+            "note": ""
+          },
+          {
+            "pair": "달러 인덱스 ↔ 원/달러",
+            "corr": -0.009,
+            "percentile": 6.7,
+            "n": 252,
+            "note": ""
+          }
+        ],
+        "exposure_link": {
+          "kr_weight": 0.4099,
+          "kr_impact": 0.162
+        },
+        "weak": true,
+        "caveat": "상관은 인과가 아니다. 판단 보조 근거이며 최종 결정은 사람이 한다."
+      }
+    },
+    {
+      "event_id": "legoland_2022",
+      "date": "2022-09-28",
+      "kr_in_regions": true,
+      "first_kr_money_alert": "2022-09-26",
+      "kr_warning_lead_days": 2,
+      "kr_money_alert_cause": {
+        "KOSPI": -2.64,
+        "KTB3Y": 5.35
+      },
+      "first_kr_alert": "2022-09-29",
+      "kr_briefing_delay_days": 1,
+      "kr_alert_cause": {
+        "CREDIT_KR": 6.2
+      },
+      "pre_event_money_alert_days": 3,
+      "global_warning_lead_days": 0,
+      "global_briefing_delay_days": 0
+    },
+    {
+      "event_id": "svb_2023",
+      "date": "2023-03-10",
+      "kr_in_regions": false,
+      "first_kr_money_alert": null,
+      "kr_warning_lead_days": null,
+      "kr_money_alert_cause": {},
+      "first_kr_alert": null,
+      "kr_briefing_delay_days": null,
+      "kr_alert_cause": {},
+      "pre_event_money_alert_days": 0,
+      "global_warning_lead_days": 52,
+      "global_briefing_delay_days": 0
+    },
+    {
+      "event_id": "tariff_2025",
+      "date": "2025-04-02",
+      "kr_in_regions": true,
+      "first_kr_money_alert": "2025-03-03",
+      "kr_warning_lead_days": 30,
+      "kr_money_alert_cause": {
+        "KOSPI": -2.79,
+        "FOREIGN_NET_KOSPI": -3.77
+      },
+      "first_kr_alert": "2025-04-03",
+      "kr_briefing_delay_days": 1,
+      "kr_alert_cause": {
+        "FOREIGN_NET_5D": -3.1
+      },
+      "pre_event_money_alert_days": 4,
+      "global_warning_lead_days": null,
+      "global_briefing_delay_days": 1
+    }
+  ],
+  "notes": [
+    "임계치는 글로벌 A·C와 같고 사건 성적으로 조정하지 않았다 (사전 등록 v5).",
+    "사건 신호(B)는 사건 카드 기준(사건일부터 14일). 2단계 = 그 기간 중 A_kr ∨ C_kr가 처음 활성인 날.",
+    "kr_events_with_prior_warning은 kr_base_rate(평상일 기준 같은 비율)와 비교해야 한다. 차이가 작으면 선행 알림은 우연일 수 있다.",
+    "연관성 근거는 지역에 KR이 없는 해외 사건에만 첨부한다. 상관은 인과가 아니다."
+  ]
+}
