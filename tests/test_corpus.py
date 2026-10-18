@@ -68,3 +68,12 @@ def test_label_ref_check_catches_unknown_ids():
     )
     errors = check_label_refs(label, load_playbooks(), load_events(), load_portfolio())
     assert len(errors) == 3
+
+
+def test_as_of_view_removes_hindsight():
+    for e in load_events():
+        v = e.as_of_view()
+        assert e.summary_as_of and v.summary == e.summary_as_of
+        assert v.entities == e.entities_as_of
+    svb = next(e for e in load_events() if e.id == "svb_2023").as_of_view()
+    assert "Signature Bank" not in svb.entities and "3월 12일" not in svb.summary

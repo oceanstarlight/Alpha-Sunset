@@ -4,7 +4,6 @@
   "uncertain_ratio": 0.1,
   "needs_requery": false,
   "entity_matches": {
-    "Signature Bank/New York NY": "Signature Bank",
     "SVB Financial Group": "Silicon Valley Bank"
   },
   "portfolio_nodes": [
@@ -30,7 +29,7 @@
       "relevance": 0.65,
       "uncertainty": 0.0,
       "risk_score": 0.0975,
-      "why": "직접 보유 방식을 통해 US 지역의 govt_bond 자산군과 일치하므로 이번 사건과 관련해 확인해야 한다."
+      "why": "직접 보유하는 미국 국채 경로를 통해 지역 US 및 자산군 govt_bond 조건이 일치하여 이번 사건과 관련해 확인해야 한다."
     },
     {
       "nodes": [
@@ -44,21 +43,21 @@
       "relevance": 0.65,
       "uncertainty": 0.0,
       "risk_score": 0.075068,
-      "why": "직접 보유 미국 대형주 ETF를 통해 US 지역의 equity 자산군과 일치하므로 이번 사건과 관련해 확인해야 한다."
+      "why": "직접 보유 미국 대형주 ETF 경로를 통해 펀드를 거쳐 보유하며 지역 US 및 자산군 equity 조건이 일치하여 이번 사건과 관련해 확인해야 한다."
     },
     {
       "nodes": [
         "기관",
         "M-HANBIT",
         "KRE",
-        "KRE US 보유 139종목",
+        "KRE US 보유 140종목",
         "US · regional_banks/banks"
       ],
-      "weight": 0.046417,
+      "weight": 0.047317,
       "relevance": 1.0,
       "uncertainty": 0.3,
-      "risk_score": 0.039455,
-      "why": "위탁운용사 한빛자산운용을 통한 펀드 보유로 US 지역 및 regional_banks 업종의 equity 자산군과 일치하며, 프록시 추정 노출이라 실제와 다를 수 있다."
+      "risk_score": 0.040219,
+      "why": "위탁운용사 한빛자산운용을 통한 펀드 경로로 노출되며 지역 US, 업종 regional_banks, 자산군 equity 조건이 일치하나 프록시 추정으로 실제와 다를 수 있다."
     },
     {
       "nodes": [
@@ -70,7 +69,7 @@
       "relevance": 0.25,
       "uncertainty": 0.0,
       "risk_score": 0.0375,
-      "why": "직접 보유 방식을 통해 자산군이 일치하므로 이번 사건과 관련해 확인해야 한다."
+      "why": "직접 보유 한국 국고채 경로를 통해 자산군 govt_bond 조건이 일치하여 이번 사건과 관련해 확인해야 한다."
     },
     {
       "nodes": [
@@ -84,7 +83,7 @@
       "relevance": 0.65,
       "uncertainty": 0.3,
       "risk_score": 0.03044,
-      "why": "위탁운용사 다온캐피탈을 통한 펀드 보유로 US 지역의 corporate_bond 자산군과 일치하며, 프록시 추정 노출이라 실제와 다를 수 있다."
+      "why": "위탁운용사 다온캐피탈을 통한 펀드 경로로 노출되며 지역 US 및 자산군 corporate_bond 조건이 일치하나 프록시 추정으로 실제와 다를 수 있다."
     },
     {
       "nodes": [
@@ -98,7 +97,7 @@
       "relevance": 0.65,
       "uncertainty": 0.3,
       "risk_score": 0.026196,
-      "why": "위탁운용사 누리에셋을 통한 펀드 보유로 US 지역의 equity 자산군과 일치하며, 프록시 추정 노출이라 실제와 다를 수 있다."
+      "why": "위탁운용사 누리에셋을 통한 펀드 경로로 노출되며 지역 US 및 자산군 equity 조건이 일치하나 프록시 추정으로 실제와 다를 수 있다."
     },
     {
       "nodes": [
@@ -112,7 +111,7 @@
       "relevance": 0.25,
       "uncertainty": 0.0,
       "risk_score": 0.014909,
-      "why": "직접 보유 한국 주식 ETF를 통해 자산군이 일치하므로 이번 사건과 관련해 확인해야 한다."
+      "why": "직접 보유 한국 주식 ETF 경로를 통해 펀드를 거쳐 보유하며 자산군 equity 조건이 일치하여 이번 사건과 관련해 확인해야 한다."
     },
     {
       "nodes": [
@@ -126,7 +125,7 @@
       "relevance": 0.6,
       "uncertainty": 0.3,
       "risk_score": 0.013962,
-      "why": "위탁운용사 서경파트너스를 통한 펀드 보유로 technology 업종의 equity 자산군과 일치하며, 프록시 추정 노출이라 실제와 다를 수 있다."
+      "why": "위탁운용사 서경파트너스를 통한 펀드 경로로 노출되며 업종 technology 및 자산군 equity 조건이 일치하나 프록시 추정으로 실제와 다를 수 있다."
     },
     {
       "nodes": [
@@ -140,7 +139,7 @@
       "relevance": 0.6,
       "uncertainty": 0.3,
       "risk_score": 0.009776,
-      "why": "위탁운용사 서경파트너스를 통한 펀드 보유로 technology 업종의 equity 자산군과 일치하며, 프록시 추정 노출이라 실제와 다를 수 있다."
+      "why": "위탁운용사 서경파트너스를 통한 펀드 경로로 노출되며 업종 technology 및 자산군 equity 조건이 일치하나 프록시 추정으로 실제와 다를 수 있다."
     },
     {
       "nodes": [
@@ -152,7 +151,7 @@
       "relevance": 0.4,
       "uncertainty": 0.5,
       "risk_score": 0.006,
-      "why": "거래상대방 아틀라스 글로벌증권을 통해 US 지역과 일치하며, 거래상대방 노출이라 실제와 다를 수 있다."
+      "why": "거래상대방 아틀라스 글로벌증권 경로로 노출되며 지역 US 조건이 일치하나 거래상대방 노출이라 실제와 다를 수 있다."
     }
   ],
   "entity_paths": [
@@ -169,20 +168,6 @@
       "uncertainty": 0.3,
       "risk_score": 0.000822,
       "why": "위탁운용사 한빛자산운용 (미국 지역은행 전략) (fund) → 프록시 펀드 SPDR S&P Regional Banking ETF → 보유 발행자 SVB Financial Group → US · regional_banks/banks: 비중 0.10%, 사건 기관 'Silicon Valley Bank'과 동일 발행자 (불확실성 0.3)"
-    },
-    {
-      "nodes": [
-        "기관",
-        "M-HANBIT",
-        "KRE",
-        "Signature Bank/New York NY",
-        "US · regional_banks/banks"
-      ],
-      "weight": 0.0009,
-      "relevance": 1.0,
-      "uncertainty": 0.3,
-      "risk_score": 0.000765,
-      "why": "위탁운용사 한빛자산운용 (미국 지역은행 전략) (fund) → 프록시 펀드 SPDR S&P Regional Banking ETF → 보유 발행자 Signature Bank/New York NY → US · regional_banks/banks: 비중 0.09%, 사건 기관 'Signature Bank'과 동일 발행자 (불확실성 0.3)"
     },
     {
       "nodes": [

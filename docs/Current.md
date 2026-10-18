@@ -23,7 +23,7 @@
 | P5 | Exposure (노출 경고) | ✅ 완료 |
 | P6 | Orchestrator + Briefing | ✅ 완료 |
 | P7 | 서비스 계층 + UI + 배포 | ✅ 완료 |
-| P8 | 백테스트 | ⏳ 예정 |
+| P8 | 백테스트 | 🔄 진행 중 (라벨 대기) |
 | P9 | Learner (알파 썬셋) | ⏳ 예정 |
 | P10 | 제출물 | ⏳ 예정 |
 
@@ -121,11 +121,16 @@
 - ⏳ 라이브 GDELT 호출을 배포 환경에서 재확인 (현재 세션은 429)
 - **완료 기준**: 외부 접속 가능한 데모 URL ✅, 재시작 후에도 정상 기동 (콜드 스타트 로컬 검증 ✅, 배포 환경 Reboot 확인 대기)
 
-## P8 — 백테스트 ⏳
-- ⏳ (P3·P4·P5 이월) 무작위 평상 구간 오경보 측정, 공백 채널 규칙, 사건일 기준 요약 분리, Exposure 순위(GLOBAL 점수·핵심 경로 표시) 조정
-- ⏳ `scripts/run_backtest.py` 지표 산출 (lead_time, doc_top3_hit, clause_PR, gap_PR, path_recall, false_alarms)
-- ⏳ 임계치·가중치 보정 (`config.yaml`)
-- **완료 기준**: `backtest_results.json` 생성 (실제 실행값만 기록)
+## P8 — 백테스트 🔄
+- ✅ 사건일 시점 요약 분리: 카드에 `summary_as_of`·`entities_as_of` 추가, 백테스트 입력은 `Event.as_of_view()`만 사용 (사후 정보 누수 제거) → 판정·노출·브리핑 재생성
+- ✅ 지표 엔진 `app/backtest.py` + `scripts/run_backtest.py` → `data/backtest_results.json` (라벨 없는 지표는 null)
+- ✅ 무작위 평상 구간: 사건 ±180일 제외 영업일 3,658일 중 시그널 A 단독 발동률 4.13%, 무작위 10개 분기 표본 기록
+- ✅ 라벨 작성 틀·참고표 (`data/labels/GUIDE.md`)
+- ⏳ 라벨 6개 작성 (사용자)
+- ⏳ 라벨 기반 지표 산출: lead_time, doc_top3_hit, clause_PR, gap_PR, path_recall
+- ⏳ 보정 (라벨 후): 공백 채널 규칙(partial 포함 여부), protected 문서 순위 영향, Exposure 순위(GLOBAL 점수·핵심 경로), Sentinel 임계치
+- **완료 기준**: `backtest_results.json` 생성 ✅ (라벨 기반 지표는 라벨 작성 후)
+- ⚠️ 사건일 시점 요약으로 바꾼 뒤 tariff_2025 1위가 PB-REG(protected)로 바뀜: protected 조항만 판정된 문서는 판정 조항 수가 적어 fit_score가 들쭉날쭉함 → 라벨 보고 보정
 
 ## P9 — Learner (알파 썬셋) ⏳
 - ⏳ 우선순위 점수 엔진 (cite_norm + fb + recency + explore, protected 하한)

@@ -41,5 +41,7 @@
     "https://home.treasury.gov/news/press-releases/jy0612",
     "https://www.gov.uk/government/news/joint-statement-on-further-restrictive-economic-measures-26-february-2022",
     "https://fred.stlouisfed.org/series/DCOILWTICO"
-  ]
+  ],
+  "summary_as_of": "2022년 2월 24일 러시아가 우크라이나를 침공했다. 같은 날 VIX는 30.32, WTI 유가는 배럴당 92.77달러, 원/달러 환율은 1,202.34원(전일 1,193.42원)이었다(FRED).",
+  "entities_as_of": []
 }
