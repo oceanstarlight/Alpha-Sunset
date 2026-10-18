@@ -49,6 +49,8 @@ def get_signals(refresh: bool = False, gdelt_client: Any = None) -> dict:
         "fetched_at": time.time(),
         "as_of": last_obs.isoformat(),
         "level": sentinel.grade(market, news, flow).value,
+        # 1단계: 자금·시장 이상 알림 (사건 확정 전), 2단계: 사건 확정 시 대응안(ALERT)
+        "money_alert": market.active or bool(flow and flow.active),
         "market": {"active": market.active, "triggered": market.triggered,
                    "zscores": {k: round(v, 2) for k, v in market.zscores.items()}},
         "flow": {"active": flow.active, "triggered": flow.triggered,

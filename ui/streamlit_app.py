@@ -55,8 +55,11 @@ def market_panel():
 def replay_signals(event_id: str) -> pd.DataFrame:
     e = events_by_id()[event_id]
     results = sentinel.replay(market_panel(), [e], e.date - timedelta(days=30), e.date + timedelta(days=14))
-    return pd.DataFrame([{"날짜": r.as_of, "등급": r.level.value, "시장 신호": r.market.active,
-                          "사건 신호": r.news.active, "트리거": ", ".join(r.market.triggered)} for r in results])
+    return pd.DataFrame([{"날짜": r.as_of, "등급": r.level.value,
+                          "자금 이상 알림": r.market.active or bool(r.flow and r.flow.active),
+                          "시장 신호(A)": r.market.active, "자금 흐름(C)": bool(r.flow and r.flow.active),
+                          "사건 확정(B)": r.news.active,
+                          "트리거": ", ".join(r.market.triggered + (r.flow.triggered if r.flow else []))} for r in results])
 
 
 def synthetic_badge():
@@ -93,13 +96,13 @@ with tab_watch:
     if mode == "백테스트 재생":
         e = events_by_id()[event_id]
         st.subheader(f"{e.title} 전후 경보 재생")
-        st.caption("시그널 A: FRED 1일 변화 z-score / 시그널 B: 사건 카드(사건일부터 14일). 기준일까지의 정보만 사용.")
+        st.caption("1단계 자금 이상 알림 = 시장 신호(A) 또는 자금 흐름(C). 2단계 대응안 = 사건 확정(B) + 1단계 → ALERT. 기준일까지 공개된 정보만 사용.")
         df = replay_signals(event_id)
         first_alert = df[df["등급"] == "ALERT"]["날짜"].min()
         c1, c2, c3 = st.columns(3)
         c1.metric("사건일", str(e.date))
         c2.metric("첫 ALERT", str(first_alert) if pd.notna(first_alert) else "없음")
-        c3.metric("사건 전 시장 신호일", int(((df["날짜"] < e.date) & df["시장 신호"]).sum()))
+        c3.metric("사건 전 자금 이상 알림일", int(((df["날짜"] < e.date) & df["자금 이상 알림"]).sum()))
         panel = market_panel()
         window = slice(pd.Timestamp(e.date - timedelta(days=60)), pd.Timestamp(e.date + timedelta(days=30)))
         cols = st.columns(2)
@@ -117,6 +120,10 @@ with tab_watch:
         if sig:
             level = AlertLevel(sig["level"])
             st.markdown(f"### 등급: :{LEVEL_COLOR[level]}[{level.value}]  (기준일 {sig['as_of']})")
+            if sig.get("money_alert"):
+                st.warning("1단계 자금 이상 알림: 시장 또는 자금 흐름에서 이상이 감지됐다. 사건이 확정되면 대응안을 생성한다.")
+            if sig.get("flow"):
+                st.caption("자금 흐름(C): " + ", ".join(f"{k} {v:+.2f}" for k, v in sig["flow"]["zscores"].items()))
             c1, c2 = st.columns(2)
             c1.write("**시그널 A (시장)**")
             c1.dataframe(pd.DataFrame(sig["market"]["zscores"].items(), columns=["시리즈", "z-score"]), hide_index=True)

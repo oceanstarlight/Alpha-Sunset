@@ -32,8 +32,9 @@ sentinel:
       rate_shock: '"bond selloff" OR "yields surge"'
   flow:                       # 시그널 C (자금 흐름, 사전 등록 v2)
     enabled: true
-    series: [WRMFNS, WIMFNS, DPSACBW027SBOG, WMTSECL1, WRESBAL]
-    publication_lag_days: {WRMFNS: 45, WIMFNS: 45, DPSACBW027SBOG: 10, WMTSECL1: 3, WRESBAL: 3}
+    # WIMFNS(기관 MMF)는 2021 중단으로 품질 기준 미달 → 제외 (사전 등록 v3, 사용자 결정)
+    series: [WRMFNS, DPSACBW027SBOG, WMTSECL1, WRESBAL]
+    publication_lag_days: {WRMFNS: 45, DPSACBW027SBOG: 10, WMTSECL1: 3, WRESBAL: 3}
     lookback_obs: 52
     min_obs: 40
     z_threshold: 3.0

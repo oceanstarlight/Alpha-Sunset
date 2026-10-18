@@ -1,6 +1,6 @@
 {
   "briefing": {
-    "run_id": "run-48f272790089",
+    "run_id": "run-d69cdb86643f",
     "event": {
       "id": "svb_2023",
       "title": "2023 실리콘밸리은행(SVB) 파산",
@@ -780,7 +780,7 @@
       "https://www.nbcbayarea.com/news/business/money-report/silicon-valley-bank-is-shut-down-by-regulators-fdic-to-protect-insured-deposits/3176655/",
       "https://fred.stlouisfed.org/series/VIXCLS"
     ],
-    "trace_id": "trace-59b1a3d5dc5c"
+    "trace_id": "trace-2376bcec165b"
   },
   "trace": [
     {

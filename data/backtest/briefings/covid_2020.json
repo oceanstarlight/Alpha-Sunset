@@ -1,6 +1,6 @@
 {
   "briefing": {
-    "run_id": "run-e0ed59740265",
+    "run_id": "run-e5d5f4f8accf",
     "event": {
       "id": "covid_2020",
       "title": "2020 코로나19 팬데믹 충격과 한국 공매도 금지",
@@ -753,7 +753,7 @@
       "https://fred.stlouisfed.org/series/VIXCLS",
       "https://fred.stlouisfed.org/series/DCOILWTICO"
     ],
-    "trace_id": "trace-420cc1690079"
+    "trace_id": "trace-870c262d73af"
   },
   "trace": [
     {
