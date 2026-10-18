@@ -156,12 +156,20 @@ def flow_active_days(panel: dict[str, pd.Series], days: pd.DatetimeIndex) -> pd.
     return df.any(axis=1) if not df.empty else pd.Series(False, index=days)
 
 
-def reaction_date_flow(panel: dict[str, pd.Series], event_date: date, lookback_days: int = 60,
-                       window: int = 5, min_active: int = 2) -> date:
-    """사전 등록 v2: 사건일 60일 전~사건일 중, 끝나는 5영업일 중 2일 이상 A 또는 C 활성인 첫 날. 없으면 사건일."""
-    start = pd.Timestamp(event_date) - pd.Timedelta(days=lookback_days)
-    days = pd.bdate_range(start - pd.Timedelta(days=14), event_date)
-    active = market_active_days(panel, days) | flow_active_days(panel, days)
+def money_alert_days(panel: dict[str, pd.Series], days: pd.DatetimeIndex, window: int = 5, min_active: int = 2) -> pd.Series:
+    """1단계 '자금 이상 알림' (사전 등록 v3): 끝나는 5영업일 중 2일 이상 A 또는 C가 활성인 날."""
+    pad = pd.bdate_range(days[0] - pd.Timedelta(days=14), days[-1])
+    active = market_active_days(panel, pad) | flow_active_days(panel, pad)
     rolling = active.astype(int).rolling(window, min_periods=window).sum()
-    hits = rolling[(rolling.index >= start) & (rolling >= min_active)]
-    return hits.index[0].date() if len(hits) else event_date
+    return (rolling >= min_active).reindex(days).fillna(False).astype(bool)
+
+
+def first_money_alert(panel: dict[str, pd.Series], event_date: date, lookback_days: int = 60) -> date | None:
+    days = pd.bdate_range(pd.Timestamp(event_date) - pd.Timedelta(days=lookback_days), event_date)
+    alerts = money_alert_days(panel, days)
+    return alerts[alerts].index[0].date() if alerts.any() else None
+
+
+def reaction_date_flow(panel: dict[str, pd.Series], event_date: date, lookback_days: int = 60) -> date:
+    """사전 등록 v2: 사건일 60일 전~사건일 중 첫 '자금 이상 알림'일. 없으면 사건일."""
+    return first_money_alert(panel, event_date, lookback_days) or event_date

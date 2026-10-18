@@ -10,6 +10,8 @@
   ],
   "unlabeled_events": [],
   "summary": {
+    "warning_lead_days": 28.6,
+    "briefing_delay_days": 0.3333,
     "lead_time": -6.3333,
     "lead_time_flow": -24.1667,
     "doc_top3_hit": 0.7222,
@@ -22,7 +24,9 @@
     "n_events": 6,
     "false_alarms_calm_alert": 0,
     "random_calm_market_active_rate": 0.0413,
-    "random_calm_flow_active_rate": 0.0519,
+    "calm_money_alert_rate": 0.0919,
+    "events_with_prior_warning": 0.8333,
+    "warning_base_rate_60d": 0.4226,
     "learner_delta": null
   },
   "events": [
@@ -45,7 +49,10 @@
       "gap_recall": 1.0,
       "path_recall": null,
       "reaction_date_flow": "2008-09-08",
-      "lead_time_flow": -7
+      "lead_time_flow": -7,
+      "first_money_alert": "2008-09-08",
+      "warning_lead_days": 7,
+      "briefing_delay_days": 0
     },
     {
       "event_id": "covid_2020",
@@ -77,7 +84,10 @@
       "gap_recall": 1.0,
       "path_recall": 1.0,
       "reaction_date_flow": "2020-01-31",
-      "lead_time_flow": -41
+      "lead_time_flow": -41,
+      "first_money_alert": "2020-01-31",
+      "warning_lead_days": 40,
+      "briefing_delay_days": 1
     },
     {
       "event_id": "ru_ua_2022",
@@ -109,7 +119,10 @@
       "gap_recall": 1.0,
       "path_recall": 0.25,
       "reaction_date_flow": "2022-01-11",
-      "lead_time_flow": -44
+      "lead_time_flow": -44,
+      "first_money_alert": "2022-01-11",
+      "warning_lead_days": 44,
+      "briefing_delay_days": 0
     },
     {
       "event_id": "legoland_2022",
@@ -141,7 +154,10 @@
       "gap_recall": 1.0,
       "path_recall": 1.0,
       "reaction_date_flow": "2022-09-28",
-      "lead_time_flow": 0
+      "lead_time_flow": 0,
+      "first_money_alert": "2022-09-28",
+      "warning_lead_days": 0,
+      "briefing_delay_days": 0
     },
     {
       "event_id": "svb_2023",
@@ -173,7 +189,10 @@
       "gap_recall": 1.0,
       "path_recall": 0.75,
       "reaction_date_flow": "2023-01-17",
-      "lead_time_flow": -52
+      "lead_time_flow": -52,
+      "first_money_alert": "2023-01-17",
+      "warning_lead_days": 52,
+      "briefing_delay_days": 0
     },
     {
       "event_id": "tariff_2025",
@@ -205,7 +224,10 @@
       "gap_recall": 1.0,
       "path_recall": 0.75,
       "reaction_date_flow": "2025-04-02",
-      "lead_time_flow": -1
+      "lead_time_flow": -1,
+      "first_money_alert": null,
+      "warning_lead_days": null,
+      "briefing_delay_days": 1
     }
   ],
   "false_alarms": {
@@ -296,6 +318,8 @@
     "path_recall은 gfc_2008(보유내역 없음)에서 계산하지 않는다.",
     "learner_delta는 P9에서 산출.",
     "lead_time_flow: 사전 등록 v2 기계적 대응일(사건일 60일 전~사건일, 5영업일 중 2일 이상 A 또는 C 활성인 첫 날) − 첫 ALERT. 음수면 자금·시장 이상 신호보다 경보가 늦음.",
-    "ablation(공백 탐지) 결과는 data/backtest/ablation/ 참고."
+    "ablation(공백 탐지) 결과는 data/backtest/ablation/ 참고.",
+    "events_with_prior_warning(사건 전 60일 내 알림이 있었던 사건 비율)은 warning_base_rate_60d(평상일 기준 같은 비율)와 비교해야 한다. 차이가 작으면 선행 알림은 우연일 수 있다.",
+    "2단계 운영(사전 등록 v3): 1차 지표는 warning_lead_days(사건 확정 전 자금 이상 알림 선행일), briefing_delay_days(사건 확정 → 대응안), calm_money_alert_rate(평상시 알림 비율)."
   ]
 }
