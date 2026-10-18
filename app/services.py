@@ -27,7 +27,8 @@ def market_panel(refresh: bool = False) -> dict:
     return load_panel(sentinel.panel_series_ids(), refresh=refresh)
 
 
-def compute_signals(gdelt_client: Any = None, fred_cache_dir: Path | None = None, coverage: bool = False) -> dict:
+def compute_signals(gdelt_client: Any = None, fred_cache_dir: Path | None = None, coverage: bool = False,
+                    news: Any = None, coverage_data: dict | None = None, quick: bool = False) -> dict:
     """최신 시그널 A/B/C와 등급을 계산한다. coverage=True면 GDELT 보도 국가 분포도 모은다 (요청 수 2배)."""
     try:
         panel = load_panel(sentinel.panel_series_ids(), **({"cache_dir": fred_cache_dir} if fred_cache_dir else {}),
@@ -39,14 +40,27 @@ def compute_signals(gdelt_client: Any = None, fred_cache_dir: Path | None = None
     last_obs = max(s.index[-1] for s in panel.values()).date()
     market = sentinel.market_signal(sentinel.AsOfPanel(panel), last_obs)
     flow = sentinel.flow_signal(sentinel.AsOfPanel(panel), today) if sentinel.flow_enabled() else None
-    if gdelt_client is None:
-        from app.data.gdelt import GdeltClient
+    quick_info = None
+    if news is None:  # 수집기는 주제별로 나눠 모은 결과(news)를 넘긴다
+        if gdelt_client is None:
+            from app.data.gdelt import GdeltClient
 
-        gdelt_client = GdeltClient()
-    news = sentinel.live_news_signal(gdelt_client, today)
+            import httpx
+
+            # 빠른 조회: 요청당 최대 2번 시도, 응답 대기 10초 → 최악에도 약 1분 안에 끝난다
+            gdelt_client = GdeltClient(http=httpx.Client(timeout=10), max_attempts=2) if quick else GdeltClient()
+        if quick:  # 직접 조회: 요청 2회 (전체 기사량 + 기사 목록)
+            news, quick_info = sentinel.quick_news_signal(gdelt_client, today)
+            coverage_data = quick_info["coverage"]
+        else:
+            news = sentinel.live_news_signal(gdelt_client, today)
     news_out = {"active": news.active, "status": news.status, "n_queries": news.n_queries, "errors": news.errors,
                 "clusters": [c.__dict__ for c in news.clusters]}
-    if coverage:
+    if quick_info is not None:
+        news_out["quick"] = {k: v for k, v in quick_info.items() if k != "coverage"}
+    if coverage_data is not None:
+        news_out["coverage"] = coverage_data
+    elif coverage:
         from app import geo
 
         news_out["coverage"] = geo.gdelt_coverage(gdelt_client)
@@ -100,7 +114,7 @@ def get_signals(refresh: bool = False, gdelt_client: Any = None) -> dict:
     cached = _signal_cache.get("signals")
     if cached and not refresh and time.time() - cached["fetched_at"] < SIGNAL_TTL_SEC:
         return cached
-    result = compute_signals(gdelt_client)
+    result = compute_signals(gdelt_client, quick=True)
     result["source"] = "live"
     _signal_cache["signals"] = result
     return result

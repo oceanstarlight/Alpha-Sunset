@@ -269,3 +269,90 @@ def test_explain_gives_cause_evidence_result_for_every_stage():
     assert "VIXCLS" in chain[0]["원인"] and "출처 25곳" in chain[1]["근거"] and chain[2]["결과"].startswith("ALERT")
     failed = NewsSignal(as_of=END, clusters=[], errors=["x"] * 8, n_queries=8)
     assert explain(SentinelResult(as_of=END, level=grade(m, failed), market=m, news=failed))[1]["결과"] == "판단 불가"
+
+
+def test_topics_state_builds_signal_with_staleness():
+    from app.agents.sentinel import news_signal_from_topics, news_topic
+
+    now = datetime(2024, 6, 28, 12, tzinfo=timezone.utc)
+    hit = news_topic(FakeGdelt(spike=True, n_domains=25), "banking_stress", '"bank run" OR "bank failure"', END)
+    assert hit["cluster"] and hit["z"] > 3
+    state = {
+        "banking_stress": {"ok_at": (now - timedelta(hours=2)).isoformat(), "result": hit},
+        "credit_event": {"ok_at": (now - timedelta(hours=40)).isoformat(), "result": {"cluster": None}, "error": "429"},
+    }
+    sig = news_signal_from_topics(state, END, now)
+    assert [c.event_type for c in sig.clusters] == ["banking_stress"]
+    assert sig.status == "partial" and any("40시간 전" in e for e in sig.errors)
+    assert any("성공 이력 없음" in e for e in sig.errors)  # 한 번도 못 받은 주제
+
+
+def test_collector_skips_fresh_topics_and_respects_budget():
+    import importlib.util
+    from pathlib import Path
+
+    spec = importlib.util.spec_from_file_location("collect", Path(__file__).resolve().parent.parent / "scripts" / "collect_signals.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    now = datetime(2024, 6, 28, 12, tzinfo=timezone.utc)
+    calls = []
+
+    class Counting(FakeGdelt):
+        def daily_volume(self, query):
+            calls.append(query)
+            return super().daily_volume(query)
+
+    state = {"banking_stress": {"ok_at": (now - timedelta(hours=1)).isoformat(), "result": {"cluster": None}}}
+    out = mod.collect_topics(Counting(spike=False, n_domains=25), state, END, now, budget_sec=3600)
+    assert len(calls) == 7 and all(v.get("ok_at") for v in out.values())  # 1시간 전 성공한 주제는 다시 안 받음
+    calls.clear()
+    mod.collect_topics(Counting(spike=False, n_domains=25), {}, END, now, budget_sec=-1)
+    assert calls == []  # 예산 0이면 다음 실행으로 미룸
+
+
+def test_combined_coverage_single_request():
+    from app import geo
+
+    class One(FakeGdelt):
+        n = 0
+
+        def articles(self, query, timespan="1d"):
+            One.n += 1
+            assert query.startswith("(") and "bank run" in query and "tariff" in query
+            now = datetime(2024, 6, 28, tzinfo=timezone.utc)
+            return [Article("Tariff war escalates", "u1", "a.com", now, "United States"),
+                    Article("Bank run fears", "u2", "b.com", now, "Germany")]
+
+    cov = geo.gdelt_coverage_combined(One(spike=False, n_domains=1))
+    assert One.n == 1 and cov["countries"] == {"United States": 1, "Germany": 1}
+    assert cov["by_query"]["trade_policy"]["n_articles"] == 1 and cov["by_query"]["banking_stress"]["n_articles"] == 1
+
+
+def test_quick_news_signal_uses_two_requests():
+    from app.agents.sentinel import quick_news_signal
+
+    calls = []
+
+    class Two(FakeGdelt):
+        def daily_volume(self, query):
+            calls.append("vol")
+            return super().daily_volume(query)  # 결합 쿼리에 "bank run" 포함 → 급증
+
+        def articles(self, query, timespan="1d"):
+            calls.append("art")
+            return super().articles(query, timespan)
+
+    sig, info = quick_news_signal(Two(spike=True, n_domains=25), END)
+    assert calls == ["vol", "art"]
+    assert [c.event_type for c in sig.clusters] == ["banking_stress"] and info["combined_z"] > 3
+    assert sig.status == "ok" and info["by_topic"]["banking_stress"]["n_sources"] == 25
+
+    class Down(FakeGdelt):
+        def daily_volume(self, query):
+            raise RuntimeError("429")
+
+        def articles(self, query, timespan="1d"):
+            raise RuntimeError("429")
+
+    sig, info = quick_news_signal(Down(spike=False, n_domains=1), END)
+    assert sig.status == "unavailable" and info["coverage"]["status"] == "unavailable"

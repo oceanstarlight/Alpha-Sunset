@@ -83,6 +83,33 @@ def country_impact(event: Event, portfolio: Portfolio, snapshot: str) -> dict[st
     return dict(out)
 
 
+from app.agents.sentinel import combined_query  # noqa: E402  (하위 호환)
+
+
+def gdelt_coverage_combined(client: Any, timespan: str = "1d") -> dict:
+    """위기 키워드 전체를 한 번에 조회해 보도 매체 국가 분포를 낸다 (요청 1회, 최대 250건).
+
+    주제별 분류는 제목 키워드로 한다. 사건 발생 위치가 아니다 (GDELT GEO API는 404).
+    """
+    queries = load_config()["sentinel"]["news"]["queries"]
+    try:
+        arts = client.articles(combined_query(queries), timespan=timespan)
+    except Exception as e:
+        return {"timespan": timespan, "countries": {}, "by_query": {}, "errors": [f"combined: {e}"], "status": "unavailable",
+                "method": "combined"}
+    countries: dict[str, int] = defaultdict(int)
+    by_query: dict[str, dict] = {}
+    for a in arts:
+        if a.source_country:
+            countries[a.source_country] += 1
+    for event_type, q in queries.items():
+        kws = [t.strip().strip('"').lower() for t in q.strip("()").split(" OR ")]
+        hit = [a for a in arts if any(k in a.title.lower() for k in kws)]
+        by_query[event_type] = {"n_articles": len(hit), "top_titles": [a.title for a in hit[:3]]}
+    return {"timespan": timespan, "countries": dict(countries), "by_query": by_query, "errors": [], "status": "ok",
+            "method": "combined", "n_articles": len(arts)}
+
+
 def gdelt_coverage(client: Any, timespan: str = "1d") -> dict:
     """주제 쿼리별 최근 기사의 보도 매체 국가 분포 (사건 발생 위치가 아니다. GDELT GEO API는 404라 사용 불가)."""
     queries = load_config()["sentinel"]["news"]["queries"]

@@ -24,16 +24,18 @@ class Article:
 
 
 class GdeltClient:
-    def __init__(self, http: httpx.Client | None = None, interval_sec: float | None = None):
+    def __init__(self, http: httpx.Client | None = None, interval_sec: float | None = None, max_attempts: int = 4):
         self._http = http or httpx.Client(timeout=30)
+        self._max_attempts = max_attempts
         self._interval = (
             interval_sec if interval_sec is not None else load_config()["sentinel"]["news"]["request_interval_sec"]
         )
         self._last_request = 0.0
 
-    def _get(self, params: dict, max_attempts: int = 4) -> dict:
+    def _get(self, params: dict, max_attempts: int | None = None) -> dict:
         """요청 간격을 지키고, 429·연결 끊김은 점점 길게 기다렸다 재시도한다 (공유 IP 환경 대응)."""
         last_error: Exception | None = None
+        max_attempts = max_attempts or self._max_attempts
         for attempt in range(1, max_attempts + 1):
             wait = self._interval * attempt - (time.monotonic() - self._last_request)
             if wait > 0:

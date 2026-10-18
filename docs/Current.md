@@ -181,7 +181,9 @@
 - ✅ 메인 탭 "세계 금융 지도" (`app/geo.py` + pydeck): 사건 지역(빨강)·보유 비중(파랑)·영향도(주황)·GDELT 보도 국가(보라) 원 표시, 레이어 선택·툴팁·상위 국가 표
 - ✅ GDELT 클라이언트: 요청 간격 10초, 429·연결 끊김 점증 대기 재시도(최대 4회), 기사 `sourcecountry` 수집
 - ✅ 사건 신호 상태 `ok / partial / unavailable`: 전부 실패하면 '사건 없음'이 아니라 '판단 불가'로 표시, 실패 원인 펼쳐 보기
-- ✅ GitHub Actions 일일 수집기 (`scripts/collect_signals.py`, 매일 07:07 KST) → `data/live/` 커밋, UI는 수집 결과 기본 + 직접 조회 보조
+- ✅ GitHub Actions 수집기 (`scripts/collect_signals.py`) → `data/live/` 커밋, UI는 수집 결과 기본 + 직접 조회 보조
+  - 개선: 첫 실행에서 8주제 중 5개가 429 → 3시간마다 주제별로 나눠 수집(`data/live/gdelt_topics.json`), 60초 간격·점증 대기·35분 예산, 실패 주제는 이전 성공값 유지(26시간), 보도 국가는 OR 쿼리 1회 (요청 16회 → 최대 9회, 저장소 public이라 Actions 시간 무료)
+  - '지금 직접 조회'는 빠른 조회: GDELT 요청 2회(전체 위기 기사량 z + 기사 목록으로 주제별 출처 수), 간격 5초·최대 2회 시도·응답 대기 10초, FRED 병렬 → 약 30초~1분 (사용자 요청)
 - ⚠️ GDELT GEO 2.0 API는 404 → 지도의 GDELT 원은 사건 위치가 아니라 **보도 매체 국가**
 
 ## 추가 — 한국(로컬) 시장 상시 감시 🔄
