@@ -17,6 +17,9 @@ from app.llm.cache import LLMCache, make_key
 T = TypeVar("T", bound=BaseModel)
 
 
+RETRYABLE_CODES = {429, 500, 503}
+
+
 class LLMUnavailableError(RuntimeError):
     """API 키가 없고 캐시에도 없는 호출."""
 
@@ -58,7 +61,7 @@ class LLMClient:
         return self._sdk
 
     def _call(self, fn, **kwargs) -> Any:
-        """무료 등급 분당 요청 제한을 지키고, 429면 서버가 알려준 시간만큼 기다렸다 재시도한다."""
+        """무료 등급 분당 요청 제한을 지키고, 429·503·500이면 기다렸다 재시도한다."""
         for attempt in range(self.rate_limit_retries + 1):
             wait = self.min_interval - (time.monotonic() - self._last_call)
             if wait > 0:
@@ -67,10 +70,12 @@ class LLMClient:
             try:
                 return fn(**kwargs)
             except Exception as e:
-                if getattr(e, "code", None) != 429 or attempt == self.rate_limit_retries:
+                code = getattr(e, "code", None)
+                if code not in RETRYABLE_CODES or attempt == self.rate_limit_retries:
                     raise
                 m = re.search(r"retry in ([\d.]+)s", str(e))
-                time.sleep(float(m.group(1)) + 1 if m else 30)
+                # 429는 서버 안내 시간, 503·500(일시 과부하)은 점증 대기
+                time.sleep(float(m.group(1)) + 1 if m else 15 * (attempt + 1))
 
     def _log(self, model: str, purpose: str, cache_hit: bool, in_tokens: int = 0, out_tokens: int = 0) -> None:
         conn = connect(self.db_mode)
@@ -132,6 +137,41 @@ class LLMClient:
             self.cache.set(key, "generate", self.model, parsed.model_dump_json())
             return parsed
         raise LLMResponseError(f"{self.max_retries}회 재시도 후에도 스키마 검증 실패: {last_error}")
+
+    def chat(self, contents: list[Any], purpose: str, tools: list[Any], system: str | None = None) -> Any:
+        """함수 호출(function calling) 한 턴. 응답 Content를 반환하고, 대화 내용 해시로 캐시한다."""
+        from google.genai import types
+
+        key = make_key(
+            kind="chat",
+            model=self.model,
+            system=system,
+            contents=[c.model_dump(mode="json", exclude_none=True) for c in contents],
+            tools=[t.model_dump(mode="json", exclude_none=True) for t in tools],
+        )
+        cached = self.cache.get(key)
+        if cached is not None:
+            self._log(self.model, purpose, cache_hit=True)
+            return types.Content.model_validate_json(cached)
+
+        config = types.GenerateContentConfig(
+            temperature=0,
+            system_instruction=system,
+            tools=tools,
+            automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
+        )
+        resp = self._call(self.sdk.models.generate_content, model=self.model, contents=contents, config=config)
+        usage = getattr(resp, "usage_metadata", None)
+        self._log(
+            self.model,
+            purpose,
+            cache_hit=False,
+            in_tokens=getattr(usage, "prompt_token_count", 0) or 0,
+            out_tokens=getattr(usage, "candidates_token_count", 0) or 0,
+        )
+        content = resp.candidates[0].content if resp.candidates else types.Content(role="model", parts=[])
+        self.cache.set(key, "chat", self.model, content.model_dump_json(exclude_none=True))
+        return content
 
     def embed(self, texts: list[str], purpose: str) -> list[list[float]]:
         """텍스트별로 캐시하고, 미스만 한 번에 API 호출한다."""

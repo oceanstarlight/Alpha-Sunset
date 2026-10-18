@@ -213,25 +213,38 @@ def _expanded_terms(event: Event) -> str:
     return "확장 검색: " + " ".join([event.type.value] + [c.value for c in event.channels] + event.sectors + event.asset_classes)
 
 
-def match(event: Event, index: ClauseIndex, llm: LLMClient) -> MatchResult:
+def retrieve_candidates(event: Event, index: ClauseIndex, exclude: set[str] | None = None, expanded: bool = False) -> list[Clause]:
+    """임베딩 검색 후보. 기본 검색에는 protected 조항을 항상 포함하고, 확장 검색은 top_k×2."""
     cfg = load_config()["matcher"]
-    candidates = index.search(event_query(event), cfg["top_k"])
-    seen = {c.clause_id for c in candidates}
-    candidates += [c for c in index.protected() if c.clause_id not in seen]
-    judgments = judge_clauses(llm, event, candidates)
+    exclude = exclude or set()
+    if expanded:
+        found = index.search(event_query(event, _expanded_terms(event)), cfg["top_k"] * 2)
+    else:
+        found = index.search(event_query(event), cfg["top_k"])
+        found += [c for c in index.protected() if c.clause_id not in {f.clause_id for f in found}]
+    return [c for c in found if c.clause_id not in exclude]
 
-    fits = build_doc_fits(judgments, index.clauses)
-    if max((f.fit_score for f in fits), default=0.0) < cfg["requery_fit_below"]:
-        # 쿼리 확장 1회 재검색: 새 후보만 추가 판정
-        more = [c for c in index.search(event_query(event, _expanded_terms(event)), cfg["top_k"] * 2)
-                if c.clause_id not in {j.clause_id for j in judgments}]
-        judgments += judge_clauses(llm, event, more)
-        fits = build_doc_fits(judgments, index.clauses)
 
+def needs_requery(judgments: list[ClauseJudgment], clauses: dict[str, Clause]) -> bool:
+    fits = build_doc_fits(judgments, clauses)
+    return max((f.fit_score for f in fits), default=0.0) < load_config()["matcher"]["requery_fit_below"]
+
+
+def finalize_match(event: Event, judgments: list[ClauseJudgment], clauses: dict[str, Clause]) -> MatchResult:
     confidences = [j.confidence for j in judgments]
     return MatchResult(
         event_id=event.id,
-        doc_fits=rank_doc_fits(fits),
-        gaps=find_gaps(event, judgments, index.clauses),
-        low_confidence=(sum(confidences) / len(confidences) if confidences else 0.0) < cfg["low_confidence_below"],
+        doc_fits=rank_doc_fits(build_doc_fits(judgments, clauses)),
+        gaps=find_gaps(event, judgments, clauses),
+        low_confidence=(sum(confidences) / len(confidences) if confidences else 0.0)
+        < load_config()["matcher"]["low_confidence_below"],
     )
+
+
+def match(event: Event, index: ClauseIndex, llm: LLMClient) -> MatchResult:
+    judgments = judge_clauses(llm, event, retrieve_candidates(event, index))
+    if needs_requery(judgments, index.clauses):
+        # 쿼리 확장 1회 재검색: 새 후보만 추가 판정
+        more = retrieve_candidates(event, index, exclude={j.clause_id for j in judgments}, expanded=True)
+        judgments += judge_clauses(llm, event, more)
+    return finalize_match(event, judgments, index.clauses)

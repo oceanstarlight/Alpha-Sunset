@@ -1,0 +1,715 @@
+{
+  "briefing": {
+    "run_id": "run-12acd5299e72",
+    "event": {
+      "id": "tariff_2025",
+      "title": "2025 미국 상호관세 충격",
+      "date": "2025-04-02",
+      "summary": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다. VIX는 4월 8일 52.33까지 상승했다.",
+      "type": "trade_policy",
+      "channels": [
+        "sanctions_trade",
+        "supply_chain",
+        "equity_vol",
+        "fx"
+      ],
+      "regions": [
+        "US",
+        "CN",
+        "KR",
+        "GLOBAL"
+      ],
+      "sectors": [
+        "manufacturing",
+        "autos",
+        "semiconductors",
+        "retail"
+      ],
+      "asset_classes": [
+        "equity",
+        "fx",
+        "corporate_bond"
+      ],
+      "entities": [
+        "The White House"
+      ],
+      "duration": "months",
+      "severity": 4,
+      "sources": [
+        "https://www.whitehouse.gov/fact-sheets/2025/04/fact-sheet-president-donald-j-trump-declares-national-emergency-to-increase-our-competitive-edge-protect-our-sovereignty-and-strengthen-our-national-and-economic-security/",
+        "https://fred.stlouisfed.org/series/VIXCLS"
+      ]
+    },
+    "alert_level": "WATCH",
+    "match": {
+      "event_id": "tariff_2025",
+      "doc_fits": [
+        {
+          "doc_id": "PB-TRADE",
+          "fit_score": 0.5,
+          "n_applicable": 2,
+          "n_partial": 4,
+          "n_not": 2,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-TRADE-01",
+              "verdict": "partial",
+              "mismatch_reasons": [
+                "지속기간 전제가 이번 사건의 months와 다릅니다."
+              ],
+              "evidence_quote": "대규모 관세 부과가 발표되면 관세 대상국 소재 기업과 수출 의존 업종의 노출을 집계한다.",
+              "confidence": 0.8
+            },
+            {
+              "clause_id": "PB-TRADE-03",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-TRADE-06",
+              "verdict": "partial",
+              "mismatch_reasons": [
+                "전제된 지역에 EU가 포함되어 있으나 이번 사건의 지역은 US, CN, KR, GLOBAL입니다."
+              ],
+              "evidence_quote": "보복 관세가 예고되면 상대국 수입 의존 업종의 2차 영향을 점검한다.",
+              "confidence": 0.85
+            },
+            {
+              "clause_id": "PB-TRADE-02",
+              "verdict": "partial",
+              "mismatch_reasons": [
+                "지속기간 전제가 months이지만 사건 지속기간과 세부 조건에서 일부 차이가 있습니다."
+              ],
+              "evidence_quote": "관세로 공급망 재편이 예상되면 자동차·반도체 등 대미 수출 업종의 실적 영향을 분석한다.",
+              "confidence": 0.85
+            },
+            {
+              "clause_id": "PB-TRADE-08",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형 전제에 rate_shock가 포함되어 있으나 이번 사건은 trade_policy입니다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.9
+            },
+            {
+              "clause_id": "PB-TRADE-04",
+              "verdict": "partial",
+              "mismatch_reasons": [
+                "지속기간 전제가 weeks이나 이번 사건의 지속기간은 months입니다."
+              ],
+              "evidence_quote": "무역 갈등으로 신흥국 통화가 약세를 보이면 신흥국 자산의 환노출을 점검한다.",
+              "confidence": 0.8
+            },
+            {
+              "clause_id": "PB-TRADE-07",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형 전제에 regulatory가 포함되어 있으나 이번 사건은 trade_policy입니다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.9
+            },
+            {
+              "clause_id": "PB-TRADE-05",
+              "verdict": "applicable",
+              "mismatch_reasons": [],
+              "evidence_quote": "VIX는 4월 8일 52.33까지 상승했다.",
+              "confidence": 0.9
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-REG",
+          "fit_score": 0.25,
+          "n_applicable": 0,
+          "n_partial": 1,
+          "n_not": 1,
+          "n_uncertain": 4,
+          "judgments": [
+            {
+              "clause_id": "PB-REG-02",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 trade_policy이며 공매도 금지 등 시장 조치 시행에 대한 언급이 없다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.9
+            },
+            {
+              "clause_id": "PB-REG-03",
+              "verdict": "partial",
+              "mismatch_reasons": [
+                "관세 부과 조치이나 전제가 요구하는 '제재 대상 지정'에 직접 해당하지는 않는다."
+              ],
+              "evidence_quote": "모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.7
+            },
+            {
+              "clause_id": "PB-REG-01",
+              "verdict": "uncertain",
+              "mismatch_reasons": [
+                "중대한 손실 또는 한도 위반 발생 여부에 대한 정보가 요약에 포함되어 있지 않음"
+              ],
+              "evidence_quote": "VIX는 4월 8일 52.33까지 상승했다.",
+              "confidence": 0.8
+            },
+            {
+              "clause_id": "PB-REG-04",
+              "verdict": "uncertain",
+              "mismatch_reasons": [
+                "한도 예외 승인 발생 여부에 대한 정보가 요약에 포함되어 있지 않음"
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.8
+            },
+            {
+              "clause_id": "PB-REG-05",
+              "verdict": "uncertain",
+              "mismatch_reasons": [
+                "전제된 운영(operational) 채널과 이번 사건의 채널이 일치하는지 확인할 정보가 부족하다."
+              ],
+              "evidence_quote": "위기 대응 과정의 의사결정 기록을 보존 기한 동안 보관한다.",
+              "confidence": 0.5
+            },
+            {
+              "clause_id": "PB-REG-08",
+              "verdict": "uncertain",
+              "mismatch_reasons": [
+                "위기가 아직 종료되지 않았으므로 종료 후 사후보고서 작성 여부를 판단할 수 없음"
+              ],
+              "evidence_quote": "지속기간은 months",
+              "confidence": 0.9
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-LIQ",
+          "fit_score": 0.1667,
+          "n_applicable": 0,
+          "n_partial": 1,
+          "n_not": 2,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-LIQ-06",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건 유형이 pandemic이 아니며 이동 제한·봉쇄 조치 시행 조건이 충족되지 않는다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-LIQ-04",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 trade_policy로 pandemic 또는 liquidity_crisis 전제와 불일치합니다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-LIQ-01",
+              "verdict": "partial",
+              "mismatch_reasons": [
+                "이번 사건의 유형은 trade_policy이며 채널에 equity_vol은 포함되나 liquidity는 없어 일부 전제만 충족된다."
+              ],
+              "evidence_quote": "VIX는 4월 8일 52.33까지 상승했다.",
+              "confidence": 0.85
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-MGR",
+          "fit_score": 0.125,
+          "n_applicable": 0,
+          "n_partial": 1,
+          "n_not": 3,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-MGR-01",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "위탁운용사의 환매중단 또는 운용 부실에 대한 내용이 이번 사건에 포함되어 있지 않다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-MGR-02",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "운용사 보고 자산과 실제 자산 불일치 의심에 대한 상황이 아니다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-MGR-03",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건 유형이 trade_policy로 liquidity_crisis, credit_event 등과 다름",
+                "자산군에 derivatives가 포함되어 있지 않음"
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-MGR-05",
+              "verdict": "partial",
+              "mismatch_reasons": [
+                "사건 유형이 trade_policy로 규제/기타 유형이 아님",
+                "지속기간이 months이지만 채널이 operational 또는 counterparty가 아님"
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.85
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-BANK",
+          "fit_score": 0.0,
+          "n_applicable": 0,
+          "n_partial": 0,
+          "n_not": 1,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-BANK-05",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 trade_policy로 banking_stress 전제와 불일치합니다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-CMDTY",
+          "fit_score": 0.0,
+          "n_applicable": 0,
+          "n_partial": 0,
+          "n_not": 4,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-CMDTY-05",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건 유형이 trade_policy이며 채널에 commodity가 포함되지 않고 원자재 가격 급등 조건이 충족되지 않는다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-CMDTY-07",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 trade_policy로 geopolitical 또는 supply_chain 전제와 맞지 않으며, 곡물 수출 차질에 대한 내용이 사건 요약에 없습니다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-CMDTY-01",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 trade_policy로 geopolitical, supply_chain, pandemic 전제와 맞지 않으며 유가 급변 전제가 사건 요약에 없습니다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-CMDTY-04",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "이번 사건의 유형은 trade_policy이며 채널에 commodity가 포함되어 있지 않고 자산군에 govt_bond와 commodity가 없다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-FX",
+          "fit_score": 0.0,
+          "n_applicable": 0,
+          "n_partial": 0,
+          "n_not": 5,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-FX-05",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "중앙은행 간 통화스와프 체결 조건이 충족되지 않는다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-FX-08",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 trade_policy로 fx_shock 전제와 불일치합니다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-FX-03",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 trade_policy로 fx_shock 또는 credit_event 전제와 불일치합니다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-FX-01",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 trade_policy로 fx_shock, credit_event, liquidity_crisis 전제와 불일치합니다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-FX-07",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 trade_policy로 fx_shock 전제와 불일치합니다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-GEO",
+          "fit_score": 0.0,
+          "n_applicable": 0,
+          "n_partial": 0,
+          "n_not": 2,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-GEO-04",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건 유형이 geopolitical 또는 supply_chain 단독이 아닌 trade_policy이며 에너지·곡물 수출국 분쟁 조건이 없다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-GEO-01",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건 유형이 geopolitical이 아니며 군사 충돌 발생 조건이 없다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-RATE",
+          "fit_score": 0.0,
+          "n_applicable": 0,
+          "n_partial": 0,
+          "n_not": 4,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-RATE-05",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형 전제가 rate_shock이며 이번 사건은 trade_policy 중심입니다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-RATE-01",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건 유형이 trade_policy이며 채널에 rates가 포함되지 않고 장기 금리 급등 전제가 없다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-RATE-08",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건 유형이 rate_shock 또는 fx_shock가 아니며 내외 금리차 확대 조건이 충족되지 않는다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            },
+            {
+              "clause_id": "PB-RATE-02",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 rate_shock가 아니라 trade_policy이며 채널에 rates가 포함되지 않았다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.9
+            }
+          ]
+        },
+        {
+          "doc_id": "PB-STFM",
+          "fit_score": 0.0,
+          "n_applicable": 0,
+          "n_partial": 0,
+          "n_not": 1,
+          "n_uncertain": 0,
+          "judgments": [
+            {
+              "clause_id": "PB-STFM-05",
+              "verdict": "not_applicable",
+              "mismatch_reasons": [
+                "사건유형이 liquidity_crisis가 아니며 정부의 채권시장안정펀드나 회사채 매입 프로그램 발표 내용이 없다."
+              ],
+              "evidence_quote": "2025년 4월 2일 미국 대통령은 국제비상경제권한법(IEEPA)에 근거해 국가비상사태를 선포하고, 모든 국가에 4월 5일부터 10% 기본관세를, 대미 무역적자가 큰 국가에는 4월 9일부터 국가별 추가 관세를 부과한다고 발표했다.",
+              "confidence": 0.95
+            }
+          ]
+        }
+      ],
+      "gaps": [],
+      "low_confidence": false
+    },
+    "exposure_top": [
+      {
+        "nodes": [
+          "기관",
+          "D-USEQ",
+          "IVV",
+          "IVV US 보유 475종목",
+          "US · broad_market"
+        ],
+        "weight": 0.116152,
+        "relevance": 0.65,
+        "uncertainty": 0.0,
+        "risk_score": 0.075499,
+        "why": "직접 보유, 프록시 펀드를 통해 미국 지역 및 자산군 equity와 일치하므로 이번 사건과 관련해 확인해야 한다."
+      },
+      {
+        "nodes": [
+          "기관",
+          "D-UST",
+          "US · sovereign"
+        ],
+        "weight": 0.15,
+        "relevance": 0.4,
+        "uncertainty": 0.0,
+        "risk_score": 0.06,
+        "why": "직접 보유를 통해 지역 US와 일치하므로 이번 사건과 관련해 확인해야 한다."
+      },
+      {
+        "nodes": [
+          "기관",
+          "D-KTB",
+          "KR · sovereign"
+        ],
+        "weight": 0.15,
+        "relevance": 0.4,
+        "uncertainty": 0.0,
+        "risk_score": 0.06,
+        "why": "직접 보유를 통해 지역 KR과 일치하므로 이번 사건과 관련해 확인해야 한다."
+      },
+      {
+        "nodes": [
+          "기관",
+          "D-KREQ",
+          "EWY",
+          "EWY KR 보유 93종목",
+          "KR · broad_market/semiconductors/autos"
+        ],
+        "weight": 0.059792,
+        "relevance": 1.0,
+        "uncertainty": 0.0,
+        "risk_score": 0.059792,
+        "why": "직접 보유, 프록시 펀드를 통해 지역 KR, 업종 autos,semiconductors 및 자산군 equity와 일치하므로 이번 사건과 관련해 확인해야 한다."
+      },
+      {
+        "nodes": [
+          "기관",
+          "D-RE",
+          "KR · real_estate"
+        ],
+        "weight": 0.1,
+        "relevance": 0.4,
+        "uncertainty": 0.0,
+        "risk_score": 0.04,
+        "why": "직접 보유를 통해 지역 KR과 일치하므로 이번 사건과 관련해 확인해야 한다."
+      },
+      {
+        "nodes": [
+          "기관",
+          "M-DAON",
+          "HYG",
+          "HYG US 보유 1012종목",
+          "US · energy/telecom/consumer"
+        ],
+        "weight": 0.055155,
+        "relevance": 0.65,
+        "uncertainty": 0.3,
+        "risk_score": 0.030473,
+        "why": "위탁운용사를 거쳐 프록시 펀드로 보유하며 지역 US 및 자산군 corporate_bond와 일치하나, 불확실성이 존재하여 프록시 추정으로 인해 실제와 다를 수 있다."
+      },
+      {
+        "nodes": [
+          "기관",
+          "D-MMF",
+          "KR · broker_dealers/banks"
+        ],
+        "weight": 0.07,
+        "relevance": 0.4,
+        "uncertainty": 0.0,
+        "risk_score": 0.028,
+        "why": "직접 보유를 통해 지역 KR과 일치하므로 이번 사건과 관련해 확인해야 한다."
+      },
+      {
+        "nodes": [
+          "기관",
+          "M-HANBIT",
+          "KRE",
+          "KRE US 보유 140종목",
+          "US · regional_banks/banks"
+        ],
+        "weight": 0.048465,
+        "relevance": 0.65,
+        "uncertainty": 0.3,
+        "risk_score": 0.026777,
+        "why": "위탁운용사를 거쳐 프록시 펀드로 보유하며 지역 US 및 자산군 equity와 일치하나, 불확실성이 존재하여 프록시 추정으로 인해 실제와 다를 수 있다."
+      },
+      {
+        "nodes": [
+          "기관",
+          "M-NURI",
+          "XLE",
+          "XLE US 보유 21종목",
+          "US · energy"
+        ],
+        "weight": 0.047853,
+        "relevance": 0.65,
+        "uncertainty": 0.3,
+        "risk_score": 0.026439,
+        "why": "위탁운용사를 거쳐 프록시 펀드로 보유하며 지역 US 및 자산군 equity와 일치하나, 불확실성이 존재하여 프록시 추정으로 인해 실제와 다를 수 있다."
+      },
+      {
+        "nodes": [
+          "기관",
+          "M-SEOGYEONG",
+          "MCHI",
+          "MCHI KY 보유 71종목",
+          "KY · technology/consumer/manufacturing"
+        ],
+        "weight": 0.028161,
+        "relevance": 0.8,
+        "uncertainty": 0.3,
+        "risk_score": 0.019149,
+        "why": "위탁운용사를 거쳐 프록시 펀드로 보유하며 지역 GLOBAL, 업종 manufacturing 및 자산군 equity와 일치하나, 불확실성이 존재하여 프록시 추정으로 인해 실제와 다를 수 있다."
+      }
+    ],
+    "exposure_entities": [],
+    "exposure_note": "",
+    "actions_to_check": [
+      "[리스크관리팀] 관세 대상국 및 업종 노출 현황 집계 (PB-TRADE-01·부분)",
+      "[운용전략팀] 관세 부과 일정 추적 관리 (PB-TRADE-03)",
+      "[운용전략팀] 위기 시나리오 최신화 (PB-TRADE-03)",
+      "[운용전략팀] 2차 파급 영향 업종 점검 (PB-TRADE-06·부분)",
+      "[운용전략팀] 업종별 기업 실적 영향 분석 (PB-TRADE-02·부분)",
+      "[외환운용팀] 신흥국 외환 익스포저 점검 (PB-TRADE-04·부분)",
+      "[운용전략팀] 포트폴리오 리밸런싱 분할 실행 (PB-TRADE-05)",
+      "[운용전략팀] 거래 비용 및 집행 점검 (PB-TRADE-05)",
+      "[준법감시팀] 규제 및 제재 관련 보고 의무 준수 (PB-REG-03·부분)",
+      "[리스크관리팀] 긴급 유동성 점검 회의 소집 (PB-LIQ-01·부분)",
+      "[리스크관리팀] 자산군별 즉시 처분 가능 금액 산출 (PB-LIQ-01·부분)",
+      "[법무팀] 법적 책임 관계 및 리스크 검토 (PB-MGR-05·부분)"
+    ],
+    "evidence_refs": [
+      "PB-TRADE-01",
+      "PB-TRADE-03",
+      "PB-TRADE-06",
+      "PB-TRADE-02",
+      "PB-TRADE-08",
+      "PB-TRADE-04",
+      "PB-TRADE-07",
+      "PB-TRADE-05",
+      "PB-REG-02",
+      "PB-REG-03",
+      "PB-REG-01",
+      "PB-REG-04",
+      "PB-REG-05",
+      "PB-REG-08",
+      "PB-LIQ-06",
+      "PB-LIQ-04",
+      "PB-LIQ-01",
+      "PB-MGR-01",
+      "PB-MGR-02",
+      "PB-MGR-03",
+      "PB-MGR-05",
+      "PB-BANK-05",
+      "PB-CMDTY-05",
+      "PB-CMDTY-07",
+      "PB-CMDTY-01",
+      "PB-CMDTY-04",
+      "PB-FX-05",
+      "PB-FX-08",
+      "PB-FX-03",
+      "PB-FX-01",
+      "PB-FX-07",
+      "PB-GEO-04",
+      "PB-GEO-01",
+      "PB-RATE-05",
+      "PB-RATE-01",
+      "PB-RATE-08",
+      "PB-RATE-02",
+      "PB-STFM-05",
+      "https://www.whitehouse.gov/fact-sheets/2025/04/fact-sheet-president-donald-j-trump-declares-national-emergency-to-increase-our-competitive-edge-protect-our-sovereignty-and-strengthen-our-national-and-economic-security/",
+      "https://fred.stlouisfed.org/series/VIXCLS"
+    ],
+    "trace_id": "trace-2709c3c325cd"
+  },
+  "trace": [
+    {
+      "step": 1,
+      "tool": "get_market_signals"
+    },
+    {
+      "step": 2,
+      "tool": "search_events"
+    },
+    {
+      "step": 3,
+      "tool": "retrieve_clauses"
+    },
+    {
+      "step": 4,
+      "tool": "judge_clauses"
+    },
+    {
+      "step": 5,
+      "tool": "compute_exposure"
+    },
+    {
+      "step": 6,
+      "tool": "get_priority"
+    },
+    {
+      "step": 7,
+      "tool": "build_briefing"
+    }
+  ]
+}
