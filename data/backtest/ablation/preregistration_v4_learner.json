@@ -1,0 +1,18 @@
+{
+  "registered_at": "2026-10-18T08:26:12.123786+00:00",
+  "purpose": "P9 Learner(알파 썬셋) 점수 엔진과 ON/OFF 비교 실험을 결과 계산 전에 고정",
+  "engine": "plans.md 5.4 그대로: 단위 (doc_id, event_type), cite_norm(반감기 180일 감쇠 인용수 / 유형 내 최대), fb=(useful+1)/(useful+not_fit+2), recency=exp(−Δ/180), explore=0.2·sqrt(ln(N_type+1)/(n_doc+1)), priority=0.4·cite+0.4·fb+0.2·recency+explore (0~1 클립), final=fit×(1+0.3·(priority−0.5)), protected 문서 priority 하한 0.5. 입력은 shadow_log만, 모드별 분리",
+  "ranking": "Learner ON이면 final 순, protected 조항만 판정된 문서는 기존처럼 하단",
+  "experiment": {
+    "inputs": "커밋된 브리핑의 MatchResult (LLM 재호출 없음)",
+    "feedback_sim": "각 사건 처리 후 shadow_log(mode=sim)에 기록: 판정에서 인용된 문서(적용·부분 1개 이상)는 cited=1, 라벨 expected_docs는 useful, ON 순위 top3 중 expected_docs가 아닌 문서는 not_fit",
+    "pass_A": "실제 날짜 순으로 6개 사건 1회 재생. 사건 유형이 모두 달라 유형별 이력이 없으므로 효과가 없을 가능성이 높음 (그대로 보고)",
+    "pass_B": "반복 사건 시뮬레이션: 6개 사건을 같은 순서로 2회 재생, 가상 시간은 사건마다 60일 간격. 2회차 doc_top3_hit의 ON−OFF를 learner_delta_sim으로 보고",
+    "metric": "doc_top3_hit ON − OFF (사건 평균)",
+    "caveats": [
+      "피드백이 라벨에서 만들어지므로 순환 위험이 있다 (README 명시)",
+      "pass_B는 같은 사건을 반복하므로 실제 성능이 아닌 '학습 메커니즘 작동 확인'이다"
+    ]
+  },
+  "no_tuning": "가중치·반감기·c는 이 결과로 조정하지 않는다"
+}

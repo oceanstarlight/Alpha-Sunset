@@ -171,11 +171,20 @@ def tool_compute_exposure(ctx: RunContext, **_) -> dict:
 
 
 def tool_get_priority(ctx: RunContext, **_) -> dict:
-    """문서 우선순위. Learner(P9) 전에는 fit_score 순서와 같다."""
-    if ctx.match is None:
+    """문서 우선순위 (Learner). 점수는 항상 계산해 보여주고, ON일 때만 순위에 반영한다."""
+    from app.agents import learner
+
+    if ctx.match is None or ctx.event is None:
         raise ToolError("judge_clauses를 먼저 호출하라.")
-    ctx.priority = [{"doc_id": f.doc_id, "fit_score": f.fit_score} for f in ctx.match.doc_fits]
-    return {"learner_enabled": get_settings().learner_enabled, "ranking": ctx.priority[:5]}
+    mode = "live" if ctx.mode == "live" else "backtest"
+    protected = {c.doc_id for c in ctx.index.clauses.values() if c.protected}
+    pri = learner.compute_priority([f.doc_id for f in ctx.match.doc_fits], ctx.event.type.value, ctx.as_of, mode, protected)
+    enabled = learner.is_enabled()
+    if enabled:
+        tail = {f.doc_id for f in ctx.match.doc_fits if matcher_agent.protected_only(f, ctx.index.clauses)}
+        ctx.match = ctx.match.model_copy(update={"doc_fits": learner.rerank(ctx.match.doc_fits, pri, tail)})
+    ctx.priority = [{"doc_id": f.doc_id, "fit_score": f.fit_score, "priority": pri[f.doc_id].priority} for f in ctx.match.doc_fits]
+    return {"learner_enabled": enabled, "ranking": ctx.priority[:5]}
 
 
 class CleanedActions(BaseModel):

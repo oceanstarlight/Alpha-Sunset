@@ -24,14 +24,6 @@ def test_feedback_writes_feedback_and_shadow_log():
     conn.close()
 
 
-def test_learner_cannot_be_enabled_before_p9():
-    r = services.set_learner_enabled(True)
-    assert r["ok"] is False and services.learner_enabled() is False
-    conn = connect("sandbox")
-    assert [tuple(r) for r in conn.execute("SELECT enabled FROM learner_toggle_log")] == [(0,)]
-    conn.close()
-
-
 def test_priority_aggregates_shadow_log():
     b = services.load_saved_briefing("svb_2023")
     services.submit_feedback(Feedback(run_id=b.run_id, doc_id="PB-BANK", label="not_fit", user_id="u1"), b)

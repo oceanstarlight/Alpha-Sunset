@@ -1,6 +1,6 @@
 {
   "briefing": {
-    "run_id": "run-f055779b7593",
+    "run_id": "run-2f15e7855aee",
     "event": {
       "id": "gfc_2008",
       "title": "2008 리먼 브라더스 파산과 한국 외환시장 불안",
@@ -600,7 +600,7 @@
       "https://fred.stlouisfed.org/series/DEXKOUS",
       "https://fred.stlouisfed.org/series/VIXCLS"
     ],
-    "trace_id": "trace-ec68cd79d5f9"
+    "trace_id": "trace-e6d8a72efd0f"
   },
   "trace": [
     {

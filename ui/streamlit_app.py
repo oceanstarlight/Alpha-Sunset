@@ -294,12 +294,30 @@ with tab_bt:
 
 with tab_learn:
     st.subheader("학습 층 (알파 썬셋)")
-    st.caption("자주 유용했던 문서의 검색 우선순위를 올리고 거의 쓰이지 않는 문서는 내린다. 문서는 삭제·폐기하지 않는다. 기본 OFF.")
-    st.toggle("학습 층 ON", value=services.learner_enabled(), disabled=True,
-              help="점수 엔진(P9) 구현 전이라 켤 수 없다. 로그(shadow_log)는 항상 기록된다.")
+    st.caption("자주 유용했던 문서의 검색 우선순위를 올리고 거의 쓰이지 않는 문서는 내린다. 문서는 삭제·폐기하지 않는다. "
+               "protected 문서는 우선순위 하한 0.5로 항상 후보에 남는다. 기본 OFF.")
+    current = services.learner_enabled()
+    enabled = st.toggle("학습 층 ON", value=current,
+                        help="ON이면 브리핑의 문서 순위에 final = fit × (1 + 0.3·(priority − 0.5))를 적용한다.")
+    if enabled != current:
+        services.set_learner_enabled(enabled)
+        st.toast(f"학습 층 {'ON' if enabled else 'OFF'} (변경 이력 기록)")
+    res = services.get_backtest_results()
+    lr = res.get("learner")
+    if lr:
+        st.markdown("**ON/OFF 비교 (시뮬레이션 기반, 사전 등록 v4)**")
+        c1, c2 = st.columns(2)
+        c1.metric("실제 순서 1회 재생 delta", lr["pass_A"]["learner_delta"],
+                  help=f"OFF {lr['pass_A']['doc_top3_hit_off']} / ON {lr['pass_A']['doc_top3_hit_on']}")
+        c2.metric("반복 2회차 delta", lr["pass_B"]["learner_delta_sim"],
+                  help=f"OFF {lr['pass_B']['doc_top3_hit_off']} / ON {lr['pass_B']['doc_top3_hit_on']}")
+        st.dataframe(pd.DataFrame(lr["pass_B"]["events"])[["event_id", "as_of", "top3_off", "top3_on", "hit_off", "hit_on", "priority_top"]],
+                     hide_index=True, width="stretch")
+        for c in lr["caveats"]:
+            st.caption("⚠️ " + c)
     pr = services.get_priority()
-    st.write(f"점수 엔진: {pr['engine']} · 현재 {'ON' if pr['learner_enabled'] else 'OFF'}")
+    st.markdown("**인용·피드백 기록 (shadow_log, 백테스트·승인 탭 피드백)**")
     if pr["docs"]:
         st.dataframe(pd.DataFrame(pr["docs"]), hide_index=True, width="stretch")
     else:
-        st.info("아직 기록된 인용·피드백이 없다 (shadow_log 비어 있음).")
+        st.info("아직 기록된 인용·피드백이 없다.")

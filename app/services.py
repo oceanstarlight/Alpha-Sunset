@@ -19,7 +19,6 @@ BACKTEST_DIR = ROOT_DIR / "data" / "backtest"
 SIGNAL_TTL_SEC = 3600
 
 _signal_cache: dict[str, Any] = {}
-_learner_override: bool | None = None
 
 
 def market_panel(refresh: bool = False) -> dict:
@@ -132,32 +131,27 @@ def submit_feedback(fb: Feedback, briefing: Briefing | None = None) -> None:
 
 
 def learner_enabled() -> bool:
-    return get_settings().learner_enabled if _learner_override is None else _learner_override
+    from app.agents import learner
+
+    return learner.is_enabled()
 
 
 def get_priority(mode: DbMode = "sandbox") -> dict:
-    """문서별 인용·피드백 집계. 우선순위 점수 엔진은 P9에서 연결한다."""
+    """문서별 인용·피드백 집계 (shadow_log)와 학습 층 상태."""
     conn = connect(mode)
     rows = [dict(r) for r in conn.execute(
         "SELECT doc_id, SUM(cited) AS cited, SUM(feedback = 'useful') AS useful, SUM(feedback = 'not_fit') AS not_fit, "
         "COUNT(DISTINCT event_id) AS events FROM shadow_log GROUP BY doc_id ORDER BY cited DESC, doc_id")]
     conn.close()
-    return {"learner_enabled": learner_enabled(), "engine": "P9에서 구현 예정", "docs": rows}
+    return {"learner_enabled": learner_enabled(), "engine": "plans.md 5.4 (app/agents/learner.py)", "docs": rows}
 
 
 def set_learner_enabled(enabled: bool, mode: DbMode = "sandbox") -> dict:
-    """학습 층 토글. 점수 엔진(P9) 전에는 켤 수 없다. 변경 시도는 모두 기록한다."""
-    global _learner_override
-    allowed = not enabled  # P9 전에는 OFF만 허용
-    conn = connect(mode)
-    with conn:
-        conn.execute("INSERT INTO learner_toggle_log (enabled, ts) VALUES (?, ?)",
-                     (int(enabled and allowed), datetime.now(timezone.utc).isoformat()))
-    conn.close()
-    if allowed:
-        _learner_override = enabled
-        return {"ok": True, "enabled": enabled}
-    return {"ok": False, "enabled": learner_enabled(), "reason": "학습 층 점수 엔진은 P9에서 구현 예정"}
+    """학습 층 토글. 변경은 learner_toggle_log에 기록한다."""
+    from app.agents import learner
+
+    learner.set_enabled(enabled, mode)
+    return {"ok": True, "enabled": enabled}
 
 
 def get_backtest_results() -> dict:
@@ -174,6 +168,7 @@ def get_backtest_results() -> dict:
         "match": read("match_summary.json"),
         "exposure": exposure,
         "backtest": read("../backtest_results.json"),
+        "learner": read("learner_results.json"),
     }
 
 
