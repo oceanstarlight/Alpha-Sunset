@@ -1,0 +1,438 @@
+{
+  "event_id": "covid_2020",
+  "doc_fits": [
+    {
+      "doc_id": "PB-BCP",
+      "fit_score": 1.0,
+      "n_applicable": 1,
+      "n_partial": 0,
+      "n_not": 0,
+      "n_uncertain": 0,
+      "judgments": [
+        {
+          "clause_id": "PB-BCP-05",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.98
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-LIQ",
+      "fit_score": 0.8333,
+      "n_applicable": 4,
+      "n_partial": 2,
+      "n_not": 0,
+      "n_uncertain": 0,
+      "judgments": [
+        {
+          "clause_id": "PB-LIQ-04",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "미 연준은 한국은행 등과 통화스와프(한국은행 최대 600억 달러)를 체결했다",
+          "confidence": 0.95
+        },
+        {
+          "clause_id": "PB-LIQ-01",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "사건의 지속기간이 months로 조항의 전제인 shock, weeks보다 길다"
+          ],
+          "evidence_quote": "VIX는 3월 16일 82.69까지 상승했다.",
+          "confidence": 0.85
+        },
+        {
+          "clause_id": "PB-LIQ-05",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "사건의 지속기간이 months로 단기 전제와 차이가 있다"
+          ],
+          "evidence_quote": "VIX는 3월 16일 82.69까지 상승했다.",
+          "confidence": 0.8
+        },
+        {
+          "clause_id": "PB-LIQ-06",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-LIQ-08",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "3월 19일 미 연준은 한국은행 등과 통화스와프(한국은행 최대 600억 달러)를 체결했다.",
+          "confidence": 0.95
+        },
+        {
+          "clause_id": "PB-LIQ-07",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "하이일드 채권 스프레드가 급등하면 투기등급 비중 한도 초과 여부를 일일 점검한다.",
+          "confidence": 0.95
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-REG",
+      "fit_score": 0.75,
+      "n_applicable": 3,
+      "n_partial": 0,
+      "n_not": 1,
+      "n_uncertain": 2,
+      "judgments": [
+        {
+          "clause_id": "PB-REG-02",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "한국 금융위원회는 3월 13일 유가증권·코스닥·코넥스 시장 전체에 3월 16일부터 9월 15일까지 6개월간 공매도 금지를 결정했다",
+          "confidence": 0.98
+        },
+        {
+          "clause_id": "PB-REG-01",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "사건 요약에 중대한 손실 또는 한도 위반이 발생했다는 구체적인 내용이 없다."
+          ],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.5
+        },
+        {
+          "clause_id": "PB-REG-03",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "사건유형(pandemic) 및 채널이 제재 및 무역(sanctions_trade)과 관련이 없다."
+          ],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-REG-04",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "사건 요약에서 위기 대응을 위한 한도 예외 승인이 발생했다는 증거를 찾을 수 없다."
+          ],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.5
+        },
+        {
+          "clause_id": "PB-REG-05",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.8
+        },
+        {
+          "clause_id": "PB-REG-08",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.8
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-CMDTY",
+      "fit_score": 0.625,
+      "n_applicable": 1,
+      "n_partial": 3,
+      "n_not": 0,
+      "n_uncertain": 0,
+      "judgments": [
+        {
+          "clause_id": "PB-CMDTY-01",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "지속기간 전제는 shock 또는 weeks이나 이번 사건은 months 단위로 지속되었다."
+          ],
+          "evidence_quote": "WTI 유가(FRED DCOILWTICO)는 4월 20일 배럴당 -36.98달러를 기록했다.",
+          "confidence": 0.85
+        },
+        {
+          "clause_id": "PB-CMDTY-02",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "WTI 유가(FRED DCOILWTICO)는 4월 20일 배럴당 -36.98달러를 기록했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-CMDTY-03",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "지역 전제가 US로 한정되어 있으나 WTI 급락은 글로벌 연동성이 강하다."
+          ],
+          "evidence_quote": "WTI 유가(FRED DCOILWTICO)는 4월 20일 배럴당 -36.98달러를 기록했다.",
+          "confidence": 0.8
+        },
+        {
+          "clause_id": "PB-CMDTY-05",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "전제된 사건유형은 지정학 및 공급망 충격이나 이번 사건은 팬데믹이며, 전제 조건은 원자재 가격 급등이나 실제로는 WTI 유가가 마이너스를 기록하는 등 급락 충격임"
+          ],
+          "evidence_quote": "WTI 유가(FRED DCOILWTICO)는 4월 20일 배럴당 -36.98달러를 기록했다.",
+          "confidence": 0.85
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-FX",
+      "fit_score": 0.5714,
+      "n_applicable": 1,
+      "n_partial": 6,
+      "n_not": 0,
+      "n_uncertain": 1,
+      "judgments": [
+        {
+          "clause_id": "PB-FX-05",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "사건유형이 pandemic으로 전제의 fx_shock, credit_event와 완벽히 일치하지 않는다"
+          ],
+          "evidence_quote": "미 연준은 한국은행 등과 통화스와프(한국은행 최대 600억 달러)를 체결했다",
+          "confidence": 0.85
+        },
+        {
+          "clause_id": "PB-FX-01",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "사건유형이 pandemic이며 지속기간이 months로 단기 전제와 차이가 있다"
+          ],
+          "evidence_quote": "미 연준은 한국은행 등과 통화스와프(한국은행 최대 600억 달러)를 체결했다",
+          "confidence": 0.8
+        },
+        {
+          "clause_id": "PB-FX-06",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "사건 유형이 pandemic이며 환율 연계 파생상품 손실에 대한 직접적 정보가 부족하다."
+          ],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.7
+        },
+        {
+          "clause_id": "PB-FX-08",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "환율 급변에 관한 명시적인 수치나 환율 변동 채널이 사건 요약에 직접 언급되지 않았다."
+          ],
+          "evidence_quote": "3월 19일 미 연준은 한국은행 등과 통화스와프(한국은행 최대 600억 달러)를 체결했다.",
+          "confidence": 0.75
+        },
+        {
+          "clause_id": "PB-FX-07",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "지속기간 전제가 shock이나 이번 사건은 months 단위로 지속되었다."
+          ],
+          "evidence_quote": "3월 19일 미 연준은 한국은행 등과 통화스와프(한국은행 최대 600억 달러)를 체결했다.",
+          "confidence": 0.75
+        },
+        {
+          "clause_id": "PB-FX-03",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "외국인 증권자금 유출 지속에 대한 구체적 수치가 사건 요약에 명시되지 않음"
+          ],
+          "evidence_quote": "외국인 증권자금 유출이 지속되면 원화 자산 비중과 환노출 한도를 재점검한다.",
+          "confidence": 0.8
+        },
+        {
+          "clause_id": "PB-FX-04",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "환헤지 롤오버 비용이나 스왑 포인트 급변에 대한 구체적 사건 내용이 없음"
+          ],
+          "evidence_quote": "환헤지 계약 만기 시 롤오버 비용이 급등하면 헤지 비율 하향 여부를 검토한다.",
+          "confidence": 0.75
+        },
+        {
+          "clause_id": "PB-FX-02",
+          "verdict": "applicable",
+          "mismatch_reasons": [],
+          "evidence_quote": "3월 19일 미 연준은 한국은행 등과 통화스와프(한국은행 최대 600억 달러)를 체결했다.",
+          "confidence": 0.95
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-STFM",
+      "fit_score": 0.5,
+      "n_applicable": 0,
+      "n_partial": 1,
+      "n_not": 0,
+      "n_uncertain": 3,
+      "judgments": [
+        {
+          "clause_id": "PB-STFM-05",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "사건 요약에 정부의 채권시장안정펀드나 회사채 매입 프로그램 발표에 대한 직접적인 내용이 없다"
+          ],
+          "evidence_quote": "한국 금융위원회는 3월 13일 유가증권·코스닥·코넥스 시장 전체에 3월 16일부터 9월 15일까지 6개월간 공매도 금지를 결정했다.",
+          "confidence": 0.7
+        },
+        {
+          "clause_id": "PB-STFM-08",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "사건유형이 pandemic이나 이번 사건은 유동성 위기 성격도 포함하나 전제 조건의 중앙은행 적격담보 확대에 대한 명시적 언급이 사건 요약에 직접 등장하지 않고 통화스와프 체결이 언급됨"
+          ],
+          "evidence_quote": "한국은행의 적격담보 확대 등 유동성 조치가 발표되면 담보로 활용 가능한 보유 채권을 확인한다.",
+          "confidence": 0.85
+        },
+        {
+          "clause_id": "PB-STFM-07",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "공사채·은행채 발행 급증에 대한 언급이 이번 사건 요약에 포함되지 않음"
+          ],
+          "evidence_quote": "공사채·은행채 발행이 늘어 회사채 수요를 구축하는지 발행시장을 모니터링한다.",
+          "confidence": 0.8
+        },
+        {
+          "clause_id": "PB-STFM-02",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "사건 요약에 CP 금리 급등이나 차환 발행 곤란에 대한 직접적인 언급이 부족함"
+          ],
+          "evidence_quote": "한국 금융위원회는 3월 13일 유가증권·코스닥·코넥스 시장 전체에 3월 16일부터 9월 15일까지 6개월간 공매도 금지를 결정했다.",
+          "confidence": 0.7
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-MGR",
+      "fit_score": 0.25,
+      "n_applicable": 0,
+      "n_partial": 2,
+      "n_not": 2,
+      "n_uncertain": 0,
+      "judgments": [
+        {
+          "clause_id": "PB-MGR-01",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "위탁운용사의 환매중단이나 운용 부실에 대한 사건 내용이 포함되어 있지 않음"
+          ],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-MGR-02",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "운용사 보고 자산과 실제 자산 불일치 의심에 대한 사건 전제가 존재하지 않음"
+          ],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-MGR-03",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "사건의 채널은 equity_vol, liquidity 등으로 다양하나 조항 전제의 채널인 counterparty가 이번 사건 요약에 명시되지 않았고, 지속기간 전제가 shock/weeks이나 이번 사건은 months 지속기간이다."
+          ],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.7
+        },
+        {
+          "clause_id": "PB-MGR-05",
+          "verdict": "partial",
+          "mismatch_reasons": [
+            "사건유형은 pandemic이나 전제는 other, regulatory이며, 이번 사건 요약에 구체적인 투자 손실 발생 내용이나 판매사·수탁사·운용사 책임 관계 검토 필요성이 명시되어 있지 않다."
+          ],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.7
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-BANK",
+      "fit_score": 0.0,
+      "n_applicable": 0,
+      "n_partial": 0,
+      "n_not": 2,
+      "n_uncertain": 0,
+      "judgments": [
+        {
+          "clause_id": "PB-BANK-08",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "사건유형이 pandemic이며 은행 위기(banking_stress)가 주된 전제가 아님"
+          ],
+          "evidence_quote": "은행 위기가 해외 은행으로 전이되는지 확인하기 위해 주요 은행 CDS와 단기자금 금리를 일일 모니터링한다.",
+          "confidence": 0.9
+        },
+        {
+          "clause_id": "PB-BANK-04",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "사건유형이 뱅킹 스트레스가 아니라 팬데믹이며, 지역이 US 단일 지역이 아님"
+          ],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.9
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-RATE",
+      "fit_score": 0.0,
+      "n_applicable": 0,
+      "n_partial": 0,
+      "n_not": 1,
+      "n_uncertain": 1,
+      "judgments": [
+        {
+          "clause_id": "PB-RATE-05",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "핵심 전제인 rate_shock 사건유형 및 govt_bond 자산군이 이번 코로나19 팬데믹 및 공매도 금지 사건 요약에 포함되지 않는다."
+          ],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.8
+        },
+        {
+          "clause_id": "PB-RATE-08",
+          "verdict": "uncertain",
+          "mismatch_reasons": [
+            "사건 요약에 내외 금리차 확대에 대한 직접적 언급이 부족하여 판단할 정보가 제한적임"
+          ],
+          "evidence_quote": "내외 금리차 확대로 원화 약세가 나타나면 환헤지 비용을 재산정한다.",
+          "confidence": 0.7
+        }
+      ]
+    },
+    {
+      "doc_id": "PB-TRADE",
+      "fit_score": 0.0,
+      "n_applicable": 0,
+      "n_partial": 0,
+      "n_not": 2,
+      "n_uncertain": 0,
+      "judgments": [
+        {
+          "clause_id": "PB-TRADE-04",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "사건유형이 pandemic이며 무역 갈등(trade_policy)에 의한 통화 약세가 아님"
+          ],
+          "evidence_quote": "무역 갈등으로 신흥국 통화가 약세를 보이면 신흥국 자산의 환노출을 점검한다.",
+          "confidence": 0.95
+        },
+        {
+          "clause_id": "PB-TRADE-01",
+          "verdict": "not_applicable",
+          "mismatch_reasons": [
+            "사건유형이 무역 정책이나 관세 부과가 아니라 팬데믹 충격임"
+          ],
+          "evidence_quote": "2020년 3월 11일 WHO 사무총장이 코로나19를 팬데믹으로 규정했다.",
+          "confidence": 0.95
+        }
+      ]
+    }
+  ],
+  "gaps": [],
+  "low_confidence": false
+}

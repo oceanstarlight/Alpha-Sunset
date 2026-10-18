@@ -34,7 +34,15 @@
 - 약관: GDELT 무료 공개 데이터, 요청 간격 5초당 1회 제한
 - 범위: 최근 약 3개월. 라이브 모드 전용, 데이터 저장 안 함
 
+## SEC EDGAR N-PORT (프록시 펀드 보유내역)
+- 티커 → 시리즈 ID: https://www.sec.gov/files/company_tickers_mf.json
+- 공시 목록: EDGAR browse-edgar (type=NPORT-P), 본문: 각 공시의 `primary_doc.xml`
+- 수집일: 2026-10-18. User-Agent에 연락처 포함(SEC 정책), 초당 10회 이하
+- 약관: SEC 공개 데이터 (미국 정부 저작물)
+- 전처리: 종목명·LEI·CUSIP·ISIN·평가액(USD)·비중·자산/발행자 분류·국가만 추출해 `data/holdings/{ticker}_{snapshot}.parquet` 저장. 공시별 URL·보고기준일·공시일은 `data/holdings/manifest.json`
+- 스냅샷: 사건일 이전에 공개된 가장 최근 공시 + live(최신). gfc_2008은 데이터 없음(2019년 이전 미공개)
+
 ## 합성 데이터
 - `data/playbooks/*.json`: `data/source_notes/` 요지를 근거로 Claude가 초안 작성, 사람 검수 대상. 모두 `synthetic: true`
-- `data/portfolio.json`: 가상 기관·가상 운용사·가상 카운터파티. 비중 모두 가상값. 프록시 펀드(KRE, EMB, HYG, XLE, MCHI, VGK, IVV, EWY)는 실존 공개 펀드이며 보유내역은 P1에서 SEC N-PORT로 수집
+- `data/portfolio.json`: 가상 기관·가상 운용사·가상 카운터파티. 비중 모두 가상값. 프록시 펀드(KRE, EMB, HYG, XLE, MCHI, VGK, IVV, EWY)는 실존 공개 펀드이며 보유내역은 SEC N-PORT로 수집(위 항목)
 - `data/labels/*.json`: 사용자가 직접 설계한 합성 라벨
