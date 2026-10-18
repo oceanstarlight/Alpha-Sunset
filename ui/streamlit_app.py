@@ -1,4 +1,4 @@
-"""Alpha Sunset — Streamlit UI (6탭: 세계 금융 지도 / 감시 / 브리핑 / 승인 / 백테스트 / 학습 층)."""
+"""Alpha Sunset — Streamlit UI (7탭: 세계 금융 지도 / 감시 / 브리핑 / 승인 / 백테스트 / 학습 층 / 데이터 입력)."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ import pandas as pd
 import pydeck as pdk
 import streamlit as st
 
-from app import geo, services
+from app import export, geo, services
 from app.config import load_config
 from app.agents import sentinel
 from app.agents.exposure import ExposureUnavailable
@@ -117,8 +117,8 @@ def current_briefing() -> Briefing | None:
     return st.session_state.get(key)
 
 
-tab_map, tab_watch, tab_brief, tab_approve, tab_bt, tab_learn = st.tabs(
-    ["세계 금융 지도", "감시", "브리핑", "승인", "백테스트", "학습 층"])
+tab_map, tab_watch, tab_brief, tab_approve, tab_bt, tab_learn, tab_input = st.tabs(
+    ["세계 금융 지도", "감시", "브리핑", "승인", "백테스트", "학습 층", "데이터 입력"])
 
 # ---------- 0. 세계 금융 지도 ----------
 
@@ -151,8 +151,14 @@ with tab_map:
         coverage = (sig or {}).get("news", {}).get("coverage")
     options = [v["label"] for k, v in geo.LAYERS.items() if live or k != "coverage"]  # 보도 국가는 라이브 전용
     shown = st.pills("표시", options, selection_mode="multi", default=options) or []
-    exp = map_exposure(snapshot)
-    imp = map_impact(map_event.model_dump_json(), snapshot) if map_event else None
+    uploaded = st.session_state.get("uploaded_portfolio")
+    if uploaded is not None:  # 데이터 입력 탭에서 올린 실제 보유내역
+        st.caption(f"포트폴리오: 업로드 ({uploaded.institution}, 노드 {len(uploaded.nodes)}개)")
+        exp = geo.country_exposure(uploaded, snapshot)
+        imp = geo.country_impact(map_event, uploaded, snapshot) if map_event else None
+    else:
+        exp = map_exposure(snapshot)
+        imp = map_impact(map_event.model_dump_json(), snapshot) if map_event else None
     df, unmapped = geo.map_rows(
         event=map_event if geo.LAYERS["event"]["label"] in shown else None,
         exposure_by_country=exp if geo.LAYERS["exposure"]["label"] in shown else None,
@@ -329,6 +335,9 @@ with tab_brief:
         st.info("브리핑이 없다. 라이브 모드는 감시 탭에서 신호 조회 후 생성한다.")
     else:
         synthetic_badge()
+        st.download_button("대응안 엑셀로 내보내기", data=export.briefing_xlsx(
+            b, clause_text={k: c.text for k, c in clauses_by_id().items()}), file_name=f"alpha_sunset_{b.event.id}.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
         st.markdown(f"## {b.event.title}  :{LEVEL_COLOR[b.alert_level]}[{b.alert_level.value}]")
         st.write(b.event.summary)
         st.caption(f"유형 {b.event.type.value} · 채널 {', '.join(c.value for c in b.event.channels)} · "
@@ -508,3 +517,75 @@ with tab_learn:
         st.dataframe(pd.DataFrame(pr["docs"]), hide_index=True, width="stretch")
     else:
         st.info("아직 기록된 인용·피드백이 없다.")
+
+# ---------- 7. 데이터 입력 ----------
+
+with tab_input:
+    from app.ingest.mapper import ColumnMap, MappingSpec
+    from app.ingest.pipeline import ingest, pick_sheet, propose
+    from app.ingest.profile import profile_text
+    from app.ingest.reader import read_file
+    from app.ingest.schema import FIELDS
+    from app.ingest.transform import apply_spec, save_preset, to_portfolio
+
+    st.subheader("보유내역 입력 (엑셀·CSV → 공통 스키마)")
+    st.caption("파일 모양이 달라도 된다. 라이브러리가 표 구조를 읽어 글로 요약하고, LLM은 그 요약만 보고 열 매핑 규칙을 제안한다. "
+               "숫자 변환·검증은 코드가 전체 행에 적용한다. 같은 양식은 저장해 두면 다음부터 LLM 없이 변환한다.")
+    st.caption("공통 스키마는 SEC N-PORT 보유 항목과 ISO 표준(ISIN 6166 · 국가 3166 · 통화 4217)에 맞춘 내부 표준이다.")
+    up = st.file_uploader("보유내역 파일", type=["xlsx", "xlsm", "csv"])
+    samples = sorted(p.name for p in (Path(__file__).resolve().parent.parent / "data" / "ingest" / "samples").glob("*.*")
+                     if p.suffix in (".xlsx", ".csv"))
+    sample = st.selectbox("또는 예시 파일", ["(선택 안 함)"] + samples)
+    use_llm = st.toggle("LLM 매핑 제안 사용 (헤더·샘플 요약만 전송)", value=False)
+    src = name = None
+    if up is not None:
+        src, name = up.getvalue(), up.name
+    elif sample != "(선택 안 함)":
+        path = Path(__file__).resolve().parent.parent / "data" / "ingest" / "samples" / sample
+        src, name = path.read_bytes(), sample
+    if src is not None:
+        sheets = read_file(src, name)
+        sheet, prof = pick_sheet(sheets)
+        with st.expander("① 표 구조 요약 (LLM에 보내는 글)"):
+            st.code(profile_text(prof), language=None)
+        key = f"spec_{name}_{use_llm}"
+        if key not in st.session_state:
+            llm = None
+            if use_llm:
+                from app.llm.client import LLMClient
+
+                llm = LLMClient(db_mode="sandbox")
+            with st.spinner("매핑 규칙 만드는 중…"):
+                st.session_state[key] = propose(sheet, prof, llm)
+        spec: MappingSpec = st.session_state[key]
+        st.markdown(f"**② 열 매핑 제안** (방식: {spec.method}, 헤더 {spec.header_row}행) — 표에서 바로 고칠 수 있다")
+        edited = st.data_editor(pd.DataFrame([c.model_dump() for c in spec.columns]), num_rows="dynamic", hide_index=True,
+                                width="stretch", column_config={
+                                    "field": st.column_config.SelectboxColumn("필드", options=list(FIELDS)),
+                                    "source": st.column_config.SelectboxColumn("원본 열", options=prof.headers),
+                                    "multiplier": st.column_config.NumberColumn("금액 단위 배수"),
+                                    "percent": st.column_config.CheckboxColumn("% → ÷100"),
+                                    "reason": st.column_config.TextColumn("근거", width="large")})
+        if spec.defaults:
+            st.caption("기본값: " + "; ".join(f"{k}={v} ({spec.default_reasons.get(k, '')})" for k, v in spec.defaults.items()))
+        for n in spec.notes:
+            st.warning(n)
+        spec = spec.model_copy(update={"columns": [ColumnMap(**{k: v for k, v in r.items() if pd.notna(v) or k == "reason"})
+                                                    for r in edited.to_dict("records") if r.get("field") and r.get("source")]})
+        res = apply_spec(sheet, prof, spec)
+        st.markdown("**③ 변환 결과와 검증 (원인 → 근거 → 결과)**")
+        show_chain(res.chain)
+        st.dataframe(res.holdings.head(200).round({"weight": 6}).astype(str), hide_index=True, width="stretch")
+        if res.dropped:
+            st.caption(f"제외 {len(res.dropped)}행: " + "; ".join(f"{d['row']}행 {d['reason']}" for d in res.dropped[:5]))
+        c1, c2, c3 = st.columns(3)
+        c1.download_button("공통 스키마 엑셀 받기", data=export.holdings_xlsx(res.holdings, res.chain),
+                           file_name="holdings_standard.xlsx",
+                           mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+        if c2.button("이 양식 저장 (다음부터 LLM 없이)"):
+            st.success(f"저장: {save_preset(prof, spec, name).name}")
+        if c3.button("이 포트폴리오로 분석", type="primary", disabled=res.holdings.empty):
+            st.session_state["uploaded_portfolio"] = to_portfolio(res.holdings, institution=name)
+            st.success("세계 금융 지도에 업로드 포트폴리오를 반영했다.")
+    if st.session_state.get("uploaded_portfolio") is not None and st.button("업로드 포트폴리오 해제"):
+        del st.session_state["uploaded_portfolio"]

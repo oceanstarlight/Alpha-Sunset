@@ -70,3 +70,8 @@
 - 한국은행 ECOS Open API (https://ecos.bok.or.kr/api): 코스피(802Y001/0001000)·외국인 순매수 유가증권(802Y001/0030000)·원/달러(731Y001/0000001)·국고채 3년(817Y002/010200000)·회사채 AA- 3년(817Y002/010300000)·CD 91일(817Y002/010502000) 일별. 이력은 `data/ecos/`에 저장 (fetch-ecos 워크플로, 2026-10-18 수집)
 - KRX Open API: 사용하지 않음 — 약관상 비상업적 목적만 이용 가능하고 결과에 대한 대가 청구 금지 (사용자 결정, 2026-10-18)
 - 비공식 시세(Yahoo 등)는 사용자 결정으로 사용하지 않는다
+
+## 엑셀 입력 검증용 파일 (`data/ingest/samples/`)
+- `nps_domestic_equity_2025.csv`: 국민연금공단_국내주식 종목별 투자 현황(2025년 말), 공공데이터포털 https://www.data.go.kr/data/3070507/fileData.do (이용허락범위 제한 없음, 무료). 수집일 2026-10-18, 원본 그대로(CP949)
+- iShares Core S&P 500 ETF 보유내역 CSV (https://www.ishares.com/us/products/239726/x/latest-holdings.csv): 검증에만 사용, BlackRock 웹사이트 약관상 저장소에 커밋하지 않음 (`scripts/verify_ingest.py --ishares 경로`)
+- `broker_balance.xlsx`·`manager_report.xlsx`·`dataguide_style.xlsx`·`unusual_headers.xlsx`·`truth.json`: 같은 합성 보유내역 240종목을 서로 다른 실무 양식으로 쓴 합성 파일과 정답 (`scripts/make_ingest_samples.py`, 실제 기관·단말 데이터 아님)
