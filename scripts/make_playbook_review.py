@@ -12,6 +12,9 @@ from app.config import ROOT_DIR
 from app.corpus import load_playbooks
 
 OUT = ROOT_DIR / "docs" / "PLAYBOOK_REVIEW.md"
+# 사용자 검수 결과 (2026-10-18): 실제 규정·약관 기반이 아님을 확인하고 기획 단계 합성 데이터로 수용
+REVIEW_MARK = "OK"
+REVIEW_NOTE = "합성 수용"
 ORIGIN_TYPE = {"gfc_2008": "credit_event", "covid_2020": "pandemic", "ru_ua_2022": "geopolitical", "legoland_2022": "liquidity_crisis",
                "svb_2023": "banking_stress", "tariff_2025": "trade_policy", "rate_hike_2022": "rate_shock"}
 
@@ -48,7 +51,7 @@ def main() -> None:
             f = flags(c, p, dup)
             n_flag += bool(f)
             body.append(f"| `{c.clause_id}`{' 🔒' + (c.protected_reason or '') if c.protected else ''} | {c.text} | {premise} | "
-                        f"{'; '.join(c.actions)} | {c.owner_role} | {'⚠️ ' + ', '.join(f) if f else ''} |  |  |")
+                        f"{'; '.join(c.actions)} | {c.owner_role} | {'⚠️ ' + ', '.join(f) if f else ''} | {REVIEW_MARK} | {REVIEW_NOTE} |")
     head = ["# 플레이북 검수 시트", "",
             "> 합성 대응문서 12개·96조항 (Claude 초안). 실무자 관점에서 현실성·일관성을 검수한다.",
             "> **에이전트 판정 결과(`data/backtest/`, 데모 브리핑 탭)는 보지 말고 검수한다.** 결과를 좋게 만들려고 고치면 그것도 편향이다.", "",
@@ -63,7 +66,13 @@ def main() -> None:
             "- 의도된 설계: 문서는 원 사건 전제에 묶여 있어 다른 사건엔 일부만 맞아야 하고, 일부러 오래된 문서(PB-FX·PB-CPTY 2009년)와 중복 조항(현금성 자산 보충 등)을 넣었다.",
             "- 조항 ID는 라벨이 참조하므로 **삭제·ID 변경 시 알려줘야 한다** (라벨 정리 필요).",
             "- 수정 반영 후에는 판정·노출·브리핑·지표를 전부 다시 계산한다 (Gemini 재호출).", "",
-            f"자동 점검 표시 조항: {n_flag}개 (참고용, 문제라는 뜻은 아님)"]
+            f"자동 점검 표시 조항: {n_flag}개 (참고용, 문제라는 뜻은 아님)", "",
+            "## 검수 결과 (2026-10-18, 사용자)",
+            "- **전 조항 OK (합성 수용)**: 조항 문구·전제·조치·담당은 실제 기관 매뉴얼·감독 규정·약관을 인용한 것이 아니라, "
+            "공개 사건 사실(`data/source_notes/`)을 근거로 Claude가 재구성한 합성 데이터임을 확인하고 기획 단계 데이터로 수용했다.",
+            "- 현실성(실제 규정 부합) 검수는 하지 않았다.",
+            "- **향후 확장**: 실제 공개 규정·가이드라인 기반 조항으로 확장하거나 교체할 수 있다. "
+            "교체 시 라벨 재작성과 판정·노출·지표 전체 재계산이 필요하다 (스키마·파이프라인은 그대로 사용 가능)."]
     OUT.write_text("\n".join(head + body) + "\n", encoding="utf-8")
     print(f"저장: {OUT.relative_to(ROOT_DIR)} · 자동 점검 표시 {n_flag}개")
 
