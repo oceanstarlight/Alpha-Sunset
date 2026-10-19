@@ -1,10 +1,10 @@
 {
-  "as_of": "2026-10-18T21:33+09:00",
-  "level": "WATCH",
+  "as_of": "2026-10-19T08:59+09:00",
+  "level": "NONE",
   "money_alert": false,
   "event_confirmed": false,
   "kr_market": {
-    "as_of": "2026-10-18",
+    "as_of": "2026-10-19",
     "zscores": {
       "KOSPI": 0.5200490134187152,
       "USDKRW": 1.3109324484107945,
@@ -16,7 +16,7 @@
     "active": false
   },
   "kr_flow": {
-    "as_of": "2026-10-18",
+    "as_of": "2026-10-19",
     "zscores": {
       "FOREIGN_NET_KOSPI": 0.5396002474529261,
       "FOREIGN_NET_5D": -1.2825796168124404
@@ -29,44 +29,44 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 4,
+        "n_articles": 8,
         "n_sources": 4,
         "z": null,
         "baseline_points": 0
       },
       "credit_event": {
-        "n_articles": 22,
-        "n_sources": 14,
+        "n_articles": 20,
+        "n_sources": 18,
         "z": null,
         "baseline_points": 0
       },
       "liquidity_crisis": {
-        "n_articles": 9,
-        "n_sources": 7,
+        "n_articles": 17,
+        "n_sources": 12,
         "z": null,
         "baseline_points": 0
       },
       "fx_shock": {
-        "n_articles": 54,
-        "n_sources": 35,
+        "n_articles": 72,
+        "n_sources": 36,
         "z": null,
         "baseline_points": 0
       },
       "trade_policy": {
-        "n_articles": 61,
-        "n_sources": 30,
+        "n_articles": 71,
+        "n_sources": 34,
         "z": null,
         "baseline_points": 0
       },
       "geopolitical": {
-        "n_articles": 82,
-        "n_sources": 62,
+        "n_articles": 120,
+        "n_sources": 83,
         "z": null,
         "baseline_points": 0
       },
       "pandemic": {
-        "n_articles": 35,
-        "n_sources": 16,
+        "n_articles": 48,
+        "n_sources": 23,
         "z": null,
         "baseline_points": 0
       }
@@ -81,26 +81,13 @@
       "pandemic: 기준선 축적 중 (0/20)"
     ]
   },
-  "warnings": [
-    {
-      "corp_name": "삼부토건",
-      "stock_code": "001470",
-      "corp_cls": "Y",
-      "report_nm": "[기재정정]주요사항보고서(영업정지)",
-      "rcept_no": "20261016000376",
-      "rcept_dt": "2026-10-16",
-      "url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261016000376",
-      "keyword": "영업정지",
-      "confirmed": false,
-      "n_sources": 3
-    }
-  ],
+  "warnings": [],
   "linkage": null,
   "chain": [
     {
       "단계": "한국 시장(A_kr)",
       "원인": "임계 초과 지표 없음",
-      "근거": "ECOS 일별 1일 변화 z (기준일 2026-10-18), 규칙 |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0 (사전 등록 v5). 관측: 코스피 z=+0.52, 원/달러 z=+1.31, 국고채 3년 z=-0.38, 회사채AA−국고채 3년 금리차 z=-0.79, CD 91일 z=-0.18",
+      "근거": "ECOS 일별 1일 변화 z (기준일 2026-10-19), 규칙 |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0 (사전 등록 v5). 관측: 코스피 z=+0.52, 원/달러 z=+1.31, 국고채 3년 z=-0.38, 회사채AA−국고채 3년 금리차 z=-0.79, CD 91일 z=-0.18",
       "결과": "비활성"
     },
     {
@@ -116,21 +103,20 @@
       "결과": "판단 불가"
     },
     {
-      "단계": "DART 신용 공시",
-      "원인": "삼부토건(001470) [기재정정]주요사항보고서(영업정지) (2026-10-16)",
-      "근거": "공시 원문 https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261016000376 · 키워드 '영업정지' · 기업명 기사 언론사 3곳 (확정 기준 48시간 내 10곳, 사전 등록 v5)",
-      "결과": "사건 경고 (대응안 없음, 알림만)"
-    },
-    {
       "단계": "로컬 종합 등급",
-      "원인": "A_kr/C_kr=비활성, 사건(B_any)=미확정, DART 경고 1건",
+      "원인": "A_kr/C_kr=비활성, 사건(B_any)=미확정, DART 경고 0건",
       "근거": "로컬 ALERT = (한국 사건 ∨ 해외 사건 ∨ 확정 DART) ∧ (A_kr ∨ C_kr) (사전 등록 v5)",
-      "결과": "WATCH → 사건 경고 알림"
+      "결과": "NONE → 조치 없음"
     }
   ],
-  "notes": [],
-  "alerts_sent": {
-    "dart:20261016000376:False": "sent"
-  },
+  "notes": [
+    "ECOS CD91: timed out",
+    "ECOS CORP_AA3Y: timed out",
+    "ECOS FOREIGN_NET_KOSPI: timed out",
+    "ECOS KOSPI: timed out",
+    "ECOS KTB3Y: timed out",
+    "ECOS USDKRW: timed out"
+  ],
+  "alerts_sent": {},
   "report": null
 }
