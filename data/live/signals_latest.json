@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-19T04:29:09+00:00",
+  "collected_at": "2026-10-19T12:57:34+00:00",
   "as_of": "2026-10-16",
   "level": "NONE",
   "chain": [
@@ -55,100 +55,101 @@
     "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "banking_stress: 기준선 축적 중 (3/20)",
-      "credit_event: 기준선 축적 중 (3/20)",
-      "liquidity_crisis: 기준선 축적 중 (3/20)",
-      "geopolitical: 기준선 축적 중 (3/20)",
-      "trade_policy: 기준선 축적 중 (3/20)",
-      "pandemic: 기준선 축적 중 (3/20)",
-      "fx_shock: 기준선 축적 중 (3/20)",
-      "rate_shock: 기준선 축적 중 (3/20)"
+      "banking_stress: 기준선 축적 중 (4/20)",
+      "credit_event: 기준선 축적 중 (4/20)",
+      "liquidity_crisis: 기준선 축적 중 (4/20)",
+      "geopolitical: 기준선 축적 중 (4/20)",
+      "trade_policy: 기준선 축적 중 (4/20)",
+      "pandemic: 기준선 축적 중 (4/20)",
+      "fx_shock: 기준선 축적 중 (4/20)",
+      "rate_shock: 기준선 축적 중 (4/20)"
     ],
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 3,
-        "n_sources": 3,
+        "n_articles": 2,
+        "n_sources": 2,
         "z": null,
-        "baseline_points": 3,
+        "baseline_points": 4,
         "top_titles": [
-          "South Korean Banks Link Savings Rates to Health Activities - 조선일보",
-          "Nearly $1 Million In 48 Hours: BankSocial Says Credit Unions Can Turn Crypto Into A New Lending Business - CU Today",
-          "Stablecoin Risk Hits Crypto Banking: What Firms Must Know - OneSafe"
+          "China’s central bank studies making overnight rate its main policy rate - WTAQ",
+          "South Korean Banks Link Savings Rates to Health Activities - 조선일보"
         ]
       },
       "credit_event": {
-        "n_articles": 51,
-        "n_sources": 37,
+        "n_articles": 56,
+        "n_sources": 44,
         "z": null,
-        "baseline_points": 3,
+        "baseline_points": 4,
         "top_titles": [
           "The Default Rule is the Regulation - The Regulatory Review",
-          "Chapter 11: Japan for Sale! - JAPAN Forward",
-          "On the Record for Monday, Oct. 19, 2026 - Texarkana Gazette"
+          "Credit stress is threatening to unwind the AI bull. All eyes are on Oracle to hold the line - CNBC",
+          "Character.AI bankruptcy docs reveal its wild rise and fall - Mashable"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 3,
-        "n_sources": 2,
+        "n_articles": 5,
+        "n_sources": 3,
         "z": null,
-        "baseline_points": 3,
+        "baseline_points": 4,
         "top_titles": [
-          "'Neets crisis is moral failure' and 'Credit crunch' - BBC",
-          "- BBC - BBC",
-          "Manufacturers Face Tighter Credit Crunch As Bank Loans Drop 27% - LEADERSHIP Newspapers"
+          "How to report investment fraud - BBC",
+          "Bank of England probes Barclays over private credit loans - report - Yahoo Finance Australia",
+          "'Neets crisis is moral failure' and 'Credit crunch' - BBC"
         ]
       },
       "geopolitical": {
         "n_articles": 100,
-        "n_sources": 81,
+        "n_sources": 78,
         "z": null,
-        "baseline_points": 3,
+        "baseline_points": 4,
         "top_titles": [
-          "Trump waives Russia sanctions. Where does that leave Congress? - NPR",
-          "Trump Defends Plans to Ease Russia Sanctions and Hints at a Hostage Deal - The New York Times",
-          "Oil tumbles as Trump's Russia sanctions waiver may lead to more fuel supplies - Reuters"
+          "Rep. Don Beyer, D-Va., on Trump waiving sanctions on Russia - NPR",
+          "President Trump waives new Russia sanctions - WBAL-TV",
+          "Oil Prices Fall as Traders Weigh Russia Sanctions Waiver, Middle East Risks - WSJ"
         ]
       },
       "trade_policy": {
-        "n_articles": 59,
-        "n_sources": 54,
+        "n_articles": 82,
+        "n_sources": 69,
         "z": null,
-        "baseline_points": 3,
+        "baseline_points": 4,
         "top_titles": [
-          "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
-          "China Proposes Expanded Export Controls on AI, Biopharma and Solar Energy Technologies - Global Sanctions and Export Controls Blog",
-          "Trump Waives Russia Sanctions, Tariff Law After Fuel Deal - Law360"
+          "Opinion | The U.S. badly needs new tariff laws - The Washington Post",
+          "China commerce ministry announces export controls for tunnel boring machines - Reuters",
+          "China is tightening export controls on drones and tunnel boring machines - Quartz"
         ]
       },
       "pandemic": {
-        "n_articles": 89,
-        "n_sources": 75,
+        "n_articles": 94,
+        "n_sources": 80,
         "z": null,
-        "baseline_points": 3,
+        "baseline_points": 4,
         "top_titles": [
-          "Kenya confirms eighth Ebola case amid widening regional outbreak - Al Jazeera",
-          "Congo confirms Ebola outbreak has spread to eighth province - Reuters",
-          "Kenya confirms eighth Ebola virus case amid outbreak in nearby DRC - upi"
+          "Measles outbreak in Bangladesh is a ‘real warning’ to other nations, experts say - NBC News",
+          "Here’s what researchers found out about pandemic learning loss - ABC7 WWSB",
+          "Military services again requiring recruits to get flu shots as Air Force outbreak grows - ABC News - Breaking News, Latest News and Videos"
         ]
       },
       "fx_shock": {
-        "n_articles": 1,
-        "n_sources": 1,
+        "n_articles": 2,
+        "n_sources": 2,
         "z": null,
-        "baseline_points": 3,
+        "baseline_points": 4,
         "top_titles": [
+          "China accelerates gold buying as it cuts US bonds and hedges sanctions risk - CHOSUNBIZ - Chosunbiz",
           "Britain needs a bonds crisis It would end the inertia - UnHerd"
         ]
       },
       "rate_shock": {
-        "n_articles": 2,
-        "n_sources": 2,
+        "n_articles": 10,
+        "n_sources": 10,
         "z": null,
-        "baseline_points": 3,
+        "baseline_points": 4,
         "top_titles": [
-          "Spinach Yields Surge 62.5% as Urban Waste and Poultry Manure Replace Fertiliser - cristinaiglesias.com",
-          "Bloomberg Strategist Warns Bitcoin Could Crash to $10,000 if US Stocks Fall 20% as Bond Yields Surge - Coinpaper"
+          "The Bond Selloff Story Has Shifted. Here’s How That Changes the Stakes for Investors - Morningstar",
+          "From Bond Selloff to High-Cost Financing: Anthropic and AI’s Debt-Service Test - SoSoValue",
+          "Bond Market Triggers Wall Street Risk Warnings As Long Yields Surge - Stocktwits"
         ]
       }
     },
