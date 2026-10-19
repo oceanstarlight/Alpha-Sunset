@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-18T23:01:39+00:00",
+  "collected_at": "2026-10-19T04:29:09+00:00",
   "as_of": "2026-10-16",
   "level": "NONE",
   "chain": [
@@ -55,14 +55,14 @@
     "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "banking_stress: 기준선 축적 중 (2/20)",
-      "credit_event: 기준선 축적 중 (2/20)",
-      "liquidity_crisis: 기준선 축적 중 (2/20)",
-      "geopolitical: 기준선 축적 중 (2/20)",
-      "trade_policy: 기준선 축적 중 (2/20)",
-      "pandemic: 기준선 축적 중 (2/20)",
-      "fx_shock: 기준선 축적 중 (2/20)",
-      "rate_shock: 기준선 축적 중 (2/20)"
+      "banking_stress: 기준선 축적 중 (3/20)",
+      "credit_event: 기준선 축적 중 (3/20)",
+      "liquidity_crisis: 기준선 축적 중 (3/20)",
+      "geopolitical: 기준선 축적 중 (3/20)",
+      "trade_policy: 기준선 축적 중 (3/20)",
+      "pandemic: 기준선 축적 중 (3/20)",
+      "fx_shock: 기준선 축적 중 (3/20)",
+      "rate_shock: 기준선 축적 중 (3/20)"
     ],
     "clusters": [],
     "observations": {
@@ -70,7 +70,7 @@
         "n_articles": 3,
         "n_sources": 3,
         "z": null,
-        "baseline_points": 2,
+        "baseline_points": 3,
         "top_titles": [
           "South Korean Banks Link Savings Rates to Health Activities - 조선일보",
           "Nearly $1 Million In 48 Hours: BankSocial Says Credit Unions Can Turn Crypto Into A New Lending Business - CU Today",
@@ -78,67 +78,66 @@
         ]
       },
       "credit_event": {
-        "n_articles": 44,
-        "n_sources": 33,
+        "n_articles": 51,
+        "n_sources": 37,
         "z": null,
-        "baseline_points": 2,
+        "baseline_points": 3,
         "top_titles": [
-          "Character.ai Maker Files for Chapter 11 Bankruptcy - WSJ",
-          "LCPS may act on lease default, sublease request at Alma d'Arte property - Organ Mountain News",
-          "An open-source hotel PMS connector keeps AI booking changes off by default - MarketScale"
+          "The Default Rule is the Regulation - The Regulatory Review",
+          "Chapter 11: Japan for Sale! - JAPAN Forward",
+          "On the Record for Monday, Oct. 19, 2026 - Texarkana Gazette"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 4,
-        "n_sources": 4,
+        "n_articles": 3,
+        "n_sources": 2,
         "z": null,
-        "baseline_points": 2,
+        "baseline_points": 3,
         "top_titles": [
-          "Manufacturers Face Tighter Credit Crunch As Bank Loans Drop 27% - LEADERSHIP Newspapers",
-          "Nvidia's Product Blitz Faces a Funding Stress Test - ad-hoc-news.de",
-          "AI trade reversal pierces Asia’s star picks-and-shovels stocks - The Straits Times"
+          "'Neets crisis is moral failure' and 'Credit crunch' - BBC",
+          "- BBC - BBC",
+          "Manufacturers Face Tighter Credit Crunch As Bank Loans Drop 27% - LEADERSHIP Newspapers"
         ]
       },
       "geopolitical": {
         "n_articles": 100,
-        "n_sources": 74,
+        "n_sources": 81,
         "z": null,
-        "baseline_points": 2,
+        "baseline_points": 3,
         "top_titles": [
-          "Congress reacts to executive order exempting Russia from economic sanctions - NPR",
-          "Trump Offers Putin Economic Relief in Hopes That Russia Will Return the Favor - The New York Times",
-          "Rubio says Trump to take up to 60 days to weigh Russia sanctions - Reuters"
+          "Trump waives Russia sanctions. Where does that leave Congress? - NPR",
+          "Trump Defends Plans to Ease Russia Sanctions and Hints at a Hostage Deal - The New York Times",
+          "Oil tumbles as Trump's Russia sanctions waiver may lead to more fuel supplies - Reuters"
         ]
       },
       "trade_policy": {
-        "n_articles": 61,
+        "n_articles": 59,
         "n_sources": 54,
         "z": null,
-        "baseline_points": 2,
+        "baseline_points": 3,
         "top_titles": [
+          "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
           "China Proposes Expanded Export Controls on AI, Biopharma and Solar Energy Technologies - Global Sanctions and Export Controls Blog",
-          "China proposes export controls on solar-manufacturing technologies - Reuters",
           "Trump Waives Russia Sanctions, Tariff Law After Fuel Deal - Law360"
         ]
       },
       "pandemic": {
-        "n_articles": 87,
-        "n_sources": 72,
+        "n_articles": 89,
+        "n_sources": 75,
         "z": null,
-        "baseline_points": 2,
+        "baseline_points": 3,
         "top_titles": [
-          "Kenya confirms eighth Ebola case as regional outbreak spreads - Reuters",
-          "Congo’s fast-moving Ebola outbreak spreads to eighth province - Los Angeles Times",
-          "Kenya Confirms Four New Ebola Cases - The New York Times"
+          "Kenya confirms eighth Ebola case amid widening regional outbreak - Al Jazeera",
+          "Congo confirms Ebola outbreak has spread to eighth province - Reuters",
+          "Kenya confirms eighth Ebola virus case amid outbreak in nearby DRC - upi"
         ]
       },
       "fx_shock": {
-        "n_articles": 2,
-        "n_sources": 2,
+        "n_articles": 1,
+        "n_sources": 1,
         "z": null,
-        "baseline_points": 2,
+        "baseline_points": 3,
         "top_titles": [
-          "Why Is the IMF, the “Grim Reaper” of Korea’s Currency Crisis 30 Years Ago, Envious of South Korea? - 아시아경제",
           "Britain needs a bonds crisis It would end the inertia - UnHerd"
         ]
       },
@@ -146,7 +145,7 @@
         "n_articles": 2,
         "n_sources": 2,
         "z": null,
-        "baseline_points": 2,
+        "baseline_points": 3,
         "top_titles": [
           "Spinach Yields Surge 62.5% as Urban Waste and Poultry Manure Replace Fertiliser - cristinaiglesias.com",
           "Bloomberg Strategist Warns Bitcoin Could Crash to $10,000 if US Stocks Fall 20% as Bond Yields Surge - Coinpaper"
