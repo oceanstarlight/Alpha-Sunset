@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-20T00:15:08+00:00",
+  "collected_at": "2026-10-20T08:25:47+00:00",
   "as_of": "2026-10-19",
   "level": "NONE",
   "chain": [
@@ -59,14 +59,14 @@
     "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "banking_stress: 기준선 축적 중 (6/20)",
-      "credit_event: 기준선 축적 중 (6/20)",
-      "liquidity_crisis: 기준선 축적 중 (6/20)",
-      "geopolitical: 기준선 축적 중 (6/20)",
-      "trade_policy: 기준선 축적 중 (6/20)",
-      "pandemic: 기준선 축적 중 (6/20)",
-      "fx_shock: 기준선 축적 중 (6/20)",
-      "rate_shock: 기준선 축적 중 (6/20)"
+      "banking_stress: 기준선 축적 중 (7/20)",
+      "credit_event: 기준선 축적 중 (7/20)",
+      "liquidity_crisis: 기준선 축적 중 (7/20)",
+      "geopolitical: 기준선 축적 중 (7/20)",
+      "trade_policy: 기준선 축적 중 (7/20)",
+      "pandemic: 기준선 축적 중 (7/20)",
+      "fx_shock: 기준선 축적 중 (7/20)",
+      "rate_shock: 기준선 축적 중 (7/20)"
     ],
     "clusters": [],
     "observations": {
@@ -74,7 +74,7 @@
         "n_articles": 3,
         "n_sources": 3,
         "z": null,
-        "baseline_points": 6,
+        "baseline_points": 7,
         "top_titles": [
           "Amway River Bank Run reveals charity partners for 2027 - WOODTV.com",
           "China’s central bank studies making overnight rate its main policy rate - WTVB",
@@ -82,78 +82,76 @@
         ]
       },
       "credit_event": {
-        "n_articles": 57,
-        "n_sources": 51,
+        "n_articles": 66,
+        "n_sources": 56,
         "z": null,
-        "baseline_points": 6,
+        "baseline_points": 7,
         "top_titles": [
-          "To Fine or Not to Fine: EDPB Confirms Default Position in GDPR Enforcement Should Be to Fine - Crowell & Moring LLP",
-          "Grand Forks Clinic files for Chapter 11 bankruptcy; owner says it will stay open - Grand Forks Herald",
-          "What the Meritage Chapter 11 Teaches Restaurant Franchisees - QSR Magazine"
+          "AI debt worries spark surge in default insurance trading - Financial Times",
+          "China’s Huachen Energy Risks Fresh Default on $956 Million Debt - Bloomberg.com",
+          "Maya Cinemas in Bakersfield to remain open during Chapter 11 restructuring - KBAK"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 3,
+        "n_articles": 4,
         "n_sources": 3,
         "z": null,
-        "baseline_points": 6,
+        "baseline_points": 7,
         "top_titles": [
-          "How to report investment fraud - BBC",
-          "Bank of England probes Barclays over private credit loans - report - Yahoo Finance Australia",
+          "India flags high unpaid UN dues, raises concern over 2026 liquidity crunch - Business Standard",
+          "'Neets crisis is moral failure' and 'Credit crunch' - BBC",
           "Chen Xi 晨若曦(@chenxi_global)'s insights - Binance"
         ]
       },
       "geopolitical": {
         "n_articles": 100,
-        "n_sources": 83,
+        "n_sources": 95,
         "z": null,
-        "baseline_points": 6,
+        "baseline_points": 7,
         "top_titles": [
           "Trump faces bipartisan backlash over waiving Russia sanctions - CBS News",
           "Oil Futures Pull Back as U.S. Waives Some Russia Sanctions - WSJ",
-          "Pres. Trump defends decision to pause sanctions - Gray TV"
+          "Imposing Sanctions to Protect Americans from Intellectual Property Theft Fact Sheet - U.S. Department of State (.gov)"
         ]
       },
       "trade_policy": {
-        "n_articles": 77,
-        "n_sources": 70,
+        "n_articles": 79,
+        "n_sources": 64,
         "z": null,
-        "baseline_points": 6,
+        "baseline_points": 7,
         "top_titles": [
           "‘Tariff Man’ finally found tariffs he doesn’t like - CNN",
-          "Tariff refund class action lawsuits target Walmart, Puma, others - Top Class Actions",
-          "States Sue Over Latest Trump Tariff Attempt - EnergyNow.com"
+          "Copper Holds Drop as Traders Gauge Risks From US Tariff Policy - Bloomberg.com",
+          "US Deficit Reaches $1.99 Trillion After a Year of Tariff Refunds and Rising Interest Bills - Spherical Insights"
         ]
       },
       "pandemic": {
-        "n_articles": 96,
-        "n_sources": 80,
+        "n_articles": 87,
+        "n_sources": 76,
         "z": null,
-        "baseline_points": 6,
+        "baseline_points": 7,
         "top_titles": [
           "Ebola disease outbreak in the Democratic Republic of the Congo - European Centre for Disease Prevention and Control (ECDC)",
-          "Where People Got Sick: Salmonella Outbreak, October 2026 - Centers for Disease Control and Prevention | CDC (.gov)",
+          "Investigation Update: Salmonella Outbreak, October 2026 - Centers for Disease Control and Prevention | CDC (.gov)",
           "Game and Fish Declares Deer Season Changes due to EHD Outbreak - North Dakota Game and Fish (.gov)"
         ]
       },
       "fx_shock": {
-        "n_articles": 1,
-        "n_sources": 1,
+        "n_articles": 0,
+        "n_sources": 0,
         "z": null,
-        "baseline_points": 6,
-        "top_titles": [
-          "China accelerates gold buying as it cuts US bonds and hedges sanctions risk - CHOSUNBIZ - Chosunbiz"
-        ]
+        "baseline_points": 7,
+        "top_titles": []
       },
       "rate_shock": {
-        "n_articles": 12,
-        "n_sources": 12,
+        "n_articles": 14,
+        "n_sources": 14,
         "z": null,
-        "baseline_points": 6,
+        "baseline_points": 7,
         "top_titles": [
           "The Bond Selloff Story Has Shifted. Here’s How That Changes the Stakes for Investors - Morningstar",
-          "CoreWeave Stock And Bond Selloff Signals Deepening Concerns Over AI Buildout Costs - TIKR.com",
-          "Global Markets Forecast: French Bond Yields Surge as Oil Retreats - FXEmpire"
+          "Global Markets Forecast: French Bond Yields Surge as Oil Retreats - FXEmpire",
+          "CoreWeave Stock And Bond Selloff Signals Deepening Concerns Over AI Buildout Costs - TIKR.com"
         ]
       }
     },
