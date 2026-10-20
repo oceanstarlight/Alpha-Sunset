@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-10-19T20:32:46+00:00",
-  "as_of": "2026-10-16",
+  "collected_at": "2026-10-20T00:15:08+00:00",
+  "as_of": "2026-10-19",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "VIX(변동성)(VIXCLS) z=+2.91",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=+2.91, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+1.51, 원/달러 환율(DEXKOUS) z=-1.04",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=+2.91, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+1.51, 미 장단기 금리차(T10Y2Y) z=+1.12",
       "결과": "비활성"
     },
     {
@@ -36,7 +36,7 @@
     ],
     "zscores": {
       "VIXCLS": 2.91,
-      "T10Y2Y": 0.76,
+      "T10Y2Y": 1.12,
       "DGS10": -0.33,
       "DEXKOUS": -1.04,
       "DCOILWTICO": 0.22,
@@ -59,14 +59,14 @@
     "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "banking_stress: 기준선 축적 중 (5/20)",
-      "credit_event: 기준선 축적 중 (5/20)",
-      "liquidity_crisis: 기준선 축적 중 (5/20)",
-      "geopolitical: 기준선 축적 중 (5/20)",
-      "trade_policy: 기준선 축적 중 (5/20)",
-      "pandemic: 기준선 축적 중 (5/20)",
-      "fx_shock: 기준선 축적 중 (5/20)",
-      "rate_shock: 기준선 축적 중 (5/20)"
+      "banking_stress: 기준선 축적 중 (6/20)",
+      "credit_event: 기준선 축적 중 (6/20)",
+      "liquidity_crisis: 기준선 축적 중 (6/20)",
+      "geopolitical: 기준선 축적 중 (6/20)",
+      "trade_policy: 기준선 축적 중 (6/20)",
+      "pandemic: 기준선 축적 중 (6/20)",
+      "fx_shock: 기준선 축적 중 (6/20)",
+      "rate_shock: 기준선 축적 중 (6/20)"
     ],
     "clusters": [],
     "observations": {
@@ -74,7 +74,7 @@
         "n_articles": 3,
         "n_sources": 3,
         "z": null,
-        "baseline_points": 5,
+        "baseline_points": 6,
         "top_titles": [
           "Amway River Bank Run reveals charity partners for 2027 - WOODTV.com",
           "China’s central bank studies making overnight rate its main policy rate - WTVB",
@@ -82,57 +82,57 @@
         ]
       },
       "credit_event": {
-        "n_articles": 55,
-        "n_sources": 50,
+        "n_articles": 57,
+        "n_sources": 51,
         "z": null,
-        "baseline_points": 5,
+        "baseline_points": 6,
         "top_titles": [
           "To Fine or Not to Fine: EDPB Confirms Default Position in GDPR Enforcement Should Be to Fine - Crowell & Moring LLP",
-          "Character.AI bankruptcy docs reveal its wild rise and fall - Mashable",
-          "California Movie Theater Chain's Bakersfield Operator and its Affiliate File for Chapter 11 Bankruptcy - edhat"
+          "Grand Forks Clinic files for Chapter 11 bankruptcy; owner says it will stay open - Grand Forks Herald",
+          "What the Meritage Chapter 11 Teaches Restaurant Franchisees - QSR Magazine"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 4,
+        "n_articles": 3,
         "n_sources": 3,
         "z": null,
-        "baseline_points": 5,
+        "baseline_points": 6,
         "top_titles": [
           "How to report investment fraud - BBC",
           "Bank of England probes Barclays over private credit loans - report - Yahoo Finance Australia",
-          "'Neets crisis is moral failure' and 'Credit crunch' - BBC"
+          "Chen Xi 晨若曦(@chenxi_global)'s insights - Binance"
         ]
       },
       "geopolitical": {
         "n_articles": 100,
-        "n_sources": 82,
+        "n_sources": 83,
         "z": null,
-        "baseline_points": 5,
+        "baseline_points": 6,
         "top_titles": [
+          "Trump faces bipartisan backlash over waiving Russia sanctions - CBS News",
           "Oil Futures Pull Back as U.S. Waives Some Russia Sanctions - WSJ",
-          "Imposing Sanctions to Protect Americans from Intellectual Property Theft Fact Sheet - U.S. Department of State (.gov)",
-          "EU adopts its largest-ever package of sanctions listings, targeting the industry behind Russia’s war - EEAS"
+          "Pres. Trump defends decision to pause sanctions - Gray TV"
         ]
       },
       "trade_policy": {
-        "n_articles": 89,
-        "n_sources": 72,
+        "n_articles": 77,
+        "n_sources": 70,
         "z": null,
-        "baseline_points": 5,
+        "baseline_points": 6,
         "top_titles": [
-          "‘Tariff Man’ finally found tariffs he doesn’t like | CNN Business - CNN",
+          "‘Tariff Man’ finally found tariffs he doesn’t like - CNN",
           "Tariff refund class action lawsuits target Walmart, Puma, others - Top Class Actions",
-          "Opinion | The U.S. badly needs new tariff laws - The Washington Post"
+          "States Sue Over Latest Trump Tariff Attempt - EnergyNow.com"
         ]
       },
       "pandemic": {
-        "n_articles": 92,
-        "n_sources": 75,
+        "n_articles": 96,
+        "n_sources": 80,
         "z": null,
-        "baseline_points": 5,
+        "baseline_points": 6,
         "top_titles": [
-          "Lockdown initiated at St. Michael-Albertville High School - kare11.com",
-          "Measles outbreak in Bangladesh is a ‘real warning’ to other nations, experts say - NBC News",
+          "Ebola disease outbreak in the Democratic Republic of the Congo - European Centre for Disease Prevention and Control (ECDC)",
+          "Where People Got Sick: Salmonella Outbreak, October 2026 - Centers for Disease Control and Prevention | CDC (.gov)",
           "Game and Fish Declares Deer Season Changes due to EHD Outbreak - North Dakota Game and Fish (.gov)"
         ]
       },
@@ -140,16 +140,16 @@
         "n_articles": 1,
         "n_sources": 1,
         "z": null,
-        "baseline_points": 5,
+        "baseline_points": 6,
         "top_titles": [
           "China accelerates gold buying as it cuts US bonds and hedges sanctions risk - CHOSUNBIZ - Chosunbiz"
         ]
       },
       "rate_shock": {
-        "n_articles": 13,
-        "n_sources": 13,
+        "n_articles": 12,
+        "n_sources": 12,
         "z": null,
-        "baseline_points": 5,
+        "baseline_points": 6,
         "top_titles": [
           "The Bond Selloff Story Has Shifted. Here’s How That Changes the Stakes for Investors - Morningstar",
           "CoreWeave Stock And Bond Selloff Signals Deepening Concerns Over AI Buildout Costs - TIKR.com",
