@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-10-20T08:25:47+00:00",
+  "collected_at": "2026-10-20T14:16:17+00:00",
   "as_of": "2026-10-19",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "VIX(변동성)(VIXCLS) z=+2.91",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=+2.91, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+1.51, 미 장단기 금리차(T10Y2Y) z=+1.12",
+      "원인": "임계 초과 지표 없음",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=+1.51, 미 장단기 금리차(T10Y2Y) z=+1.12, VIX(변동성)(VIXCLS) z=-1.09",
       "결과": "비활성"
     },
     {
@@ -31,11 +31,9 @@
   "money_alert": false,
   "market": {
     "active": false,
-    "triggered": [
-      "VIXCLS"
-    ],
+    "triggered": [],
     "zscores": {
-      "VIXCLS": 2.91,
+      "VIXCLS": -1.09,
       "T10Y2Y": 1.12,
       "DGS10": -0.33,
       "DEXKOUS": -1.04,
@@ -59,99 +57,99 @@
     "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "banking_stress: 기준선 축적 중 (7/20)",
-      "credit_event: 기준선 축적 중 (7/20)",
-      "liquidity_crisis: 기준선 축적 중 (7/20)",
-      "geopolitical: 기준선 축적 중 (7/20)",
-      "trade_policy: 기준선 축적 중 (7/20)",
-      "pandemic: 기준선 축적 중 (7/20)",
-      "fx_shock: 기준선 축적 중 (7/20)",
-      "rate_shock: 기준선 축적 중 (7/20)"
+      "banking_stress: 기준선 축적 중 (8/20)",
+      "credit_event: 기준선 축적 중 (8/20)",
+      "liquidity_crisis: 기준선 축적 중 (8/20)",
+      "geopolitical: 기준선 축적 중 (8/20)",
+      "trade_policy: 기준선 축적 중 (8/20)",
+      "pandemic: 기준선 축적 중 (8/20)",
+      "fx_shock: 기준선 축적 중 (8/20)",
+      "rate_shock: 기준선 축적 중 (8/20)"
     ],
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 3,
-        "n_sources": 3,
+        "n_articles": 4,
+        "n_sources": 4,
         "z": null,
-        "baseline_points": 7,
+        "baseline_points": 8,
         "top_titles": [
+          "The “Agentic Bank Run” Has A Speed Bump And It’s Identity - Forbes",
           "Amway River Bank Run reveals charity partners for 2027 - WOODTV.com",
-          "China’s central bank studies making overnight rate its main policy rate - WTVB",
-          "China's central bank studies making overnight rate its main policy rate - Lexington Herald Leader"
+          "The Plundering Oligarch You Haven’t Heard Of - Institute for Policy Studies"
         ]
       },
       "credit_event": {
-        "n_articles": 66,
-        "n_sources": 56,
+        "n_articles": 76,
+        "n_sources": 70,
         "z": null,
-        "baseline_points": 7,
+        "baseline_points": 8,
         "top_titles": [
-          "AI debt worries spark surge in default insurance trading - Financial Times",
-          "China’s Huachen Energy Risks Fresh Default on $956 Million Debt - Bloomberg.com",
-          "Maya Cinemas in Bakersfield to remain open during Chapter 11 restructuring - KBAK"
+          "Brazil's Azul sees longer recovery as fuel costs squeeze margins after Chapter 11 - Reuters",
+          "Southern Indiana firm files for bankruptcy protection - The Business Journals",
+          "AI debt worries spark surge in default insurance trading - Financial Times"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 4,
-        "n_sources": 3,
+        "n_articles": 5,
+        "n_sources": 4,
         "z": null,
-        "baseline_points": 7,
+        "baseline_points": 8,
         "top_titles": [
           "India flags high unpaid UN dues, raises concern over 2026 liquidity crunch - Business Standard",
-          "'Neets crisis is moral failure' and 'Credit crunch' - BBC",
-          "Chen Xi 晨若曦(@chenxi_global)'s insights - Binance"
+          "OnionSam(@Onion_Square)'s insights - Binance",
+          "CoreWeave Falls 4% as HSBC Reiterates Bearish Call on Debt Risk; Nebius Drops 5%, Oracle Holds Steady - 24/7 Wall St."
         ]
       },
       "geopolitical": {
         "n_articles": 100,
         "n_sources": 95,
         "z": null,
-        "baseline_points": 7,
+        "baseline_points": 8,
         "top_titles": [
-          "Trump faces bipartisan backlash over waiving Russia sanctions - CBS News",
-          "Oil Futures Pull Back as U.S. Waives Some Russia Sanctions - WSJ",
-          "Imposing Sanctions to Protect Americans from Intellectual Property Theft Fact Sheet - U.S. Department of State (.gov)"
+          "Trump's Russia Sanctions Waiver Draws Bipartisan Backlash - Legis1",
+          "Donald Trump pauses sanctions on Russia; experts, lawmakers react - FOX8 WGHP",
+          "Trump faces bipartisan backlash over waiving Russia sanctions - CBS News"
         ]
       },
       "trade_policy": {
-        "n_articles": 79,
-        "n_sources": 64,
+        "n_articles": 64,
+        "n_sources": 53,
         "z": null,
-        "baseline_points": 7,
+        "baseline_points": 8,
         "top_titles": [
-          "‘Tariff Man’ finally found tariffs he doesn’t like - CNN",
-          "Copper Holds Drop as Traders Gauge Risks From US Tariff Policy - Bloomberg.com",
-          "US Deficit Reaches $1.99 Trillion After a Year of Tariff Refunds and Rising Interest Bills - Spherical Insights"
+          "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
+          "Trump announces 100% tariff on Chinese imports, after stock market sell-off - ABC7 Chicago",
+          "ReMA's Wiener discusses export controls on black mass, tungsten - Recycling Today"
         ]
       },
       "pandemic": {
-        "n_articles": 87,
-        "n_sources": 76,
+        "n_articles": 88,
+        "n_sources": 79,
         "z": null,
-        "baseline_points": 7,
+        "baseline_points": 8,
         "top_titles": [
           "Ebola disease outbreak in the Democratic Republic of the Congo - European Centre for Disease Prevention and Control (ECDC)",
-          "Investigation Update: Salmonella Outbreak, October 2026 - Centers for Disease Control and Prevention | CDC (.gov)",
-          "Game and Fish Declares Deer Season Changes due to EHD Outbreak - North Dakota Game and Fish (.gov)"
+          "Salmonella Outbreak Associated With Oysters - Virginia Department of Health (.gov)",
+          "Ebola outbreak update as of October 18 - Outbreak News Today"
         ]
       },
       "fx_shock": {
         "n_articles": 0,
         "n_sources": 0,
         "z": null,
-        "baseline_points": 7,
+        "baseline_points": 8,
         "top_titles": []
       },
       "rate_shock": {
-        "n_articles": 14,
-        "n_sources": 14,
+        "n_articles": 13,
+        "n_sources": 13,
         "z": null,
-        "baseline_points": 7,
+        "baseline_points": 8,
         "top_titles": [
-          "The Bond Selloff Story Has Shifted. Here’s How That Changes the Stakes for Investors - Morningstar",
           "Global Markets Forecast: French Bond Yields Surge as Oil Retreats - FXEmpire",
-          "CoreWeave Stock And Bond Selloff Signals Deepening Concerns Over AI Buildout Costs - TIKR.com"
+          "CoreWeave’s AI boom has a repayment date - thetechpencil",
+          "Japanese Yields Fall After Strong 20-Year Auction - TradingView"
         ]
       }
     },
