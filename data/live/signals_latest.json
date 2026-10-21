@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-21T04:32:26+00:00",
+  "collected_at": "2026-10-21T11:39:33+00:00",
   "as_of": "2026-10-20",
   "level": "NONE",
   "chain": [
@@ -56,101 +56,100 @@
     "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "banking_stress: 기준선 축적 중 (11/20)",
-      "credit_event: 기준선 축적 중 (11/20)",
-      "liquidity_crisis: 기준선 축적 중 (11/20)",
-      "geopolitical: 기준선 축적 중 (11/20)",
-      "trade_policy: 기준선 축적 중 (11/20)",
-      "pandemic: 기준선 축적 중 (11/20)",
-      "fx_shock: 기준선 축적 중 (11/20)",
-      "rate_shock: 기준선 축적 중 (11/20)"
+      "banking_stress: 기준선 축적 중 (12/20)",
+      "credit_event: 기준선 축적 중 (12/20)",
+      "liquidity_crisis: 기준선 축적 중 (12/20)",
+      "geopolitical: 기준선 축적 중 (12/20)",
+      "trade_policy: 기준선 축적 중 (12/20)",
+      "pandemic: 기준선 축적 중 (12/20)",
+      "fx_shock: 기준선 축적 중 (12/20)",
+      "rate_shock: 기준선 축적 중 (12/20)"
     ],
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 3,
-        "n_sources": 3,
+        "n_articles": 2,
+        "n_sources": 2,
         "z": null,
-        "baseline_points": 11,
+        "baseline_points": 12,
         "top_titles": [
           "The ‘Agentic Bank Run’ Has A Speed Bump And It’s Identity - Forbes",
-          "Failed Bank Information for Nano Banc, Irvine, CA - Federal Deposit Insurance Corporation (FDIC) (.gov)",
           "Bank Of America Hit With Two Class Actions Following $1.2 Billion Money Laundering Penalty - CU Today"
         ]
       },
       "credit_event": {
-        "n_articles": 82,
-        "n_sources": 76,
+        "n_articles": 83,
+        "n_sources": 77,
         "z": null,
-        "baseline_points": 11,
+        "baseline_points": 12,
         "top_titles": [
-          "Movie theater chain closes megaplex, files Chapter 11 bankruptcy - Yahoo Finance",
-          "Ill-fated Ignit Johnston files for Chapter 11 bankruptcy - WHO13.com",
-          "Maya Cinemas files for Chapter 11 bankruptcy, but will remain open for business - KGET.com"
+          "Braskem Creditor Bracebridge Starts Involuntary Chapter 11 Case - Bloomberg.com",
+          "Developers Ordered To Pay Merricks $46m for Loan Default - Law360",
+          "Movie theater chain closes megaplex, files Chapter 11 bankruptcy - Yahoo Finance"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 3,
-        "n_sources": 3,
+        "n_articles": 5,
+        "n_sources": 4,
         "z": null,
-        "baseline_points": 11,
+        "baseline_points": 12,
         "top_titles": [
-          "CoreWeave Falls 4% as HSBC Reiterates Bearish Call on Debt Risk; Nebius Drops 5%, Oracle Holds Steady - 24/7 Wall St.",
-          "India flags high unpaid UN dues, raises concern over 2026 liquidity crunch - Business Standard",
-          "Anthem for Dissatisfaction at the Stanley Arts Centre in South Norwood: rock, punk, pop, politics and poverty, Weds 11th Nov 2026 - Brixton Buzz"
+          "PhionX confronts liquidity crunch in South Korea as sale delays spur bankruptcy bid - CHOSUNBIZ - Chosunbiz",
+          "America’s Car-Mart in talks for sale as subprime auto struggles - Automotive News",
+          "CoreWeave Falls 4% as HSBC Reiterates Bearish Call on Debt Risk; Nebius Drops 5%, Oracle Holds Steady - 24/7 Wall St."
         ]
       },
       "geopolitical": {
         "n_articles": 100,
-        "n_sources": 91,
+        "n_sources": 85,
         "z": null,
-        "baseline_points": 11,
+        "baseline_points": 12,
         "top_titles": [
-          "Tightening sanctions on Russia is 'the way to end this war,' says David Kramer - PBS",
-          "More Republicans break with Trump on Russia sanctions - Semafor",
-          "Beyoncé's Company Demands Sanctions Over Allegedly False Claims in 'Alien Superstar' Lawsuit - Law Commentary"
+          "Oil Futures Pull Back as U.S. Waives Some Russia Sanctions - WSJ",
+          "Trump to campaign for Sen. Darline Graham despite disagreement on Russia sanctions - NPR",
+          "Tightening sanctions on Russia is 'the way to end this war,' says David Kramer - PBS"
         ]
       },
       "trade_policy": {
-        "n_articles": 81,
-        "n_sources": 68,
+        "n_articles": 78,
+        "n_sources": 65,
         "z": null,
-        "baseline_points": 11,
+        "baseline_points": 12,
         "top_titles": [
-          "Trump sued over 50% tariffs on Canada in latest trade challenge - CNBC",
+          "Colorado utility regulators to decide whether Xcel's data center tariff proposal protects customers - The Colorado Sun",
           "Food importer files new lawsuit to block Trump's Canada tariffs - Reuters",
-          "Trump Tariffs on Canada Spark Latest Lawsuit Over Trade Powers - The New York Times"
+          "Trump sued over 50% tariffs on Canada in latest trade challenge - CNBC"
         ]
       },
       "pandemic": {
-        "n_articles": 93,
-        "n_sources": 81,
+        "n_articles": 98,
+        "n_sources": 84,
         "z": null,
-        "baseline_points": 11,
+        "baseline_points": 12,
         "top_titles": [
-          "Nigeria confirms Ebola case as outbreak spreads into western Africa - The Guardian",
-          "Chickenpox outbreak reported at Shepherd High School following homecoming dance, district says - ABC13 Houston",
-          "Montana deer and antelope dying of disease amid hot fall weather - Montana Free Press"
+          "One US measles outbreak is proving particularly deadly. Here’s why - CNN",
+          "Cats, data, and pandemic preparedness - Wellcome Sanger Institute Blog",
+          "Nigeria confirms Ebola case as outbreak spreads into western Africa - The Guardian"
         ]
       },
       "fx_shock": {
         "n_articles": 1,
         "n_sources": 1,
         "z": null,
-        "baseline_points": 11,
+        "baseline_points": 12,
         "top_titles": [
           "Russia Sells 62 Tonnes of Gold as Budget Deficit Soars - Oj - Odessa Journal"
         ]
       },
       "rate_shock": {
-        "n_articles": 7,
-        "n_sources": 7,
+        "n_articles": 13,
+        "n_sources": 10,
         "z": null,
-        "baseline_points": 11,
+        "baseline_points": 12,
         "top_titles": [
-          "Bond Selloff Deepens as Rising Energy Prices Stoke Inflation Fears - EnergyNow.com",
-          "Treasury Yields Surge as Bond Investors Reprice the Global Outlook - kalkine.ca",
-          "US 10-Year Yield Steadies on Inflation Worries - TradingView"
+          "Bond selloff revives debate about euro zone banks' 'doom loop' - Reuters",
+          "RBI Turns Away All Bids at Treasury Bill Sale Amid Bond Selloff - Bloomberg.com",
+          "Bond Selloff Deepens as Rising Energy Prices Stoke Inflation Fears - EnergyNow.com"
         ]
       }
     },
