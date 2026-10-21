@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-10-21T11:39:33+00:00",
-  "as_of": "2026-10-20",
+  "collected_at": "2026-10-21T17:05:51+00:00",
+  "as_of": "2026-10-16",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 장단기 금리차(T10Y2Y) z=-1.79, 미 10년물 금리(DGS10) z=+1.32, VIX(변동성)(VIXCLS) z=-1.09",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=-2.23, 미 장단기 금리차(T10Y2Y) z=+0.76, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.42",
       "결과": "비활성"
     },
     {
@@ -33,12 +33,11 @@
     "active": false,
     "triggered": [],
     "zscores": {
-      "VIXCLS": -1.09,
-      "T10Y2Y": -1.79,
-      "DGS10": 1.32,
-      "DEXKOUS": -1.04,
-      "DTWEXBGS": -0.52,
-      "BAMLH0A0HYM2": -0.41
+      "VIXCLS": -0.36,
+      "T10Y2Y": 0.76,
+      "DGS10": -2.23,
+      "DCOILWTICO": 0.22,
+      "BAMLH0A0HYM2": -0.42
     }
   },
   "flow": {
@@ -56,96 +55,97 @@
     "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "banking_stress: 기준선 축적 중 (12/20)",
-      "credit_event: 기준선 축적 중 (12/20)",
-      "liquidity_crisis: 기준선 축적 중 (12/20)",
-      "geopolitical: 기준선 축적 중 (12/20)",
-      "trade_policy: 기준선 축적 중 (12/20)",
-      "pandemic: 기준선 축적 중 (12/20)",
-      "fx_shock: 기준선 축적 중 (12/20)",
-      "rate_shock: 기준선 축적 중 (12/20)"
+      "banking_stress: 기준선 축적 중 (13/20)",
+      "credit_event: 기준선 축적 중 (13/20)",
+      "liquidity_crisis: 기준선 축적 중 (13/20)",
+      "geopolitical: 기준선 축적 중 (13/20)",
+      "trade_policy: 기준선 축적 중 (13/20)",
+      "pandemic: 기준선 축적 중 (13/20)",
+      "fx_shock: 기준선 축적 중 (13/20)",
+      "rate_shock: 기준선 축적 중 (13/20)"
     ],
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 2,
-        "n_sources": 2,
+        "n_articles": 3,
+        "n_sources": 3,
         "z": null,
-        "baseline_points": 12,
+        "baseline_points": 13,
         "top_titles": [
-          "The ‘Agentic Bank Run’ Has A Speed Bump And It’s Identity - Forbes",
+          "The Gdf uncovers an ‘underground bank’ run by organised crime - Il Sole 24 ORE",
+          "GORILLA CONSERVATION! Stanbic Bank Pumps Shs20m into Virunga Marathon - Red Pepper",
           "Bank Of America Hit With Two Class Actions Following $1.2 Billion Money Laundering Penalty - CU Today"
         ]
       },
       "credit_event": {
-        "n_articles": 83,
-        "n_sources": 77,
+        "n_articles": 81,
+        "n_sources": 74,
         "z": null,
-        "baseline_points": 12,
+        "baseline_points": 13,
         "top_titles": [
-          "Braskem Creditor Bracebridge Starts Involuntary Chapter 11 Case - Bloomberg.com",
-          "Developers Ordered To Pay Merricks $46m for Loan Default - Law360",
-          "Movie theater chain closes megaplex, files Chapter 11 bankruptcy - Yahoo Finance"
+          "Globally, corporate defaults fell in September; rate will decline further in coming months - Moody's",
+          "Getty Images filed for Chapter 11 bankruptcy as part of a plan to go private - Quartz",
+          "Car-Mart stock tumbles following report of possible Chapter 11 sale - Northwest Arkansas Democrat-Gazette"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 5,
-        "n_sources": 4,
+        "n_articles": 3,
+        "n_sources": 3,
         "z": null,
-        "baseline_points": 12,
+        "baseline_points": 13,
         "top_titles": [
+          "US Special Situations: JetBlue liquidity crunch looming by late 2027 - CreditSights",
           "PhionX confronts liquidity crunch in South Korea as sale delays spur bankruptcy bid - CHOSUNBIZ - Chosunbiz",
-          "America’s Car-Mart in talks for sale as subprime auto struggles - Automotive News",
-          "CoreWeave Falls 4% as HSBC Reiterates Bearish Call on Debt Risk; Nebius Drops 5%, Oracle Holds Steady - 24/7 Wall St."
+          "America’s Car-Mart in talks for sale as subprime auto struggles - Automotive News"
         ]
       },
       "geopolitical": {
         "n_articles": 100,
-        "n_sources": 85,
+        "n_sources": 87,
         "z": null,
-        "baseline_points": 12,
+        "baseline_points": 13,
         "top_titles": [
-          "Oil Futures Pull Back as U.S. Waives Some Russia Sanctions - WSJ",
-          "Trump to campaign for Sen. Darline Graham despite disagreement on Russia sanctions - NPR",
-          "Tightening sanctions on Russia is 'the way to end this war,' says David Kramer - PBS"
+          "Israel Balderas analyzes Trump’s decision to pause Russian sanctions on FOX8 - Elon University",
+          "Trump’s pause on Russia sanctions triggers pushback from Pennsylvania - The Center Square",
+          "Britt reiterates Russia sanctions support but rejects making them mandatory - Alabama Daily News"
         ]
       },
       "trade_policy": {
-        "n_articles": 78,
-        "n_sources": 65,
+        "n_articles": 86,
+        "n_sources": 73,
         "z": null,
-        "baseline_points": 12,
+        "baseline_points": 13,
         "top_titles": [
           "Colorado utility regulators to decide whether Xcel's data center tariff proposal protects customers - The Colorado Sun",
-          "Food importer files new lawsuit to block Trump's Canada tariffs - Reuters",
-          "Trump sued over 50% tariffs on Canada in latest trade challenge - CNBC"
+          "Germany wants to avoid China trade war despite ‘kill switch’: Merz - South China Morning Post",
+          "New Jersey food importer files lawsuit challenging Trump's 50% tariffs on Canadian goods - 6abc Philadelphia"
         ]
       },
       "pandemic": {
-        "n_articles": 98,
-        "n_sources": 84,
+        "n_articles": 94,
+        "n_sources": 82,
         "z": null,
-        "baseline_points": 12,
+        "baseline_points": 13,
         "top_titles": [
+          "Nigeria reports Ebola case as outbreak reaches West Africa - Reuters",
           "One US measles outbreak is proving particularly deadly. Here’s why - CNN",
-          "Cats, data, and pandemic preparedness - Wellcome Sanger Institute Blog",
-          "Nigeria confirms Ebola case as outbreak spreads into western Africa - The Guardian"
+          "Norovirus outbreak confirmed at metro area elementary school with around 85 cases reported - KCTV"
         ]
       },
       "fx_shock": {
         "n_articles": 1,
         "n_sources": 1,
         "z": null,
-        "baseline_points": 12,
+        "baseline_points": 13,
         "top_titles": [
           "Russia Sells 62 Tonnes of Gold as Budget Deficit Soars - Oj - Odessa Journal"
         ]
       },
       "rate_shock": {
-        "n_articles": 13,
-        "n_sources": 10,
+        "n_articles": 10,
+        "n_sources": 9,
         "z": null,
-        "baseline_points": 12,
+        "baseline_points": 13,
         "top_titles": [
           "Bond selloff revives debate about euro zone banks' 'doom loop' - Reuters",
           "RBI Turns Away All Bids at Treasury Bill Sale Amid Bond Selloff - Bloomberg.com",
@@ -155,5 +155,5 @@
     },
     "source": "Google 뉴스 RSS"
   },
-  "fred_error": null
+  "fred_error": "Error tokenizing data. C error: Expected 1 fields in line 5, saw 3\n"
 }
