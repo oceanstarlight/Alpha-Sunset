@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-20T23:47:54+00:00",
+  "collected_at": "2026-10-21T04:32:26+00:00",
   "as_of": "2026-10-20",
   "level": "NONE",
   "chain": [
@@ -56,14 +56,14 @@
     "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "banking_stress: 기준선 축적 중 (10/20)",
-      "credit_event: 기준선 축적 중 (10/20)",
-      "liquidity_crisis: 기준선 축적 중 (10/20)",
-      "geopolitical: 기준선 축적 중 (10/20)",
-      "trade_policy: 기준선 축적 중 (10/20)",
-      "pandemic: 기준선 축적 중 (10/20)",
-      "fx_shock: 기준선 축적 중 (10/20)",
-      "rate_shock: 기준선 축적 중 (10/20)"
+      "banking_stress: 기준선 축적 중 (11/20)",
+      "credit_event: 기준선 축적 중 (11/20)",
+      "liquidity_crisis: 기준선 축적 중 (11/20)",
+      "geopolitical: 기준선 축적 중 (11/20)",
+      "trade_policy: 기준선 축적 중 (11/20)",
+      "pandemic: 기준선 축적 중 (11/20)",
+      "fx_shock: 기준선 축적 중 (11/20)",
+      "rate_shock: 기준선 축적 중 (11/20)"
     ],
     "clusters": [],
     "observations": {
@@ -71,7 +71,7 @@
         "n_articles": 3,
         "n_sources": 3,
         "z": null,
-        "baseline_points": 10,
+        "baseline_points": 11,
         "top_titles": [
           "The ‘Agentic Bank Run’ Has A Speed Bump And It’s Identity - Forbes",
           "Failed Bank Information for Nano Banc, Irvine, CA - Federal Deposit Insurance Corporation (FDIC) (.gov)",
@@ -79,21 +79,21 @@
         ]
       },
       "credit_event": {
-        "n_articles": 83,
-        "n_sources": 71,
+        "n_articles": 82,
+        "n_sources": 76,
         "z": null,
-        "baseline_points": 10,
+        "baseline_points": 11,
         "top_titles": [
-          "American Home Furniture to close months after bankruptcy filing - Yahoo Finance",
-          "Maya Cinemas files for Chapter 11 bankruptcy, but will remain open for business - KGET.com",
-          "Brazil's Azul sees longer recovery as fuel costs squeeze margins after Chapter 11 - Reuters"
+          "Movie theater chain closes megaplex, files Chapter 11 bankruptcy - Yahoo Finance",
+          "Ill-fated Ignit Johnston files for Chapter 11 bankruptcy - WHO13.com",
+          "Maya Cinemas files for Chapter 11 bankruptcy, but will remain open for business - KGET.com"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 3,
         "n_sources": 3,
         "z": null,
-        "baseline_points": 10,
+        "baseline_points": 11,
         "top_titles": [
           "CoreWeave Falls 4% as HSBC Reiterates Bearish Call on Debt Risk; Nebius Drops 5%, Oracle Holds Steady - 24/7 Wall St.",
           "India flags high unpaid UN dues, raises concern over 2026 liquidity crunch - Business Standard",
@@ -102,55 +102,55 @@
       },
       "geopolitical": {
         "n_articles": 100,
-        "n_sources": 93,
+        "n_sources": 91,
         "z": null,
-        "baseline_points": 10,
+        "baseline_points": 11,
         "top_titles": [
           "Tightening sanctions on Russia is 'the way to end this war,' says David Kramer - PBS",
-          "Beyoncé's Company Demands Sanctions Over Allegedly False Claims in 'Alien Superstar' Lawsuit - Law Commentary",
-          "Beijing blasts US sanctions on 5 Chinese firms tied to ex-Google engineer - WRAL"
+          "More Republicans break with Trump on Russia sanctions - Semafor",
+          "Beyoncé's Company Demands Sanctions Over Allegedly False Claims in 'Alien Superstar' Lawsuit - Law Commentary"
         ]
       },
       "trade_policy": {
-        "n_articles": 80,
-        "n_sources": 67,
+        "n_articles": 81,
+        "n_sources": 68,
         "z": null,
-        "baseline_points": 10,
+        "baseline_points": 11,
         "top_titles": [
           "Trump sued over 50% tariffs on Canada in latest trade challenge - CNBC",
-          "Trump Tariffs on Canada Spark Latest Lawsuit Over Trade Powers - The New York Times",
-          "Liberty Justice Center Sues Over Trump’s Revival of 1930 Tariff Law, Citing Harm to American Businesses - Liberty Justice Center"
+          "Food importer files new lawsuit to block Trump's Canada tariffs - Reuters",
+          "Trump Tariffs on Canada Spark Latest Lawsuit Over Trade Powers - The New York Times"
         ]
       },
       "pandemic": {
-        "n_articles": 95,
+        "n_articles": 93,
         "n_sources": 81,
         "z": null,
-        "baseline_points": 10,
+        "baseline_points": 11,
         "top_titles": [
-          "Nigeria confirms an Ebola case in Abuja as a woman arriving from Uganda tests positive - NPR",
-          "Security threat prompted lockdown at Spring Hill campuses, students now dismissed - cbs19.tv",
-          "Salmonella Outbreak Associated With Oysters - Virginia Department of Health (.gov)"
+          "Nigeria confirms Ebola case as outbreak spreads into western Africa - The Guardian",
+          "Chickenpox outbreak reported at Shepherd High School following homecoming dance, district says - ABC13 Houston",
+          "Montana deer and antelope dying of disease amid hot fall weather - Montana Free Press"
         ]
       },
       "fx_shock": {
         "n_articles": 1,
         "n_sources": 1,
         "z": null,
-        "baseline_points": 10,
+        "baseline_points": 11,
         "top_titles": [
           "Russia Sells 62 Tonnes of Gold as Budget Deficit Soars - Oj - Odessa Journal"
         ]
       },
       "rate_shock": {
-        "n_articles": 13,
-        "n_sources": 13,
+        "n_articles": 7,
+        "n_sources": 7,
         "z": null,
-        "baseline_points": 10,
+        "baseline_points": 11,
         "top_titles": [
-          "Global Markets Forecast: French Bond Yields Surge as Oil Retreats - FXEmpire",
-          "How safe havens stack up as tech, energy and France fears grip markets - Yahoo! Finance Canada",
-          "Treasury Yields Surge as Bond Investors Reprice the Global Outlook - kalkine.ca"
+          "Bond Selloff Deepens as Rising Energy Prices Stoke Inflation Fears - EnergyNow.com",
+          "Treasury Yields Surge as Bond Investors Reprice the Global Outlook - kalkine.ca",
+          "US 10-Year Yield Steadies on Inflation Worries - TradingView"
         ]
       }
     },
