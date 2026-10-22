@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-10-22T17:04:27+00:00",
-  "as_of": "2026-10-21",
+  "collected_at": "2026-10-22T21:28:42+00:00",
+  "as_of": "2026-10-22",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.19, 원/달러 환율(DEXKOUS) z=-1.04, 미 10년물 금리(DGS10) z=-0.81",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.19, WTI 유가(DCOILWTICO) z=-0.61, VIX(변동성)(VIXCLS) z=-0.53",
       "결과": "비활성"
     },
     {
@@ -35,10 +35,8 @@
     "zscores": {
       "VIXCLS": -0.53,
       "T10Y2Y": -0.33,
-      "DGS10": -0.81,
-      "DEXKOUS": -1.04,
+      "DGS10": 0.13,
       "DCOILWTICO": -0.61,
-      "DTWEXBGS": -0.52,
       "BAMLH0A0HYM2": -1.19
     }
   },
@@ -57,14 +55,14 @@
     "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "banking_stress: 기준선 축적 중 (17/20)",
-      "credit_event: 기준선 축적 중 (17/20)",
-      "liquidity_crisis: 기준선 축적 중 (17/20)",
-      "geopolitical: 기준선 축적 중 (17/20)",
-      "trade_policy: 기준선 축적 중 (17/20)",
-      "pandemic: 기준선 축적 중 (17/20)",
-      "fx_shock: 기준선 축적 중 (17/20)",
-      "rate_shock: 기준선 축적 중 (17/20)"
+      "banking_stress: 기준선 축적 중 (18/20)",
+      "credit_event: 기준선 축적 중 (18/20)",
+      "liquidity_crisis: 기준선 축적 중 (18/20)",
+      "geopolitical: 기준선 축적 중 (18/20)",
+      "trade_policy: 기준선 축적 중 (18/20)",
+      "pandemic: 기준선 축적 중 (18/20)",
+      "fx_shock: 기준선 축적 중 (18/20)",
+      "rate_shock: 기준선 축적 중 (18/20)"
     ],
     "clusters": [],
     "observations": {
@@ -72,81 +70,81 @@
         "n_articles": 6,
         "n_sources": 6,
         "z": null,
-        "baseline_points": 17,
+        "baseline_points": 18,
         "top_titles": [
           "Central Bank imposes €3.25m fine on Coinbase’s Irish arm over safeguarding breaches - Irish Examiner",
           "IMF Warns Tokenisation Could Amplify Financial Risks - Business Today",
-          "Italy Busts Mafia 'Secret Bank' That Laundered Money Through Crypto, Seizes $24M - Cryptonews.net"
+          "Coinbase’s Ireland Arm Fined by Irish Central Bank Over Breaches - Bloomberg.com"
         ]
       },
       "credit_event": {
-        "n_articles": 62,
-        "n_sources": 54,
+        "n_articles": 69,
+        "n_sources": 56,
         "z": null,
-        "baseline_points": 17,
+        "baseline_points": 18,
         "top_titles": [
-          "ServiceLink Announces Leadership Changes Across Origination And Default - National Mortgage Professional",
-          "Avoiding charts by default - FlowingData",
-          "AG Fitch urges court to protect children online in Character.AI bankruptcy filing - Picayune Item"
+          "Global default for Copilot features generally available - The GitHub Blog",
+          "West Palm Beach bakery files Chapter 11 bankruptcy with $2 million in liabilities - The Business Journals",
+          "ServiceLink Announces Leadership Changes Across Origination And Default - National Mortgage Professional"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 1,
         "n_sources": 1,
         "z": null,
-        "baseline_points": 17,
+        "baseline_points": 18,
         "top_titles": [
-          "Scandinavian Enviro Systems AB (publ) (SES) Issues 62.5M Shares at SEK 0.08 After SEK 5M Conversion - TradingView"
+          "Where Has the Liquidity Gone? Who Is Withholding Billions from the Syrian Economy? - The Syrian Observer"
         ]
       },
       "geopolitical": {
-        "n_articles": 99,
-        "n_sources": 88,
+        "n_articles": 100,
+        "n_sources": 83,
         "z": null,
-        "baseline_points": 17,
+        "baseline_points": 18,
         "top_titles": [
           "Greece says it is implementing sanctions linked to Iran - Reuters",
-          "Europe Needs its own Sanctions-Enforcement Muscle - Carnegie Endowment for International Peace",
-          "Two charged after 15-year-old held at gunpoint in violent Delaware home invasion - NBC10 Philadelphia"
+          "3 British Invasion Bands From 1975 Whose Melodies Still Echo Decades Later - American Songwriter",
+          "Darline Graham didn’t talk to Trump about Russia sanctions waiver during SC visit - The State"
         ]
       },
       "trade_policy": {
-        "n_articles": 59,
-        "n_sources": 57,
+        "n_articles": 65,
+        "n_sources": 59,
         "z": null,
-        "baseline_points": 17,
+        "baseline_points": 18,
         "top_titles": [
+          "Intel Lobbying Rises as Senate Advances Chip Export Controls - Legis1",
           "Hydro Flask maker aims tariff refunds at inventory, packaging - Supply Chain Dive",
-          "China Takes Cleantech Tariff Fight to COP31 Climate Summit - Impakter",
-          "OG&E’s large load tariff case decision delayed by regulators to 2027 - Oklahoma Energy Today"
+          "Congress must close this tariff loophole - The Hill"
         ]
       },
       "pandemic": {
-        "n_articles": 88,
-        "n_sources": 71,
+        "n_articles": 83,
+        "n_sources": 72,
         "z": null,
-        "baseline_points": 17,
+        "baseline_points": 18,
         "top_titles": [
           "Ebola Outbreak in Africa Reaches Widest Expansion Ever - The New York Times",
-          "Penn Yan schools on lockdown and lockout due to possible weapon at high school - WHEC.com",
-          "DR Congo: Ebola responders under pressure as outbreak expands - UN News"
+          "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com",
+          "Penn Yan Academy closes early after report of potential weapon on campus prompts lockdown - 13WHAM-TV"
         ]
       },
       "fx_shock": {
         "n_articles": 0,
         "n_sources": 0,
         "z": null,
-        "baseline_points": 17,
+        "baseline_points": 18,
         "top_titles": []
       },
       "rate_shock": {
         "n_articles": 9,
-        "n_sources": 8,
+        "n_sources": 9,
         "z": null,
-        "baseline_points": 17,
+        "baseline_points": 18,
         "top_titles": [
-          "Bond Market Triggers Wall Street Risk Warnings As Long Yields Surge - Stocktwits",
-          "RBI turns away all bids at treasury bill sale amid bond selloff - TradingView",
+          "Bond selloff revives debate about euro zone banks' 'doom loop' - Reuters",
+          "French Bond Yields Surge, Stirring Euro Zone Debt Concerns - Global Banking & Finance Review",
           "French bond yields surge amid fiscal, political pressure - Breakingthenews.net"
         ]
       }
