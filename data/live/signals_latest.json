@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-10-22T04:31:24+00:00",
-  "as_of": "2026-10-16",
+  "collected_at": "2026-10-22T11:40:29+00:00",
+  "as_of": "2026-10-21",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=-2.23, 미 장단기 금리차(T10Y2Y) z=+0.76, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.42",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 원/달러 환율(DEXKOUS) z=-1.04, VIX(변동성)(VIXCLS) z=-0.87, 미 10년물 금리(DGS10) z=-0.81",
       "결과": "비활성"
     },
     {
@@ -33,11 +33,13 @@
     "active": false,
     "triggered": [],
     "zscores": {
-      "VIXCLS": -0.36,
-      "T10Y2Y": 0.76,
-      "DGS10": -2.23,
-      "DCOILWTICO": 0.22,
-      "BAMLH0A0HYM2": -0.42
+      "VIXCLS": -0.87,
+      "T10Y2Y": -0.33,
+      "DGS10": -0.81,
+      "DEXKOUS": -1.04,
+      "DCOILWTICO": -0.61,
+      "DTWEXBGS": -0.52,
+      "BAMLH0A0HYM2": 0.76
     }
   },
   "flow": {
@@ -55,79 +57,78 @@
     "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "banking_stress: 기준선 축적 중 (15/20)",
-      "credit_event: 기준선 축적 중 (15/20)",
-      "liquidity_crisis: 기준선 축적 중 (15/20)",
-      "geopolitical: 기준선 축적 중 (15/20)",
-      "trade_policy: 기준선 축적 중 (15/20)",
-      "pandemic: 기준선 축적 중 (15/20)",
-      "fx_shock: 기준선 축적 중 (15/20)",
-      "rate_shock: 기준선 축적 중 (15/20)"
+      "banking_stress: 기준선 축적 중 (16/20)",
+      "credit_event: 기준선 축적 중 (16/20)",
+      "liquidity_crisis: 기준선 축적 중 (16/20)",
+      "geopolitical: 기준선 축적 중 (16/20)",
+      "trade_policy: 기준선 축적 중 (16/20)",
+      "pandemic: 기준선 축적 중 (16/20)",
+      "fx_shock: 기준선 축적 중 (16/20)",
+      "rate_shock: 기준선 축적 중 (16/20)"
     ],
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 4,
-        "n_sources": 4,
+        "n_articles": 6,
+        "n_sources": 5,
         "z": null,
-        "baseline_points": 15,
+        "baseline_points": 16,
         "top_titles": [
-          "The Gdf uncovers an ‘underground bank’ run by organised crime - Il Sole 24 ORE",
           "GORILLA CONSERVATION! Stanbic Bank Pumps Shs20m into Virunga Marathon - Red Pepper",
-          "Polymarket Insolvency Bets: Can 3% CEX Odds Flag Risk? - FinanceFeeds"
+          "Coinbase’s Ireland Arm Fined by Irish Central Bank Over Breaches - Bloomberg.com",
+          "IMF Warns Tokenisation Could Amplify Financial Risks - Business Today"
         ]
       },
       "credit_event": {
         "n_articles": 71,
-        "n_sources": 62,
+        "n_sources": 63,
         "z": null,
-        "baseline_points": 15,
+        "baseline_points": 16,
         "top_titles": [
+          "RNDC Files for Chapter 11, Pursues Sales and Wind-Down - National Association of Wholesaler-Distributors",
           "Pulp Maker Mercer Is Weighing Possible Chapter 11 Bankruptcy - Bloomberg.com",
-          "Globally, corporate defaults fell in September; rate will decline further in coming months - Moody's",
-          "CoreWeave’s market confidence erodes as bond yields spike and stock sinks - CNBC"
+          "Not impressed with Google Maps? Make Waze your default on Pixel – here’s how - ZDNET"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 4,
-        "n_sources": 4,
+        "n_articles": 2,
+        "n_sources": 2,
         "z": null,
-        "baseline_points": 15,
+        "baseline_points": 16,
         "top_titles": [
           "US Special Situations: JetBlue liquidity crunch looming by late 2027 - CreditSights",
-          "PhionX confronts liquidity crunch in South Korea as sale delays spur bankruptcy bid - CHOSUNBIZ - Chosunbiz",
-          "America’s Car-Mart in talks for sale as subprime auto struggles - Automotive News"
+          "Scandinavian Enviro Systems AB (publ) (SES) Issues 62.5M Shares at SEK 0.08 After SEK 5M Conversion - TradingView"
         ]
       },
       "geopolitical": {
         "n_articles": 100,
-        "n_sources": 83,
+        "n_sources": 81,
         "z": null,
-        "baseline_points": 15,
+        "baseline_points": 16,
         "top_titles": [
-          "US sanctions Greece-, Panama-based law firm over aid to Iranian shipping - Reuters",
-          "Israel Balderas analyzes Trump’s decision to pause Russian sanctions on FOX8 - Elon University",
-          "State panel sanctions ex-Rutland officer for violations of anti-bias policing and other policies - VTDigger"
+          "Europe Needs its own Sanctions-Enforcement Muscle - Carnegie Endowment for International Peace",
+          "Dr. Annie Andrews challenges Sen. Graham on sanctions, rising costs during Trump's visit - WCIV",
+          "ICC, reviled by Trump, wins top EU human rights award - South China Morning Post"
         ]
       },
       "trade_policy": {
         "n_articles": 70,
-        "n_sources": 59,
+        "n_sources": 61,
         "z": null,
-        "baseline_points": 15,
+        "baseline_points": 16,
         "top_titles": [
-          "US and China Reach $30 Billion Tariff Deal - MichAuto",
-          "Germany wants to avoid China trade war despite EU ‘kill switch’: Merz - South China Morning Post",
-          "Colorado utility regulators to decide whether Xcel's data center tariff proposal protects customers - The Colorado Sun"
+          "Tariff War or Poll Meddling? Why the US Is Accusing Canada Ahead of the Midterms - Open Magazine",
+          "UK Revised Tariff Preference Utilisation Statistics for 2024 - News and Statistics - IndexBox",
+          "Detroit tourism bureau halts advertising in Canada amid trade war, hopes Canadians won't 'hold a grudge' - CBC"
         ]
       },
       "pandemic": {
-        "n_articles": 92,
-        "n_sources": 74,
+        "n_articles": 88,
+        "n_sources": 72,
         "z": null,
-        "baseline_points": 15,
+        "baseline_points": 16,
         "top_titles": [
-          "Nigeria reports Ebola case as outbreak reaches West Africa - Reuters",
+          "Nigeria's first Ebola patient holidayed in Uganda, officials say - BBC",
           "Lockdown lifted at Hastings High School, SkyEye13 video shows students dismissed - ABC13 Houston",
           "Mayfield High School placed on lockdown after verbal threat - Cleveland 19 News"
         ]
@@ -136,22 +137,22 @@
         "n_articles": 0,
         "n_sources": 0,
         "z": null,
-        "baseline_points": 15,
+        "baseline_points": 16,
         "top_titles": []
       },
       "rate_shock": {
-        "n_articles": 13,
-        "n_sources": 11,
+        "n_articles": 8,
+        "n_sources": 8,
         "z": null,
-        "baseline_points": 15,
+        "baseline_points": 16,
         "top_titles": [
-          "Argentina’s Bond Selloff Blindsides Bulls as Election Fears Grow - Bloomberg.com",
-          "Bond selloff revives debate about euro zone banks' 'doom loop' - Reuters",
+          "Analysis-Bond selloff revives debate about euro zone banks’ ‘doom loop’ - KWSN",
+          "Argentina’s Bond Selloff Blindsides Bulls as Vote Fears Grow - Bloomberg.com",
           "Bond Market Triggers Wall Street Risk Warnings As Long Yields Surge - Stocktwits"
         ]
       }
     },
     "source": "Google 뉴스 RSS"
   },
-  "fred_error": "Error tokenizing data. C error: Expected 1 fields in line 5, saw 3\n"
+  "fred_error": null
 }
