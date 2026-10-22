@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-21T21:35:09+00:00",
+  "collected_at": "2026-10-22T04:31:24+00:00",
   "as_of": "2026-10-16",
   "level": "NONE",
   "chain": [
@@ -55,44 +55,44 @@
     "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "banking_stress: 기준선 축적 중 (14/20)",
-      "credit_event: 기준선 축적 중 (14/20)",
-      "liquidity_crisis: 기준선 축적 중 (14/20)",
-      "geopolitical: 기준선 축적 중 (14/20)",
-      "trade_policy: 기준선 축적 중 (14/20)",
-      "pandemic: 기준선 축적 중 (14/20)",
-      "fx_shock: 기준선 축적 중 (14/20)",
-      "rate_shock: 기준선 축적 중 (14/20)"
+      "banking_stress: 기준선 축적 중 (15/20)",
+      "credit_event: 기준선 축적 중 (15/20)",
+      "liquidity_crisis: 기준선 축적 중 (15/20)",
+      "geopolitical: 기준선 축적 중 (15/20)",
+      "trade_policy: 기준선 축적 중 (15/20)",
+      "pandemic: 기준선 축적 중 (15/20)",
+      "fx_shock: 기준선 축적 중 (15/20)",
+      "rate_shock: 기준선 축적 중 (15/20)"
     ],
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 5,
-        "n_sources": 5,
+        "n_articles": 4,
+        "n_sources": 4,
         "z": null,
-        "baseline_points": 14,
+        "baseline_points": 15,
         "top_titles": [
           "The Gdf uncovers an ‘underground bank’ run by organised crime - Il Sole 24 ORE",
-          "Bank Of America Hit With Two Class Actions Following $1.2 Billion Money Laundering Penalty - CU Today",
-          "GORILLA CONSERVATION! Stanbic Bank Pumps Shs20m into Virunga Marathon - Red Pepper"
+          "GORILLA CONSERVATION! Stanbic Bank Pumps Shs20m into Virunga Marathon - Red Pepper",
+          "Polymarket Insolvency Bets: Can 3% CEX Odds Flag Risk? - FinanceFeeds"
         ]
       },
       "credit_event": {
-        "n_articles": 82,
-        "n_sources": 74,
+        "n_articles": 71,
+        "n_sources": 62,
         "z": null,
-        "baseline_points": 14,
+        "baseline_points": 15,
         "top_titles": [
+          "Pulp Maker Mercer Is Weighing Possible Chapter 11 Bankruptcy - Bloomberg.com",
           "Globally, corporate defaults fell in September; rate will decline further in coming months - Moody's",
-          "Car-Mart stock tumbles following report of possible Chapter 11 sale - The Arkansas Democrat-Gazette",
-          "Getty Images filed for Chapter 11 bankruptcy as part of a plan to go private - Quartz"
+          "CoreWeave’s market confidence erodes as bond yields spike and stock sinks - CNBC"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 4,
         "n_sources": 4,
         "z": null,
-        "baseline_points": 14,
+        "baseline_points": 15,
         "top_titles": [
           "US Special Situations: JetBlue liquidity crunch looming by late 2027 - CreditSights",
           "PhionX confronts liquidity crunch in South Korea as sale delays spur bankruptcy bid - CHOSUNBIZ - Chosunbiz",
@@ -100,10 +100,10 @@
         ]
       },
       "geopolitical": {
-        "n_articles": 95,
-        "n_sources": 74,
+        "n_articles": 100,
+        "n_sources": 83,
         "z": null,
-        "baseline_points": 14,
+        "baseline_points": 15,
         "top_titles": [
           "US sanctions Greece-, Panama-based law firm over aid to Iranian shipping - Reuters",
           "Israel Balderas analyzes Trump’s decision to pause Russian sanctions on FOX8 - Elon University",
@@ -111,43 +111,43 @@
         ]
       },
       "trade_policy": {
-        "n_articles": 74,
-        "n_sources": 61,
+        "n_articles": 70,
+        "n_sources": 59,
         "z": null,
-        "baseline_points": 14,
+        "baseline_points": 15,
         "top_titles": [
           "US and China Reach $30 Billion Tariff Deal - MichAuto",
-          "Colorado utility regulators to decide whether Xcel's data center tariff proposal protects customers - The Colorado Sun",
-          "Germany wants to avoid China trade war despite EU ‘kill switch’: Merz - South China Morning Post"
+          "Germany wants to avoid China trade war despite EU ‘kill switch’: Merz - South China Morning Post",
+          "Colorado utility regulators to decide whether Xcel's data center tariff proposal protects customers - The Colorado Sun"
         ]
       },
       "pandemic": {
-        "n_articles": 98,
-        "n_sources": 82,
+        "n_articles": 92,
+        "n_sources": 74,
         "z": null,
-        "baseline_points": 14,
+        "baseline_points": 15,
         "top_titles": [
-          "Mayfield Heights High School placed on lockdown after verbal threat - Cleveland 19 News",
-          "Hastings High School placed on lockdown, Alief ISD says - ABC13 Houston",
-          "Shepherd ISD reports chickenpox outbreak at high school - Houston Public Media"
+          "Nigeria reports Ebola case as outbreak reaches West Africa - Reuters",
+          "Lockdown lifted at Hastings High School, SkyEye13 video shows students dismissed - ABC13 Houston",
+          "Mayfield High School placed on lockdown after verbal threat - Cleveland 19 News"
         ]
       },
       "fx_shock": {
         "n_articles": 0,
         "n_sources": 0,
         "z": null,
-        "baseline_points": 14,
+        "baseline_points": 15,
         "top_titles": []
       },
       "rate_shock": {
-        "n_articles": 10,
-        "n_sources": 8,
+        "n_articles": 13,
+        "n_sources": 11,
         "z": null,
-        "baseline_points": 14,
+        "baseline_points": 15,
         "top_titles": [
-          "Argentina’s Bond Selloff Blindsides Bulls as Vote Fears Grow - Bloomberg.com",
+          "Argentina’s Bond Selloff Blindsides Bulls as Election Fears Grow - Bloomberg.com",
           "Bond selloff revives debate about euro zone banks' 'doom loop' - Reuters",
-          "RBI Turns Away All Bids at Treasury Bill Sale Amid Bond Selloff - Bloomberg.com"
+          "Bond Market Triggers Wall Street Risk Warnings As Long Yields Surge - Stocktwits"
         ]
       }
     },
