@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-22T21:28:42+00:00",
+  "collected_at": "2026-10-23T04:36:29+00:00",
   "as_of": "2026-10-22",
   "level": "NONE",
   "chain": [
@@ -55,14 +55,14 @@
     "status": "unavailable",
     "n_queries": 8,
     "errors": [
-      "banking_stress: 기준선 축적 중 (18/20)",
-      "credit_event: 기준선 축적 중 (18/20)",
-      "liquidity_crisis: 기준선 축적 중 (18/20)",
-      "geopolitical: 기준선 축적 중 (18/20)",
-      "trade_policy: 기준선 축적 중 (18/20)",
-      "pandemic: 기준선 축적 중 (18/20)",
-      "fx_shock: 기준선 축적 중 (18/20)",
-      "rate_shock: 기준선 축적 중 (18/20)"
+      "banking_stress: 기준선 축적 중 (19/20)",
+      "credit_event: 기준선 축적 중 (19/20)",
+      "liquidity_crisis: 기준선 축적 중 (19/20)",
+      "geopolitical: 기준선 축적 중 (19/20)",
+      "trade_policy: 기준선 축적 중 (19/20)",
+      "pandemic: 기준선 축적 중 (19/20)",
+      "fx_shock: 기준선 축적 중 (19/20)",
+      "rate_shock: 기준선 축적 중 (19/20)"
     ],
     "clusters": [],
     "observations": {
@@ -70,7 +70,7 @@
         "n_articles": 6,
         "n_sources": 6,
         "z": null,
-        "baseline_points": 18,
+        "baseline_points": 19,
         "top_titles": [
           "Central Bank imposes €3.25m fine on Coinbase’s Irish arm over safeguarding breaches - Irish Examiner",
           "IMF Warns Tokenisation Could Amplify Financial Risks - Business Today",
@@ -78,74 +78,76 @@
         ]
       },
       "credit_event": {
-        "n_articles": 69,
-        "n_sources": 56,
+        "n_articles": 76,
+        "n_sources": 64,
         "z": null,
-        "baseline_points": 18,
+        "baseline_points": 19,
         "top_titles": [
+          "McDermott Will & Schulte advises Genesis Healthcare on successful Chapter 11 restructuring, including nearly $1 billion sale of approximately 170 nursing homes - McDermott Will & Schulte",
           "Global default for Copilot features generally available - The GitHub Blog",
-          "West Palm Beach bakery files Chapter 11 bankruptcy with $2 million in liabilities - The Business Journals",
-          "ServiceLink Announces Leadership Changes Across Origination And Default - National Mortgage Professional"
+          "Getty Images Files for Chapter 11 at a ~$910M Run-Rate: 27% EBITDA Margins, 25% Fewer Subscribers, and $0 for Public Shareholders - saastr.com"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 1,
-        "n_sources": 1,
+        "n_articles": 4,
+        "n_sources": 4,
         "z": null,
-        "baseline_points": 18,
+        "baseline_points": 19,
         "top_titles": [
+          "AI Credit Crunch? - Yardeni QuickTakes",
+          "From Mobile Money Boom to Credit Crunch: IMF Exposes Uganda’s Financial Growth Challenges - Devdiscourse",
           "Where Has the Liquidity Gone? Who Is Withholding Billions from the Syrian Economy? - The Syrian Observer"
         ]
       },
       "geopolitical": {
         "n_articles": 100,
-        "n_sources": 83,
+        "n_sources": 87,
         "z": null,
-        "baseline_points": 18,
+        "baseline_points": 19,
         "top_titles": [
-          "Greece says it is implementing sanctions linked to Iran - Reuters",
-          "3 British Invasion Bands From 1975 Whose Melodies Still Echo Decades Later - American Songwriter",
-          "Darline Graham didn’t talk to Trump about Russia sanctions waiver during SC visit - The State"
+          "Trump Waives Sanctions Against Russia Just Before New Law Takes Effect - WSJ",
+          "Stamford Man Convicted in 2024 Home Invasion, Robbery and Sexual Assault in West Haven - CT.GOV-Connecticut's Official State Website (.gov)",
+          "The Taiwan Strait is not on the verge of war: The ‘2027 invasion’ countdown is a mirage - Fortune"
         ]
       },
       "trade_policy": {
-        "n_articles": 65,
-        "n_sources": 59,
+        "n_articles": 66,
+        "n_sources": 57,
         "z": null,
-        "baseline_points": 18,
+        "baseline_points": 19,
         "top_titles": [
+          "COMMENTARY: US tariff war is fueling Vietnam's coal boom - Reuters",
           "Intel Lobbying Rises as Senate Advances Chip Export Controls - Legis1",
-          "Hydro Flask maker aims tariff refunds at inventory, packaging - Supply Chain Dive",
-          "Congress must close this tariff loophole - The Hill"
+          "Small Business Update: Economic Outlook, Tariff Refunds, and Policy Priorities for 2027 - U.S. Chamber of Commerce"
         ]
       },
       "pandemic": {
-        "n_articles": 83,
-        "n_sources": 72,
+        "n_articles": 90,
+        "n_sources": 82,
         "z": null,
-        "baseline_points": 18,
+        "baseline_points": 19,
         "top_titles": [
+          "DR Congo: Ebola responders under pressure as outbreak expands - UN News",
           "Ebola Outbreak in Africa Reaches Widest Expansion Ever - The New York Times",
-          "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com",
-          "Penn Yan Academy closes early after report of potential weapon on campus prompts lockdown - 13WHAM-TV"
+          "WHO warns ‘more complex’ Ebola outbreak now present in 3 African countries - Al Jazeera"
         ]
       },
       "fx_shock": {
         "n_articles": 0,
         "n_sources": 0,
         "z": null,
-        "baseline_points": 18,
+        "baseline_points": 19,
         "top_titles": []
       },
       "rate_shock": {
-        "n_articles": 9,
-        "n_sources": 9,
+        "n_articles": 4,
+        "n_sources": 4,
         "z": null,
-        "baseline_points": 18,
+        "baseline_points": 19,
         "top_titles": [
-          "Bond selloff revives debate about euro zone banks' 'doom loop' - Reuters",
           "French Bond Yields Surge, Stirring Euro Zone Debt Concerns - Global Banking & Finance Review",
-          "French bond yields surge amid fiscal, political pressure - Breakingthenews.net"
+          "French bond yields surge amid fiscal, political pressure - Breakingthenews.net",
+          "Australian dairy economics | Victoria maintains dairy dominance as farm yields surge - https://en.edairynews.com/"
         ]
       }
     },
