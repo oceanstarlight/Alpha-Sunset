@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-23T04:36:29+00:00",
+  "collected_at": "2026-10-23T11:29:56+00:00",
   "as_of": "2026-10-22",
   "level": "NONE",
   "chain": [
@@ -17,9 +17,9 @@
     },
     {
       "단계": "사건 신호(B)",
-      "원인": "조회 실패 8/8건",
+      "원인": "사건 군집 없음",
       "근거": "규칙: 최근 24시간 기사 수 z ≥ 3.0 (직전 30일 관측 기준선) AND 언론사 ≥ 20곳, 출처 Google 뉴스 RSS",
-      "결과": "판단 불가"
+      "결과": "비활성"
     },
     {
       "단계": "종합 등급",
@@ -52,47 +52,38 @@
   },
   "news": {
     "active": false,
-    "status": "unavailable",
+    "status": "ok",
     "n_queries": 8,
-    "errors": [
-      "banking_stress: 기준선 축적 중 (19/20)",
-      "credit_event: 기준선 축적 중 (19/20)",
-      "liquidity_crisis: 기준선 축적 중 (19/20)",
-      "geopolitical: 기준선 축적 중 (19/20)",
-      "trade_policy: 기준선 축적 중 (19/20)",
-      "pandemic: 기준선 축적 중 (19/20)",
-      "fx_shock: 기준선 축적 중 (19/20)",
-      "rate_shock: 기준선 축적 중 (19/20)"
-    ],
+    "errors": [],
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 6,
-        "n_sources": 6,
-        "z": null,
-        "baseline_points": 19,
+        "n_articles": 4,
+        "n_sources": 4,
+        "z": 0.103,
+        "baseline_points": 20,
         "top_titles": [
           "Central Bank imposes €3.25m fine on Coinbase’s Irish arm over safeguarding breaches - Irish Examiner",
-          "IMF Warns Tokenisation Could Amplify Financial Risks - Business Today",
-          "Coinbase’s Ireland Arm Fined by Irish Central Bank Over Breaches - Bloomberg.com"
+          "Coinbase’s Ireland Arm Fined by Irish Central Bank Over Breaches - Bloomberg.com",
+          "Italy Busts Mafia 'Secret Bank' That Laundered Money Through Crypto, Seizes $24M - Cryptonews.net"
         ]
       },
       "credit_event": {
-        "n_articles": 76,
-        "n_sources": 64,
-        "z": null,
-        "baseline_points": 19,
+        "n_articles": 75,
+        "n_sources": 68,
+        "z": 0.615,
+        "baseline_points": 20,
         "top_titles": [
           "McDermott Will & Schulte advises Genesis Healthcare on successful Chapter 11 restructuring, including nearly $1 billion sale of approximately 170 nursing homes - McDermott Will & Schulte",
           "Global default for Copilot features generally available - The GitHub Blog",
-          "Getty Images Files for Chapter 11 at a ~$910M Run-Rate: 27% EBITDA Margins, 25% Fewer Subscribers, and $0 for Public Shareholders - saastr.com"
+          "France is flashing euro crisis signals. This time, the fault lines are different - CNBC"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 4,
-        "n_sources": 4,
-        "z": null,
-        "baseline_points": 19,
+        "n_articles": 19,
+        "n_sources": 5,
+        "z": 12.516,
+        "baseline_points": 20,
         "top_titles": [
           "AI Credit Crunch? - Yardeni QuickTakes",
           "From Mobile Money Boom to Credit Crunch: IMF Exposes Uganda’s Financial Growth Challenges - Devdiscourse",
@@ -101,52 +92,52 @@
       },
       "geopolitical": {
         "n_articles": 100,
-        "n_sources": 87,
-        "z": null,
-        "baseline_points": 19,
+        "n_sources": 95,
+        "z": 0.266,
+        "baseline_points": 20,
         "top_titles": [
-          "Trump Waives Sanctions Against Russia Just Before New Law Takes Effect - WSJ",
-          "Stamford Man Convicted in 2024 Home Invasion, Robbery and Sexual Assault in West Haven - CT.GOV-Connecticut's Official State Website (.gov)",
-          "The Taiwan Strait is not on the verge of war: The ‘2027 invasion’ countdown is a mirage - Fortune"
+          "Oil Futures Pull Back as U.S. Waives Some Russia Sanctions - WSJ",
+          "Norebo owner launches lawsuit against small newspaper over coverage of sanctions - SeafoodSource",
+          "Trump’s Iran sanctions run into limits - Semafor"
         ]
       },
       "trade_policy": {
-        "n_articles": 66,
-        "n_sources": 57,
-        "z": null,
-        "baseline_points": 19,
+        "n_articles": 70,
+        "n_sources": 61,
+        "z": -0.167,
+        "baseline_points": 20,
         "top_titles": [
-          "COMMENTARY: US tariff war is fueling Vietnam's coal boom - Reuters",
-          "Intel Lobbying Rises as Senate Advances Chip Export Controls - Legis1",
-          "Small Business Update: Economic Outlook, Tariff Refunds, and Policy Priorities for 2027 - U.S. Chamber of Commerce"
+          "Kansas manufacturing business responds to candidates’ conflicting accounts of tariff effects - Kansas Reflector",
+          "Signify beats profit expectations helped by US tariff refund - Reuters",
+          "Port Huron mayor welcomes Trump to Michigan city hurt by tariffs - Detroit Free Press"
         ]
       },
       "pandemic": {
-        "n_articles": 90,
+        "n_articles": 92,
         "n_sources": 82,
-        "z": null,
-        "baseline_points": 19,
+        "z": 0.357,
+        "baseline_points": 20,
         "top_titles": [
+          "Israel orders ‘full lockdown’ of West Bank after military kills 2 accused of attack - NBC News",
           "DR Congo: Ebola responders under pressure as outbreak expands - UN News",
-          "Ebola Outbreak in Africa Reaches Widest Expansion Ever - The New York Times",
-          "WHO warns ‘more complex’ Ebola outbreak now present in 3 African countries - Al Jazeera"
+          "Bird Flu Is Raging on a Mink Farm. It Could Spark a Human Pandemic, Experts Say, but Officials Won’t Act. - ProPublica"
         ]
       },
       "fx_shock": {
         "n_articles": 0,
         "n_sources": 0,
-        "z": null,
-        "baseline_points": 19,
+        "z": -0.955,
+        "baseline_points": 20,
         "top_titles": []
       },
       "rate_shock": {
-        "n_articles": 4,
-        "n_sources": 4,
-        "z": null,
-        "baseline_points": 19,
+        "n_articles": 10,
+        "n_sources": 9,
+        "z": 0.267,
+        "baseline_points": 20,
         "top_titles": [
-          "French Bond Yields Surge, Stirring Euro Zone Debt Concerns - Global Banking & Finance Review",
-          "French bond yields surge amid fiscal, political pressure - Breakingthenews.net",
+          "Global Market: French bond selloff raises debt concerns across Europe amid social unrest - The Economic Times",
+          "French Bond Yields Surge: Euro Zone's Debt-Laden Economies at Risk - Global Banking & Finance Review",
           "Australian dairy economics | Victoria maintains dairy dominance as farm yields surge - https://en.edairynews.com/"
         ]
       }
