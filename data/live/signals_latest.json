@@ -1,13 +1,13 @@
 {
-  "collected_at": "2026-10-23T16:58:38+00:00",
-  "as_of": "2026-10-22",
-  "level": "NONE",
+  "collected_at": "2026-10-23T21:20:08+00:00",
+  "as_of": "2026-10-23",
+  "level": "WATCH",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.52",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.52, VIX(변동성)(VIXCLS) z=+1.86, WTI 유가(DCOILWTICO) z=-0.61",
-      "결과": "비활성"
+      "원인": "미 10년물 금리(DGS10) z=-4.13, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.52",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=-4.13, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.52, VIX(변동성)(VIXCLS) z=+1.86",
+      "결과": "활성"
     },
     {
       "단계": "자금 흐름(C)",
@@ -23,21 +23,22 @@
     },
     {
       "단계": "종합 등급",
-      "원인": "A=비활성, C=비활성, B=비활성",
+      "원인": "A=활성, C=비활성, B=비활성",
       "근거": "등급 규칙(사전 등록 v2·v3): ALERT = B ∧ (A ∨ C), WATCH = 하나 이상 활성",
-      "결과": "NONE → 조치 없음"
+      "결과": "WATCH → 1단계: 자금 이상 알림"
     }
   ],
-  "money_alert": false,
+  "money_alert": true,
   "market": {
-    "active": false,
+    "active": true,
     "triggered": [
+      "DGS10",
       "BAMLH0A0HYM2"
     ],
     "zscores": {
       "VIXCLS": 1.86,
-      "T10Y2Y": -0.33,
-      "DGS10": 0.13,
+      "T10Y2Y": 0.03,
+      "DGS10": -4.13,
       "DCOILWTICO": -0.61,
       "BAMLH0A0HYM2": 2.52
     }
@@ -60,87 +61,86 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 3,
-        "n_sources": 3,
-        "z": -0.602,
-        "baseline_points": 21,
+        "n_articles": 2,
+        "n_sources": 1,
+        "z": -1.297,
+        "baseline_points": 22,
         "top_titles": [
           "Banks see ₹5.19 lakh crore deposit outflow, credit shrinks ₹2.52 lakh crore - The Economic Times",
-          "Nifty Bank: Failure To Reclaim 50-DEMA Weighs On Sentiment - https://www.fintechbiznews.com/",
-          "How Silicon Valley Bank Collapsed In 48 Hours — The Bank Run Explained Montréal (sshvsyLsnm) - Unisba Media"
+          "'Nothing to fear': Top bureaucrat says IDBI staff, pensioners' service conditions won't change after Fairf - The Economic Times"
         ]
       },
       "credit_event": {
-        "n_articles": 71,
-        "n_sources": 66,
-        "z": 0.294,
-        "baseline_points": 21,
+        "n_articles": 68,
+        "n_sources": 65,
+        "z": 0.056,
+        "baseline_points": 22,
         "top_titles": [
-          "Getty Images Files Prepackaged Chapter 11 in Delaware - ABF Journal",
-          "McDermott Will & Schulte advises Genesis Healthcare on successful Chapter 11 restructuring, including nearly $1 billion sale of approximately 170 nursing homes - McDermott Will & Schulte",
-          "France is flashing euro crisis signals. This time, the fault lines are different - CNBC"
+          "Case Summary: RiverStreet Chapter 11 - Bondoro",
+          "Owner files Chapter 11 to avoid foreclosure on shuttered West Palm Beach hotel - The Business Journals",
+          "Another day, another default as more Oakland offices face distress - The Real Deal"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 29,
-        "n_sources": 7,
-        "z": 6.904,
-        "baseline_points": 21,
+        "n_articles": 28,
+        "n_sources": 6,
+        "z": 3.573,
+        "baseline_points": 22,
         "top_titles": [
           "AI Credit Crunch? - Yardeni QuickTakes",
           "From Mobile Money Boom to Credit Crunch: IMF Exposes Uganda’s Financial Growth Challenges - Devdiscourse",
-          "Where Has the Liquidity Gone? Who Is Withholding Billions from the Syrian Economy? - The Syrian Observer"
+          "Silver Traders Face a Liquidity Crunch as Oil and Tech Losses Collide - AD HOC NEWS"
         ]
       },
       "geopolitical": {
-        "n_articles": 82,
-        "n_sources": 71,
-        "z": -16.075,
-        "baseline_points": 21,
+        "n_articles": 100,
+        "n_sources": 91,
+        "z": 0.278,
+        "baseline_points": 22,
         "top_titles": [
-          "Oil Futures Pull Back as U.S. Waives Some Russia Sanctions - WSJ",
-          "New electronics reach Iran, but prices soar as gov’t fees, US sanctions hit - Al Jazeera",
-          "The Kremlin says a first tanker of Russian diesel sets sail for the U.S. despite Ukraine's protests - PBS"
+          "Trump Waives Sanctions Against Russia Just Before New Law Takes Effect - WSJ",
+          "Netanyahu Eyes Crypto To Counter Sanctions, Warns US Military Aid Will End - i24NEWS",
+          "Ukrainian civilians killed in Russian attacks following Trump’s easing of sanctions - Scripps News"
         ]
       },
       "trade_policy": {
-        "n_articles": 75,
-        "n_sources": 63,
-        "z": 0.356,
-        "baseline_points": 21,
+        "n_articles": 83,
+        "n_sources": 66,
+        "z": 1.196,
+        "baseline_points": 22,
         "top_titles": [
-          "Kansas manufacturing business responds to candidates’ conflicting accounts of tariff effects - Kansas Reflector",
-          "US-Canada trade war creates winners and losers - DW.com",
-          "China proposes new export controls on AI, life sciences and photovoltaic technologies - Hogan Lovells Cadwalader"
+          "Exclusive | Trump to Remove Some Tariffs on Canada in Bid to Help Susan Collins - WSJ",
+          "U.S. dropping some Canada tariffs, Susan Collins says as trade war looms over Maine Senate race - CNBC",
+          "Trump administration cancels some Canada tariffs amid close midterm races - NBC News"
         ]
       },
       "pandemic": {
-        "n_articles": 92,
-        "n_sources": 77,
-        "z": 0.348,
-        "baseline_points": 21,
+        "n_articles": 94,
+        "n_sources": 80,
+        "z": 0.493,
+        "baseline_points": 22,
         "top_titles": [
-          "Israel orders ‘full lockdown’ of occupied West Bank after 2 soldiers killed in shooting attack - NBC News",
+          "Israel orders sweeping West Bank operation after military says 2 soldiers were killed in attack that left 2 gunmen dead - NBC News",
           "Israel preparing full lockdown of occupied West Bank after Hebron gunfight - Al Jazeera",
-          "Menasha High School on lockdown; police responding - WLUK"
+          "Menasha High locked down after reported community situation; police find no threat - WLUK"
         ]
       },
       "fx_shock": {
         "n_articles": 0,
         "n_sources": 0,
-        "z": -0.913,
-        "baseline_points": 21,
+        "z": -0.876,
+        "baseline_points": 22,
         "top_titles": []
       },
       "rate_shock": {
-        "n_articles": 9,
-        "n_sources": 7,
-        "z": 0.033,
-        "baseline_points": 21,
+        "n_articles": 4,
+        "n_sources": 3,
+        "z": -1.137,
+        "baseline_points": 22,
         "top_titles": [
           "Global Market: French bond selloff raises debt concerns across Europe amid social unrest - The Economic Times",
-          "French Bond Yields Surge: Euro Zone's Debt-Laden Economies at Risk - Global Banking & Finance Review",
-          "Australian dairy economics | Victoria maintains dairy dominance as farm yields surge - https://en.edairynews.com/"
+          "Ready for a French test?: Five questions for the ECB - WTVB",
+          "US stocks today: US stocks open lower after AI rout; SpaceX worries hit telecoms - The Economic Times"
         ]
       }
     },
