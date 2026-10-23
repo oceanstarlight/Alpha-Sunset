@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-10-23T11:29:56+00:00",
+  "collected_at": "2026-10-23T16:58:38+00:00",
   "as_of": "2026-10-22",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.19, WTI 유가(DCOILWTICO) z=-0.61, VIX(변동성)(VIXCLS) z=-0.53",
+      "원인": "미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.52",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.52, VIX(변동성)(VIXCLS) z=+1.86, WTI 유가(DCOILWTICO) z=-0.61",
       "결과": "비활성"
     },
     {
@@ -31,13 +31,15 @@
   "money_alert": false,
   "market": {
     "active": false,
-    "triggered": [],
+    "triggered": [
+      "BAMLH0A0HYM2"
+    ],
     "zscores": {
-      "VIXCLS": -0.53,
+      "VIXCLS": 1.86,
       "T10Y2Y": -0.33,
       "DGS10": 0.13,
       "DCOILWTICO": -0.61,
-      "BAMLH0A0HYM2": -1.19
+      "BAMLH0A0HYM2": 2.52
     }
   },
   "flow": {
@@ -58,32 +60,32 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 4,
-        "n_sources": 4,
-        "z": 0.103,
-        "baseline_points": 20,
+        "n_articles": 3,
+        "n_sources": 3,
+        "z": -0.602,
+        "baseline_points": 21,
         "top_titles": [
-          "Central Bank imposes €3.25m fine on Coinbase’s Irish arm over safeguarding breaches - Irish Examiner",
-          "Coinbase’s Ireland Arm Fined by Irish Central Bank Over Breaches - Bloomberg.com",
-          "Italy Busts Mafia 'Secret Bank' That Laundered Money Through Crypto, Seizes $24M - Cryptonews.net"
+          "Banks see ₹5.19 lakh crore deposit outflow, credit shrinks ₹2.52 lakh crore - The Economic Times",
+          "Nifty Bank: Failure To Reclaim 50-DEMA Weighs On Sentiment - https://www.fintechbiznews.com/",
+          "How Silicon Valley Bank Collapsed In 48 Hours — The Bank Run Explained Montréal (sshvsyLsnm) - Unisba Media"
         ]
       },
       "credit_event": {
-        "n_articles": 75,
-        "n_sources": 68,
-        "z": 0.615,
-        "baseline_points": 20,
+        "n_articles": 71,
+        "n_sources": 66,
+        "z": 0.294,
+        "baseline_points": 21,
         "top_titles": [
+          "Getty Images Files Prepackaged Chapter 11 in Delaware - ABF Journal",
           "McDermott Will & Schulte advises Genesis Healthcare on successful Chapter 11 restructuring, including nearly $1 billion sale of approximately 170 nursing homes - McDermott Will & Schulte",
-          "Global default for Copilot features generally available - The GitHub Blog",
           "France is flashing euro crisis signals. This time, the fault lines are different - CNBC"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 19,
-        "n_sources": 5,
-        "z": 12.516,
-        "baseline_points": 20,
+        "n_articles": 29,
+        "n_sources": 7,
+        "z": 6.904,
+        "baseline_points": 21,
         "top_titles": [
           "AI Credit Crunch? - Yardeni QuickTakes",
           "From Mobile Money Boom to Credit Crunch: IMF Exposes Uganda’s Financial Growth Challenges - Devdiscourse",
@@ -91,50 +93,50 @@
         ]
       },
       "geopolitical": {
-        "n_articles": 100,
-        "n_sources": 95,
-        "z": 0.266,
-        "baseline_points": 20,
+        "n_articles": 82,
+        "n_sources": 71,
+        "z": -16.075,
+        "baseline_points": 21,
         "top_titles": [
           "Oil Futures Pull Back as U.S. Waives Some Russia Sanctions - WSJ",
-          "Norebo owner launches lawsuit against small newspaper over coverage of sanctions - SeafoodSource",
-          "Trump’s Iran sanctions run into limits - Semafor"
+          "New electronics reach Iran, but prices soar as gov’t fees, US sanctions hit - Al Jazeera",
+          "The Kremlin says a first tanker of Russian diesel sets sail for the U.S. despite Ukraine's protests - PBS"
         ]
       },
       "trade_policy": {
-        "n_articles": 70,
-        "n_sources": 61,
-        "z": -0.167,
-        "baseline_points": 20,
+        "n_articles": 75,
+        "n_sources": 63,
+        "z": 0.356,
+        "baseline_points": 21,
         "top_titles": [
           "Kansas manufacturing business responds to candidates’ conflicting accounts of tariff effects - Kansas Reflector",
-          "Signify beats profit expectations helped by US tariff refund - Reuters",
-          "Port Huron mayor welcomes Trump to Michigan city hurt by tariffs - Detroit Free Press"
+          "US-Canada trade war creates winners and losers - DW.com",
+          "China proposes new export controls on AI, life sciences and photovoltaic technologies - Hogan Lovells Cadwalader"
         ]
       },
       "pandemic": {
         "n_articles": 92,
-        "n_sources": 82,
-        "z": 0.357,
-        "baseline_points": 20,
+        "n_sources": 77,
+        "z": 0.348,
+        "baseline_points": 21,
         "top_titles": [
-          "Israel orders ‘full lockdown’ of West Bank after military kills 2 accused of attack - NBC News",
-          "DR Congo: Ebola responders under pressure as outbreak expands - UN News",
-          "Bird Flu Is Raging on a Mink Farm. It Could Spark a Human Pandemic, Experts Say, but Officials Won’t Act. - ProPublica"
+          "Israel orders ‘full lockdown’ of occupied West Bank after 2 soldiers killed in shooting attack - NBC News",
+          "Israel preparing full lockdown of occupied West Bank after Hebron gunfight - Al Jazeera",
+          "Menasha High School on lockdown; police responding - WLUK"
         ]
       },
       "fx_shock": {
         "n_articles": 0,
         "n_sources": 0,
-        "z": -0.955,
-        "baseline_points": 20,
+        "z": -0.913,
+        "baseline_points": 21,
         "top_titles": []
       },
       "rate_shock": {
-        "n_articles": 10,
-        "n_sources": 9,
-        "z": 0.267,
-        "baseline_points": 20,
+        "n_articles": 9,
+        "n_sources": 7,
+        "z": 0.033,
+        "baseline_points": 21,
         "top_titles": [
           "Global Market: French bond selloff raises debt concerns across Europe amid social unrest - The Economic Times",
           "French Bond Yields Surge: Euro Zone's Debt-Laden Economies at Risk - Global Banking & Finance Review",
