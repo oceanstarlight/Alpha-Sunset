@@ -183,6 +183,30 @@ def all_clauses() -> dict:
     return out
 
 
+def status_strip() -> None:
+    """탭 위 상황판 띠: 데이터 → 감시 → 브리핑 → 승인. 어느 탭에서든 현재 위치와 다음에 갈 탭이 보인다."""
+    b = current_briefing()
+    if mode == "백테스트 재생":
+        e = events_by_id()[event_id]
+        df = replay_signals(event_id)
+        fa = df[df["등급"] == "ALERT"]["날짜"].min()
+        watch = dashboard.step_watch_replay(fa if pd.notna(fa) else None, int(((df["날짜"] < e.date) & df["자금 이상 알림"]).sum()), e.date)
+    elif is_local:
+        watch = dashboard.step_watch(services.load_local_signals(), local=True)
+    else:
+        watch = dashboard.step_watch(st.session_state.get("signals") or services.load_collected_signals(with_panel=False), local=False)
+    steps = [dashboard.step_data(st.session_state.get("uploaded_portfolio"), st.session_state.get("uploaded_playbooks")),
+             watch, dashboard.step_briefing(b, services.briefing_kind(b) if b else None),
+             dashboard.step_approval(b, audit.read("app"))]
+    st.caption(f"{'백테스트 재생 · ' + events_by_id()[event_id].title if mode == '백테스트 재생' else '라이브'} — 업무 흐름")
+    for col, s in zip(st.columns(4), steps):
+        with col.container(border=True, height=128):
+            st.markdown(f"**{s.no} {s.name}** &nbsp; {s.icon} {s.status}")
+            st.caption(f"{s.detail}  \n→ '{s.tab}' 탭")
+
+
+status_strip()
+
 tab_map, tab_watch, tab_brief, tab_approve, tab_bt, tab_learn, tab_input = st.tabs(
     ["세계 금융 지도", "감시", "브리핑", "승인", "백테스트", "학습 층", "데이터 입력"])
 
@@ -206,7 +230,6 @@ def map_impact(event_json: str, snapshot: str) -> dict[str, float] | None:
 
 
 with tab_map:
-    map_summary = st.empty()  # 맨 위 요약 (아래에서 계산 후 채움)
     st.subheader(f"금융 지도 · {LOCAL['name']} 중심" if is_local else "세계 금융 지도")
     live = mode == "라이브"
     b = current_briefing()
@@ -255,8 +278,6 @@ with tab_map:
         m1.metric(f"{LOCAL['name']} 보유 비중", f"{loc.get(geo.LAYERS['exposure']['label'], 0):.1%}")
         m2.metric(f"{LOCAL['name']} 영향도", f"{loc.get(geo.LAYERS['impact']['label'], 0):.4f}")
         m3.metric(f"{LOCAL['name']} 사건 지역", "예" if geo.LAYERS["event"]["label"] in loc.index else "아니오")
-    with map_summary.container():
-        summary_box(dashboard.map_view(map_event, exp, imp))
     g1, g2 = st.columns(2)
     chart(dashboard.country_chart(exp, "국가별 보유 비중 상위"), g1)
     chart(dashboard.country_chart(imp, "국가별 사건 영향도 상위", fmt=".3f"), g2)
@@ -294,8 +315,8 @@ with tab_watch:
             with st.expander("판단 근거 표 (원인 → 근거 → 결과)", expanded=lv == AlertLevel.ALERT):
                 show_chain(loc["chain"])
             if lv != AlertLevel.ALERT:
-                st.info("자동 대응안은 사건이 확인된 ALERT에서만 만든다 (원칙). 지금 상황에서 대응 문서·노출을 미리 보려면 "
-                        "모드를 '라이브'로 두고 브리핑 탭의 '🧪 시나리오 브리핑'에 가정 사건을 넣는다.")
+                st.info("자동 대응안(알림)은 사건이 확인된 ALERT에서만 만든다. 지금 상황으로 브리핑을 보려면 "
+                        "모드 '라이브' → 브리핑 탭 '▶ 지금 브리핑 실행'.")
             if loc.get("kr_news"):
                 with st.expander("한국 뉴스 주제별 관측"):
                     obs = pd.DataFrame(loc["kr_news"]["observations"]).T.reset_index(names="주제")
@@ -395,7 +416,7 @@ with tab_watch:
             if sig["fred_error"]:
                 st.warning(f"FRED 갱신 실패, 커밋된 캐시 사용: {sig['fred_error']}")
             if not news["clusters"]:
-                st.caption("탐지된 사건이 없어 자동 브리핑은 만들지 않는다. 가정 사건으로 보려면 브리핑 탭의 '시나리오 브리핑'을 쓴다.")
+                st.caption("탐지된 사건이 없어 자동 브리핑은 만들지 않는다. 직접 보려면 브리핑 탭 '▶ 지금 브리핑 실행'.")
             if news["clusters"] and st.button("탐지 사건 브리핑 생성"):
                 with st.spinner("에이전트 실행 중…"):
                     st.session_state["live_briefing"] = services.run_live(sig, **uploaded_args())
@@ -407,6 +428,31 @@ TYPE_KO = {"banking_stress": "은행 위기", "liquidity_crisis": "유동성 위
            "rate_shock": "금리 충격", "fx_shock": "환율 충격", "trade_policy": "무역·관세", "geopolitical": "지정학",
            "pandemic": "감염병", "supply_chain": "공급망", "regulatory": "규제", "other": "기타"}
 DURATION_KO = {"shock": "단기 충격", "weeks": "수 주", "months": "수 개월", "structural": "구조적"}
+
+
+def ondemand_panel() -> None:
+    """감시 등급과 상관없이 지금 브리핑을 직접 실행 (현재 감시 신호 기준)."""
+    sig = services.load_local_signals() if is_local else (st.session_state.get("signals") or services.get_signals())
+    if not sig:
+        st.warning("감시 신호가 아직 없다. 감시 탭에서 조회한 뒤 실행한다.")
+        return
+    topics, default, why = services.ondemand_topics(sig)
+    with st.container(border=True):
+        st.markdown(f"**▶ 지금 브리핑 실행** — {'대한민국' if is_local else '글로벌'} 감시 등급 "
+                    f":{LEVEL_COLOR[AlertLevel(sig.get('level', 'NONE'))]}[{sig.get('level', 'NONE')}] · 사건 확인 여부와 상관없이 실행")
+        if not topics:
+            st.caption("뉴스 관측이 없어 주제를 고를 수 없다. 시나리오 브리핑을 쓴다.")
+            return
+        c1, c2 = st.columns([3, 1])
+        topic = c1.selectbox("주제", topics, index=topics.index(default) if default in topics else 0,
+                             format_func=lambda v: f"{TYPE_KO.get(v, v)} ({v})", key=f"od_topic_{market_view}")
+        c1.caption(f"기본 선택: {why}")
+        c2.write("")
+        if c2.button("지금 브리핑 실행", type="primary", key="od_run"):
+            event = services.ondemand_event(sig, topic, local=is_local)
+            with st.spinner("에이전트 실행 중 (직접 실행)…"):
+                st.session_state["live_briefing"] = services.run_ondemand(event, **uploaded_args())
+            st.rerun()
 
 
 def scenario_form(expanded: bool) -> None:
@@ -478,16 +524,20 @@ with tab_brief:
             st.rerun()
         b = current_briefing()
     if mode == "라이브":
-        scenario_form(expanded=b is None)
+        ondemand_panel()
+        scenario_form(expanded=False)
         b = current_briefing()
     if b is None:
-        st.info("브리핑이 없다. 라이브 모드는 감시 탭에서 사건이 탐지되면 생성하거나, 위 '시나리오 브리핑'으로 가정 사건을 넣어 만든다.")
+        st.info("브리핑이 없다. 위 '지금 브리핑 실행'을 누르거나, 가정 사건은 '시나리오 브리핑'에 넣는다.")
     else:
+        kind = services.briefing_kind(b)
         with brief_summary.container():
-            summary_box(dashboard.briefing(b, scenario=services.is_scenario(b)))
+            summary_box(dashboard.briefing(b, kind=kind))
         synthetic_badge()
-        if services.is_scenario(b):
+        if kind == "scenario":
             st.warning("🧪 " + SCENARIO_NOTE + ". 문서 적합도·노출·확인 항목은 이 가정 사건 기준이다.")
+        elif kind == "ondemand":
+            st.info("▶ 직접 실행 브리핑 — 자동 감시가 사건을 확인하지 않은 상태일 수 있다. 사건은 현재 감시 신호(뉴스 관측·시장 z)로 만들었다.")
         st.download_button("대응안 엑셀로 내보내기", data=export.briefing_xlsx(
             b, clause_text={k: c.text for k, c in all_clauses().items()}), file_name=f"alpha_sunset_{b.event.id}.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
@@ -593,7 +643,6 @@ with tab_approve:
 
 with tab_bt:
     res = services.get_backtest_results()
-    summary_box(dashboard.backtest(res, is_local))
     g1, g2 = st.columns([3, 2])
     chart(dashboard.capture_chart(res.get("v6") or {}), g1)
     chart(dashboard.confusion_chart(((res.get("clause_eval") or {}).get("overall") or {}).get("confusion")), g2)

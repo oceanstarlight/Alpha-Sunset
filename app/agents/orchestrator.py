@@ -401,15 +401,19 @@ def run_live_briefing(event: Event, panel: dict, llm: LLMClient | None = None, p
 SCENARIO_NOTE = "가정 시나리오 — 사건은 사용자 입력이고 자동 감시 근거가 아니다"
 
 
+ONDEMAND_NOTE = "직접 실행 — 자동 감시가 사건을 확인하지 않은 상태에서 현재 신호로 만든 브리핑"
+
+
 def run_scenario_briefing(event: Event, panel: dict, llm: LLMClient | None = None, portfolio: Portfolio | None = None,
-                          holdings: list[dict] | None = None, playbooks: list | None = None) -> Briefing:
-    """사용자가 입력한 가정 사건으로 브리핑 (sandbox DB — 라이브 학습 기록과 섞지 않는다). 시장·자금 신호는 현재값."""
+                          holdings: list[dict] | None = None, playbooks: list | None = None,
+                          note_head: str = SCENARIO_NOTE) -> Briefing:
+    """사용자가 실행한 브리핑 (가정 시나리오·직접 실행). sandbox DB — 라이브 학습 기록과 섞지 않는다. 시장·자금 신호는 현재값."""
     from app.corpus import load_portfolio
 
     llm = llm or LLMClient(db_mode="sandbox")
     index, doc_note = _index(playbooks, llm)
     pf_note = f"업로드 포트폴리오 '{portfolio.institution}' 기준" if portfolio is not None else ""
-    note = " · ".join(x for x in (SCENARIO_NOTE, pf_note, doc_note) if x)
+    note = " · ".join(x for x in (note_head, pf_note, doc_note) if x)
     ctx = new_context(mode="sandbox", as_of=event.date, events=[event], portfolio=portfolio or load_portfolio(),
                       index=index, llm=llm, panel=panel, live=True, holdings=holdings, portfolio_note=note)
     return orchestrate(ctx, f"{event.date.isoformat()} 기준 가정 사건의 대응문서 적합도와 노출을 분석해 브리핑을 만들어라.")

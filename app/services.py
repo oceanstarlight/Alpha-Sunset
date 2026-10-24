@@ -175,6 +175,66 @@ def is_scenario(b: Briefing) -> bool:
     return b.event.id.startswith("scenario_")
 
 
+def briefing_kind(b: Briefing) -> str:
+    """auto(자동 감시 사건) / ondemand(직접 실행, 사건 미확인) / scenario(가정 사건)."""
+    return "scenario" if b.event.id.startswith("scenario_") else "ondemand" if b.event.id.startswith("ondemand_") else "auto"
+
+
+def ondemand_topics(signals: dict) -> tuple[list[str], str | None, str]:
+    """직접 실행 브리핑의 주제 후보와 기본값·선택 이유. 신호 dict = 글로벌 수집 결과 또는 로컬 kr_latest."""
+    news = signals.get("news") or signals.get("kr_news") or {}
+    obs = news.get("observations") or {}
+    topics = list(obs)
+    if news.get("clusters"):
+        top = news["clusters"][0]["event_type"]
+        return topics, top, "기사량 급증으로 탐지된 사건"
+    scored = [(t, o["z"]) for t, o in obs.items() if o.get("z") is not None]
+    if scored:
+        t, z = max(scored, key=lambda x: x[1])
+        return topics, t, f"급증 기준 미만이지만 평소 대비 가장 높은 주제 (z {z:+.2f})"
+    if obs:
+        t = max(obs, key=lambda k: obs[k].get("n_articles", 0))
+        return topics, t, f"기준선이 쌓이는 중이라 기사 수가 가장 많은 주제 ({obs[t].get('n_articles', 0)}건)"
+    return topics, None, "뉴스 관측 없음"
+
+
+def ondemand_event(signals: dict, topic: str, local: bool, on: date | None = None) -> Event:
+    """현재 감시 신호(뉴스 관측·시장 z)를 근거로 직접 실행 브리핑용 사건을 만든다 (LLM 구조화 없이 결정적)."""
+    from app.agents.matcher import RULE_CHANNELS
+    from app.schemas import Duration, EventType
+
+    news = signals.get("news") or signals.get("kr_news") or {}
+    o = (news.get("observations") or {}).get(topic, {})
+    market = signals.get("market") or signals.get("kr_market") or {}
+    z = market.get("zscores") or {}
+    level = signals.get("level", "NONE")
+    lines = [f"현재 감시 등급 {level}. 자동 감시가 사건을 확인하지 않은 상태에서 사용자가 직접 실행했다." if not news.get("clusters")
+             else f"현재 감시 등급 {level}. 기사량 급증으로 탐지된 사건."]
+    if o:
+        lines.append(f"{topic} 관련 최근 24시간 기사 {o.get('n_articles', 0)}건·언론사 {o.get('n_sources', 0)}곳"
+                     + (f", 평소 대비 z {o['z']:+.2f}" if o.get("z") is not None else ", 기준선 축적 중"))
+    lines += [f"- {t}" for t in (o.get("top_titles") or [])[:3]]
+    if z:
+        top = sorted(((k, v) for k, v in z.items() if v is not None), key=lambda kv: -abs(kv[1]))[:3]
+        lines.append("시장 z: " + ", ".join(f"{k} {v:+.2f}" for k, v in top))
+    etype = EventType(topic) if topic in EventType._value2member_map_ else EventType.other
+    on = on or date.today()
+    return Event(id=f"ondemand_{datetime.now():%Y%m%d_%H%M%S}_{etype.value}", date=on,
+                 title=f"현재 신호 점검 — {etype.value} ({'대한민국' if local else '글로벌'}, {on})", summary="\n".join(lines),
+                 type=etype, channels=RULE_CHANNELS[etype], regions=["KR"] if local else ["GLOBAL"],
+                 duration=Duration.weeks, severity={"ALERT": 4, "WATCH": 3}.get(level, 2),
+                 sources=["감시 신호 (Google 뉴스 RSS·FRED·ECOS)"])
+
+
+def run_ondemand(event: Event, portfolio=None, holdings: list[dict] | None = None, playbooks: list | None = None) -> Briefing:
+    """직접 실행 브리핑 (사건 미확인 상태 포함). sandbox 기록, 감사 로그 mode=ondemand."""
+    llm = LLMClient(db_mode="sandbox")
+    b = orchestrator.run_scenario_briefing(event, load_panel(sentinel.panel_series_ids()), llm, portfolio=portfolio,
+                                           holdings=holdings, playbooks=playbooks, note_head=orchestrator.ONDEMAND_NOTE)
+    audit_briefing(b, "ondemand", get_settings().llm_provider, portfolio, playbooks)
+    return b
+
+
 def audit_briefing(b: Briefing, mode: str, provider: str, portfolio=None, playbooks: list | None = None,
                    source: str = "app") -> None:
     """브리핑 생성 감사 기록: 무엇을 근거로 어떤 문서를 올렸는지 (보유 종목명은 남기지 않는다)."""

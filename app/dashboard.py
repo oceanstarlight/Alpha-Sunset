@@ -85,10 +85,10 @@ def _next_step(level: str, news: dict | None) -> str:
     if level == "ALERT":
         return "→ **할 일**: 대응안 브리핑을 확인하고 승인 탭에서 결정"
     if level == "WATCH":
-        return "→ **할 일**: 사건 확인 전까지 감시 유지 (자동 대응안은 ALERT에서만) · 미리 보려면 시나리오 브리핑"
+        return "→ **할 일**: 사건 확인 전까지 감시 유지 (자동 대응안은 ALERT에서만) · 지금 보려면 브리핑 탭 ▶ 지금 브리핑 실행"
     if news and news.get("status") == "unavailable":
-        return "→ **할 일**: 없음. 사건 판단은 기준선이 차면 시작 · 미리 보려면 브리핑 탭 시나리오 브리핑"
-    return "→ **할 일**: 없음 · 미리 보려면 브리핑 탭 시나리오 브리핑"
+        return "→ **할 일**: 없음. 사건 판단은 기준선이 차면 시작 · 지금 보려면 브리핑 탭 ▶ 지금 브리핑 실행"
+    return "→ **할 일**: 없음 · 지금 보려면 브리핑 탭 ▶ 지금 브리핑 실행"
 
 
 def watch_local(loc: dict) -> Summary:
@@ -135,7 +135,8 @@ def watch_replay(df: pd.DataFrame, event_title: str, event_date) -> Summary:
     return Summary(tone, f"재생: {event_title}", bullets)
 
 
-def briefing(b: Any, scenario: bool = False) -> Summary:
+def briefing(b: Any, kind: str = "auto") -> Summary:
+    """kind: auto(자동 감시 사건) / ondemand(직접 실행) / scenario(가정 사건)."""
     level = b.alert_level.value
     fits = b.match.doc_fits
     bullets = []
@@ -159,8 +160,9 @@ def briefing(b: Any, scenario: bool = False) -> Summary:
     if b.match.low_confidence:
         bullets.append("⚠️ 판정 평균 신뢰도 낮음 — 사람 확인 필요")
     bullets.append("→ **할 일**: 아래 1위 문서 조항과 확인 항목 검토 후 승인 탭에서 결정")
-    head = ("🧪 가정 시나리오 · " if scenario else "") + f"{LEVEL_KO.get(level, level)} · {b.event.title}"
-    return Summary("blue" if scenario else LEVEL_TONE.get(level, "gray"), head, bullets)
+    prefix = {"scenario": "🧪 가정 시나리오 · ", "ondemand": "▶ 직접 실행 · "}.get(kind, "")
+    head = prefix + (b.event.title if kind == "ondemand" else f"{LEVEL_KO.get(level, level)} · {b.event.title}")
+    return Summary("blue" if kind != "auto" else LEVEL_TONE.get(level, "gray"), head, bullets)
 
 
 def approval(b: Any, records: list[dict]) -> Summary:
@@ -179,34 +181,6 @@ def approval(b: Any, records: list[dict]) -> Summary:
                f"**문서 피드백**: {len(fb)}건 (유용 {useful} · 부적합 {len(fb) - useful})",
                "→ **할 일**: " + ("없음 (결정 기록됨, 감사 로그에 남음)" if last else "문서별 유용/부적합 표시 후 승인 또는 반려")]
     return Summary(tone, head, bullets)
-
-
-def backtest(res: dict, local: bool) -> Summary:
-    bullets = []
-    v6 = res.get("v6") or {}
-    g = (v6.get("global") or {}).get("adopted_full_period") or (v6.get("global") or {}).get("current_full_period")
-    if g:
-        bullets.append(f"**글로벌 사건 포착**: {g['caught']}/{g['n_events']} ({g['caught_rate']:.0%}) vs 우연 {g['base_rate_caught']:.0%} "
-                       f"→ {'🟢 우연보다 확실히 나음' if g['p_value_caught'] < 0.05 else '⚪ 우연과 구분 안 됨'} (p={g['p_value_caught']:.4f})")
-        bullets.append(f"**평상시 알림 비율**: {g['calm_alert_rate']:.1%} · 사건 전 평균 선행 {g['mean_lead_days']}일")
-    k = (v6.get("local_kr") or {}).get("current_full_period")
-    if k:
-        bullets.append(f"**한국 사건 포착**: {k['caught']}/{k['n_events']} vs 우연 {k['base_rate_caught']:.0%} → "
-                       f"{'🟢 우연보다 나음' if k['p_value_caught'] < 0.05 else '⚪ 아직 우연과 구분 안 됨 — 보조 지표'} (p={k['p_value_caught']:.2f})")
-    ce = (res.get("clause_eval") or {}).get("overall")
-    if ce:
-        ba = ce["binary_actionable"]
-        bullets.append(f"**조항 판정 (전수 라벨 576건)**: 정확도 {ce['accuracy']:.2f} · κ {ce['kappa']:.2f} · "
-                       f"실행 대상 재현율 {ba['recall']:.2f} / 정밀도 {ba['precision']:.2f} → 놓침은 적고 과잉은 사람이 거름")
-    bt = (res.get("backtest") or {}).get("summary")
-    if bt:
-        bullets.append(f"**6개 사건 재생**: 경보 재현 {bt['alerts_reproduced']}/{bt['n_events']} · 꼭 볼 문서 top3 적중 {bt['doc_top3_hit']:.2f} · "
-                       f"노출 경로 재현율 {bt['path_recall']:.2f}")
-    sig = bool(g and g["p_value_caught"] < 0.05)
-    head = "검증 요약 — " + ("글로벌 신호는 우연보다 확실히 나음" if sig else "글로벌 신호 유의성 미확인")
-    if local and k:
-        head += ", 한국 신호는 " + ("유의" if k["p_value_caught"] < 0.05 else "아직 보조 지표")
-    return Summary("green" if sig else "gray", head, bullets)
 
 
 def learner(enabled: bool, docs: list[dict], delta: float | None) -> Summary:
@@ -236,24 +210,6 @@ def data_input(portfolio: Any, holdings: list[dict] | None, playbooks: list | No
     bullets.append("→ 보유 종목명은 외부 LLM에 보내지 않는다 (표 구조 요약만 전송, 끌 수 있음)")
     tone = "green" if portfolio is not None or playbooks else "gray"
     return Summary(tone, "업로드 데이터 반영 상태", bullets)
-
-
-def map_view(event: Any, exposure: dict[str, float] | None, impact: dict[str, float] | None) -> Summary:
-    bullets = []
-    if event is not None:
-        bullets.append(f"**사건**: {event.title} · 지역 {', '.join(event.regions) or '-'} · 심각도 {event.severity}/5")
-    else:
-        bullets.append("**사건**: 표시할 사건 없음 (라이브 브리핑이 있으면 표시)")
-    if exposure:
-        top = sorted(exposure.items(), key=lambda kv: -kv[1])[:3]
-        bullets.append("**보유 비중 상위**: " + ", ".join(f"{c} {v:.1%}" for c, v in top))
-    else:
-        bullets.append("**보유 비중**: 이 시점 보유 스냅샷 없음")
-    if impact:
-        top = sorted(impact.items(), key=lambda kv: -kv[1])[:3]
-        bullets.append("**사건 영향 상위**: " + ", ".join(f"{c} {v:.3f}" for c, v in top))
-    tone = "orange" if impact else "gray"
-    return Summary(tone, "지도 요약", bullets)
 
 
 # ---------- 그래프 ----------
@@ -446,3 +402,83 @@ def country_chart(values: dict[str, float] | None, title: str, fmt: str = ".1%",
         x=alt.X("값:Q", axis=alt.Axis(format=fmt), title=None), y=_y("국가:N"),
         color=alt.value(BLUE), tooltip=["국가", alt.Tooltip("값:Q", format=fmt)]
     ).properties(title=title, height=_h(len(df), 28))
+
+
+# ---------- 상황판 띠 (탭 위, 업무 흐름 4단계) ----------
+
+
+@dataclass
+class Step:
+    no: str
+    name: str
+    tone: str
+    status: str
+    detail: str
+    tab: str
+
+    @property
+    def icon(self) -> str:
+        return TONE_ICON.get(self.tone, "⚪")
+
+
+def step_data(portfolio: Any, playbooks: list | None) -> Step:
+    parts = ([f"포트폴리오 {portfolio.institution}"] if portfolio is not None else []) + \
+            ([f"문서 {len(playbooks)}개"] if playbooks else [])
+    if parts:
+        return Step("①", "데이터", "green", "업로드 반영", " · ".join(parts), "데이터 입력")
+    return Step("①", "데이터", "gray", "합성 사용 중", "실제 보유·문서를 올리면 반영", "데이터 입력")
+
+
+def _news_detail(news: dict | None, min_points: int) -> str:
+    if not news:
+        return "뉴스 관측 없음"
+    if news.get("clusters"):
+        return "기사 급증: " + ", ".join(c["event_type"] for c in news["clusters"][:2])
+    pts = [o.get("baseline_points") for o in (news.get("observations") or {}).values() if o.get("baseline_points") is not None]
+    if news.get("status") == "unavailable" and pts and min(pts) < min_points:
+        return f"뉴스 기준선 {min(pts)}/{min_points} 축적 중"
+    return "뉴스 급증 없음"
+
+
+def step_watch(signals: dict | None, local: bool) -> Step:
+    scope = "한국" if local else "글로벌"
+    if not signals:
+        return Step("②", "감시", "gray", f"{scope} 결과 없음", "감시 탭에서 조회", "감시")
+    level = signals.get("level", "NONE")
+    news = signals.get("kr_news") if local else signals.get("news")
+    min_points = load_config()["korea" if local else "sentinel"]["news"]["baseline_min_points"]
+    detail = _news_detail(news, min_points)
+    if signals.get("money_alert"):
+        detail = "자금 이상 알림 · " + detail
+    return Step("②", "감시", LEVEL_TONE.get(level, "gray"), f"{level} ({scope})", detail, "감시")
+
+
+def step_watch_replay(first_alert: Any, money_days: int, event_date: Any) -> Step:
+    if first_alert is not None:
+        return Step("②", "감시", "red", "ALERT 재현", f"첫 ALERT {first_alert} · 사전 알림 {money_days}일", "감시")
+    return Step("②", "감시", "orange" if money_days else "gray", "ALERT 없음", f"사건일 {event_date} · 사전 알림 {money_days}일", "감시")
+
+
+def step_briefing(b: Any, kind: str | None) -> Step:
+    if b is None:
+        return Step("③", "브리핑", "gray", "없음", "▶ 지금 브리핑 실행 (라이브)", "브리핑")
+    label = {"scenario": "가정 시나리오", "ondemand": "직접 실행"}.get(kind or "auto", "자동 감지")
+    top = b.match.doc_fits[0] if b.match.doc_fits else None
+    detail = f"1위 {top.doc_id} {top.fit_score:.2f}" if top else "판정 문서 없음"
+    gaps = len(b.match.gaps)
+    if gaps:
+        detail += f" · 공백 {gaps}"
+    return Step("③", "브리핑", "blue" if kind in ("scenario", "ondemand") else LEVEL_TONE.get(b.alert_level.value, "gray"),
+                label, detail, "브리핑")
+
+
+def step_approval(b: Any, records: list[dict]) -> Step:
+    if b is None:
+        return Step("④", "승인", "gray", "대상 없음", "브리핑 후 결정", "승인")
+    mine = [r for r in records if r.get("data", {}).get("run_id") == b.run_id]
+    decision = next((r for r in reversed(mine) if r["action"] == "approval"), None)
+    fb = sum(r["action"] == "feedback" for r in mine)
+    if decision:
+        ok = decision["data"]["decision"] == "approved"
+        return Step("④", "승인", "green" if ok else "orange", "승인 완료" if ok else "반려", f"{decision['actor']} · 피드백 {fb}건", "승인")
+    return Step("④", "승인", "orange", "대기", f"문서 피드백 {fb}건", "승인")
