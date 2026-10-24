@@ -198,36 +198,61 @@ def rss_query(query: str) -> str:
     return query.strip("()")
 
 
-def fetch_rss_topics(rss: Any, now: datetime) -> tuple[dict[str, list], list[str]]:
-    """주제별 최근 window_hours 기사 (Google 뉴스 RSS, 키·요청 제한 없음). 반환: (주제→기사, 실패 사유)."""
+def _title_key(title: str) -> str:
+    return re.sub(r"\W+", "", title.lower())[:80]
+
+
+def fetch_rss_topics(rss: Any, now: datetime) -> tuple[dict[str, list], dict[str, dict], list[str]]:
+    """주제별 최근 window_hours 기사 (Google 뉴스 RSS, 키·요청 제한 없음).
+
+    RSS는 검색어당 약 100건이 상한이라, 주제 쿼리 1회(기존 측정, 상한 있음)와 키워드별 개별 검색(합쳐서 중복 제거)을
+    함께 받는다. 반환: (주제→키워드별 합친 기사, 주제→기존 측정 {n, sources}, 실패 사유).
+    """
     cfg = _sentinel_cfg()["news"]
     since = now - timedelta(hours=cfg["window_hours"])
-    out, errors = {}, []
+    split, legacy, errors = {}, {}, []
     for event_type, query in cfg["queries"].items():
         try:
-            out[event_type] = rss.search(rss_query(query), since)
+            combined = rss.search(rss_query(query), since)
+            legacy[event_type] = {"n": len(combined), "sources": len({a.source for a in combined})}
+            merged = {_title_key(a.title): a for a in combined}
+            for term in [t.strip() for t in rss_query(query).split(" OR ") if t.strip()]:
+                for a in rss.search(term, since):
+                    merged.setdefault(_title_key(a.title), a)
+            split[event_type] = list(merged.values())
         except Exception as e:
             errors.append(f"{event_type}: Google 뉴스 RSS 실패 ({type(e).__name__})")
-    return out, errors
+    return split, legacy, errors
 
 
 def rss_news_signal(articles: dict[str, list], history: list[dict], now: datetime,
-                    fetch_errors: list[str] | None = None) -> tuple[NewsSignal, list[dict], dict]:
+                    fetch_errors: list[str] | None = None,
+                    legacy: dict[str, dict] | None = None) -> tuple[NewsSignal, list[dict], dict]:
     """라이브 B (글로벌): 주제별 최근 24시간 기사 수가 직전 30일 관측 대비 z ≥ 3 AND 언론사 ≥ 20곳.
 
-    기준선은 수집기가 3시간마다 쌓는 data/live/global_news_history.jsonl. 기준점이 부족한 주제는 '판단 불가'.
+    기준선은 수집기가 3시간마다 쌓는 data/live/global_news_history.jsonl. 키워드별 합산 측정(n_split, 상한 완화)의
+    기준점이 20개 쌓이기 전에는 기존 측정(주제 쿼리 1회, 상한 100)으로 판단하고 그 사실을 근거에 남긴다.
     반환: (신호, 이번 관측 행, 주제별 관측).
     """
     from app.agents.local import baseline_z
 
     cfg = _sentinel_cfg()["news"]
+    legacy = legacy or {}
     clusters, errors, rows, obs = [], list(fetch_errors or []), [], {}
     for event_type, items in articles.items():
-        n, sources = len(items), len({a.source for a in items})
-        z, n_base = baseline_z(history, event_type, now, n, cfg)
+        n_split, src_split = len(items), len({a.source for a in items})
+        lg = legacy.get(event_type, {"n": n_split, "sources": src_split})
+        z, n_base = baseline_z(history, event_type, now, n_split, cfg, field="n_split")
+        measure, n, sources = "키워드별 합산", n_split, src_split
+        if z is None and n_base < cfg["baseline_min_points"]:
+            z_lg, base_lg = baseline_z(history, event_type, now, lg["n"], cfg, field="n_articles")
+            if z_lg is not None or base_lg >= n_base:
+                z, n_base, measure, n, sources = z_lg, base_lg, "주제 쿼리 1회(상한 100)", lg["n"], lg["sources"]
         obs[event_type] = {"n_articles": n, "n_sources": sources, "z": None if z is None else round(z, 3),
-                           "baseline_points": n_base, "top_titles": [a.title for a in items[:3]]}
-        rows.append({"ts": now.isoformat(), "event_type": event_type, "n_articles": n, "n_sources": sources})
+                           "baseline_points": n_base, "measure": measure, "n_split": n_split,
+                           "saturated": lg["n"] >= 95, "top_titles": [a.title for a in items[:3]]}
+        rows.append({"ts": now.isoformat(), "event_type": event_type, "n_articles": lg["n"], "n_sources": lg["sources"],
+                     "n_split": n_split, "n_sources_split": src_split})
         if z is None:
             errors.append(f"{event_type}: 기준선 축적 중 ({n_base}/{cfg['baseline_min_points']})")
             continue

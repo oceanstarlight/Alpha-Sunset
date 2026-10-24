@@ -192,18 +192,38 @@ def test_rss_news_unavailable_while_baseline_accumulates():
     assert not sig.active and "기준선 축적 중" in sig.errors[0] and obs["banking_stress"]["baseline_points"] == 5
 
 
-def test_fetch_rss_topics_records_failures():
+def test_fetch_rss_topics_splits_keywords_and_records_failures():
     from app.agents.sentinel import fetch_rss_topics
 
-    class Half:
+    queries = []
+
+    class Capped:  # 검색어당 100건 상한을 흉내 낸다
         def search(self, query, since):
+            queries.append(query)
             if "bank run" in query:
                 raise RuntimeError("timeout")
-            assert " OR " in query and not query.startswith("(")
-            return _items(3, 3)
+            if " OR " in query:
+                return [NewsItem(f"common {i}", "u", f"s{i}", NOW, "google") for i in range(100)]
+            return [NewsItem(f"{query} only {i}", "u", f"t{i}", NOW, "google") for i in range(60)] + \
+                [NewsItem("common 1", "u", "s1", NOW, "google")]  # 중복은 한 번만
 
-    arts, errors = fetch_rss_topics(Half(), NOW)
-    assert "banking_stress" not in arts and len(arts) == 7 and "RSS 실패" in errors[0]
+    split, legacy, errors = fetch_rss_topics(Capped(), NOW)
+    assert "banking_stress" not in split and "RSS 실패" in errors[0]
+    assert legacy["trade_policy"]["n"] == 100  # 기존 측정은 상한에 걸림
+    assert len(split["trade_policy"]) == 100 + 60 * 3  # 키워드 3개 개별 검색으로 상한 완화
+    assert '"tariff"' in queries  # 키워드별 개별 검색
+
+
+def test_rss_signal_falls_back_to_legacy_baseline_until_split_ready():
+    from app.agents.sentinel import rss_news_signal
+
+    legacy = {"banking_stress": {"n": 60, "sources": 25}}
+    sig, rows, obs = rss_news_signal({"banking_stress": _items(150, 30)}, _history(), NOW, legacy=legacy)
+    assert obs["banking_stress"]["measure"].startswith("주제 쿼리 1회") and sig.active  # 기존 기준선(상한 100)으로 판단
+    assert rows[0]["n_split"] == 150 and rows[0]["n_articles"] == 60
+    split_hist = [dict(h, n_split=h["n_articles"] * 2) for h in _history()]
+    _, _, obs2 = rss_news_signal({"banking_stress": _items(150, 30)}, split_hist, NOW, legacy=legacy)
+    assert obs2["banking_stress"]["measure"] == "키워드별 합산"
 
 
 def test_signal_status_partial_and_unavailable():
@@ -224,3 +244,23 @@ def test_explain_gives_cause_evidence_result_for_every_stage():
     assert "VIXCLS" in chain[0]["원인"] and "언론사 25곳" in chain[1]["근거"] and chain[2]["결과"].startswith("ALERT")
     failed = NewsSignal(as_of=END, clusters=[], errors=["x"] * 8, n_queries=8)
     assert explain(SentinelResult(as_of=END, level=grade(m, failed), market=m, news=failed))[1]["결과"] == "판단 불가"
+
+
+def test_global_collector_notifies_money_alert_once(monkeypatch, tmp_path):
+    import importlib.util
+    from pathlib import Path
+
+    spec = importlib.util.spec_from_file_location("collect", Path(__file__).resolve().parent.parent / "scripts" / "collect_signals.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    monkeypatch.setattr(mod, "LIVE_DIR", tmp_path)
+    sent = []
+    monkeypatch.setattr(mod.Notifier, "send", lambda self, key, text: sent.append((key, text)) or "sent")
+    result = {"level": "WATCH", "money_alert": True, "chain": [{"단계": "A", "원인": "c", "근거": "e", "결과": "r"}],
+              "news": {"clusters": [], "errors": [], "n_queries": 8}}
+    out = mod.notify(result)
+    assert list(out) == [k for k, _ in sent] and sent[0][0].startswith("global_money:") and "1단계" in sent[0][1]
+    sent.clear()
+    result["news"]["errors"] = [f"t{i}: Google 뉴스 RSS 실패 (HTTPStatusError)" for i in range(8)]
+    mod.notify(result)
+    assert any(k.startswith("global_news_fail:") for k, _ in sent)  # 뉴스 전부 실패 = 감시 공백 경고

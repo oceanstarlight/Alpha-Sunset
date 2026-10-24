@@ -53,8 +53,8 @@ def compute_signals(rss: Any = None, fred_cache_dir: Path | None = None, now: da
 
         rss = GoogleNewsRss(http=__import__("httpx").Client(timeout=10, follow_redirects=True), lang="en-US", region="US")
     now = now or datetime.now(timezone.utc)
-    articles, fetch_errors = sentinel.fetch_rss_topics(rss, now)
-    news, rows, obs = sentinel.rss_news_signal(articles, read_global_history(), now, fetch_errors)
+    articles, legacy, fetch_errors = sentinel.fetch_rss_topics(rss, now)
+    news, rows, obs = sentinel.rss_news_signal(articles, read_global_history(), now, fetch_errors, legacy)
     level = sentinel.grade(market, news, flow)
     chain = sentinel.explain(sentinel.SentinelResult(as_of=last_obs, level=level, market=market, news=news, flow=flow))
     return {
@@ -107,7 +107,10 @@ def get_signals(refresh: bool = False, rss: Any = None) -> dict:
     cached = _signal_cache.get("signals")
     if cached and not refresh and time.time() - cached["fetched_at"] < SIGNAL_TTL_SEC:
         return cached
-    result = compute_signals(rss)
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:  # 커밋된 data/fred(백테스트 재현용)를 덮어쓰지 않는다
+        result = compute_signals(rss, fred_cache_dir=Path(tmp))
     result["source"] = "live"
     _signal_cache["signals"] = result
     return result
