@@ -53,7 +53,7 @@
 | 꼭 봐야 할 문서 top3 적중 | 0.72 | |
 | 노출 경로 재현율 | 0.75 | gfc_2008 제외 (N-PORT 2019년 이전 미공개) |
 | 공백 탐지 (핵심 문서 제거 검증) | 정밀도 1.0 / 재현율 0.75 | 라벨이 모두 '공백 없음'이라 문서 제거 실험으로 별도 검증 |
-| 부적용 조항 정밀도 / 재현율 | 0.07 / 0.22 | 라벨에 '헷갈리는' 조항 일부만 담아 정밀도가 구조적으로 낮음 |
+| 조항 판정 (전수 라벨, 사전 등록 v7) | 정확도 0.57 · κ 0.30 · 실행 대상 F1 0.75 | 아래 '조항 단위 검증' |
 | 근거 없는 판정 | 0건 | |
 | Learner ON − OFF (top3 적중) | 0.0 | 사건 유형별 이력이 없고, 보정 폭(±15%)이 보수적이라 순위 변화 없음 (설계 의도대로 유지) |
 
@@ -75,6 +75,18 @@
 | 사건 → 대응안 | 0.8일 (5/6 재현, SVB는 한국 반응 없음) | 0.33일 |
 | 평상시 알림 비율 | 7.57% | 4.76% (v6 보정 후) |
 | 사건 전 알림 사건 비율 / 평상일 기준선 | 83% / 51% | 67% / 38% |
+
+### 조항 단위 검증 (사전 등록 v7, 전수 라벨)
+6개 사건 × 조항 96개 = 576건을 에이전트 결과를 보지 않은 격리 라벨러가 사건일 기준 사실만으로 판정했고, 에이전트 판정(검색된 조항)과 비교했다.
+
+| 지표 | Gemini (기본) | 규칙 판정 (LLM 없음, 탐색적) |
+|---|---|---|
+| 판정 범위 | 검색된 237/576 (41%) | 576/576 전수 |
+| 정확도 / macro F1 / Cohen κ | 0.57 / 0.48 / 0.30 | 0.48 / 0.41 / 0.13 |
+| 실행 대상(적용·부분) 정밀도 / 재현율 | 0.65 / **0.87** | 0.33 / 0.83 |
+| '적용' 라벨 중 검색 누락 | 9/35 | — |
+
+에이전트는 '적용'을 넉넉하게 준다(적용 정밀도 0.22) — 실행 대상은 놓치지 않지만 사람이 걸러야 한다. 검색 누락 9건(대부분 코로나)은 검색 범위 확대 과제. 전체 [`data/backtest/clause_eval.json`](data/backtest/clause_eval.json).
 
 전체 수치는 [`data/backtest/kr_results.json`](data/backtest/kr_results.json). 파이프라인 그림은 [`docs/pipeline.png`](docs/pipeline.png).
 
@@ -98,10 +110,13 @@
 python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 .venv/bin/streamlit run ui/streamlit_app.py
-.venv/bin/pytest -q       # 151개 테스트
+.venv/bin/pytest -q       # 174개 테스트
 ```
 - **API 키 없이도** 백테스트 재생은 동작한다. 커밋된 LLM 응답 캐시(`data/llm_cache.db`)로 같은 결과를 재현한다.
 - 배포: Streamlit Community Cloud (`ui/streamlit_app.py`, Python 3.11, Secrets에 `GEMINI_API_KEY`·`SEC_USER_AGENT`).
+- 판정 엔진 바꾸기 (`LLM_PROVIDER`, 기본 `gemini`): `openai_compatible`(+ `LLM_BASE_URL`·`LLM_MODEL`·`LLM_EMBED_MODEL`·`LLM_API_KEY` — Ollama·vLLM·사내 게이트웨이) 또는 `rule`(LLM 없이 규칙 판정, 정확도 낮음).
+- 감사 로그: 승인 탭 맨 아래에서 체인 검증·내려받기. 자동 감시 기록은 `data/live/audit/`에 커밋된다.
+- 조항 평가 재현: `python -m scripts.run_clause_eval` → `data/backtest/clause_eval.json`.
 
 | 스크립트 | 역할 |
 |---|---|
