@@ -36,6 +36,15 @@ def read_global_history() -> list[dict]:
     return [json.loads(x) for x in GLOBAL_NEWS_HISTORY.read_text(encoding="utf-8").splitlines() if x.strip()]
 
 
+def _money_alert_now(panel: dict, as_of) -> bool:
+    """1단계 자금 이상 알림 — 백테스트와 같은 지속성 규칙 (끝나는 5영업일 중 min_active일 이상 A∨C)."""
+    from app.backtest import money_alert_days
+
+    import pandas as pd
+
+    return bool(money_alert_days(panel, pd.DatetimeIndex([pd.Timestamp(as_of)])).iloc[0])
+
+
 def compute_signals(rss: Any = None, fred_cache_dir: Path | None = None, now: datetime | None = None) -> dict:
     """최신 시그널 A/B/C와 등급. B는 Google 뉴스 RSS 주제별 기사 수 (기준선은 수집기 누적 이력)."""
     try:
@@ -64,7 +73,7 @@ def compute_signals(rss: Any = None, fred_cache_dir: Path | None = None, now: da
         "level": level.value,
         "chain": chain,  # 원인-근거-결과
         # 1단계: 자금·시장 이상 알림 (사건 확정 전), 2단계: 사건 확정 시 대응안(ALERT)
-        "money_alert": market.active or bool(flow and flow.active),
+        "money_alert": _money_alert_now(panel, last_obs),
         "market": {"active": market.active, "triggered": market.triggered,
                    "zscores": {k: round(v, 2) for k, v in market.zscores.items()}},
         "flow": {"active": flow.active, "triggered": flow.triggered,

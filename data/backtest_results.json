@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18",
+  "generated_at": "2026-10-24",
   "labeled_events": [
     "covid_2020",
     "gfc_2008",
@@ -10,10 +10,10 @@
   ],
   "unlabeled_events": [],
   "summary": {
-    "warning_lead_days": 28.6,
+    "warning_lead_days": 27.0,
     "briefing_delay_days": 0.3333,
     "lead_time": -6.3333,
-    "lead_time_flow": -24.1667,
+    "lead_time_flow": -18.3333,
     "doc_top3_hit": 0.7222,
     "clause_precision": 0.0727,
     "clause_recall": 0.2222,
@@ -23,10 +23,10 @@
     "alerts_reproduced": 6,
     "n_events": 6,
     "false_alarms_calm_alert": 0,
-    "random_calm_market_active_rate": 0.0413,
-    "calm_money_alert_rate": 0.0919,
-    "events_with_prior_warning": 0.8333,
-    "warning_base_rate_60d": 0.4226,
+    "random_calm_market_active_rate": 0.0798,
+    "calm_money_alert_rate": 0.0476,
+    "events_with_prior_warning": 0.6667,
+    "warning_base_rate_60d": 0.3759,
     "learner_delta": 0.0,
     "learner_delta_sim": 0.0
   },
@@ -49,10 +49,10 @@
       "gap_precision": 1.0,
       "gap_recall": 1.0,
       "path_recall": null,
-      "reaction_date_flow": "2008-09-08",
-      "lead_time_flow": -7,
-      "first_money_alert": "2008-09-08",
-      "warning_lead_days": 7,
+      "reaction_date_flow": "2008-09-15",
+      "lead_time_flow": 0,
+      "first_money_alert": null,
+      "warning_lead_days": null,
       "briefing_delay_days": 0
     },
     {
@@ -84,10 +84,10 @@
       "gap_precision": 1.0,
       "gap_recall": 1.0,
       "path_recall": 1.0,
-      "reaction_date_flow": "2020-01-31",
-      "lead_time_flow": -41,
-      "first_money_alert": "2020-01-31",
-      "warning_lead_days": 40,
+      "reaction_date_flow": "2020-02-28",
+      "lead_time_flow": -13,
+      "first_money_alert": "2020-02-28",
+      "warning_lead_days": 12,
       "briefing_delay_days": 1
     },
     {
@@ -119,10 +119,10 @@
       "gap_precision": 1.0,
       "gap_recall": 1.0,
       "path_recall": 0.25,
-      "reaction_date_flow": "2022-01-11",
-      "lead_time_flow": -44,
-      "first_money_alert": "2022-01-11",
-      "warning_lead_days": 44,
+      "reaction_date_flow": "2022-01-12",
+      "lead_time_flow": -43,
+      "first_money_alert": "2022-01-12",
+      "warning_lead_days": 43,
       "briefing_delay_days": 0
     },
     {
@@ -154,10 +154,10 @@
       "gap_precision": 1.0,
       "gap_recall": 1.0,
       "path_recall": 1.0,
-      "reaction_date_flow": "2022-09-28",
-      "lead_time_flow": 0,
-      "first_money_alert": "2022-09-28",
-      "warning_lead_days": 0,
+      "reaction_date_flow": "2022-09-26",
+      "lead_time_flow": -2,
+      "first_money_alert": "2022-09-26",
+      "warning_lead_days": 2,
       "briefing_delay_days": 0
     },
     {
@@ -189,10 +189,10 @@
       "gap_precision": 1.0,
       "gap_recall": 1.0,
       "path_recall": 0.75,
-      "reaction_date_flow": "2023-01-17",
-      "lead_time_flow": -52,
-      "first_money_alert": "2023-01-17",
-      "warning_lead_days": 52,
+      "reaction_date_flow": "2023-01-18",
+      "lead_time_flow": -51,
+      "first_money_alert": "2023-01-18",
+      "warning_lead_days": 51,
       "briefing_delay_days": 0
     },
     {
@@ -237,32 +237,32 @@
         "window_id": "calm_2014q2",
         "days": 65,
         "alert_days": 0,
-        "watch_days": 4,
-        "first_watch": "2014-04-01"
+        "watch_days": 0,
+        "first_watch": null
       },
       {
         "window_id": "calm_2017q4",
         "days": 65,
         "alert_days": 0,
-        "watch_days": 0,
-        "first_watch": null
+        "watch_days": 1,
+        "first_watch": "2017-11-30"
       },
       {
         "window_id": "calm_2024q1",
         "days": 65,
         "alert_days": 0,
-        "watch_days": 0,
-        "first_watch": null
+        "watch_days": 1,
+        "first_watch": "2024-01-16"
       }
     ],
     "random_calm": {
       "n_days": 3658,
-      "market_active_rate": 0.0413,
+      "market_active_rate": 0.0798,
       "quarters": [
         {
           "quarter": "2008Q1",
           "days": 56,
-          "market_active_days": 10
+          "market_active_days": 18
         },
         {
           "quarter": "2009Q1",
@@ -272,7 +272,7 @@
         {
           "quarter": "2010Q4",
           "days": 66,
-          "market_active_days": 3
+          "market_active_days": 9
         },
         {
           "quarter": "2013Q4",
@@ -282,12 +282,12 @@
         {
           "quarter": "2016Q3",
           "days": 66,
-          "market_active_days": 1
+          "market_active_days": 3
         },
         {
           "quarter": "2018Q1",
           "days": 65,
-          "market_active_days": 4
+          "market_active_days": 8
         },
         {
           "quarter": "2020Q3",
@@ -297,12 +297,12 @@
         {
           "quarter": "2024Q1",
           "days": 65,
-          "market_active_days": 0
+          "market_active_days": 1
         },
         {
           "quarter": "2024Q3",
           "days": 66,
-          "market_active_days": 5
+          "market_active_days": 8
         },
         {
           "quarter": "2024Q4",

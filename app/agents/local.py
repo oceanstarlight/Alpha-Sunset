@@ -49,8 +49,10 @@ def kr_panel(raw: dict[str, pd.Series]) -> dict[str, pd.Series]:
 
 
 def _kr_market_cfg() -> dict[str, Any]:
-    """임계치는 글로벌 시그널 A와 같은 값 (v5 원칙), 변화 방식만 시리즈별."""
+    """창 크기 등은 글로벌 시그널 A와 같고, 임계치는 korea.thresholds (v6: 로컬 보정 미채택 → v5 값 유지)."""
     base = dict(load_config()["sentinel"]["market"])
+    th = _cfg()["thresholds"]
+    base.update(z_threshold=th["market_z"], min_series=th["min_series"], z_extreme=th["z_extreme"])
     series = _cfg()["market"]["series"]
     base["diff_series"] = [s for s, c in series.items() if c["change"] == "diff"] + list(_cfg()["market"]["derived"])
     return base
@@ -84,7 +86,7 @@ def kr_flow_signal(panel: dict[str, pd.Series], as_of: date) -> sentinel.FlowSig
         hist = x.iloc[-(gcfg["lookback_obs"] + 1): -1]
         if len(hist) >= gcfg["min_obs"] and hist.std():
             zscores[sid] = float((x.iloc[-1] - hist.mean()) / hist.std())
-    triggered = [k for k, z in zscores.items() if abs(z) >= gcfg["z_threshold"]]
+    triggered = [k for k, z in zscores.items() if abs(z) >= _cfg()["thresholds"]["flow_z"]]
     return sentinel.FlowSignal(as_of=as_of, zscores=zscores, triggered=triggered, active=bool(triggered))
 
 
@@ -297,7 +299,7 @@ def _z(z: dict[str, float], ids) -> str:
 
 
 def explain_local(r: LocalResult) -> list[dict[str, str]]:
-    cfg, mcfg = _cfg(), load_config()["sentinel"]["market"]
+    cfg, kcfg = _cfg(), _kr_market_cfg()
     chain = []
     if r.kr_market is None:
         chain.append({"단계": "한국 시장(A_kr)", "원인": "데이터 없음", "근거": "ECOS 키 미설정 또는 조회 실패", "결과": "판단 불가"})
@@ -305,13 +307,13 @@ def explain_local(r: LocalResult) -> list[dict[str, str]]:
         m = r.kr_market
         chain.append({"단계": "한국 시장(A_kr)",
                       "원인": _z(m.zscores, m.triggered) or "임계 초과 지표 없음",
-                      "근거": f"ECOS 일별 1일 변화 z (기준일 {m.as_of}), 규칙 |z| ≥ {mcfg['z_threshold']} 지표 {mcfg['min_series']}개 이상 "
-                              f"또는 |z| ≥ {mcfg['z_extreme']} ({RULE}). 관측: {_z(m.zscores, m.zscores) or '-'}",
+                      "근거": f"ECOS 일별 1일 변화 z (기준일 {m.as_of}), 규칙 |z| ≥ {kcfg['z_threshold']} 지표 {kcfg['min_series']}개 이상 "
+                              f"또는 |z| ≥ {kcfg['z_extreme']} ({RULE}). 관측: {_z(m.zscores, m.zscores) or '-'}",
                       "결과": "활성" if m.active else "비활성"})
     if r.kr_flow is not None:
         f = r.kr_flow
         chain.append({"단계": "외국인 자금(C_kr)", "원인": _z(f.zscores, f.triggered) or "임계 초과 없음",
-                      "근거": f"외국인 순매수 수준 z, 규칙 |z| ≥ {load_config()['sentinel']['flow']['z_threshold']} ({RULE})",
+                      "근거": f"외국인 순매수 수준 z, 규칙 |z| ≥ {_cfg()['thresholds']['flow_z']} ({RULE})",
                       "결과": "활성" if f.active else "비활성"})
     if r.kr_news is not None:
         n = r.kr_news

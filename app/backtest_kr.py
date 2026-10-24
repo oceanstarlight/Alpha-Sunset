@@ -62,7 +62,7 @@ def kr_flow_z(panel: dict[str, pd.Series], days: pd.DatetimeIndex) -> pd.DataFra
 def kr_flow_active(z: pd.DataFrame) -> pd.Series:
     if z.empty:
         return pd.Series(False, index=z.index)
-    return (z.abs() >= load_config()["sentinel"]["flow"]["z_threshold"]).any(axis=1)
+    return (z.abs() >= load_config()["korea"]["thresholds"]["flow_z"]).any(axis=1)
 
 
 def kr_daily(panel: dict[str, pd.Series], days: pd.DatetimeIndex) -> pd.DataFrame:
@@ -71,7 +71,7 @@ def kr_daily(panel: dict[str, pd.Series], days: pd.DatetimeIndex) -> pd.DataFram
     mz, fz = kr_market_z(panel, pad), kr_flow_z(panel, pad)
     df = pd.DataFrame({"A_kr": kr_market_active(mz), "C_kr": kr_flow_active(fz)}, index=pad)
     df["money"] = df["A_kr"] | df["C_kr"]
-    df["money_alert"] = df["money"].astype(int).rolling(5, min_periods=5).sum() >= 2
+    df["money_alert"] = df["money"].astype(int).rolling(5, min_periods=5).sum() >= load_config()["korea"]["thresholds"]["min_active"]
     return df.reindex(days)
 
 
@@ -81,7 +81,7 @@ def triggered_on(panel: dict[str, pd.Series], day: pd.Timestamp) -> dict[str, fl
     z = pd.concat([kr_market_z(panel, pd.bdate_range(day - pd.Timedelta(days=10), day)).iloc[[-1]],
                    kr_flow_z(panel, pd.bdate_range(day - pd.Timedelta(days=10), day)).iloc[[-1]]], axis=1)
     z.index = days
-    mcfg, fth = local._kr_market_cfg(), load_config()["sentinel"]["flow"]["z_threshold"]
+    mcfg, fth = local._kr_market_cfg(), load_config()["korea"]["thresholds"]["flow_z"]
     out = {}
     for sid, v in z.iloc[0].dropna().items():
         th = fth if sid.startswith("FOREIGN") else mcfg["z_threshold"]
