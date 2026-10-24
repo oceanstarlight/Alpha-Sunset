@@ -17,7 +17,7 @@ from datetime import date
 from pydantic import BaseModel, Field, ValidationError
 
 from app.config import get_settings, load_config
-from app.llm.client import LLMClient, LLMResponseError
+from app.llm.client import LLMClient, LLMResponseError, LLMUnavailableError
 from app.retrieval import ClauseIndex, event_query
 from app.schemas import Channel, Clause, ClauseJudgment, DocFit, Duration, Event, EventType, MatchResult, Verdict
 
@@ -43,7 +43,44 @@ STRUCTURE_SYSTEM = """너는 금융 위기 사건을 구조화하는 분석가�
 - severity: 1(경미)~5(시스템 위기)"""
 
 
+# rule 제공자(LLM 없음)용 사건 구조화: 키워드 → 유형, 유형 → 기본 채널
+RULE_TYPE_KEYWORDS = [
+    (EventType.banking_stress, ("bank run", "은행", "예금 인출", "뱅크런")),
+    (EventType.liquidity_crisis, ("liquidity", "유동성", "자금시장", "cp 금리")),
+    (EventType.credit_event, ("default", "부도", "신용", "회생", "채무불이행")),
+    (EventType.trade_policy, ("tariff", "관세", "무역")),
+    (EventType.geopolitical, ("war", "invasion", "전쟁", "침공", "제재")),
+    (EventType.pandemic, ("pandemic", "팬데믹", "코로나", "감염병")),
+    (EventType.fx_shock, ("환율", "currency", "외환")),
+    (EventType.rate_shock, ("금리 급등", "rate hike", "국채 금리")),
+]
+RULE_CHANNELS = {
+    EventType.banking_stress: [Channel.liquidity, Channel.counterparty, Channel.credit_spread],
+    EventType.liquidity_crisis: [Channel.liquidity, Channel.credit_spread],
+    EventType.credit_event: [Channel.credit_spread, Channel.counterparty],
+    EventType.trade_policy: [Channel.sanctions_trade, Channel.supply_chain, Channel.equity_vol],
+    EventType.geopolitical: [Channel.sanctions_trade, Channel.commodity, Channel.equity_vol],
+    EventType.pandemic: [Channel.equity_vol, Channel.liquidity, Channel.supply_chain],
+    EventType.fx_shock: [Channel.fx],
+    EventType.rate_shock: [Channel.rates],
+    EventType.supply_chain: [Channel.supply_chain, Channel.commodity],
+    EventType.regulatory: [Channel.operational],
+    EventType.other: [Channel.equity_vol],
+}
+
+
+def rule_event(text: str, event_id: str, event_date: date, sources: list[str] | None = None) -> Event:
+    low = text.lower()
+    etype = next((t for t in EventType if t.value in low), None) or next(
+        (t for t, kws in RULE_TYPE_KEYWORDS if any(k in low for k in kws)), EventType.other)
+    first = text.strip().splitlines()[0] if text.strip() else event_id
+    return Event(id=event_id, date=event_date, title=first[:120], summary=text.strip(), type=etype,
+                 channels=RULE_CHANNELS[etype], duration=Duration.weeks, severity=3, sources=sources or [])
+
+
 def structure_event(llm: LLMClient, text: str, event_id: str, event_date: date, sources: list[str] | None = None) -> Event:
+    if llm.provider == "rule":
+        return rule_event(text, event_id, event_date, sources)
     draft = llm.generate(f"다음 사건을 구조화하라.\n\n{text}", purpose="structure_event",
                          response_schema=EventDraft, system=STRUCTURE_SYSTEM)
     return Event(id=event_id, date=event_date, sources=sources or [], **draft.model_dump())
@@ -130,7 +167,34 @@ def validate_draft(draft: JudgmentDraft, clause: Clause, event: Event) -> tuple[
     return j, None
 
 
+def rule_judgment(clause: Clause, event: Event) -> ClauseJudgment:
+    """rule 제공자: 전제(유형·채널·지역) 겹침만으로 보수적으로 판정. 신뢰도 0.3 고정."""
+    p = clause.premises
+    type_ok = event.type in p.event_types
+    shared = [c for c in p.channels if c in event.channels]
+    ch = len(shared) / len(p.channels) if p.channels else 0.0
+    reg_ok = (not p.regions or "GLOBAL" in p.regions or "GLOBAL" in event.regions
+              or any(r in event.regions for r in p.regions))
+    reasons = []
+    if not type_ok:
+        reasons.append(f"전제 사건유형에 {event.type.value} 없음")
+    if ch < 0.5:
+        reasons.append(f"전제 채널 겹침 {len(shared)}/{len(p.channels)}")
+    if not reg_ok:
+        reasons.append("전제 지역 불일치")
+    if type_ok and ch >= 0.5 and reg_ok:
+        verdict = Verdict.applicable
+    elif type_ok or shared:
+        verdict = Verdict.partial
+    else:
+        verdict = Verdict.not_applicable
+    return ClauseJudgment(clause_id=clause.clause_id, verdict=verdict, mismatch_reasons=["규칙 판정(LLM 없음)"] + reasons,
+                          evidence_quote=clause.text[:40].strip(), confidence=0.3)
+
+
 def judge_clauses(llm: LLMClient, event: Event, clauses: list[Clause]) -> list[ClauseJudgment]:
+    if llm.provider == "rule":
+        return [rule_judgment(c, event) for c in clauses]
     cfg = load_config()["matcher"]
     out: dict[str, ClauseJudgment] = {}
     for i in range(0, len(clauses), cfg["batch_size"]):

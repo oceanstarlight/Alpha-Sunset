@@ -33,7 +33,7 @@ import pydeck as pdk
 import streamlit as st
 
 from app import export, geo, services
-from app.config import load_config
+from app.config import get_settings, load_config
 from app.agents import sentinel
 from app.agents.exposure import ExposureUnavailable
 from app.corpus import load_events, load_playbooks, load_portfolio
@@ -133,6 +133,10 @@ event_id = st.sidebar.selectbox(
 user_id = st.sidebar.text_input("검토자", value="reviewer")
 st.sidebar.divider()
 st.sidebar.caption("에이전트는 제안만 하고 최종 결정은 사람이 승인한다. 문서를 삭제·폐기하지 않는다.")
+_PROVIDER_LABEL = {"gemini": "Gemini", "openai_compatible": "OpenAI 호환", "rule": "규칙 판정(LLM 없음 · 신뢰도 0.3)"}
+_st = get_settings()
+st.sidebar.caption(f"판정 엔진: {_PROVIDER_LABEL.get(_st.llm_provider, _st.llm_provider)}"
+                   + (f" · {_st.llm_model}" if _st.llm_provider == "openai_compatible" and _st.llm_model else ""))
 st.sidebar.caption(f"코드 버전 {abs(int(_STAMP)) % 10**8:08d}" + (" · 새 코드 반영됨" if _RELOADED else ""))
 
 

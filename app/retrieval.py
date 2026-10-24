@@ -52,7 +52,10 @@ class ClauseIndex:
     def __init__(self, playbooks: list[Playbook], llm: LLMClient, path: Path | None = None):
         self.llm = llm
         self.clauses = {c.clause_id: c for p in playbooks for c in p.clauses}
-        self._client = chromadb.PersistentClient(path=str(path or get_settings().chroma_dir))
+        if path is None:  # 제공자별로 색인 분리 (Gemini 기본 색인을 다른 임베딩으로 덮어쓰지 않게)
+            st = get_settings()
+            path = st.chroma_dir if llm.provider == "gemini" else st.data_dir / f"chroma_{llm.provider}"
+        self._client = chromadb.PersistentClient(path=str(path))
         fp = _fingerprint(list(self.clauses.values()), llm.embed_model)
         try:
             col = self._client.get_collection(COLLECTION, embedding_function=None)

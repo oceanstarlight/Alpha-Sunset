@@ -53,6 +53,12 @@ sentinel:
     days_after: 14
 
 llm:
+  # 제공자 (B2): gemini(기본) | openai_compatible(OpenAI 호환 API — Ollama·vLLM·사내 게이트웨이 등) | rule(LLM 없이 규칙 판정)
+  # 키는 env/secret LLM_API_KEY로만 받는다. LLM_PROVIDER·LLM_BASE_URL·LLM_MODEL·LLM_EMBED_MODEL env가 아래 값보다 우선.
+  provider: gemini
+  base_url: null        # openai_compatible 예: http://localhost:11434/v1
+  model: null
+  embed_model: null
   requests_per_minute: 14   # Gemini 무료 등급 분당 15회 제한
   rate_limit_retries: 5     # 429 응답 시 서버가 알려준 시간만큼 대기 후 재시도
 

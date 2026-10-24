@@ -49,6 +49,20 @@ def scores(pairs: list[tuple[str, str]]) -> dict:
                                   "f1": None if f1(bp, br) is None else round(f1(bp, br), 4)}}
 
 
+def rule_baseline(event_ids: list[str]) -> dict:
+    """탐색적(사전 등록 외): B2 rule 제공자 판정을 같은 라벨 전수(조항 96개)에 대어 본 비교 기준선."""
+    from app.agents.matcher import rule_judgment
+    from app.corpus import load_events, load_playbooks
+
+    cards = {e.id: e.as_of_view() for e in load_events()}
+    clauses = [c for p in load_playbooks() for c in p.clauses]
+    pairs = []
+    for eid in event_ids:
+        labels = {x["clause_id"]: x["verdict"] for x in json.loads((LABELS / f"{eid}.json").read_text(encoding="utf-8"))["labels"]}
+        pairs += [(labels[c.clause_id], rule_judgment(c, cards[eid]).verdict.value) for c in clauses if c.clause_id in labels]
+    return {"note": "탐색적 비교 — 사전 등록 v7 지표 아님. LLM 없이 전제 겹침만으로 판정, 조항 전수(검색 없음)", **scores(pairs)}
+
+
 def main() -> None:
     all_pairs, events, totals = [], {}, Counter()
     for path in sorted(LABELS.glob("*.json")):
@@ -67,11 +81,13 @@ def main() -> None:
     out = {"generated_at": date.today().isoformat(), "preregistration": "data/backtest/ablation/preregistration_v7_clause_labels.json",
            "overall": {"coverage": round(totals["judged"] / totals["labels"], 4), "uncertain": totals["uncertain"],
                        "missed_applicable": totals["missed"], "label_applicable": totals["label_applicable"], **scores(all_pairs)},
-           "events": events}
+           "events": events, "rule_baseline_exploratory": rule_baseline(list(events))}
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     o = out["overall"]
     print(json.dumps({k: o[k] for k in ("coverage", "n", "accuracy", "macro_f1", "kappa", "binary_actionable",
                                          "uncertain", "missed_applicable", "label_applicable")}, ensure_ascii=False))
+    rb = out["rule_baseline_exploratory"]
+    print("규칙 기준선(탐색적):", {k: rb[k] for k in ("n", "accuracy", "macro_f1", "kappa", "binary_actionable")})
     for eid, e in events.items():
         print(eid, "판정", e["judged"], "정확도", e.get("accuracy"), "kappa", e.get("kappa"), "누락", len(e["missed_applicable"]))
 

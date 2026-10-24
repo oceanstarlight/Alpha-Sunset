@@ -22,7 +22,7 @@ from app.agents import matcher as matcher_agent
 from app.agents import sentinel as sentinel_agent
 from app.config import get_settings, load_config
 from app.db import DbMode, connect
-from app.llm.client import LLMClient, LLMResponseError
+from app.llm.client import LLMClient, LLMResponseError, LLMUnavailableError
 from app.retrieval import ClauseIndex
 from app.schemas import (
     AlertLevel,
@@ -217,7 +217,7 @@ def clean_actions(llm: LLMClient, actions: list[str]) -> list[str]:
         return actions
     try:
         res = llm.generate("\n".join(actions), purpose="clean_actions", response_schema=CleanedActions, system=ACTIONS_SYSTEM)
-    except LLMResponseError:
+    except (LLMResponseError, LLMUnavailableError):
         return actions
     return res.actions if len(res.actions) == len(actions) else actions
 
@@ -359,7 +359,7 @@ def _index(playbooks: list | None, llm: LLMClient) -> tuple[ClauseIndex, str]:
 
     key = hashlib.sha1("|".join(sorted(c.clause_id + c.text for p in playbooks for c in p.clauses)).encode()).hexdigest()[:12]
     note = f"대응 문서: 업로드 {len(playbooks)}개({sum(len(p.clauses) for p in playbooks)}조항) 기준"
-    return ClauseIndex(playbooks, llm, path=ROOT_DIR / "data" / "chroma_uploaded" / key), note
+    return ClauseIndex(playbooks, llm, path=ROOT_DIR / "data" / "chroma_uploaded" / f"{llm.provider}_{key}"), note
 
 
 def run_replay(event_id: str, llm: LLMClient | None = None, portfolio: Portfolio | None = None,

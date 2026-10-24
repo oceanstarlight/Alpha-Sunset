@@ -356,5 +356,48 @@
     "f1": 0.5263
    }
   }
+ },
+ "rule_baseline_exploratory": {
+  "note": "탐색적 비교 — 사전 등록 v7 지표 아님. LLM 없이 전제 겹침만으로 판정, 조항 전수(검색 없음)",
+  "n": 576,
+  "accuracy": 0.4826,
+  "macro_f1": 0.4105,
+  "kappa": 0.1319,
+  "per_class": {
+   "applicable": {
+    "precision": 0.2727,
+    "recall": 0.7714,
+    "f1": 0.403,
+    "support": 35
+   },
+   "partial": {
+    "precision": 0.1325,
+    "recall": 0.3131,
+    "f1": 0.1862,
+    "support": 99
+   },
+   "not_applicable": {
+    "precision": 0.9053,
+    "recall": 0.4977,
+    "f1": 0.6423,
+    "support": 442
+   }
+  },
+  "confusion": {
+   "applicable→applicable": 27,
+   "applicable→not_applicable": 3,
+   "applicable→partial": 5,
+   "not_applicable→applicable": 24,
+   "not_applicable→not_applicable": 220,
+   "not_applicable→partial": 198,
+   "partial→applicable": 48,
+   "partial→not_applicable": 20,
+   "partial→partial": 31
+  },
+  "binary_actionable": {
+   "precision": 0.3333,
+   "recall": 0.8284,
+   "f1": 0.4754
+  }
  }
 }
