@@ -359,7 +359,7 @@ def _index(playbooks: list | None, llm: LLMClient) -> tuple[ClauseIndex, str]:
 
     key = hashlib.sha1("|".join(sorted(c.clause_id + c.text for p in playbooks for c in p.clauses)).encode()).hexdigest()[:12]
     note = f"대응 문서: 업로드 {len(playbooks)}개({sum(len(p.clauses) for p in playbooks)}조항) 기준"
-    return ClauseIndex(playbooks, llm, path=ROOT_DIR / "data" / "chroma_uploaded" / f"{llm.provider}_{key}"), note
+    return ClauseIndex(playbooks, llm, path=ROOT_DIR / "data" / "chroma_uploaded" / f"{getattr(llm, 'provider', 'gemini')}_{key}"), note
 
 
 def run_replay(event_id: str, llm: LLMClient | None = None, portfolio: Portfolio | None = None,

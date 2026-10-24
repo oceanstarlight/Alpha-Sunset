@@ -79,7 +79,7 @@ def rule_event(text: str, event_id: str, event_date: date, sources: list[str] | 
 
 
 def structure_event(llm: LLMClient, text: str, event_id: str, event_date: date, sources: list[str] | None = None) -> Event:
-    if llm.provider == "rule":
+    if getattr(llm, "provider", "gemini") == "rule":
         return rule_event(text, event_id, event_date, sources)
     draft = llm.generate(f"다음 사건을 구조화하라.\n\n{text}", purpose="structure_event",
                          response_schema=EventDraft, system=STRUCTURE_SYSTEM)
@@ -193,7 +193,7 @@ def rule_judgment(clause: Clause, event: Event) -> ClauseJudgment:
 
 
 def judge_clauses(llm: LLMClient, event: Event, clauses: list[Clause]) -> list[ClauseJudgment]:
-    if llm.provider == "rule":
+    if getattr(llm, "provider", "gemini") == "rule":
         return [rule_judgment(c, event) for c in clauses]
     cfg = load_config()["matcher"]
     out: dict[str, ClauseJudgment] = {}
