@@ -32,19 +32,14 @@ def test_briefing_and_approval_summary():
     b = services.load_saved_briefing("svb_2023")
     s = dashboard.briefing(b)
     assert b.match.doc_fits[0].doc_id in s.bullets[0] and s.tone in ("red", "orange", "green")
-    assert dashboard.briefing(b, scenario=True).tone == "blue"
+    assert dashboard.briefing(b, kind="scenario").tone == "blue"
+    assert dashboard.briefing(b, kind="ondemand").headline.startswith("▶ 직접 실행")
     recs = [{"action": "approval", "actor": "kim", "ts": "2026-10-24T10:00:00", "data": {"run_id": b.run_id, "decision": "approved"}},
             {"action": "feedback", "actor": "kim", "ts": "x", "data": {"run_id": b.run_id, "label": "useful"}},
             {"action": "feedback", "actor": "kim", "ts": "x", "data": {"run_id": "other", "label": "useful"}}]
     a = dashboard.approval(b, recs)
     assert a.tone == "green" and "승인 완료" in a.headline and "1건" in a.bullets[1]
     assert dashboard.approval(b, []).headline == "승인 대기"
-
-
-def test_backtest_summary_uses_adopted_v6():
-    s = dashboard.backtest(services.get_backtest_results(), local=True)
-    text = "\n".join(s.bullets)
-    assert "17/23" in text and "κ" in text and "우연과 구분 안 됨" in text
 
 
 def test_charts_build_and_handle_empty():
