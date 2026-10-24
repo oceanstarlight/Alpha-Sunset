@@ -2,7 +2,7 @@ name: collect-signals
 
 on:
   schedule:
-    - cron: "7 */3 * * *"  # 3시간마다 (뉴스 기준선을 같은 시간대별로 쌓는다)
+    - cron: "7 */3 * * *"  # 3시간마다 (뉴스 기준선 누적 + 글로벌 텔레그램 알림)
   workflow_dispatch:
 
 permissions:
@@ -25,6 +25,10 @@ jobs:
       - name: Install
         run: pip install -r requirements.txt
       - name: Collect
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/collect_signals.py
       - name: Commit
         run: |

@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import email.utils
 import re
+import time
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
@@ -111,9 +112,20 @@ class GoogleNewsRss:
     def search(self, query: str, since: datetime) -> list[NewsItem]:
         """검색 RSS (최대 약 100건, 기본 한국어·한국판). 언론사는 <source> 이름."""
         days = max(1, -(-int((datetime.now(timezone.utc) - since).total_seconds()) // 86400))  # 올림
-        resp = self._http.get(self.URL, params={"q": f"{query} when:{days}d", "hl": self._lang, "gl": self._region,
-                                                "ceid": f"{self._region}:{self._lang.split('-')[0]}"})
-        resp.raise_for_status()
+        params = {"q": f"{query} when:{days}d", "hl": self._lang, "gl": self._region,
+                  "ceid": f"{self._region}:{self._lang.split('-')[0]}"}
+        for attempt in range(2):  # 일시 오류(429·5xx·연결 끊김)는 2초 뒤 한 번 더
+            try:
+                resp = self._http.get(self.URL, params=params)
+                if resp.status_code in (429, 500, 502, 503, 504) and attempt == 0:
+                    time.sleep(2)
+                    continue
+                resp.raise_for_status()
+                break
+            except httpx.TransportError:
+                if attempt:
+                    raise
+                time.sleep(2)
         out = []
         for item in ET.fromstring(resp.content).iter("item"):
             published = email.utils.parsedate_to_datetime(item.findtext("pubDate"))

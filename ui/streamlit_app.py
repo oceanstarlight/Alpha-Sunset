@@ -326,7 +326,8 @@ with tab_watch:
             if news.get("observations"):
                 with c2.expander("주제별 관측 (Google 뉴스 최근 24시간)"):
                     st.dataframe(pd.DataFrame([{"주제": k, "기사": v["n_articles"], "언론사": v["n_sources"], "z": v["z"],
-                                                "기준점": v["baseline_points"], "대표 기사": (v["top_titles"] or [""])[0][:60]}
+                                                "기준점": v["baseline_points"], "측정": v.get("measure", "-"),
+                                                "키워드별 합산": v.get("n_split", "-"), "대표 기사": (v["top_titles"] or [""])[0][:60]}
                                                for k, v in news["observations"].items()]).astype(str),
                                  hide_index=True, width="stretch")
             if news["errors"]:

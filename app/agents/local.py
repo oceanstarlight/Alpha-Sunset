@@ -120,7 +120,7 @@ class KrNewsSignal:
 
 
 def baseline_z(history: list[dict], event_type: str, now: datetime, count: int,
-               cfg: dict | None = None) -> tuple[float | None, int]:
+               cfg: dict | None = None, field: str = "n_articles") -> tuple[float | None, int]:
     """직전 baseline_days일 같은 시간대(±baseline_window_min분, 기본 60) 기사 수 대비 z. 기준점 부족이면 (None, 개수)."""
     cfg = cfg or _cfg()["news"]
     window = cfg.get("baseline_window_min", 60)
@@ -128,11 +128,11 @@ def baseline_z(history: list[dict], event_type: str, now: datetime, count: int,
     pts = []
     for h in history:
         ts = datetime.fromisoformat(h["ts"])
-        if h["event_type"] != event_type or not (start <= ts < now - timedelta(hours=1)):
+        if h["event_type"] != event_type or h.get(field) is None or not (start <= ts < now - timedelta(hours=1)):
             continue
         minutes = abs((ts.hour * 60 + ts.minute) - (now.hour * 60 + now.minute))
         if min(minutes, 1440 - minutes) <= window:
-            pts.append(h["n_articles"])
+            pts.append(h[field])
     if len(pts) < cfg["baseline_min_points"]:
         return None, len(pts)
     std = float(np.std(pts, ddof=1))
