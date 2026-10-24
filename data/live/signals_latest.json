@@ -1,18 +1,18 @@
 {
-  "collected_at": "2026-10-24T10:49:31+00:00",
+  "collected_at": "2026-10-24T18:20:42+00:00",
   "as_of": "2026-10-23",
   "level": "WATCH",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "미 10년물 금리(DGS10) z=-4.13, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.52",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=-4.13, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.52, VIX(변동성)(VIXCLS) z=+1.86",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=-4.13, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.52, VIX(변동성)(VIXCLS) z=+1.86",
       "결과": "활성"
     },
     {
       "단계": "자금 흐름(C)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.0 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.61, 미 은행 예금(DPSACBW027SBOG) z=+0.24, 해외 공적 미국채 보관(WMTSECL1) z=+1.32, 지급준비금(WRESBAL) z=-0.95",
+      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.61, 미 은행 예금(DPSACBW027SBOG) z=+0.24, 해외 공적 미국채 보관(WMTSECL1) z=+1.32, 지급준비금(WRESBAL) z=-0.95",
       "결과": "비활성"
     },
     {
@@ -28,7 +28,7 @@
       "결과": "WATCH → 1단계: 자금 이상 알림"
     }
   ],
-  "money_alert": true,
+  "money_alert": false,
   "market": {
     "active": true,
     "triggered": [
@@ -61,91 +61,119 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 3,
-        "n_sources": 2,
-        "z": -0.539,
-        "baseline_points": 24,
+        "n_articles": 1,
+        "n_sources": 1,
+        "z": -1.986,
+        "baseline_points": 25,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 10,
+        "saturated": false,
         "top_titles": [
-          "Banks see ₹5.19 lakh crore deposit outflow, credit shrinks ₹2.52 lakh crore - The Economic Times",
           "U.S. Banks Block AI Agents from Customer Accounts Amid Fears of Unauthorized Transactions - 아시아경제",
-          "'Nothing to fear': Top bureaucrat says IDBI staff, pensioners' service conditions won't change after Fairf - The Economic Times"
+          "Banks Preparing for Aftermath of Unprecedented Catastrophe Caused by AI - Futurism",
+          "Wall Street prepares for AI's \"day after\" - Axios"
         ]
       },
       "credit_event": {
-        "n_articles": 46,
-        "n_sources": 43,
-        "z": -1.507,
-        "baseline_points": 24,
+        "n_articles": 43,
+        "n_sources": 39,
+        "z": -1.631,
+        "baseline_points": 25,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 70,
+        "saturated": false,
         "top_titles": [
-          "How to replace Google with ChatGPT Search as your default search engine - Mashable",
-          "Student Loans: Late Payment Trends, Servicing Practices, and Credit Reporting Issues - EveryCRSReport.com",
-          "LIV Golf's Scott O'Neil given $6.3M before bankruptcy protection filing - ESPN"
+          "LIV Golf Paid Executives $15.6M in Retention Payments Before Bankruptcy Filing, Records Show - RG.org",
+          "LIV Golf paid execs $15.6M in retention money in weeks before bankruptcy filing - The New York Times",
+          "How to replace Google with ChatGPT Search as your default search engine - Mashable"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 7,
-        "n_sources": 3,
-        "z": -0.024,
-        "baseline_points": 24,
+        "n_articles": 0,
+        "n_sources": 0,
+        "z": -0.856,
+        "baseline_points": 25,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 4,
+        "saturated": false,
         "top_titles": [
-          "Unidentified gunmen open fire at church in Jordan, causing deaths and injuries, state TV says - Devdiscourse",
-          "Silver Traders Face a Liquidity Crunch as Oil and Tech Losses Collide - ad-hoc-news.de",
-          "China opposes arms race in space, official document shows - Devdiscourse"
+          "Indian Small Caps Fall, 2026 Gains Wiped Out - Briefs Finance",
+          "Crunch Fitness to Open in Arlington’s Gazebo Shopping Center - WhatNow",
+          "SF Compute's Evan Conrad says GPU credit, not chips, is AI's real bottleneck - BigGo Finance"
         ]
       },
       "geopolitical": {
-        "n_articles": 100,
-        "n_sources": 83,
-        "z": 0.266,
-        "baseline_points": 24,
+        "n_articles": 84,
+        "n_sources": 73,
+        "z": -4.075,
+        "baseline_points": 25,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 134,
+        "saturated": false,
         "top_titles": [
-          "Trump Waives Sanctions Against Russia Just Before New Law Takes Effect - WSJ",
-          "'Masha and the Bear': Ukraine sanctions Russian cartoon - DW.com",
-          "Ukrainian civilians killed in Russian attacks following Trump’s easing of sanctions - Scripps News"
+          "Benjamin Netanyahu warns of banking sanctions, plans alternatives - The Jerusalem Post",
+          "Officer assaulted during home invasion investigation - Western Mass News",
+          "Netanyahu Says Israel Mulls Crypto Ahead of Possible Sanctions - Bloomberg.com"
         ]
       },
       "trade_policy": {
-        "n_articles": 89,
-        "n_sources": 68,
-        "z": 1.524,
-        "baseline_points": 24,
+        "n_articles": 75,
+        "n_sources": 65,
+        "z": 0.113,
+        "baseline_points": 25,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 112,
+        "saturated": false,
         "top_titles": [
-          "Trump dropping some Canada tariffs but 'replacing' them with other products - CNBC",
+          "Trump to Remove Some Tariffs on Canada in Bid to Help Susan Collins - WSJ",
           "Opinion | A stinky cheese tariff - The Washington Post",
-          "US lifts tariffs on some Canadian goods before midterm elections - BBC"
+          "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos"
         ]
       },
       "pandemic": {
-        "n_articles": 84,
-        "n_sources": 72,
-        "z": -0.323,
-        "baseline_points": 24,
+        "n_articles": 68,
+        "n_sources": 59,
+        "z": -1.619,
+        "baseline_points": 25,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 124,
+        "saturated": false,
         "top_titles": [
-          "Israel orders sweeping West Bank operation after military says 2 soldiers were killed in attack that left 2 gunmen dead - NBC News",
-          "Menasha High locked down after reported community situation; police find no threat - WLUK",
-          "Pennsylvania measles outbreak climbs above 1,300 cases - American Hospital Association"
+          "Additional 178 cases of measles reported by US health authorities amid outbreak - The Guardian",
+          "Disease outbreak impacts hunting in North Dakota’s southwestern units - Grand Forks Herald",
+          "Trader Joe's wraps named as source of ongoing E. coli outbreak - USA Today"
         ]
       },
       "fx_shock": {
-        "n_articles": 0,
-        "n_sources": 0,
-        "z": -0.813,
-        "baseline_points": 24,
-        "top_titles": []
+        "n_articles": 1,
+        "n_sources": 1,
+        "z": 0.618,
+        "baseline_points": 25,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 2,
+        "saturated": false,
+        "top_titles": [
+          "Peter Schiff Says Buy Gold Near $4000 As Prices Sink From January High, Warns Of Currency Crisis Worse Than 2008 - TradingView",
+          "The world's best- and worst-performing currencies: see how the dollar fares | lovemoney.com - lovemoney.com"
+        ]
       },
       "rate_shock": {
-        "n_articles": 4,
-        "n_sources": 4,
-        "z": -1.034,
-        "baseline_points": 24,
+        "n_articles": 3,
+        "n_sources": 3,
+        "z": -1.223,
+        "baseline_points": 25,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 4,
+        "saturated": false,
         "top_titles": [
           "LVMH, Kering and Hermès shares fall as France riots damage 3,000 shops and bond yields surge to 2002 highs - Yahoo Finance",
-          "Bond Selloff Deepens as Rising Energy Prices Stoke Inflation Fears - EnergyNow.com",
-          "US stocks today: US stocks open lower after AI rout; SpaceX worries hit telecoms - The Economic Times"
+          "JetBlue Stock Sinks, Bond Yields Surge as Creditors Hire Advisors Amid Higher Jet Fuel Prices - Benzinga",
+          "Bond Selloff Deepens as Rising Energy Prices Stoke Inflation Fears - EnergyNow.com"
         ]
       }
     },
     "source": "Google 뉴스 RSS"
   },
-  "fred_error": null
+  "fred_error": null,
+  "alerts_sent": {}
 }
