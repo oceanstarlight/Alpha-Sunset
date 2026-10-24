@@ -430,6 +430,183 @@
    "persistence": 3,
    "flow_z": 3.5,
    "z_extreme": 4.0
+  },
+  "adopted_full_period": {
+   "n_events": 23,
+   "caught": 17,
+   "caught_rate": 0.7391,
+   "prior_warning": 10,
+   "prior_rate": 0.4348,
+   "mean_lead_days": 28.1,
+   "calm_alert_rate": 0.0264,
+   "base_rate_caught": 0.3362,
+   "base_rate_prior": 0.2904,
+   "p_value_caught": 0.0001,
+   "p_value_prior": 0.1002,
+   "n_calm_days": 3034,
+   "events": [
+    {
+     "id": "asia_1997",
+     "date": "1997-07-02",
+     "caught": true,
+     "prior_warning": true,
+     "lead_days": 9
+    },
+    {
+     "id": "minicrash_1997",
+     "date": "1997-10-27",
+     "caught": true,
+     "prior_warning": true,
+     "lead_days": 4
+    },
+    {
+     "id": "russia_1998",
+     "date": "1998-08-17",
+     "caught": false,
+     "prior_warning": false,
+     "lead_days": null
+    },
+    {
+     "id": "dotcom_2000",
+     "date": "2000-03-10",
+     "caught": true,
+     "prior_warning": true,
+     "lead_days": 29
+    },
+    {
+     "id": "sept11_2001",
+     "date": "2001-09-11",
+     "caught": true,
+     "prior_warning": false,
+     "lead_days": null
+    },
+    {
+     "id": "downturn_2002",
+     "date": "2002-10-09",
+     "caught": false,
+     "prior_warning": false,
+     "lead_days": null
+    },
+    {
+     "id": "china_2007",
+     "date": "2007-02-27",
+     "caught": false,
+     "prior_warning": false,
+     "lead_days": null
+    },
+    {
+     "id": "us_bear_2007",
+     "date": "2007-10-11",
+     "caught": true,
+     "prior_warning": true,
+     "lead_days": 57
+    },
+    {
+     "id": "gfc_2008",
+     "date": "2008-09-15",
+     "caught": true,
+     "prior_warning": false,
+     "lead_days": null
+    },
+    {
+     "id": "dubai_2009",
+     "date": "2009-11-27",
+     "caught": false,
+     "prior_warning": false,
+     "lead_days": null
+    },
+    {
+     "id": "euro_2010",
+     "date": "2010-04-27",
+     "caught": true,
+     "prior_warning": false,
+     "lead_days": null
+    },
+    {
+     "id": "aug_2011",
+     "date": "2011-08-01",
+     "caught": true,
+     "prior_warning": false,
+     "lead_days": null
+    },
+    {
+     "id": "china_2015",
+     "date": "2015-06-12",
+     "caught": true,
+     "prior_warning": true,
+     "lead_days": 60
+    },
+    {
+     "id": "selloff_2015",
+     "date": "2015-08-18",
+     "caught": true,
+     "prior_warning": false,
+     "lead_days": null
+    },
+    {
+     "id": "crypto_2018",
+     "date": "2018-09-20",
+     "caught": false,
+     "prior_warning": false,
+     "lead_days": null
+    },
+    {
+     "id": "covid_2020",
+     "date": "2020-02-24",
+     "caught": true,
+     "prior_warning": false,
+     "lead_days": null
+    },
+    {
+     "id": "decline_2022",
+     "date": "2022-01-03",
+     "caught": true,
+     "prior_warning": true,
+     "lead_days": 34
+    },
+    {
+     "id": "ru_ua_2022",
+     "date": "2022-02-16",
+     "caught": true,
+     "prior_warning": true,
+     "lead_days": 35
+    },
+    {
+     "id": "legoland_2022",
+     "date": "2022-09-28",
+     "caught": true,
+     "prior_warning": true,
+     "lead_days": 2
+    },
+    {
+     "id": "svb_2023",
+     "date": "2023-03-10",
+     "caught": true,
+     "prior_warning": true,
+     "lead_days": 51
+    },
+    {
+     "id": "china_2024",
+     "date": "2024-02-02",
+     "caught": false,
+     "prior_warning": false,
+     "lead_days": null
+    },
+    {
+     "id": "japan_2024",
+     "date": "2024-08-05",
+     "caught": true,
+     "prior_warning": true,
+     "lead_days": 0
+    },
+    {
+     "id": "tariff_2025",
+     "date": "2025-04-02",
+     "caught": true,
+     "prior_warning": false,
+     "lead_days": null
+    }
+   ]
   }
  },
  "local_kr": {
