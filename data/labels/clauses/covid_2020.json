@@ -1,0 +1,487 @@
+{
+ "event_id": "covid_2020",
+ "labeler": "isolated Sonnet subagent (agent outputs not shown)",
+ "preregistration": "data/backtest/ablation/preregistration_v7_clause_labels.json",
+ "labels": [
+  {
+   "clause_id": "PB-BANK-01",
+   "verdict": "not_applicable",
+   "reason": "코로나 팬데믹 사건에는 은행 폐쇄·뱅크런 전제가 없다."
+  },
+  {
+   "clause_id": "PB-BANK-02",
+   "verdict": "not_applicable",
+   "reason": "코로나 팬데믹 사건에는 은행 폐쇄·뱅크런 전제가 없다."
+  },
+  {
+   "clause_id": "PB-BANK-03",
+   "verdict": "not_applicable",
+   "reason": "코로나 팬데믹 사건에는 은행 폐쇄·뱅크런 전제가 없다."
+  },
+  {
+   "clause_id": "PB-BANK-04",
+   "verdict": "not_applicable",
+   "reason": "사건일에 정부 예금보호·긴급대출 발표가 없다."
+  },
+  {
+   "clause_id": "PB-BANK-05",
+   "verdict": "not_applicable",
+   "reason": "은행 섹터 변동성 급등 사실이 facts에 없고 위기 성격이 다르다."
+  },
+  {
+   "clause_id": "PB-BANK-06",
+   "verdict": "partial",
+   "reason": "유동성 압박 국면이나 현금 비중 하한 미달 여부는 불명이라 조건부로 유효하다."
+  },
+  {
+   "clause_id": "PB-BANK-07",
+   "verdict": "not_applicable",
+   "reason": "코로나 팬데믹 사건에는 은행 폐쇄·뱅크런 전제가 없다."
+  },
+  {
+   "clause_id": "PB-BANK-08",
+   "verdict": "partial",
+   "reason": "금융 전이 모니터링은 유용하나 은행 위기가 발단은 아니다."
+  },
+  {
+   "clause_id": "PB-BCP-01",
+   "verdict": "partial",
+   "reason": "팬데믹 선언으로 준비 차원에서 유효하나 출입 제한·확진 등 구체 조건은 facts에 없다."
+  },
+  {
+   "clause_id": "PB-BCP-02",
+   "verdict": "partial",
+   "reason": "팬데믹 선언으로 준비 차원에서 유효하나 출입 제한·확진 등 구체 조건은 facts에 없다."
+  },
+  {
+   "clause_id": "PB-BCP-03",
+   "verdict": "applicable",
+   "reason": "WHO 팬데믹 선언으로 핵심 인력 결원에 대비한 대체 인력·위임표 정비가 필요하다."
+  },
+  {
+   "clause_id": "PB-BCP-04",
+   "verdict": "applicable",
+   "reason": "WHO 팬데믹 선언으로 위탁운용사·수탁기관 BCP 가동 확인이 필요하다."
+  },
+  {
+   "clause_id": "PB-BCP-05",
+   "verdict": "partial",
+   "reason": "팬데믹 선언으로 준비 차원에서 유효하나 출입 제한·확진 등 구체 조건은 facts에 없다."
+  },
+  {
+   "clause_id": "PB-BCP-06",
+   "verdict": "partial",
+   "reason": "팬데믹 선언으로 준비 차원에서 유효하나 출입 제한·확진 등 구체 조건은 facts에 없다."
+  },
+  {
+   "clause_id": "PB-BCP-07",
+   "verdict": "partial",
+   "reason": "팬데믹 선언으로 준비 차원에서 유효하나 출입 제한·확진 등 구체 조건은 facts에 없다."
+  },
+  {
+   "clause_id": "PB-BCP-08",
+   "verdict": "partial",
+   "reason": "팬데믹 선언으로 준비 차원에서 유효하나 출입 제한·확진 등 구체 조건은 facts에 없다."
+  },
+  {
+   "clause_id": "PB-CMDTY-01",
+   "verdict": "partial",
+   "reason": "유가가 33달러대로 낮아져 에너지 노출 집계는 유효하나 당일 변동폭은 작다."
+  },
+  {
+   "clause_id": "PB-CMDTY-02",
+   "verdict": "not_applicable",
+   "reason": "선물 만기 가격 왜곡·저장 공간 부족 사실이 facts에 없다."
+  },
+  {
+   "clause_id": "PB-CMDTY-03",
+   "verdict": "partial",
+   "reason": "유가 33달러대 약세로 에너지 하이일드 점검은 유효하나 스프레드 확대는 facts에 없다."
+  },
+  {
+   "clause_id": "PB-CMDTY-04",
+   "verdict": "not_applicable",
+   "reason": "원자재 가격 급등·공급 차질 등 조항 전제가 이번 사건 사실과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-05",
+   "verdict": "not_applicable",
+   "reason": "원자재 가격 급등·공급 차질 등 조항 전제가 이번 사건 사실과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-06",
+   "verdict": "not_applicable",
+   "reason": "원자재 가격 급등·공급 차질 등 조항 전제가 이번 사건 사실과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-07",
+   "verdict": "not_applicable",
+   "reason": "원자재 가격 급등·공급 차질 등 조항 전제가 이번 사건 사실과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-08",
+   "verdict": "not_applicable",
+   "reason": "원자재 가격 급등·공급 차질 등 조항 전제가 이번 사건 사실과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-01",
+   "verdict": "not_applicable",
+   "reason": "특정 거래상대방의 부도·파산 사실이 없다."
+  },
+  {
+   "clause_id": "PB-CPTY-02",
+   "verdict": "not_applicable",
+   "reason": "거래상대방 부도 전제가 없다."
+  },
+  {
+   "clause_id": "PB-CPTY-03",
+   "verdict": "partial",
+   "reason": "변동성 급등으로 담보 가치 재평가는 유용하나 상대방 부도는 없다."
+  },
+  {
+   "clause_id": "PB-CPTY-04",
+   "verdict": "not_applicable",
+   "reason": "투자은행 CDS 급등 사실이 facts에 없고 위기 성격이 다르다."
+  },
+  {
+   "clause_id": "PB-CPTY-05",
+   "verdict": "not_applicable",
+   "reason": "부도 상대방 발행 증권이 없다."
+  },
+  {
+   "clause_id": "PB-CPTY-06",
+   "verdict": "not_applicable",
+   "reason": "레포 상대방 신용도 하락 사실이 없다."
+  },
+  {
+   "clause_id": "PB-CPTY-07",
+   "verdict": "not_applicable",
+   "reason": "고레버리지 상대방 마진콜 불이행 사실이 없다."
+  },
+  {
+   "clause_id": "PB-CPTY-08",
+   "verdict": "not_applicable",
+   "reason": "손실 확정·추정 가능한 상대방 부도가 없다."
+  },
+  {
+   "clause_id": "PB-FX-01",
+   "verdict": "partial",
+   "reason": "환율 데이터가 facts에 없으나 팬데믹 충격 속 점검 회의는 유용하다."
+  },
+  {
+   "clause_id": "PB-FX-02",
+   "verdict": "not_applicable",
+   "reason": "국내 은행 외화차입 상환 압력 사실이 없다."
+  },
+  {
+   "clause_id": "PB-FX-03",
+   "verdict": "not_applicable",
+   "reason": "외국인 증권자금 유출 사실이 facts에 없다."
+  },
+  {
+   "clause_id": "PB-FX-04",
+   "verdict": "not_applicable",
+   "reason": "스왑포인트 급변 사실이 facts에 없다."
+  },
+  {
+   "clause_id": "PB-FX-05",
+   "verdict": "not_applicable",
+   "reason": "사건일에 통화스와프 발표가 facts에 없다."
+  },
+  {
+   "clause_id": "PB-FX-06",
+   "verdict": "not_applicable",
+   "reason": "환율 연계 파생상품 손실 확대 사실이 facts에 없다."
+  },
+  {
+   "clause_id": "PB-FX-07",
+   "verdict": "not_applicable",
+   "reason": "환율 급등 사실이 facts에 없다."
+  },
+  {
+   "clause_id": "PB-FX-08",
+   "verdict": "partial",
+   "reason": "환율 변동 자료는 없으나 일일 환산 평가 보고는 유용하다."
+  },
+  {
+   "clause_id": "PB-GEO-01",
+   "verdict": "not_applicable",
+   "reason": "군사 충돌·제재 등 지정학 전제가 이번 사건과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-02",
+   "verdict": "not_applicable",
+   "reason": "군사 충돌·제재 등 지정학 전제가 이번 사건과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-03",
+   "verdict": "not_applicable",
+   "reason": "군사 충돌·제재 등 지정학 전제가 이번 사건과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-04",
+   "verdict": "not_applicable",
+   "reason": "군사 충돌·제재 등 지정학 전제가 이번 사건과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-05",
+   "verdict": "not_applicable",
+   "reason": "군사 충돌·제재 등 지정학 전제가 이번 사건과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-06",
+   "verdict": "not_applicable",
+   "reason": "군사 충돌·제재 등 지정학 전제가 이번 사건과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-07",
+   "verdict": "not_applicable",
+   "reason": "달러 강세 사실이 facts에 없다."
+  },
+  {
+   "clause_id": "PB-GEO-08",
+   "verdict": "not_applicable",
+   "reason": "군사 충돌·제재 등 지정학 전제가 이번 사건과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-01",
+   "verdict": "applicable",
+   "reason": "VIX 53.9의 극단적 변동성과 팬데믹 충격으로 유동성 점검 회의 소집이 필요하다."
+  },
+  {
+   "clause_id": "PB-LIQ-02",
+   "verdict": "partial",
+   "reason": "현금 비중 하한 미달 여부는 불명이나 유동성 확보 차원에서 조건부로 유효하다."
+  },
+  {
+   "clause_id": "PB-LIQ-03",
+   "verdict": "applicable",
+   "reason": "팬데믹 충격과 VIX 급등으로 향후 capital call과 지급 일정 재점검이 필요하다."
+  },
+  {
+   "clause_id": "PB-LIQ-04",
+   "verdict": "partial",
+   "reason": "달러 조달 악화 사실은 facts에 없으나 외화 유동성 모니터링은 유용하다."
+  },
+  {
+   "clause_id": "PB-LIQ-05",
+   "verdict": "partial",
+   "reason": "VIX 53.9로 유동성이 낮은 시장이라 리밸런싱 범위 한시 확대 검토가 유용하다."
+  },
+  {
+   "clause_id": "PB-LIQ-06",
+   "verdict": "partial",
+   "reason": "팬데믹 선언으로 경기 급랭 우려가 있으나 봉쇄 시행은 facts에 없어 조정이 필요하다."
+  },
+  {
+   "clause_id": "PB-LIQ-07",
+   "verdict": "partial",
+   "reason": "신용 스프레드 채널이 활성화됐으나 하이일드 급등은 facts에 없어 조건부로 유효하다."
+  },
+  {
+   "clause_id": "PB-LIQ-08",
+   "verdict": "not_applicable",
+   "reason": "사건일에 중앙은행 유동성 공급 발표가 없다."
+  },
+  {
+   "clause_id": "PB-MGR-01",
+   "verdict": "not_applicable",
+   "reason": "위탁운용사 사고 전제가 이번 사건에 없다."
+  },
+  {
+   "clause_id": "PB-MGR-02",
+   "verdict": "not_applicable",
+   "reason": "위탁운용사 사고 전제가 이번 사건에 없다."
+  },
+  {
+   "clause_id": "PB-MGR-03",
+   "verdict": "applicable",
+   "reason": "VIX 53.9의 시장 급변 속에서 위탁운용사 레버리지 점검이 필요하다."
+  },
+  {
+   "clause_id": "PB-MGR-04",
+   "verdict": "not_applicable",
+   "reason": "위탁운용사 사고 전제가 이번 사건에 없다."
+  },
+  {
+   "clause_id": "PB-MGR-05",
+   "verdict": "not_applicable",
+   "reason": "위탁운용사 사고 전제가 이번 사건에 없다."
+  },
+  {
+   "clause_id": "PB-MGR-06",
+   "verdict": "not_applicable",
+   "reason": "위탁운용사 사고 전제가 이번 사건에 없다."
+  },
+  {
+   "clause_id": "PB-MGR-07",
+   "verdict": "not_applicable",
+   "reason": "위탁운용사 사고 전제가 이번 사건에 없다."
+  },
+  {
+   "clause_id": "PB-MGR-08",
+   "verdict": "not_applicable",
+   "reason": "위탁운용사 사고 전제가 이번 사건에 없다."
+  },
+  {
+   "clause_id": "PB-RATE-01",
+   "verdict": "not_applicable",
+   "reason": "금리 급등 전제가 이번 사건 사실과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-02",
+   "verdict": "not_applicable",
+   "reason": "금리 급등 전제가 이번 사건 사실과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-03",
+   "verdict": "not_applicable",
+   "reason": "금리 급등 전제가 이번 사건 사실과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-04",
+   "verdict": "not_applicable",
+   "reason": "금리 급등 전제가 이번 사건 사실과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-05",
+   "verdict": "not_applicable",
+   "reason": "금리 급등 전제가 이번 사건 사실과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-06",
+   "verdict": "not_applicable",
+   "reason": "금리 급등 전제가 이번 사건 사실과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-07",
+   "verdict": "not_applicable",
+   "reason": "금리 급등 전제가 이번 사건 사실과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-08",
+   "verdict": "not_applicable",
+   "reason": "금리 급등 전제가 이번 사건 사실과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-01",
+   "verdict": "partial",
+   "reason": "중대 손실이나 한도 위반이 발생할 경우에 해당하는 조건부 조항이다."
+  },
+  {
+   "clause_id": "PB-REG-02",
+   "verdict": "not_applicable",
+   "reason": "사건일에 공매도 금지 시행이 facts에 없다."
+  },
+  {
+   "clause_id": "PB-REG-03",
+   "verdict": "not_applicable",
+   "reason": "제재 대상 지정 전제가 없다."
+  },
+  {
+   "clause_id": "PB-REG-04",
+   "verdict": "partial",
+   "reason": "한도 예외 승인이 있을 경우 사후 보고하는 조건부 조항이다."
+  },
+  {
+   "clause_id": "PB-REG-05",
+   "verdict": "applicable",
+   "reason": "위기 대응 의사결정 기록 보관은 모든 위기에 적용된다."
+  },
+  {
+   "clause_id": "PB-REG-06",
+   "verdict": "partial",
+   "reason": "공시 대상 사안이 생기면 적용되는 조건부 조항이다."
+  },
+  {
+   "clause_id": "PB-REG-07",
+   "verdict": "applicable",
+   "reason": "위기 대응 자료의 외부 공유 제한은 모든 위기에 그대로 적용된다."
+  },
+  {
+   "clause_id": "PB-REG-08",
+   "verdict": "not_applicable",
+   "reason": "위기가 막 시작되어 종료 후 보고 전제가 아직 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-01",
+   "verdict": "not_applicable",
+   "reason": "국내 단기자금시장·정책 대응 전제가 사건일 facts에 없다."
+  },
+  {
+   "clause_id": "PB-STFM-02",
+   "verdict": "not_applicable",
+   "reason": "CP 금리 급등과 차환 곤란 사실이 facts에 없다."
+  },
+  {
+   "clause_id": "PB-STFM-03",
+   "verdict": "not_applicable",
+   "reason": "국내 단기자금시장·정책 대응 전제가 사건일 facts에 없다."
+  },
+  {
+   "clause_id": "PB-STFM-04",
+   "verdict": "partial",
+   "reason": "현금 비중 하한 미달 여부는 불명이나 유동성 확보 차원에서 조건부로 유효하다."
+  },
+  {
+   "clause_id": "PB-STFM-05",
+   "verdict": "not_applicable",
+   "reason": "국내 단기자금시장·정책 대응 전제가 사건일 facts에 없다."
+  },
+  {
+   "clause_id": "PB-STFM-06",
+   "verdict": "not_applicable",
+   "reason": "증권사 유동성 부족 징후가 facts에 없다."
+  },
+  {
+   "clause_id": "PB-STFM-07",
+   "verdict": "not_applicable",
+   "reason": "국내 단기자금시장·정책 대응 전제가 사건일 facts에 없다."
+  },
+  {
+   "clause_id": "PB-STFM-08",
+   "verdict": "not_applicable",
+   "reason": "국내 단기자금시장·정책 대응 전제가 사건일 facts에 없다."
+  },
+  {
+   "clause_id": "PB-TRADE-01",
+   "verdict": "not_applicable",
+   "reason": "관세·무역정책 전제가 이번 사건과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-02",
+   "verdict": "not_applicable",
+   "reason": "관세·무역정책 전제가 이번 사건과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-03",
+   "verdict": "not_applicable",
+   "reason": "관세·무역정책 전제가 이번 사건과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-04",
+   "verdict": "not_applicable",
+   "reason": "관세·무역정책 전제가 이번 사건과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-05",
+   "verdict": "applicable",
+   "reason": "VIX 53.9 급등으로 리밸런싱 분할 실행과 거래비용 점검이 필요하다."
+  },
+  {
+   "clause_id": "PB-TRADE-06",
+   "verdict": "not_applicable",
+   "reason": "관세·무역정책 전제가 이번 사건과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-07",
+   "verdict": "not_applicable",
+   "reason": "관세·무역정책 전제가 이번 사건과 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-08",
+   "verdict": "not_applicable",
+   "reason": "관세·무역정책 전제가 이번 사건과 맞지 않는다."
+  }
+ ]
+}

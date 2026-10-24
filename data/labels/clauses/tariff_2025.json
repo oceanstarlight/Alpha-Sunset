@@ -1,0 +1,487 @@
+{
+ "event_id": "tariff_2025",
+ "labeler": "isolated Sonnet subagent (agent outputs not shown)",
+ "preregistration": "data/backtest/ablation/preregistration_v7_clause_labels.json",
+ "labels": [
+  {
+   "clause_id": "PB-BANK-01",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-02",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-03",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-04",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-05",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-06",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-07",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-08",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-01",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-02",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-03",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-04",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-05",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-06",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-07",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-08",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-01",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-02",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-03",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-04",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-05",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-06",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-07",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-08",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-01",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-02",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-03",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-04",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-05",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-06",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-07",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-08",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-01",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-02",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-03",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-04",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-05",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-06",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-07",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-08",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-01",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-02",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-03",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-04",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-05",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-06",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-07",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-08",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-01",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-02",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-03",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-04",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-05",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-06",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-07",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-08",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-01",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-02",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-03",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-04",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-05",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-06",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-07",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-08",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-01",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-02",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-03",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-04",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-05",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-06",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-07",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-08",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-01",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-02",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-03",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-04",
+   "verdict": "partial",
+   "reason": "일반 절차 조항으로 위기 대응이 진행될 경우 조건부로 적용된다."
+  },
+  {
+   "clause_id": "PB-REG-05",
+   "verdict": "partial",
+   "reason": "일반 절차 조항으로 위기 대응이 진행될 경우 조건부로 적용된다."
+  },
+  {
+   "clause_id": "PB-REG-06",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-07",
+   "verdict": "partial",
+   "reason": "일반 절차 조항으로 위기 대응이 진행될 경우 조건부로 적용된다."
+  },
+  {
+   "clause_id": "PB-REG-08",
+   "verdict": "partial",
+   "reason": "일반 절차 조항으로 위기 대응이 진행될 경우 조건부로 적용된다."
+  },
+  {
+   "clause_id": "PB-STFM-01",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-02",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-03",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-04",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-05",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-06",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-07",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-08",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-01",
+   "verdict": "applicable",
+   "reason": "대규모 상호관세가 발표되어 대상국·수출 의존 업종 노출을 집계해야 한다."
+  },
+  {
+   "clause_id": "PB-TRADE-02",
+   "verdict": "applicable",
+   "reason": "관세로 자동차·반도체 등 대미 수출 업종의 실적 영향 분석이 필요하다."
+  },
+  {
+   "clause_id": "PB-TRADE-03",
+   "verdict": "applicable",
+   "reason": "4월 5일 기본관세와 4월 9일 국가별 관세 발효 일정이 있어 추적·시나리오 갱신이 필요하다."
+  },
+  {
+   "clause_id": "PB-TRADE-04",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-05",
+   "verdict": "partial",
+   "reason": "VIX 21.5로 급등은 아니나 변동성 확대에 대비한 분할 리밸런싱은 유용하다."
+  },
+  {
+   "clause_id": "PB-TRADE-06",
+   "verdict": "not_applicable",
+   "reason": "관세 발표 사건의 사실과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-07",
+   "verdict": "partial",
+   "reason": "IEEPA 근거 관세라 법적 근거 정리는 유효하나 소송 동향은 아직 없다."
+  },
+  {
+   "clause_id": "PB-TRADE-08",
+   "verdict": "partial",
+   "reason": "관세발 물가·금리 영향 반영은 유효하나 구체적 물가 우려는 사실에 없다."
+  }
+ ]
+}

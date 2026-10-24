@@ -1,0 +1,487 @@
+{
+ "event_id": "svb_2023",
+ "labeler": "isolated Sonnet subagent (agent outputs not shown)",
+ "preregistration": "data/backtest/ablation/preregistration_v7_clause_labels.json",
+ "labels": [
+  {
+   "clause_id": "PB-BANK-01",
+   "verdict": "applicable",
+   "reason": "예치 은행인 SVB가 당일 폐쇄되었으므로 해당 은행 예금·결제계좌 잔액을 즉시 확인해야 한다."
+  },
+  {
+   "clause_id": "PB-BANK-02",
+   "verdict": "partial",
+   "reason": "SVB 폐쇄로 단일 은행 집중 점검이 유효하나 실제 집중 보유 여부는 사실에 없다."
+  },
+  {
+   "clause_id": "PB-BANK-03",
+   "verdict": "partial",
+   "reason": "은행 위기 국면이라 취약 지역은행 노출 점검은 유효하나 평가손실 확대는 당일 사실에 명시되지 않았다."
+  },
+  {
+   "clause_id": "PB-BANK-04",
+   "verdict": "not_applicable",
+   "reason": "당일까지 정부 예금보호·긴급대출 발표가 사실에 없다."
+  },
+  {
+   "clause_id": "PB-BANK-05",
+   "verdict": "partial",
+   "reason": "은행 섹터 변동성 급등은 사실에 없으나 SVB 폐쇄로 비중 조정 검토는 유효하다."
+  },
+  {
+   "clause_id": "PB-BANK-06",
+   "verdict": "partial",
+   "reason": "현금성 비중 하한 미달 시에만 발동하는 조건부 조항으로 은행 위기 시 유효하다."
+  },
+  {
+   "clause_id": "PB-BANK-07",
+   "verdict": "applicable",
+   "reason": "기술·벤처 기업 예금 비중이 높은 SVB가 폐쇄되어 위탁운용사 결제계좌 확인이 필요하다."
+  },
+  {
+   "clause_id": "PB-BANK-08",
+   "verdict": "applicable",
+   "reason": "은행 위기 전이 여부 확인을 위한 은행 CDS·단기자금 금리 모니터링이 필요하다."
+  },
+  {
+   "clause_id": "PB-BCP-01",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-02",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-03",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-04",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-05",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-06",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-07",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-08",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-01",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-02",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-03",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-04",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-05",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-06",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-07",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-08",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-01",
+   "verdict": "applicable",
+   "reason": "SVB는 폐쇄된 은행 상대방이므로 전체 노출 집계와 보고가 필요하다."
+  },
+  {
+   "clause_id": "PB-CPTY-02",
+   "verdict": "partial",
+   "reason": "SVB와 ISDA 계약이 있을 경우에만 조기종료 절차가 해당하며 파산 절차 중이라 조정이 필요하다."
+  },
+  {
+   "clause_id": "PB-CPTY-03",
+   "verdict": "partial",
+   "reason": "SVB 관련 수취 담보가 있을 때에 한해 재평가·추가 담보 요구가 유효하다."
+  },
+  {
+   "clause_id": "PB-CPTY-04",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-05",
+   "verdict": "applicable",
+   "reason": "SVB 폐쇄로 발행 주식·채권 보유분 확인과 회수 가능성 평가가 필요하다."
+  },
+  {
+   "clause_id": "PB-CPTY-06",
+   "verdict": "partial",
+   "reason": "은행 불안 시 레포 상대방 신용도 점검은 유효하나 상대방 신용 하락은 사실에 없다."
+  },
+  {
+   "clause_id": "PB-CPTY-07",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-08",
+   "verdict": "partial",
+   "reason": "손실 확정 전이므로 추정 손실 산정과 회계팀 사전 통보 정도로 조정한다."
+  },
+  {
+   "clause_id": "PB-FX-01",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-02",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-03",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-04",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-05",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-06",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-07",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-08",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-01",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-02",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-03",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-04",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-05",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-06",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-07",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-08",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-01",
+   "verdict": "partial",
+   "reason": "VIX 24.8로 전 자산 동반 하락은 아니나 은행 폐쇄로 유동성 점검 회의는 유용하다."
+  },
+  {
+   "clause_id": "PB-LIQ-02",
+   "verdict": "partial",
+   "reason": "현금성 비중 하한 미달 시 조건부로 유효하다."
+  },
+  {
+   "clause_id": "PB-LIQ-03",
+   "verdict": "partial",
+   "reason": "은행 위기 시 capital call 일정 재점검은 유용하나 출자 약정 존재 여부는 사실에 없다."
+  },
+  {
+   "clause_id": "PB-LIQ-04",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-05",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-06",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-07",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-08",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-01",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-02",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-03",
+   "verdict": "partial",
+   "reason": "은행 위기로 위탁운용사 레버리지·파생 노출 점검은 유효하나 시장 급변 정도는 제한적이다."
+  },
+  {
+   "clause_id": "PB-MGR-04",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-05",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-06",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-07",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-08",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-01",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-02",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-03",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-04",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-05",
+   "verdict": "partial",
+   "reason": "금리 경로가 은행 위기의 배경이라 통화정책 일정 추적은 유용하나 금리 급등 사실은 없다."
+  },
+  {
+   "clause_id": "PB-RATE-06",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-07",
+   "verdict": "applicable",
+   "reason": "금융기관 보유채권 평가손실 점검과 거래 노출 점검이 SVB 사태와 맞는다."
+  },
+  {
+   "clause_id": "PB-RATE-08",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-01",
+   "verdict": "partial",
+   "reason": "중대 손실·한도 위반 발생 시 조건부로 유효하나 당일 사실에는 손실 확정이 없다."
+  },
+  {
+   "clause_id": "PB-REG-02",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-03",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-04",
+   "verdict": "partial",
+   "reason": "일반 절차 조항으로 위기 대응이 진행될 경우 조건부로 적용된다."
+  },
+  {
+   "clause_id": "PB-REG-05",
+   "verdict": "partial",
+   "reason": "일반 절차 조항으로 위기 대응이 진행될 경우 조건부로 적용된다."
+  },
+  {
+   "clause_id": "PB-REG-06",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-07",
+   "verdict": "partial",
+   "reason": "일반 절차 조항으로 위기 대응이 진행될 경우 조건부로 적용된다."
+  },
+  {
+   "clause_id": "PB-REG-08",
+   "verdict": "partial",
+   "reason": "일반 절차 조항으로 위기 대응이 진행될 경우 조건부로 적용된다."
+  },
+  {
+   "clause_id": "PB-STFM-01",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-02",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-03",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-04",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-05",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-06",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-07",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-08",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-01",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-02",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-03",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-04",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-05",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-06",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-07",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-08",
+   "verdict": "not_applicable",
+   "reason": "SVB 사건 사실(은행 폐쇄)과 전제·조치가 맞지 않는다."
+  }
+ ]
+}

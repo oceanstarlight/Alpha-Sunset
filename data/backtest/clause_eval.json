@@ -1,0 +1,360 @@
+{
+ "generated_at": "2026-10-24",
+ "preregistration": "data/backtest/ablation/preregistration_v7_clause_labels.json",
+ "overall": {
+  "coverage": 0.4115,
+  "uncertain": 25,
+  "missed_applicable": 9,
+  "label_applicable": 35,
+  "n": 212,
+  "accuracy": 0.5708,
+  "macro_f1": 0.476,
+  "kappa": 0.2956,
+  "per_class": {
+   "applicable": {
+    "precision": 0.2157,
+    "recall": 0.4231,
+    "f1": 0.2857,
+    "support": 26
+   },
+   "partial": {
+    "precision": 0.3548,
+    "recall": 0.3729,
+    "f1": 0.3636,
+    "support": 59
+   },
+   "not_applicable": {
+    "precision": 0.8889,
+    "recall": 0.6929,
+    "f1": 0.7788,
+    "support": 127
+   }
+  },
+  "confusion": {
+   "applicable→applicable": 11,
+   "applicable→partial": 15,
+   "not_applicable→applicable": 14,
+   "not_applicable→not_applicable": 88,
+   "not_applicable→partial": 25,
+   "partial→applicable": 26,
+   "partial→not_applicable": 11,
+   "partial→partial": 22
+  },
+  "binary_actionable": {
+   "precision": 0.6549,
+   "recall": 0.8706,
+   "f1": 0.7475
+  }
+ },
+ "events": {
+  "covid_2020": {
+   "labels": {
+    "not_applicable": 66,
+    "partial": 22,
+    "applicable": 8
+   },
+   "judged": 39,
+   "coverage": 0.4062,
+   "uncertain": 3,
+   "missed_applicable": [
+    "PB-BCP-03",
+    "PB-BCP-04",
+    "PB-LIQ-03",
+    "PB-REG-07",
+    "PB-TRADE-05"
+   ],
+   "n": 36,
+   "accuracy": 0.4167,
+   "macro_f1": 0.3459,
+   "kappa": 0.1572,
+   "per_class": {
+    "applicable": {
+     "precision": 0.125,
+     "recall": 0.6667,
+     "f1": 0.2105,
+     "support": 3
+    },
+    "partial": {
+     "precision": 0.1429,
+     "recall": 0.0769,
+     "f1": 0.1,
+     "support": 13
+    },
+    "not_applicable": {
+     "precision": 0.9231,
+     "recall": 0.6,
+     "f1": 0.7273,
+     "support": 20
+    }
+   },
+   "confusion": {
+    "applicable→applicable": 2,
+    "applicable→partial": 1,
+    "not_applicable→applicable": 3,
+    "not_applicable→not_applicable": 12,
+    "not_applicable→partial": 5,
+    "partial→applicable": 11,
+    "partial→not_applicable": 1,
+    "partial→partial": 1
+   },
+   "binary_actionable": {
+    "precision": 0.6522,
+    "recall": 0.9375,
+    "f1": 0.7692
+   }
+  },
+  "gfc_2008": {
+   "labels": {
+    "not_applicable": 65,
+    "partial": 19,
+    "applicable": 12
+   },
+   "judged": 40,
+   "coverage": 0.4167,
+   "uncertain": 2,
+   "missed_applicable": [
+    "PB-CPTY-03",
+    "PB-CPTY-05",
+    "PB-REG-07"
+   ],
+   "n": 38,
+   "accuracy": 0.6053,
+   "macro_f1": 0.5957,
+   "kappa": 0.3917,
+   "per_class": {
+    "applicable": {
+     "precision": 0.6667,
+     "recall": 0.6667,
+     "f1": 0.6667,
+     "support": 9
+    },
+    "partial": {
+     "precision": 0.3571,
+     "recall": 0.5556,
+     "f1": 0.4348,
+     "support": 9
+    },
+    "not_applicable": {
+     "precision": 0.8,
+     "recall": 0.6,
+     "f1": 0.6857,
+     "support": 20
+    }
+   },
+   "confusion": {
+    "applicable→applicable": 6,
+    "applicable→partial": 3,
+    "not_applicable→applicable": 2,
+    "not_applicable→not_applicable": 12,
+    "not_applicable→partial": 6,
+    "partial→applicable": 1,
+    "partial→not_applicable": 3,
+    "partial→partial": 5
+   },
+   "binary_actionable": {
+    "precision": 0.6522,
+    "recall": 0.8333,
+    "f1": 0.7317
+   }
+  },
+  "legoland_2022": {
+   "labels": {
+    "not_applicable": 76,
+    "partial": 19,
+    "applicable": 1
+   },
+   "judged": 40,
+   "coverage": 0.4167,
+   "uncertain": 5,
+   "missed_applicable": [],
+   "n": 35,
+   "accuracy": 0.5714,
+   "macro_f1": 0.6512,
+   "kappa": 0.3137,
+   "per_class": {
+    "applicable": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": null,
+     "support": 1
+    },
+    "partial": {
+     "precision": 0.6,
+     "recall": 0.5,
+     "f1": 0.5455,
+     "support": 12
+    },
+    "not_applicable": {
+     "precision": 0.9333,
+     "recall": 0.6364,
+     "f1": 0.7568,
+     "support": 22
+    }
+   },
+   "confusion": {
+    "applicable→partial": 1,
+    "not_applicable→applicable": 5,
+    "not_applicable→not_applicable": 14,
+    "not_applicable→partial": 3,
+    "partial→applicable": 5,
+    "partial→not_applicable": 1,
+    "partial→partial": 6
+   },
+   "binary_actionable": {
+    "precision": 0.6,
+    "recall": 0.9231,
+    "f1": 0.7273
+   }
+  },
+  "ru_ua_2022": {
+   "labels": {
+    "not_applicable": 77,
+    "applicable": 5,
+    "partial": 14
+   },
+   "judged": 40,
+   "coverage": 0.4167,
+   "uncertain": 3,
+   "missed_applicable": [],
+   "n": 37,
+   "accuracy": 0.5946,
+   "macro_f1": 0.6646,
+   "kappa": 0.3265,
+   "per_class": {
+    "applicable": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": null,
+     "support": 5
+    },
+    "partial": {
+     "precision": 0.4667,
+     "recall": 0.5833,
+     "f1": 0.5185,
+     "support": 12
+    },
+    "not_applicable": {
+     "precision": 0.8824,
+     "recall": 0.75,
+     "f1": 0.8108,
+     "support": 20
+    }
+   },
+   "confusion": {
+    "applicable→partial": 5,
+    "not_applicable→applicable": 2,
+    "not_applicable→not_applicable": 15,
+    "not_applicable→partial": 3,
+    "partial→applicable": 3,
+    "partial→not_applicable": 2,
+    "partial→partial": 7
+   },
+   "binary_actionable": {
+    "precision": 0.75,
+    "recall": 0.8824,
+    "f1": 0.8108
+   }
+  },
+  "svb_2023": {
+   "labels": {
+    "applicable": 6,
+    "partial": 18,
+    "not_applicable": 72
+   },
+   "judged": 40,
+   "coverage": 0.4167,
+   "uncertain": 9,
+   "missed_applicable": [
+    "PB-CPTY-05"
+   ],
+   "n": 31,
+   "accuracy": 0.5484,
+   "macro_f1": 0.4174,
+   "kappa": 0.2594,
+   "per_class": {
+    "applicable": {
+     "precision": 0.125,
+     "recall": 0.2,
+     "f1": 0.1538,
+     "support": 5
+    },
+    "partial": {
+     "precision": 0.2857,
+     "recall": 0.2222,
+     "f1": 0.25,
+     "support": 9
+    },
+    "not_applicable": {
+     "precision": 0.875,
+     "recall": 0.8235,
+     "f1": 0.8485,
+     "support": 17
+    }
+   },
+   "confusion": {
+    "applicable→applicable": 1,
+    "applicable→partial": 4,
+    "not_applicable→applicable": 2,
+    "not_applicable→not_applicable": 14,
+    "not_applicable→partial": 1,
+    "partial→applicable": 5,
+    "partial→not_applicable": 2,
+    "partial→partial": 2
+   },
+   "binary_actionable": {
+    "precision": 0.8,
+    "recall": 0.8571,
+    "f1": 0.8276
+   }
+  },
+  "tariff_2025": {
+   "labels": {
+    "not_applicable": 86,
+    "partial": 7,
+    "applicable": 3
+   },
+   "judged": 38,
+   "coverage": 0.3958,
+   "uncertain": 3,
+   "missed_applicable": [],
+   "n": 35,
+   "accuracy": 0.6857,
+   "macro_f1": 0.548,
+   "kappa": 0.2817,
+   "per_class": {
+    "applicable": {
+     "precision": 0.6667,
+     "recall": 0.6667,
+     "f1": 0.6667,
+     "support": 3
+    },
+    "partial": {
+     "precision": 0.1111,
+     "recall": 0.25,
+     "f1": 0.1538,
+     "support": 4
+    },
+    "not_applicable": {
+     "precision": 0.913,
+     "recall": 0.75,
+     "f1": 0.8235,
+     "support": 28
+    }
+   },
+   "confusion": {
+    "applicable→applicable": 2,
+    "applicable→partial": 1,
+    "not_applicable→not_applicable": 21,
+    "not_applicable→partial": 7,
+    "partial→applicable": 1,
+    "partial→not_applicable": 2,
+    "partial→partial": 1
+   },
+   "binary_actionable": {
+    "precision": 0.4167,
+    "recall": 0.7143,
+    "f1": 0.5263
+   }
+  }
+ }
+}
