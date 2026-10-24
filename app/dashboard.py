@@ -402,3 +402,83 @@ def country_chart(values: dict[str, float] | None, title: str, fmt: str = ".1%",
         x=alt.X("값:Q", axis=alt.Axis(format=fmt), title=None), y=_y("국가:N"),
         color=alt.value(BLUE), tooltip=["국가", alt.Tooltip("값:Q", format=fmt)]
     ).properties(title=title, height=_h(len(df), 28))
+
+
+# ---------- 상황판 띠 (탭 위, 업무 흐름 4단계) ----------
+
+
+@dataclass
+class Step:
+    no: str
+    name: str
+    tone: str
+    status: str
+    detail: str
+    tab: str
+
+    @property
+    def icon(self) -> str:
+        return TONE_ICON.get(self.tone, "⚪")
+
+
+def step_data(portfolio: Any, playbooks: list | None) -> Step:
+    parts = ([f"포트폴리오 {portfolio.institution}"] if portfolio is not None else []) + \
+            ([f"문서 {len(playbooks)}개"] if playbooks else [])
+    if parts:
+        return Step("①", "데이터", "green", "업로드 반영", " · ".join(parts), "데이터 입력")
+    return Step("①", "데이터", "gray", "합성 사용 중", "실제 보유·문서를 올리면 반영", "데이터 입력")
+
+
+def _news_detail(news: dict | None, min_points: int) -> str:
+    if not news:
+        return "뉴스 관측 없음"
+    if news.get("clusters"):
+        return "기사 급증: " + ", ".join(c["event_type"] for c in news["clusters"][:2])
+    pts = [o.get("baseline_points") for o in (news.get("observations") or {}).values() if o.get("baseline_points") is not None]
+    if news.get("status") == "unavailable" and pts and min(pts) < min_points:
+        return f"뉴스 기준선 {min(pts)}/{min_points} 축적 중"
+    return "뉴스 급증 없음"
+
+
+def step_watch(signals: dict | None, local: bool) -> Step:
+    scope = "한국" if local else "글로벌"
+    if not signals:
+        return Step("②", "감시", "gray", f"{scope} 결과 없음", "감시 탭에서 조회", "감시")
+    level = signals.get("level", "NONE")
+    news = signals.get("kr_news") if local else signals.get("news")
+    min_points = load_config()["korea" if local else "sentinel"]["news"]["baseline_min_points"]
+    detail = _news_detail(news, min_points)
+    if signals.get("money_alert"):
+        detail = "자금 이상 알림 · " + detail
+    return Step("②", "감시", LEVEL_TONE.get(level, "gray"), f"{level} ({scope})", detail, "감시")
+
+
+def step_watch_replay(first_alert: Any, money_days: int, event_date: Any) -> Step:
+    if first_alert is not None:
+        return Step("②", "감시", "red", "ALERT 재현", f"첫 ALERT {first_alert} · 사전 알림 {money_days}일", "감시")
+    return Step("②", "감시", "orange" if money_days else "gray", "ALERT 없음", f"사건일 {event_date} · 사전 알림 {money_days}일", "감시")
+
+
+def step_briefing(b: Any, kind: str | None) -> Step:
+    if b is None:
+        return Step("③", "브리핑", "gray", "없음", "▶ 지금 브리핑 실행 (라이브)", "브리핑")
+    label = {"scenario": "가정 시나리오", "ondemand": "직접 실행"}.get(kind or "auto", "자동 감지")
+    top = b.match.doc_fits[0] if b.match.doc_fits else None
+    detail = f"1위 {top.doc_id} {top.fit_score:.2f}" if top else "판정 문서 없음"
+    gaps = len(b.match.gaps)
+    if gaps:
+        detail += f" · 공백 {gaps}"
+    return Step("③", "브리핑", "blue" if kind in ("scenario", "ondemand") else LEVEL_TONE.get(b.alert_level.value, "gray"),
+                label, detail, "브리핑")
+
+
+def step_approval(b: Any, records: list[dict]) -> Step:
+    if b is None:
+        return Step("④", "승인", "gray", "대상 없음", "브리핑 후 결정", "승인")
+    mine = [r for r in records if r.get("data", {}).get("run_id") == b.run_id]
+    decision = next((r for r in reversed(mine) if r["action"] == "approval"), None)
+    fb = sum(r["action"] == "feedback" for r in mine)
+    if decision:
+        ok = decision["data"]["decision"] == "approved"
+        return Step("④", "승인", "green" if ok else "orange", "승인 완료" if ok else "반려", f"{decision['actor']} · 피드백 {fb}건", "승인")
+    return Step("④", "승인", "orange", "대기", f"문서 피드백 {fb}건", "승인")

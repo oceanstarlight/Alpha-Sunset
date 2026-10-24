@@ -183,6 +183,30 @@ def all_clauses() -> dict:
     return out
 
 
+def status_strip() -> None:
+    """탭 위 상황판 띠: 데이터 → 감시 → 브리핑 → 승인. 어느 탭에서든 현재 위치와 다음에 갈 탭이 보인다."""
+    b = current_briefing()
+    if mode == "백테스트 재생":
+        e = events_by_id()[event_id]
+        df = replay_signals(event_id)
+        fa = df[df["등급"] == "ALERT"]["날짜"].min()
+        watch = dashboard.step_watch_replay(fa if pd.notna(fa) else None, int(((df["날짜"] < e.date) & df["자금 이상 알림"]).sum()), e.date)
+    elif is_local:
+        watch = dashboard.step_watch(services.load_local_signals(), local=True)
+    else:
+        watch = dashboard.step_watch(st.session_state.get("signals") or services.load_collected_signals(with_panel=False), local=False)
+    steps = [dashboard.step_data(st.session_state.get("uploaded_portfolio"), st.session_state.get("uploaded_playbooks")),
+             watch, dashboard.step_briefing(b, services.briefing_kind(b) if b else None),
+             dashboard.step_approval(b, audit.read("app"))]
+    st.caption(f"{'백테스트 재생 · ' + events_by_id()[event_id].title if mode == '백테스트 재생' else '라이브'} — 업무 흐름")
+    for col, s in zip(st.columns(4), steps):
+        with col.container(border=True, height=128):
+            st.markdown(f"**{s.no} {s.name}** &nbsp; {s.icon} {s.status}")
+            st.caption(f"{s.detail}  \n→ '{s.tab}' 탭")
+
+
+status_strip()
+
 tab_map, tab_watch, tab_brief, tab_approve, tab_bt, tab_learn, tab_input = st.tabs(
     ["세계 금융 지도", "감시", "브리핑", "승인", "백테스트", "학습 층", "데이터 입력"])
 

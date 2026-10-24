@@ -53,3 +53,17 @@ def test_charts_build_and_handle_empty():
     for c in charts:
         assert c is not None and c.to_dict()
     assert dashboard.z_chart({}, 2.5, "t") is None and dashboard.fit_chart([]) is None and dashboard.priority_chart([]) is None
+
+
+def test_status_steps():
+    b = services.load_saved_briefing("svb_2023")
+    assert dashboard.step_data(None, None).status == "합성 사용 중"
+    w = dashboard.step_watch(KR, local=True)
+    assert w.status.startswith(KR["level"]) and "한국" in w.status and "축적 중" in w.detail
+    assert dashboard.step_watch(None, local=False).tone == "gray"
+    assert dashboard.step_watch_replay("2023-03-10", 2, "2023-03-10").tone == "red"
+    sb = dashboard.step_briefing(b, "auto")
+    assert b.match.doc_fits[0].doc_id in sb.detail and dashboard.step_briefing(None, None).status == "없음"
+    assert dashboard.step_briefing(b, "ondemand").status == "직접 실행"
+    rec = [{"action": "approval", "actor": "kim", "ts": "t", "data": {"run_id": b.run_id, "decision": "approved"}}]
+    assert dashboard.step_approval(b, rec).status == "승인 완료" and dashboard.step_approval(b, []).status == "대기"
