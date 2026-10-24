@@ -81,3 +81,9 @@
 - `nps_domestic_equity_2025.csv`: 국민연금공단_국내주식 종목별 투자 현황(2025년 말), 공공데이터포털 https://www.data.go.kr/data/3070507/fileData.do (이용허락범위 제한 없음, 무료). 수집일 2026-10-18, 원본 그대로(CP949)
 - iShares Core S&P 500 ETF 보유내역 CSV (https://www.ishares.com/us/products/239726/x/latest-holdings.csv): 검증에만 사용, BlackRock 웹사이트 약관상 저장소에 커밋하지 않음 (`scripts/verify_ingest.py --ishares 경로`)
 - `broker_balance.xlsx`·`manager_report.xlsx`·`dataguide_style.xlsx`·`unusual_headers.xlsx`·`truth.json`: 같은 합성 보유내역 240종목을 서로 다른 실무 양식으로 쓴 합성 파일과 정답 (`scripts/make_ingest_samples.py`, 실제 기관·단말 데이터 아님)
+
+## 대응 문서 입력 검증용 파일 (`data/ingest/doc_samples/`)
+- `PB-BANK.docx`·`PB-LIQ.pdf`·`truth.json`: 합성 플레이북(PB-BANK·PB-LIQ)을 워드·PDF 양식으로 렌더링한 샘플과 정답 (`scripts/make_doc_samples.py`, 실제 기관 문서 아님)
+
+## 사건 23개 확대 검증 (사전 등록 v6)
+- 사건 목록: Wikipedia "List of stock market crashes and bear markets" (https://en.wikipedia.org/wiki/List_of_stock_market_crashes_and_bear_markets), 2026-10-24 조회, 1997~2025 일 단위 항목 + 기존 사건 카드 6개

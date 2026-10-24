@@ -347,8 +347,23 @@ def orchestrate(ctx: RunContext, task: str) -> Briefing:
 # ---------- 진입점 ----------
 
 
+def _index(playbooks: list | None, llm: LLMClient) -> tuple[ClauseIndex, str]:
+    """업로드 문서는 별도 폴더에 색인 (기본 색인을 다시 만들지 않게)."""
+    from app.corpus import load_playbooks
+
+    if not playbooks:
+        return ClauseIndex(load_playbooks(), llm), ""
+    import hashlib
+
+    from app.config import ROOT_DIR
+
+    key = hashlib.sha1("|".join(sorted(c.clause_id + c.text for p in playbooks for c in p.clauses)).encode()).hexdigest()[:12]
+    note = f"대응 문서: 업로드 {len(playbooks)}개({sum(len(p.clauses) for p in playbooks)}조항) 기준"
+    return ClauseIndex(playbooks, llm, path=ROOT_DIR / "data" / "chroma_uploaded" / key), note
+
+
 def run_replay(event_id: str, llm: LLMClient | None = None, portfolio: Portfolio | None = None,
-               holdings: list[dict] | None = None) -> Briefing:
+               holdings: list[dict] | None = None, playbooks: list | None = None) -> Briefing:
     """백테스트 사건 재생 → Briefing (sandbox DB). 기준일 = 사건 카드 date."""
     from app.corpus import load_events, load_playbooks, load_portfolio
     from app.data.fred import load_panel
@@ -362,21 +377,24 @@ def run_replay(event_id: str, llm: LLMClient | None = None, portfolio: Portfolio
     panel = load_panel(sentinel_agent.panel_series_ids())
     note = (f"업로드 포트폴리오 '{portfolio.institution}'(현재 보유)를 과거 사건에 적용한 가정 분석 — 사건 당시 보유와 다르다"
             if portfolio is not None else "")
+    index, doc_note = _index(playbooks, llm)
+    note = " · ".join(x for x in (note, doc_note) if x)
     ctx = new_context(mode="sandbox", as_of=target.date, events=[target], portfolio=portfolio or load_portfolio(),
-                      index=ClauseIndex(load_playbooks(), llm), llm=llm, panel=panel, holdings=holdings, portfolio_note=note)
+                      index=index, llm=llm, panel=panel, holdings=holdings, portfolio_note=note)
     return orchestrate(ctx, f"{target.date.isoformat()} 기준으로 사건을 탐지하고 대응문서 적합도와 노출을 분석해 브리핑을 만들어라.")
 
 
 def run_live_briefing(event: Event, panel: dict, llm: LLMClient | None = None, portfolio: Portfolio | None = None,
-                      holdings: list[dict] | None = None) -> Briefing:
+                      holdings: list[dict] | None = None, playbooks: list | None = None) -> Briefing:
     """라이브 사건(뉴스 군집을 구조화한 Event)으로 브리핑 생성 (live DB, 최신 보유내역)."""
     from app.corpus import load_playbooks, load_portfolio
 
     llm = llm or LLMClient(db_mode="live")
     note = f"업로드 포트폴리오 '{portfolio.institution}' 기준" if portfolio is not None else ""
+    index, doc_note = _index(playbooks, llm)
+    note = " · ".join(x for x in (note, doc_note) if x)
     ctx = new_context(mode="live", as_of=event.date, events=[event], portfolio=portfolio or load_portfolio(),
-                      index=ClauseIndex(load_playbooks(), llm), llm=llm, panel=panel, live=True, holdings=holdings,
-                      portfolio_note=note)
+                      index=index, llm=llm, panel=panel, live=True, holdings=holdings, portfolio_note=note)
     return orchestrate(ctx, f"{event.date.isoformat()} 현재 탐지된 사건의 대응문서 적합도와 노출을 분석해 브리핑을 만들어라.")
 
 

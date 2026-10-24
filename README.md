@@ -34,6 +34,7 @@
 | **Exposure** (노출 경고) | 기관 → 직접·위탁운용사·거래상대방 → 프록시 펀드(SEC N-PORT 보유내역) → 발행자·국가 그래프. 사건 기관과 같은 발행자, 사건 지역과 직접 겹치는 핵심 경로는 별도 표시 |
 | **Orchestrator** | Gemini 함수 호출로 도구 순서를 정한다. 도구 입력·상태는 코드가 보유(LLM이 데이터를 조작하지 못함). 판정·노출 분석 전 브리핑 생성은 코드로 거부. 모든 호출은 trace로 저장 |
 | **세계 금융 지도** (메인 탭) | 세계 지도 위 원으로 사건 지역(심각도)·국가별 보유 비중·영향도(노출 경로 risk 합)를 표시 |
+| **대응 문서 입력** | 기관의 PDF·워드 위기 대응 매뉴얼을 조항으로 나눠(원문 보존) 플레이북으로 변환. LLM은 전제·조치·담당 속성만 채우고, 담당·법규 보호는 원문 근거가 있을 때만 인정 |
 | **엑셀 입출력** | 형식이 제각각인 보유내역 엑셀·CSV를 공통 스키마(N-PORT·ISO 기준)로 변환. 라이브러리가 읽고 LLM은 표 구조 요약만 보고 매핑 규칙을 제안, 숫자는 코드가 변환·검증. 대응안은 엑셀로 내보내기 |
 | **Learner** (알파 썬셋) | 인용·피드백 이력으로 문서 검색 우선순위를 보정 (최대 ±15%, protected 하한, 기본 OFF) |
 
@@ -97,7 +98,7 @@
 python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 .venv/bin/streamlit run ui/streamlit_app.py
-.venv/bin/pytest -q       # 145개 테스트
+.venv/bin/pytest -q       # 151개 테스트
 ```
 - **API 키 없이도** 백테스트 재생은 동작한다. 커밋된 LLM 응답 캐시(`data/llm_cache.db`)로 같은 결과를 재현한다.
 - 배포: Streamlit Community Cloud (`ui/streamlit_app.py`, Python 3.11, Secrets에 `GEMINI_API_KEY`·`SEC_USER_AGENT`).
@@ -114,6 +115,8 @@ cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 | `scripts/run_backtest.py` | 지표 산출 → `data/backtest_results.json` |
 | `scripts/validate_data.py` | 코퍼스·라벨 스키마·참조 검증 |
 | `scripts/collect_signals.py` | 일일 글로벌 시그널 수집 (GitHub Actions, `data/live/`) |
+| `scripts/run_backtest_v6.py` | 사건 23개 확대 검증 + 훈련/검증 분리 임계치 보정 (사전 등록 v6) |
+| `scripts/verify_doc_ingest.py` | 대응 문서(PDF·워드) 입력 변환 검증 |
 | `scripts/verify_ingest.py` | 엑셀 입력 변환 검증 (합성 4양식 정답 비교 + 공개 파일) |
 | `scripts/monitor_kr.py` | 로컬(대한민국) 상시 감시: 뉴스·DART 30분마다, ECOS 하루 2회 → 텔레그램 알림·대응안 리포트 |
 

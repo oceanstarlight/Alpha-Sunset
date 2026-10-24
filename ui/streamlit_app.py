@@ -146,9 +146,24 @@ def current_briefing() -> Briefing | None:
 
 
 def uploaded_args() -> dict:
-    """업로드 포트폴리오가 있으면 브리핑 실행에 넘길 인자."""
+    """업로드 포트폴리오·대응 문서가 있으면 브리핑 실행에 넘길 인자."""
+    args = {}
     pf = st.session_state.get("uploaded_portfolio")
-    return {"portfolio": pf, "holdings": st.session_state.get("uploaded_holdings")} if pf is not None else {}
+    if pf is not None:
+        args |= {"portfolio": pf, "holdings": st.session_state.get("uploaded_holdings")}
+    pbs = st.session_state.get("uploaded_playbooks")
+    if pbs:
+        mode_ = st.session_state.get("doc_mode", "업로드 문서만")
+        args["playbooks"] = pbs if mode_ == "업로드 문서만" else load_playbooks() + pbs
+    return args
+
+
+def all_clauses() -> dict:
+    """합성 조항 + 업로드 문서 조항 (브리핑 표시용)."""
+    out = dict(clauses_by_id())
+    for p in st.session_state.get("uploaded_playbooks") or []:
+        out |= {c.clause_id: c for c in p.clauses}
+    return out
 
 
 tab_map, tab_watch, tab_brief, tab_approve, tab_bt, tab_learn, tab_input = st.tabs(
@@ -361,15 +376,17 @@ with tab_brief:
         if c2.button("재생 다시 실행"):
             with st.spinner("에이전트 실행 중…"):
                 st.session_state[f"briefing_{event_id}"] = b = services.run_replay(event_id)
-    if mode == "백테스트 재생" and st.session_state.get("uploaded_portfolio") is not None:
-        pf = st.session_state["uploaded_portfolio"]
+    if mode == "백테스트 재생" and uploaded_args():
+        up = uploaded_args()
+        label = " + ".join(x for x in (f"포트폴리오 {up['portfolio'].institution}" if "portfolio" in up else "",
+                                       f"문서 {len(st.session_state['uploaded_playbooks'])}개" if "playbooks" in up else "") if x)
         u1, u2 = st.columns([2, 1])
         if st.session_state.pop("_choose_upload", False):  # 위젯 생성 전에만 값을 바꿀 수 있다
             st.session_state["portfolio_choice"] = "업로드"
         u1.radio("포트폴리오", ["기본(합성)", "업로드"], horizontal=True, key="portfolio_choice",
-                 help="업로드는 현재 보유를 과거 사건에 적용한 가정 분석이다 (사건 당시 보유와 다름).")
-        if u2.button(f"업로드 포트폴리오로 분석 ({pf.institution})"):
-            with st.spinner("에이전트 실행 중 (업로드 포트폴리오)…"):
+                 help="업로드는 현재 보유·문서를 과거 사건에 적용한 가정 분석이다 (사건 당시와 다름).")
+        if u2.button(f"업로드 데이터로 분석 ({label})"):
+            with st.spinner("에이전트 실행 중 (업로드 데이터)…"):
                 st.session_state[f"briefing_{event_id}_upload"] = services.run_replay(event_id, **uploaded_args())
                 st.session_state["_choose_upload"] = True
             st.rerun()
@@ -379,7 +396,7 @@ with tab_brief:
     else:
         synthetic_badge()
         st.download_button("대응안 엑셀로 내보내기", data=export.briefing_xlsx(
-            b, clause_text={k: c.text for k, c in clauses_by_id().items()}), file_name=f"alpha_sunset_{b.event.id}.xlsx",
+            b, clause_text={k: c.text for k, c in all_clauses().items()}), file_name=f"alpha_sunset_{b.event.id}.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
         st.markdown(f"## {b.event.title}  :{LEVEL_COLOR[b.alert_level]}[{b.alert_level.value}]")
         st.write(b.event.summary)
@@ -389,8 +406,8 @@ with tab_brief:
         st.markdown("### 문서별 적합도")
         if b.match.low_confidence:
             st.warning("판정 평균 신뢰도가 낮다 (low_confidence)")
-        clauses = clauses_by_id()
-        docs = docs_by_id()
+        clauses = all_clauses()
+        docs = docs_by_id() | {p.doc_id: p for p in st.session_state.get("uploaded_playbooks") or []}
         table = pd.DataFrame([{"순위": i, "문서": f.doc_id, "제목": docs[f.doc_id].title if f.doc_id in docs else "",
                                "fit_score": f.fit_score, "적용": f.n_applicable, "부분": f.n_partial,
                                "부적용": f.n_not, "불확실": f.n_uncertain}
@@ -634,3 +651,43 @@ with tab_input:
             st.success("세계 금융 지도와 브리핑(가정 분석·라이브)에 업로드 포트폴리오를 반영했다.")
     if st.session_state.get("uploaded_portfolio") is not None and st.button("업로드 포트폴리오 해제"):
         del st.session_state["uploaded_portfolio"]
+
+    # ---------- 대응 문서 입력 ----------
+    st.divider()
+    st.subheader("대응 문서 입력 (PDF·워드·텍스트 → 조항)")
+    st.caption("문서를 조항으로 나누고(번호·조문 패턴, 원문 그대로), LLM은 조항마다 전제 사건·채널·조치·담당만 채운다. "
+               "담당은 원문에 적힌 부서명만, 법규·보험 보호는 원문 인용 근거가 있을 때만 인정한다. LLM을 끄면 규칙만으로 분해한다.")
+    from app.ingest.documents import ingest_document
+
+    doc_files = st.file_uploader("대응 문서", type=["pdf", "docx", "txt", "md"], accept_multiple_files=True)
+    doc_dir = Path(__file__).resolve().parent.parent / "data" / "ingest" / "doc_samples"
+    doc_samples = sorted(p.name for p in doc_dir.glob("*.*") if p.suffix in (".pdf", ".docx"))
+    doc_pick = st.multiselect("또는 예시 문서", doc_samples)
+    doc_llm = st.toggle("LLM 속성 채우기 사용 (조항 원문 전송)", value=False, key="doc_llm")
+    docs = [(f.getvalue(), f.name) for f in doc_files or []] + [((doc_dir / n).read_bytes(), n) for n in doc_pick]
+    if docs:
+        llm = None
+        if doc_llm:
+            from app.llm.client import LLMClient
+
+            llm = LLMClient(db_mode="sandbox")
+        results = []
+        for data, name in docs:
+            key = f"doc_{name}_{len(data)}_{doc_llm}"
+            if key not in st.session_state:
+                with st.spinner(f"{name} 변환 중…"):
+                    st.session_state[key] = ingest_document(data, name, llm=llm)
+            results.append(st.session_state[key])
+        for r in results:
+            st.markdown(f"**{r.playbook.title}** (`{r.playbook.doc_id}`, 조항 {len(r.playbook.clauses)}개)")
+            show_chain(r.chain)
+            st.dataframe(pd.DataFrame(r.rows).astype(str), hide_index=True, width="stretch")
+            st.download_button(f"{r.playbook.doc_id} 플레이북 JSON 받기", data=r.playbook.model_dump_json(indent=2),
+                               file_name=f"{r.playbook.doc_id}.json", mime="application/json", key=f"dl_{r.playbook.doc_id}")
+        d1, d2 = st.columns(2)
+        d1.radio("분석에 쓸 문서", ["업로드 문서만", "기본 문서와 함께"], horizontal=True, key="doc_mode")
+        if d2.button("이 문서로 분석", type="primary", disabled=not any(r.playbook.clauses for r in results)):
+            st.session_state["uploaded_playbooks"] = [r.playbook for r in results if r.playbook.clauses]
+            st.success("브리핑(가정 분석·라이브)에 업로드 문서를 반영했다. 브리핑 탭에서 '업로드 데이터로 분석'을 누른다.")
+    if st.session_state.get("uploaded_playbooks") and st.button("업로드 문서 해제"):
+        del st.session_state["uploaded_playbooks"]
