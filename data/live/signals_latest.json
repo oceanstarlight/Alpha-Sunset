@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-23T21:20:08+00:00",
+  "collected_at": "2026-10-24T04:25:54+00:00",
   "as_of": "2026-10-23",
   "level": "WATCH",
   "chain": [
@@ -12,7 +12,7 @@
     {
       "단계": "자금 흐름(C)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.0 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.61, 미 은행 예금(DPSACBW027SBOG) z=+1.04, 해외 공적 미국채 보관(WMTSECL1) z=-0.55, 지급준비금(WRESBAL) z=-0.14",
+      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.0 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.61, 미 은행 예금(DPSACBW027SBOG) z=+0.24, 해외 공적 미국채 보관(WMTSECL1) z=+1.32, 지급준비금(WRESBAL) z=-0.95",
       "결과": "비활성"
     },
     {
@@ -48,9 +48,9 @@
     "triggered": [],
     "zscores": {
       "WRMFNS": -0.61,
-      "DPSACBW027SBOG": 1.04,
-      "WMTSECL1": -0.55,
-      "WRESBAL": -0.14
+      "DPSACBW027SBOG": 0.24,
+      "WMTSECL1": 1.32,
+      "WRESBAL": -0.95
     }
   },
   "news": {
@@ -61,85 +61,86 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 2,
-        "n_sources": 1,
-        "z": -1.297,
-        "baseline_points": 22,
+        "n_articles": 4,
+        "n_sources": 3,
+        "z": 0.184,
+        "baseline_points": 23,
         "top_titles": [
           "Banks see ₹5.19 lakh crore deposit outflow, credit shrinks ₹2.52 lakh crore - The Economic Times",
-          "'Nothing to fear': Top bureaucrat says IDBI staff, pensioners' service conditions won't change after Fairf - The Economic Times"
+          "How Silicon Valley Bank Collapsed In 48 Hours — The Bank Run Explained Montréal (sshvsyLsnm) - Unisba Media",
+          "U.S. Banks Block AI Agents from Customer Accounts Amid Fears of Unauthorized Transactions - 아시아경제"
         ]
       },
       "credit_event": {
-        "n_articles": 68,
-        "n_sources": 65,
-        "z": 0.056,
-        "baseline_points": 22,
+        "n_articles": 42,
+        "n_sources": 41,
+        "z": -1.996,
+        "baseline_points": 23,
         "top_titles": [
           "Case Summary: RiverStreet Chapter 11 - Bondoro",
-          "Owner files Chapter 11 to avoid foreclosure on shuttered West Palm Beach hotel - The Business Journals",
+          "LIV Golf's Scott O'Neil given $6.3M before bankruptcy protection filing - ESPN Singapore",
           "Another day, another default as more Oakland offices face distress - The Real Deal"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 28,
-        "n_sources": 6,
-        "z": 3.573,
-        "baseline_points": 22,
+        "n_articles": 26,
+        "n_sources": 4,
+        "z": 2.524,
+        "baseline_points": 23,
         "top_titles": [
-          "AI Credit Crunch? - Yardeni QuickTakes",
-          "From Mobile Money Boom to Credit Crunch: IMF Exposes Uganda’s Financial Growth Challenges - Devdiscourse",
-          "Silver Traders Face a Liquidity Crunch as Oil and Tech Losses Collide - AD HOC NEWS"
+          "China urges government agencies to mitigate AI job displacement - Devdiscourse",
+          "Silver Traders Face a Liquidity Crunch as Oil and Tech Losses Collide - ad-hoc-news.de",
+          "China stocks rebound on ETF buying, CSI300 logs record weekly losing streak - Devdiscourse"
         ]
       },
       "geopolitical": {
         "n_articles": 100,
-        "n_sources": 91,
-        "z": 0.278,
-        "baseline_points": 22,
+        "n_sources": 90,
+        "z": 0.272,
+        "baseline_points": 23,
         "top_titles": [
           "Trump Waives Sanctions Against Russia Just Before New Law Takes Effect - WSJ",
-          "Netanyahu Eyes Crypto To Counter Sanctions, Warns US Military Aid Will End - i24NEWS",
-          "Ukrainian civilians killed in Russian attacks following Trump’s easing of sanctions - Scripps News"
+          "Executive Order Implements, and Immediately Waives, New Graham Act Sanctions and Tariffs Targeting Russia - Snell & Wilmer",
+          "On Meidas Defense: cryptocurrency, sanctions, and Trump quid pro quo - Citation Needed by Molly White"
         ]
       },
       "trade_policy": {
-        "n_articles": 83,
-        "n_sources": 66,
-        "z": 1.196,
-        "baseline_points": 22,
+        "n_articles": 95,
+        "n_sources": 75,
+        "z": 2.398,
+        "baseline_points": 23,
         "top_titles": [
-          "Exclusive | Trump to Remove Some Tariffs on Canada in Bid to Help Susan Collins - WSJ",
-          "U.S. dropping some Canada tariffs, Susan Collins says as trade war looms over Maine Senate race - CNBC",
-          "Trump administration cancels some Canada tariffs amid close midterm races - NBC News"
+          "Trump dropping some Canada tariffs but 'replacing' them with other products - CNBC",
+          "US lifts tariffs on some Canadian goods before midterm elections - BBC",
+          "Trump to Remove Some Tariffs on Canada in Bid to Help Susan Collins - WSJ"
         ]
       },
       "pandemic": {
-        "n_articles": 94,
-        "n_sources": 80,
-        "z": 0.493,
-        "baseline_points": 22,
+        "n_articles": 92,
+        "n_sources": 77,
+        "z": 0.324,
+        "baseline_points": 23,
         "top_titles": [
           "Israel orders sweeping West Bank operation after military says 2 soldiers were killed in attack that left 2 gunmen dead - NBC News",
-          "Israel preparing full lockdown of occupied West Bank after Hebron gunfight - Al Jazeera",
-          "Menasha High locked down after reported community situation; police find no threat - WLUK"
+          "Menasha High locked down after reported community situation; police find no threat - WLUK",
+          "Israel preparing full lockdown of occupied West Bank after Hebron gunfight - Al Jazeera"
         ]
       },
       "fx_shock": {
         "n_articles": 0,
         "n_sources": 0,
-        "z": -0.876,
-        "baseline_points": 22,
+        "z": -0.843,
+        "baseline_points": 23,
         "top_titles": []
       },
       "rate_shock": {
         "n_articles": 4,
         "n_sources": 3,
-        "z": -1.137,
-        "baseline_points": 22,
+        "z": -1.081,
+        "baseline_points": 23,
         "top_titles": [
+          "Bond Selloff Deepens as Rising Energy Prices Stoke Inflation Fears - EnergyNow.com",
           "Global Market: French bond selloff raises debt concerns across Europe amid social unrest - The Economic Times",
-          "Ready for a French test?: Five questions for the ECB - WTVB",
           "US stocks today: US stocks open lower after AI rout; SpaceX worries hit telecoms - The Economic Times"
         ]
       }
