@@ -15,3 +15,4 @@ data/chroma_*/
 
 # 로컬 감시 상태 (GitHub Actions 캐시)
 .kr_state/
+data/live/audit/app.jsonl

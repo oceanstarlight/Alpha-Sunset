@@ -8,6 +8,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from app import audit
 from app.agents import orchestrator, sentinel
 from app.agents.matcher import structure_event
 from app.config import ROOT_DIR, get_settings, load_config
@@ -126,7 +127,7 @@ def get_signals(refresh: bool = False, rss: Any = None) -> dict:
 
 
 def run_live(signals: dict | None = None, portfolio=None, holdings: list[dict] | None = None,
-             playbooks: list | None = None) -> Briefing | None:
+             playbooks: list | None = None, audit_source: str = "app") -> Briefing | None:
     """현재 사건 탐지 → Briefing. 사건 신호(B)가 없으면 None."""
     signals = signals or get_signals()
     clusters = signals["news"]["clusters"]
@@ -136,13 +137,30 @@ def run_live(signals: dict | None = None, portfolio=None, holdings: list[dict] |
     llm = LLMClient(db_mode="live")
     text = f"{top['label']}\n(뉴스 군집: {top['event_type']}, 기사 {top['n_articles']}건, 출처 {top['n_sources']}곳)"
     event = structure_event(llm, text, f"live_{date.today():%Y%m%d}_{top['event_type']}", date.today())
-    return orchestrator.run_live_briefing(event, signals["panel"], llm, portfolio=portfolio, holdings=holdings,
-                                          playbooks=playbooks)
+    b = orchestrator.run_live_briefing(event, signals["panel"], llm, portfolio=portfolio, holdings=holdings,
+                                       playbooks=playbooks)
+    audit_briefing(b, "live", llm.provider, portfolio, playbooks, source=audit_source)
+    return b
+
+
+def audit_briefing(b: Briefing, mode: str, provider: str, portfolio=None, playbooks: list | None = None,
+                   source: str = "app") -> None:
+    """브리핑 생성 감사 기록: 무엇을 근거로 어떤 문서를 올렸는지 (보유 종목명은 남기지 않는다)."""
+    payload = b.model_dump_json().encode("utf-8")
+    audit.log("briefing", {"run_id": b.run_id, "trace_id": b.trace_id, "mode": mode, "event_id": b.event.id,
+                           "event_type": b.event.type.value, "provider": provider,
+                           "top_docs": [[f.doc_id, f.fit_score] for f in b.match.doc_fits[:3]],
+                           "uploaded_portfolio": portfolio is not None, "uploaded_docs": len(playbooks or []),
+                           "briefing_sha256": audit.sha256_bytes(payload)}, source=source)
 
 
 def run_replay(event_id: str, portfolio=None, holdings: list[dict] | None = None, playbooks: list | None = None) -> Briefing:
     """백테스트 사건 재생 → Briefing (sandbox). portfolio·playbooks를 주면 업로드 데이터로 가정 분석."""
-    return orchestrator.run_replay(event_id, portfolio=portfolio, holdings=holdings, playbooks=playbooks)
+    from app.config import get_settings
+
+    b = orchestrator.run_replay(event_id, portfolio=portfolio, holdings=holdings, playbooks=playbooks)
+    audit_briefing(b, "replay", get_settings().llm_provider, portfolio, playbooks)
+    return b
 
 
 def load_saved_briefing(event_id: str) -> Briefing | None:
@@ -192,6 +210,7 @@ def submit_feedback(fb: Feedback, briefing: Briefing | None = None) -> None:
                  "live" if mode == "live" else "backtest", fb.ts.isoformat()),
             )
     conn.close()
+    audit.log("feedback", {"run_id": fb.run_id, "doc_id": fb.doc_id, "label": fb.label, "rank": rank}, actor=fb.user_id)
 
 
 def learner_enabled() -> bool:
@@ -249,3 +268,5 @@ def record_approval(briefing: Briefing, decision: str, user_id: str, note: str =
              datetime.now(timezone.utc).isoformat()),
         )
     conn.close()
+    audit.log("approval", {"run_id": briefing.run_id, "trace_id": briefing.trace_id, "event_id": briefing.event.id,
+                           "decision": decision, "note": note}, actor=user_id)

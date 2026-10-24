@@ -22,6 +22,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import pandas as pd  # noqa: E402
 
+from app import audit  # noqa: E402
 from app.agents import local  # noqa: E402
 from app.agents.sentinel import AlertLevel, MarketSignal  # noqa: E402
 from app.config import ROOT_DIR, load_config  # noqa: E402
@@ -186,8 +187,13 @@ def main() -> int:
     # 저장 (커밋 대상은 의미 있는 변화가 있을 때만)
     out = local.to_json(result) | {"notes": sorted(set(notes)), "alerts_sent": sent, "report": report_link}
     changed = args.daily or level.value != run_state["last_level"] or bool(warnings) or report_link is not None
-    if changed:
+    delivered = {k: v for k, v in sent.items() if v == "sent"}
+    if changed or delivered:  # 커밋되는 실행만 감사 기록 (체인이 저장소와 어긋나지 않게)
+        changed = True
         local.write_json(LIVE_DIR / "kr_latest.json", out)
+        audit.log("kr_run", {"level": level.value, "prev_level": run_state["last_level"], "money_alert": result.money_alert,
+                             "news_status": kr_news.status, "warnings": [w.disclosure.rcept_no for w in warnings],
+                             "report": report_link, "alerts_sent": sent}, source="monitor_kr")
     run_state["last_level"] = level.value
     RUN_STATE.write_text(json.dumps(run_state))
     if os.environ.get("GITHUB_OUTPUT"):

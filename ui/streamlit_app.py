@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import sys
 from collections import defaultdict
 from datetime import timedelta
@@ -32,7 +33,7 @@ import pandas as pd
 import pydeck as pdk
 import streamlit as st
 
-from app import export, geo, services
+from app import audit, export, geo, services
 from app.config import get_settings, load_config
 from app.agents import sentinel
 from app.agents.exposure import ExposureUnavailable
@@ -584,6 +585,31 @@ with tab_learn:
 
 # ---------- 7. 데이터 입력 ----------
 
+with tab_approve:
+    st.divider()
+    st.subheader("감사 로그 (추가 전용 · 해시 체인)")
+    st.caption("승인·피드백·브리핑 생성·업로드·학습 층 토글·자동 알림을 한 줄씩 남긴다. 줄마다 앞 줄 해시를 품고 있어 "
+               "중간 줄을 고치거나 지우면 검증이 깨진다. 업로드는 파일 이름·내용 대신 해시와 건수만 남긴다. "
+               "자동 감시(collect_signals·monitor_kr) 기록은 저장소에 커밋되고, 앱 기록(app)은 이 서버에만 남으니 내려받아 보관한다.")
+    srcs = audit.sources()
+    if not srcs:
+        st.info("아직 기록이 없다.")
+    for s in srcs:
+        v = audit.verify(s)
+        rows = audit.read(s)
+        c1, c2, c3 = st.columns([2, 3, 2])
+        c1.markdown(f"**{s}** · {v.n}줄")
+        if v.ok:
+            c2.success("체인 검증 통과" + (f" · 마지막 해시 `{rows[-1]['hash'][:12]}…`" if rows else ""))
+        else:
+            c2.error(f"검증 실패 (seq {v.bad_seq}): {v.reason}")
+        c3.download_button("JSONL 받기", data=audit.path_for(s).read_bytes(), file_name=f"audit_{s}.jsonl",
+                           mime="application/json", key=f"audit_dl_{s}")
+        if rows:
+            st.dataframe(pd.DataFrame([{"seq": r["seq"], "ts": r["ts"], "action": r["action"], "actor": r["actor"],
+                                        "data": json.dumps(r["data"], ensure_ascii=False)[:200]} for r in rows[-50:][::-1]]),
+                         hide_index=True, width="stretch")
+
 with tab_input:
     from app.ingest.mapper import ColumnMap, MappingSpec
     from app.ingest.pipeline import ingest, pick_sheet, propose
@@ -652,6 +678,8 @@ with tab_input:
             st.session_state["uploaded_portfolio"] = to_portfolio(res.holdings, institution=name)
             st.session_state["uploaded_holdings"] = res.holdings[["name", "isin", "weight", "country", "sector", "source_row"]] \
                 .astype(object).where(res.holdings.notna(), None).to_dict("records")
+            audit.log("upload_portfolio", {"file_sha256": audit.sha256_bytes(src), "rows": int(len(res.holdings)),
+                                           "dropped": len(res.dropped), "mapping": spec.method, "llm": use_llm}, actor=user_id)
             st.success("세계 금융 지도와 브리핑(가정 분석·라이브)에 업로드 포트폴리오를 반영했다.")
     if st.session_state.get("uploaded_portfolio") is not None and st.button("업로드 포트폴리오 해제"):
         del st.session_state["uploaded_portfolio"]
@@ -692,6 +720,9 @@ with tab_input:
         d1.radio("분석에 쓸 문서", ["업로드 문서만", "기본 문서와 함께"], horizontal=True, key="doc_mode")
         if d2.button("이 문서로 분석", type="primary", disabled=not any(r.playbook.clauses for r in results)):
             st.session_state["uploaded_playbooks"] = [r.playbook for r in results if r.playbook.clauses]
+            audit.log("upload_documents", {"docs": [{"file_sha256": audit.sha256_bytes(d), "doc_id": r.playbook.doc_id,
+                                                     "clauses": len(r.playbook.clauses)} for (d, _), r in zip(docs, results)],
+                                           "mode": st.session_state.get("doc_mode"), "llm": doc_llm}, actor=user_id)
             st.success("브리핑(가정 분석·라이브)에 업로드 문서를 반영했다. 브리핑 탭에서 '업로드 데이터로 분석'을 누른다.")
     if st.session_state.get("uploaded_playbooks") and st.button("업로드 문서 해제"):
         del st.session_state["uploaded_playbooks"]

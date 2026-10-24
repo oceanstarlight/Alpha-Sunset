@@ -20,7 +20,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from app import services  # noqa: E402
+from app import audit, services  # noqa: E402
 from app.notify import Notifier, format_message  # noqa: E402
 from app.report import build_report, save_report  # noqa: E402
 
@@ -36,7 +36,7 @@ def notify(result: dict) -> dict:
     if result["level"] == "ALERT":
         briefing = None
         try:
-            briefing = services.run_live(result)  # Gemini 필요. 실패하면 판단 근거만으로 리포트
+            briefing = services.run_live(result, audit_source="collect_signals")  # Gemini 필요. 실패하면 판단 근거만으로 리포트
         except Exception as e:
             print(f"브리핑 생성 실패: {type(e).__name__}: {e}")
         name = f"{now:%Y%m%d_%H%M}_global_alert"
@@ -61,6 +61,10 @@ def main() -> int:
     with tempfile.TemporaryDirectory() as tmp:
         result = services.compute_signals(fred_cache_dir=Path(tmp))
     result["alerts_sent"] = notify(result)
+    audit.log("signal_run", {"as_of": result["as_of"], "level": result["level"], "money_alert": result["money_alert"],
+                             "market": result["market"]["triggered"], "news_status": result["news"]["status"],
+                             "clusters": [c["event_type"] for c in result["news"]["clusters"]],
+                             "alerts_sent": result["alerts_sent"]}, source="collect_signals")
     result.pop("panel")
     result.pop("fetched_at")
     rows = result.pop("news_rows")
