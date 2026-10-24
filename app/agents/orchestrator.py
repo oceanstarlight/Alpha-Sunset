@@ -398,6 +398,23 @@ def run_live_briefing(event: Event, panel: dict, llm: LLMClient | None = None, p
     return orchestrate(ctx, f"{event.date.isoformat()} 현재 탐지된 사건의 대응문서 적합도와 노출을 분석해 브리핑을 만들어라.")
 
 
+SCENARIO_NOTE = "가정 시나리오 — 사건은 사용자 입력이고 자동 감시 근거가 아니다"
+
+
+def run_scenario_briefing(event: Event, panel: dict, llm: LLMClient | None = None, portfolio: Portfolio | None = None,
+                          holdings: list[dict] | None = None, playbooks: list | None = None) -> Briefing:
+    """사용자가 입력한 가정 사건으로 브리핑 (sandbox DB — 라이브 학습 기록과 섞지 않는다). 시장·자금 신호는 현재값."""
+    from app.corpus import load_portfolio
+
+    llm = llm or LLMClient(db_mode="sandbox")
+    index, doc_note = _index(playbooks, llm)
+    pf_note = f"업로드 포트폴리오 '{portfolio.institution}' 기준" if portfolio is not None else ""
+    note = " · ".join(x for x in (SCENARIO_NOTE, pf_note, doc_note) if x)
+    ctx = new_context(mode="sandbox", as_of=event.date, events=[event], portfolio=portfolio or load_portfolio(),
+                      index=index, llm=llm, panel=panel, live=True, holdings=holdings, portfolio_note=note)
+    return orchestrate(ctx, f"{event.date.isoformat()} 기준 가정 사건의 대응문서 적합도와 노출을 분석해 브리핑을 만들어라.")
+
+
 def get_trace(trace_id: str, mode: DbMode = "sandbox") -> list[dict]:
     conn = connect(mode)
     rows = [dict(r) for r in conn.execute("SELECT step, tool, input_summary, output_summary, ts FROM traces WHERE trace_id = ? ORDER BY step", (trace_id,))]
