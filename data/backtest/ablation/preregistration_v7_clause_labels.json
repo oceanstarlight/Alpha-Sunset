@@ -1,0 +1,25 @@
+{
+  "status": "registered",
+  "registered_at": "2026-10-24T15:30:00+00:00",
+  "purpose": "A3: 조항 단위 판정 정확도를 제대로 잰다. 기존 라벨은 사건당 '헷갈리는 부적용 조항' 3~8개만 담아 정밀도 0.07이 구조적으로 낮게 나왔다. 사건 6개 × 조항 96개 전부를 독립 라벨링한다.",
+  "labeling": {
+    "labeler": "격리된 별도 서브에이전트 (Claude Sonnet). 입력은 사건일 시점 요약(summary_as_of)·사건 유형·채널·지역과 조항 원문·전제뿐이다. 에이전트 판정·캐시·코드·사후 요약은 주지 않는다",
+    "verdicts": {
+      "applicable": "이 사건(사건일 시점 사실)에 조항의 전제가 맞고 조치를 그대로 실행해야 한다",
+      "partial": "전제 일부만 맞거나, 조치를 조정하면 쓸모 있다",
+      "not_applicable": "전제가 맞지 않거나 조치가 무관·부적절하다"
+    },
+    "conservative_rule": "사건일에 아직 발표되지 않은 정책 대응을 전제로 한 조항은 not_applicable (기존 라벨 원칙과 같음)",
+    "split": "사건 2개씩 라벨러 3개에 나눠 맡긴다 (같은 지침)",
+    "human_review": "사람은 무작위 표본을 검수한다. 576건 전수 검수는 하지 않는다 (한계로 보고)"
+  },
+  "metrics": {
+    "coverage": "에이전트가 실제로 판정한 조항 수 / 96 (검색 top-30 + protected만 판정하므로 전부가 아니다)",
+    "on_judged": "에이전트가 판정한 조항만 비교: 정확도, 3분류 macro F1, Cohen's kappa, 혼동행렬",
+    "binary": "실행 대상(applicable·partial) vs 비대상(not_applicable) 정밀도·재현율·F1",
+    "uncertain": "에이전트 uncertain은 별도 집계하고 정확도 계산에서 뺀다 (개수 보고)",
+    "missed": "라벨이 applicable인데 에이전트가 판정하지 않은(검색에서 빠진) 조항 수 = 검색 누락",
+    "no_tuning": "결과를 보고 판정 프롬프트·임계치를 바꾸지 않는다. 바꾸려면 새 버전으로 등록"
+  },
+  "source_of_agent_verdicts": "data/backtest/briefings/{event_id}.json 의 match.doc_fits[].judgments (커밋된 재생 결과, 재실행 없음)"
+}
