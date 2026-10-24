@@ -33,7 +33,7 @@ import pandas as pd
 import pydeck as pdk
 import streamlit as st
 
-from app import audit, export, geo, services
+from app import audit, dashboard, export, geo, services
 from app.config import get_settings, load_config
 from app.agents import sentinel
 from app.agents.exposure import ExposureUnavailable
@@ -109,6 +109,18 @@ def show_chain(chain: list[dict]) -> None:
     """원인 → 근거 → 결과 표."""
     st.dataframe(pd.DataFrame(chain), hide_index=True, width="stretch",
                  column_config={"근거": st.column_config.TextColumn(width="large")})
+
+
+def summary_box(s: dashboard.Summary) -> None:
+    """탭 맨 위 요약: 지금 상태 → 이유 → 할 일."""
+    with st.container(border=True):
+        st.markdown(f"#### {s.icon} {s.headline}")
+        st.markdown("\n".join(f"- {x}" for x in s.bullets))
+
+
+def chart(c, col=None) -> None:
+    if c is not None:
+        (col or st).altair_chart(c, width="stretch")
 
 
 def synthetic_badge():
@@ -194,6 +206,7 @@ def map_impact(event_json: str, snapshot: str) -> dict[str, float] | None:
 
 
 with tab_map:
+    map_summary = st.empty()  # 맨 위 요약 (아래에서 계산 후 채움)
     st.subheader(f"금융 지도 · {LOCAL['name']} 중심" if is_local else "세계 금융 지도")
     live = mode == "라이브"
     b = current_briefing()
@@ -242,6 +255,11 @@ with tab_map:
         m1.metric(f"{LOCAL['name']} 보유 비중", f"{loc.get(geo.LAYERS['exposure']['label'], 0):.1%}")
         m2.metric(f"{LOCAL['name']} 영향도", f"{loc.get(geo.LAYERS['impact']['label'], 0):.4f}")
         m3.metric(f"{LOCAL['name']} 사건 지역", "예" if geo.LAYERS["event"]["label"] in loc.index else "아니오")
+    with map_summary.container():
+        summary_box(dashboard.map_view(map_event, exp, imp))
+    g1, g2 = st.columns(2)
+    chart(dashboard.country_chart(exp, "국가별 보유 비중 상위"), g1)
+    chart(dashboard.country_chart(imp, "국가별 사건 영향도 상위", fmt=".3f"), g2)
     if not df.empty:
         top = (df.sort_values("value", ascending=False).groupby("layer").head(5)
                [["layer", "name", "code", "value"]].rename(columns={"layer": "레이어", "name": "국가", "code": "코드", "value": "값"}))
@@ -261,13 +279,20 @@ with tab_watch:
             st.info("아직 로컬 감시 결과가 없다. 수집기가 처음 실행되면 표시된다.")
         else:
             lv = AlertLevel(loc["level"])
-            st.markdown(f"### 로컬 등급: :{LEVEL_COLOR[lv]}[{lv.value}]  (기준 {loc['as_of']} KST)")
+            summary_box(dashboard.watch_local(loc))
+            th = load_config()["korea"]["thresholds"]
+            g1, g2 = st.columns(2)
+            chart(dashboard.z_chart((loc.get("kr_market") or {}).get("zscores"), th["market_z"], "한국 시장(A)"), g1)
+            chart(dashboard.z_chart((loc.get("kr_flow") or {}).get("zscores"), th["flow_z"], "외국인 자금(C)"), g2)
+            chart(dashboard.news_chart((loc.get("kr_news") or {}).get("observations"), load_config()["korea"]["news"]["z_threshold"],
+                                       "한국 뉴스 주제별 기사 수 (최근 24시간)"))
             if loc.get("money_alert"):
                 st.warning("1단계 자금 이상 알림 (한국 시장·외국인 자금)")
             for w in loc.get("warnings", []):
                 (st.error if w["confirmed"] else st.warning)(
                     f"{'사건 확정' if w['confirmed'] else '사건 경고'}: {w['corp_name']} — {w['report_nm']} ({w['rcept_dt']}) · [공시 원문]({w['url']})")
-            show_chain(loc["chain"])
+            with st.expander("판단 근거 표 (원인 → 근거 → 결과)", expanded=lv == AlertLevel.ALERT):
+                show_chain(loc["chain"])
             if lv != AlertLevel.ALERT:
                 st.info("자동 대응안은 사건이 확인된 ALERT에서만 만든다 (원칙). 지금 상황에서 대응 문서·노출을 미리 보려면 "
                         "모드를 '라이브'로 두고 브리핑 탭의 '🧪 시나리오 브리핑'에 가정 사건을 넣는다.")
@@ -289,6 +314,7 @@ with tab_watch:
         st.subheader(f"{e.title} 전후 경보 재생")
         st.caption("1단계 자금 이상 알림 = 시장 신호(A) 또는 자금 흐름(C). 2단계 대응안 = 사건 확정(B) + 1단계 → ALERT. 기준일까지 공개된 정보만 사용.")
         df = replay_signals(event_id)
+        summary_box(dashboard.watch_replay(df, e.title, e.date))
         first_alert = df[df["등급"] == "ALERT"]["날짜"].min()
         c1, c2, c3 = st.columns(3)
         c1.metric("사건일", str(e.date))
@@ -318,16 +344,25 @@ with tab_watch:
             with st.spinner("FRED·Google 뉴스 조회 중…"):
                 st.session_state["signals"] = services.get_signals(refresh=True)
         sig = st.session_state.get("signals")
+        if not sig:
+            summary_box(dashboard.Summary("gray", "글로벌 신호 조회 전", [
+                "'수집 결과 보기'는 3시간마다 모은 결과를 바로 보여준다",
+                "'지금 직접 조회'는 FRED·Google 뉴스를 지금 부른다 (10~20초)"]))
         if sig:
             level = AlertLevel(sig["level"])
             news = sig["news"]
             status = news.get("status", "ok")
             src = "일일 수집기" if sig.get("source") == "collector" else "직접 조회"
-            st.markdown(f"### 등급: :{LEVEL_COLOR[level]}[{level.value}]  (기준일 {sig['as_of']})")
+            summary_box(dashboard.watch_global(sig))
             st.caption(f"출처: {src} · 조회 시각(UTC) {sig.get('collected_at', '-')}")
+            scfg = load_config()["sentinel"]
+            g1, g2 = st.columns(2)
+            chart(dashboard.z_chart(sig["market"]["zscores"], scfg["market"]["z_threshold"], "시장(A)"), g1)
+            chart(dashboard.z_chart((sig.get("flow") or {}).get("zscores"), scfg["flow"]["z_threshold"], "자금 흐름(C)"), g2)
+            chart(dashboard.news_chart(news.get("observations"), scfg["news"]["z_threshold"], "글로벌 뉴스 주제별 기사 수 (최근 24시간)"))
             if sig.get("chain"):
-                st.markdown("#### 판단 근거 (원인 → 근거 → 결과)")
-                show_chain(sig["chain"])
+                with st.expander("판단 근거 표 (원인 → 근거 → 결과)", expanded=level == AlertLevel.ALERT):
+                    show_chain(sig["chain"])
             if status == "unavailable":
                 st.error("사건 신호(B) 판단 불가: 뉴스 조회 실패 또는 기준선 축적 중이다. 등급의 '사건 없음'은 확인된 결과가 아니다.")
             if sig.get("money_alert"):
@@ -419,6 +454,7 @@ def exposure_dot(b: Briefing) -> str:
 
 
 with tab_brief:
+    brief_summary = st.empty()  # 맨 위 요약 (컨트롤 실행 뒤 최종 브리핑으로 채움)
     b = current_briefing()
     if mode == "백테스트 재생":
         c1, c2 = st.columns([3, 1])
@@ -447,6 +483,8 @@ with tab_brief:
     if b is None:
         st.info("브리핑이 없다. 라이브 모드는 감시 탭에서 사건이 탐지되면 생성하거나, 위 '시나리오 브리핑'으로 가정 사건을 넣어 만든다.")
     else:
+        with brief_summary.container():
+            summary_box(dashboard.briefing(b, scenario=services.is_scenario(b)))
         synthetic_badge()
         if services.is_scenario(b):
             st.warning("🧪 " + SCENARIO_NOTE + ". 문서 적합도·노출·확인 항목은 이 가정 사건 기준이다.")
@@ -467,7 +505,9 @@ with tab_brief:
                                "fit_score": f.fit_score, "적용": f.n_applicable, "부분": f.n_partial,
                                "부적용": f.n_not, "불확실": f.n_uncertain}
                               for i, f in enumerate(b.match.doc_fits, start=1)])
-        st.dataframe(table, hide_index=True, width="stretch")
+        chart(dashboard.fit_chart(b.match.doc_fits))
+        with st.expander("문서별 적합도 표"):
+            st.dataframe(table, hide_index=True, width="stretch")
         for f in b.match.doc_fits[:5]:
             with st.expander(f"{f.doc_id} · {docs[f.doc_id].title if f.doc_id in docs else ''} (fit {f.fit_score:.2f})"):
                 for j in f.judgments:
@@ -493,12 +533,14 @@ with tab_brief:
             st.warning("핵심 경로 (사건 지역과 직접 겹치지만 비중이 작아 상위 10 밖): "
                        + " / ".join(" → ".join(p.nodes[1:]) for p in b.exposure_core))
         if b.exposure_top:
+            chart(dashboard.exposure_chart(b.exposure_top))
             st.dataframe(pd.DataFrame([{"경로": " → ".join(p.nodes[1:]), "risk_score": p.risk_score, "비중": p.weight,
                                         "연관도": p.relevance, "불확실성": p.uncertainty, "이유": p.why}
                                        for p in b.exposure_top]), hide_index=True, width="stretch")
             st.graphviz_chart(exposure_dot(b))
 
         st.markdown("### 확인 항목 (담당별)")
+        chart(dashboard.actions_chart(b.actions_to_check))
         grouped = defaultdict(list)
         for a in b.actions_to_check:
             role, _, rest = a.partition("] ")
@@ -522,8 +564,11 @@ with tab_brief:
 with tab_approve:
     b = current_briefing()
     if b is None:
-        st.info("브리핑이 없다.")
+        summary_box(dashboard.Summary("gray", "승인할 브리핑 없음", [
+            "백테스트 재생 모드는 사건을 고르면 커밋된 브리핑이 뜬다",
+            "라이브 모드는 감시 탭 사건 탐지 또는 브리핑 탭 시나리오 브리핑으로 만든다"]))
     else:
+        summary_box(dashboard.approval(b, audit.read("app")))
         synthetic_badge()
         st.subheader(f"{b.event.title} — 문서 피드백")
         st.caption("피드백은 학습 층 입력(shadow_log)으로만 기록되며, 문서 우선순위 반영은 학습 층이 켜졌을 때만 한다.")
@@ -539,15 +584,20 @@ with tab_approve:
         c1, c2 = st.columns(2)
         if c1.button("브리핑 승인", type="primary"):
             services.record_approval(b, "approved", user_id, note)
-            st.success("승인 기록")
+            st.rerun()  # 맨 위 요약에 결정 반영
         if c2.button("반려"):
             services.record_approval(b, "rejected", user_id, note)
-            st.warning("반려 기록")
+            st.rerun()
 
 # ---------- 4. 백테스트 ----------
 
 with tab_bt:
     res = services.get_backtest_results()
+    summary_box(dashboard.backtest(res, is_local))
+    g1, g2 = st.columns([3, 2])
+    chart(dashboard.capture_chart(res.get("v6") or {}), g1)
+    chart(dashboard.confusion_chart(((res.get("clause_eval") or {}).get("overall") or {}).get("confusion")), g2)
+    chart(dashboard.lead_chart(res.get("v6") or {}))
     st.subheader("백테스트 결과")
     st.caption("실제 실행값만 표시한다. 정답 라벨 기반 지표(top3 적중, P/R)는 라벨 작성 후 P8에서 산출한다.")
     if is_local and res.get("kr"):
@@ -599,6 +649,7 @@ with tab_bt:
 # ---------- 5. 학습 층 ----------
 
 with tab_learn:
+    learn_summary = st.empty()
     st.subheader("학습 층 (알파 썬셋)")
     st.caption("자주 유용했던 문서의 검색 우선순위를 올리고 거의 쓰이지 않는 문서는 내린다. 문서는 삭제·폐기하지 않는다. "
                "protected 문서는 우선순위 하한 0.5로 항상 후보에 남는다. 기본 OFF.")
@@ -610,6 +661,10 @@ with tab_learn:
         st.toast(f"학습 층 {'ON' if enabled else 'OFF'} (변경 이력 기록)")
     res = services.get_backtest_results()
     lr = res.get("learner")
+    pr = services.get_priority()
+    with learn_summary.container():
+        summary_box(dashboard.learner(enabled, pr["docs"], lr["pass_B"]["learner_delta_sim"] if lr else None))
+    chart(dashboard.priority_chart(pr["docs"]))
     if lr:
         st.markdown("**ON/OFF 비교 (시뮬레이션 기반, 사전 등록 v4)**")
         c1, c2 = st.columns(2)
@@ -626,7 +681,6 @@ with tab_learn:
                      hide_index=True, width="stretch")
         for c in lr["caveats"]:
             st.caption("⚠️ " + c)
-    pr = services.get_priority()
     st.markdown("**인용·피드백 기록 (shadow_log, 백테스트·승인 탭 피드백)**")
     if pr["docs"]:
         st.dataframe(pd.DataFrame(pr["docs"]), hide_index=True, width="stretch")
@@ -668,6 +722,13 @@ with tab_input:
     from app.ingest.schema import FIELDS
     from app.ingest.transform import apply_spec, save_preset, to_portfolio
 
+    summary_box(dashboard.data_input(st.session_state.get("uploaded_portfolio"), st.session_state.get("uploaded_holdings"),
+                                     st.session_state.get("uploaded_playbooks")))
+    if st.session_state.get("uploaded_holdings"):
+        held = pd.DataFrame(st.session_state["uploaded_holdings"])
+        g1, g2 = st.columns(2)
+        chart(dashboard.weight_chart(held, "sector", "반영 중 포트폴리오 · 업종 비중"), g1)
+        chart(dashboard.weight_chart(held, "country", "반영 중 포트폴리오 · 국가 비중"), g2)
     st.subheader("보유내역 입력 (엑셀·CSV → 공통 스키마)")
     st.caption("파일 모양이 달라도 된다. 라이브러리가 표 구조를 읽어 글로 요약하고, LLM은 그 요약만 보고 열 매핑 규칙을 제안한다. "
                "숫자 변환·검증은 코드가 전체 행에 적용한다. 같은 양식은 저장해 두면 다음부터 LLM 없이 변환한다.")
@@ -715,6 +776,9 @@ with tab_input:
         res = apply_spec(sheet, prof, spec)
         st.markdown("**③ 변환 결과와 검증 (원인 → 근거 → 결과)**")
         show_chain(res.chain)
+        g1, g2 = st.columns(2)
+        chart(dashboard.weight_chart(res.holdings, "sector", "변환 결과 · 업종 비중"), g1)
+        chart(dashboard.weight_chart(res.holdings, "country", "변환 결과 · 국가 비중"), g2)
         st.dataframe(res.holdings.head(200).round({"weight": 6}).astype(str), hide_index=True, width="stretch")
         if res.dropped:
             st.caption(f"제외 {len(res.dropped)}행: " + "; ".join(f"{d['row']}행 {d['reason']}" for d in res.dropped[:5]))

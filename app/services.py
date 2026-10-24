@@ -285,6 +285,8 @@ def get_backtest_results() -> dict:
         "backtest": read("../backtest_results.json"),
         "learner": read("learner_results.json"),
         "kr": read("kr_results.json"),
+        "v6": read("v6_results.json"),
+        "clause_eval": read("clause_eval.json"),
     }
 
 

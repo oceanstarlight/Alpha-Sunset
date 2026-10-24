@@ -38,6 +38,10 @@ def main() -> None:
         cur = v6.evaluate(v6.alerts(mz, fz, params), events, START, END)
         cal = v6.calibrate(mz, fz, events, START, SPLIT, END, params)
         out[scope] = {"current_full_period": cur, "calibration": cal}
+        if cal.get("adopt"):  # 채택한 임계치로 전체 기간 (화면 요약·README 수치)
+            ch = cal["chosen"]
+            out[scope]["adopted_full_period"] = v6.evaluate(v6.alerts(mz, fz, v6.Params(
+                ch["market_z"], ch["min_series"], ch["persistence"], ch["flow_z"], ch["z_extreme"])), events, START, END)
         b = v6._brief(cur)
         print(f"[{scope}] 현행 전체: {json.dumps(b, ensure_ascii=False)}")
         print(f"[{scope}] 보정: 채택={cal['adopt']} ({cal['reason']}) 선택={cal.get('chosen')}")
