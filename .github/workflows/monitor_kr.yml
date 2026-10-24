@@ -1,13 +1,16 @@
 name: monitor-kr
+run-name: monitor-kr ${{ (inputs.daily || github.event.schedule == '47 7 * * 1-5' || github.event.schedule == '7 22 * * 0-4') && 'daily' || 'news' }}
 
 # 로컬(대한민국) 상시 감시 — 사전 등록 v5
-# 평일 08:00~19:30 KST 30분마다 뉴스·DART, 16:40·07:00 KST에 ECOS 시장·외국인 순매수(--daily)
+# 평일 08:00~19:30 KST 30분마다 뉴스·DART, 16:40·07:00 KST에 ECOS 시장·외국인 순매수(daily)
+# 정시 실행 (B3): 외부 cron(cron-job.org)이 workflow_dispatch로 호출한다 — docs/scheduler.md.
+# 아래 schedule은 예비: 외부 호출이 최근에 같은 종류로 돌았으면 건너뛴다 (GitHub 예약 실행은 혼잡 시 지연·누락).
 on:
   schedule:
-    - cron: "0,30 23 * * 0-4"   # 08:00, 08:30 KST (월~금)
-    - cron: "0,30 0-10 * * 1-5" # 09:00~19:30 KST
-    - cron: "40 7 * * 1-5"      # 16:40 KST 장 마감 후 (daily)
-    - cron: "0 22 * * 0-4"      # 07:00 KST 아침 (daily)
+    - cron: "13,43 23 * * 0-4"  # 08:13·08:43 KST 예비 (월~금)
+    - cron: "13,43 0-10 * * 1-5" # 09:13~19:43 KST 30분마다 예비 (외부 cron 미설정이어도 기존 주기 유지)
+    - cron: "47 7 * * 1-5"      # 16:47 KST 예비 (daily)
+    - cron: "7 22 * * 0-4"      # 07:07 KST 예비 (daily)
   workflow_dispatch:
     inputs:
       daily:
@@ -17,6 +20,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: monitor-kr
@@ -26,21 +30,37 @@ jobs:
   monitor:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      KIND: ${{ (inputs.daily || github.event.schedule == '47 7 * * 1-5' || github.event.schedule == '7 22 * * 0-4') && 'daily' || 'news' }}
     steps:
       - uses: actions/checkout@v4
+      - name: Skip backup if external cron ran
+        id: guard
+        if: github.event_name == 'schedule'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/recent_run.py --workflow monitor_kr.yml --title "monitor-kr $KIND" --minutes $([ "$KIND" = daily ] && echo 60 || echo 25)
+          # 건너뛴 예비 실행은 '취소'로 남겨 정시성 집계(check_schedule)·다음 중복 판단에서 빠지게 한다
+          if grep -q "skip=true" "$GITHUB_OUTPUT"; then gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"; sleep 30; fi
       - uses: actions/setup-python@v5
+        if: steps.guard.outputs.skip != 'true'
         with:
           python-version: "3.11"
           cache: pip
       - name: Install
+        if: steps.guard.outputs.skip != 'true'
         run: pip install -r requirements.txt
       - name: Restore state (뉴스 기준선·알림 중복 방지)
+        if: steps.guard.outputs.skip != 'true'
         uses: actions/cache/restore@v4
         with:
           path: .kr_state
           key: kr-state-${{ github.run_id }}
           restore-keys: kr-state-
       - name: Monitor
+        if: steps.guard.outputs.skip != 'true'
         id: monitor
         env:
           DART_API_KEY: ${{ secrets.DART_API_KEY }}
@@ -48,16 +68,15 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          DAILY: ${{ github.event.schedule == '40 7 * * 1-5' || github.event.schedule == '0 22 * * 0-4' || inputs.daily }}
-        run: python scripts/monitor_kr.py $([ "$DAILY" = "true" ] && echo --daily)
+        run: python scripts/monitor_kr.py $([ "$KIND" = "daily" ] && echo --daily)
       - name: Save state
-        if: always()
+        if: always() && steps.guard.outputs.skip != 'true'
         uses: actions/cache/save@v4
         with:
           path: .kr_state
           key: kr-state-${{ github.run_id }}
       - name: Commit
-        if: steps.monitor.outputs.commit == 'true'
+        if: steps.guard.outputs.skip != 'true' && steps.monitor.outputs.commit == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

@@ -268,6 +268,9 @@ with tab_watch:
                 (st.error if w["confirmed"] else st.warning)(
                     f"{'사건 확정' if w['confirmed'] else '사건 경고'}: {w['corp_name']} — {w['report_nm']} ({w['rcept_dt']}) · [공시 원문]({w['url']})")
             show_chain(loc["chain"])
+            if lv != AlertLevel.ALERT:
+                st.info("자동 대응안은 사건이 확인된 ALERT에서만 만든다 (원칙). 지금 상황에서 대응 문서·노출을 미리 보려면 "
+                        "모드를 '라이브'로 두고 브리핑 탭의 '🧪 시나리오 브리핑'에 가정 사건을 넣는다.")
             if loc.get("kr_news"):
                 with st.expander("한국 뉴스 주제별 관측"):
                     obs = pd.DataFrame(loc["kr_news"]["observations"]).T.reset_index(names="주제")
@@ -356,11 +359,53 @@ with tab_watch:
                         st.text(err)
             if sig["fred_error"]:
                 st.warning(f"FRED 갱신 실패, 커밋된 캐시 사용: {sig['fred_error']}")
+            if not news["clusters"]:
+                st.caption("탐지된 사건이 없어 자동 브리핑은 만들지 않는다. 가정 사건으로 보려면 브리핑 탭의 '시나리오 브리핑'을 쓴다.")
             if news["clusters"] and st.button("탐지 사건 브리핑 생성"):
                 with st.spinner("에이전트 실행 중…"):
                     st.session_state["live_briefing"] = services.run_live(sig, **uploaded_args())
 
 # ---------- 2. 브리핑 ----------
+
+SCENARIO_NOTE = "가정 시나리오 — 사건은 사용자 입력이고 자동 감시 근거가 아니다"
+TYPE_KO = {"banking_stress": "은행 위기", "liquidity_crisis": "유동성 위기", "credit_event": "신용 사건(부도)",
+           "rate_shock": "금리 충격", "fx_shock": "환율 충격", "trade_policy": "무역·관세", "geopolitical": "지정학",
+           "pandemic": "감염병", "supply_chain": "공급망", "regulatory": "규제", "other": "기타"}
+DURATION_KO = {"shock": "단기 충격", "weeks": "수 주", "months": "수 개월", "structural": "구조적"}
+
+
+def scenario_form(expanded: bool) -> None:
+    """감시 등급과 무관하게 가정 사건으로 브리핑·노출·승인 단계를 쓴다 (자동 경보 원칙과 분리)."""
+    from app.agents.matcher import RULE_CHANNELS
+    from app.schemas import Channel, EventType
+
+    with st.expander("🧪 시나리오 브리핑 (가정 사건 입력)", expanded=expanded):
+        st.caption("자동 감시가 사건을 확인하지 않아도, 가정 사건을 직접 넣어 대응 문서 적합도·보유 노출·확인 항목을 본다. "
+                   "결과에는 '가정 시나리오'로 표시되고 라이브 학습 기록(shadow_log)과 섞이지 않는다.")
+        c1, c2 = st.columns(2)
+        etype = c1.selectbox("사건 유형", [t.value for t in EventType], format_func=lambda v: f"{TYPE_KO.get(v, v)} ({v})",
+                             key="sc_type")
+        sev = c2.slider("심각도", 1, 5, 3, key="sc_sev", help="1 경미 ~ 5 시스템 위기")
+        title = st.text_input("제목", placeholder="예: 국내 중형 증권사 PF 부실로 단기자금시장 경색", key="sc_title")
+        desc = st.text_area("상황 설명", placeholder="무엇이 일어났고 어디로 번지는지 한두 줄", key="sc_desc", height=80)
+        c3, c4 = st.columns(2)
+        channels = c3.multiselect("전파 채널", [c.value for c in Channel], key=f"sc_ch_{etype}",
+                                  default=[c.value for c in RULE_CHANNELS[EventType(etype)]])
+        regions = c4.multiselect("지역", ["KR", "US", "CN", "JP", "EU", "RU", "UA", "EM", "GLOBAL"],
+                                 default=["KR"] if is_local else ["GLOBAL"], key="sc_regions")
+        c5, c6 = st.columns(2)
+        duration = c5.selectbox("지속기간", list(DURATION_KO), index=1, format_func=DURATION_KO.get, key="sc_dur")
+        entities = c6.text_input("관련 기관 (쉼표 구분, 선택)", placeholder="예: 태영건설, 한국투자증권", key="sc_ent",
+                                 help="보유 종목 발행자와 규칙으로만 대조한다 (외부 LLM에 보유 종목명을 보내지 않음).")
+        up = uploaded_args()
+        if up:
+            st.caption("업로드 데이터 반영: " + ", ".join(k for k in ("portfolio", "playbooks") if k in up))
+        if st.button("시나리오 브리핑 생성", type="primary", disabled=not (title.strip() or desc.strip())):
+            event = services.scenario_event(etype, desc, title=title, channels=channels, regions=regions, severity=sev,
+                                            duration=duration, entities=[x.strip() for x in entities.split(",") if x.strip()])
+            with st.spinner("에이전트 실행 중 (가정 시나리오)…"):
+                st.session_state["live_briefing"] = services.run_scenario(event, **up)
+            st.rerun()
 
 
 def exposure_dot(b: Briefing) -> str:
@@ -396,10 +441,15 @@ with tab_brief:
                 st.session_state["_choose_upload"] = True
             st.rerun()
         b = current_briefing()
+    if mode == "라이브":
+        scenario_form(expanded=b is None)
+        b = current_briefing()
     if b is None:
-        st.info("브리핑이 없다. 라이브 모드는 감시 탭에서 신호 조회 후 생성한다.")
+        st.info("브리핑이 없다. 라이브 모드는 감시 탭에서 사건이 탐지되면 생성하거나, 위 '시나리오 브리핑'으로 가정 사건을 넣어 만든다.")
     else:
         synthetic_badge()
+        if services.is_scenario(b):
+            st.warning("🧪 " + SCENARIO_NOTE + ". 문서 적합도·노출·확인 항목은 이 가정 사건 기준이다.")
         st.download_button("대응안 엑셀로 내보내기", data=export.briefing_xlsx(
             b, clause_text={k: c.text for k, c in all_clauses().items()}), file_name=f"alpha_sunset_{b.event.id}.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")

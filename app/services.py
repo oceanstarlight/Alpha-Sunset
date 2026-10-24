@@ -143,6 +143,38 @@ def run_live(signals: dict | None = None, portfolio=None, holdings: list[dict] |
     return b
 
 
+def scenario_event(event_type: str, description: str, title: str = "", channels: list[str] | None = None,
+                   regions: list[str] | None = None, entities: list[str] | None = None, severity: int = 3,
+                   duration: str = "weeks", on: date | None = None) -> Event:
+    """시나리오 브리핑용 사건 (사용자 입력 그대로 — LLM 구조화 없이 결정적으로 만든다)."""
+    from app.agents.matcher import RULE_CHANNELS
+    from app.schemas import Channel, Duration, EventType
+
+    etype = EventType(event_type)
+    on = on or date.today()
+    desc = description.strip()
+    return Event(id=f"scenario_{datetime.now():%Y%m%d_%H%M%S}_{etype.value}", date=on,
+                 title=title.strip() or (desc.splitlines()[0][:80] if desc else etype.value), summary=desc or etype.value,
+                 type=etype, channels=[Channel(c) for c in channels] if channels else RULE_CHANNELS[etype],
+                 regions=regions or [], entities=entities or [], duration=Duration(duration), severity=severity,
+                 sources=["사용자 입력 (가정 시나리오)"])
+
+
+def run_scenario(event: Event, portfolio=None, holdings: list[dict] | None = None, playbooks: list | None = None) -> Briefing:
+    """가정 시나리오 브리핑. 시장·자금 신호는 커밋된 FRED 캐시의 최신값."""
+    from app.config import get_settings
+
+    llm = LLMClient(db_mode="sandbox")
+    b = orchestrator.run_scenario_briefing(event, load_panel(sentinel.panel_series_ids()), llm, portfolio=portfolio,
+                                           holdings=holdings, playbooks=playbooks)
+    audit_briefing(b, "scenario", get_settings().llm_provider, portfolio, playbooks)
+    return b
+
+
+def is_scenario(b: Briefing) -> bool:
+    return b.event.id.startswith("scenario_")
+
+
 def audit_briefing(b: Briefing, mode: str, provider: str, portfolio=None, playbooks: list | None = None,
                    source: str = "app") -> None:
     """브리핑 생성 감사 기록: 무엇을 근거로 어떤 문서를 올렸는지 (보유 종목명은 남기지 않는다)."""

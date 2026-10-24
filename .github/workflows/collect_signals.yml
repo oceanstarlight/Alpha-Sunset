@@ -1,12 +1,16 @@
 name: collect-signals
 
+# 3시간마다 (뉴스 기준선 누적 + 글로벌 텔레그램 알림)
+# 정시 실행 (B3): 외부 cron(cron-job.org)이 workflow_dispatch로 호출한다 — docs/scheduler.md.
+# schedule은 예비: 최근 150분 안에 실행이 있었으면 건너뛴다.
 on:
   schedule:
-    - cron: "7 */3 * * *"  # 3시간마다 (뉴스 기준선 누적 + 글로벌 텔레그램 알림)
+    - cron: "37 */3 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: collect-signals
@@ -18,19 +22,33 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+      - name: Skip backup if external cron ran
+        id: guard
+        if: github.event_name == 'schedule'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/recent_run.py --workflow collect_signals.yml --title collect-signals --minutes 150
+          # 건너뛴 예비 실행은 '취소'로 남겨 정시성 집계(check_schedule)·다음 중복 판단에서 빠지게 한다
+          if grep -q "skip=true" "$GITHUB_OUTPUT"; then gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"; sleep 30; fi
       - uses: actions/setup-python@v5
+        if: steps.guard.outputs.skip != 'true'
         with:
           python-version: "3.11"
           cache: pip
       - name: Install
+        if: steps.guard.outputs.skip != 'true'
         run: pip install -r requirements.txt
       - name: Collect
+        if: steps.guard.outputs.skip != 'true'
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/collect_signals.py
       - name: Commit
+        if: steps.guard.outputs.skip != 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
