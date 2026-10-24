@@ -1,0 +1,204 @@
+{
+ "synthetic": true,
+ "docs": {
+  "PB-BANK": [
+   {
+    "text": "예치 은행의 폐쇄 또는 뱅크런 징후가 확인되면 해당 은행 예금·결제계좌 잔액을 즉시 확인한다.",
+    "owner_role": "자금운용팀",
+    "protected": false,
+    "event_types": [
+     "banking_stress"
+    ],
+    "channels": [
+     "counterparty",
+     "liquidity"
+    ]
+   },
+   {
+    "text": "단일 은행 예치 한도를 초과한 예금은 신용등급이 높은 복수 은행으로 분산한다.",
+    "owner_role": "자금운용팀",
+    "protected": false,
+    "event_types": [
+     "banking_stress"
+    ],
+    "channels": [
+     "counterparty"
+    ]
+   },
+   {
+    "text": "보유 채권의 미실현 평가손실이 큰 지역은행을 식별하고 해당 은행 주식·채권 노출을 점검한다.",
+    "owner_role": "신용분석팀",
+    "protected": false,
+    "event_types": [
+     "banking_stress",
+     "rate_shock"
+    ],
+    "channels": [
+     "rates",
+     "counterparty"
+    ]
+   },
+   {
+    "text": "정부의 예금 전액 보호 또는 긴급 대출 프로그램 발표 시 시장 안정 여부를 확인하고 추가 매도를 보류한다.",
+    "owner_role": "운용전략팀",
+    "protected": false,
+    "event_types": [
+     "banking_stress"
+    ],
+    "channels": [
+     "liquidity"
+    ]
+   },
+   {
+    "text": "은행 섹터 주가 변동성이 급등하면 은행 섹터 비중을 벤치마크 대비 중립 이하로 조정한다.",
+    "owner_role": "운용전략팀",
+    "protected": false,
+    "event_types": [
+     "banking_stress"
+    ],
+    "channels": [
+     "equity_vol"
+    ]
+   },
+   {
+    "text": "현금성 자산 비중이 목표 하한 아래로 내려가면 단기 국채와 MMF로 우선 보충한다.",
+    "owner_role": "자금운용팀",
+    "protected": false,
+    "event_types": [
+     "banking_stress",
+     "liquidity_crisis"
+    ],
+    "channels": [
+     "liquidity"
+    ]
+   },
+   {
+    "text": "벤처·기술 기업 예금 비중이 높은 은행과 거래하는 위탁운용사에 결제계좌 현황을 확인 요청한다.",
+    "owner_role": "위탁운용팀",
+    "protected": false,
+    "event_types": [
+     "banking_stress"
+    ],
+    "channels": [
+     "counterparty",
+     "operational"
+    ]
+   },
+   {
+    "text": "은행 위기가 해외 은행으로 전이되는지 확인하기 위해 주요 은행 CDS와 단기자금 금리를 일일 모니터링한다.",
+    "owner_role": "리스크관리팀",
+    "protected": false,
+    "event_types": [
+     "banking_stress"
+    ],
+    "channels": [
+     "credit_spread",
+     "liquidity"
+    ]
+   }
+  ],
+  "PB-LIQ": [
+   {
+    "text": "전 자산군이 동반 하락하고 현금 확보 수요가 급증하면 즉시 유동성 점검 회의를 소집한다.",
+    "owner_role": "리스크관리팀",
+    "protected": false,
+    "event_types": [
+     "pandemic",
+     "liquidity_crisis"
+    ],
+    "channels": [
+     "liquidity",
+     "equity_vol"
+    ]
+   },
+   {
+    "text": "현금성 자산 비중이 목표 하한 아래로 내려가면 단기 국채와 MMF로 우선 보충한다.",
+    "owner_role": "자금운용팀",
+    "protected": false,
+    "event_types": [
+     "liquidity_crisis",
+     "pandemic"
+    ],
+    "channels": [
+     "liquidity"
+    ]
+   },
+   {
+    "text": "향후 3개월 내 예정된 출자 요청(capital call)과 지급 일정을 재점검하고 우선순위를 정한다.",
+    "owner_role": "대체투자팀",
+    "protected": false,
+    "event_types": [
+     "liquidity_crisis",
+     "pandemic",
+     "credit_event"
+    ],
+    "channels": [
+     "liquidity"
+    ]
+   },
+   {
+    "text": "글로벌 달러 조달 여건이 악화되면 외화 유동성 한도를 하향하고 통화스와프 등 정책 지원 여부를 모니터링한다.",
+    "owner_role": "외환운용팀",
+    "protected": false,
+    "event_types": [
+     "pandemic",
+     "liquidity_crisis"
+    ],
+    "channels": [
+     "liquidity",
+     "fx"
+    ]
+   },
+   {
+    "text": "리밸런싱 범위를 일시적으로 확대해 유동성이 낮은 시장에서의 강제 매도를 피한다.",
+    "owner_role": "운용전략팀",
+    "protected": false,
+    "event_types": [
+     "pandemic",
+     "liquidity_crisis"
+    ],
+    "channels": [
+     "liquidity",
+     "equity_vol"
+    ]
+   },
+   {
+    "text": "봉쇄 조치로 실물 경기 급랭이 예상되면 경기민감 업종의 신규 매수를 보류한다.",
+    "owner_role": "운용전략팀",
+    "protected": false,
+    "event_types": [
+     "pandemic"
+    ],
+    "channels": [
+     "equity_vol",
+     "supply_chain"
+    ]
+   },
+   {
+    "text": "하이일드 채권 스프레드가 급등하면 투기등급 비중 한도 초과 여부를 일일 점검한다.",
+    "owner_role": "리스크관리팀",
+    "protected": false,
+    "event_types": [
+     "pandemic",
+     "credit_event",
+     "liquidity_crisis"
+    ],
+    "channels": [
+     "credit_spread"
+    ]
+   },
+   {
+    "text": "중앙은행 유동성 공급이 발표되면 시장 안정 여부를 확인한 뒤 단계적으로 평상 한도로 복귀한다.",
+    "owner_role": "리스크관리팀",
+    "protected": false,
+    "event_types": [
+     "pandemic",
+     "liquidity_crisis"
+    ],
+    "channels": [
+     "liquidity"
+    ]
+   }
+  ]
+ }
+}

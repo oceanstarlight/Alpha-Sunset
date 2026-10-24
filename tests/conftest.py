@@ -8,6 +8,8 @@ def isolated_env(tmp_path, monkeypatch):
     monkeypatch.setenv("GEMINI_API_KEY", "")
     monkeypatch.setenv("GEMINI_MODEL", "test-model")
     monkeypatch.setenv("EMBED_MODEL", "test-embed")
+    for k in ("LLM_PROVIDER", "LLM_BASE_URL", "LLM_API_KEY", "LLM_MODEL", "LLM_EMBED_MODEL"):
+        monkeypatch.setenv(k, "")
     return tmp_path
 
 

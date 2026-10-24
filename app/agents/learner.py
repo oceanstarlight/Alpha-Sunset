@@ -34,6 +34,9 @@ def set_enabled(enabled: bool, db: DbMode = "sandbox") -> None:
         conn.execute("INSERT INTO learner_toggle_log (enabled, ts) VALUES (?, ?)",
                      (int(enabled), datetime.now(timezone.utc).isoformat()))
     conn.close()
+    from app import audit
+
+    audit.log("learner_toggle", {"enabled": enabled, "db": db})
 
 
 @dataclass

@@ -15,7 +15,7 @@ sentinel:
     lookback_days: 252
     min_history: 200          # z-score 계산에 필요한 최소 관측치
     stale_days: 5             # 마지막 관측이 이보다 오래되면 제외
-    z_threshold: 2.5
+    z_threshold: 2.0          # 사전 등록 v6 보정 채택 (기존 2.5): 2015년 이후 검증에서 포착 9/11 유지, 평상시 알림 4.3% → 2.2%
     min_series: 2
     z_extreme: 4.0
   news:                       # 시그널 B (라이브: Google 뉴스 RSS, 백테스트: 사건 카드)
@@ -43,13 +43,22 @@ sentinel:
     publication_lag_days: {WRMFNS: 45, DPSACBW027SBOG: 10, WMTSECL1: 3, WRESBAL: 3}
     lookback_obs: 52
     min_obs: 40
-    z_threshold: 3.0
+    z_threshold: 3.5          # 사전 등록 v6 보정 채택 (기존 3.0)
+  money_alert:                # 1단계 자금 이상 알림: 끝나는 window영업일 중 min_active일 이상 A∨C
+    window: 5
+    min_active: 3             # 사전 등록 v6 보정 채택 (기존 2)
   merge_window_hours: 72
   replay:                     # P3 재생 범위 (사건일 기준)
     days_before: 30
     days_after: 14
 
 llm:
+  # 제공자 (B2): gemini(기본) | openai_compatible(OpenAI 호환 API — Ollama·vLLM·사내 게이트웨이 등) | rule(LLM 없이 규칙 판정)
+  # 키는 env/secret LLM_API_KEY로만 받는다. LLM_PROVIDER·LLM_BASE_URL·LLM_MODEL·LLM_EMBED_MODEL env가 아래 값보다 우선.
+  provider: gemini
+  base_url: null        # openai_compatible 예: http://localhost:11434/v1
+  model: null
+  embed_model: null
   requests_per_minute: 14   # Gemini 무료 등급 분당 15회 제한
   rate_limit_retries: 5     # 429 응답 시 서버가 알려준 시간만큼 대기 후 재시도
 
@@ -137,6 +146,12 @@ korea:                        # 로컬(대한민국) 상시 감시 — 사전 �
     report_keywords: [부도발생, 회생절차개시신청, 회생절차개시결정, 기한의이익상실, 영업정지, 채권은행, 해산사유발생, 파산신청]
     listed_classes: [Y, K]     # 유가증권·코스닥
     confirm_hours: 48          # 이 시간 안에 기업명 기사 언론사 min_sources곳 이상이면 사건 확정으로 승격
+  thresholds:                 # 로컬 임계치: 사전 등록 v6에서 보정안이 채택 조건 불충족 → 기존값 유지 (글로벌과 분리)
+    market_z: 2.5
+    min_series: 2
+    z_extreme: 4.0
+    flow_z: 3.0
+    min_active: 2
   linkage:                    # 해외-한국 연관성 근거 (v5 linkage_evidence)
     window: 252
     history_years: 5

@@ -156,8 +156,11 @@ def flow_active_days(panel: dict[str, pd.Series], days: pd.DatetimeIndex) -> pd.
     return df.any(axis=1) if not df.empty else pd.Series(False, index=days)
 
 
-def money_alert_days(panel: dict[str, pd.Series], days: pd.DatetimeIndex, window: int = 5, min_active: int = 2) -> pd.Series:
-    """1단계 '자금 이상 알림' (사전 등록 v3): 끝나는 5영업일 중 2일 이상 A 또는 C가 활성인 날."""
+def money_alert_days(panel: dict[str, pd.Series], days: pd.DatetimeIndex, window: int | None = None,
+                     min_active: int | None = None) -> pd.Series:
+    """1단계 '자금 이상 알림': 끝나는 window영업일 중 min_active일 이상 A 또는 C가 활성인 날 (v3: 5중 2, v6 보정: 5중 3)."""
+    cfg = load_config()["sentinel"].get("money_alert", {})
+    window, min_active = window or cfg.get("window", 5), min_active or cfg.get("min_active", 2)
     pad = pd.bdate_range(days[0] - pd.Timedelta(days=14), days[-1])
     active = market_active_days(panel, pad) | flow_active_days(panel, pad)
     rolling = active.astype(int).rolling(window, min_periods=window).sum()

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18",
+  "generated_at": "2026-10-24",
   "preregistration": [
     "data/backtest/ablation/preregistration_v5_kr.json",
     "data/backtest/ablation/preregistration_v5_1_kr_linkage.json"
@@ -53,11 +53,11 @@
     "kr_calm_flow_active_rate": 0.0372,
     "kr_base_rate": 0.5066,
     "global_reference": {
-      "warning_lead_days": 28.6,
+      "warning_lead_days": 27.0,
       "briefing_delay_days": 0.3333,
-      "events_with_prior_warning": 0.8333,
-      "calm_money_alert_rate": 0.0919,
-      "warning_base_rate_60d": 0.4226
+      "events_with_prior_warning": 0.6667,
+      "calm_money_alert_rate": 0.0476,
+      "warning_base_rate_60d": 0.3759
     }
   },
   "events": [
@@ -77,7 +77,7 @@
         "KTB3Y": -2.53
       },
       "pre_event_money_alert_days": 6,
-      "global_warning_lead_days": 7,
+      "global_warning_lead_days": null,
       "global_briefing_delay_days": 0
     },
     {
@@ -97,7 +97,7 @@
         "FOREIGN_NET_5D": -3.02
       },
       "pre_event_money_alert_days": 9,
-      "global_warning_lead_days": 40,
+      "global_warning_lead_days": 12,
       "global_briefing_delay_days": 1
     },
     {
@@ -116,7 +116,7 @@
         "KTB3Y": -2.75
       },
       "pre_event_money_alert_days": 8,
-      "global_warning_lead_days": 44,
+      "global_warning_lead_days": 43,
       "global_briefing_delay_days": 0,
       "linkage": {
         "co_movement": {
@@ -213,7 +213,7 @@
         "CREDIT_KR": 6.2
       },
       "pre_event_money_alert_days": 3,
-      "global_warning_lead_days": 0,
+      "global_warning_lead_days": 2,
       "global_briefing_delay_days": 0
     },
     {
@@ -227,7 +227,7 @@
       "kr_briefing_delay_days": null,
       "kr_alert_cause": {},
       "pre_event_money_alert_days": 0,
-      "global_warning_lead_days": 52,
+      "global_warning_lead_days": 51,
       "global_briefing_delay_days": 0
     },
     {

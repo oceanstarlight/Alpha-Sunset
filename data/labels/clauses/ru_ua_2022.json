@@ -1,0 +1,487 @@
+{
+ "event_id": "ru_ua_2022",
+ "labeler": "isolated Sonnet subagent (agent outputs not shown)",
+ "preregistration": "data/backtest/ablation/preregistration_v7_clause_labels.json",
+ "labels": [
+  {
+   "clause_id": "PB-BANK-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-01",
+   "verdict": "applicable",
+   "reason": "WTI 92.77달러로 침공 당일 유가가 급변해 에너지·원자재 노출 집계가 필요하다."
+  },
+  {
+   "clause_id": "PB-CMDTY-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-04",
+   "verdict": "applicable",
+   "reason": "침공에 따른 에너지 공급 차질 우려로 인플레이션 시나리오를 채권 전략에 반영할 필요가 있다."
+  },
+  {
+   "clause_id": "PB-CMDTY-05",
+   "verdict": "partial",
+   "reason": "유가 상승과 원/달러 환율 소폭 상승이 있어 수입국 통화 위험 점검이 유효하나 급등 수준은 아니다."
+  },
+  {
+   "clause_id": "PB-CMDTY-06",
+   "verdict": "partial",
+   "reason": "에너지 가격 상승 시 상대방 증거금·신용 점검은 유효하나 증거금 급증은 아직 확인되지 않았다."
+  },
+  {
+   "clause_id": "PB-CMDTY-07",
+   "verdict": "partial",
+   "reason": "우크라이나는 곡물 수출국이라 신흥국 물가 영향 점검이 유용하나 곡물 수출 차질은 사실로 나오지 않았다."
+  },
+  {
+   "clause_id": "PB-CMDTY-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-01",
+   "verdict": "partial",
+   "reason": "환율이 1,193원에서 1,202원으로 올랐으나 급등이라 보기는 어려워 점검 수준으로 조정한다."
+  },
+  {
+   "clause_id": "PB-FX-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-08",
+   "verdict": "partial",
+   "reason": "환율이 변동했으므로 해외자산 원화 환산 평가액 보고는 쓸모 있다."
+  },
+  {
+   "clause_id": "PB-GEO-01",
+   "verdict": "applicable",
+   "reason": "러시아의 우크라이나 침공은 군사 충돌 발생으로 분쟁국 및 인접국 노출 집계가 필요하다."
+  },
+  {
+   "clause_id": "PB-GEO-02",
+   "verdict": "partial",
+   "reason": "제재 대상 지정이 사실에 나오지 않았으나 지정이 예상되므로 사전 준법 점검 수준으로 조정한다."
+  },
+  {
+   "clause_id": "PB-GEO-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-04",
+   "verdict": "applicable",
+   "reason": "러시아·우크라이나는 에너지·곡물 수출국으로 원자재 가격 시나리오 분석이 필요하다."
+  },
+  {
+   "clause_id": "PB-GEO-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-06",
+   "verdict": "partial",
+   "reason": "러시아 관련 자산이 위탁 자산에 포함될 수 있어 보유 현황 요청이 유용하다."
+  },
+  {
+   "clause_id": "PB-GEO-07",
+   "verdict": "partial",
+   "reason": "안전자산 선호 가능성과 원화 소폭 약세가 있어 환헤지 비율 점검이 유효하다."
+  },
+  {
+   "clause_id": "PB-GEO-08",
+   "verdict": "partial",
+   "reason": "분쟁 장기화 여부는 불명확하나 국가 리스크 재산정은 사전 준비로 쓸모 있다."
+  },
+  {
+   "clause_id": "PB-LIQ-01",
+   "verdict": "partial",
+   "reason": "VIX가 30.32로 올랐으나 전 자산 동반 하락과 현금 수요 급증은 확인되지 않았다."
+  },
+  {
+   "clause_id": "PB-LIQ-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-03",
+   "verdict": "partial",
+   "reason": "시장 급변 국면이라 위탁운용사 레버리지 점검은 유용하다."
+  },
+  {
+   "clause_id": "PB-MGR-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-03",
+   "verdict": "partial",
+   "reason": "제재 지정이 사실에 없으나 지정 시 보고 의무 확인을 미리 해 둘 수 있다."
+  },
+  {
+   "clause_id": "PB-REG-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-05",
+   "verdict": "partial",
+   "reason": "위기 대응 의사결정 기록 보관은 일반 절차로 이번 사건에도 적용 가능하다."
+  },
+  {
+   "clause_id": "PB-REG-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-07",
+   "verdict": "partial",
+   "reason": "위기 대응 자료 외부 공유 제한은 일반 절차로 적용 가능하다."
+  },
+  {
+   "clause_id": "PB-REG-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-05",
+   "verdict": "applicable",
+   "reason": "VIX 30.32로 주식 변동성이 급등해 리밸런싱 분할 실행과 거래 비용 점검이 맞다."
+  },
+  {
+   "clause_id": "PB-TRADE-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  }
+ ]
+}

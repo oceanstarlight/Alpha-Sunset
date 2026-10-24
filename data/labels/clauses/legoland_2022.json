@@ -1,0 +1,487 @@
+{
+ "event_id": "legoland_2022",
+ "labeler": "isolated Sonnet subagent (agent outputs not shown)",
+ "preregistration": "data/backtest/ablation/preregistration_v7_clause_labels.json",
+ "labels": [
+  {
+   "clause_id": "PB-BANK-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-06",
+   "verdict": "partial",
+   "reason": "유동성 위기 유형이라 현금성 자산 점검은 유효하나 비중 하한 미달 여부는 불명확하다."
+  },
+  {
+   "clause_id": "PB-BANK-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BANK-08",
+   "verdict": "partial",
+   "reason": "단기자금 금리 모니터링은 유효하나 해외 은행 전이 전제는 맞지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-BCP-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CMDTY-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-01",
+   "verdict": "partial",
+   "reason": "GJC 회생 신청이 발표되어 관련 노출 집계가 유효하나 주요 거래상대방 직접 부도는 아니다."
+  },
+  {
+   "clause_id": "PB-CPTY-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-05",
+   "verdict": "partial",
+   "reason": "GJC 관련 채권 보유분 확인과 회수 가능성 평가가 필요하다."
+  },
+  {
+   "clause_id": "PB-CPTY-06",
+   "verdict": "partial",
+   "reason": "유동성 경색 국면이라 레포 상대방 신용도 점검과 분산은 유효하나 신용도 하락은 아직 확인되지 않았다."
+  },
+  {
+   "clause_id": "PB-CPTY-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-CPTY-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-01",
+   "verdict": "partial",
+   "reason": "환율이 1,422원에서 1,440원으로 올랐으나 유동성 점검의 주된 이유는 국내 단기자금 문제다."
+  },
+  {
+   "clause_id": "PB-FX-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-FX-07",
+   "verdict": "partial",
+   "reason": "환율 상승은 있으나 외화 현금 확대까지는 사실 근거가 약해 점검 중심으로 조정한다."
+  },
+  {
+   "clause_id": "PB-FX-08",
+   "verdict": "partial",
+   "reason": "환율이 변동했으므로 해외자산 원화 환산 평가액 보고는 쓸모 있다."
+  },
+  {
+   "clause_id": "PB-GEO-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-GEO-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-01",
+   "verdict": "partial",
+   "reason": "유동성 위기 유형이나 전 자산 동반 하락과 VIX 급등은 확인되지 않았다."
+  },
+  {
+   "clause_id": "PB-LIQ-02",
+   "verdict": "partial",
+   "reason": "현금성 자산 보충 절차는 유효하나 비중 하한 미달 여부는 사실에 없다."
+  },
+  {
+   "clause_id": "PB-LIQ-03",
+   "verdict": "partial",
+   "reason": "유동성 위기 가능성에 대비해 출자 요청과 지급 일정 재점검이 유용하다."
+  },
+  {
+   "clause_id": "PB-LIQ-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-LIQ-07",
+   "verdict": "partial",
+   "reason": "신용 스프레드 확대 가능성에 대비해 투기등급 비중 점검이 유용하나 급등은 아직 확인되지 않았다."
+  },
+  {
+   "clause_id": "PB-LIQ-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-03",
+   "verdict": "partial",
+   "reason": "시장 급변 가능성에 대비해 위탁운용사 레버리지 점검이 유용하다."
+  },
+  {
+   "clause_id": "PB-MGR-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-MGR-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-RATE-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-05",
+   "verdict": "partial",
+   "reason": "위기 대응 의사결정 기록 보관은 일반 절차로 적용 가능하다."
+  },
+  {
+   "clause_id": "PB-REG-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-REG-07",
+   "verdict": "partial",
+   "reason": "위기 대응 자료 외부 공유 제한은 일반 절차로 적용 가능하다."
+  },
+  {
+   "clause_id": "PB-REG-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-01",
+   "verdict": "applicable",
+   "reason": "강원도의 GJC 회생절차 추진 발표는 지자체 보증 채무 회생에 해당해 CP·ABCP 보유 현황 집계가 필요하다."
+  },
+  {
+   "clause_id": "PB-STFM-02",
+   "verdict": "partial",
+   "reason": "CP 금리 급등과 차환 곤란은 아직 사실에 없으나 선제적 단기물 매수 보류가 유용하다."
+  },
+  {
+   "clause_id": "PB-STFM-03",
+   "verdict": "partial",
+   "reason": "부동산 개발 관련 신용 우려가 있어 PF 유동화증권 노출 점검이 유용하다."
+  },
+  {
+   "clause_id": "PB-STFM-04",
+   "verdict": "partial",
+   "reason": "현금성 자산 보충 절차는 유효하나 비중 하한 미달 여부는 사실에 없다."
+  },
+  {
+   "clause_id": "PB-STFM-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-06",
+   "verdict": "partial",
+   "reason": "증권사 유동성 부족 징후는 아직 없으나 증권사 대상 레포·RP 노출 점검은 선제적으로 유용하다."
+  },
+  {
+   "clause_id": "PB-STFM-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-STFM-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-01",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-02",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-03",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-04",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-05",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-06",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-07",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  },
+  {
+   "clause_id": "PB-TRADE-08",
+   "verdict": "not_applicable",
+   "reason": "사건일 시점 사실에 이 조항의 전제 조건이 나타나지 않는다."
+  }
+ ]
+}

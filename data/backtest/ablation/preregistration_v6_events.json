@@ -1,0 +1,55 @@
+{
+  "status": "registered",
+  "registered_at": "2026-10-24T13:00:00+00:00",
+  "purpose": "A1(사건 확대)·A2(훈련/검증 분리 임계치 보정)를 결과 계산 전에 고정한다. 대상은 경보(시그널 A·C, 1단계 자금 이상 알림)만이다. 문서 적합도·노출 지표는 정답 라벨이 필요해 이번 범위가 아니다.",
+  "event_selection": {
+    "source": "Wikipedia 'List of stock market crashes and bear markets' (https://en.wikipedia.org/wiki/List_of_stock_market_crashes_and_bear_markets), 2026-10-24 조회",
+    "rule": "1997-01-01 ~ 2025-12-31 항목 중 날짜가 '일' 단위로 적힌 것 전부 + 기존 사건 카드 6개. 30일 안에 겹치면 이른 날짜 하나만 남긴다. 신호를 보고 사건을 고르지 않는다.",
+    "excluded_by_rule": ["1999 Greek stock market crash (연도만 표기)"],
+    "events": [
+      {"id": "asia_1997", "date": "1997-07-02", "name": "1997 Asian financial crisis"},
+      {"id": "minicrash_1997", "date": "1997-10-27", "name": "October 27, 1997 mini-crash"},
+      {"id": "russia_1998", "date": "1998-08-17", "name": "1998 Russian financial crisis"},
+      {"id": "dotcom_2000", "date": "2000-03-10", "name": "Dot-com bubble"},
+      {"id": "sept11_2001", "date": "2001-09-11", "name": "September 11 attacks"},
+      {"id": "downturn_2002", "date": "2002-10-09", "name": "Stock market downturn of 2002"},
+      {"id": "china_2007", "date": "2007-02-27", "name": "Chinese stock bubble of 2007"},
+      {"id": "us_bear_2007", "date": "2007-10-11", "name": "US bear market of 2007–2009"},
+      {"id": "gfc_2008", "date": "2008-09-15", "name": "2008 financial crisis (카드 2008-09-15, 목록 09-16 → 이른 날짜)"},
+      {"id": "dubai_2009", "date": "2009-11-27", "name": "2009 Dubai debt standstill"},
+      {"id": "euro_2010", "date": "2010-04-27", "name": "Euro area crisis (2010 flash crash 05-06은 30일 안 → 제외)"},
+      {"id": "aug_2011", "date": "2011-08-01", "name": "August 2011 stock markets fall"},
+      {"id": "china_2015", "date": "2015-06-12", "name": "2015–16 Chinese stock market crash"},
+      {"id": "selloff_2015", "date": "2015-08-18", "name": "2015–2016 stock market selloff"},
+      {"id": "crypto_2018", "date": "2018-09-20", "name": "2018 cryptocurrency crash"},
+      {"id": "covid_2020", "date": "2020-02-24", "name": "2020 stock market crash (목록 02-24, 카드 03-11 → 이른 날짜)"},
+      {"id": "decline_2022", "date": "2022-01-03", "name": "2022 stock market decline"},
+      {"id": "ru_ua_2022", "date": "2022-02-16", "name": "2022 Russian stock market crash (목록 02-16, 카드 02-24 → 이른 날짜)"},
+      {"id": "legoland_2022", "date": "2022-09-28", "name": "레고랜드 사태 (기존 카드)"},
+      {"id": "svb_2023", "date": "2023-03-10", "name": "SVB 파산 (기존 카드)"},
+      {"id": "china_2024", "date": "2024-02-02", "name": "2024 China stock market crash"},
+      {"id": "japan_2024", "date": "2024-08-05", "name": "2024 Tokyo stock market crash"},
+      {"id": "tariff_2025", "date": "2025-04-02", "name": "2025 stock market crash (카드 04-02, 목록 04-03 → 이른 날짜)"}
+    ],
+    "n_events": 23,
+    "note": "목표였던 30개에 못 미치지만, 기준을 넓히려면 사건을 손으로 골라야 해서 선택 편향이 생긴다. 공개 목록 규칙을 우선한다. 목록은 주가 폭락 중심이라 신용·유동성 사건(예: 2022 영국 연기금, 2023 크레디트스위스)이 빠질 수 있다."
+  },
+  "metrics": {
+    "alert": "1단계 자금 이상 알림 = (A ∨ C)가 끝나는 5영업일 중 2일 이상 (현행 규칙). A2 후보는 아래 grid",
+    "caught": "사건일 −60일 ~ +14일 사이 알림이 한 번이라도 있으면 포착",
+    "prior_warning": "사건일 −60일 ~ 0일 사이 알림",
+    "lead_days": "사건일 − 첫 알림일 (−60~0일 창)",
+    "calm_alert_rate": "평상일(모든 사건 ±180일 밖) 중 알림 비율",
+    "base_rate": "평상일 중 직전 60일(또는 −60~+14일 창)에 알림이 있었던 비율 = 무작위 날짜의 우연 포착률",
+    "significance": "포착 사건 수 k가 이항분포 B(n, base_rate)에서 나올 확률 (단측 p값). p < 0.05면 '우연보다 낫다'",
+    "local": "로컬(대한민국) A_kr ∨ C_kr도 같은 지표로. ECOS 이력이 있는 사건만 (국고채 3년 1998-11~, 외국인 순매수 2003~)"
+  },
+  "calibration_A2": {
+    "train": "사건·평상일 2014-12-31 이전",
+    "test": "2015-01-01 이후",
+    "grid": {"market_z_threshold": [2.0, 2.5, 3.0, 3.5], "market_min_series": [1, 2, 3], "persistence_min_active_of_5": [1, 2, 3], "flow_z_threshold": [2.5, 3.0, 3.5, 4.0]},
+    "objective": "훈련 구간에서 (포착률 − 평상시 알림 비율) 최대, 단 평상시 알림 비율 ≤ 5%. 같으면 현행값에 가까운 쪽",
+    "adoption": "검증 구간에서 (1) 포착 사건 수가 현행보다 1개 넘게 줄지 않고 (2) 평상시 알림 비율이 현행보다 낮을 때만 config에 반영. 아니면 현행 유지. 반영 여부와 무관하게 결과는 모두 보고",
+    "scope": "글로벌·로컬 각각 같은 절차"
+  }
+}

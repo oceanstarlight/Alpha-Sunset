@@ -43,6 +43,11 @@ class Settings:
     embed_model: str
     learner_enabled: bool
     data_dir: Path
+    llm_provider: str = "gemini"
+    llm_base_url: str | None = None
+    llm_api_key: str | None = None
+    llm_model: str | None = None
+    llm_embed_model: str | None = None
 
     @property
     def live_db(self) -> Path:
@@ -70,6 +75,12 @@ def get_settings() -> Settings:
         embed_model=get_secret("EMBED_MODEL", "gemini-embedding-001"),
         learner_enabled=_flag(get_secret("LEARNER_ENABLED", "false")),
         data_dir=Path(data_dir),
+        # 제공자: env/secret LLM_PROVIDER가 config.yaml llm.provider보다 우선
+        llm_provider=get_secret("LLM_PROVIDER") or load_config()["llm"].get("provider", "gemini"),
+        llm_base_url=get_secret("LLM_BASE_URL") or load_config()["llm"].get("base_url"),
+        llm_api_key=get_secret("LLM_API_KEY"),
+        llm_model=get_secret("LLM_MODEL") or load_config()["llm"].get("model"),
+        llm_embed_model=get_secret("LLM_EMBED_MODEL") or load_config()["llm"].get("embed_model"),
     )
 
 

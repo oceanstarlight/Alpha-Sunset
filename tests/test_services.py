@@ -145,3 +145,16 @@ def test_briefing_excel_export_has_evidence_sheets():
     wb = load_workbook(io.BytesIO(export.briefing_xlsx(b, chain)))
     assert {"요약", "판단 근거", "문서 적합도", "조항 판정", "노출 경로", "확인 항목"} <= set(wb.sheetnames)
     assert wb["조항 판정"].max_row > 1
+
+
+def test_ui_document_upload_section_sets_playbooks():
+    from streamlit.testing.v1 import AppTest
+
+    app = Path(__file__).resolve().parent.parent / "ui" / "streamlit_app.py"
+    at = AppTest.from_file(str(app), default_timeout=120).run()
+    next(m for m in at.multiselect if m.label == "또는 예시 문서").set_value(["PB-BANK.docx"]).run()
+    assert not at.exception
+    next(b for b in at.button if b.label == "이 문서로 분석").click().run()
+    assert not at.exception and at.session_state["uploaded_playbooks"][0].doc_id == "UP-PB-BANK"
+    at.run()
+    assert any(b.label.startswith("업로드 데이터로 분석") for b in at.button)  # 브리핑 탭에 가정 분석 버튼

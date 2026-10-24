@@ -18,7 +18,7 @@ from pydantic import BaseModel
 
 from app.config import load_config
 from app.corpus import DATA_DIR
-from app.llm.client import LLMClient, LLMResponseError
+from app.llm.client import LLMClient, LLMResponseError, LLMUnavailableError
 from app.schemas import Event, ExposurePath, Portfolio, PortfolioNode
 
 ROOT = "기관"
@@ -139,7 +139,7 @@ def match_entities(event: Event, issuers: list[str], llm: LLMClient | None) -> d
             res = llm.generate(prompt, purpose="exposure_entity_match", response_schema=EntityMatches, system=MATCH_SYSTEM)
             valid = set(issuers)
             found.update({m.issuer: m.entity for m in res.matches if m.issuer in valid and m.entity in unmatched})
-        except LLMResponseError:
+        except (LLMResponseError, LLMUnavailableError):
             pass
     return found
 
@@ -277,7 +277,7 @@ def explain(paths: list[PathDetail], llm: LLMClient | None) -> list[str]:
     try:
         res = llm.generate(json.dumps(items, ensure_ascii=False, indent=1), purpose="exposure_why",
                            response_schema=WhyList, system=WHY_SYSTEM)
-    except LLMResponseError:
+    except (LLMResponseError, LLMUnavailableError):
         return [_fallback_why(p) for p in paths]
     if len(res.whys) != len(paths):
         return [_fallback_why(p) for p in paths]

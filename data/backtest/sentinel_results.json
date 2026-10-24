@@ -27,7 +27,7 @@
       "lookback_days": 252,
       "min_history": 200,
       "stale_days": 5,
-      "z_threshold": 2.5,
+      "z_threshold": 2.0,
       "min_series": 2,
       "z_extreme": 4.0
     },
@@ -47,8 +47,8 @@
       ],
       "alert_days": 10,
       "merged_alerts": 1,
-      "market_active_days_before_event": 2,
-      "first_market_active_before_event": "2008-09-02"
+      "market_active_days_before_event": 3,
+      "first_market_active_before_event": "2008-08-21"
     },
     {
       "event_id": "covid_2020",
@@ -56,12 +56,14 @@
       "first_alert": "2020-03-12",
       "alert_triggered_by": [
         "VIXCLS",
+        "T10Y2Y",
+        "DEXKOUS",
         "DTWEXBGS",
         "BAA10Y"
       ],
       "alert_days": 9,
       "merged_alerts": 1,
-      "market_active_days_before_event": 7,
+      "market_active_days_before_event": 8,
       "first_market_active_before_event": "2020-02-24"
     },
     {
@@ -72,10 +74,10 @@
         "DTWEXBGS",
         "BAA10Y"
       ],
-      "alert_days": 6,
-      "merged_alerts": 3,
-      "market_active_days_before_event": 5,
-      "first_market_active_before_event": "2022-02-10"
+      "alert_days": 7,
+      "merged_alerts": 2,
+      "market_active_days_before_event": 6,
+      "first_market_active_before_event": "2022-01-27"
     },
     {
       "event_id": "legoland_2022",
@@ -83,12 +85,13 @@
       "first_alert": "2022-09-28",
       "alert_triggered_by": [
         "DGS10",
+        "DEXKOUS",
         "BAA10Y"
       ],
       "alert_days": 6,
       "merged_alerts": 2,
-      "market_active_days_before_event": 2,
-      "first_market_active_before_event": "2022-09-13"
+      "market_active_days_before_event": 6,
+      "first_market_active_before_event": "2022-09-01"
     },
     {
       "event_id": "svb_2023",
@@ -98,9 +101,9 @@
         "DGS10",
         "BAA10Y"
       ],
-      "alert_days": 7,
+      "alert_days": 5,
       "merged_alerts": 2,
-      "market_active_days_before_event": 5,
+      "market_active_days_before_event": 6,
       "first_market_active_before_event": "2023-02-23"
     },
     {
@@ -109,12 +112,13 @@
       "first_alert": "2025-04-03",
       "alert_triggered_by": [
         "VIXCLS",
+        "DGS10",
         "DCOILWTICO",
         "DTWEXBGS",
         "BAMLH0A0HYM2"
       ],
-      "alert_days": 5,
-      "merged_alerts": 2,
+      "alert_days": 6,
+      "merged_alerts": 1,
       "market_active_days_before_event": 1,
       "first_market_active_before_event": "2025-03-05"
     }
@@ -124,22 +128,22 @@
       "window_id": "calm_2014q2",
       "days": 65,
       "alert_days": 0,
-      "watch_days": 4,
-      "first_watch": "2014-04-01"
+      "watch_days": 0,
+      "first_watch": null
     },
     {
       "window_id": "calm_2017q4",
       "days": 65,
       "alert_days": 0,
-      "watch_days": 0,
-      "first_watch": null
+      "watch_days": 1,
+      "first_watch": "2017-11-30"
     },
     {
       "window_id": "calm_2024q1",
       "days": 65,
       "alert_days": 0,
-      "watch_days": 0,
-      "first_watch": null
+      "watch_days": 1,
+      "first_watch": "2024-01-16"
     }
   ]
 }
