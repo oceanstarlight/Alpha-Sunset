@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-25T05:12:59+00:00",
+  "collected_at": "2026-10-25T11:57:24+00:00",
   "as_of": "2026-10-23",
   "level": "WATCH",
   "chain": [
@@ -63,113 +63,112 @@
       "banking_stress": {
         "n_articles": 0,
         "n_sources": 0,
-        "z": -2.341,
-        "baseline_points": 27,
+        "z": -2.097,
+        "baseline_points": 28,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 5,
         "saturated": false,
         "top_titles": [
           "Banks Preparing for Aftermath of Unprecedented Catastrophe Caused by AI - Futurism",
-          "Your Money Is Not In The Bank Corinthians X São Paulo (ywjDIUQFEB) - Unisba Media",
-          "AI Could Be Stablecoin Payments' Next Engine, Bernstein Says - OneSafe.io"
+          "AI Could Be Stablecoin Payments' Next Engine, Bernstein Says - OneSafe.io",
+          "RBI Removes Paytm Payments Bank From Scheduled Banks. Was Paytm’s Biggest Mistake Trying To Become A Bank, Or Did Its Ambitions Grow Faster Than Its Systems And Controls? - Inventiva"
         ]
       },
       "credit_event": {
-        "n_articles": 48,
-        "n_sources": 43,
-        "z": -0.992,
-        "baseline_points": 27,
+        "n_articles": 45,
+        "n_sources": 39,
+        "z": -1.152,
+        "baseline_points": 28,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 61,
+        "n_split": 59,
         "saturated": false,
         "top_titles": [
-          "Filing Alert: Grapeman Chapter 11 - Bondoro",
-          "LIV Golf Paid Executives $15.6M in Retention Payments Before Bankruptcy Filing, Records Show - RG.org",
-          "LIV Golf’s latest bankruptcy filing shows PGA Tour star signed intent to play in 2022 - GOLF.com"
+          "A landlord’s refusal to offer rent relief helped drive this iconic California cafe chain into bankruptcy - Cleveland.com",
+          "Popeyes franchisee seeks a way out of Chapter 11 bankruptcy - TheStreet",
+          "‘Breaking Bad’ actor sank his savings into a historic California restaurant — now it’s filed for bankruptcy - lehighvalleylive"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 0,
-        "n_sources": 0,
-        "z": -0.803,
-        "baseline_points": 27,
+        "n_articles": 2,
+        "n_sources": 2,
+        "z": -0.537,
+        "baseline_points": 28,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 3,
+        "n_split": 7,
         "saturated": false,
         "top_titles": [
-          "Small caps log worst drop in five months as retail investors unwind leveraged bets - Telegraph India",
-          "Gold prices today, October 25, 2026, have fallen below the $4,000 mark, with support levels broken and the sell-off pushing the market too far. - Vietnam.vn",
-          "Bridgepoint Stock And 2 Private Credit Plays Linked To AI Infrastructure - Simply Wall Street"
+          "Shafaq News..CBI foreign currency sales rise 8.8% in September - شفق نيوز",
+          "Eximbank ends Daesun workout as SB Sunbo takes control, rebrands SB Daesun - CHOSUNBIZ - Chosunbiz",
+          "The Latest Bond Thriller - freebeacon.com"
         ]
       },
       "geopolitical": {
-        "n_articles": 74,
+        "n_articles": 78,
         "n_sources": 63,
-        "z": -3.754,
-        "baseline_points": 27,
+        "z": -2.465,
+        "baseline_points": 28,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 116,
         "saturated": false,
         "top_titles": [
-          "ICC prosecutor says court making ‘significant progress’ despite US sanctions - The Guardian",
-          "Benjamin Netanyahu warns of banking sanctions, plans alternatives - The Jerusalem Post",
-          "Bank of Israel Rejects Netanyahu Cryptocurrency Plan To Bypass Sanctions - The Media Line"
+          "Netanyahu Says Israel Mulls Crypto Ahead of Possible Sanctions - Bloomberg.com",
+          "'Diplomatic and financial isolation': Netanyahu’s crypto plan to bypass sanctions draws rebuke - Middle East Eye",
+          "Trump announced a deal with Putin releasing millions of barrels of Russian diesel oil onto U.S. and global markets - Cleveland.com"
         ]
       },
       "trade_policy": {
-        "n_articles": 44,
-        "n_sources": 34,
-        "z": -2.756,
-        "baseline_points": 27,
+        "n_articles": 37,
+        "n_sources": 28,
+        "z": -2.985,
+        "baseline_points": 28,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 65,
+        "n_split": 57,
         "saturated": false,
         "top_titles": [
-          "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
+          "Trump started a trade war with Canada. GOP candidates became casualties. - The Washington Post",
           "'They’re the nicest people': Obama mocks Trump for hitting Canada with tariffs - CBC",
-          "Opinion | A stinky cheese tariff - The Washington Post"
+          "Trump Announces $4 Billion Audi Plant in Georgia as Tariff Fight Intensifies - BigGo Finance"
         ]
       },
       "pandemic": {
-        "n_articles": 43,
-        "n_sources": 37,
-        "z": -3.142,
-        "baseline_points": 27,
+        "n_articles": 38,
+        "n_sources": 29,
+        "z": -2.96,
+        "baseline_points": 28,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 84,
+        "n_split": 70,
         "saturated": false,
         "top_titles": [
           "New York declares state disaster emergency over rising measles cases. Here's what that means - ABC News - Breaking News, Latest News and Videos",
-          "Additional 178 cases of measles reported by US health authorities amid outbreak - The Guardian",
-          "VUU on lockdown after school warns students of reported gunfire on campus - WRIC ABC 8News"
+          "Israeli forces turn Hebron homes into military posts amid lockdown - Al Jazeera",
+          "Congo begins Ebola vaccine trial despite embedded outbreak - South China Morning Post"
         ]
       },
       "fx_shock": {
-        "n_articles": 1,
-        "n_sources": 1,
-        "z": 0.587,
-        "baseline_points": 27,
+        "n_articles": 0,
+        "n_sources": 0,
+        "z": -0.886,
+        "baseline_points": 28,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 6,
         "saturated": false,
         "top_titles": [
-          "Peter Schiff Says Buy Gold Near $4000 As Prices Sink From January High, Warns Of Currency Crisis Worse Than 2008 - Stocktwits",
+          "Zimbabwe wants digital payments to build trust in its newest currency. Why technology alone won’t be enough to save the ZiG - The Conversation",
           "Stablecoins Are Testing the Limits of Capital Controls - IndraStra Global",
-          "Franklin Templeton Prepares Nasdaq Debut For ETFs That Turn Stock Dividends Into Bitcoin - Stocktwits"
+          "Hyperliquid Strategies Expands PURR Stock Buyback As HYPE Extends Monthly Losses - Stocktwits"
         ]
       },
       "rate_shock": {
-        "n_articles": 2,
-        "n_sources": 2,
-        "z": -1.322,
-        "baseline_points": 27,
+        "n_articles": 1,
+        "n_sources": 1,
+        "z": -1.482,
+        "baseline_points": 28,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 3,
+        "n_split": 2,
         "saturated": false,
         "top_titles": [
-          "LVMH, Kering and Hermès shares fall as France riots damage 3,000 shops and bond yields surge to 2002 highs - Yahoo Finance",
           "JetBlue Stock Sinks, Bond Yields Surge as Creditors Hire Advisors Amid Higher Jet Fuel Prices - Benzinga",
-          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com"
+          "US stocks decline amid AI concerns and rising oil prices: Weekly Market Recap - Beansprout"
         ]
       }
     },
