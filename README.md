@@ -116,6 +116,7 @@ cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 - 배포: Streamlit Community Cloud (`ui/streamlit_app.py`, Python 3.11, Secrets에 `GEMINI_API_KEY`·`SEC_USER_AGENT`).
 - 판정 엔진 바꾸기 (`LLM_PROVIDER`, 기본 `gemini`): `openai_compatible`(+ `LLM_BASE_URL`·`LLM_MODEL`·`LLM_EMBED_MODEL`·`LLM_API_KEY` — Ollama·vLLM·사내 게이트웨이) 또는 `rule`(LLM 없이 규칙 판정, 정확도 낮음).
 - 감사 로그: 승인 탭 맨 아래에서 체인 검증·내려받기. 자동 감시 기록은 `data/live/audit/`에 커밋된다.
+- 직접 실행 브리핑: 모드 '라이브' → 브리핑 탭 '▶ 지금 브리핑 실행' — 사건이 없어도 현재 감시 신호로 바로 브리핑한다.
 - 시나리오 브리핑: 감시 등급이 NONE이어도 모드 '라이브' → 브리핑 탭 '🧪 시나리오 브리핑'에 가정 사건을 넣으면 대응 문서·노출·승인까지 쓸 수 있다 (결과는 '가정 시나리오'로 표시).
 - 정시 실행: 외부 무료 cron이 워크플로를 호출한다 — 설정은 [`docs/scheduler.md`](docs/scheduler.md), 정시성 점검은 `python -m scripts.check_schedule --days 7`.
 - 조항 평가 재현: `python -m scripts.run_clause_eval` → `data/backtest/clause_eval.json`.
