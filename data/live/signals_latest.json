@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-25T16:46:35+00:00",
+  "collected_at": "2026-10-25T21:11:31+00:00",
   "as_of": "2026-10-23",
   "level": "WATCH",
   "chain": [
@@ -61,26 +61,26 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 0,
-        "n_sources": 0,
-        "z": -1.917,
-        "baseline_points": 29,
+        "n_articles": 1,
+        "n_sources": 1,
+        "z": -1.215,
+        "baseline_points": 30,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 6,
+        "n_split": 9,
         "saturated": false,
         "top_titles": [
-          "Debt And Leverage: The Businesses That Learned The Hard Way - Nett Magazine Online",
-          "AI Could Be Stablecoin Payments' Next Engine, Bernstein Says - OneSafe.io",
-          "Stablecoin Regulation Shifts: New Reserve Rules for Business - OneSafe.io"
+          "RBI data centre to strengthen payment systems, cyber resilience - The Economic Times",
+          "🥛 Quality didn’t matter. It does now 🔄 - Milk Road",
+          "Debt And Leverage: The Businesses That Learned The Hard Way - Nett Magazine Online"
         ]
       },
       "credit_event": {
-        "n_articles": 45,
-        "n_sources": 41,
-        "z": -1.107,
-        "baseline_points": 29,
+        "n_articles": 39,
+        "n_sources": 37,
+        "z": -1.453,
+        "baseline_points": 30,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 58,
+        "n_split": 50,
         "saturated": false,
         "top_titles": [
           "LIV Golf paid $15M to keep executives before bankruptcy filing - Chattanooga Times Free Press",
@@ -91,8 +91,8 @@
       "liquidity_crisis": {
         "n_articles": 2,
         "n_sources": 2,
-        "z": -0.525,
-        "baseline_points": 29,
+        "z": -0.515,
+        "baseline_points": 30,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 10,
         "saturated": false,
@@ -103,54 +103,54 @@
         ]
       },
       "geopolitical": {
-        "n_articles": 84,
-        "n_sources": 69,
-        "z": -1.47,
-        "baseline_points": 29,
+        "n_articles": 79,
+        "n_sources": 65,
+        "z": -1.989,
+        "baseline_points": 30,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 120,
+        "n_split": 115,
         "saturated": false,
         "top_titles": [
           "Netanyahu rebuked for plan to use crypto to bypass economic sanctions - Reuters",
-          "Netanyahu Says Israel Mulls Crypto Ahead of Possible Sanctions - Bloomberg.com",
-          "Netanyahu’s pitch: Can Israel use crypto to evade economic sanctions? - Al Jazeera"
+          "Netanyahu’s pitch: Can Israel use crypto to evade economic sanctions? - Al Jazeera",
+          "Netanyahu Says Israel Mulls Crypto Ahead of Possible Sanctions - Bloomberg.com"
         ]
       },
       "trade_policy": {
-        "n_articles": 34,
-        "n_sources": 26,
-        "z": -2.781,
-        "baseline_points": 29,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 58,
-        "saturated": false,
-        "top_titles": [
-          "Trump started a trade war with Canada. GOP candidates became casualties. - The Washington Post",
-          "LES annual meeting; Apple v OpenAI discovery; EU countries SEP regulation push; Beijing biotech export controls; quarterly DTSA filing data; plus much more - IAM Media",
-          "‘Well-known evil empire’: Barack Obama mocks President Trump’s tariff war with Canada - Toronto Star"
-        ]
-      },
-      "pandemic": {
-        "n_articles": 42,
-        "n_sources": 36,
-        "z": -2.313,
-        "baseline_points": 29,
+        "n_articles": 45,
+        "n_sources": 35,
+        "z": -1.684,
+        "baseline_points": 30,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 78,
         "saturated": false,
         "top_titles": [
-          "Bird flu outbreak at Utah mink farm sparks concerns about government response - The Guardian",
-          "Ebola Update: DRC Outbreak Reaches 9735 Cases, Second Largest on Record - Contagion Live",
-          "Israeli settler attacks and military lockdown upend Palestinian olive harvest - NBC News"
+          "Trump started a trade war with Canada. GOP candidates became casualties. - The Washington Post",
+          "Trump’s tariff pause angers some US ranchers, boosts Brazilian beef imports - Al Jazeera",
+          "Trump Exempts Some Canadian Products From Section 338 Tariffs - But his Illegal Trade War Continues - Reason Magazine"
+        ]
+      },
+      "pandemic": {
+        "n_articles": 51,
+        "n_sources": 42,
+        "z": -1.614,
+        "baseline_points": 30,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 92,
+        "saturated": false,
+        "top_titles": [
+          "U.S. measles cases more than double what they were last year as outbreak spreads - NPR",
+          "Plague risks in Russia and a dangerous delay on WHO pandemic agreement | Letters - The Guardian",
+          "Vikings vs. Colts Game Observations: Another 4th Quarter Lockdown - Minnesota Vikings"
         ]
       },
       "fx_shock": {
         "n_articles": 0,
         "n_sources": 0,
-        "z": -0.859,
-        "baseline_points": 29,
+        "z": -0.835,
+        "baseline_points": 30,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 5,
+        "n_split": 4,
         "saturated": false,
         "top_titles": [
           "Zimbabwe wants digital payments to build trust in its newest currency. Why technology alone won’t be enough to save the ZiG - The Conversation",
@@ -161,15 +161,15 @@
       "rate_shock": {
         "n_articles": 0,
         "n_sources": 0,
-        "z": -1.622,
-        "baseline_points": 29,
+        "z": -1.528,
+        "baseline_points": 30,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 5,
+        "n_split": 3,
         "saturated": false,
         "top_titles": [
-          "When AI Fear Beats Oil Inflation: The Bond Market Finds Its Defensive Instinct - The Dark Side Of The Boom",
           "US stocks decline amid AI concerns and rising oil prices: Weekly Market Recap - Beansprout",
-          "Yes Bank yet to decide on AT-1 bond coupon, says it retains discretion - Business Standard"
+          "Yes Bank yet to decide on AT-1 bond coupon, says it retains discretion - Business Standard",
+          "Indian Rice Exporters Eye UK, European Markets Amidst Global Demand Surge - Lokmat Times"
         ]
       }
     },
