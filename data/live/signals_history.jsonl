@@ -26,3 +26,4 @@
 {"collected_at": "2026-10-24T10:49:31+00:00", "as_of": "2026-10-23", "level": "WATCH", "money_alert": true, "market": ["DGS10", "BAMLH0A0HYM2"], "flow": [], "news_status": "ok", "news_errors": 0, "clusters": []}
 {"collected_at": "2026-10-24T18:20:42+00:00", "as_of": "2026-10-23", "level": "WATCH", "money_alert": false, "market": ["DGS10", "BAMLH0A0HYM2"], "flow": [], "news_status": "ok", "news_errors": 0, "clusters": [], "alerts_sent": {}}
 {"collected_at": "2026-10-24T21:09:42+00:00", "as_of": "2026-10-23", "level": "WATCH", "money_alert": false, "market": ["DGS10", "BAMLH0A0HYM2"], "flow": [], "news_status": "ok", "news_errors": 0, "clusters": [], "alerts_sent": {}}
+{"collected_at": "2026-10-25T05:12:59+00:00", "as_of": "2026-10-23", "level": "WATCH", "money_alert": false, "market": ["DGS10", "BAMLH0A0HYM2"], "flow": [], "news_status": "ok", "news_errors": 0, "clusters": [], "alerts_sent": {}}

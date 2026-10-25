@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-24T21:09:42+00:00",
+  "collected_at": "2026-10-25T05:12:59+00:00",
   "as_of": "2026-10-23",
   "level": "WATCH",
   "chain": [
@@ -61,109 +61,110 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 1,
-        "n_sources": 1,
-        "z": -1.811,
-        "baseline_points": 26,
+        "n_articles": 0,
+        "n_sources": 0,
+        "z": -2.341,
+        "baseline_points": 27,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 9,
+        "n_split": 5,
         "saturated": false,
         "top_titles": [
-          "U.S. Banks Block AI Agents from Customer Accounts Amid Fears of Unauthorized Transactions - 아시아경제",
           "Banks Preparing for Aftermath of Unprecedented Catastrophe Caused by AI - Futurism",
-          "Wall Street prepares for AI's \"day after\" - Axios"
+          "Your Money Is Not In The Bank Corinthians X São Paulo (ywjDIUQFEB) - Unisba Media",
+          "AI Could Be Stablecoin Payments' Next Engine, Bernstein Says - OneSafe.io"
         ]
       },
       "credit_event": {
-        "n_articles": 30,
-        "n_sources": 27,
-        "z": -2.438,
-        "baseline_points": 26,
+        "n_articles": 48,
+        "n_sources": 43,
+        "z": -0.992,
+        "baseline_points": 27,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 63,
+        "n_split": 61,
         "saturated": false,
         "top_titles": [
           "Filing Alert: Grapeman Chapter 11 - Bondoro",
           "LIV Golf Paid Executives $15.6M in Retention Payments Before Bankruptcy Filing, Records Show - RG.org",
-          "LIV Golf paid execs $15.6M in retention money in weeks before bankruptcy filing - The New York Times"
+          "LIV Golf’s latest bankruptcy filing shows PGA Tour star signed intent to play in 2022 - GOLF.com"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 0,
         "n_sources": 0,
-        "z": -0.828,
-        "baseline_points": 26,
+        "z": -0.803,
+        "baseline_points": 27,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 5,
+        "n_split": 3,
         "saturated": false,
         "top_titles": [
-          "Indian Small Caps Fall, 2026 Gains Wiped Out - Briefs Finance",
+          "Small caps log worst drop in five months as retail investors unwind leveraged bets - Telegraph India",
           "Gold prices today, October 25, 2026, have fallen below the $4,000 mark, with support levels broken and the sell-off pushing the market too far. - Vietnam.vn",
-          "Crunch Fitness to Open in Arlington’s Gazebo Shopping Center - WhatNow"
+          "Bridgepoint Stock And 2 Private Credit Plays Linked To AI Infrastructure - Simply Wall Street"
         ]
       },
       "geopolitical": {
-        "n_articles": 76,
-        "n_sources": 64,
-        "z": -4.813,
-        "baseline_points": 26,
+        "n_articles": 74,
+        "n_sources": 63,
+        "z": -3.754,
+        "baseline_points": 27,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 126,
+        "n_split": 116,
         "saturated": false,
         "top_titles": [
+          "ICC prosecutor says court making ‘significant progress’ despite US sanctions - The Guardian",
           "Benjamin Netanyahu warns of banking sanctions, plans alternatives - The Jerusalem Post",
-          "Officer assaulted during home invasion investigation - Western Mass News",
-          "Senate overwhelmingly advances Russia sanctions bill named after Sen. Lindsey Graham - ABC News - Breaking News, Latest News and Videos"
+          "Bank of Israel Rejects Netanyahu Cryptocurrency Plan To Bypass Sanctions - The Media Line"
         ]
       },
       "trade_policy": {
-        "n_articles": 59,
-        "n_sources": 47,
-        "z": -1.422,
-        "baseline_points": 26,
+        "n_articles": 44,
+        "n_sources": 34,
+        "z": -2.756,
+        "baseline_points": 27,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 65,
+        "saturated": false,
+        "top_titles": [
+          "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
+          "'They’re the nicest people': Obama mocks Trump for hitting Canada with tariffs - CBC",
+          "Opinion | A stinky cheese tariff - The Washington Post"
+        ]
+      },
+      "pandemic": {
+        "n_articles": 43,
+        "n_sources": 37,
+        "z": -3.142,
+        "baseline_points": 27,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 84,
         "saturated": false,
         "top_titles": [
-          "Opinion | A stinky cheese tariff - The Washington Post",
-          "US Trade Rep Greer says tariff policy 'hasn't changed' despite SCOTUS ruling - ABC News - Breaking News, Latest News and Videos",
-          "Trump to Remove Some Tariffs on Canada in Bid to Help Susan Collins - WSJ"
-        ]
-      },
-      "pandemic": {
-        "n_articles": 57,
-        "n_sources": 47,
-        "z": -2.382,
-        "baseline_points": 26,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 100,
-        "saturated": false,
-        "top_titles": [
+          "New York declares state disaster emergency over rising measles cases. Here's what that means - ABC News - Breaking News, Latest News and Videos",
           "Additional 178 cases of measles reported by US health authorities amid outbreak - The Guardian",
-          "Ebola disease caused by Bundibugyo virus, Democratic Republic of the Congo, Kenya and Nigeria - World Health Organization (WHO)",
-          "Full lockdown of occupied West Bank begins - Al Jazeera"
+          "VUU on lockdown after school warns students of reported gunfire on campus - WRIC ABC 8News"
         ]
       },
       "fx_shock": {
         "n_articles": 1,
         "n_sources": 1,
-        "z": 0.602,
-        "baseline_points": 26,
+        "z": 0.587,
+        "baseline_points": 27,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 2,
+        "n_split": 6,
         "saturated": false,
         "top_titles": [
           "Peter Schiff Says Buy Gold Near $4000 As Prices Sink From January High, Warns Of Currency Crisis Worse Than 2008 - Stocktwits",
-          "The world's best- and worst-performing currencies: see how the dollar fares | lovemoney.com - lovemoney.com"
+          "Stablecoins Are Testing the Limits of Capital Controls - IndraStra Global",
+          "Franklin Templeton Prepares Nasdaq Debut For ETFs That Turn Stock Dividends Into Bitcoin - Stocktwits"
         ]
       },
       "rate_shock": {
         "n_articles": 2,
         "n_sources": 2,
-        "z": -1.396,
-        "baseline_points": 26,
+        "z": -1.322,
+        "baseline_points": 27,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 4,
+        "n_split": 3,
         "saturated": false,
         "top_titles": [
           "LVMH, Kering and Hermès shares fall as France riots damage 3,000 shops and bond yields surge to 2002 highs - Yahoo Finance",
