@@ -40,8 +40,7 @@ def briefing_xlsx(b: Briefing, chain: list[dict] | None = None, clause_text: dic
                ("지역", ", ".join(e.regions)), ("등급", b.alert_level.value), ("요약", e.summary),
                ("적합 문서 top3", ", ".join(f"{f.doc_id}({f.fit_score:.2f})" for f in b.match.doc_fits[:3])),
                ("공백 채널", ", ".join(g.value for g in b.match.gaps) or "없음"),
-               ("비고", b.exposure_note or "-"), ("run_id / trace_id", f"{b.run_id} / {b.trace_id}"),
-               ("고지", "에이전트 제안이며 최종 결정은 사람이 한다. 대응문서·포트폴리오는 합성 데이터.")]
+               ("비고", b.exposure_note or "-"), ("run_id / trace_id", f"{b.run_id} / {b.trace_id}")]
     for k, v in summary:
         ws.append([k, v])
         ws.cell(ws.max_row, 1).font = Font(bold=True)
