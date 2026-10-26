@@ -1,13 +1,13 @@
 {
-  "collected_at": "2026-10-26T13:29:30+00:00",
+  "collected_at": "2026-10-26T20:43:55+00:00",
   "as_of": "2026-10-23",
-  "level": "WATCH",
+  "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "미 10년물 금리(DGS10) z=-4.13, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.52",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=-4.13, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.52, VIX(변동성)(VIXCLS) z=+1.86",
-      "결과": "활성"
+      "원인": "임계 초과 지표 없음",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+0.83, WTI 유가(DCOILWTICO) z=-0.61, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.41",
+      "결과": "비활성"
     },
     {
       "단계": "자금 흐름(C)",
@@ -23,24 +23,23 @@
     },
     {
       "단계": "종합 등급",
-      "원인": "A=활성, C=비활성, B=비활성",
+      "원인": "A=비활성, C=비활성, B=비활성",
       "근거": "등급 규칙(사전 등록 v2·v3): ALERT = B ∧ (A ∨ C), WATCH = 하나 이상 활성",
-      "결과": "WATCH → 1단계: 자금 이상 알림"
+      "결과": "NONE → 조치 없음"
     }
   ],
   "money_alert": false,
   "market": {
-    "active": true,
-    "triggered": [
-      "DGS10",
-      "BAMLH0A0HYM2"
-    ],
+    "active": false,
+    "triggered": [],
     "zscores": {
-      "VIXCLS": 1.86,
+      "VIXCLS": 0.25,
       "T10Y2Y": 0.03,
-      "DGS10": -4.13,
+      "DGS10": 0.83,
+      "DEXKOUS": -0.1,
       "DCOILWTICO": -0.61,
-      "BAMLH0A0HYM2": 2.52
+      "DTWEXBGS": -0.11,
+      "BAMLH0A0HYM2": -0.41
     }
   },
   "flow": {
@@ -61,111 +60,113 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 4,
-        "n_sources": 3,
-        "z": 0.513,
-        "baseline_points": 32,
+        "n_articles": 2,
+        "n_sources": 2,
+        "z": -0.642,
+        "baseline_points": 33,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 14,
         "saturated": false,
         "top_titles": [
-          "Wall Street Cyber Thriller: How Silicon Valley's AI Butlers Are Attempting to Empty Bank Vaults - eu.36kr.com",
           "Phl asks China’s AIIB to fund infra projects - Daily Tribune",
-          "RBI data centre to strengthen payment systems, cyber resilience - The Economic Times"
+          "Wall Street Cyber Thriller: How Silicon Valley's AI Butlers Are Attempting to Empty Bank Vaults - eu.36kr.com",
+          "Banks Hit The Alarm On AI Agents - TheFutureParty"
         ]
       },
       "credit_event": {
-        "n_articles": 53,
-        "n_sources": 47,
-        "z": -0.414,
-        "baseline_points": 32,
+        "n_articles": 56,
+        "n_sources": 53,
+        "z": -0.223,
+        "baseline_points": 33,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 64,
+        "n_split": 71,
         "saturated": false,
         "top_titles": [
+          "RNDC Settles with Unsecured Creditors, Moving Chapter 11 Liquidation Forward - Brewbound",
           "Student Loan Defaults Surge Past 21% as Repayment Plans Shift - Legis1",
-          "Popeyes Franchisee Sailormen Reaches Settlement to Exit Chapter 11 After Nine Months - L’Express Franchise",
-          "LIV Golf paid its CEO $6.4 million in the months before filing for bankruptcy - Quartz"
+          "Popeyes Franchisee Sailormen Reaches Settlement to Exit Chapter 11 After Nine Months - L’Express Franchise"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 3,
         "n_sources": 3,
-        "z": -0.367,
-        "baseline_points": 32,
+        "z": -0.361,
+        "baseline_points": 33,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 8,
+        "n_split": 11,
         "saturated": false,
         "top_titles": [
           "SpaceX Secures $40 Billion in GPU Financing as Musk Warns of AI Credit Crunch - citybiz",
-          "WEFC | Of Ether or Artificial Intelligence [PDF Download] - MacroMicro",
-          "Musk Says SpaceX Secured $40 Billion of Debt for AI Chips, Warns of Neocloud Failures - bloomingbit"
+          "Musk Says SpaceX Secured $40 Billion of Debt for AI Chips, Warns of Neocloud Failures - bloomingbit",
+          "WEFC | Of Ether or Artificial Intelligence [PDF Download] - MacroMicro"
         ]
       },
       "geopolitical": {
-        "n_articles": 77,
-        "n_sources": 64,
-        "z": -1.925,
-        "baseline_points": 32,
+        "n_articles": 97,
+        "n_sources": 82,
+        "z": 0.302,
+        "baseline_points": 33,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 123,
-        "saturated": false,
+        "n_split": 167,
+        "saturated": true,
         "top_titles": [
-          "EU sanctions against ISIL/Da’esh and Al-Qaeda: Council renews regime until 2027 - Council, European Union",
-          "This Week in History: Martian invasion broadcast captures country’s attention - UConn Daily Campus",
-          "UK sanctions 15 commanders from rival Sudan factions over wartime rape - Reuters"
+          "As Russia’s War on Ukraine Drags On, Sanctions Remain Essential - Hudson Institute",
+          "New Marvel Cosmic Invasion: The Siege of Castle Doom gameplay details - PlayStation.Blog",
+          "EU sanctions against ISIL/Da’esh and Al-Qaeda: Council renews regime until 2027 - Council, European Union"
         ]
       },
       "trade_policy": {
-        "n_articles": 88,
-        "n_sources": 73,
-        "z": 1.28,
-        "baseline_points": 32,
+        "n_articles": 93,
+        "n_sources": 86,
+        "z": 1.562,
+        "baseline_points": 33,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 153,
+        "n_split": 170,
         "saturated": false,
         "top_titles": [
+          "EXCLUSIVE: US, Canada working on deal to ease steel, auto tariffs, sources say - Reuters",
           "Trump started a trade war with Canada. GOP candidates became casualties. - The Washington Post",
-          "Trump says Canada tariff deal coming 'soon' at Michigan border rally - Reuters",
-          "Some Republican lawmakers skewer Trump's beef imports, slam Canada trade war - ABC News - Breaking News, Latest News and Videos"
+          "US, Canada ‘very close’ to tariff deal: WH - New York Post"
         ]
       },
       "pandemic": {
-        "n_articles": 81,
-        "n_sources": 68,
-        "z": 0.042,
-        "baseline_points": 32,
+        "n_articles": 82,
+        "n_sources": 71,
+        "z": 0.095,
+        "baseline_points": 33,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 142,
+        "n_split": 154,
         "saturated": false,
         "top_titles": [
-          "Flu outbreak among Air Force recruits at Joint Base San Antonio after Hegseth ends mandatory flu vaccine - ABC News - Breaking News, Latest News and Videos",
-          "U.S. measles cases more than double what they were last year as outbreak spreads - NPR",
-          "Bird flu is raging on a Utah mink farm. It could spark a human pandemic, experts say, but officials won’t act. - The Salt Lake Tribune"
+          "Making the Case: Arrest for Resisting Emergency Hospitalization and Claim to Pandemic-Era Unemployment Benefits Considered - Ohio Court News (.gov)",
+          "Zambia cholera outbreak update as of October 26 - Outbreak News Today",
+          "Strengthening Africa’s outbreak-ready evidence generation capabilities - CEPI"
         ]
       },
       "fx_shock": {
-        "n_articles": 0,
-        "n_sources": 0,
-        "z": -0.791,
-        "baseline_points": 32,
+        "n_articles": 1,
+        "n_sources": 1,
+        "z": 0.727,
+        "baseline_points": 33,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 0,
-        "saturated": false,
-        "top_titles": []
-      },
-      "rate_shock": {
-        "n_articles": 6,
-        "n_sources": 5,
-        "z": -0.148,
-        "baseline_points": 32,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 32,
+        "n_split": 1,
         "saturated": false,
         "top_titles": [
+          "Why Brazil’s post-election currency plunge sank soybeans on Monday - Pro Farmer"
+        ]
+      },
+      "rate_shock": {
+        "n_articles": 5,
+        "n_sources": 4,
+        "z": -0.354,
+        "baseline_points": 33,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 13,
+        "saturated": false,
+        "top_titles": [
+          "French bond selloff eases as country spared ratings downgrade - TradingView",
           "French bond selloff eases as country spared ratings downgrade - CTV News",
-          "French bond selloff eases as country spared ratings downgrade - marketscreener.com",
-          "Bond Selloff Deepens as Rising Energy Prices Stoke Inflation Fears - EnergyNow.com"
+          "China's central bank sets up non-bank financial institution bond market swap facility - The Economic Times"
         ]
       }
     },
