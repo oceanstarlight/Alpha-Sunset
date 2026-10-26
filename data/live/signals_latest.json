@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-25T21:11:31+00:00",
+  "collected_at": "2026-10-26T05:13:49+00:00",
   "as_of": "2026-10-23",
   "level": "WATCH",
   "chain": [
@@ -61,115 +61,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 1,
-        "n_sources": 1,
-        "z": -1.215,
-        "baseline_points": 30,
+        "n_articles": 3,
+        "n_sources": 3,
+        "z": -0.054,
+        "baseline_points": 31,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 9,
+        "n_split": 13,
         "saturated": false,
         "top_titles": [
-          "RBI data centre to strengthen payment systems, cyber resilience - The Economic Times",
-          "🥛 Quality didn’t matter. It does now 🔄 - Milk Road",
-          "Debt And Leverage: The Businesses That Learned The Hard Way - Nett Magazine Online"
+          "Phl asks China’s AIIB to fund infra projects - Daily Tribune",
+          "Wall Street Cyber Thriller: How Silicon Valley's AI Butlers Are Attempting to Empty Bank Vaults - 36Kr",
+          "RBI data centre to strengthen payment systems, cyber resilience - The Economic Times"
         ]
       },
       "credit_event": {
-        "n_articles": 39,
-        "n_sources": 37,
-        "z": -1.453,
-        "baseline_points": 30,
+        "n_articles": 29,
+        "n_sources": 25,
+        "z": -2.016,
+        "baseline_points": 31,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 50,
+        "n_split": 44,
         "saturated": false,
         "top_titles": [
+          "Why Are Investors Buying Credit Default Swaps to Hedge AI-Related Debt? - Yahoo Finance",
           "LIV Golf paid $15M to keep executives before bankruptcy filing - Chattanooga Times Free Press",
-          "What’s behind the Vermont Catholic Church’s ever-evolving bankruptcy case — and what’s next - VTDigger",
-          "Why Are Investors Buying Credit Default Swaps to Hedge AI-Related Debt? - Yahoo Finance"
+          "What’s behind the Vermont Catholic Church’s ever-evolving bankruptcy case — and what’s next - VTDigger"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 2,
         "n_sources": 2,
-        "z": -0.515,
-        "baseline_points": 30,
+        "z": -0.504,
+        "baseline_points": 31,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 10,
         "saturated": false,
         "top_titles": [
           "Shafaq News..CBI foreign currency sales rise 8.8% in September - شفق نيوز",
-          "Eximbank ends Daesun workout as SB Sunbo takes control, rebrands SB Daesun - CHOSUNBIZ - Chosunbiz",
+          "Musk Says SpaceX Secured $40 Billion of Debt for AI Chips, Warns of Neocloud Failures - bloomingbit",
           "The Latest Bond Thriller - freebeacon.com"
         ]
       },
       "geopolitical": {
-        "n_articles": 79,
+        "n_articles": 78,
         "n_sources": 65,
-        "z": -1.989,
-        "baseline_points": 30,
+        "z": -1.954,
+        "baseline_points": 31,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 115,
+        "n_split": 114,
         "saturated": false,
         "top_titles": [
           "Netanyahu rebuked for plan to use crypto to bypass economic sanctions - Reuters",
           "Netanyahu’s pitch: Can Israel use crypto to evade economic sanctions? - Al Jazeera",
-          "Netanyahu Says Israel Mulls Crypto Ahead of Possible Sanctions - Bloomberg.com"
+          "How Did Myanmar Hide Iranian Jet Fuel Imports to Evade US Sanctions? - Modern Diplomacy"
         ]
       },
       "trade_policy": {
-        "n_articles": 45,
-        "n_sources": 35,
-        "z": -1.684,
-        "baseline_points": 30,
+        "n_articles": 66,
+        "n_sources": 58,
+        "z": -0.198,
+        "baseline_points": 31,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 78,
+        "n_split": 109,
         "saturated": false,
         "top_titles": [
           "Trump started a trade war with Canada. GOP candidates became casualties. - The Washington Post",
-          "Trump’s tariff pause angers some US ranchers, boosts Brazilian beef imports - Al Jazeera",
-          "Trump Exempts Some Canadian Products From Section 338 Tariffs - But his Illegal Trade War Continues - Reason Magazine"
+          "Trump says Canada tariff deal coming 'soon' at Michigan border rally - Reuters",
+          "Trump’s tariff pause angers some US ranchers, boosts Brazilian beef imports - Al Jazeera"
         ]
       },
       "pandemic": {
-        "n_articles": 51,
-        "n_sources": 42,
-        "z": -1.614,
-        "baseline_points": 30,
+        "n_articles": 70,
+        "n_sources": 56,
+        "z": -0.543,
+        "baseline_points": 31,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 92,
+        "n_split": 125,
         "saturated": false,
         "top_titles": [
           "U.S. measles cases more than double what they were last year as outbreak spreads - NPR",
-          "Plague risks in Russia and a dangerous delay on WHO pandemic agreement | Letters - The Guardian",
-          "Vikings vs. Colts Game Observations: Another 4th Quarter Lockdown - Minnesota Vikings"
+          "Health officials report 74 new measles cases in Pennsylvania - ABC News - Breaking News, Latest News and Videos",
+          "Plague risks in Russia and a dangerous delay on WHO pandemic agreement | Letters - The Guardian"
         ]
       },
       "fx_shock": {
         "n_articles": 0,
         "n_sources": 0,
-        "z": -0.835,
-        "baseline_points": 30,
+        "z": -0.812,
+        "baseline_points": 31,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 4,
         "saturated": false,
         "top_titles": [
           "Zimbabwe wants digital payments to build trust in its newest currency. Why technology alone won’t be enough to save the ZiG - The Conversation",
-          "Stablecoins Are Testing the Limits of Capital Controls - IndraStra Global",
-          "Pimco investment fund and billionaire Bill Gross's deal that raked in $1.7 billion in a single day. - Vietnam.vn"
+          "Pimco investment fund and billionaire Bill Gross's deal that raked in $1.7 billion in a single day. - Vietnam.vn",
+          "Why Is NU Stock Plunging Nearly 12% Overnight? - Stocktwits"
         ]
       },
       "rate_shock": {
         "n_articles": 0,
         "n_sources": 0,
-        "z": -1.528,
-        "baseline_points": 30,
+        "z": -1.448,
+        "baseline_points": 31,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 3,
+        "n_split": 7,
         "saturated": false,
         "top_titles": [
-          "US stocks decline amid AI concerns and rising oil prices: Weekly Market Recap - Beansprout",
-          "Yes Bank yet to decide on AT-1 bond coupon, says it retains discretion - Business Standard",
-          "Indian Rice Exporters Eye UK, European Markets Amidst Global Demand Surge - Lokmat Times"
+          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com",
+          "How to Play the Brutal Selloff in CoreWeave Stock - Yahoo Finance",
+          "How Much Could Amgen Stock Give Back? - Trefis"
         ]
       }
     },
