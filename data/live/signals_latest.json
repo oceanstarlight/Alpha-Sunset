@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-27T00:45:52+00:00",
+  "collected_at": "2026-10-27T09:19:24+00:00",
   "as_of": "2026-10-26",
   "level": "NONE",
   "chain": [
@@ -59,114 +59,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 2,
-        "n_sources": 2,
-        "z": -0.629,
-        "baseline_points": 34,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 17,
-        "saturated": false,
-        "top_titles": [
-          "Wall Street Cyber Thriller: How Silicon Valley's AI Butlers Are Attempting to Empty Bank Vaults - eu.36kr.com",
-          "India’s Central Bank Deputy Governor Urges Controls to Keep Pace With Growth - TOKENPOST",
-          "Awa Bank (TSE:8388) Stock Could Be Overvalued Given Its Earnings Premium - Yahoo Finance"
-        ]
-      },
-      "credit_event": {
-        "n_articles": 59,
-        "n_sources": 55,
-        "z": -0.033,
-        "baseline_points": 34,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 75,
-        "saturated": false,
-        "top_titles": [
-          "RNDC Settles with Unsecured Creditors, Moving Chapter 11 Liquidation Forward - Brewbound",
-          "Student loan default: what the government can take - qz.com",
-          "LIV Golf Paid Out $15.6 Million in Executive Retention Bonuses Ahead of Chapter 11 Bankruptcy Filing - Ministry of Sport"
-        ]
-      },
-      "liquidity_crisis": {
-        "n_articles": 4,
-        "n_sources": 4,
-        "z": -0.224,
-        "baseline_points": 34,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 12,
-        "saturated": false,
-        "top_titles": [
-          "SpaceX Secures $40 Billion in GPU Financing as Musk Warns of AI Credit Crunch - citybiz",
-          "KOSPI Falls as Much as During Financial Crises... Rose in All 9 Similar Past Episodes - 아시아경제",
-          "Can JetBlue still avoid bankruptcy? Analysis says yes, but it won’t be easy - Investing.com"
-        ]
-      },
-      "geopolitical": {
-        "n_articles": 92,
-        "n_sources": 83,
-        "z": -0.235,
-        "baseline_points": 34,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 168,
-        "saturated": false,
-        "top_titles": [
-          "New Marvel Cosmic Invasion: The Siege of Castle Doom gameplay details - PlayStation.Blog",
-          "Weekly Sanctions Update: October 26, 2026 - Steptoe",
-          "EU sanctions against ISIL/Da’esh and Al-Qaeda: Council renews regime until 2027 - Council, European Union"
-        ]
-      },
-      "trade_policy": {
-        "n_articles": 87,
-        "n_sources": 75,
-        "z": 1.095,
-        "baseline_points": 34,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 159,
-        "saturated": false,
-        "top_titles": [
-          "EXCLUSIVE: US, Canada working on deal to ease steel, auto tariffs, sources say - Reuters",
-          "Trump tweaks Canada tariffs, removing certain goods while adding others - Facilities Dive",
-          "Trump's promise of 300,000 tons of tariff-reduced beef imports to reduce grocery costs falls short - Fortune"
-        ]
-      },
-      "pandemic": {
-        "n_articles": 86,
-        "n_sources": 73,
-        "z": 0.309,
-        "baseline_points": 34,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 148,
-        "saturated": false,
-        "top_titles": [
-          "Ebola outbreak 2026 news: Chicago hospitals say they are ready amid Ebola cases in Kenya, Congo, Nigeria, Uganda, France - ABC7 Chicago",
-          "Measles outbreak confirms 3 infected in the U.P. - Upper Michigan's Source",
-          "Lockdown lifted on Lincoln County High, Middle school - WRDW"
-        ]
-      },
-      "fx_shock": {
         "n_articles": 1,
         "n_sources": 1,
-        "z": 0.711,
-        "baseline_points": 34,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 2,
-        "saturated": false,
-        "top_titles": [
-          "Why Brazil’s post-election currency plunge sank soybeans on Monday - Pro Farmer",
-          "Opinion | Markets Don’t Vote for Lula in Brazil - WSJ"
-        ]
-      },
-      "rate_shock": {
-        "n_articles": 5,
-        "n_sources": 4,
-        "z": -0.348,
-        "baseline_points": 34,
+        "z": -1.2,
+        "baseline_points": 35,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 11,
         "saturated": false,
         "top_titles": [
-          "French bond selloff eases as country spared ratings downgrade - TradingView",
+          "India’s Central Bank Deputy Governor Urges Controls to Keep Pace With Growth - TOKENPOST",
+          "Awa Bank (TSE:8388) Stock Could Be Overvalued Given Its Earnings Premium - Yahoo Finance",
+          "Wall Street Is Preparing For An AI Catastrophe. Major Banks Discussing How to Deal With The Day After. - International Business Times"
+        ]
+      },
+      "credit_event": {
+        "n_articles": 54,
+        "n_sources": 48,
+        "z": -0.348,
+        "baseline_points": 35,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 67,
+        "saturated": false,
+        "top_titles": [
+          "Historic Oheka Castle Heading To Auction Following Bankruptcy Filing - News12 | Long Island",
+          "RNDC Settles with Unsecured Creditors, Moving Chapter 11 Liquidation Forward - Brewbound",
+          "Student loan default: what the government can take - qz.com"
+        ]
+      },
+      "liquidity_crisis": {
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": 0.046,
+        "baseline_points": 35,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 14,
+        "saturated": false,
+        "top_titles": [
+          "SpaceX Secures $40 Billion in GPU Financing as Musk Warns of AI Credit Crunch - citybiz",
+          "2007 vs 2026: Subprime Then, AI Debt Now for CME_MINI:NQ1! by CandelaCharts - TradingView",
+          "KOSPI Falls as Much as During Financial Crises... Rose in All 9 Similar Past Episodes - 아시아경제"
+        ]
+      },
+      "geopolitical": {
+        "n_articles": 91,
+        "n_sources": 83,
+        "z": -0.339,
+        "baseline_points": 35,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 158,
+        "saturated": false,
+        "top_titles": [
+          "New Marvel Cosmic Invasion: The Siege of Castle Doom gameplay details - PlayStation.Blog",
+          "Americans Challenge Trump’s International Criminal Court Sanctions in Federal Court - Military.com",
+          "US lifts sanctions on Chinese animation studios linked to North Korean schemes - NK News"
+        ]
+      },
+      "trade_policy": {
+        "n_articles": 74,
+        "n_sources": 67,
+        "z": 0.217,
+        "baseline_points": 35,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 136,
+        "saturated": false,
+        "top_titles": [
+          "America Needs Canada’s Aluminum. Trump’s Tariff Exposed Just How Badly. - WSJ",
+          "Will shoppers receive any savings from tariff refunds? Experts explain - ABC News - Breaking News, Latest News and Videos",
+          "EXCLUSIVE: US, Canada working on deal to ease steel, auto tariffs, sources say - Reuters"
+        ]
+      },
+      "pandemic": {
+        "n_articles": 85,
+        "n_sources": 72,
+        "z": 0.25,
+        "baseline_points": 35,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 157,
+        "saturated": false,
+        "top_titles": [
+          "Ebola outbreak 2026 news: Chicago hospitals say they are ready amid Ebola cases in Kenya, Congo, Nigeria, Uganda, France - ABC7 Chicago",
+          "Ebola disease outbreak 2026: How MSF is responding - Doctors Without Borders",
+          "Vermont sees 40% jump in Amtrak ridership since before pandemic - WCAX"
+        ]
+      },
+      "fx_shock": {
+        "n_articles": 2,
+        "n_sources": 2,
+        "z": 2.217,
+        "baseline_points": 35,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 4,
+        "saturated": false,
+        "top_titles": [
+          "Why Brazil’s post-election currency plunge sank soybeans on Monday - Pro Farmer",
+          "Fast money is leaving, patient money is arriving—and RBI quietly rewrites the rules - ThePrint",
+          "Opinion | Markets Don’t Vote for Lula in Brazil - WSJ"
+        ]
+      },
+      "rate_shock": {
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": -0.129,
+        "baseline_points": 35,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 12,
+        "saturated": false,
+        "top_titles": [
+          "French Consumer Confidence Sinks to 13-Year Low Amid Protests, Bond Selloff - WSJ",
           "French bond selloff eases as country spared ratings downgrade - CTV News",
-          "China's central bank sets up non-bank financial institution bond market swap facility - The Economic Times"
+          "UK budget: Markets on watch for new finance minister's plans - Reuters"
         ]
       }
     },
