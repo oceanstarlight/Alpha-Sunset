@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-27T15:32:03+00:00",
+  "collected_at": "2026-10-27T20:13:55+00:00",
   "as_of": "2026-10-26",
   "level": "NONE",
   "chain": [
@@ -12,7 +12,7 @@
     {
       "단계": "자금 흐름(C)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.61, 미 은행 예금(DPSACBW027SBOG) z=+0.24, 해외 공적 미국채 보관(WMTSECL1) z=+1.32, 지급준비금(WRESBAL) z=-0.95",
+      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=+0.73, 미 은행 예금(DPSACBW027SBOG) z=+0.24, 해외 공적 미국채 보관(WMTSECL1) z=+1.32, 지급준비금(WRESBAL) z=-0.95",
       "결과": "비활성"
     },
     {
@@ -45,7 +45,7 @@
     "active": false,
     "triggered": [],
     "zscores": {
-      "WRMFNS": -0.61,
+      "WRMFNS": 0.73,
       "DPSACBW027SBOG": 0.24,
       "WMTSECL1": 1.32,
       "WRESBAL": -0.95
@@ -59,115 +59,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 2,
-        "n_sources": 2,
-        "z": -0.58,
-        "baseline_points": 36,
+        "n_articles": 4,
+        "n_sources": 4,
+        "z": 0.601,
+        "baseline_points": 37,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 12,
+        "n_split": 16,
         "saturated": false,
         "top_titles": [
-          "Edward Allen West Obituary (2026) - Grand Rapids, MI - Memorial Alternatives - Legacy | Obituary",
-          "India’s Central Bank Deputy Governor Urges Controls to Keep Pace With Growth - TOKENPOST",
-          "Awa Bank (TSE:8388) Stock Could Be Overvalued Given Its Earnings Premium - Yahoo Finance"
+          "Missed South Indian Bank's Run? Here Is What Holders Saw - Yahoo Finance",
+          "Arion Bank reaches settlement with the Financial Supervisory Authority - TradingView",
+          "Edward Allen West Obituary (2026) - Grand Rapids, MI - Memorial Alternatives - Legacy | Obituary"
         ]
       },
       "credit_event": {
-        "n_articles": 50,
-        "n_sources": 49,
-        "z": -0.599,
-        "baseline_points": 36,
+        "n_articles": 55,
+        "n_sources": 52,
+        "z": -0.265,
+        "baseline_points": 37,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 72,
+        "n_split": 69,
         "saturated": false,
         "top_titles": [
-          "RI Energy Default Power Plan Adds Summer Spot Market Buys - Uprise RI",
-          "VA Broadband Provider Files for Chapter 11 Bankruptcy Protection - Inside Towers",
-          "HomePod 27.2 hands-on: default wireless speaker for Mac, Sound Glow and more [Video] - 9to5Mac"
+          "GitHub Applies Copilot Default Policies to Unconfigured Features - Visual Studio Magazine",
+          "HomePod 27.2 hands-on: default wireless speaker for Mac, Sound Glow and more [Video] - 9to5Mac",
+          "RiverStreet’s Chapter 11 filing shows why its $480M rural fiber expansion unraveled — and contractors and suppliers are owed tens of millions - Wireless Estimator"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 6,
         "n_sources": 6,
-        "z": 0.045,
-        "baseline_points": 36,
+        "z": 0.044,
+        "baseline_points": 37,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 10,
+        "n_split": 9,
         "saturated": false,
         "top_titles": [
           "Star concedes overzealous compliance is driving VIPs away as new leadership moves to reverse years of mistakes - IAG – Inside Asian Gaming",
-          "Can JetBlue still avoid bankruptcy? Analysis says yes, but it won’t be easy - Investing.com",
-          "KOSPI Falls as Much as During Financial Crises... Rose in All 9 Similar Past Episodes - 아시아경제"
+          "KOSPI Falls as Much as During Financial Crises... Rose in All 9 Similar Past Episodes - 아시아경제",
+          "Could AI Data Centre Funding Stress Reach ANZ Group (ASX:ANZ)? - Kalkine Media"
         ]
       },
       "geopolitical": {
         "n_articles": 91,
-        "n_sources": 84,
-        "z": -0.334,
-        "baseline_points": 36,
+        "n_sources": 86,
+        "z": -0.329,
+        "baseline_points": 37,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 159,
+        "n_split": 142,
         "saturated": false,
         "top_titles": [
+          "Trump Explores Lifting Sanctions on Russia’s Flagship Investment Fund - The New York Times",
           "Senate overwhelmingly advances Russia sanctions bill named after Sen. Lindsey Graham - ABC News - Breaking News, Latest News and Videos",
-          "Rosatom advances nuclear projects abroad as sanctions gaps and wartime ties draw scrutiny - Bellona Foundation",
-          "Three Russian diesel tankers steam for US — including two under sanctions - Financial Times"
+          "Rosatom advances nuclear projects abroad as sanctions gaps and wartime ties draw scrutiny - Bellona Foundation"
         ]
       },
       "trade_policy": {
-        "n_articles": 70,
-        "n_sources": 60,
-        "z": -0.049,
-        "baseline_points": 36,
+        "n_articles": 68,
+        "n_sources": 56,
+        "z": -0.182,
+        "baseline_points": 37,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 106,
+        "n_split": 121,
         "saturated": false,
         "top_titles": [
-          "America Needs Canada’s Aluminum. Trump’s Tariff Exposed Just How Badly. - WSJ",
-          "US Trade Rep Greer says tariff policy 'hasn't changed' despite SCOTUS ruling - ABC News - Breaking News, Latest News and Videos",
-          "Blueprint Coffee Is Giving Tariff Refunds Back To Their Customers - Sprudge"
+          "Understanding Trump's tariff reversals - Peterson Institute for International Economics",
+          "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
+          "America Needs Canada’s Aluminum. Trump’s Tariff Exposed Just How Badly. - WSJ"
         ]
       },
       "pandemic": {
-        "n_articles": 91,
-        "n_sources": 77,
-        "z": 0.578,
-        "baseline_points": 36,
+        "n_articles": 97,
+        "n_sources": 83,
+        "z": 0.903,
+        "baseline_points": 37,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 179,
-        "saturated": false,
+        "n_split": 173,
+        "saturated": true,
         "top_titles": [
-          "Ebola cases in DR Congo surpass 10,000 in fastest-growing outbreak - Al Jazeera",
-          "What we know about the spread of Ebola amid growing outbreak in DRC - ABC News - Breaking News, Latest News and Videos",
-          "Lockdowns ordered at two Hilliard schools as police probe reported situation - WSYX"
+          "The Ebola outbreak is breaking records — and just marked a grim milestone - NPR",
+          "Africa Ebola outbreak passes 10,000 cases, mostly in DR Congo - Courthouse News",
+          "Threat to Hilliard high school deemed not credible after 3 schools placed on lockdown - 10TV"
         ]
       },
       "fx_shock": {
         "n_articles": 2,
         "n_sources": 2,
-        "z": 2.048,
-        "baseline_points": 36,
+        "z": 1.912,
+        "baseline_points": 37,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 6,
         "saturated": false,
         "top_titles": [
-          "Why Brazil’s post-election currency plunge sank soybeans on Monday - Pro Farmer",
           "Fast money is leaving, patient money is arriving—and RBI quietly rewrites the rules - ThePrint",
+          "Musasizi: Gov’t to Slash Spending as Shilling Plunges - ChimpReports",
           "Uganda’s falling shilling: What it means for Kenya and East African trade - People Daily"
         ]
       },
       "rate_shock": {
-        "n_articles": 7,
-        "n_sources": 7,
-        "z": 0.091,
-        "baseline_points": 36,
+        "n_articles": 13,
+        "n_sources": 12,
+        "z": 1.412,
+        "baseline_points": 37,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 12,
+        "n_split": 20,
         "saturated": false,
         "top_titles": [
           "French Consumer Confidence Sinks to 13-Year Low Amid Protests, Bond Selloff - WSJ",
-          "Oppenheimer holds $150 CoreWeave target, sees bond selloff as overdone - Yahoo Finance",
-          "Oppenheimer holds $150 CoreWeave target, sees bond selloff as overdone - Investing.com"
+          "CoreWeave's Bond Selloff May Overstate Debt Risks, Oppenheimer Says - Yahoo Finance",
+          "JetBlue CEO says no creditor talks as bond selloff raises doubts about turnaround - TradingView"
         ]
       }
     },
