@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-10-28T09:59:34+00:00",
+  "collected_at": "2026-10-28T18:29:08+00:00",
   "as_of": "2026-10-27",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.57, 미 장단기 금리차(T10Y2Y) z=-1.06, VIX(변동성)(VIXCLS) z=-0.77",
+      "원인": "미 하이일드 스프레드(BAMLH0A0HYM2) z=-2.37",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=-2.37, 미 장단기 금리차(T10Y2Y) z=-1.06, VIX(변동성)(VIXCLS) z=-0.67",
       "결과": "비활성"
     },
     {
@@ -31,14 +31,17 @@
   "money_alert": false,
   "market": {
     "active": false,
-    "triggered": [],
+    "triggered": [
+      "BAMLH0A0HYM2"
+    ],
     "zscores": {
-      "VIXCLS": -0.77,
+      "VIXCLS": -0.67,
       "T10Y2Y": -1.06,
       "DGS10": -0.09,
       "DEXKOUS": -0.1,
+      "DCOILWTICO": -0.56,
       "DTWEXBGS": -0.11,
-      "BAMLH0A0HYM2": -1.57
+      "BAMLH0A0HYM2": -2.37
     }
   },
   "flow": {
@@ -59,115 +62,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 5,
-        "n_sources": 5,
-        "z": 1.177,
-        "baseline_points": 39,
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": 1.736,
+        "baseline_points": 40,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 14,
+        "n_split": 17,
         "saturated": false,
         "top_titles": [
           "Silicon Valley Bank failure might further stymie tech funding - TechTarget",
-          "Missed South Indian Bank's Run? Here Is What Holders Saw - Yahoo Finance",
-          "Arion Bank reaches settlement with the Financial Supervisory Authority - TradingView"
+          "Avidbank Expects $270 Million Deposit Outflow in Q4, Beta Below 50% - www.tokenpost.com",
+          "Dashain exodus deepens blood shortage in Valley - The Kathmandu Post"
         ]
       },
       "credit_event": {
-        "n_articles": 30,
-        "n_sources": 30,
-        "z": -1.913,
-        "baseline_points": 39,
+        "n_articles": 45,
+        "n_sources": 38,
+        "z": -0.845,
+        "baseline_points": 40,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 72,
+        "n_split": 68,
         "saturated": false,
         "top_titles": [
-          "Filing Alert: FitLab Chapter 11 - Bondoro",
-          "Oheka Castle goes up for auction after bankruptcy filing - NBC New York",
-          "Google now saves Gemini API requests by default for new paid projects - MIXED News"
+          "LABA/LAMA Combination Inhalers in COPD: Default Therapy, Different Products, and Uneven Proof - Medscape",
+          "Managing school IAQ and mold in the Southeast webinar - USGBC | U.S. Green Building Council",
+          "Popular brand for moms files Chapter 11 bankruptcy - Yahoo Finance"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 3,
-        "n_sources": 3,
-        "z": -0.379,
-        "baseline_points": 39,
+        "n_articles": 2,
+        "n_sources": 2,
+        "z": -0.515,
+        "baseline_points": 40,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 6,
+        "n_split": 8,
         "saturated": false,
         "top_titles": [
-          "Crunch’s Growth Tests Planet Fitness’ Grip on Gym Newcomers, Analysts Say - Athletech News",
-          "US sells 6-wk bills at high-rate 3.950%, B/C 2.83x; sells 1-yr bills at high-rate 4.290%, B/C 3.15x - Newsquawk",
-          "A $20 AGNC Share Bought at Its 2008 IPO Has Paid $51 in Dividends. The Stock Trades Near $9. - The Globe and Mail"
+          "With Musk and Huang at odds on AI neoclouds, can China weather the storm? - South China Morning Post",
+          "A $20 AGNC Share Bought at Its 2008 IPO Has Paid $51 in Dividends. The Stock Trades Near $9. - The Globe and Mail",
+          "Taiwan inflation could rise if energy subsidies end: Central bank - Focus Taiwan"
         ]
       },
       "geopolitical": {
-        "n_articles": 84,
-        "n_sources": 78,
-        "z": -1.12,
-        "baseline_points": 39,
+        "n_articles": 99,
+        "n_sources": 91,
+        "z": 0.608,
+        "baseline_points": 40,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 138,
-        "saturated": false,
+        "n_split": 164,
+        "saturated": true,
         "top_titles": [
-          "Executive Order Implements, and Immediately Waives, New Graham Act Sanctions and Tariffs Targeting Russia - Snell & Wilmer",
-          "Judge threatens ICE with contempt, sanctions in Minnesota re-arrest case - MPR News",
-          "Trump Explores Lifting Sanctions on Russia’s Flagship Investment Fund - The New York Times"
+          "US imposes sanctions on Rwanda's defense ministry over Congo conflict - Reuters",
+          "U.S. imposes new North Korea sanctions amid stalled diplomatic talks - NBC News",
+          "Treasury sanctions 10 North Koreans and Russians over IT worker fraud scheme - CBS News"
         ]
       },
       "trade_policy": {
-        "n_articles": 63,
-        "n_sources": 53,
-        "z": -0.524,
-        "baseline_points": 39,
+        "n_articles": 71,
+        "n_sources": 62,
+        "z": 0.038,
+        "baseline_points": 40,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 108,
+        "n_split": 116,
         "saturated": false,
         "top_titles": [
           "America Needs Canada’s Aluminum. Trump’s Tariff Exposed Just How Badly. - WSJ",
-          "Understanding Trump's tariff reversals - Peterson Institute for International Economics",
-          "Honda warns 50% Canada auto tariffs would be catastrophic for industry - CNBC"
+          "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
+          "Malaysia intercepted $12.2 million shipment of servers with AI chips suspected of violating export controls - Fortune"
         ]
       },
       "pandemic": {
-        "n_articles": 89,
-        "n_sources": 74,
-        "z": 0.432,
-        "baseline_points": 39,
+        "n_articles": 94,
+        "n_sources": 77,
+        "z": 0.713,
+        "baseline_points": 40,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 191,
+        "n_split": 195,
         "saturated": false,
         "top_titles": [
-          "The Ebola outbreak is breaking records — and just marked a grim milestone - NPR",
-          "Update (October 27, 2026, 8:15 a.m.): Visiting Availability For CUCF, USCF - Utah.gov",
-          "Islamic Center of San Diego lockdown lifted - KPBS"
+          "Africa’s ‘unprecedented’ Ebola outbreak could reach UK, says top health official - The Guardian",
+          "Israel's election too close to call. And, the Ebola outbreak reaches grim milestone - NPR",
+          "IVAC Researchers Inform Global Guidance for Diphtheria Outbreak Prevention - Johns Hopkins Bloomberg School of Public Health"
         ]
       },
       "fx_shock": {
-        "n_articles": 3,
-        "n_sources": 3,
-        "z": 3.012,
-        "baseline_points": 39,
+        "n_articles": 1,
+        "n_sources": 1,
+        "z": 0.298,
+        "baseline_points": 40,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 6,
+        "n_split": 3,
         "saturated": false,
         "top_titles": [
           "Uganda Cites Shocks, Structural Woes After 18% Currency Plunge - Bloomberg.com",
-          "Fast money is leaving, patient money is arriving—and RBI quietly rewrites the rules - ThePrint",
-          "Musasizi: Gov’t to Slash Spending as Shilling Plunges - ChimpReports"
+          "How Yemen’s Houthis finance their war and evade sanctions - Arab News",
+          "U.S. Dollar Surges to Unprecedented Levels in Cuba's Black Market - CubaHeadlines"
         ]
       },
       "rate_shock": {
-        "n_articles": 11,
-        "n_sources": 10,
-        "z": 0.824,
-        "baseline_points": 39,
+        "n_articles": 4,
+        "n_sources": 4,
+        "z": -0.651,
+        "baseline_points": 40,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 15,
+        "n_split": 6,
         "saturated": false,
         "top_titles": [
           "EXCLUSIVE: JetBlue CEO says no creditor talks as bond selloff raises doubts about turnaround - Reuters",
           "Exclusive-JetBlue CEO says no creditor talks as bond selloff raises doubts about turnaround - WTVB",
-          "CoreWeave's Bond Selloff May Overstate Debt Risks, Oppenheimer Says - Yahoo Finance"
+          "JetBlue CEO says no creditor talks as bond selloff raises doubts about turnaround - TradingView"
         ]
       }
     },
