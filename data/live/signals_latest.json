@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-10-27T20:13:55+00:00",
-  "as_of": "2026-10-26",
+  "collected_at": "2026-10-28T00:43:12+00:00",
+  "as_of": "2026-10-27",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.57, 미 10년물 금리(DGS10) z=+0.83, VIX(변동성)(VIXCLS) z=-0.77",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.57, 미 장단기 금리차(T10Y2Y) z=-1.06, VIX(변동성)(VIXCLS) z=-0.77",
       "결과": "비활성"
     },
     {
@@ -34,8 +34,8 @@
     "triggered": [],
     "zscores": {
       "VIXCLS": -0.77,
-      "T10Y2Y": 0.39,
-      "DGS10": 0.83,
+      "T10Y2Y": -1.06,
+      "DGS10": -0.09,
       "DEXKOUS": -0.1,
       "DTWEXBGS": -0.11,
       "BAMLH0A0HYM2": -1.57
@@ -61,8 +61,8 @@
       "banking_stress": {
         "n_articles": 4,
         "n_sources": 4,
-        "z": 0.601,
-        "baseline_points": 37,
+        "z": 0.591,
+        "baseline_points": 38,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 16,
         "saturated": false,
@@ -74,79 +74,79 @@
       },
       "credit_event": {
         "n_articles": 55,
-        "n_sources": 52,
-        "z": -0.265,
-        "baseline_points": 37,
+        "n_sources": 53,
+        "z": -0.261,
+        "baseline_points": 38,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 69,
+        "n_split": 76,
         "saturated": false,
         "top_titles": [
-          "GitHub Applies Copilot Default Policies to Unconfigured Features - Visual Studio Magazine",
-          "HomePod 27.2 hands-on: default wireless speaker for Mac, Sound Glow and more [Video] - 9to5Mac",
-          "RiverStreet’s Chapter 11 filing shows why its $480M rural fiber expansion unraveled — and contractors and suppliers are owed tens of millions - Wireless Estimator"
+          "Filing Alert: FitLab Chapter 11 - Bondoro",
+          "Three bankruptcy filings in Clovis and Bakersfield report liabilities up to $50 million - The Business Journal",
+          "S.C. Senator Josh Kimbrell Faces Default Judgment - FITSNews"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 6,
         "n_sources": 6,
         "z": 0.044,
-        "baseline_points": 37,
+        "baseline_points": 38,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 9,
         "saturated": false,
         "top_titles": [
-          "Star concedes overzealous compliance is driving VIPs away as new leadership moves to reverse years of mistakes - IAG – Inside Asian Gaming",
-          "KOSPI Falls as Much as During Financial Crises... Rose in All 9 Similar Past Episodes - 아시아경제",
-          "Could AI Data Centre Funding Stress Reach ANZ Group (ASX:ANZ)? - Kalkine Media"
+          "US sells 6-wk bills at high-rate 3.950%, B/C 2.83x; sells 1-yr bills at high-rate 4.290%, B/C 3.15x - Newsquawk",
+          "Crunch’s Growth Tests Planet Fitness’ Grip on Gym Newcomers, Analysts Say - Athletech News",
+          "Star concedes overzealous compliance is driving VIPs away as new leadership moves to reverse years of mistakes - IAG – Inside Asian Gaming"
         ]
       },
       "geopolitical": {
-        "n_articles": 91,
-        "n_sources": 86,
-        "z": -0.329,
-        "baseline_points": 37,
+        "n_articles": 93,
+        "n_sources": 82,
+        "z": -0.1,
+        "baseline_points": 38,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 142,
+        "n_split": 144,
         "saturated": false,
         "top_titles": [
           "Trump Explores Lifting Sanctions on Russia’s Flagship Investment Fund - The New York Times",
           "Senate overwhelmingly advances Russia sanctions bill named after Sen. Lindsey Graham - ABC News - Breaking News, Latest News and Videos",
-          "Rosatom advances nuclear projects abroad as sanctions gaps and wartime ties draw scrutiny - Bellona Foundation"
+          "US Considers Sanctions Relief for Kremlin Investment Fund Amid Diesel Deal - UNITED24 Media"
         ]
       },
       "trade_policy": {
-        "n_articles": 68,
-        "n_sources": 56,
-        "z": -0.182,
-        "baseline_points": 37,
+        "n_articles": 70,
+        "n_sources": 58,
+        "z": -0.045,
+        "baseline_points": 38,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 121,
+        "n_split": 113,
         "saturated": false,
         "top_titles": [
           "Understanding Trump's tariff reversals - Peterson Institute for International Economics",
           "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
-          "America Needs Canada’s Aluminum. Trump’s Tariff Exposed Just How Badly. - WSJ"
+          "White House tempers tough talk on Canada trade as inflation tops voter concerns - NBC News"
         ]
       },
       "pandemic": {
-        "n_articles": 97,
-        "n_sources": 83,
-        "z": 0.903,
-        "baseline_points": 37,
+        "n_articles": 86,
+        "n_sources": 73,
+        "z": 0.266,
+        "baseline_points": 38,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 173,
-        "saturated": true,
+        "n_split": 168,
+        "saturated": false,
         "top_titles": [
           "The Ebola outbreak is breaking records — and just marked a grim milestone - NPR",
-          "Africa Ebola outbreak passes 10,000 cases, mostly in DR Congo - Courthouse News",
-          "Threat to Hilliard high school deemed not credible after 3 schools placed on lockdown - 10TV"
+          "WATCH LIVE: Lockdown at Islamic Center of San Diego “out of an abundance of caution,” SDPD says - NBC 7 San Diego",
+          "San Diego police: Islamic Center on lockdown ‘out of abundance of caution’ - Times of San Diego"
         ]
       },
       "fx_shock": {
         "n_articles": 2,
         "n_sources": 2,
-        "z": 1.912,
-        "baseline_points": 37,
+        "z": 1.801,
+        "baseline_points": 38,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 6,
         "saturated": false,
@@ -157,17 +157,17 @@
         ]
       },
       "rate_shock": {
-        "n_articles": 13,
-        "n_sources": 12,
-        "z": 1.412,
-        "baseline_points": 37,
+        "n_articles": 17,
+        "n_sources": 14,
+        "z": 2.228,
+        "baseline_points": 38,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 20,
+        "n_split": 19,
         "saturated": false,
         "top_titles": [
+          "EXCLUSIVE: JetBlue CEO says no creditor talks as bond selloff raises doubts about turnaround - Reuters",
           "French Consumer Confidence Sinks to 13-Year Low Amid Protests, Bond Selloff - WSJ",
-          "CoreWeave's Bond Selloff May Overstate Debt Risks, Oppenheimer Says - Yahoo Finance",
-          "JetBlue CEO says no creditor talks as bond selloff raises doubts about turnaround - TradingView"
+          "Exclusive-JetBlue CEO says no creditor talks as bond selloff raises doubts about turnaround - WTVB"
         ]
       }
     },
