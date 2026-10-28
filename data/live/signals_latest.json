@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-28T00:43:12+00:00",
+  "collected_at": "2026-10-28T09:59:34+00:00",
   "as_of": "2026-10-27",
   "level": "NONE",
   "chain": [
@@ -59,115 +59,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 4,
-        "n_sources": 4,
-        "z": 0.591,
-        "baseline_points": 38,
+        "n_articles": 5,
+        "n_sources": 5,
+        "z": 1.177,
+        "baseline_points": 39,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 16,
+        "n_split": 14,
         "saturated": false,
         "top_titles": [
+          "Silicon Valley Bank failure might further stymie tech funding - TechTarget",
           "Missed South Indian Bank's Run? Here Is What Holders Saw - Yahoo Finance",
-          "Arion Bank reaches settlement with the Financial Supervisory Authority - TradingView",
-          "Edward Allen West Obituary (2026) - Grand Rapids, MI - Memorial Alternatives - Legacy | Obituary"
+          "Arion Bank reaches settlement with the Financial Supervisory Authority - TradingView"
         ]
       },
       "credit_event": {
-        "n_articles": 55,
-        "n_sources": 53,
-        "z": -0.261,
-        "baseline_points": 38,
+        "n_articles": 30,
+        "n_sources": 30,
+        "z": -1.913,
+        "baseline_points": 39,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 76,
+        "n_split": 72,
         "saturated": false,
         "top_titles": [
           "Filing Alert: FitLab Chapter 11 - Bondoro",
-          "Three bankruptcy filings in Clovis and Bakersfield report liabilities up to $50 million - The Business Journal",
-          "S.C. Senator Josh Kimbrell Faces Default Judgment - FITSNews"
+          "Oheka Castle goes up for auction after bankruptcy filing - NBC New York",
+          "Google now saves Gemini API requests by default for new paid projects - MIXED News"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 6,
-        "n_sources": 6,
-        "z": 0.044,
-        "baseline_points": 38,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 9,
-        "saturated": false,
-        "top_titles": [
-          "US sells 6-wk bills at high-rate 3.950%, B/C 2.83x; sells 1-yr bills at high-rate 4.290%, B/C 3.15x - Newsquawk",
-          "Crunch’s Growth Tests Planet Fitness’ Grip on Gym Newcomers, Analysts Say - Athletech News",
-          "Star concedes overzealous compliance is driving VIPs away as new leadership moves to reverse years of mistakes - IAG – Inside Asian Gaming"
-        ]
-      },
-      "geopolitical": {
-        "n_articles": 93,
-        "n_sources": 82,
-        "z": -0.1,
-        "baseline_points": 38,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 144,
-        "saturated": false,
-        "top_titles": [
-          "Trump Explores Lifting Sanctions on Russia’s Flagship Investment Fund - The New York Times",
-          "Senate overwhelmingly advances Russia sanctions bill named after Sen. Lindsey Graham - ABC News - Breaking News, Latest News and Videos",
-          "US Considers Sanctions Relief for Kremlin Investment Fund Amid Diesel Deal - UNITED24 Media"
-        ]
-      },
-      "trade_policy": {
-        "n_articles": 70,
-        "n_sources": 58,
-        "z": -0.045,
-        "baseline_points": 38,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 113,
-        "saturated": false,
-        "top_titles": [
-          "Understanding Trump's tariff reversals - Peterson Institute for International Economics",
-          "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
-          "White House tempers tough talk on Canada trade as inflation tops voter concerns - NBC News"
-        ]
-      },
-      "pandemic": {
-        "n_articles": 86,
-        "n_sources": 73,
-        "z": 0.266,
-        "baseline_points": 38,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 168,
-        "saturated": false,
-        "top_titles": [
-          "The Ebola outbreak is breaking records — and just marked a grim milestone - NPR",
-          "WATCH LIVE: Lockdown at Islamic Center of San Diego “out of an abundance of caution,” SDPD says - NBC 7 San Diego",
-          "San Diego police: Islamic Center on lockdown ‘out of abundance of caution’ - Times of San Diego"
-        ]
-      },
-      "fx_shock": {
-        "n_articles": 2,
-        "n_sources": 2,
-        "z": 1.801,
-        "baseline_points": 38,
+        "n_articles": 3,
+        "n_sources": 3,
+        "z": -0.379,
+        "baseline_points": 39,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 6,
         "saturated": false,
         "top_titles": [
+          "Crunch’s Growth Tests Planet Fitness’ Grip on Gym Newcomers, Analysts Say - Athletech News",
+          "US sells 6-wk bills at high-rate 3.950%, B/C 2.83x; sells 1-yr bills at high-rate 4.290%, B/C 3.15x - Newsquawk",
+          "A $20 AGNC Share Bought at Its 2008 IPO Has Paid $51 in Dividends. The Stock Trades Near $9. - The Globe and Mail"
+        ]
+      },
+      "geopolitical": {
+        "n_articles": 84,
+        "n_sources": 78,
+        "z": -1.12,
+        "baseline_points": 39,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 138,
+        "saturated": false,
+        "top_titles": [
+          "Executive Order Implements, and Immediately Waives, New Graham Act Sanctions and Tariffs Targeting Russia - Snell & Wilmer",
+          "Judge threatens ICE with contempt, sanctions in Minnesota re-arrest case - MPR News",
+          "Trump Explores Lifting Sanctions on Russia’s Flagship Investment Fund - The New York Times"
+        ]
+      },
+      "trade_policy": {
+        "n_articles": 63,
+        "n_sources": 53,
+        "z": -0.524,
+        "baseline_points": 39,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 108,
+        "saturated": false,
+        "top_titles": [
+          "America Needs Canada’s Aluminum. Trump’s Tariff Exposed Just How Badly. - WSJ",
+          "Understanding Trump's tariff reversals - Peterson Institute for International Economics",
+          "Honda warns 50% Canada auto tariffs would be catastrophic for industry - CNBC"
+        ]
+      },
+      "pandemic": {
+        "n_articles": 89,
+        "n_sources": 74,
+        "z": 0.432,
+        "baseline_points": 39,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 191,
+        "saturated": false,
+        "top_titles": [
+          "The Ebola outbreak is breaking records — and just marked a grim milestone - NPR",
+          "Update (October 27, 2026, 8:15 a.m.): Visiting Availability For CUCF, USCF - Utah.gov",
+          "Islamic Center of San Diego lockdown lifted - KPBS"
+        ]
+      },
+      "fx_shock": {
+        "n_articles": 3,
+        "n_sources": 3,
+        "z": 3.012,
+        "baseline_points": 39,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 6,
+        "saturated": false,
+        "top_titles": [
+          "Uganda Cites Shocks, Structural Woes After 18% Currency Plunge - Bloomberg.com",
           "Fast money is leaving, patient money is arriving—and RBI quietly rewrites the rules - ThePrint",
-          "Musasizi: Gov’t to Slash Spending as Shilling Plunges - ChimpReports",
-          "Uganda’s falling shilling: What it means for Kenya and East African trade - People Daily"
+          "Musasizi: Gov’t to Slash Spending as Shilling Plunges - ChimpReports"
         ]
       },
       "rate_shock": {
-        "n_articles": 17,
-        "n_sources": 14,
-        "z": 2.228,
-        "baseline_points": 38,
+        "n_articles": 11,
+        "n_sources": 10,
+        "z": 0.824,
+        "baseline_points": 39,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 19,
+        "n_split": 15,
         "saturated": false,
         "top_titles": [
           "EXCLUSIVE: JetBlue CEO says no creditor talks as bond selloff raises doubts about turnaround - Reuters",
-          "French Consumer Confidence Sinks to 13-Year Low Amid Protests, Bond Selloff - WSJ",
-          "Exclusive-JetBlue CEO says no creditor talks as bond selloff raises doubts about turnaround - WTVB"
+          "Exclusive-JetBlue CEO says no creditor talks as bond selloff raises doubts about turnaround - WTVB",
+          "CoreWeave's Bond Selloff May Overstate Debt Risks, Oppenheimer Says - Yahoo Finance"
         ]
       }
     },
