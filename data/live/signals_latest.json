@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-28T22:49:13+00:00",
+  "collected_at": "2026-10-29T06:23:23+00:00",
   "as_of": "2026-10-28",
   "level": "WATCH",
   "chain": [
@@ -12,7 +12,7 @@
     {
       "단계": "자금 흐름(C)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=+0.73, 미 은행 예금(DPSACBW027SBOG) z=+0.24, 해외 공적 미국채 보관(WMTSECL1) z=+1.32, 지급준비금(WRESBAL) z=-0.95",
+      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.19, 미 은행 예금(DPSACBW027SBOG) z=+0.24, 해외 공적 미국채 보관(WMTSECL1) z=+1.32, 지급준비금(WRESBAL) z=-0.95",
       "결과": "비활성"
     },
     {
@@ -49,7 +49,7 @@
     "active": false,
     "triggered": [],
     "zscores": {
-      "WRMFNS": 0.73,
+      "WRMFNS": -0.19,
       "DPSACBW027SBOG": 0.24,
       "WMTSECL1": 1.32,
       "WRESBAL": -0.95
@@ -63,114 +63,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 6,
-        "n_sources": 6,
-        "z": 1.654,
-        "baseline_points": 41,
+        "n_articles": 7,
+        "n_sources": 7,
+        "z": 2.15,
+        "baseline_points": 42,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 19,
+        "n_split": 18,
         "saturated": false,
         "top_titles": [
-          "Silicon Valley Bank failure might further stymie tech funding - TechTarget",
-          "Avidbank Expects $270 Million Deposit Outflow in Q4, Beta Below 50% - www.tokenpost.com",
-          "Dashain exodus deepens blood shortage in Valley - The Kathmandu Post"
+          "BNM fines AmBank, AmBank Islamic RM552,000 over cash reporting lapses - The Malaysian Reserve",
+          "US Bank Failures Pile Up — Is It Just Noise? - Global Finance Magazine",
+          "FDIC Insurance Protects Eligible Deposits as Bitcoin Faces Price Risk - TOKENPOST"
         ]
       },
       "credit_event": {
-        "n_articles": 54,
-        "n_sources": 48,
-        "z": -0.248,
-        "baseline_points": 41,
+        "n_articles": 42,
+        "n_sources": 38,
+        "z": -1.026,
+        "baseline_points": 42,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 75,
+        "n_split": 61,
         "saturated": false,
         "top_titles": [
-          "Broward apartment owner files Chapter 11 to stay foreclosure - The Business Journals",
-          "LABA/LAMA Inhalers: Default COPD Therapy, Uneven Proof - Medscape",
-          "Managing school IAQ and mold in the Southeast webinar - USGBC | U.S. Green Building Council"
+          "“It’s electric.” VIA debuts new rideshare vehicles - VIA Metropolitan Transit",
+          "Mega-Cap Default Risk - Seeking Alpha",
+          "Broward apartment owner files Chapter 11 to stay foreclosure - The Business Journals"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 2,
         "n_sources": 2,
-        "z": -0.508,
-        "baseline_points": 41,
+        "z": -0.5,
+        "baseline_points": 42,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 9,
+        "n_split": 12,
         "saturated": false,
         "top_titles": [
           "With Musk and Huang at odds on AI neoclouds, can China weather the storm? - South China Morning Post",
           "JPMorgan Says Gold Could Fall Further Into Early Next Year, Rebound After Rates Peak - bloomingbit",
-          "A Landlord’s Moral Dilemma When Tenants Strike It Rich - Financial Samurai"
+          "Taiwan inflation could rise if energy subsidies end: Central bank - Focus Taiwan"
         ]
       },
       "geopolitical": {
-        "n_articles": 98,
+        "n_articles": 95,
         "n_sources": 83,
-        "z": 0.484,
-        "baseline_points": 41,
+        "z": 0.132,
+        "baseline_points": 42,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 175,
+        "n_split": 178,
         "saturated": true,
         "top_titles": [
           "US imposes sanctions on Rwanda's defense ministry over Congo conflict - Reuters",
-          "U.S. imposes new North Korea sanctions amid stalled diplomatic talks - NBC News",
-          "MSU officials sued by another trustee over code's impact on speech rights - The Detroit News"
+          "Trump Officials Discussing Sanctions Relief for Russian Fund, Russia Acknowledges - The New York Times",
+          "Honor Committee discusses effectiveness of sanctions in abeyance - The Cavalier Daily"
         ]
       },
       "trade_policy": {
-        "n_articles": 76,
-        "n_sources": 61,
-        "z": 0.388,
-        "baseline_points": 41,
+        "n_articles": 82,
+        "n_sources": 71,
+        "z": 0.808,
+        "baseline_points": 42,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 114,
+        "n_split": 111,
         "saturated": false,
         "top_titles": [
+          "Halloween candy prices rise 7.7% amid global supply chain & tariff impacts, experts say - thv11.com",
           "President Trump’s Steel and Aluminum Tariffs: 1.0 vs. 2.0 - The American Action Forum",
-          "Canada reports limited progress in trade talks with US - Reuters",
-          "Malaysia intercepted $12.2 million shipment of servers with AI chips suspected of violating export controls - Fortune"
+          "Small business owners crave stability as inflation, trade war fallout stifle main street - WBFF"
         ]
       },
       "pandemic": {
-        "n_articles": 95,
-        "n_sources": 84,
-        "z": 0.757,
-        "baseline_points": 41,
+        "n_articles": 90,
+        "n_sources": 80,
+        "z": 0.453,
+        "baseline_points": 42,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 198,
-        "saturated": true,
+        "n_split": 189,
+        "saturated": false,
         "top_titles": [
-          "Arlington Elementary placed on lockdown as SCSO searches for suspect - localmemphis.com",
-          "Africa’s ‘unprecedented’ Ebola outbreak could reach UK, says top health official - The Guardian",
-          "IVAC Researchers Inform Global Guidance for Diphtheria Outbreak Prevention - Johns Hopkins Bloomberg School of Public Health"
+          "Arrest made after Arlington school put on lockdown - Action News 5",
+          "Officials: More than 20 Georgia prisons placed on lockdown - WJCL",
+          "SCSO search prompts lockdown at Arlington Elementary School - localmemphis.com"
         ]
       },
       "fx_shock": {
-        "n_articles": 1,
-        "n_sources": 1,
-        "z": 0.294,
-        "baseline_points": 41,
+        "n_articles": 2,
+        "n_sources": 2,
+        "z": 1.508,
+        "baseline_points": 42,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 3,
+        "n_split": 5,
         "saturated": false,
         "top_titles": [
-          "Uganda Cites Shocks, Structural Woes After 18% Currency Plunge - Bloomberg.com",
-          "Top 10 Biggest Currency Devaluations in African History, Ranked - The African Exponent",
-          "U.S. Dollar Surges to Unprecedented Levels in Cuba's Black Market - CubaHeadlines"
+          "Uganda Cites Shocks, Structural Woes After 18% Currency Plunge - Bloomberg",
+          "Indian currency crisis? | Is RBI cutting LRS limits? | Sandy’s Economy Crackers # 072 - Howl.Link",
+          "Top 10 Biggest Currency Devaluations in African History, Ranked - The African Exponent"
         ]
       },
       "rate_shock": {
         "n_articles": 1,
         "n_sources": 1,
-        "z": -1.27,
-        "baseline_points": 41,
+        "z": -1.231,
+        "baseline_points": 42,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 2,
+        "n_split": 3,
         "saturated": false,
         "top_titles": [
-          "Morgan Stanley Research Report Breakdown: Real Yields Surge, Gold Holds Steady at $4,000, Backed by Central Bank and ET… - 深潮TechFlow",
-          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com"
+          "Zhuhai Huafa repays part of overdue trust product after bond selloff - Traders Union",
+          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com",
+          "Stock Market Today, Oct. 28: Markets Edge Higher as Fed Holds Rates Steady - Yahoo Finance"
         ]
       }
     },
