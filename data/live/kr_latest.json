@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-29T11:26+09:00",
+  "as_of": "2026-10-29T14:49+09:00",
   "level": "WATCH",
   "money_alert": false,
   "event_confirmed": false,
@@ -29,46 +29,46 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 18,
-        "n_sources": 17,
-        "z": 1.5716170305361927,
-        "baseline_points": 47
+        "n_articles": 26,
+        "n_sources": 25,
+        "z": 2.9134673713898747,
+        "baseline_points": 49
       },
       "credit_event": {
-        "n_articles": 61,
+        "n_articles": 49,
         "n_sources": 36,
-        "z": -0.01659458466628542,
-        "baseline_points": 47
+        "z": -0.6263492755659806,
+        "baseline_points": 49
       },
       "liquidity_crisis": {
-        "n_articles": 10,
-        "n_sources": 10,
-        "z": -1.8560651942617843,
-        "baseline_points": 47
+        "n_articles": 17,
+        "n_sources": 15,
+        "z": -0.6997477332704776,
+        "baseline_points": 49
       },
       "fx_shock": {
-        "n_articles": 55,
-        "n_sources": 45,
-        "z": -0.4479446931356677,
-        "baseline_points": 47
+        "n_articles": 40,
+        "n_sources": 34,
+        "z": -1.1986265043778466,
+        "baseline_points": 49
       },
       "trade_policy": {
-        "n_articles": 50,
-        "n_sources": 45,
-        "z": -0.5485979146048169,
-        "baseline_points": 47
+        "n_articles": 69,
+        "n_sources": 58,
+        "z": 0.3262391090352656,
+        "baseline_points": 49
       },
       "geopolitical": {
-        "n_articles": 113,
-        "n_sources": 72,
-        "z": -0.41879168473642053,
-        "baseline_points": 47
+        "n_articles": 119,
+        "n_sources": 75,
+        "z": -0.168947727464605,
+        "baseline_points": 49
       },
       "pandemic": {
-        "n_articles": 54,
-        "n_sources": 34,
-        "z": 0.46941580942189143,
-        "baseline_points": 47
+        "n_articles": 61,
+        "n_sources": 42,
+        "z": 0.9082939813380625,
+        "baseline_points": 49
       }
     },
     "notes": []
