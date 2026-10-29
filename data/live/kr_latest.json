@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-10-29T14:49+09:00",
+  "as_of": "2026-10-29T22:02+09:00",
   "level": "WATCH",
   "money_alert": false,
-  "event_confirmed": false,
+  "event_confirmed": true,
   "kr_market": {
     "as_of": "2026-10-29",
     "zscores": {
@@ -26,49 +26,61 @@
   },
   "kr_news": {
     "status": "ok",
-    "clusters": [],
+    "clusters": [
+      {
+        "event_type": "banking_stress",
+        "n_articles": 29,
+        "n_sources": 26,
+        "z": 3.1619619124782603,
+        "top_titles": [
+          "기업은행, 퇴직연금도 매일 자동투자…월 1만원부터 가능 - 데일리안",
+          "[포커스] 금융당국, 부실 금융사 '3일 만에 정리' 추진···주주·채권자 권리보호는? - 폴리뉴스 Polinews",
+          "금융위기 우려 땐 부실 금융회사 3일 만에 정리… '신속정리제도' 추진 - 한국일보"
+        ]
+      }
+    ],
     "observations": {
       "banking_stress": {
-        "n_articles": 26,
-        "n_sources": 25,
-        "z": 2.9134673713898747,
-        "baseline_points": 49
+        "n_articles": 29,
+        "n_sources": 26,
+        "z": 3.1619619124782603,
+        "baseline_points": 50
       },
       "credit_event": {
-        "n_articles": 49,
-        "n_sources": 36,
-        "z": -0.6263492755659806,
-        "baseline_points": 49
+        "n_articles": 86,
+        "n_sources": 45,
+        "z": 1.3390863172247647,
+        "baseline_points": 50
       },
       "liquidity_crisis": {
-        "n_articles": 17,
-        "n_sources": 15,
-        "z": -0.6997477332704776,
-        "baseline_points": 49
+        "n_articles": 27,
+        "n_sources": 26,
+        "z": 0.8633299076051135,
+        "baseline_points": 50
       },
       "fx_shock": {
-        "n_articles": 40,
-        "n_sources": 34,
-        "z": -1.1986265043778466,
-        "baseline_points": 49
+        "n_articles": 50,
+        "n_sources": 41,
+        "z": -0.654011950877624,
+        "baseline_points": 50
       },
       "trade_policy": {
-        "n_articles": 69,
-        "n_sources": 58,
-        "z": 0.3262391090352656,
-        "baseline_points": 49
+        "n_articles": 31,
+        "n_sources": 29,
+        "z": -1.414111915673714,
+        "baseline_points": 50
       },
       "geopolitical": {
-        "n_articles": 119,
+        "n_articles": 112,
         "n_sources": 75,
-        "z": -0.168947727464605,
-        "baseline_points": 49
+        "z": -0.44075238825988794,
+        "baseline_points": 50
       },
       "pandemic": {
-        "n_articles": 61,
+        "n_articles": 52,
         "n_sources": 42,
-        "z": 0.9082939813380625,
-        "baseline_points": 49
+        "z": 0.2955239135383522,
+        "baseline_points": 50
       }
     },
     "notes": []
@@ -115,9 +127,9 @@
     },
     {
       "단계": "한국 사건(B_kr)",
-      "원인": "급증 군집 없음",
-      "근거": "규칙: 최근 24시간 기사 수 z ≥ 3.0 (직전 30일 같은 시간대) AND 언론사 ≥ 10곳 (사전 등록 v5). 출처: Google 뉴스 RSS",
-      "결과": "비활성"
+      "원인": "banking_stress: 기업은행, 퇴직연금도 매일 자동투자…월 1만원부터 가능 - 데일리안",
+      "근거": "banking_stress: 기사 29건 · 언론사 26곳 · z=3.2 규칙: 최근 24시간 기사 수 z ≥ 3.0 (직전 30일 같은 시간대) AND 언론사 ≥ 10곳 (사전 등록 v5). 출처: Google 뉴스 RSS",
+      "결과": "활성"
     },
     {
       "단계": "DART 신용 공시",
@@ -133,15 +145,15 @@
     },
     {
       "단계": "로컬 종합 등급",
-      "원인": "A_kr/C_kr=비활성, 사건(B_any)=미확정, DART 경고 2건",
+      "원인": "A_kr/C_kr=비활성, 사건(B_any)=확정, DART 경고 2건",
       "근거": "로컬 ALERT = (한국 사건 ∨ 해외 사건 ∨ 확정 DART) ∧ (A_kr ∨ C_kr) (사전 등록 v5)",
       "결과": "WATCH → 사건 경고 알림"
     }
   ],
   "notes": [],
   "alerts_sent": {
-    "dart:20261028000447:False": "duplicate",
-    "dart:20261028000288:False": "duplicate"
+    "dart:20261028000447:False": "sent",
+    "dart:20261028000288:False": "sent"
   },
   "report": null
 }
