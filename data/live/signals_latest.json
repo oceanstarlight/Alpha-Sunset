@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-29T06:23:23+00:00",
+  "collected_at": "2026-10-29T13:39:50+00:00",
   "as_of": "2026-10-28",
   "level": "WATCH",
   "chain": [
@@ -63,114 +63,114 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 7,
-        "n_sources": 7,
-        "z": 2.15,
-        "baseline_points": 42,
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": 1.472,
+        "baseline_points": 43,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 18,
+        "n_split": 22,
         "saturated": false,
         "top_titles": [
-          "BNM fines AmBank, AmBank Islamic RM552,000 over cash reporting lapses - The Malaysian Reserve",
           "US Bank Failures Pile Up — Is It Just Noise? - Global Finance Magazine",
-          "FDIC Insurance Protects Eligible Deposits as Bitcoin Faces Price Risk - TOKENPOST"
+          "FDIC Insurance Protects Eligible Deposits as Bitcoin Faces Price Risk - TOKENPOST",
+          "Dashain exodus deepens blood shortage in Valley - The Kathmandu Post"
         ]
       },
       "credit_event": {
-        "n_articles": 42,
-        "n_sources": 38,
-        "z": -1.026,
-        "baseline_points": 42,
+        "n_articles": 58,
+        "n_sources": 53,
+        "z": 0.039,
+        "baseline_points": 43,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 61,
+        "n_split": 72,
         "saturated": false,
         "top_titles": [
-          "“It’s electric.” VIA debuts new rideshare vehicles - VIA Metropolitan Transit",
-          "Mega-Cap Default Risk - Seeking Alpha",
-          "Broward apartment owner files Chapter 11 to stay foreclosure - The Business Journals"
+          "European Loans September Wrap-Up: Back from the Beach, Back to the Limit: AI Default Shields Arrive as New Paper Revives a Raft of Aggressive Terms - CreditSights",
+          "Ubuntu Core Desktop returns as Canonical’s plan for an immutable default desktop - Help Net Security",
+          "“It’s electric.” VIA debuts new rideshare vehicles - VIA Metropolitan Transit"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 2,
-        "n_sources": 2,
-        "z": -0.5,
-        "baseline_points": 42,
+        "n_articles": 1,
+        "n_sources": 1,
+        "z": -0.639,
+        "baseline_points": 43,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 12,
+        "n_split": 8,
         "saturated": false,
         "top_titles": [
-          "With Musk and Huang at odds on AI neoclouds, can China weather the storm? - South China Morning Post",
+          "The Sequence Opinion - Issue #961: The AI Credit Crunch - TheSequence | Jesus Rodriguez",
           "JPMorgan Says Gold Could Fall Further Into Early Next Year, Rebound After Rates Peak - bloomingbit",
-          "Taiwan inflation could rise if energy subsidies end: Central bank - Focus Taiwan"
+          "Lax rules, looting pushed banking sector into crisis - The Daily Star"
         ]
       },
       "geopolitical": {
-        "n_articles": 95,
-        "n_sources": 83,
-        "z": 0.132,
-        "baseline_points": 42,
+        "n_articles": 96,
+        "n_sources": 80,
+        "z": 0.247,
+        "baseline_points": 43,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 178,
+        "n_split": 173,
         "saturated": true,
         "top_titles": [
-          "US imposes sanctions on Rwanda's defense ministry over Congo conflict - Reuters",
-          "Trump Officials Discussing Sanctions Relief for Russian Fund, Russia Acknowledges - The New York Times",
-          "Honor Committee discusses effectiveness of sanctions in abeyance - The Cavalier Daily"
+          "State Police Investigating Home Invasion Robbery in Bridgeville - Delaware State Police (.gov)",
+          "Russia and US discussing sanctions relief for Moscow’s sovereign wealth fund, Kremlin aide says - Yahoo",
+          "U.S., South Korea, partners back North Korea sanctions enforcement - upi"
         ]
       },
       "trade_policy": {
-        "n_articles": 82,
-        "n_sources": 71,
-        "z": 0.808,
-        "baseline_points": 42,
+        "n_articles": 79,
+        "n_sources": 67,
+        "z": 0.579,
+        "baseline_points": 43,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 111,
+        "n_split": 113,
         "saturated": false,
         "top_titles": [
-          "Halloween candy prices rise 7.7% amid global supply chain & tariff impacts, experts say - thv11.com",
-          "President Trump’s Steel and Aluminum Tariffs: 1.0 vs. 2.0 - The American Action Forum",
-          "Small business owners crave stability as inflation, trade war fallout stifle main street - WBFF"
+          "Brooksville engineering firm issues tariff refunds to customers - WUSF",
+          "Exclusive | Trump Administration Promised Tariff Relief in Talks to Secure U.S. Audi Factory - WSJ",
+          "Nucor: Tariff Tailwinds And New Capacity Set Up A Stronger 2027 (NYSE:NUE) - Seeking Alpha"
         ]
       },
       "pandemic": {
-        "n_articles": 90,
-        "n_sources": 80,
-        "z": 0.453,
-        "baseline_points": 42,
+        "n_articles": 86,
+        "n_sources": 69,
+        "z": 0.213,
+        "baseline_points": 43,
         "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 189,
+        "n_split": 183,
         "saturated": false,
         "top_titles": [
+          "Update (October 28, 2026, 8:15 a.m.): Visiting Availability For CUCF, USCF - Utah.gov",
           "Arrest made after Arlington school put on lockdown - Action News 5",
-          "Officials: More than 20 Georgia prisons placed on lockdown - WJCL",
-          "SCSO search prompts lockdown at Arlington Elementary School - localmemphis.com"
+          "Screwworm Detected for First Time in Arizona as Outbreak Spreads - Bloomberg.com"
         ]
       },
       "fx_shock": {
+        "n_articles": 1,
+        "n_sources": 1,
+        "z": 0.251,
+        "baseline_points": 43,
+        "measure": "주제 쿼리 1회(상한 100)",
+        "n_split": 7,
+        "saturated": false,
+        "top_titles": [
+          "Indian currency crisis? | Is RBI cutting LRS limits? | Sandy’s Economy Crackers # 072 - Howl.Link",
+          "Many of Africa’s banks got bigger in 2025. Did they get better? - The Africa Report",
+          "Zimbabwe wants digital payments to build trust in its newest currency - Moneyweb"
+        ]
+      },
+      "rate_shock": {
         "n_articles": 2,
         "n_sources": 2,
-        "z": 1.508,
-        "baseline_points": 42,
+        "z": -0.988,
+        "baseline_points": 43,
         "measure": "주제 쿼리 1회(상한 100)",
         "n_split": 5,
         "saturated": false,
         "top_titles": [
-          "Uganda Cites Shocks, Structural Woes After 18% Currency Plunge - Bloomberg",
-          "Indian currency crisis? | Is RBI cutting LRS limits? | Sandy’s Economy Crackers # 072 - Howl.Link",
-          "Top 10 Biggest Currency Devaluations in African History, Ranked - The African Exponent"
-        ]
-      },
-      "rate_shock": {
-        "n_articles": 1,
-        "n_sources": 1,
-        "z": -1.231,
-        "baseline_points": 42,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 3,
-        "saturated": false,
-        "top_titles": [
+          "Arini losses deepen to 26% as European junk bond selloff accelerates - Hedgeweek",
           "Zhuhai Huafa repays part of overdue trust product after bond selloff - Traders Union",
-          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com",
           "Stock Market Today, Oct. 28: Markets Edge Higher as Fed Holds Rates Steady - Yahoo Finance"
         ]
       }
