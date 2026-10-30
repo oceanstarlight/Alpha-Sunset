@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-10-30T10:25:32+00:00",
+  "collected_at": "2026-10-30T18:11:17+00:00",
   "as_of": "2026-10-29",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+1.29, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.79, WTI 유가(DCOILWTICO) z=-0.56",
+      "원인": "미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.31",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.31, 미 10년물 금리(DGS10) z=+1.29, WTI 유가(DCOILWTICO) z=-0.56",
       "결과": "비활성"
     },
     {
@@ -31,13 +31,15 @@
   "money_alert": false,
   "market": {
     "active": false,
-    "triggered": [],
+    "triggered": [
+      "BAMLH0A0HYM2"
+    ],
     "zscores": {
-      "VIXCLS": -0.5,
+      "VIXCLS": 0.2,
       "T10Y2Y": -0.33,
       "DGS10": 1.29,
       "DCOILWTICO": -0.56,
-      "BAMLH0A0HYM2": -0.79
+      "BAMLH0A0HYM2": 2.31
     }
   },
   "flow": {
@@ -58,115 +60,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 15,
-        "n_sources": 15,
-        "z": 0.316,
-        "baseline_points": 21,
+        "n_articles": 16,
+        "n_sources": 16,
+        "z": 0.52,
+        "baseline_points": 22,
         "measure": "키워드별 합산",
-        "n_split": 15,
+        "n_split": 16,
         "saturated": false,
         "top_titles": [
+          "Silicon Valley Bank failure might further stymie tech funding - TechTarget",
           "Law firm Weil Gotshal prepares to wind down - Axios",
-          "Bitcoin warning: Billionaire says dollar holders could be left behind - TheStreet",
           "Nearly Half of $6 Billion Stolen in Binance Hack Frozen as BNB Rebounds Past $700, Targeting $800 - TradingKey"
         ]
       },
       "credit_event": {
-        "n_articles": 96,
-        "n_sources": 78,
-        "z": 2.366,
-        "baseline_points": 21,
+        "n_articles": 99,
+        "n_sources": 80,
+        "z": 2.289,
+        "baseline_points": 22,
         "measure": "키워드별 합산",
-        "n_split": 96,
+        "n_split": 99,
         "saturated": false,
         "top_titles": [
-          "Filing Alert: Stuckey's Chapter 11 - Bondoro",
-          "A private equity firm defaulted on its mortgage for a Boston tower. Then it repurchased the building — at a big discount - The Boston Globe",
-          "Endor Labs + Google Antigravity: Secure code by default in agentic workflows - Endor Labs"
+          "US Bankruptcy: Gibson Dunn and Davis Polk lead creditor coalition alliances in chapter 11 – Bankruptcy Data Insights - CreditSights",
+          "Lake Norman wine bar files for Chapter 11 bankruptcy, listing nearly $270K in debt - The Business Journals",
+          "Getty Images Files for Chapter 11 at a ~$910M Run-Rate: 27% EBITDA Margins, 25% Fewer Subscribers, and $0 for Public Shareholders - saastr.com"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 9,
-        "n_sources": 7,
-        "z": 0.204,
-        "baseline_points": 21,
+        "n_articles": 14,
+        "n_sources": 11,
+        "z": 2.025,
+        "baseline_points": 22,
         "measure": "키워드별 합산",
-        "n_split": 9,
+        "n_split": 14,
         "saturated": false,
         "top_titles": [
-          "The Sequence Opinion - Issue #961: The AI Credit Crunch - TheSequence | Jesus Rodriguez",
-          "Risk is being repriced and re-allocated to different buyers, Meltem Demirors notes - Traders Union",
-          "China Vanke Posts Another Quarterly Loss as Cash Woes Mount - Bloomberg.com"
+          "Jupiter Lend Says Liquidity Crunch Is Delaying Withdrawals - The Defiant",
+          "Jupiter Earn Liquidity Crunch Disrupts Withdrawals in DeFi Market - The Cryptonomist",
+          "Jupiter Lend faces a liquidity crunch with only 3.35 USDC available for 418.5M USDC withdrawal claims. - Pluang"
         ]
       },
       "geopolitical": {
-        "n_articles": 161,
-        "n_sources": 137,
-        "z": 0.66,
-        "baseline_points": 21,
+        "n_articles": 144,
+        "n_sources": 124,
+        "z": -0.11,
+        "baseline_points": 22,
         "measure": "키워드별 합산",
-        "n_split": 161,
+        "n_split": 144,
         "saturated": false,
         "top_titles": [
-          "New sanctions show limits of Trump influence over Congo conflict - Semafor",
-          "Buckeye mother assaulted in home invasion was set up by fiancé, police say - FOX 10 Phoenix",
-          "Army commander: China invasion of Taiwan by April remains real threat - Washington Times"
+          "Sanctions Watch (October 2026) - Center for Economic and Policy Research",
+          "WARMINGTON: Three people shot in 'violent interaction' during Bridle Path home invasion - Toronto Sun",
+          "Pope modifies disciplinary sanctions for employees of the Roman Curia - EWTN News"
         ]
       },
       "trade_policy": {
-        "n_articles": 113,
-        "n_sources": 85,
-        "z": 0.066,
-        "baseline_points": 21,
+        "n_articles": 137,
+        "n_sources": 103,
+        "z": 0.876,
+        "baseline_points": 22,
         "measure": "키워드별 합산",
-        "n_split": 113,
+        "n_split": 137,
         "saturated": false,
         "top_titles": [
-          "Exclusive | Trump Administration Promised Tariff Relief in Talks to Secure U.S. Audi Factory - WSJ",
-          "UK: UK Government Introduces Further Tariff Suspensions - Global Sanctions and Export Controls Blog",
-          "Border communities feel strain as U.S.-Canada trade war disrupts longtime friendship - kare11.com"
+          "An end to summer tariff peace threatens U.S. economic growth - Equitable Growth",
+          "Scotland's Swinney raised Scotch whisky tariff concerns during India trip - Reuters",
+          "Facing a potential $40M US tariff bill, this American importer is suing Trump to end some tariffs on Canada - CBC"
         ]
       },
       "pandemic": {
-        "n_articles": 187,
-        "n_sources": 151,
-        "z": 0.81,
-        "baseline_points": 21,
+        "n_articles": 137,
+        "n_sources": 118,
+        "z": -0.346,
+        "baseline_points": 22,
         "measure": "키워드별 합산",
-        "n_split": 187,
+        "n_split": 137,
         "saturated": false,
         "top_titles": [
-          "At least 55 sickened in salmonella, E. coli outbreak linked to sprouts in 15 states; 4 hospitalized - ABC7 Bay Area",
-          "Report of shooting at Barrington High School spurs lockdown, police response: officials - ABC7 Chicago",
-          "As a historic measles outbreak hits Pennsylvania Amish country, more show openness to vaccines - The Daily Gazette"
+          "As a historic measles outbreak hits Pennsylvania Amish country, more show openness to vaccines - Pioneer Press",
+          "Health officials report 74 new measles cases in Pennsylvania - ABC News - Breaking News, Latest News and Videos",
+          "Reports: Riverchase Galleria on lockdown - WBRC"
         ]
       },
       "fx_shock": {
-        "n_articles": 9,
-        "n_sources": 7,
-        "z": 2.353,
-        "baseline_points": 21,
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": 0.682,
+        "baseline_points": 22,
         "measure": "키워드별 합산",
-        "n_split": 9,
+        "n_split": 6,
         "saturated": false,
         "top_titles": [
           "The shilling crisis exposes the cost of growth without better livelihoods - The Independent Uganda",
           "Iranian Rial Dirhamisation: UAE Financial Leverage on Tehran and the Weaponisation of Currency Interdependence - SpecialEurasia",
-          "Scariest stock market events in recent history - Financial Post"
+          "SanlamAllianz: Why the insurance giant is slow to win over global funds - The Africa Report"
         ]
       },
       "rate_shock": {
         "n_articles": 8,
         "n_sources": 8,
-        "z": -0.184,
-        "baseline_points": 21,
+        "z": -0.18,
+        "baseline_points": 22,
         "measure": "키워드별 합산",
         "n_split": 8,
         "saturated": false,
         "top_titles": [
-          "ING webinar on the 2027 rates outlook: The Good, the Bad, and the Ugly - ing think",
-          "India bonds seen attracting buyers as 10-year yield nears 2022 levels - The Economic Times",
-          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com"
+          "Hedge funds increase China bond bets as equity selloff drives ETF inflows - Hedgeweek",
+          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com",
+          "Full list of stories by category Market Report - midday - 2026-10-30 - 2 - Sharecast.com"
         ]
       }
     },
