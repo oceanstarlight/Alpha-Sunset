@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-10-29T20:30:54+00:00",
-  "as_of": "2026-10-28",
+  "collected_at": "2026-10-30T01:19:50+00:00",
+  "as_of": "2026-10-29",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "미 장단기 금리차(T10Y2Y) z=+3.29",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 장단기 금리차(T10Y2Y) z=+3.29, 미 10년물 금리(DGS10) z=+1.29, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.79",
+      "원인": "임계 초과 지표 없음",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+1.29, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.79, WTI 유가(DCOILWTICO) z=-0.56",
       "결과": "비활성"
     },
     {
@@ -31,16 +31,12 @@
   "money_alert": false,
   "market": {
     "active": false,
-    "triggered": [
-      "T10Y2Y"
-    ],
+    "triggered": [],
     "zscores": {
       "VIXCLS": -0.5,
-      "T10Y2Y": 3.29,
+      "T10Y2Y": -0.33,
       "DGS10": 1.29,
-      "DEXKOUS": -0.1,
       "DCOILWTICO": -0.56,
-      "DTWEXBGS": -0.11,
       "BAMLH0A0HYM2": -0.79
     }
   },
@@ -62,95 +58,95 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 6,
-        "n_sources": 6,
-        "z": 1.42,
-        "baseline_points": 44,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 19,
+        "n_articles": 17,
+        "n_sources": 17,
+        "z": 0.758,
+        "baseline_points": 20,
+        "measure": "키워드별 합산",
+        "n_split": 17,
         "saturated": false,
         "top_titles": [
-          "US Bank Failures Pile Up — Is It Just Noise? - Global Finance Magazine",
           "Law firm Weil Gotshal prepares to wind down - Axios",
-          "Bitcoin warning: Billionaire says dollar holders could be left behind - TheStreet"
+          "US Bank Failures Pile Up — Is It Just Noise? - Global Finance Magazine",
+          "‘It is a feeding frenzy’ — How a run on talent doomed Weil Gotshal - 9fin"
         ]
       },
       "credit_event": {
-        "n_articles": 60,
-        "n_sources": 56,
-        "z": 0.171,
-        "baseline_points": 44,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 94,
+        "n_articles": 93,
+        "n_sources": 81,
+        "z": 2.467,
+        "baseline_points": 20,
+        "measure": "키워드별 합산",
+        "n_split": 93,
         "saturated": false,
         "top_titles": [
           "Filing Alert: Stuckey's Chapter 11 - Bondoro",
-          "US private credit default rate falls for second consecutive quarter - Alternative Credit Investor",
-          "Ubuntu Core Desktop returns as Canonical’s plan for an immutable default desktop - Help Net Security"
+          "Endor Labs + Google Antigravity: Secure code by default in agentic workflows - Endor Labs",
+          "Bermuda Insurer Files Ch. 15 Papers After $125M Loan Default - Law360"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 1,
-        "n_sources": 1,
-        "z": -0.629,
-        "baseline_points": 44,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 7,
+        "n_articles": 5,
+        "n_sources": 4,
+        "z": -1.304,
+        "baseline_points": 20,
+        "measure": "키워드별 합산",
+        "n_split": 5,
         "saturated": false,
         "top_titles": [
           "The Sequence Opinion - Issue #961: The AI Credit Crunch - TheSequence | Jesus Rodriguez",
-          "JPMorgan Says Gold Could Fall Further Into Early Next Year, Rebound After Rates Peak - bloomingbit",
-          "Lax rules, looting pushed banking sector into crisis - The Daily Star"
+          "Crunch Fitness Hits 600 Gyms Worldwide as Franchisees Push Growth - Athletech News",
+          "Can Avis Budget Stock Fall 50%? - Trefis"
         ]
       },
       "geopolitical": {
-        "n_articles": 95,
-        "n_sources": 84,
-        "z": 0.126,
-        "baseline_points": 44,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 170,
-        "saturated": true,
+        "n_articles": 162,
+        "n_sources": 133,
+        "z": 0.729,
+        "baseline_points": 20,
+        "measure": "키워드별 합산",
+        "n_split": 162,
+        "saturated": false,
         "top_titles": [
+          "Buckeye mother assaulted in home invasion was set up by fiancé, police say - FOX 10 Phoenix",
           "Russia and US discussing sanctions relief for Moscow’s sovereign wealth fund, Kremlin aide says - CNN",
-          "U.S. Hits Rwanda With New Sanctions Over a Conflict Trump Declared ‘Ended’ - The New York Times",
-          "State Police Investigating Home Invasion Robbery in Bridgeville - Delaware State Police (.gov)"
+          "Hit Send and Get Hit with Sanctions: Federal Court Orders Sanctions for In-House Counsel's Emails - Snell & Wilmer"
         ]
       },
       "trade_policy": {
-        "n_articles": 76,
-        "n_sources": 61,
-        "z": 0.355,
-        "baseline_points": 44,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 126,
+        "n_articles": 122,
+        "n_sources": 91,
+        "z": 0.373,
+        "baseline_points": 20,
+        "measure": "키워드별 합산",
+        "n_split": 122,
         "saturated": false,
         "top_titles": [
           "Exclusive | Trump Administration Promised Tariff Relief in Talks to Secure U.S. Audi Factory - WSJ",
-          "Trump strikes warmer tone on Canada despite tariff tensions | Daily Sabah - Daily Sabah",
-          "Tariff Refunds Boost Polaris and Logistics Stocks, but Leave Caterpillar Sidelined - Barron's"
+          "US promises tariff relief in talks with Audi on Georgia plant, sources say - Reuters",
+          "The U.S. and EU could break their tariff truce over a record-breaking $3.4 billion Airbus loan - Fortune"
         ]
       },
       "pandemic": {
-        "n_articles": 99,
-        "n_sources": 75,
-        "z": 0.98,
-        "baseline_points": 44,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 211,
+        "n_articles": 204,
+        "n_sources": 152,
+        "z": 1.265,
+        "baseline_points": 20,
+        "measure": "키워드별 합산",
+        "n_split": 204,
         "saturated": true,
         "top_titles": [
-          "Officials: Learning centers on lockdown as search for suspect underway in Simpsonville - FOX Carolina News",
-          "Officials: More than 20 Georgia prisons placed on lockdown - WJCL",
-          "Meriwether County schools placed on lockdown, closing early as deputies investigate possible threat - CBS News"
+          "Report of shooting at Barrington High School spurs lockdown, police response: officials - ABC7 Chicago",
+          "Infective Endocarditis Mortality Stable After the Pandemic - DocWireNews",
+          "Officials: Suspect still on the run after search places Upstate learning centers’ on lockdown - FOX Carolina News"
         ]
       },
       "fx_shock": {
-        "n_articles": 0,
-        "n_sources": 0,
-        "z": -0.966,
-        "baseline_points": 44,
-        "measure": "주제 쿼리 1회(상한 100)",
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": 0.893,
+        "baseline_points": 20,
+        "measure": "키워드별 합산",
         "n_split": 6,
         "saturated": false,
         "top_titles": [
@@ -160,12 +156,12 @@
         ]
       },
       "rate_shock": {
-        "n_articles": 4,
-        "n_sources": 4,
-        "z": -0.551,
-        "baseline_points": 44,
-        "measure": "주제 쿼리 1회(상한 100)",
-        "n_split": 9,
+        "n_articles": 10,
+        "n_sources": 10,
+        "z": 0.085,
+        "baseline_points": 20,
+        "measure": "키워드별 합산",
+        "n_split": 10,
         "saturated": false,
         "top_titles": [
           "Arini losses deepen to 26% as European junk bond selloff accelerates - Hedgeweek",
