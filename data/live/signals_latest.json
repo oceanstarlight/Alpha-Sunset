@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-30T01:19:50+00:00",
+  "collected_at": "2026-10-30T10:25:32+00:00",
   "as_of": "2026-10-29",
   "level": "NONE",
   "chain": [
@@ -58,115 +58,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 17,
-        "n_sources": 17,
-        "z": 0.758,
-        "baseline_points": 20,
+        "n_articles": 15,
+        "n_sources": 15,
+        "z": 0.316,
+        "baseline_points": 21,
         "measure": "키워드별 합산",
-        "n_split": 17,
+        "n_split": 15,
         "saturated": false,
         "top_titles": [
           "Law firm Weil Gotshal prepares to wind down - Axios",
-          "US Bank Failures Pile Up — Is It Just Noise? - Global Finance Magazine",
-          "‘It is a feeding frenzy’ — How a run on talent doomed Weil Gotshal - 9fin"
+          "Bitcoin warning: Billionaire says dollar holders could be left behind - TheStreet",
+          "Nearly Half of $6 Billion Stolen in Binance Hack Frozen as BNB Rebounds Past $700, Targeting $800 - TradingKey"
         ]
       },
       "credit_event": {
-        "n_articles": 93,
-        "n_sources": 81,
-        "z": 2.467,
-        "baseline_points": 20,
+        "n_articles": 96,
+        "n_sources": 78,
+        "z": 2.366,
+        "baseline_points": 21,
         "measure": "키워드별 합산",
-        "n_split": 93,
+        "n_split": 96,
         "saturated": false,
         "top_titles": [
           "Filing Alert: Stuckey's Chapter 11 - Bondoro",
-          "Endor Labs + Google Antigravity: Secure code by default in agentic workflows - Endor Labs",
-          "Bermuda Insurer Files Ch. 15 Papers After $125M Loan Default - Law360"
+          "A private equity firm defaulted on its mortgage for a Boston tower. Then it repurchased the building — at a big discount - The Boston Globe",
+          "Endor Labs + Google Antigravity: Secure code by default in agentic workflows - Endor Labs"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 5,
-        "n_sources": 4,
-        "z": -1.304,
-        "baseline_points": 20,
+        "n_articles": 9,
+        "n_sources": 7,
+        "z": 0.204,
+        "baseline_points": 21,
         "measure": "키워드별 합산",
-        "n_split": 5,
+        "n_split": 9,
         "saturated": false,
         "top_titles": [
           "The Sequence Opinion - Issue #961: The AI Credit Crunch - TheSequence | Jesus Rodriguez",
-          "Crunch Fitness Hits 600 Gyms Worldwide as Franchisees Push Growth - Athletech News",
-          "Can Avis Budget Stock Fall 50%? - Trefis"
+          "Risk is being repriced and re-allocated to different buyers, Meltem Demirors notes - Traders Union",
+          "China Vanke Posts Another Quarterly Loss as Cash Woes Mount - Bloomberg.com"
         ]
       },
       "geopolitical": {
-        "n_articles": 162,
-        "n_sources": 133,
-        "z": 0.729,
-        "baseline_points": 20,
+        "n_articles": 161,
+        "n_sources": 137,
+        "z": 0.66,
+        "baseline_points": 21,
         "measure": "키워드별 합산",
-        "n_split": 162,
+        "n_split": 161,
         "saturated": false,
         "top_titles": [
+          "New sanctions show limits of Trump influence over Congo conflict - Semafor",
           "Buckeye mother assaulted in home invasion was set up by fiancé, police say - FOX 10 Phoenix",
-          "Russia and US discussing sanctions relief for Moscow’s sovereign wealth fund, Kremlin aide says - CNN",
-          "Hit Send and Get Hit with Sanctions: Federal Court Orders Sanctions for In-House Counsel's Emails - Snell & Wilmer"
+          "Army commander: China invasion of Taiwan by April remains real threat - Washington Times"
         ]
       },
       "trade_policy": {
-        "n_articles": 122,
-        "n_sources": 91,
-        "z": 0.373,
-        "baseline_points": 20,
+        "n_articles": 113,
+        "n_sources": 85,
+        "z": 0.066,
+        "baseline_points": 21,
         "measure": "키워드별 합산",
-        "n_split": 122,
+        "n_split": 113,
         "saturated": false,
         "top_titles": [
           "Exclusive | Trump Administration Promised Tariff Relief in Talks to Secure U.S. Audi Factory - WSJ",
-          "US promises tariff relief in talks with Audi on Georgia plant, sources say - Reuters",
-          "The U.S. and EU could break their tariff truce over a record-breaking $3.4 billion Airbus loan - Fortune"
+          "UK: UK Government Introduces Further Tariff Suspensions - Global Sanctions and Export Controls Blog",
+          "Border communities feel strain as U.S.-Canada trade war disrupts longtime friendship - kare11.com"
         ]
       },
       "pandemic": {
-        "n_articles": 204,
-        "n_sources": 152,
-        "z": 1.265,
-        "baseline_points": 20,
+        "n_articles": 187,
+        "n_sources": 151,
+        "z": 0.81,
+        "baseline_points": 21,
         "measure": "키워드별 합산",
-        "n_split": 204,
-        "saturated": true,
+        "n_split": 187,
+        "saturated": false,
         "top_titles": [
+          "At least 55 sickened in salmonella, E. coli outbreak linked to sprouts in 15 states; 4 hospitalized - ABC7 Bay Area",
           "Report of shooting at Barrington High School spurs lockdown, police response: officials - ABC7 Chicago",
-          "Infective Endocarditis Mortality Stable After the Pandemic - DocWireNews",
-          "Officials: Suspect still on the run after search places Upstate learning centers’ on lockdown - FOX Carolina News"
+          "As a historic measles outbreak hits Pennsylvania Amish country, more show openness to vaccines - The Daily Gazette"
         ]
       },
       "fx_shock": {
-        "n_articles": 6,
-        "n_sources": 6,
-        "z": 0.893,
-        "baseline_points": 20,
+        "n_articles": 9,
+        "n_sources": 7,
+        "z": 2.353,
+        "baseline_points": 21,
         "measure": "키워드별 합산",
-        "n_split": 6,
+        "n_split": 9,
         "saturated": false,
         "top_titles": [
-          "Scariest stock market events in recent history - Financial Post",
-          "Many of Africa’s banks got bigger in 2025. Did they get better? - The Africa Report",
-          "Zimbabwe wants digital payments to build trust in its newest currency - Moneyweb"
+          "The shilling crisis exposes the cost of growth without better livelihoods - The Independent Uganda",
+          "Iranian Rial Dirhamisation: UAE Financial Leverage on Tehran and the Weaponisation of Currency Interdependence - SpecialEurasia",
+          "Scariest stock market events in recent history - Financial Post"
         ]
       },
       "rate_shock": {
-        "n_articles": 10,
-        "n_sources": 10,
-        "z": 0.085,
-        "baseline_points": 20,
+        "n_articles": 8,
+        "n_sources": 8,
+        "z": -0.184,
+        "baseline_points": 21,
         "measure": "키워드별 합산",
-        "n_split": 10,
+        "n_split": 8,
         "saturated": false,
         "top_titles": [
-          "Arini losses deepen to 26% as European junk bond selloff accelerates - Hedgeweek",
           "ING webinar on the 2027 rates outlook: The Good, the Bad, and the Ugly - ing think",
-          "India bonds seen attracting buyers as 10-year yield nears 2022 levels - The Economic Times"
+          "India bonds seen attracting buyers as 10-year yield nears 2022 levels - The Economic Times",
+          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com"
         ]
       }
     },
