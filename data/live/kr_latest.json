@@ -1,8 +1,8 @@
 {
-  "as_of": "2026-10-30T11:35+09:00",
+  "as_of": "2026-10-30T14:50+09:00",
   "level": "WATCH",
   "money_alert": false,
-  "event_confirmed": true,
+  "event_confirmed": false,
   "kr_market": {
     "as_of": "2026-10-30",
     "zscores": {
@@ -26,61 +26,49 @@
   },
   "kr_news": {
     "status": "ok",
-    "clusters": [
-      {
-        "event_type": "banking_stress",
-        "n_articles": 33,
-        "n_sources": 31,
-        "z": 3.203563892198683,
-        "top_titles": [
-          "[민주내전] 유시민의 자기실현적 예언 - 한국NGO신문",
-          "스위스 최대 은행 美로 떠나나…UBS, 해외 이전 검토 - 데일리안",
-          "금융사 부실 정리 150일→3~4일…신속정리제도 도입 추진 - 서울경제TV"
-        ]
-      }
-    ],
+    "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 33,
-        "n_sources": 31,
-        "z": 3.203563892198683,
-        "baseline_points": 52
+        "n_articles": 20,
+        "n_sources": 19,
+        "z": 1.0701784385020958,
+        "baseline_points": 54
       },
       "credit_event": {
-        "n_articles": 76,
-        "n_sources": 31,
-        "z": 0.7501263640940161,
-        "baseline_points": 52
+        "n_articles": 59,
+        "n_sources": 33,
+        "z": -0.16932388339986731,
+        "baseline_points": 54
       },
       "liquidity_crisis": {
-        "n_articles": 19,
-        "n_sources": 18,
-        "z": -0.42161197088364966,
-        "baseline_points": 52
+        "n_articles": 13,
+        "n_sources": 13,
+        "z": -1.3513311291431251,
+        "baseline_points": 54
       },
       "fx_shock": {
-        "n_articles": 38,
-        "n_sources": 33,
-        "z": -1.2605977386473686,
-        "baseline_points": 52
+        "n_articles": 44,
+        "n_sources": 36,
+        "z": -0.9034334316723304,
+        "baseline_points": 54
       },
       "trade_policy": {
-        "n_articles": 44,
-        "n_sources": 30,
-        "z": -0.7780273272654341,
-        "baseline_points": 52
+        "n_articles": 32,
+        "n_sources": 24,
+        "z": -1.3111507415231802,
+        "baseline_points": 54
       },
       "geopolitical": {
-        "n_articles": 142,
-        "n_sources": 92,
-        "z": 0.7528633372838839,
-        "baseline_points": 52
+        "n_articles": 113,
+        "n_sources": 73,
+        "z": -0.4174569589022815,
+        "baseline_points": 54
       },
       "pandemic": {
-        "n_articles": 57,
-        "n_sources": 50,
-        "z": 0.6325410036089638,
-        "baseline_points": 52
+        "n_articles": 25,
+        "n_sources": 23,
+        "z": -1.5549257597587038,
+        "baseline_points": 54
       }
     },
     "notes": []
@@ -127,9 +115,9 @@
     },
     {
       "단계": "한국 사건(B_kr)",
-      "원인": "banking_stress: [민주내전] 유시민의 자기실현적 예언 - 한국NGO신문",
-      "근거": "banking_stress: 기사 33건 · 언론사 31곳 · z=3.2 규칙: 최근 24시간 기사 수 z ≥ 3.0 (직전 30일 같은 시간대) AND 언론사 ≥ 10곳 (사전 등록 v5). 출처: Google 뉴스 RSS",
-      "결과": "활성"
+      "원인": "급증 군집 없음",
+      "근거": "규칙: 최근 24시간 기사 수 z ≥ 3.0 (직전 30일 같은 시간대) AND 언론사 ≥ 10곳 (사전 등록 v5). 출처: Google 뉴스 RSS",
+      "결과": "비활성"
     },
     {
       "단계": "DART 신용 공시",
@@ -145,7 +133,7 @@
     },
     {
       "단계": "로컬 종합 등급",
-      "원인": "A_kr/C_kr=비활성, 사건(B_any)=확정, DART 경고 2건",
+      "원인": "A_kr/C_kr=비활성, 사건(B_any)=미확정, DART 경고 2건",
       "근거": "로컬 ALERT = (한국 사건 ∨ 해외 사건 ∨ 확정 DART) ∧ (A_kr ∨ C_kr) (사전 등록 v5)",
       "결과": "WATCH → 사건 경고 알림"
     }
