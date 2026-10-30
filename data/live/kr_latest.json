@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-30T14:50+09:00",
+  "as_of": "2026-10-30T21:57+09:00",
   "level": "WATCH",
   "money_alert": false,
   "event_confirmed": false,
@@ -29,46 +29,46 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 20,
-        "n_sources": 19,
-        "z": 1.0701784385020958,
-        "baseline_points": 54
+        "n_articles": 16,
+        "n_sources": 16,
+        "z": 0.5464778703573204,
+        "baseline_points": 55
       },
       "credit_event": {
-        "n_articles": 59,
-        "n_sources": 33,
-        "z": -0.16932388339986731,
-        "baseline_points": 54
+        "n_articles": 36,
+        "n_sources": 28,
+        "z": -1.3874089159271181,
+        "baseline_points": 55
       },
       "liquidity_crisis": {
-        "n_articles": 13,
-        "n_sources": 13,
-        "z": -1.3513311291431251,
-        "baseline_points": 54
+        "n_articles": 7,
+        "n_sources": 6,
+        "z": -2.245870185728283,
+        "baseline_points": 55
       },
       "fx_shock": {
-        "n_articles": 44,
-        "n_sources": 36,
-        "z": -0.9034334316723304,
-        "baseline_points": 54
+        "n_articles": 54,
+        "n_sources": 48,
+        "z": -0.368138740203951,
+        "baseline_points": 55
       },
       "trade_policy": {
-        "n_articles": 32,
-        "n_sources": 24,
-        "z": -1.3111507415231802,
-        "baseline_points": 54
+        "n_articles": 55,
+        "n_sources": 41,
+        "z": -0.22774405816661727,
+        "baseline_points": 55
       },
       "geopolitical": {
-        "n_articles": 113,
+        "n_articles": 107,
         "n_sources": 73,
-        "z": -0.4174569589022815,
-        "baseline_points": 54
+        "z": -0.6568886811899506,
+        "baseline_points": 55
       },
       "pandemic": {
         "n_articles": 25,
-        "n_sources": 23,
-        "z": -1.5549257597587038,
-        "baseline_points": 54
+        "n_sources": 22,
+        "z": -1.5075971595103923,
+        "baseline_points": 55
       }
     },
     "notes": []
