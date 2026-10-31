@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-10-31T06:13:21+00:00",
+  "collected_at": "2026-10-31T13:00:08+00:00",
   "as_of": "2026-10-30",
   "level": "NONE",
   "chain": [
@@ -62,108 +62,108 @@
       "banking_stress": {
         "n_articles": 11,
         "n_sources": 11,
-        "z": -0.609,
-        "baseline_points": 24,
+        "z": -0.592,
+        "baseline_points": 25,
         "measure": "키워드별 합산",
         "n_split": 11,
         "saturated": false,
         "top_titles": [
-          "Silicon Valley Bank failure might further stymie tech funding - TechTarget",
-          "Nearly Half of $6 Billion Stolen in Binance Hack Frozen as BNB Rebounds Past $700, Targeting $800 - TradingKey",
-          "UCT food bank offers science students peace of mind - GroundUp"
+          "Was Binance’s $6.3 Billion Hack an Inside Job? - the deep dive",
+          "BRI Fell While Profit Rose - Yahoo Finance",
+          "How AI might be deployed for better bank supervision - Financial Times"
         ]
       },
       "credit_event": {
-        "n_articles": 47,
-        "n_sources": 42,
-        "z": -1.672,
-        "baseline_points": 24,
+        "n_articles": 49,
+        "n_sources": 44,
+        "z": -1.413,
+        "baseline_points": 25,
         "measure": "키워드별 합산",
-        "n_split": 47,
+        "n_split": 49,
         "saturated": false,
         "top_titles": [
-          "US Bankruptcy: Gibson Dunn and Davis Polk lead creditor coalition alliances in chapter 11 – Bankruptcy Data Insights - CreditSights",
-          "Lake Norman wine bar files for Chapter 11 bankruptcy, listing nearly $270K in debt - The Business Journals",
-          "Getty Images Files for Chapter 11 at a ~$910M Run-Rate: 27% EBITDA Margins, 25% Fewer Subscribers, and $0 for Public Shareholders - saastr.com"
+          "Bedford Planning Board Declares Page Hill Subdivision In Default - The Bedford Citizen",
+          "I hate Samsung's default camera app — here's what I use instead - Android Authority",
+          "US Bankruptcy: Gibson Dunn and Davis Polk lead creditor coalition alliances in chapter 11 – Bankruptcy Data Insights - CreditSights"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 14,
-        "n_sources": 12,
-        "z": 1.612,
-        "baseline_points": 24,
+        "n_articles": 10,
+        "n_sources": 8,
+        "z": 0.261,
+        "baseline_points": 25,
         "measure": "키워드별 합산",
-        "n_split": 14,
+        "n_split": 10,
         "saturated": false,
         "top_titles": [
-          "Jupiter Lend Says Liquidity Crunch Is Delaying Withdrawals - The Defiant",
-          "Jupiter Earn Liquidity Crunch Disrupts Withdrawals in DeFi Market - The Cryptonomist",
-          "Jupiter Lend faces a liquidity crunch with only 3.35 USDC available for 418.5M USDC withdrawal claims. - Pluang"
+          "Jupiter Lend suspends withdrawals after Binance hack and market volatility - The News International",
+          "Jupiter Lend Halts Withdrawals Amid $6.3B Binance Hack Fears Despite Zero Exposure - CryptoNinjas",
+          "Liquidity Crunch Affects Withdrawals, JupiterExchange - Coinfomania"
         ]
       },
       "geopolitical": {
-        "n_articles": 142,
-        "n_sources": 117,
-        "z": -0.179,
-        "baseline_points": 24,
+        "n_articles": 145,
+        "n_sources": 126,
+        "z": -0.036,
+        "baseline_points": 25,
         "measure": "키워드별 합산",
-        "n_split": 142,
+        "n_split": 145,
         "saturated": false,
         "top_titles": [
-          "U.S. blockade, sanctions crippling Iran's economy, Treasury report says - Axios",
+          "North Korea says sanctions don't work to deny its status as nuclear weapons state - Reuters",
           "Family of real estate CEO wounded in violent Toronto home invasion, officials say; 3 suspects at large - CBS News",
-          "North Korea says sanctions don't work to deny its status as nuclear weapons state - Reuters"
+          "U.S. blockade, sanctions crippling Iran's economy, Treasury report says - Axios"
         ]
       },
       "trade_policy": {
-        "n_articles": 107,
-        "n_sources": 80,
-        "z": -0.18,
-        "baseline_points": 24,
+        "n_articles": 73,
+        "n_sources": 57,
+        "z": -1.383,
+        "baseline_points": 25,
         "measure": "키워드별 합산",
-        "n_split": 107,
+        "n_split": 73,
         "saturated": false,
         "top_titles": [
-          "An end to summer tariff peace threatens U.S. economic growth - Equitable Growth",
-          "Putting a Price on a Proposed Motorcoach Tariff - Tourism Economics",
-          "Year-End Tariff Reporting: What PE-Backed Companies Need to Know - CBIZ"
+          "The countries fighting back against Trump's tariff tirade - DW.com",
+          "Weekend Drive: Audi tariff relief; what the midterms mean for autos - Automotive News",
+          "Audi Reportedly Due For US Tariff Relief After Pledge To Open Georgia Plant - CarBuzz"
         ]
       },
       "pandemic": {
-        "n_articles": 142,
-        "n_sources": 118,
-        "z": -0.213,
-        "baseline_points": 24,
+        "n_articles": 123,
+        "n_sources": 104,
+        "z": -0.663,
+        "baseline_points": 25,
         "measure": "키워드별 합산",
-        "n_split": 142,
+        "n_split": 123,
         "saturated": false,
         "top_titles": [
+          "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com",
           "Where People Got Sick: Salmonella Outbreak, October 2026 - Centers for Disease Control and Prevention | CDC (.gov)",
-          "Congo Ebola outbreak kills more than 5,000 - Reuters",
-          "Cases near 1,400 in Pennsylvania measles outbreak - American Hospital Association"
+          "Congo Ebola outbreak deaths top 5,000 as fear of continent-wide spread mounts - NBC News"
         ]
       },
       "fx_shock": {
-        "n_articles": 7,
-        "n_sources": 7,
-        "z": 1.07,
-        "baseline_points": 24,
+        "n_articles": 4,
+        "n_sources": 4,
+        "z": -0.348,
+        "baseline_points": 25,
         "measure": "키워드별 합산",
-        "n_split": 7,
+        "n_split": 4,
         "saturated": false,
         "top_titles": [
+          "US sanctions and blockade measures disrupt Iran’s trade with Afghanistan and regional neighbors - Ariana News",
           "Uganda inflation hits 3-year high as shilling crisis threatens Kenya’s Ksh162B export market - People Daily",
-          "Stablecoins as a vehicle for dollarisation: Evidence from capital controls and currency crises - CEPR",
-          "The 3 worst hyperinflations of modern times: Hungary, Zimbabwe, Yugoslavia - qz.com"
+          "Stablecoins as a vehicle for dollarisation: Evidence from capital controls and currency crises - CEPR"
         ]
       },
       "rate_shock": {
-        "n_articles": 11,
-        "n_sources": 8,
-        "z": 0.261,
-        "baseline_points": 24,
+        "n_articles": 13,
+        "n_sources": 10,
+        "z": 0.547,
+        "baseline_points": 25,
         "measure": "키워드별 합산",
-        "n_split": 11,
+        "n_split": 13,
         "saturated": false,
         "top_titles": [
           "Bond selloff sparks euro crisis fears - The Star",
