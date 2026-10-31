@@ -1,18 +1,18 @@
 {
-  "collected_at": "2026-10-30T22:37:56+00:00",
-  "as_of": "2026-10-16",
+  "collected_at": "2026-10-31T06:13:21+00:00",
+  "as_of": "2026-10-30",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "미 10년물 금리(DGS10) z=-2.23",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=-2.23, 미 장단기 금리차(T10Y2Y) z=+0.76, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.42",
+      "원인": "미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.31",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.31, 미 10년물 금리(DGS10) z=-1.69, WTI 유가(DCOILWTICO) z=-0.56",
       "결과": "비활성"
     },
     {
       "단계": "자금 흐름(C)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.61, 미 은행 예금(DPSACBW027SBOG) z=+1.04, 해외 공적 미국채 보관(WMTSECL1) z=-0.55, 지급준비금(WRESBAL) z=-0.14",
+      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.19, 미 은행 예금(DPSACBW027SBOG) z=-1.14, 해외 공적 미국채 보관(WMTSECL1) z=-0.05, 지급준비금(WRESBAL) z=-1.14",
       "결과": "비활성"
     },
     {
@@ -32,24 +32,24 @@
   "market": {
     "active": false,
     "triggered": [
-      "DGS10"
+      "BAMLH0A0HYM2"
     ],
     "zscores": {
-      "VIXCLS": -0.36,
-      "T10Y2Y": 0.76,
-      "DGS10": -2.23,
-      "DCOILWTICO": 0.22,
-      "BAMLH0A0HYM2": -0.42
+      "VIXCLS": 0.2,
+      "T10Y2Y": 0.38,
+      "DGS10": -1.69,
+      "DCOILWTICO": -0.56,
+      "BAMLH0A0HYM2": 2.31
     }
   },
   "flow": {
     "active": false,
     "triggered": [],
     "zscores": {
-      "WRMFNS": -0.61,
-      "DPSACBW027SBOG": 1.04,
-      "WMTSECL1": -0.55,
-      "WRESBAL": -0.14
+      "WRMFNS": -0.19,
+      "DPSACBW027SBOG": -1.14,
+      "WMTSECL1": -0.05,
+      "WRESBAL": -1.14
     }
   },
   "news": {
@@ -60,26 +60,26 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 17,
-        "n_sources": 17,
-        "z": 0.722,
-        "baseline_points": 23,
+        "n_articles": 11,
+        "n_sources": 11,
+        "z": -0.609,
+        "baseline_points": 24,
         "measure": "키워드별 합산",
-        "n_split": 17,
+        "n_split": 11,
         "saturated": false,
         "top_titles": [
           "Silicon Valley Bank failure might further stymie tech funding - TechTarget",
           "Nearly Half of $6 Billion Stolen in Binance Hack Frozen as BNB Rebounds Past $700, Targeting $800 - TradingKey",
-          "SC seeks bank liability for digital arrest fraud losses | Hindustan Times Chandigarh - newspaper - Magzter"
+          "UCT food bank offers science students peace of mind - GroundUp"
         ]
       },
       "credit_event": {
-        "n_articles": 58,
-        "n_sources": 52,
-        "z": -0.917,
-        "baseline_points": 23,
+        "n_articles": 47,
+        "n_sources": 42,
+        "z": -1.672,
+        "baseline_points": 24,
         "measure": "키워드별 합산",
-        "n_split": 58,
+        "n_split": 47,
         "saturated": false,
         "top_titles": [
           "US Bankruptcy: Gibson Dunn and Davis Polk lead creditor coalition alliances in chapter 11 – Bankruptcy Data Insights - CreditSights",
@@ -88,12 +88,12 @@
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 15,
+        "n_articles": 14,
         "n_sources": 12,
-        "z": 2.163,
-        "baseline_points": 23,
+        "z": 1.612,
+        "baseline_points": 24,
         "measure": "키워드별 합산",
-        "n_split": 15,
+        "n_split": 14,
         "saturated": false,
         "top_titles": [
           "Jupiter Lend Says Liquidity Crunch Is Delaying Withdrawals - The Defiant",
@@ -102,78 +102,78 @@
         ]
       },
       "geopolitical": {
-        "n_articles": 135,
-        "n_sources": 114,
-        "z": -0.513,
-        "baseline_points": 23,
+        "n_articles": 142,
+        "n_sources": 117,
+        "z": -0.179,
+        "baseline_points": 24,
         "measure": "키워드별 합산",
-        "n_split": 135,
+        "n_split": 142,
         "saturated": false,
         "top_titles": [
           "U.S. blockade, sanctions crippling Iran's economy, Treasury report says - Axios",
-          "North Korea says sanctions don't work to deny its status as nuclear weapons state - Reuters",
-          "Sanctions Watch (October 2026) - Center for Economic and Policy Research"
+          "Family of real estate CEO wounded in violent Toronto home invasion, officials say; 3 suspects at large - CBS News",
+          "North Korea says sanctions don't work to deny its status as nuclear weapons state - Reuters"
         ]
       },
       "trade_policy": {
-        "n_articles": 111,
-        "n_sources": 87,
-        "z": -0.041,
-        "baseline_points": 23,
+        "n_articles": 107,
+        "n_sources": 80,
+        "z": -0.18,
+        "baseline_points": 24,
         "measure": "키워드별 합산",
-        "n_split": 111,
+        "n_split": 107,
         "saturated": false,
         "top_titles": [
-          "Putting a Price on a Proposed Motorcoach Tariff - Tourism Economics",
           "An end to summer tariff peace threatens U.S. economic growth - Equitable Growth",
-          "The Trade War Next Door (TCF Investigates) - The Capitol Forum"
+          "Putting a Price on a Proposed Motorcoach Tariff - Tourism Economics",
+          "Year-End Tariff Reporting: What PE-Backed Companies Need to Know - CBIZ"
         ]
       },
       "pandemic": {
-        "n_articles": 137,
-        "n_sources": 117,
-        "z": -0.338,
-        "baseline_points": 23,
+        "n_articles": 142,
+        "n_sources": 118,
+        "z": -0.213,
+        "baseline_points": 24,
         "measure": "키워드별 합산",
-        "n_split": 137,
+        "n_split": 142,
         "saturated": false,
         "top_titles": [
+          "Where People Got Sick: Salmonella Outbreak, October 2026 - Centers for Disease Control and Prevention | CDC (.gov)",
           "Congo Ebola outbreak kills more than 5,000 - Reuters",
-          "As a historic measles outbreak hits Pennsylvania Amish country, more show openness to vaccines - Bozeman Daily Chronicle",
           "Cases near 1,400 in Pennsylvania measles outbreak - American Hospital Association"
         ]
       },
       "fx_shock": {
         "n_articles": 7,
         "n_sources": 7,
-        "z": 1.122,
-        "baseline_points": 23,
+        "z": 1.07,
+        "baseline_points": 24,
         "measure": "키워드별 합산",
         "n_split": 7,
         "saturated": false,
         "top_titles": [
           "Uganda inflation hits 3-year high as shilling crisis threatens Kenya’s Ksh162B export market - People Daily",
-          "The 3 worst hyperinflations of modern times: Hungary, Zimbabwe, Yugoslavia - qz.com",
-          "Iranian Rial Dirhamisation: UAE Financial Leverage on Tehran and the Weaponisation of Currency Interdependence - SpecialEurasia"
+          "Stablecoins as a vehicle for dollarisation: Evidence from capital controls and currency crises - CEPR",
+          "The 3 worst hyperinflations of modern times: Hungary, Zimbabwe, Yugoslavia - qz.com"
         ]
       },
       "rate_shock": {
-        "n_articles": 7,
-        "n_sources": 7,
-        "z": -0.316,
-        "baseline_points": 23,
+        "n_articles": 11,
+        "n_sources": 8,
+        "z": 0.261,
+        "baseline_points": 24,
         "measure": "키워드별 합산",
-        "n_split": 7,
+        "n_split": 11,
         "saturated": false,
         "top_titles": [
-          "Hedge funds increase China bond bets as equity selloff drives ETF inflows - Hedgeweek",
-          "Full list of stories by category Market Report - midday - 2026-10-30 - 2 - Sharecast.com",
-          "Yields Too High to Ignore Lure Investors Back to Long-Dated Debt - Yahoo Finance UK"
+          "Bond selloff sparks euro crisis fears - The Star",
+          "Bond Yields Surge as Loan Caps Hold... Authorities, Banks in a 'Dilemma' Over Assembly's Criticism of 'Rate Tricks' - 아시아경제",
+          "Bond selloff sparks euro crisis fears - KLSE Screener"
         ]
       }
     },
     "source": "Google 뉴스 RSS"
   },
-  "fred_error": "[Errno -2] Name or service not known",
+  "fred_error": null,
   "alerts_sent": {}
 }
