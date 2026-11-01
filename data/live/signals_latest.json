@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-01T06:46:37+00:00",
+  "collected_at": "2026-11-01T16:17:22+00:00",
   "as_of": "2026-10-30",
   "level": "NONE",
   "chain": [
@@ -60,115 +60,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 7,
-        "n_sources": 7,
-        "z": -1.361,
-        "baseline_points": 28,
-        "measure": "키워드별 합산",
-        "n_split": 7,
-        "saturated": false,
-        "top_titles": [
-          "Silicon Valley Bank failure might further stymie tech funding - TechTarget",
-          "BJD seeks probe into alleged leak of 3,897 SBI customers’ data - The Statesman",
-          "BRI Fell While Profit Rose - Yahoo Finance"
-        ]
-      },
-      "credit_event": {
-        "n_articles": 33,
-        "n_sources": 31,
-        "z": -1.972,
-        "baseline_points": 28,
-        "measure": "키워드별 합산",
-        "n_split": 33,
-        "saturated": false,
-        "top_titles": [
-          "Default Deadlines for Motion Papers in New Jersey - Reuters",
-          "Filing Alert: Greenwood Mall Realty Holding Chapter 11 - Bondoro",
-          "How to open different iPhone camera modes fast or by default - Mashable"
-        ]
-      },
-      "liquidity_crisis": {
-        "n_articles": 7,
-        "n_sources": 6,
-        "z": -0.754,
-        "baseline_points": 28,
-        "measure": "키워드별 합산",
-        "n_split": 7,
-        "saturated": false,
-        "top_titles": [
-          "Jupiter Lend Halts Withdrawals Amid $6.3B Binance Hack Fears Despite Zero Exposure - CryptoNinjas",
-          "Liquidity Crunch Affects Withdrawals, JupiterExchange - Coinfomania",
-          "Jupiter Shares News: USDC Withdrawals Available Again - Coinfomania"
-        ]
-      },
-      "geopolitical": {
-        "n_articles": 101,
-        "n_sources": 75,
-        "z": -1.994,
-        "baseline_points": 28,
-        "measure": "키워드별 합산",
-        "n_split": 101,
-        "saturated": false,
-        "top_titles": [
-          "Hit Send and Get Hit with Sanctions: Federal Court Orders Sanctions for In-House Counsel's Emails - Snell & Wilmer",
-          "Mycosis Fungoides With Skeletal Muscle Invasion: A Rare Aggressive Presentation With Fatal Outcome - Cureus",
-          "Trump administration imposes new sanctions on Rwanda over war in Congo - The Washington Post"
-        ]
-      },
-      "trade_policy": {
-        "n_articles": 63,
-        "n_sources": 54,
-        "z": -1.426,
-        "baseline_points": 28,
-        "measure": "키워드별 합산",
-        "n_split": 63,
-        "saturated": false,
-        "top_titles": [
-          "Grainger Lowers Margin Outlook on Tariff Impacts Despite 2Q Sales Acceleration - National Association of Wholesaler-Distributors",
-          "Trump’s tariff craze has derailed the GOP’s hopes to maintain their authority after the 2026 midterms - Forex Factory",
-          "Ward and Smith: Tariff Refunds - Business North Carolina"
-        ]
-      },
-      "pandemic": {
-        "n_articles": 85,
-        "n_sources": 81,
-        "z": -1.459,
-        "baseline_points": 28,
-        "measure": "키워드별 합산",
-        "n_split": 85,
-        "saturated": false,
-        "top_titles": [
-          "Ninth meeting of the Intergovernmental Working Group (IGWG) on the WHO Pandemic Agreement - World Health Organization (WHO)",
-          "Pandemic-Era Longing to Gather Fed Qiu Jiongjiong’s Tokyo Competition Title ‘Fuxi: Four Tales of Feasting’ - IMDb",
-          "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com"
-        ]
-      },
-      "fx_shock": {
-        "n_articles": 3,
-        "n_sources": 3,
-        "z": -0.754,
-        "baseline_points": 28,
-        "measure": "키워드별 합산",
-        "n_split": 3,
-        "saturated": false,
-        "top_titles": [
-          "US sanctions and blockade measures disrupt Iran’s trade with Afghanistan and regional neighbors - Ariana News",
-          "How to Send Parcels From Syria to 150 Countries - Enab Baladi - Enab Baladi",
-          "Franklin Templeton Prepares Nasdaq Debut For ETFs That Turn Stock Dividends Into Bitcoin - Stocktwits"
-        ]
-      },
-      "rate_shock": {
         "n_articles": 4,
         "n_sources": 4,
-        "z": -0.807,
-        "baseline_points": 28,
+        "z": -1.948,
+        "baseline_points": 29,
         "measure": "키워드별 합산",
         "n_split": 4,
         "saturated": false,
         "top_titles": [
+          "Binance After the Hack: Withdrawals Resume, 95 Percent Covered, $2.5 Billion in Outflows - trendingtopics.eu",
+          "Ohio’s government has been running in place for 30-plus years - Cleveland.com",
+          "Canara Bank Ordered to Refund Customer After OTP Claim Fails - The 420.in"
+        ]
+      },
+      "credit_event": {
+        "n_articles": 40,
+        "n_sources": 28,
+        "z": -1.42,
+        "baseline_points": 29,
+        "measure": "키워드별 합산",
+        "n_split": 40,
+        "saturated": false,
+        "top_titles": [
+          "A Slow Comeback, Columbia Made - COMO Magazine",
+          "Default Deadlines for Motion Papers in New Jersey - Reuters",
+          "airBaltic claims 'Chapter 11' status in U.S. court / Article - LSM"
+        ]
+      },
+      "liquidity_crisis": {
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": -1.061,
+        "baseline_points": 29,
+        "measure": "키워드별 합산",
+        "n_split": 6,
+        "saturated": false,
+        "top_titles": [
+          "Jupiter (JUP) Volatility: Protocol News Drives 3.54% Move - CoinMarketCap",
+          "Jupiter Lend USDC Withdrawal Liquidity Rebounds to 27.9 Million - KuCoin",
+          "What Financial Experts Are Watching in the Market Right Now - MoneyLion"
+        ]
+      },
+      "geopolitical": {
+        "n_articles": 82,
+        "n_sources": 71,
+        "z": -2.677,
+        "baseline_points": 29,
+        "measure": "키워드별 합산",
+        "n_split": 82,
+        "saturated": false,
+        "top_titles": [
+          "US Clears Boeing Jet Sales to Belarus as Trump Eases Sanctions on Lukashenko - UNITED24 Media",
+          "Hit Send and Get Hit with Sanctions: Federal Court Orders Sanctions for In-House Counsel's Emails - Snell & Wilmer",
+          "Announcements: US Sanctions Against the ICC Roundtable; CfP Battlefield Forensics; EU-Mercosur Partnership Agreement Workshop; CfS ASIL International Legal Theory Prize; CfP Sustainability and its Discontents; Security Concerns in International Law W - EJIL: Talk!"
+        ]
+      },
+      "trade_policy": {
+        "n_articles": 63,
+        "n_sources": 55,
+        "z": -1.354,
+        "baseline_points": 29,
+        "measure": "키워드별 합산",
+        "n_split": 63,
+        "saturated": false,
+        "top_titles": [
+          "US Trade Rep Greer says tariff policy 'hasn't changed' despite SCOTUS ruling - ABC News - Breaking News, Latest News and Videos",
+          "The US-China trade war seems to have subsided – but the sense of calm is misleading - The Guardian",
+          "US, Canada Trade Negotiators Meet After Trump Sets New Tariff Deadline - EnergyNow.com"
+        ]
+      },
+      "pandemic": {
+        "n_articles": 58,
+        "n_sources": 53,
+        "z": -2.016,
+        "baseline_points": 29,
+        "measure": "키워드별 합산",
+        "n_split": 58,
+        "saturated": false,
+        "top_titles": [
+          "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com",
+          "Ninth meeting of the Intergovernmental Working Group (IGWG) on the WHO Pandemic Agreement - World Health Organization (WHO)",
+          "Military services again requiring recruits to get flu shots as Air Force outbreak grows - ABC News - Breaking News, Latest News and Videos"
+        ]
+      },
+      "fx_shock": {
+        "n_articles": 4,
+        "n_sources": 3,
+        "z": -0.261,
+        "baseline_points": 29,
+        "measure": "키워드별 합산",
+        "n_split": 4,
+        "saturated": false,
+        "top_titles": [
+          "How to Send Parcels From Syria to 150 Countries - Enab Baladi - Enab Baladi",
+          "Franklin Templeton Prepares Nasdaq Debut For ETFs That Turn Stock Dividends Into Bitcoin - Stocktwits",
+          "WULF Stock Hits Six-Month Weekly Low As TeraWulf Expands Credit Facility By 60% - Stocktwits"
+        ]
+      },
+      "rate_shock": {
+        "n_articles": 7,
+        "n_sources": 7,
+        "z": -0.323,
+        "baseline_points": 29,
+        "measure": "키워드별 합산",
+        "n_split": 7,
+        "saturated": false,
+        "top_titles": [
+          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com",
           "The U.S. Just Borrowed a Record $839 Billion in One Week - 24/7 Wall St.",
-          "Why the sell-off in French bonds is a warning for global governments - Yahoo Finance Australia",
-          "France's Debt Could Hit 124% of GDP as Fitch Turns Negative and Bond Yields Reach 24-Year Highs - Coinpaper"
+          "Why the sell-off in French bonds is a warning for global governments - Yahoo Finance Australia"
         ]
       }
     },
