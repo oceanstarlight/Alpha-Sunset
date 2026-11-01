@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-01T16:17:22+00:00",
+  "collected_at": "2026-11-01T22:20:01+00:00",
   "as_of": "2026-10-30",
   "level": "NONE",
   "chain": [
@@ -60,115 +60,114 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 4,
-        "n_sources": 4,
-        "z": -1.948,
-        "baseline_points": 29,
-        "measure": "키워드별 합산",
-        "n_split": 4,
-        "saturated": false,
-        "top_titles": [
-          "Binance After the Hack: Withdrawals Resume, 95 Percent Covered, $2.5 Billion in Outflows - trendingtopics.eu",
-          "Ohio’s government has been running in place for 30-plus years - Cleveland.com",
-          "Canara Bank Ordered to Refund Customer After OTP Claim Fails - The 420.in"
-        ]
-      },
-      "credit_event": {
-        "n_articles": 40,
-        "n_sources": 28,
-        "z": -1.42,
-        "baseline_points": 29,
-        "measure": "키워드별 합산",
-        "n_split": 40,
-        "saturated": false,
-        "top_titles": [
-          "A Slow Comeback, Columbia Made - COMO Magazine",
-          "Default Deadlines for Motion Papers in New Jersey - Reuters",
-          "airBaltic claims 'Chapter 11' status in U.S. court / Article - LSM"
-        ]
-      },
-      "liquidity_crisis": {
         "n_articles": 6,
         "n_sources": 6,
-        "z": -1.061,
-        "baseline_points": 29,
+        "z": -1.386,
+        "baseline_points": 30,
         "measure": "키워드별 합산",
         "n_split": 6,
         "saturated": false,
         "top_titles": [
+          "Binance After the Hack: Withdrawals Resume, 95 Percent Covered, $2.5 Billion in Outflows - trendingtopics.eu",
+          "Ohio’s government has been running in place for 30-plus years - Cleveland.com",
+          "Binance resumes withdrawals as tracker shows $3.7B outflows - TheStreet"
+        ]
+      },
+      "credit_event": {
+        "n_articles": 33,
+        "n_sources": 22,
+        "z": -1.741,
+        "baseline_points": 30,
+        "measure": "키워드별 합산",
+        "n_split": 33,
+        "saturated": false,
+        "top_titles": [
+          "‍‍‍https://katv.com/resources/assets/default/images/sbg-live.png - Pierce Manufacturing",
+          "Another whiskey distillery files Chapter 11 bankruptcy after declining sales - Yahoo Finance",
+          "The Last Word - COMO Magazine"
+        ]
+      },
+      "liquidity_crisis": {
+        "n_articles": 8,
+        "n_sources": 8,
+        "z": -0.37,
+        "baseline_points": 30,
+        "measure": "키워드별 합산",
+        "n_split": 8,
+        "saturated": false,
+        "top_titles": [
           "Jupiter (JUP) Volatility: Protocol News Drives 3.54% Move - CoinMarketCap",
-          "Jupiter Lend USDC Withdrawal Liquidity Rebounds to 27.9 Million - KuCoin",
+          "Binance Says It Has Covered 95% of Assets Stolen in Hack, Warns of Temporary Withdrawal Delays After Resumption - bloomingbit",
           "What Financial Experts Are Watching in the Market Right Now - MoneyLion"
         ]
       },
       "geopolitical": {
-        "n_articles": 82,
-        "n_sources": 71,
-        "z": -2.677,
-        "baseline_points": 29,
+        "n_articles": 83,
+        "n_sources": 77,
+        "z": -2.317,
+        "baseline_points": 30,
         "measure": "키워드별 합산",
-        "n_split": 82,
+        "n_split": 83,
         "saturated": false,
         "top_titles": [
-          "US Clears Boeing Jet Sales to Belarus as Trump Eases Sanctions on Lukashenko - UNITED24 Media",
-          "Hit Send and Get Hit with Sanctions: Federal Court Orders Sanctions for In-House Counsel's Emails - Snell & Wilmer",
-          "Announcements: US Sanctions Against the ICC Roundtable; CfP Battlefield Forensics; EU-Mercosur Partnership Agreement Workshop; CfS ASIL International Legal Theory Prize; CfP Sustainability and its Discontents; Security Concerns in International Law W - EJIL: Talk!"
+          "Two masked men arrested after early morning Bridgeport home invasion, police say - WFSB",
+          "2 Bridgeport men apprehended in Kent Avenue home invasion early Sunday, police say - CTPost",
+          "Two Bridgeport men charged for home invasion - WTNH.com"
         ]
       },
       "trade_policy": {
-        "n_articles": 63,
-        "n_sources": 55,
-        "z": -1.354,
-        "baseline_points": 29,
+        "n_articles": 77,
+        "n_sources": 68,
+        "z": -0.849,
+        "baseline_points": 30,
         "measure": "키워드별 합산",
-        "n_split": 63,
+        "n_split": 77,
         "saturated": false,
         "top_titles": [
           "US Trade Rep Greer says tariff policy 'hasn't changed' despite SCOTUS ruling - ABC News - Breaking News, Latest News and Videos",
-          "The US-China trade war seems to have subsided – but the sense of calm is misleading - The Guardian",
-          "US, Canada Trade Negotiators Meet After Trump Sets New Tariff Deadline - EnergyNow.com"
+          "Canada's Carney reports progress in trade talks with U.S. and Trump talks up 'concept' of a deal - PBS",
+          "Democratic wins would shift Congress' trade debate but fall short of US tariff rollbacks - Reuters"
         ]
       },
       "pandemic": {
-        "n_articles": 58,
-        "n_sources": 53,
-        "z": -2.016,
-        "baseline_points": 29,
+        "n_articles": 78,
+        "n_sources": 71,
+        "z": -1.411,
+        "baseline_points": 30,
         "measure": "키워드별 합산",
-        "n_split": 58,
+        "n_split": 78,
         "saturated": false,
         "top_titles": [
+          "Valley Children’s Hospital on lockdown as deputies investigate threat call - KMPH Fox 26",
           "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com",
-          "Ninth meeting of the Intergovernmental Working Group (IGWG) on the WHO Pandemic Agreement - World Health Organization (WHO)",
-          "Military services again requiring recruits to get flu shots as Air Force outbreak grows - ABC News - Breaking News, Latest News and Videos"
+          "Shapiro's strategy for tackling measles outbreak: Don't listen to RFK Jr. - Politico"
         ]
       },
       "fx_shock": {
+        "n_articles": 2,
+        "n_sources": 2,
+        "z": -1.218,
+        "baseline_points": 30,
+        "measure": "키워드별 합산",
+        "n_split": 2,
+        "saturated": false,
+        "top_titles": [
+          "SPECIAL REPORT-Iran’s hidden web of military agencies is slipping hardware past the US blockade - Devdiscourse",
+          "Iran’s hidden web of military agencies is slipping hardware past the US blockade - Khaleej Times"
+        ]
+      },
+      "rate_shock": {
         "n_articles": 4,
-        "n_sources": 3,
-        "z": -0.261,
-        "baseline_points": 29,
+        "n_sources": 4,
+        "z": -0.785,
+        "baseline_points": 30,
         "measure": "키워드별 합산",
         "n_split": 4,
         "saturated": false,
         "top_titles": [
-          "How to Send Parcels From Syria to 150 Countries - Enab Baladi - Enab Baladi",
-          "Franklin Templeton Prepares Nasdaq Debut For ETFs That Turn Stock Dividends Into Bitcoin - Stocktwits",
-          "WULF Stock Hits Six-Month Weekly Low As TeraWulf Expands Credit Facility By 60% - Stocktwits"
-        ]
-      },
-      "rate_shock": {
-        "n_articles": 7,
-        "n_sources": 7,
-        "z": -0.323,
-        "baseline_points": 29,
-        "measure": "키워드별 합산",
-        "n_split": 7,
-        "saturated": false,
-        "top_titles": [
-          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com",
-          "The U.S. Just Borrowed a Record $839 Billion in One Week - 24/7 Wall St.",
-          "Why the sell-off in French bonds is a warning for global governments - Yahoo Finance Australia"
+          "Mi Technovation’s strong quarter fuels optimism - The Star",
+          "France Debt Outlook: Bonds, Banks and EUR/USD Risks - www.equiti.com",
+          "Stocks decline as AI concerns deepen: Weekly Market Recap - Beansprout - Singapore’s Leading Financial Insights Platform - Growbeansprout.com"
         ]
       }
     },
