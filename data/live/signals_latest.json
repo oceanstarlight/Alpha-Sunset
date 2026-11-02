@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-11-02T06:44:54+00:00",
+  "collected_at": "2026-11-02T19:44:32+00:00",
   "as_of": "2026-10-30",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.31",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.31, 미 10년물 금리(DGS10) z=-1.69, WTI 유가(DCOILWTICO) z=-0.56",
+      "원인": "미 하이일드 스프레드(BAMLH0A0HYM2) z=+3.44",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=+3.44, VIX(변동성)(VIXCLS) z=+1.71, 미 10년물 금리(DGS10) z=-1.69",
       "결과": "비활성"
     },
     {
@@ -35,11 +35,11 @@
       "BAMLH0A0HYM2"
     ],
     "zscores": {
-      "VIXCLS": 0.2,
+      "VIXCLS": 1.71,
       "T10Y2Y": 0.38,
       "DGS10": -1.69,
       "DCOILWTICO": -0.56,
-      "BAMLH0A0HYM2": 2.31
+      "BAMLH0A0HYM2": 3.44
     }
   },
   "flow": {
@@ -60,115 +60,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 9,
-        "n_sources": 9,
-        "z": -0.708,
-        "baseline_points": 31,
+        "n_articles": 17,
+        "n_sources": 17,
+        "z": 0.963,
+        "baseline_points": 32,
         "measure": "키워드별 합산",
-        "n_split": 9,
+        "n_split": 17,
         "saturated": false,
         "top_titles": [
-          "Binance After the Hack: Withdrawals Resume, 95 Percent Covered, $2.5 Billion in Outflows - trendingtopics.eu",
-          "Ohio’s government has been running in place for 30-plus years - Cleveland.com",
-          "Will Anthropic’s Expected $100 Billion I.P.O. Leave Shareholders Holding the Bag? - puck.news"
+          "Nov. 2 Newsletter: Know before you vote - The Richmonder",
+          "P2P Lending Firm Zoomfund Suffers 300 Million Won in Customer Deposit Outflow… First Case of Won Denomination Losses - 머니투데이",
+          "Binance Hit by $6.3 Billion Hack, the Largest in History: Is Simply Promising Compensation Really Enough? - 深潮TechFlow"
         ]
       },
       "credit_event": {
-        "n_articles": 39,
-        "n_sources": 28,
-        "z": -1.309,
-        "baseline_points": 31,
+        "n_articles": 57,
+        "n_sources": 51,
+        "z": -0.291,
+        "baseline_points": 32,
         "measure": "키워드별 합산",
-        "n_split": 39,
+        "n_split": 57,
         "saturated": false,
         "top_titles": [
-          "Colombia Is at Risk of Default Without Fiscal Fix, Restrepo Says - Bloomberg",
-          "On the Record for Monday, Nov. 2, 2026 - Texarkana Gazette",
-          "The Last Word - COMO Magazine"
+          "Karyopharm files Chapter 11, lines up Ayrmid as lead bidder in planned merger - Fierce Pharma",
+          "Redeemer Health Files for Chapter 11 Bankruptcy in Pennsylvania - Bloomberg.com",
+          "Karyopharm, deep in debt, to sell itself in bankruptcy - BioPharma Dive"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 9,
         "n_sources": 8,
         "z": -0.032,
-        "baseline_points": 31,
+        "baseline_points": 32,
         "measure": "키워드별 합산",
         "n_split": 9,
         "saturated": false,
         "top_titles": [
-          "BNB (BNBUSD) Fluctuated Significantly on Nov 2: Key Variables Behind the Move - TradingKey",
-          "Binance Says It Has Covered 95% of Assets Stolen in Hack, Warns of Temporary Withdrawal Delays After Resumption - bloomingbit",
+          "Eisman Warns AI Price Cuts and Fading Token Demand Could Spark a 'Massive Correction' - BigGo Finance",
+          "Goldman Puts a $19.5 Billion Price Tag on Gold's Liquidity Crunch - ad-hoc-news.de",
           "Bitcoin’s resilience after Binance hack masks market jitters - The Edge Singapore"
         ]
       },
       "geopolitical": {
-        "n_articles": 98,
-        "n_sources": 89,
-        "z": -1.533,
-        "baseline_points": 31,
+        "n_articles": 124,
+        "n_sources": 112,
+        "z": -0.492,
+        "baseline_points": 32,
         "measure": "키워드별 합산",
-        "n_split": 98,
+        "n_split": 124,
         "saturated": false,
         "top_titles": [
-          "Justice Department urges sanctions for database analysis critical of its noncitizen voting claims - Winnipeg Free Press",
-          "Cuba's doctors confront medicine and supply shortages along with power outages amid ongoing U.S. sanctions - CBS News",
-          "K Street predicts Russia sanctions return - Punchbowl News"
+          "Trump Risks Violating U.S. Law by Giving Russia Even More Sanctions Relief - Foundation for Defense of Democracies",
+          "$1 Million Criminal Penalty for Sanctions and Export Violations - Sandler, Travis & Rosenberg, P.A.",
+          "Justice Department urges sanctions for database analysis critical of its noncitizen voting claims - Bozeman Daily Chronicle"
         ]
       },
       "trade_policy": {
-        "n_articles": 110,
-        "n_sources": 93,
-        "z": 0.222,
-        "baseline_points": 31,
+        "n_articles": 134,
+        "n_sources": 109,
+        "z": 0.993,
+        "baseline_points": 32,
         "measure": "키워드별 합산",
-        "n_split": 110,
+        "n_split": 134,
         "saturated": false,
         "top_titles": [
-          "China’s 5,000-Ton Digging Machines Are a Trade War Risk to India - Bloomberg",
-          "Surging costs and China trade war test US farmers' loyalty to Trump - Nikkei Asia",
-          "Canada's Carney reports progress in trade talks with U.S. and Trump talks up 'concept' of a deal - PBS"
+          "The Aluminum Industry’s New Tariff Study Argues Against Itself - Cato Institute",
+          "EXCLUSIVE: India moves to resolve Scotch tariff dispute under UK trade pact, sources say - Reuters",
+          "$1 Million Criminal Penalty for Sanctions and Export Violations - Sandler, Travis & Rosenberg, P.A."
         ]
       },
       "pandemic": {
-        "n_articles": 83,
-        "n_sources": 76,
-        "z": -1.234,
-        "baseline_points": 31,
+        "n_articles": 158,
+        "n_sources": 137,
+        "z": 0.451,
+        "baseline_points": 32,
         "measure": "키워드별 합산",
-        "n_split": 83,
+        "n_split": 158,
         "saturated": false,
         "top_titles": [
-          "Lockdown lifted at Valley Children's Hospital after Madera County deputies investigate threatening call - ABC30 Fresno",
-          "UPDATE: Lockdown lifted at Valley Children s Hospital - KMPH Fox 26",
-          "Update: Lockdown lifted at Valley Children’s Hospital after phone threat - Fresno Bee"
+          "Soft lockdown at IMS - Bethel Park School District",
+          "Sheriff: Franklinton High School lockdown a 'false alarm,' all students safe - WRAL",
+          "Seasoned French Diplomat Returns To Lead Pandemic Annex Talks - Health Policy Watch"
         ]
       },
       "fx_shock": {
         "n_articles": 4,
         "n_sources": 4,
-        "z": -0.216,
-        "baseline_points": 31,
+        "z": -0.212,
+        "baseline_points": 32,
         "measure": "키워드별 합산",
         "n_split": 4,
         "saturated": false,
         "top_titles": [
           "Lessons From Discontinued Philippine Brands - The Business Manual",
-          "The Unseen Regulator: How MSCI Became the Most Powerful Voice in Emerging Markets - The Dark Side Of The Boom",
+          "‘We are not your bank’: Azerbaijani outlet signals limits to Turkey ties - Turkish Minute",
           "Michael Carolan: \"Rich countries tend to confuse abundance in supermarkets with food resilience\" - Diari ARA"
         ]
       },
       "rate_shock": {
-        "n_articles": 5,
-        "n_sources": 4,
-        "z": -0.608,
-        "baseline_points": 31,
+        "n_articles": 13,
+        "n_sources": 11,
+        "z": 0.675,
+        "baseline_points": 32,
         "measure": "키워드별 합산",
-        "n_split": 5,
+        "n_split": 13,
         "saturated": false,
         "top_titles": [
-          "Each Selloff Brings AI’s Day of Reckoning Closer - Bloomberg",
-          "Japan Extends Transition Bond Push Despite Fossil-Fuel Reliance - Bloomberg",
-          "France Debt Outlook: Bonds, Banks and EUR/USD Risks - www.equiti.com"
+          "French Consumer Confidence Sinks to 13-Year Low Amid Protests, Bond Selloff - WSJ",
+          "Credit hedge funds hit by deepening global junk bond selloff - Hedgeweek",
+          "Indian Bonds Rally as Oil Falls, Higher Yields Attract Buyers - Bloomberg.com"
         ]
       }
     },
