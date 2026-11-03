@@ -1,13 +1,13 @@
 {
-  "collected_at": "2026-11-03T11:17:25+00:00",
+  "collected_at": "2026-11-03T19:45:57+00:00",
   "as_of": "2026-11-02",
-  "level": "WATCH",
+  "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "미 장단기 금리차(T10Y2Y) z=-2.11, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+3.44",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=+3.44, 미 장단기 금리차(T10Y2Y) z=-2.11, VIX(변동성)(VIXCLS) z=+1.71",
-      "결과": "활성"
+      "원인": "미 장단기 금리차(T10Y2Y) z=-2.11",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 장단기 금리차(T10Y2Y) z=-2.11, VIX(변동성)(VIXCLS) z=+1.15, 미 10년물 금리(DGS10) z=-1.00",
+      "결과": "비활성"
     },
     {
       "단계": "자금 흐름(C)",
@@ -23,25 +23,24 @@
     },
     {
       "단계": "종합 등급",
-      "원인": "A=활성, C=비활성, B=비활성",
+      "원인": "A=비활성, C=비활성, B=비활성",
       "근거": "등급 규칙(사전 등록 v2·v3): ALERT = B ∧ (A ∨ C), WATCH = 하나 이상 활성",
-      "결과": "WATCH → 1단계: 자금 이상 알림"
+      "결과": "NONE → 조치 없음"
     }
   ],
   "money_alert": false,
   "market": {
-    "active": true,
+    "active": false,
     "triggered": [
-      "T10Y2Y",
-      "BAMLH0A0HYM2"
+      "T10Y2Y"
     ],
     "zscores": {
-      "VIXCLS": 1.71,
+      "VIXCLS": 1.15,
       "T10Y2Y": -2.11,
       "DGS10": -1.0,
       "DEXKOUS": -0.54,
       "DTWEXBGS": -0.23,
-      "BAMLH0A0HYM2": 3.44
+      "BAMLH0A0HYM2": -0.22
     }
   },
   "flow": {
@@ -62,114 +61,114 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 20,
-        "n_sources": 16,
-        "z": 1.558,
-        "baseline_points": 34,
+        "n_articles": 25,
+        "n_sources": 21,
+        "z": 2.511,
+        "baseline_points": 35,
         "measure": "키워드별 합산",
-        "n_split": 20,
+        "n_split": 25,
         "saturated": false,
         "top_titles": [
-          "Billionaire Draper warns of a bank run sparked by Bitcoin's rise reshaping finance. - Pluang",
-          "Thrissur Consumer Commission Holds SBI Liable For Losing Customer's Original Property Title Deed - Live Law",
-          "How Do Banking Supervisors Deal with Failing Banks? - Liberty Street Economics"
+          "Paraguay Bank Failure - Post Register",
+          "48 hours after Binance resumed withdrawals no signs of bank run - CryptoQuant",
+          "Paraguay Bank Failure - WV News"
         ]
       },
       "credit_event": {
-        "n_articles": 106,
+        "n_articles": 98,
         "n_sources": 83,
-        "z": 2.378,
-        "baseline_points": 34,
+        "z": 1.759,
+        "baseline_points": 35,
         "measure": "키워드별 합산",
-        "n_split": 106,
+        "n_split": 98,
         "saturated": false,
         "top_titles": [
-          "Pulp Producer Mercer Plans Chapter 11 With $1.1 Billion Debt Cut - Bloomberg.com",
-          "FCC Assesses Texas Licensee an Interim Default Payment From 2021 FM Auction - Radio World",
-          "Redeemer Health owes $12.9M to 30 largest unsecured creditors, bankruptcy filing shows - The Business Journals"
+          "Britain to make lifetime retirement income the default for private pensions - Reuters",
+          "Braskem Idesa Files for Chapter 11 Restructuring - Mexico Business News",
+          "Brightspeed names new CEO as Charlotte fiber provider reportedly prepares for bankruptcy filing - The Business Journals"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 10,
-        "n_sources": 8,
-        "z": 0.295,
-        "baseline_points": 34,
+        "n_articles": 7,
+        "n_sources": 6,
+        "z": -0.761,
+        "baseline_points": 35,
         "measure": "키워드별 합산",
-        "n_split": 10,
+        "n_split": 7,
         "saturated": false,
         "top_titles": [
+          "Are Gold and Silver Markets Facing a Repeat of the 2008 Liquidity Crunch? Analysts: The \"October Slump\" Presents a Prime Opportunity to Buy the Dip! - Moomoo",
           "Private equity’s liquidity crunch fuels growth in secondaries, alternative fund structures - The Business Times",
-          "Eisman Warns AI Price Cuts and Fading Token Demand Could Spark a 'Massive Correction' - BigGo Finance",
-          "Goldman Puts a $19.5 Billion Price Tag on Gold's Liquidity Crunch - ad-hoc-news.de"
+          "Nightwatch marks 50th anniversary with film about a stray cat - Inside Croydon"
         ]
       },
       "geopolitical": {
-        "n_articles": 152,
-        "n_sources": 137,
-        "z": 0.572,
-        "baseline_points": 34,
+        "n_articles": 142,
+        "n_sources": 122,
+        "z": 0.177,
+        "baseline_points": 35,
         "measure": "키워드별 합산",
-        "n_split": 152,
+        "n_split": 142,
         "saturated": false,
         "top_titles": [
-          "What Sanctions Get Right - Foreign Affairs",
-          "Call of Duty’s North Korean invasion scenario hits a nerve in the South - NK News",
-          "Rio Tinto creates ‘kill zone’ to halt cane toad invasion - Financial Times"
+          "S. C. M. Paine: What Sanctions Get Right - Foreign Affairs",
+          "Trump Delegates Western Balkans Sanctions Authority to Treasury - Legis1",
+          "Justin Sun seeks sanctions against Trump-linked World Liberty Financial over UAE ties - CoinDesk"
         ]
       },
       "trade_policy": {
-        "n_articles": 145,
-        "n_sources": 118,
-        "z": 1.257,
-        "baseline_points": 34,
+        "n_articles": 113,
+        "n_sources": 97,
+        "z": 0.202,
+        "baseline_points": 35,
         "measure": "키워드별 합산",
-        "n_split": 145,
+        "n_split": 113,
         "saturated": false,
         "top_titles": [
-          "Apple's received most of its Trump reciprocal tariff refunds - AppleInsider",
-          "Trade war tests America’s Asia alliances | White Paper - Hinrich Foundation",
-          "The Aluminum Industry’s New Tariff Study Argues Against Itself - Cato Institute"
+          "Trump’s tariff claims need evidence, not a rubber stamp - The Hill",
+          "Trump Changes Which Canadian Goods Face 50 Percent Tariffs - Legis1",
+          "Nairobi Protocol Offers Another Way to Mitigate Import Tariffs - Sandler, Travis & Rosenberg, P.A."
         ]
       },
       "pandemic": {
-        "n_articles": 217,
-        "n_sources": 185,
-        "z": 1.732,
-        "baseline_points": 34,
+        "n_articles": 195,
+        "n_sources": 163,
+        "z": 1.161,
+        "baseline_points": 35,
         "measure": "키워드별 합산",
-        "n_split": 217,
+        "n_split": 195,
         "saturated": false,
         "top_titles": [
-          "Ebola outbreak kills more than 5,300 people in DR Congo - Al Jazeera",
-          "2026 Ebola outbreak in Central Africa - Britannica",
-          "Independence Middle School lockdown lifted; threat deemed non-credible following K9 search - Bethel Park School District"
+          "Yum says Taco Bell rebounding after cyclosporiasis outbreak hit Q3 sales - Reuters",
+          "How Did the U.S. Policy Response to the COVID-19 Pandemic Affect Inflation and Economic Growth? - Philadelphia Federal Reserve Bank",
+          "Nowcasting Improved Real-Time Measles Outbreak Tracking - Infectious Disease Special Edition"
         ]
       },
       "fx_shock": {
         "n_articles": 4,
         "n_sources": 4,
-        "z": -0.206,
-        "baseline_points": 34,
+        "z": -0.203,
+        "baseline_points": 35,
         "measure": "키워드별 합산",
         "n_split": 4,
         "saturated": false,
         "top_titles": [
           "Uncertainty is certain: India is resilient and will emerge stronger - The Economic Times",
-          "‘We are not your bank’: Azerbaijani outlet signals limits to Turkey ties - Turkish Minute",
+          "Dollar stablecoin use stayed elevated after capital controls ended, new research suggests - CryptoSlate",
           "U.S. Dollar Breaks New Record, Surpassing 900 Cuban Pesos in Informal Market - CubaHeadlines"
         ]
       },
       "rate_shock": {
-        "n_articles": 12,
-        "n_sources": 8,
-        "z": 0.472,
-        "baseline_points": 34,
+        "n_articles": 7,
+        "n_sources": 6,
+        "z": -0.348,
+        "baseline_points": 35,
         "measure": "키워드별 합산",
-        "n_split": 12,
+        "n_split": 7,
         "saturated": false,
         "top_titles": [
-          "French Consumer Confidence Sinks to 13-Year Low Amid Protests, Bond Selloff - WSJ",
-          "Credit hedge funds hit by deepening global junk bond selloff - Hedgeweek",
+          "Lufthansa Q3 2026 slides: yields surge, cargo triples profit - Investing.com",
+          "Euro Falls to 1.1135 Against Dollar as French Bond Selloff Adds Pressure - BigGo Finance",
           "Euro countries to nominate candidates for ECB presidency by Friday - eKathimerini.com"
         ]
       }
