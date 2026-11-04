@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-04T01:38:28+00:00",
+  "collected_at": "2026-11-04T11:30:55+00:00",
   "as_of": "2026-11-03",
   "level": "NONE",
   "chain": [
@@ -59,115 +59,114 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 17,
-        "n_sources": 15,
-        "z": 0.746,
-        "baseline_points": 36,
+        "n_articles": 20,
+        "n_sources": 18,
+        "z": 1.309,
+        "baseline_points": 37,
         "measure": "키워드별 합산",
-        "n_split": 17,
+        "n_split": 20,
         "saturated": false,
         "top_titles": [
           "Paraguay Bank Failure - Post Register",
           "Paraguay Bank Failure - chronicleonline.com",
-          "Paraguay Bank Failure - WV News"
+          "Paraguay seizes major digital bank tied to president, leaving millions of customers in limbo - KTVN"
         ]
       },
       "credit_event": {
-        "n_articles": 98,
-        "n_sources": 86,
-        "z": 1.663,
-        "baseline_points": 36,
+        "n_articles": 101,
+        "n_sources": 79,
+        "z": 1.728,
+        "baseline_points": 37,
         "measure": "키워드별 합산",
-        "n_split": 98,
+        "n_split": 101,
         "saturated": false,
         "top_titles": [
-          "Britain to make lifetime retirement income the default for private pensions - Reuters",
           "Fixed-price is the new default. Do government contractors know what their contracts cost? - Federal News Network",
+          "Britain to make lifetime retirement income the default for private pensions - Reuters",
           "Broker in NFL Loan Scam Files for Chapter 11 Bankruptcy - Front Office Sports"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 8,
-        "n_sources": 8,
-        "z": -0.392,
-        "baseline_points": 36,
+        "n_articles": 5,
+        "n_sources": 5,
+        "z": -1.456,
+        "baseline_points": 37,
         "measure": "키워드별 합산",
-        "n_split": 8,
+        "n_split": 5,
         "saturated": false,
         "top_titles": [
           "Api3DAO Says dCOMP/USDC Market Is Healthy Despite Liquidity Crunch - www.tokenpost.com",
-          "Nightwatch marks 50th anniversary with film about a stray cat - Inside Croydon",
-          "dCOMP/USDC Market Update: Api3DAO Reports Healthy Conditions - Coinfomania"
+          "US to sell USD 75bln of 17-wk bills on November 4th, to sell USD 115bln of 4-wk bill and USD 110bln of 8-wk bills on November 5th; all to settle on November 10th - Newsquawk",
+          "USD/SGD (SGD=X) live rate, chart and news - Yahoo Finance Singapore"
         ]
       },
       "geopolitical": {
-        "n_articles": 124,
-        "n_sources": 110,
-        "z": -0.528,
-        "baseline_points": 36,
+        "n_articles": 121,
+        "n_sources": 102,
+        "z": -0.637,
+        "baseline_points": 37,
         "measure": "키워드별 합산",
-        "n_split": 124,
+        "n_split": 121,
         "saturated": false,
         "top_titles": [
-          "CCS hits Bellarmine with severe football sanctions for ineligible player - The Mercury News",
-          "Toronto Police Discuss Possible Motive Behind ‘Brutal’ Home Invasion and Hammer Attack on CEO Family - People.com",
-          "S. C. M. Paine: What Sanctions Get Right - Foreign Affairs"
+          "Several Republicans vote with Democrats to pass Ukraine aid, Russia sanctions package - ABC News - Breaking News, Latest News and Videos",
+          "UK Financial Conduct Authority publishes sanctions-focused proposed changes to its Financial Crime Guide - Global Sanctions and Export Controls Blog",
+          "Top ICC official urges Europe to shield court from US sanctions - Financial Times"
         ]
       },
       "trade_policy": {
-        "n_articles": 110,
-        "n_sources": 86,
-        "z": 0.103,
-        "baseline_points": 36,
+        "n_articles": 135,
+        "n_sources": 89,
+        "z": 0.912,
+        "baseline_points": 37,
         "measure": "키워드별 합산",
-        "n_split": 110,
+        "n_split": 135,
         "saturated": false,
         "top_titles": [
+          "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
           "Trump’s trade chief pushing him to step up negotiations with Canada - Politico",
-          "Trump Changes Which Canadian Goods Face 50 Percent Tariffs - Legis1",
-          "Global Industrial’s 3Q Sales Rise 10.2%, Tariff Refunds Lift Profits - National Association of Wholesaler-Distributors"
+          "Brown: Even in red-hot steel sector, U.S.-Canada trade war hurts Minnesota - Star Tribune"
         ]
       },
       "pandemic": {
-        "n_articles": 184,
-        "n_sources": 157,
-        "z": 0.887,
-        "baseline_points": 36,
+        "n_articles": 168,
+        "n_sources": 139,
+        "z": 0.52,
+        "baseline_points": 37,
         "measure": "키워드별 합산",
-        "n_split": 184,
+        "n_split": 168,
         "saturated": false,
         "top_titles": [
-          "Lockdown Traffic Exposed Los Angeles County’s Economic Divide - USC Viterbi School of Engineering",
-          "Queen Creek school under lockdown during police investigation - 12News",
-          "How Did the U.S. Policy Response to the COVID-19 Pandemic Affect Inflation and Economic Growth? - Philadelphia Federal Reserve Bank"
+          "Ebola disease outbreak 2026: How MSF is responding - Doctors Without Borders",
+          "What we know about the spread of Ebola amid growing outbreak in DRC - ABC News - Breaking News, Latest News and Videos",
+          "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com"
         ]
       },
       "fx_shock": {
-        "n_articles": 3,
-        "n_sources": 3,
-        "z": -0.714,
-        "baseline_points": 36,
+        "n_articles": 2,
+        "n_sources": 2,
+        "z": -1.217,
+        "baseline_points": 37,
         "measure": "키워드별 합산",
-        "n_split": 3,
+        "n_split": 2,
         "saturated": false,
         "top_titles": [
-          "Uncertainty is certain: India is resilient and will emerge stronger - The Economic Times",
-          "Dollar stablecoin use stayed elevated after capital controls ended, new research suggests - CryptoSlate",
-          "U.S. Dollar Breaks New Record, Surpassing 900 Cuban Pesos in Informal Market - CubaHeadlines"
+          "Dong Hyun “The Stun Gun” Kim’s Apgujeong Apartment, Bought for 10 Billion Won, Plunges by 1.2 Billion Won Right After Purchase - 파이낸셜뉴스",
+          "Economy: Tinubu Has Done More Than Other Previous Administrations, IMPI Claims - https://thefact.ng/"
         ]
       },
       "rate_shock": {
-        "n_articles": 8,
-        "n_sources": 7,
-        "z": -0.178,
-        "baseline_points": 36,
+        "n_articles": 9,
+        "n_sources": 8,
+        "z": -0.009,
+        "baseline_points": 37,
         "measure": "키워드별 합산",
-        "n_split": 8,
+        "n_split": 9,
         "saturated": false,
         "top_titles": [
           "Euro Falls to 1.1135 Against Dollar as French Bond Selloff Adds Pressure - BigGo Finance",
           "Lufthansa Q3 2026 slides: yields surge, cargo triples profit By Investing.com - Investing.com UK",
-          "Euro countries to nominate candidates for ECB presidency by Friday - eKathimerini.com"
+          "Season starts vary across Fleurieu and Murraylands, but not harvest potential - Stock Journal"
         ]
       }
     },
