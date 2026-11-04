@@ -1,10 +1,10 @@
 {
-  "as_of": "2026-11-04T11:12+09:00",
+  "as_of": "2026-11-05T00:47+09:00",
   "level": "NONE",
   "money_alert": false,
   "event_confirmed": false,
   "kr_market": {
-    "as_of": "2026-11-04",
+    "as_of": "2026-11-05",
     "zscores": {
       "KOSPI": -1.0909620659314374,
       "USDKRW": 0.06725777600200546,
@@ -16,7 +16,7 @@
     "active": false
   },
   "kr_flow": {
-    "as_of": "2026-11-04",
+    "as_of": "2026-11-05",
     "zscores": {
       "FOREIGN_NET_KOSPI": -0.3599767687862176,
       "FOREIGN_NET_5D": 0.419640632210068
@@ -31,44 +31,44 @@
       "banking_stress": {
         "n_articles": 15,
         "n_sources": 12,
-        "z": 0.5269851483506914,
-        "baseline_points": 67
+        "z": 0.495810998396629,
+        "baseline_points": 70
       },
       "credit_event": {
-        "n_articles": 76,
-        "n_sources": 64,
-        "z": 0.8378588484038754,
-        "baseline_points": 67
+        "n_articles": 59,
+        "n_sources": 55,
+        "z": -0.07822688199238471,
+        "baseline_points": 70
       },
       "liquidity_crisis": {
-        "n_articles": 12,
-        "n_sources": 12,
-        "z": -1.4163836535160748,
-        "baseline_points": 67
+        "n_articles": 21,
+        "n_sources": 19,
+        "z": -0.04297206664818738,
+        "baseline_points": 70
       },
       "fx_shock": {
-        "n_articles": 25,
-        "n_sources": 22,
-        "z": -1.8871718001220679,
-        "baseline_points": 67
+        "n_articles": 26,
+        "n_sources": 24,
+        "z": -1.739672183197647,
+        "baseline_points": 70
       },
       "trade_policy": {
-        "n_articles": 65,
-        "n_sources": 54,
-        "z": 0.12139973803826203,
-        "baseline_points": 67
+        "n_articles": 40,
+        "n_sources": 28,
+        "z": -1.0145314950610855,
+        "baseline_points": 70
       },
       "geopolitical": {
-        "n_articles": 143,
-        "n_sources": 87,
-        "z": 0.8710594750194773,
-        "baseline_points": 67
+        "n_articles": 127,
+        "n_sources": 83,
+        "z": 0.14055098266830846,
+        "baseline_points": 70
       },
       "pandemic": {
-        "n_articles": 27,
+        "n_articles": 26,
         "n_sources": 25,
-        "z": -1.2644965109092703,
-        "baseline_points": 67
+        "z": -1.269371629001765,
+        "baseline_points": 70
       }
     },
     "notes": []
@@ -79,7 +79,7 @@
     {
       "단계": "한국 시장(A_kr)",
       "원인": "임계 초과 지표 없음",
-      "근거": "ECOS 일별 1일 변화 z (기준일 2026-11-04), 규칙 |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0 (사전 등록 v5). 관측: 코스피 z=-1.09, 원/달러 z=+0.07, 국고채 3년 z=-0.18, 회사채AA−국고채 3년 금리차 z=-0.66, CD 91일 z=+0.45",
+      "근거": "ECOS 일별 1일 변화 z (기준일 2026-11-05), 규칙 |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0 (사전 등록 v5). 관측: 코스피 z=-1.09, 원/달러 z=+0.07, 국고채 3년 z=-0.18, 회사채AA−국고채 3년 금리차 z=-0.66, CD 91일 z=+0.45",
       "결과": "비활성"
     },
     {
@@ -101,7 +101,14 @@
       "결과": "NONE → 조치 없음"
     }
   ],
-  "notes": [],
+  "notes": [
+    "ECOS CD91: timed out",
+    "ECOS CORP_AA3Y: timed out",
+    "ECOS FOREIGN_NET_KOSPI: timed out",
+    "ECOS KOSPI: timed out",
+    "ECOS KTB3Y: timed out",
+    "ECOS USDKRW: timed out"
+  ],
   "alerts_sent": {},
   "report": null
 }
