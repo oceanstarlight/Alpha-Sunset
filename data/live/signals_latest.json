@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-11-04T11:30:55+00:00",
+  "collected_at": "2026-11-04T19:59:35+00:00",
   "as_of": "2026-11-03",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=+1.15, 미 10년물 금리(DGS10) z=-0.77, 미 장단기 금리차(T10Y2Y) z=+0.73",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=-0.77, 미 장단기 금리차(T10Y2Y) z=+0.73, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.59",
       "결과": "비활성"
     },
     {
@@ -33,12 +33,13 @@
     "active": false,
     "triggered": [],
     "zscores": {
-      "VIXCLS": 1.15,
+      "VIXCLS": -0.25,
       "T10Y2Y": 0.73,
       "DGS10": -0.77,
       "DEXKOUS": -0.54,
+      "DCOILWTICO": -0.18,
       "DTWEXBGS": -0.23,
-      "BAMLH0A0HYM2": -0.22
+      "BAMLH0A0HYM2": -0.59
     }
   },
   "flow": {
@@ -60,112 +61,113 @@
     "observations": {
       "banking_stress": {
         "n_articles": 20,
-        "n_sources": 18,
-        "z": 1.309,
-        "baseline_points": 37,
+        "n_sources": 19,
+        "z": 1.264,
+        "baseline_points": 38,
         "measure": "키워드별 합산",
         "n_split": 20,
         "saturated": false,
         "top_titles": [
+          "APTOPIX Paraguay Bank Failure - Springfield News-Sun",
           "Paraguay Bank Failure - Post Register",
-          "Paraguay Bank Failure - chronicleonline.com",
-          "Paraguay seizes major digital bank tied to president, leaving millions of customers in limbo - KTVN"
+          "APTOPIX Paraguay Bank Failure - dailyrecordnews.com"
         ]
       },
       "credit_event": {
-        "n_articles": 101,
-        "n_sources": 79,
-        "z": 1.728,
-        "baseline_points": 37,
+        "n_articles": 73,
+        "n_sources": 61,
+        "z": 0.304,
+        "baseline_points": 38,
         "measure": "키워드별 합산",
-        "n_split": 101,
+        "n_split": 73,
         "saturated": false,
         "top_titles": [
-          "Fixed-price is the new default. Do government contractors know what their contracts cost? - Federal News Network",
-          "Britain to make lifetime retirement income the default for private pensions - Reuters",
-          "Broker in NFL Loan Scam Files for Chapter 11 Bankruptcy - Front Office Sports"
+          "Athlete-Lender Sure Sports Files for Chapter 11 Bankruptcy Protection - Sportico.com",
+          "Laying the runway: how airline bankruptcies have revolutionised Chapter 11 Latin American restructuring - Latin Lawyer",
+          "Electronic Arts Takes Default Fight Against Creditors to Court - Bloomberg"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 5,
-        "n_sources": 5,
-        "z": -1.456,
-        "baseline_points": 37,
+        "n_articles": 8,
+        "n_sources": 8,
+        "z": -0.343,
+        "baseline_points": 38,
         "measure": "키워드별 합산",
-        "n_split": 5,
+        "n_split": 8,
         "saturated": false,
         "top_titles": [
           "Api3DAO Says dCOMP/USDC Market Is Healthy Despite Liquidity Crunch - www.tokenpost.com",
-          "US to sell USD 75bln of 17-wk bills on November 4th, to sell USD 115bln of 4-wk bill and USD 110bln of 8-wk bills on November 5th; all to settle on November 10th - Newsquawk",
-          "USD/SGD (SGD=X) live rate, chart and news - Yahoo Finance Singapore"
+          "Videos - Kitco",
+          "‘Intelligence and poverty can live side by side’ - Barnet Post"
         ]
       },
       "geopolitical": {
-        "n_articles": 121,
-        "n_sources": 102,
-        "z": -0.637,
-        "baseline_points": 37,
+        "n_articles": 115,
+        "n_sources": 105,
+        "z": -0.864,
+        "baseline_points": 38,
         "measure": "키워드별 합산",
-        "n_split": 121,
+        "n_split": 115,
         "saturated": false,
         "top_titles": [
-          "Several Republicans vote with Democrats to pass Ukraine aid, Russia sanctions package - ABC News - Breaking News, Latest News and Videos",
-          "UK Financial Conduct Authority publishes sanctions-focused proposed changes to its Financial Crime Guide - Global Sanctions and Export Controls Blog",
-          "Top ICC official urges Europe to shield court from US sanctions - Financial Times"
+          "US slaps sanctions on Indian, Turkish firms and people for aiding Iran - Reuters",
+          "ICC president condemns Trump’s sanctions in UN General Assembly speech - Jurist.org",
+          "US issues fresh Iran-related sanctions, Treasury says - The Times of Israel"
         ]
       },
       "trade_policy": {
         "n_articles": 135,
-        "n_sources": 89,
-        "z": 0.912,
-        "baseline_points": 37,
+        "n_sources": 93,
+        "z": 0.891,
+        "baseline_points": 38,
         "measure": "키워드별 합산",
         "n_split": 135,
         "saturated": false,
         "top_titles": [
+          "U.S. Midterms: Trump's Next Trade War Could Be With Congress - Foreign Policy",
           "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
-          "Trump’s trade chief pushing him to step up negotiations with Canada - Politico",
-          "Brown: Even in red-hot steel sector, U.S.-Canada trade war hurts Minnesota - Star Tribune"
+          "Canada, China Extend Tariff Deal, Aim to Boost Canadian Exports - Bloomberg"
         ]
       },
       "pandemic": {
-        "n_articles": 168,
-        "n_sources": 139,
-        "z": 0.52,
-        "baseline_points": 37,
+        "n_articles": 141,
+        "n_sources": 114,
+        "z": -0.078,
+        "baseline_points": 38,
         "measure": "키워드별 합산",
-        "n_split": 168,
+        "n_split": 141,
         "saturated": false,
         "top_titles": [
-          "Ebola disease outbreak 2026: How MSF is responding - Doctors Without Borders",
-          "What we know about the spread of Ebola amid growing outbreak in DRC - ABC News - Breaking News, Latest News and Videos",
-          "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com"
+          "The Woodlands High School on lockdown after student reportedly made threat - FOX 26 Houston",
+          "Lone Star College in The Woodlands placed on lockdown - KHOU",
+          "The latest Ebola outbreak could be the worst ever - The Economist"
         ]
       },
       "fx_shock": {
-        "n_articles": 2,
-        "n_sources": 2,
-        "z": -1.217,
-        "baseline_points": 37,
+        "n_articles": 4,
+        "n_sources": 4,
+        "z": -0.149,
+        "baseline_points": 38,
         "measure": "키워드별 합산",
-        "n_split": 2,
+        "n_split": 4,
         "saturated": false,
         "top_titles": [
           "Dong Hyun “The Stun Gun” Kim’s Apgujeong Apartment, Bought for 10 Billion Won, Plunges by 1.2 Billion Won Right After Purchase - 파이낸셜뉴스",
-          "Economy: Tinubu Has Done More Than Other Previous Administrations, IMPI Claims - https://thefact.ng/"
+          "Economy: Tinubu Has Done More Than Other Previous Administrations, IMPI Claims - https://thefact.ng/",
+          "Tinubu’s reforms have strengthened economy, attracted more capital than past administrations – IMPI - The Nation Newspaper"
         ]
       },
       "rate_shock": {
-        "n_articles": 9,
-        "n_sources": 8,
-        "z": -0.009,
-        "baseline_points": 37,
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": -0.515,
+        "baseline_points": 38,
         "measure": "키워드별 합산",
-        "n_split": 9,
+        "n_split": 6,
         "saturated": false,
         "top_titles": [
-          "Euro Falls to 1.1135 Against Dollar as French Bond Selloff Adds Pressure - BigGo Finance",
-          "Lufthansa Q3 2026 slides: yields surge, cargo triples profit By Investing.com - Investing.com UK",
+          "US Treasury shifts language, opening door to auction size changes - The Mighty 790 KFGO",
+          "AI debt binge isn’t crowding out Treasuries, TBAC says - KELO-AM",
           "Season starts vary across Fleurieu and Murraylands, but not harvest potential - Stock Journal"
         ]
       }
