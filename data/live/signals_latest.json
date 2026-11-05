@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-11-05T11:27:15+00:00",
+  "collected_at": "2026-11-05T20:14:58+00:00",
   "as_of": "2026-11-04",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+0.84, 미 장단기 금리차(T10Y2Y) z=-0.68, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.59",
+      "원인": "VIX(변동성)(VIXCLS) z=-2.75",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=-2.75, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.52, 미 10년물 금리(DGS10) z=+0.84",
       "결과": "비활성"
     },
     {
@@ -31,15 +31,17 @@
   "money_alert": false,
   "market": {
     "active": false,
-    "triggered": [],
+    "triggered": [
+      "VIXCLS"
+    ],
     "zscores": {
-      "VIXCLS": -0.25,
+      "VIXCLS": -2.75,
       "T10Y2Y": -0.68,
       "DGS10": 0.84,
       "DEXKOUS": -0.54,
       "DCOILWTICO": -0.18,
       "DTWEXBGS": -0.23,
-      "BAMLH0A0HYM2": -0.59
+      "BAMLH0A0HYM2": -1.52
     }
   },
   "flow": {
@@ -60,110 +62,110 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 22,
-        "n_sources": 20,
-        "z": 1.481,
-        "baseline_points": 40,
+        "n_articles": 25,
+        "n_sources": 24,
+        "z": 1.962,
+        "baseline_points": 41,
         "measure": "키워드별 합산",
-        "n_split": 22,
+        "n_split": 25,
         "saturated": false,
         "top_titles": [
           "Paraguay Bank Failure - Post Register",
           "Paraguay Bank Failure - The Herald Journal",
-          "Paraguay Bank Failure - WV News"
+          "Paraguayan president impeached minutes after resigning following bank collapse - KTVN"
         ]
       },
       "credit_event": {
-        "n_articles": 91,
-        "n_sources": 77,
-        "z": 1.121,
-        "baseline_points": 40,
+        "n_articles": 102,
+        "n_sources": 89,
+        "z": 1.615,
+        "baseline_points": 41,
         "measure": "키워드별 합산",
-        "n_split": 91,
+        "n_split": 102,
         "saturated": false,
         "top_titles": [
-          "Outback Steakhouse franchisee files for Chapter 11 bankruptcy - kens5.com",
-          "Filing Alert: The New Roseland Community Hospital Chapter 11 - Bondoro",
-          "Google turns off AI for schoolchildren by default - Phys.org"
+          "Have you seen the new Default Loans Support Center on Studentaid.gov? - Student Loan Borrowers Assistance",
+          "Case Summary: Redeemer Health Chapter 11 - Bondoro",
+          "SpaceX Default Risk Hits Fresh Peak as Tech-Led Selloff Builds - Bloomberg.com"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 11,
-        "n_sources": 10,
-        "z": 0.753,
-        "baseline_points": 40,
+        "n_sources": 9,
+        "z": 0.738,
+        "baseline_points": 41,
         "measure": "키워드별 합산",
         "n_split": 11,
         "saturated": false,
         "top_titles": [
           "India's deposit debate: are banks really facing funding stress? - Forbes India",
-          "Videos - Kitco",
-          "‘Intelligence and poverty can live side by side’ - Barnet Post"
+          "SK Chairman Chey Raises $679 Million by Selling Stake to Fund Divorce Settlement - bloomingbit",
+          "Hem Holdings Q2FY27 Results: Net loss ₹0.65 lakh, revenue nil - scanx.trade"
         ]
       },
       "geopolitical": {
-        "n_articles": 152,
-        "n_sources": 130,
-        "z": 0.65,
-        "baseline_points": 40,
+        "n_articles": 153,
+        "n_sources": 129,
+        "z": 0.679,
+        "baseline_points": 41,
         "measure": "키워드별 합산",
-        "n_split": 152,
+        "n_split": 153,
         "saturated": true,
         "top_titles": [
-          "U.S. issues fresh Iran-related sanctions - upi",
-          "US slaps sanctions on Indian, Turkish firms and people for aiding Iran - Reuters",
-          "US sanctions Indian and Turkish firms accused of helping Iran - Al Jazeera"
+          "Further Sanctions on the Cuban Regime’s Foreign Military Support and Illicit Revenue Networks - U.S. Department of State (.gov)",
+          "US issues new Cuba sanctions, takes aim at sectors of Cuban economy - Reuters",
+          "Kennedy Cole on writing about race through invasion horror and parasitism - Crime Reads"
         ]
       },
       "trade_policy": {
-        "n_articles": 159,
-        "n_sources": 112,
-        "z": 1.618,
-        "baseline_points": 40,
+        "n_articles": 131,
+        "n_sources": 96,
+        "z": 0.656,
+        "baseline_points": 41,
         "measure": "키워드별 합산",
-        "n_split": 159,
+        "n_split": 131,
         "saturated": false,
         "top_titles": [
-          "Democrats gain influence over trade agenda, but tariff repeals to hit Trump veto wall - Reuters",
-          "Some Republican lawmakers skewer Trump's beef imports, slam Canada trade war - ABC News - Breaking News, Latest News and Videos",
-          "China ties more US farm imports to reciprocal tariff cuts By Reuters - Investing.com"
+          "China says US farm purchases hinge on tariff-cut deal - Reuters",
+          "Housing Stocks Jumped on Tariff Relief Hopes. Now Reality Is Setting in. - Barron's",
+          "High Tariffs Impacted the Election: Democrats Gained Senate Seats in States with Highest Tariff Costs on Households - National Taxpayers Union"
         ]
       },
       "pandemic": {
-        "n_articles": 169,
-        "n_sources": 146,
-        "z": 0.54,
-        "baseline_points": 40,
+        "n_articles": 185,
+        "n_sources": 161,
+        "z": 0.893,
+        "baseline_points": 41,
         "measure": "키워드별 합산",
-        "n_split": 169,
+        "n_split": 185,
         "saturated": false,
         "top_titles": [
-          "Yum Says Taco Bell Sales Are Improving After Cyclospora Outbreak Fallout - WSJ",
-          "The latest Ebola outbreak could be the worst ever - The Economist",
-          "Lockdown lifted at The Woodlands High School after phone threat made on campus, authorities say - ABC13 Houston"
+          "Student conversation about video game leads to lockdown at Brockport HS, police say - 13WHAM-TV",
+          "Baby dies from measles amid ongoing outbreak in Wisconsin; 1st death of its kind since 1990, health officials say - ABC7 Chicago",
+          "Possible Swatting: Desert Vista HS lockdown lifted, school officials say - 12News"
         ]
       },
       "fx_shock": {
-        "n_articles": 5,
-        "n_sources": 5,
-        "z": 0.369,
-        "baseline_points": 40,
+        "n_articles": 4,
+        "n_sources": 4,
+        "z": -0.169,
+        "baseline_points": 41,
         "measure": "키워드별 합산",
-        "n_split": 5,
+        "n_split": 4,
         "saturated": false,
         "top_titles": [
           "Somalia’s Currency Crisis Exposes Failures in Central Bank Leadership - Garowe Online",
-          "How High Will the Dollar Climb in Cuba's Escalating Currency Crisis? - CubaHeadlines",
-          "Tinubu’s reforms have strengthened economy, attracted more capital than past administrations – IMPI - The Nation Newspaper"
+          "“What’s to become of retail investors?” ... ETF they bought for 1.2199 trillion won plunges 45% - 파이낸셜뉴스",
+          "How High Will the Dollar Climb in Cuba's Escalating Currency Crisis? - CubaHeadlines"
         ]
       },
       "rate_shock": {
-        "n_articles": 10,
-        "n_sources": 10,
-        "z": 0.189,
-        "baseline_points": 40,
+        "n_articles": 12,
+        "n_sources": 12,
+        "z": 0.536,
+        "baseline_points": 41,
         "measure": "키워드별 합산",
-        "n_split": 10,
+        "n_split": 12,
         "saturated": false,
         "top_titles": [
           "French Consumer Confidence Sinks to 13-Year Low Amid Protests, Bond Selloff - WSJ",
