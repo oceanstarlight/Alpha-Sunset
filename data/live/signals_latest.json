@@ -1,18 +1,18 @@
 {
-  "collected_at": "2026-11-04T19:59:35+00:00",
-  "as_of": "2026-11-03",
+  "collected_at": "2026-11-05T01:45:10+00:00",
+  "as_of": "2026-11-04",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=-0.77, 미 장단기 금리차(T10Y2Y) z=+0.73, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.59",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+0.84, 미 장단기 금리차(T10Y2Y) z=-0.68, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.59",
       "결과": "비활성"
     },
     {
       "단계": "자금 흐름(C)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.19, 미 은행 예금(DPSACBW027SBOG) z=-1.14, 해외 공적 미국채 보관(WMTSECL1) z=-0.05, 지급준비금(WRESBAL) z=-1.14",
+      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.50, 미 은행 예금(DPSACBW027SBOG) z=-1.14, 해외 공적 미국채 보관(WMTSECL1) z=-0.05, 지급준비금(WRESBAL) z=-1.14",
       "결과": "비활성"
     },
     {
@@ -34,8 +34,8 @@
     "triggered": [],
     "zscores": {
       "VIXCLS": -0.25,
-      "T10Y2Y": 0.73,
-      "DGS10": -0.77,
+      "T10Y2Y": -0.68,
+      "DGS10": 0.84,
       "DEXKOUS": -0.54,
       "DCOILWTICO": -0.18,
       "DTWEXBGS": -0.23,
@@ -46,7 +46,7 @@
     "active": false,
     "triggered": [],
     "zscores": {
-      "WRMFNS": -0.19,
+      "WRMFNS": -0.5,
       "DPSACBW027SBOG": -1.14,
       "WMTSECL1": -0.05,
       "WRESBAL": -1.14
@@ -60,115 +60,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 20,
-        "n_sources": 19,
-        "z": 1.264,
-        "baseline_points": 38,
+        "n_articles": 25,
+        "n_sources": 24,
+        "z": 2.172,
+        "baseline_points": 39,
         "measure": "키워드별 합산",
-        "n_split": 20,
+        "n_split": 25,
         "saturated": false,
         "top_titles": [
-          "APTOPIX Paraguay Bank Failure - Springfield News-Sun",
           "Paraguay Bank Failure - Post Register",
-          "APTOPIX Paraguay Bank Failure - dailyrecordnews.com"
+          "Paraguay Bank Failure - The Herald Journal",
+          "Paraguay Bank Failure - WV News"
         ]
       },
       "credit_event": {
-        "n_articles": 73,
-        "n_sources": 61,
-        "z": 0.304,
-        "baseline_points": 38,
+        "n_articles": 96,
+        "n_sources": 79,
+        "z": 1.412,
+        "baseline_points": 39,
         "measure": "키워드별 합산",
-        "n_split": 73,
+        "n_split": 96,
         "saturated": false,
         "top_titles": [
-          "Athlete-Lender Sure Sports Files for Chapter 11 Bankruptcy Protection - Sportico.com",
-          "Laying the runway: how airline bankruptcies have revolutionised Chapter 11 Latin American restructuring - Latin Lawyer",
-          "Electronic Arts Takes Default Fight Against Creditors to Court - Bloomberg"
+          "Roseland Community Hospital files for Chapter 11 bankruptcy - CBS News",
+          "Outback Steakhouse franchisee files for Chapter 11 bankruptcy - WQAD",
+          "Camp Mystic’s Eastland family transfers control of Chapter 11 bankruptcy case - kens5.com"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 8,
-        "n_sources": 8,
-        "z": -0.343,
-        "baseline_points": 38,
+        "n_articles": 7,
+        "n_sources": 7,
+        "z": -0.694,
+        "baseline_points": 39,
         "measure": "키워드별 합산",
-        "n_split": 8,
+        "n_split": 7,
         "saturated": false,
         "top_titles": [
-          "Api3DAO Says dCOMP/USDC Market Is Healthy Despite Liquidity Crunch - www.tokenpost.com",
           "Videos - Kitco",
-          "‘Intelligence and poverty can live side by side’ - Barnet Post"
+          "‘Intelligence and poverty can live side by side’ - Barnet Post",
+          "Petra Diamonds ties up Cullinan output for $20m lifeline amid debt pressure - MiningMX"
         ]
       },
       "geopolitical": {
-        "n_articles": 115,
-        "n_sources": 105,
-        "z": -0.864,
-        "baseline_points": 38,
+        "n_articles": 124,
+        "n_sources": 108,
+        "z": -0.486,
+        "baseline_points": 39,
         "measure": "키워드별 합산",
-        "n_split": 115,
+        "n_split": 124,
         "saturated": false,
         "top_titles": [
           "US slaps sanctions on Indian, Turkish firms and people for aiding Iran - Reuters",
           "ICC president condemns Trump’s sanctions in UN General Assembly speech - Jurist.org",
-          "US issues fresh Iran-related sanctions, Treasury says - The Times of Israel"
+          "NJ governor warns gas companies of sanctions for importing Russian diesel - New Jersey Monitor"
         ]
       },
       "trade_policy": {
-        "n_articles": 135,
-        "n_sources": 93,
-        "z": 0.891,
-        "baseline_points": 38,
+        "n_articles": 144,
+        "n_sources": 94,
+        "z": 1.164,
+        "baseline_points": 39,
         "measure": "키워드별 합산",
-        "n_split": 135,
+        "n_split": 144,
         "saturated": false,
         "top_titles": [
-          "U.S. Midterms: Trump's Next Trade War Could Be With Congress - Foreign Policy",
-          "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
-          "Canada, China Extend Tariff Deal, Aim to Boost Canadian Exports - Bloomberg"
+          "Some Republican lawmakers skewer Trump's beef imports, slam Canada trade war - ABC News - Breaking News, Latest News and Videos",
+          "US Democratic win unlikely to ease firms' cost, tariff woes in near term, executives say - Reuters",
+          "U.S. Midterms: Trump's Next Trade War Could Be With Congress - Foreign Policy"
         ]
       },
       "pandemic": {
-        "n_articles": 141,
-        "n_sources": 114,
-        "z": -0.078,
-        "baseline_points": 38,
+        "n_articles": 160,
+        "n_sources": 139,
+        "z": 0.344,
+        "baseline_points": 39,
         "measure": "키워드별 합산",
-        "n_split": 141,
+        "n_split": 160,
         "saturated": false,
         "top_titles": [
-          "The Woodlands High School on lockdown after student reportedly made threat - FOX 26 Houston",
-          "Lone Star College in The Woodlands placed on lockdown - KHOU",
-          "The latest Ebola outbreak could be the worst ever - The Economist"
+          "Lockdown lifted at The Woodlands High School after phone threat made on campus, authorities say - ABC13 Houston",
+          "All-clear issued after lockdown at The Woodlands High School - KHOU",
+          "UPDATE: The Woodlands High School Lockdown, Montgomery County Sheriff’s Office units on scene - Hello Woodlands"
         ]
       },
       "fx_shock": {
-        "n_articles": 4,
-        "n_sources": 4,
-        "z": -0.149,
-        "baseline_points": 38,
+        "n_articles": 5,
+        "n_sources": 5,
+        "z": 0.374,
+        "baseline_points": 39,
         "measure": "키워드별 합산",
-        "n_split": 4,
+        "n_split": 5,
         "saturated": false,
         "top_titles": [
-          "Dong Hyun “The Stun Gun” Kim’s Apgujeong Apartment, Bought for 10 Billion Won, Plunges by 1.2 Billion Won Right After Purchase - 파이낸셜뉴스",
-          "Economy: Tinubu Has Done More Than Other Previous Administrations, IMPI Claims - https://thefact.ng/",
-          "Tinubu’s reforms have strengthened economy, attracted more capital than past administrations – IMPI - The Nation Newspaper"
+          "Somalia’s Currency Crisis Exposes Failures in Central Bank Leadership - Garowe Online",
+          "How High Will the Dollar Climb in Cuba's Escalating Currency Crisis? - CubaHeadlines",
+          "Economy: Tinubu Has Done More Than Other Previous Administrations, IMPI Claims - https://thefact.ng/"
         ]
       },
       "rate_shock": {
         "n_articles": 6,
         "n_sources": 6,
-        "z": -0.515,
-        "baseline_points": 38,
+        "z": -0.507,
+        "baseline_points": 39,
         "measure": "키워드별 합산",
         "n_split": 6,
         "saturated": false,
         "top_titles": [
-          "US Treasury shifts language, opening door to auction size changes - The Mighty 790 KFGO",
-          "AI debt binge isn’t crowding out Treasuries, TBAC says - KELO-AM",
-          "Season starts vary across Fleurieu and Murraylands, but not harvest potential - Stock Journal"
+          "French Consumer Confidence Sinks to 13-Year Low Amid Protests, Bond Selloff - WSJ",
+          "Season starts vary across Fleurieu and Murraylands, but not harvest potential - Stock Journal",
+          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com"
         ]
       }
     },
