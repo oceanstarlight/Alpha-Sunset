@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-11-06T11:25:53+00:00",
+  "collected_at": "2026-11-06T19:40:01+00:00",
   "as_of": "2026-11-05",
   "level": "WATCH",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "VIX(변동성)(VIXCLS) z=-2.75, 미 장단기 금리차(T10Y2Y) z=+2.13",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=-2.75, 미 장단기 금리차(T10Y2Y) z=+2.13, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.52",
+      "원인": "VIX(변동성)(VIXCLS) z=+9.14, 미 장단기 금리차(T10Y2Y) z=+2.13, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.99",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=+9.14, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.99, 미 장단기 금리차(T10Y2Y) z=+2.13",
       "결과": "활성"
     },
     {
@@ -33,14 +33,15 @@
     "active": true,
     "triggered": [
       "VIXCLS",
-      "T10Y2Y"
+      "T10Y2Y",
+      "BAMLH0A0HYM2"
     ],
     "zscores": {
-      "VIXCLS": -2.75,
+      "VIXCLS": 9.14,
       "T10Y2Y": 2.13,
       "DGS10": -1.22,
       "DCOILWTICO": -0.18,
-      "BAMLH0A0HYM2": -1.52
+      "BAMLH0A0HYM2": 2.99
     }
   },
   "flow": {
@@ -61,115 +62,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 29,
-        "n_sources": 24,
-        "z": 2.548,
-        "baseline_points": 42,
+        "n_articles": 30,
+        "n_sources": 25,
+        "z": 2.507,
+        "baseline_points": 43,
         "measure": "키워드별 합산",
-        "n_split": 29,
+        "n_split": 30,
         "saturated": false,
         "top_titles": [
-          "Paraguay prosecutor will seek charges against President Peña following bank collapse - KTVN",
-          "Paraguay Bank Failure - WV News",
-          "Paraguay President Santiago Peña resigns following bank collapse | World News | 2news.com - KTVN"
+          "Paraguay Bank Failure - Goshen News",
+          "Paraguay’s President, Santiago Peña, Quits Amid Ueno Bank Scandal - The New York Times",
+          "Paraguay’s Peña loses top aides as impeachment trial resumes over failed bank - Dayton Daily News"
         ]
       },
       "credit_event": {
-        "n_articles": 117,
-        "n_sources": 105,
-        "z": 2.249,
-        "baseline_points": 42,
+        "n_articles": 111,
+        "n_sources": 98,
+        "z": 1.832,
+        "baseline_points": 43,
         "measure": "키워드별 합산",
-        "n_split": 117,
+        "n_split": 111,
         "saturated": false,
         "top_titles": [
-          "SoftBank credit risk jumps to 4-year high, shares tumble as AI fears roil market - Reuters",
-          "Moody’s Warns Senegal Debt Rework Likely Tantamount to Default - Bloomberg.com",
-          "Latham Advises on Karyopharm Therapeutics Inc.’s Chapter 11 Restructuring - Latham & Watkins LLP"
+          "Filing Alert: TapestryHealth Chapter 11 - Bondoro",
+          "Arizona Court Permanently Bars Debt Relief Companies And Telemarketing In FTC Default Judgment - JD Supra",
+          "SoftBank credit risk jumps to 4-year high, shares tumble as AI fears roil market - Reuters"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 9,
-        "n_sources": 8,
+        "n_sources": 9,
         "z": 0.0,
-        "baseline_points": 42,
+        "baseline_points": 43,
         "measure": "키워드별 합산",
         "n_split": 9,
         "saturated": false,
         "top_titles": [
-          "Gold Falls Alongside Stocks and Crypto in a Break From Its Usual Script - Startup Fortune",
           "Gammon India Limited faces material going-concern uncertainty - Multibagg AI",
-          "How A Banking Collapse Brought Down Paraguay S President In Days - ИФЗ РАН"
+          "Banking Risk Monthly Outlook: November 2026 - S&P Global",
+          "Gold Falls Alongside Stocks and Crypto in a Break From Its Usual Script - Startup Fortune"
         ]
       },
       "geopolitical": {
-        "n_articles": 126,
-        "n_sources": 119,
-        "z": -0.436,
-        "baseline_points": 42,
+        "n_articles": 137,
+        "n_sources": 130,
+        "z": 0.024,
+        "baseline_points": 43,
         "measure": "키워드별 합산",
-        "n_split": 126,
+        "n_split": 137,
         "saturated": false,
         "top_titles": [
+          "UK jailing of Indian sailor over Russia sanctions sets off ‘perfect storm’ - Al Jazeera",
           "Rubio places additional sanctions on Cuba, targeting ‘illicit’ shipping network - The Hill",
-          "Further Sanctions on the Cuban Regime’s Foreign Military Support and Illicit Revenue Networks - U.S. Department of State (.gov)",
-          "Trump expands Cuba sanctions, targeting new industries and offshore network - Miami Herald"
+          "U.S. sanctions relatives of Cuban military business leaders - upi"
         ]
       },
       "trade_policy": {
-        "n_articles": 118,
-        "n_sources": 97,
-        "z": 0.228,
-        "baseline_points": 42,
+        "n_articles": 117,
+        "n_sources": 94,
+        "z": 0.193,
+        "baseline_points": 43,
         "measure": "키워드별 합산",
-        "n_split": 118,
+        "n_split": 117,
         "saturated": false,
         "top_titles": [
-          "The countries fighting back against Trump's tariff tirade - DW.com",
-          "Copper Moves Lower as US Election Undermines AI and Tariff Trade - Bloomberg.com",
-          "New TiRADE database logs every tariff rate Trump has announced - Brown Daily Herald"
+          "Democrats Won the Tariff Argument—Now Comes the Hard but Necessary Part - Cato Institute",
+          "Canadian art market takes hit from trade war with US - The Art Newspaper",
+          "The Week Ahead: Tariffs, Import Compliance, Carbon Border Charges - Sandler, Travis & Rosenberg, P.A."
         ]
       },
       "pandemic": {
-        "n_articles": 216,
-        "n_sources": 173,
-        "z": 1.575,
-        "baseline_points": 42,
+        "n_articles": 205,
+        "n_sources": 167,
+        "z": 1.268,
+        "baseline_points": 43,
         "measure": "키워드별 합산",
-        "n_split": 216,
-        "saturated": true,
+        "n_split": 205,
+        "saturated": false,
         "top_titles": [
-          "Infant’s death linked to measles outbreak in southwest Wisconsin - WPR",
           "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com",
-          "China's Q3 emissions post biggest drop since pandemic as Hormuz crisis curbs fossil fuel use - Reuters"
+          "Canada’s Measles Outbreak Concentrated Among Undervaccinated - Medscape",
+          "Strand Bookstore to Pay U.S. $1.5 Million Over Pandemic-Relief Loan - The New York Times"
         ]
       },
       "fx_shock": {
-        "n_articles": 3,
-        "n_sources": 3,
-        "z": -0.706,
-        "baseline_points": 42,
+        "n_articles": 4,
+        "n_sources": 4,
+        "z": -0.151,
+        "baseline_points": 43,
         "measure": "키워드별 합산",
-        "n_split": 3,
+        "n_split": 4,
         "saturated": false,
         "top_titles": [
-          "“What’s to become of retail investors?” ... ETF they bought for 1.2199 trillion won plunges 45% - 파이낸셜뉴스",
           "The World Cup effect: Football and politics in Argentina - Buenos Aires Times",
-          "Nigeria’s consumer giants squeeze out bigger profits as shoppers pull back - Nairametrics"
+          "Economists predict when the next US recession could arrive - Finbold",
+          "Rupee | A test of resilience - India Today"
         ]
       },
       "rate_shock": {
         "n_articles": 6,
         "n_sources": 6,
-        "z": -0.528,
-        "baseline_points": 42,
+        "z": -0.52,
+        "baseline_points": 43,
         "measure": "키워드별 합산",
         "n_split": 6,
         "saturated": false,
         "top_titles": [
           "Japan’s GPIF posts $33.3 bln Q2 loss as global bond selloff hits foreign holdings - Yahoo Finance Singapore",
           "Japan’s GPIF posts $33.3 bln Q2 loss as global bond selloff hits foreign holdings - Investing.com",
-          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com"
+          "BREAKING: US NFP much stronger than expected 📈 US Dollar and treasuries yields surge - XTB.com"
         ]
       }
     },
