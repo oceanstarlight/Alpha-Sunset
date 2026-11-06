@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-07T00:05+09:00",
+  "as_of": "2026-11-07T00:25+09:00",
   "level": "WATCH",
   "money_alert": false,
   "event_confirmed": false,
@@ -8,9 +8,9 @@
     "zscores": {
       "KOSPI": -1.5664307168441658,
       "USDKRW": 0.21289472597402917,
-      "KTB3Y": -1.027602002806222,
-      "CREDIT_KR": 0.2565238525274055,
-      "CD91": -0.20801551207135427
+      "KTB3Y": -1.2481041275033646,
+      "CREDIT_KR": 1.305027562836583,
+      "CD91": -0.2080155120713543
     },
     "triggered": [],
     "active": false
@@ -29,27 +29,27 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 31,
-        "n_sources": 18,
-        "z": 2.508095262754908,
+        "n_articles": 30,
+        "n_sources": 16,
+        "z": 2.3770386846880287,
         "baseline_points": 80
       },
       "credit_event": {
-        "n_articles": 44,
-        "n_sources": 37,
-        "z": -0.6958110128196271,
+        "n_articles": 37,
+        "n_sources": 32,
+        "z": -1.043096366811598,
         "baseline_points": 80
       },
       "liquidity_crisis": {
-        "n_articles": 7,
-        "n_sources": 7,
-        "z": -2.168993315539555,
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": -2.3222790622207956,
         "baseline_points": 80
       },
       "fx_shock": {
-        "n_articles": 46,
+        "n_articles": 47,
         "n_sources": 36,
-        "z": -0.5391040820038049,
+        "z": -0.4902611300668804,
         "baseline_points": 80
       },
       "trade_policy": {
@@ -59,9 +59,9 @@
         "baseline_points": 80
       },
       "geopolitical": {
-        "n_articles": 90,
-        "n_sources": 61,
-        "z": -1.5891650780622122,
+        "n_articles": 88,
+        "n_sources": 60,
+        "z": -1.6840052169991588,
         "baseline_points": 80
       },
       "pandemic": {
@@ -92,7 +92,7 @@
     {
       "단계": "한국 시장(A_kr)",
       "원인": "임계 초과 지표 없음",
-      "근거": "ECOS 일별 1일 변화 z (기준일 2026-11-07), 규칙 |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0 (사전 등록 v5). 관측: 코스피 z=-1.57, 원/달러 z=+0.21, 국고채 3년 z=-1.03, 회사채AA−국고채 3년 금리차 z=+0.26, CD 91일 z=-0.21",
+      "근거": "ECOS 일별 1일 변화 z (기준일 2026-11-07), 규칙 |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0 (사전 등록 v5). 관측: 코스피 z=-1.57, 원/달러 z=+0.21, 국고채 3년 z=-1.25, 회사채AA−국고채 3년 금리차 z=+1.31, CD 91일 z=-0.21",
       "결과": "비활성"
     },
     {
@@ -122,7 +122,7 @@
   ],
   "notes": [],
   "alerts_sent": {
-    "dart:20261106000463:False": "sent"
+    "dart:20261106000463:False": "duplicate"
   },
   "report": null
 }
