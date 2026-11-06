@@ -1,13 +1,13 @@
 {
-  "collected_at": "2026-11-05T20:14:58+00:00",
-  "as_of": "2026-11-04",
-  "level": "NONE",
+  "collected_at": "2026-11-06T11:25:53+00:00",
+  "as_of": "2026-11-05",
+  "level": "WATCH",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "VIX(변동성)(VIXCLS) z=-2.75",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=-2.75, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.52, 미 10년물 금리(DGS10) z=+0.84",
-      "결과": "비활성"
+      "원인": "VIX(변동성)(VIXCLS) z=-2.75, 미 장단기 금리차(T10Y2Y) z=+2.13",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=-2.75, 미 장단기 금리차(T10Y2Y) z=+2.13, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.52",
+      "결과": "활성"
     },
     {
       "단계": "자금 흐름(C)",
@@ -23,24 +23,23 @@
     },
     {
       "단계": "종합 등급",
-      "원인": "A=비활성, C=비활성, B=비활성",
+      "원인": "A=활성, C=비활성, B=비활성",
       "근거": "등급 규칙(사전 등록 v2·v3): ALERT = B ∧ (A ∨ C), WATCH = 하나 이상 활성",
-      "결과": "NONE → 조치 없음"
+      "결과": "WATCH → 1단계: 자금 이상 알림"
     }
   ],
   "money_alert": false,
   "market": {
-    "active": false,
+    "active": true,
     "triggered": [
-      "VIXCLS"
+      "VIXCLS",
+      "T10Y2Y"
     ],
     "zscores": {
       "VIXCLS": -2.75,
-      "T10Y2Y": -0.68,
-      "DGS10": 0.84,
-      "DEXKOUS": -0.54,
+      "T10Y2Y": 2.13,
+      "DGS10": -1.22,
       "DCOILWTICO": -0.18,
-      "DTWEXBGS": -0.23,
       "BAMLH0A0HYM2": -1.52
     }
   },
@@ -62,115 +61,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 25,
+        "n_articles": 29,
         "n_sources": 24,
-        "z": 1.962,
-        "baseline_points": 41,
+        "z": 2.548,
+        "baseline_points": 42,
         "measure": "키워드별 합산",
-        "n_split": 25,
+        "n_split": 29,
         "saturated": false,
         "top_titles": [
-          "Paraguay Bank Failure - Post Register",
-          "Paraguay Bank Failure - The Herald Journal",
-          "Paraguayan president impeached minutes after resigning following bank collapse - KTVN"
+          "Paraguay prosecutor will seek charges against President Peña following bank collapse - KTVN",
+          "Paraguay Bank Failure - WV News",
+          "Paraguay President Santiago Peña resigns following bank collapse | World News | 2news.com - KTVN"
         ]
       },
       "credit_event": {
-        "n_articles": 102,
-        "n_sources": 89,
-        "z": 1.615,
-        "baseline_points": 41,
+        "n_articles": 117,
+        "n_sources": 105,
+        "z": 2.249,
+        "baseline_points": 42,
         "measure": "키워드별 합산",
-        "n_split": 102,
+        "n_split": 117,
         "saturated": false,
         "top_titles": [
-          "Have you seen the new Default Loans Support Center on Studentaid.gov? - Student Loan Borrowers Assistance",
-          "Case Summary: Redeemer Health Chapter 11 - Bondoro",
-          "SpaceX Default Risk Hits Fresh Peak as Tech-Led Selloff Builds - Bloomberg.com"
+          "SoftBank credit risk jumps to 4-year high, shares tumble as AI fears roil market - Reuters",
+          "Moody’s Warns Senegal Debt Rework Likely Tantamount to Default - Bloomberg.com",
+          "Latham Advises on Karyopharm Therapeutics Inc.’s Chapter 11 Restructuring - Latham & Watkins LLP"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 11,
-        "n_sources": 9,
-        "z": 0.738,
-        "baseline_points": 41,
+        "n_articles": 9,
+        "n_sources": 8,
+        "z": 0.0,
+        "baseline_points": 42,
         "measure": "키워드별 합산",
-        "n_split": 11,
+        "n_split": 9,
         "saturated": false,
         "top_titles": [
-          "India's deposit debate: are banks really facing funding stress? - Forbes India",
-          "SK Chairman Chey Raises $679 Million by Selling Stake to Fund Divorce Settlement - bloomingbit",
-          "Hem Holdings Q2FY27 Results: Net loss ₹0.65 lakh, revenue nil - scanx.trade"
+          "Gold Falls Alongside Stocks and Crypto in a Break From Its Usual Script - Startup Fortune",
+          "Gammon India Limited faces material going-concern uncertainty - Multibagg AI",
+          "How A Banking Collapse Brought Down Paraguay S President In Days - ИФЗ РАН"
         ]
       },
       "geopolitical": {
-        "n_articles": 153,
-        "n_sources": 129,
-        "z": 0.679,
-        "baseline_points": 41,
+        "n_articles": 126,
+        "n_sources": 119,
+        "z": -0.436,
+        "baseline_points": 42,
         "measure": "키워드별 합산",
-        "n_split": 153,
-        "saturated": true,
+        "n_split": 126,
+        "saturated": false,
         "top_titles": [
+          "Rubio places additional sanctions on Cuba, targeting ‘illicit’ shipping network - The Hill",
           "Further Sanctions on the Cuban Regime’s Foreign Military Support and Illicit Revenue Networks - U.S. Department of State (.gov)",
-          "US issues new Cuba sanctions, takes aim at sectors of Cuban economy - Reuters",
-          "Kennedy Cole on writing about race through invasion horror and parasitism - Crime Reads"
+          "Trump expands Cuba sanctions, targeting new industries and offshore network - Miami Herald"
         ]
       },
       "trade_policy": {
-        "n_articles": 131,
-        "n_sources": 96,
-        "z": 0.656,
-        "baseline_points": 41,
+        "n_articles": 118,
+        "n_sources": 97,
+        "z": 0.228,
+        "baseline_points": 42,
         "measure": "키워드별 합산",
-        "n_split": 131,
+        "n_split": 118,
         "saturated": false,
         "top_titles": [
-          "China says US farm purchases hinge on tariff-cut deal - Reuters",
-          "Housing Stocks Jumped on Tariff Relief Hopes. Now Reality Is Setting in. - Barron's",
-          "High Tariffs Impacted the Election: Democrats Gained Senate Seats in States with Highest Tariff Costs on Households - National Taxpayers Union"
+          "The countries fighting back against Trump's tariff tirade - DW.com",
+          "Copper Moves Lower as US Election Undermines AI and Tariff Trade - Bloomberg.com",
+          "New TiRADE database logs every tariff rate Trump has announced - Brown Daily Herald"
         ]
       },
       "pandemic": {
-        "n_articles": 185,
-        "n_sources": 161,
-        "z": 0.893,
-        "baseline_points": 41,
+        "n_articles": 216,
+        "n_sources": 173,
+        "z": 1.575,
+        "baseline_points": 42,
         "measure": "키워드별 합산",
-        "n_split": 185,
-        "saturated": false,
+        "n_split": 216,
+        "saturated": true,
         "top_titles": [
-          "Student conversation about video game leads to lockdown at Brockport HS, police say - 13WHAM-TV",
-          "Baby dies from measles amid ongoing outbreak in Wisconsin; 1st death of its kind since 1990, health officials say - ABC7 Chicago",
-          "Possible Swatting: Desert Vista HS lockdown lifted, school officials say - 12News"
+          "Infant’s death linked to measles outbreak in southwest Wisconsin - WPR",
+          "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com",
+          "China's Q3 emissions post biggest drop since pandemic as Hormuz crisis curbs fossil fuel use - Reuters"
         ]
       },
       "fx_shock": {
-        "n_articles": 4,
-        "n_sources": 4,
-        "z": -0.169,
-        "baseline_points": 41,
+        "n_articles": 3,
+        "n_sources": 3,
+        "z": -0.706,
+        "baseline_points": 42,
         "measure": "키워드별 합산",
-        "n_split": 4,
+        "n_split": 3,
         "saturated": false,
         "top_titles": [
-          "Somalia’s Currency Crisis Exposes Failures in Central Bank Leadership - Garowe Online",
           "“What’s to become of retail investors?” ... ETF they bought for 1.2199 trillion won plunges 45% - 파이낸셜뉴스",
-          "How High Will the Dollar Climb in Cuba's Escalating Currency Crisis? - CubaHeadlines"
+          "The World Cup effect: Football and politics in Argentina - Buenos Aires Times",
+          "Nigeria’s consumer giants squeeze out bigger profits as shoppers pull back - Nairametrics"
         ]
       },
       "rate_shock": {
-        "n_articles": 12,
-        "n_sources": 12,
-        "z": 0.536,
-        "baseline_points": 41,
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": -0.528,
+        "baseline_points": 42,
         "measure": "키워드별 합산",
-        "n_split": 12,
+        "n_split": 6,
         "saturated": false,
         "top_titles": [
-          "French Consumer Confidence Sinks to 13-Year Low Amid Protests, Bond Selloff - WSJ",
-          "China's Huafa gains 'full support' of local government amid bond selloff - TradingView",
-          "French, Spanish, Belgian Government Bond Yields Surge as Protests and Election Uncertainty Inflate Fiscal Risk - BigGo Finance"
+          "Japan’s GPIF posts $33.3 bln Q2 loss as global bond selloff hits foreign holdings - Yahoo Finance Singapore",
+          "Japan’s GPIF posts $33.3 bln Q2 loss as global bond selloff hits foreign holdings - Investing.com",
+          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com"
         ]
       }
     },
