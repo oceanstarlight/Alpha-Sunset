@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-07T17:51:15+00:00",
+  "collected_at": "2026-11-07T22:15:13+00:00",
   "as_of": "2026-11-06",
   "level": "WATCH",
   "chain": [
@@ -61,114 +61,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 24,
-        "n_sources": 20,
-        "z": 1.163,
-        "baseline_points": 46,
+        "n_articles": 25,
+        "n_sources": 23,
+        "z": 1.273,
+        "baseline_points": 47,
         "measure": "키워드별 합산",
-        "n_split": 24,
+        "n_split": 25,
         "saturated": false,
         "top_titles": [
           "Paraguay Bank Failure - TelegraphHerald.com",
-          "Ousted Paraguayan president placed under house arrest after bank collapse - KTVN",
-          "Paraguay Bank Failure - Springfield News-Sun"
+          "Paraguay Bank Failure - Springfield News-Sun",
+          "Ousted Paraguayan president placed under house arrest after bank collapse - KTVN"
         ]
       },
       "credit_event": {
-        "n_articles": 47,
-        "n_sources": 42,
-        "z": -1.083,
-        "baseline_points": 46,
+        "n_articles": 44,
+        "n_sources": 41,
+        "z": -1.191,
+        "baseline_points": 47,
         "measure": "키워드별 합산",
-        "n_split": 47,
+        "n_split": 44,
         "saturated": false,
         "top_titles": [
-          "Chiefs WR Rashee Rice's bankruptcy filing says he owes $3.5 million but nets just $3.6K a month - Los Angeles Times",
-          "Target-Date Funds Are The New Default. Is Yours Working For You? - Forbes",
-          "Weekend Doctor: When distraction becomes the default - Bluffton Icon"
+          "Snapchat's Find Friends Feature Will Be Off By Default For UK Users Under 18 - Engadget",
+          "When distraction becomes the default - Advertiser-Tribune",
+          "Target-Date Funds Are The New Default. Is Yours Working For You? - Forbes"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 8,
-        "n_sources": 8,
-        "z": -0.39,
-        "baseline_points": 46,
+        "n_articles": 7,
+        "n_sources": 7,
+        "z": -0.763,
+        "baseline_points": 47,
         "measure": "키워드별 합산",
-        "n_split": 8,
+        "n_split": 7,
         "saturated": false,
         "top_titles": [
+          "Why gold is losing its shine: Goldman breaks down the recent sell-off - Yahoo Finance",
           "MEXC Cut Off by FinCEN: What European Users Should Do - CryptoTicker.io",
-          "69.5% of US Midterm Winners Classified as Pro-Crypto, Higher Than in 2024 - bloomingbit",
-          "JetBlue Financial Status Restructuring Debt: Is The Airline One Bad Quarter Away From Following Spirit Into Bankruptcy? - The Sunday Guardian"
+          "69.5% of US Midterm Winners Classified as Pro-Crypto, Higher Than in 2024 - bloomingbit"
         ]
       },
       "geopolitical": {
-        "n_articles": 132,
-        "n_sources": 117,
-        "z": -0.224,
-        "baseline_points": 46,
+        "n_articles": 119,
+        "n_sources": 104,
+        "z": -0.773,
+        "baseline_points": 47,
         "measure": "키워드별 합산",
-        "n_split": 132,
+        "n_split": 119,
         "saturated": false,
         "top_titles": [
-          "US Treasury sanctions Canadian money services firms over Iran-related transactions - Reuters",
           "Police investigating after man flees scene following home invasion - KMOV",
+          "Six arrested in alleged Modesto home invasion robbery, police say. Some had fled - Modesto Bee",
           "US Treasury sanctions eight Canadian money exchange firms over Iran ties - Al Jazeera"
         ]
       },
       "trade_policy": {
-        "n_articles": 71,
-        "n_sources": 62,
-        "z": -1.316,
-        "baseline_points": 46,
+        "n_articles": 66,
+        "n_sources": 59,
+        "z": -1.444,
+        "baseline_points": 47,
         "measure": "키워드별 합산",
-        "n_split": 71,
+        "n_split": 66,
         "saturated": false,
         "top_titles": [
-          "U.S. poultry imports tariff-free benefit from South Africa will have to be reevaluated - Wandile Sihlobo | Substack",
-          "The S&P 500 Just Had Its Worst Week Since the April 2025 Tariff Crash - 24/7 Wall St.",
-          "From high-flying AI stocks to tariff-hit alcohol companies, the midterms shook up Wall Street - The Killeen Daily Herald"
+          "Abdul El-Sayed slams Trump’s tariff war with Canada - Al Jazeera",
+          "US, Canada Trade Negotiators Meet After Trump Sets New Tariff Deadline - EnergyNow.com",
+          "Managing U.S. Sanctions, Export Controls, and Trade Compliance Risks In U.S.-Africa Energy Investments - pan african visions"
         ]
       },
       "pandemic": {
-        "n_articles": 104,
-        "n_sources": 93,
-        "z": -1.009,
-        "baseline_points": 46,
+        "n_articles": 81,
+        "n_sources": 70,
+        "z": -1.507,
+        "baseline_points": 47,
         "measure": "키워드별 합산",
-        "n_split": 104,
+        "n_split": 81,
         "saturated": false,
         "top_titles": [
+          "Ebola disease caused by Bundibugyo virus, Democratic Republic of the Congo, Kenya and Nigeria - World Health Organization (WHO)",
           "New outbreak of mpox in Anchorage prompts advisory from state health officials - Alaska Beacon",
-          "Public health officials confirm infant death from measles outbreak was from Grant County - WSMV",
-          "SLO County Public Health Update on Shiga Toxin-Producing E. coli (STEC) Outbreak Investigation - County of San Luis Obispo (.gov)"
+          "Military services again requiring recruits to get flu shots as Air Force outbreak grows - ABC News - Breaking News, Latest News and Videos"
         ]
       },
       "fx_shock": {
         "n_articles": 7,
-        "n_sources": 6,
-        "z": 1.484,
-        "baseline_points": 46,
+        "n_sources": 7,
+        "z": 1.434,
+        "baseline_points": 47,
         "measure": "키워드별 합산",
         "n_split": 7,
         "saturated": false,
         "top_titles": [
           "Turkey’s Post-Crisis Housing Policies Deepened Inequality - Bioengineer.org",
           "\"The Price of Prices\": A photographer from Pinar reflects on the unstoppable rise of the dollar - CiberCuba",
-          "Peter Schiff Predicts Gold Boom, Says Political Shift Threatens To Send Inflation Soaring — ‘Sign Of Things To Come’ - Yahoo Finance"
+          "Photographer from Pinar del Río Reflects on the Unchecked Rise of the Dollar - CubaHeadlines"
         ]
       },
       "rate_shock": {
-        "n_articles": 2,
-        "n_sources": 2,
-        "z": -1.189,
-        "baseline_points": 46,
+        "n_articles": 3,
+        "n_sources": 3,
+        "z": -0.981,
+        "baseline_points": 47,
         "measure": "키워드별 합산",
-        "n_split": 2,
+        "n_split": 3,
         "saturated": false,
         "top_titles": [
-          "United Rentals Stock Finding Support At Key Level Amid Market Losses - Investor's Business Daily",
-          "Kering SA (PPRUY) Stock Price, News, Quote & History - Yahoo! Finance Canada"
+          "Why gold is losing its shine: Goldman breaks down the recent sell-off - Yahoo Finance",
+          "Gold outlook: XAU/USD hammered, stretched and vulnerable to a sharp rebound - FOREX.com",
+          "Kering SA (PPRUF) Stock Price, News, Quote & History - Yahoo! Finance Canada"
         ]
       }
     },
