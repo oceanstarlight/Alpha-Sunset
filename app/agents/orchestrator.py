@@ -20,7 +20,7 @@ from pydantic import BaseModel
 from app.agents import exposure as exposure_agent
 from app.agents import matcher as matcher_agent
 from app.agents import sentinel as sentinel_agent
-from app.config import get_settings, load_config
+from app.config import load_config
 from app.db import DbMode, connect
 from app.llm.client import LLMClient, LLMResponseError, LLMUnavailableError
 from app.retrieval import ClauseIndex
@@ -365,7 +365,7 @@ def _index(playbooks: list | None, llm: LLMClient) -> tuple[ClauseIndex, str]:
 def run_replay(event_id: str, llm: LLMClient | None = None, portfolio: Portfolio | None = None,
                holdings: list[dict] | None = None, playbooks: list | None = None) -> Briefing:
     """백테스트 사건 재생 → Briefing (sandbox DB). 기준일 = 사건 카드 date."""
-    from app.corpus import load_events, load_playbooks, load_portfolio
+    from app.corpus import load_events, load_portfolio
     from app.data.fred import load_panel
 
     events = load_events()
@@ -387,7 +387,7 @@ def run_replay(event_id: str, llm: LLMClient | None = None, portfolio: Portfolio
 def run_live_briefing(event: Event, panel: dict, llm: LLMClient | None = None, portfolio: Portfolio | None = None,
                       holdings: list[dict] | None = None, playbooks: list | None = None) -> Briefing:
     """라이브 사건(뉴스 군집을 구조화한 Event)으로 브리핑 생성 (live DB, 최신 보유내역)."""
-    from app.corpus import load_playbooks, load_portfolio
+    from app.corpus import load_portfolio
 
     llm = llm or LLMClient(db_mode="live")
     note = f"업로드 포트폴리오 '{portfolio.institution}' 기준" if portfolio is not None else ""

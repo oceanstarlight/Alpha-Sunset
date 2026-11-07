@@ -1,6 +1,6 @@
 from datetime import date
 
-from app.data.nport import Filing, parse_filing_feed, parse_nport, pick_filing
+from app.data.nport import parse_filing_feed, parse_nport, pick_filing
 
 FEED = """<feed><entry><content>
 <filing-date>2023-02-28</filing-date>

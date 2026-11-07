@@ -4,12 +4,10 @@ from __future__ import annotations
 
 from collections import defaultdict
 from functools import lru_cache
-from typing import Any
-
 import pandas as pd
 
 from app.agents import exposure
-from app.config import ROOT_DIR, load_config
+from app.config import ROOT_DIR
 from app.schemas import Event, Portfolio
 
 CENTROIDS_PATH = ROOT_DIR / "data" / "geo" / "country_centroids.csv"

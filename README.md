@@ -24,7 +24,7 @@
 ## 2. 동작 방식 (2단계 운영)
 | 단계 | 조건 | 에이전트가 하는 일 |
 |---|---|---|
-| **1단계: 자금 이상 알림** | 시장 신호(A) 또는 자금 흐름 신호(C)가 5영업일 중 2일 이상 이상 | 알림만 띄운다 (사건 확정 전) |
+| **1단계: 자금 이상 알림** | 시장 신호(A) 또는 자금 흐름 신호(C)가 최근 5영업일 중 3일 이상 이상 (글로벌, 사전 등록 v6 보정 · 로컬은 2일 유지) | 알림만 띄운다 (사건 확정 전) |
 | **2단계: 대응안** | 사건 확정(B) + 1단계 | 문서 적합도 판정, 공백 탐지, 보유 노출 추적, 담당별 확인 항목을 담은 브리핑 생성 |
 
 | 구성 요소 | 내용 |
@@ -110,7 +110,7 @@
 python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 .venv/bin/streamlit run ui/streamlit_app.py
-.venv/bin/pytest -q       # 181개 테스트
+.venv/bin/pytest -q       # 190개 테스트
 ```
 - **API 키 없이도** 백테스트 재생은 동작한다. 커밋된 LLM 응답 캐시(`data/llm_cache.db`)로 같은 결과를 재현한다.
 - 배포: Streamlit Community Cloud (`ui/streamlit_app.py`, Python 3.11, Secrets에 `GEMINI_API_KEY`·`SEC_USER_AGENT`).
@@ -120,6 +120,8 @@ cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 - 시나리오 브리핑: 감시 등급이 NONE이어도 모드 '라이브' → 브리핑 탭 '🧪 시나리오 브리핑'에 가정 사건을 넣으면 대응 문서·노출·승인까지 쓸 수 있다 (결과는 '가정 시나리오'로 표시).
 - 정시 실행: 외부 무료 cron이 워크플로를 호출한다 — 설정은 [`docs/scheduler.md`](docs/scheduler.md), 정시성 점검은 `python -m scripts.check_schedule --days 7`.
 - 조항 평가 재현: `python -m scripts.run_clause_eval` → `data/backtest/clause_eval.json`.
+
+스크립트는 저장소 루트에서 `python -m scripts.<이름>`으로 실행한다 (예: `python -m scripts.validate_data`).
 
 | 스크립트 | 역할 |
 |---|---|
@@ -141,15 +143,17 @@ cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 ## 7. 기술 스택과 비용
 - Python 3.11 · Streamlit · Pydantic v2 · Gemini API(`gemini-3.5-flash-lite`, `gemini-embedding-001`) · ChromaDB · SQLite · networkx · pandas
 - 무료 도구·무료 API 등급만 사용 (Gemini 무료 등급 분당 15회 제한에 맞춰 요청 간격·재시도 내장)
-- **API 사용 내역**: 모든 LLM 호출은 단일 래퍼(`app/llm/client.py`)를 거쳐 `llm_calls` 테이블(시각·모델·입출력 토큰·용도·캐시 여부)에 기록된다. 현재 캐시: 생성 187건, 함수 호출 104건, 임베딩 108건.
+- **API 사용 내역**: 모든 LLM 호출은 단일 래퍼(`app/llm/client.py`)를 거쳐 `llm_calls` 테이블(시각·모델·입출력 토큰·용도·캐시 여부)에 기록된다. 현재 캐시: 생성 204건, 함수 호출 110건, 임베딩 124건.
 
 ## 8. 저장소 구조
 ```
 app/
-  agents/      sentinel · matcher · exposure · orchestrator · learner
-  data/        fred · gdelt · nport 클라이언트
-  llm/         단일 LLM 래퍼 + 응답 캐시
-  backtest.py  지표 · geo.py(지도 집계) · schemas.py · services.py(UI 진입 함수)
+  agents/      sentinel · local(한국 감시) · matcher · exposure · orchestrator · learner
+  data/        fred · korea(ECOS·DART·Google 뉴스 RSS) · nport 클라이언트
+  ingest/      엑셀·CSV 보유내역 / PDF·워드 대응 문서 입력 변환
+  llm/         단일 LLM 래퍼(gemini · openai_compatible · rule) + 응답 캐시
+  backtest*.py 지표(글로벌·한국·v6 확대 검증) · geo.py(지도 집계) · dashboard.py(탭 요약·그래프)
+  services.py  UI 진입 함수 · audit.py(해시 체인 감사 로그) · notify.py(텔레그램) · report.py · export.py(엑셀)
 ui/streamlit_app.py   7탭 UI (세계 금융 지도 / 감시 / 브리핑 / 승인 / 백테스트 / 학습 층 / 데이터 입력)
 data/          사건 카드 · 플레이북 · 포트폴리오 · 라벨 · FRED · N-PORT · 백테스트 결과
 docs/          plans.md(계획·결정 기록) · Current.md(진행 현황)

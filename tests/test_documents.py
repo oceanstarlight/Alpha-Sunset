@@ -58,7 +58,6 @@ def test_validation_keeps_only_evidence_backed_owner_and_protection():
 
 def test_uploaded_playbooks_get_separate_index_and_note(monkeypatch, tmp_path):
     from app.agents import orchestrator as orch
-    from app.config import ROOT_DIR
     from tests.test_orchestrator import FakeLLM
 
     r = ingest_document((SAMPLES / "PB-BANK.docx").read_bytes(), "PB-BANK.docx")
