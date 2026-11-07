@@ -1,4 +1,23 @@
+import copy
+import json
+from pathlib import Path
+
 import pytest
+
+_KR_LATEST = Path(__file__).resolve().parents[1] / "data" / "live" / "kr_latest.json"
+
+
+def kr_accumulating() -> dict:
+    """커밋된 kr_latest.json을 '뉴스 기준선 축적 중' 상태로 고정한 사본.
+
+    kr_latest.json은 수집기가 매일 덮어쓰므로, 그 값에 기대는 테스트는 날짜에 따라 깨진다.
+    """
+    kr = copy.deepcopy(json.loads(_KR_LATEST.read_text(encoding="utf-8")))
+    news = kr["kr_news"]
+    news.update(status="unavailable", clusters=[])
+    for o in news["observations"].values():
+        o.update(z=None, baseline_points=4)
+    return kr
 
 
 @pytest.fixture(autouse=True)

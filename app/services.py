@@ -11,7 +11,7 @@ from typing import Any
 from app import audit
 from app.agents import orchestrator, sentinel
 from app.agents.matcher import structure_event
-from app.config import ROOT_DIR, get_settings, load_config
+from app.config import ROOT_DIR, get_settings
 from app.data.fred import load_panel
 from app.db import DbMode, connect
 from app.llm.client import LLMClient

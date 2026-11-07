@@ -8,7 +8,7 @@
 from __future__ import annotations
 
 import json
-from datetime import date, timedelta
+from datetime import date
 
 import pandas as pd
 

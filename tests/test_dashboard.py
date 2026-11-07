@@ -6,6 +6,7 @@ import pandas as pd
 
 from app import dashboard, services
 from app.config import ROOT_DIR
+from tests.conftest import kr_accumulating
 
 KR = json.loads((ROOT_DIR / "data" / "live" / "kr_latest.json").read_text(encoding="utf-8"))
 
@@ -58,8 +59,9 @@ def test_charts_build_and_handle_empty():
 def test_status_steps():
     b = services.load_saved_briefing("svb_2023")
     assert dashboard.step_data(None, None).status == "합성 사용 중"
-    w = dashboard.step_watch(KR, local=True)
-    assert w.status.startswith(KR["level"]) and "한국" in w.status and "축적 중" in w.detail
+    kr = kr_accumulating()
+    w = dashboard.step_watch(kr, local=True)
+    assert w.status.startswith(kr["level"]) and "한국" in w.status and "축적 중" in w.detail
     assert dashboard.step_watch(None, local=False).tone == "gray"
     assert dashboard.step_watch_replay("2023-03-10", 2, "2023-03-10").tone == "red"
     sb = dashboard.step_briefing(b, "auto")

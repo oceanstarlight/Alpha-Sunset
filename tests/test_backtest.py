@@ -1,6 +1,5 @@
 from datetime import date
 
-import numpy as np
 import pandas as pd
 
 from app.agents.sentinel import AsOfPanel, market_signal

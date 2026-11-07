@@ -9,7 +9,7 @@ from app.agents.sentinel import AlertLevel, MarketSignal
 from app.data import korea
 from app.data.korea import KST, Disclosure, NewsItem
 from app.notify import Notifier, format_message
-from app.report import build_report
+from app.report import build_report, report_link
 
 NOW = datetime(2026, 10, 19, 10, 0, tzinfo=KST)
 
@@ -128,3 +128,13 @@ def test_search_news_dedupes_and_records_failures():
 
     items, notes = korea.search_news("부도 | 디폴트", NOW - timedelta(days=1), FakeGoogle())
     assert len(items) == 1 and notes == ["google '디폴트': timeout"]
+
+
+def test_report_link_follows_running_branch(monkeypatch):
+    monkeypatch.delenv("GITHUB_REPOSITORY", raising=False)
+    assert report_link("x") == "data/live/reports/x.md"
+    monkeypatch.setenv("GITHUB_REPOSITORY", "o/r")
+    monkeypatch.setenv("GITHUB_REF_NAME", "dev")
+    assert report_link("x") == "https://github.com/o/r/blob/dev/data/live/reports/x.md"
+    monkeypatch.setenv("GITHUB_REF_NAME", "")
+    assert report_link("x").startswith("https://github.com/o/r/blob/main/")

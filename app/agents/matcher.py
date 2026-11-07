@@ -16,8 +16,8 @@ from datetime import date
 
 from pydantic import BaseModel, Field, ValidationError
 
-from app.config import get_settings, load_config
-from app.llm.client import LLMClient, LLMResponseError, LLMUnavailableError
+from app.config import load_config
+from app.llm.client import LLMClient, LLMResponseError
 from app.retrieval import ClauseIndex, event_query
 from app.schemas import Channel, Clause, ClauseJudgment, DocFit, Duration, Event, EventType, MatchResult, Verdict
 
