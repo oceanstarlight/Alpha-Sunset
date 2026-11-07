@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-07T10:39:24+00:00",
+  "collected_at": "2026-11-07T17:51:15+00:00",
   "as_of": "2026-11-06",
   "level": "WATCH",
   "chain": [
@@ -61,115 +61,114 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 30,
-        "n_sources": 26,
-        "z": 2.123,
-        "baseline_points": 45,
+        "n_articles": 24,
+        "n_sources": 20,
+        "z": 1.163,
+        "baseline_points": 46,
         "measure": "키워드별 합산",
-        "n_split": 30,
+        "n_split": 24,
         "saturated": false,
         "top_titles": [
           "Paraguay Bank Failure - TelegraphHerald.com",
           "Ousted Paraguayan president placed under house arrest after bank collapse - KTVN",
-          "APTOPIX Paraguay Bank Failure - Post Register"
+          "Paraguay Bank Failure - Springfield News-Sun"
         ]
       },
       "credit_event": {
-        "n_articles": 78,
-        "n_sources": 67,
-        "z": 0.286,
-        "baseline_points": 45,
+        "n_articles": 47,
+        "n_sources": 42,
+        "z": -1.083,
+        "baseline_points": 46,
         "measure": "키워드별 합산",
-        "n_split": 78,
+        "n_split": 47,
         "saturated": false,
         "top_titles": [
           "Chiefs WR Rashee Rice's bankruptcy filing says he owes $3.5 million but nets just $3.6K a month - Los Angeles Times",
-          "Scotiabank Saddledome Stories - Chapter 11 - NHL.com",
-          "Mega-Cap Default Risk Update - Seeking Alpha"
+          "Target-Date Funds Are The New Default. Is Yours Working For You? - Forbes",
+          "Weekend Doctor: When distraction becomes the default - Bluffton Icon"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 8,
         "n_sources": 8,
-        "z": -0.395,
-        "baseline_points": 45,
+        "z": -0.39,
+        "baseline_points": 46,
         "measure": "키워드별 합산",
         "n_split": 8,
         "saturated": false,
         "top_titles": [
-          "Videos - Kitco",
-          "Vinny Overseas Q2FY27 Results: Net loss widens to ₹65.51 lakh, revenue up 55% - scanx.trade",
-          "8 Best Ways to Earn Yield on Stablecoins in 2026, Ranked by Return and Effort | Bitcoinist.com - Bitcoinist.com"
+          "MEXC Cut Off by FinCEN: What European Users Should Do - CryptoTicker.io",
+          "69.5% of US Midterm Winners Classified as Pro-Crypto, Higher Than in 2024 - bloomingbit",
+          "JetBlue Financial Status Restructuring Debt: Is The Airline One Bad Quarter Away From Following Spirit Into Bankruptcy? - The Sunday Guardian"
         ]
       },
       "geopolitical": {
-        "n_articles": 158,
-        "n_sources": 142,
-        "z": 0.886,
-        "baseline_points": 45,
+        "n_articles": 132,
+        "n_sources": 117,
+        "z": -0.224,
+        "baseline_points": 46,
         "measure": "키워드별 합산",
-        "n_split": 158,
+        "n_split": 132,
         "saturated": false,
         "top_titles": [
-          "US Treasury sanctions eight Canadian money exchange firms over Iran ties - Al Jazeera",
-          "6 arrested in Modesto home invasion robbery, police say - KCRA",
-          "Beijing urges US to correct its 'wrongdoings' swiftly after Washington sanctions Chinese companies over Cuba - Anadolu Ajansı"
+          "US Treasury sanctions Canadian money services firms over Iran-related transactions - Reuters",
+          "Police investigating after man flees scene following home invasion - KMOV",
+          "US Treasury sanctions eight Canadian money exchange firms over Iran ties - Al Jazeera"
         ]
       },
       "trade_policy": {
-        "n_articles": 89,
-        "n_sources": 70,
-        "z": -0.728,
-        "baseline_points": 45,
+        "n_articles": 71,
+        "n_sources": 62,
+        "z": -1.316,
+        "baseline_points": 46,
         "measure": "키워드별 합산",
-        "n_split": 89,
+        "n_split": 71,
         "saturated": false,
         "top_titles": [
-          "Democrats Won the Tariff Argument—Now Comes the Hard but Necessary Part - Cato Institute",
-          "Wisconsin Farm And Forestry Exports Hit Record Despite Tariff Turmoil - Urban Milwaukee",
-          "Copper Moves Lower as US Election Undermines AI and Tariff Trade - Bloomberg.com"
+          "U.S. poultry imports tariff-free benefit from South Africa will have to be reevaluated - Wandile Sihlobo | Substack",
+          "The S&P 500 Just Had Its Worst Week Since the April 2025 Tariff Crash - 24/7 Wall St.",
+          "From high-flying AI stocks to tariff-hit alcohol companies, the midterms shook up Wall Street - The Killeen Daily Herald"
         ]
       },
       "pandemic": {
-        "n_articles": 127,
-        "n_sources": 115,
-        "z": -0.497,
-        "baseline_points": 45,
+        "n_articles": 104,
+        "n_sources": 93,
+        "z": -1.009,
+        "baseline_points": 46,
         "measure": "키워드별 합산",
-        "n_split": 127,
+        "n_split": 104,
         "saturated": false,
         "top_titles": [
           "New outbreak of mpox in Anchorage prompts advisory from state health officials - Alaska Beacon",
-          "Chico High School placed on brief lockdown Friday after potential threat - KRCR",
-          "As measles outbreaks grow in the U.S., maps and charts show a record number of cases in 2026 - CBS News"
+          "Public health officials confirm infant death from measles outbreak was from Grant County - WSMV",
+          "SLO County Public Health Update on Shiga Toxin-Producing E. coli (STEC) Outbreak Investigation - County of San Luis Obispo (.gov)"
         ]
       },
       "fx_shock": {
-        "n_articles": 6,
+        "n_articles": 7,
         "n_sources": 6,
-        "z": 0.948,
-        "baseline_points": 45,
+        "z": 1.484,
+        "baseline_points": 46,
         "measure": "키워드별 합산",
-        "n_split": 6,
+        "n_split": 7,
         "saturated": false,
         "top_titles": [
+          "Turkey’s Post-Crisis Housing Policies Deepened Inequality - Bioengineer.org",
           "\"The Price of Prices\": A photographer from Pinar reflects on the unstoppable rise of the dollar - CiberCuba",
-          "Peter Schiff Predicts Gold Boom, Says Political Shift Threatens To Send Inflation Soaring — ‘Sign Of Things To Come’ - Yahoo Finance",
-          "Bitcoin and USDT attract modest premiums in Paraguay as millions face banking crisis - CryptoSlate"
+          "Peter Schiff Predicts Gold Boom, Says Political Shift Threatens To Send Inflation Soaring — ‘Sign Of Things To Come’ - Yahoo Finance"
         ]
       },
       "rate_shock": {
-        "n_articles": 3,
-        "n_sources": 3,
-        "z": -1.033,
-        "baseline_points": 45,
+        "n_articles": 2,
+        "n_sources": 2,
+        "z": -1.189,
+        "baseline_points": 46,
         "measure": "키워드별 합산",
-        "n_split": 3,
+        "n_split": 2,
         "saturated": false,
         "top_titles": [
-          "BREAKING: US NFP much stronger than expected 📈 US Dollar and treasuries yields surge - XTB.com",
           "United Rentals Stock Finding Support At Key Level Amid Market Losses - Investor's Business Daily",
-          "Kering SA (PPRUF) Stock Price, News, Quote & History - Yahoo! Finance Canada"
+          "Kering SA (PPRUY) Stock Price, News, Quote & History - Yahoo! Finance Canada"
         ]
       }
     },
