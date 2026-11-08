@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-07T22:15:13+00:00",
+  "collected_at": "2026-11-08T06:38:26+00:00",
   "as_of": "2026-11-06",
   "level": "WATCH",
   "chain": [
@@ -61,40 +61,40 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 25,
-        "n_sources": 23,
-        "z": 1.273,
-        "baseline_points": 47,
+        "n_articles": 17,
+        "n_sources": 17,
+        "z": 0.13,
+        "baseline_points": 48,
         "measure": "키워드별 합산",
-        "n_split": 25,
+        "n_split": 17,
         "saturated": false,
         "top_titles": [
           "Paraguay Bank Failure - TelegraphHerald.com",
-          "Paraguay Bank Failure - Springfield News-Sun",
-          "Ousted Paraguayan president placed under house arrest after bank collapse - KTVN"
+          "Unrest in Paraguay amid banking and political crises, in photos - Union-Bulletin",
+          "Paraguay's ousted president faces prosecutors after his removal over bank collapse - Japan Today"
         ]
       },
       "credit_event": {
-        "n_articles": 44,
-        "n_sources": 41,
-        "z": -1.191,
-        "baseline_points": 47,
+        "n_articles": 36,
+        "n_sources": 33,
+        "z": -1.512,
+        "baseline_points": 48,
         "measure": "키워드별 합산",
-        "n_split": 44,
+        "n_split": 36,
         "saturated": false,
         "top_titles": [
-          "Snapchat's Find Friends Feature Will Be Off By Default For UK Users Under 18 - Engadget",
+          "National Civics Bee returning to Owensboro; middle school students invited to apply - The Owensboro Times",
           "When distraction becomes the default - Advertiser-Tribune",
-          "Target-Date Funds Are The New Default. Is Yours Working For You? - Forbes"
+          "Snapchat's Find Friends Feature Will Be Off By Default For UK Users Under 18 - Engadget"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 7,
-        "n_sources": 7,
-        "z": -0.763,
-        "baseline_points": 47,
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": -1.129,
+        "baseline_points": 48,
         "measure": "키워드별 합산",
-        "n_split": 7,
+        "n_split": 6,
         "saturated": false,
         "top_titles": [
           "Why gold is losing its shine: Goldman breaks down the recent sell-off - Yahoo Finance",
@@ -103,73 +103,72 @@
         ]
       },
       "geopolitical": {
-        "n_articles": 119,
-        "n_sources": 104,
-        "z": -0.773,
-        "baseline_points": 47,
-        "measure": "키워드별 합산",
-        "n_split": 119,
-        "saturated": false,
-        "top_titles": [
-          "Police investigating after man flees scene following home invasion - KMOV",
-          "Six arrested in alleged Modesto home invasion robbery, police say. Some had fled - Modesto Bee",
-          "US Treasury sanctions eight Canadian money exchange firms over Iran ties - Al Jazeera"
-        ]
-      },
-      "trade_policy": {
-        "n_articles": 66,
-        "n_sources": 59,
-        "z": -1.444,
-        "baseline_points": 47,
-        "measure": "키워드별 합산",
-        "n_split": 66,
-        "saturated": false,
-        "top_titles": [
-          "Abdul El-Sayed slams Trump’s tariff war with Canada - Al Jazeera",
-          "US, Canada Trade Negotiators Meet After Trump Sets New Tariff Deadline - EnergyNow.com",
-          "Managing U.S. Sanctions, Export Controls, and Trade Compliance Risks In U.S.-Africa Energy Investments - pan african visions"
-        ]
-      },
-      "pandemic": {
         "n_articles": 81,
-        "n_sources": 70,
-        "z": -1.507,
-        "baseline_points": 47,
+        "n_sources": 71,
+        "z": -2.381,
+        "baseline_points": 48,
         "measure": "키워드별 합산",
         "n_split": 81,
         "saturated": false,
         "top_titles": [
-          "Ebola disease caused by Bundibugyo virus, Democratic Republic of the Congo, Kenya and Nigeria - World Health Organization (WHO)",
-          "New outbreak of mpox in Anchorage prompts advisory from state health officials - Alaska Beacon",
-          "Military services again requiring recruits to get flu shots as Air Force outbreak grows - ABC News - Breaking News, Latest News and Videos"
+          "US sanctions Canadian money services businesses for helping Iranian regime move money out of the country - JNS.org",
+          "Police investigating after man flees scene following home invasion - KMOV",
+          "Six arrested in alleged Modesto home invasion robbery, police say. Some had fled - Modesto Bee"
+        ]
+      },
+      "trade_policy": {
+        "n_articles": 63,
+        "n_sources": 55,
+        "z": -1.497,
+        "baseline_points": 48,
+        "measure": "키워드별 합산",
+        "n_split": 63,
+        "saturated": false,
+        "top_titles": [
+          "Trump loses Congress as Europe presses for tariff cuts and Ukraine aid - EU Perspectives",
+          "Abdul El-Sayed slams Trump’s tariff war with Canada - Al Jazeera",
+          "US, Canada Trade Negotiators Meet After Trump Sets New Tariff Deadline - EnergyNow.com"
+        ]
+      },
+      "pandemic": {
+        "n_articles": 71,
+        "n_sources": 56,
+        "z": -1.679,
+        "baseline_points": 48,
+        "measure": "키워드별 합산",
+        "n_split": 71,
+        "saturated": false,
+        "top_titles": [
+          "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com",
+          "Owner speaks on E. coli outbreak that shut down popular California farm: ‘I’m destroyed’ - Sacramento Bee",
+          "Measles outbreak continues to grow; deaths reported in Pennsylvania, Wisconsin, New York this week - CBS News"
         ]
       },
       "fx_shock": {
-        "n_articles": 7,
-        "n_sources": 7,
-        "z": 1.434,
-        "baseline_points": 47,
+        "n_articles": 5,
+        "n_sources": 5,
+        "z": 0.305,
+        "baseline_points": 48,
         "measure": "키워드별 합산",
-        "n_split": 7,
+        "n_split": 5,
         "saturated": false,
         "top_titles": [
           "Turkey’s Post-Crisis Housing Policies Deepened Inequality - Bioengineer.org",
-          "\"The Price of Prices\": A photographer from Pinar reflects on the unstoppable rise of the dollar - CiberCuba",
-          "Photographer from Pinar del Río Reflects on the Unchecked Rise of the Dollar - CubaHeadlines"
+          "Photographer from Pinar del Río Reflects on the Unchecked Rise of the Dollar - CubaHeadlines",
+          "Peter Schiff Predicts Gold Boom, Says Political Shift Threatens To Send Inflation Soaring — ‘Sign Of Things To Come’ - Yahoo Finance"
         ]
       },
       "rate_shock": {
-        "n_articles": 3,
-        "n_sources": 3,
-        "z": -0.981,
-        "baseline_points": 47,
+        "n_articles": 2,
+        "n_sources": 2,
+        "z": -1.139,
+        "baseline_points": 48,
         "measure": "키워드별 합산",
-        "n_split": 3,
+        "n_split": 2,
         "saturated": false,
         "top_titles": [
           "Why gold is losing its shine: Goldman breaks down the recent sell-off - Yahoo Finance",
-          "Gold outlook: XAU/USD hammered, stretched and vulnerable to a sharp rebound - FOREX.com",
-          "Kering SA (PPRUF) Stock Price, News, Quote & History - Yahoo! Finance Canada"
+          "PSKY Stock Rallies For 12 Straight Sessions — Paramount Demands $1.88B Bond From State Prosecutors Over Delayed Warner Merger - Stocktwits"
         ]
       }
     },
