@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-08T06:38:26+00:00",
+  "collected_at": "2026-11-08T16:16:31+00:00",
   "as_of": "2026-11-06",
   "level": "WATCH",
   "chain": [
@@ -61,114 +61,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 17,
-        "n_sources": 17,
-        "z": 0.13,
-        "baseline_points": 48,
+        "n_articles": 20,
+        "n_sources": 19,
+        "z": 0.549,
+        "baseline_points": 49,
         "measure": "키워드별 합산",
-        "n_split": 17,
+        "n_split": 20,
         "saturated": false,
         "top_titles": [
-          "Paraguay Bank Failure - TelegraphHerald.com",
-          "Unrest in Paraguay amid banking and political crises, in photos - Union-Bulletin",
-          "Paraguay's ousted president faces prosecutors after his removal over bank collapse - Japan Today"
+          "Paraguay Bank Failure - Bluefield Daily Telegraph",
+          "Paraguay President Santiago Peña resigns following bank collapse - CoastTV",
+          "Unrest in Paraguay amid banking and political crises, in photos - Union-Bulletin"
         ]
       },
       "credit_event": {
-        "n_articles": 36,
-        "n_sources": 33,
-        "z": -1.512,
-        "baseline_points": 48,
+        "n_articles": 30,
+        "n_sources": 29,
+        "z": -1.722,
+        "baseline_points": 49,
         "measure": "키워드별 합산",
-        "n_split": 36,
+        "n_split": 30,
         "saturated": false,
         "top_titles": [
-          "National Civics Bee returning to Owensboro; middle school students invited to apply - The Owensboro Times",
-          "When distraction becomes the default - Advertiser-Tribune",
-          "Snapchat's Find Friends Feature Will Be Off By Default For UK Users Under 18 - Engadget"
+          "What LIV Golf’s Chapter 11 bankruptcy means for sports fans and golfers - TheStreet",
+          "airBaltic claims 'Chapter 11' status in U.S. court / Article - LSM",
+          "YouTube shifts default video quality to standard definition globally - Mashable"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 6,
-        "n_sources": 6,
-        "z": -1.129,
-        "baseline_points": 48,
-        "measure": "키워드별 합산",
-        "n_split": 6,
-        "saturated": false,
-        "top_titles": [
-          "Why gold is losing its shine: Goldman breaks down the recent sell-off - Yahoo Finance",
-          "MEXC Cut Off by FinCEN: What European Users Should Do - CryptoTicker.io",
-          "69.5% of US Midterm Winners Classified as Pro-Crypto, Higher Than in 2024 - bloomingbit"
-        ]
-      },
-      "geopolitical": {
-        "n_articles": 81,
-        "n_sources": 71,
-        "z": -2.381,
-        "baseline_points": 48,
-        "measure": "키워드별 합산",
-        "n_split": 81,
-        "saturated": false,
-        "top_titles": [
-          "US sanctions Canadian money services businesses for helping Iranian regime move money out of the country - JNS.org",
-          "Police investigating after man flees scene following home invasion - KMOV",
-          "Six arrested in alleged Modesto home invasion robbery, police say. Some had fled - Modesto Bee"
-        ]
-      },
-      "trade_policy": {
-        "n_articles": 63,
-        "n_sources": 55,
-        "z": -1.497,
-        "baseline_points": 48,
-        "measure": "키워드별 합산",
-        "n_split": 63,
-        "saturated": false,
-        "top_titles": [
-          "Trump loses Congress as Europe presses for tariff cuts and Ukraine aid - EU Perspectives",
-          "Abdul El-Sayed slams Trump’s tariff war with Canada - Al Jazeera",
-          "US, Canada Trade Negotiators Meet After Trump Sets New Tariff Deadline - EnergyNow.com"
-        ]
-      },
-      "pandemic": {
-        "n_articles": 71,
-        "n_sources": 56,
-        "z": -1.679,
-        "baseline_points": 48,
-        "measure": "키워드별 합산",
-        "n_split": 71,
-        "saturated": false,
-        "top_titles": [
-          "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com",
-          "Owner speaks on E. coli outbreak that shut down popular California farm: ‘I’m destroyed’ - Sacramento Bee",
-          "Measles outbreak continues to grow; deaths reported in Pennsylvania, Wisconsin, New York this week - CBS News"
-        ]
-      },
-      "fx_shock": {
         "n_articles": 5,
         "n_sources": 5,
-        "z": 0.305,
-        "baseline_points": 48,
+        "z": -1.482,
+        "baseline_points": 49,
         "measure": "키워드별 합산",
         "n_split": 5,
         "saturated": false,
         "top_titles": [
+          "peHUB First Read - PEI Private Equity",
+          "Why gold is losing its shine: Goldman breaks down the recent sell-off - Yahoo Finance",
+          "Pharma Aids declares 35% cash dividend for FY26 - The Business Standard"
+        ]
+      },
+      "geopolitical": {
+        "n_articles": 60,
+        "n_sources": 54,
+        "z": -3.085,
+        "baseline_points": 49,
+        "measure": "키워드별 합산",
+        "n_split": 60,
+        "saturated": false,
+        "top_titles": [
+          "Carter Wilson’s reflection on home invasion sparked latest thriller - The Colorado Sun",
+          "From sanctions relief to deterrence: How Iran reads US elections - Al-Monitor",
+          "NFL Week 9 what to watch: Backup QB invasion, boiling hot seats and season-defining matchups - The Athletic - The New York Times"
+        ]
+      },
+      "trade_policy": {
+        "n_articles": 37,
+        "n_sources": 32,
+        "z": -2.289,
+        "baseline_points": 49,
+        "measure": "키워드별 합산",
+        "n_split": 37,
+        "saturated": false,
+        "top_titles": [
+          "How Democrats will try to end Trump's tariffs - CNBC",
+          "How Canada Inflicted Maximum Midterms Pain on Trump - Politico",
+          "Apple got a $2.2 billion tariff refund this quarter - Mashable"
+        ]
+      },
+      "pandemic": {
+        "n_articles": 58,
+        "n_sources": 41,
+        "z": -1.9,
+        "baseline_points": 49,
+        "measure": "키워드별 합산",
+        "n_split": 58,
+        "saturated": false,
+        "top_titles": [
+          "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com",
+          "Ebola outbreak update as of November 5 - Outbreak News Today",
+          "An early flu outbreak is hitting the US West Coast. Here’s what it means for Mexico - Mexico News Daily"
+        ]
+      },
+      "fx_shock": {
+        "n_articles": 3,
+        "n_sources": 3,
+        "z": -0.793,
+        "baseline_points": 49,
+        "measure": "키워드별 합산",
+        "n_split": 3,
+        "saturated": false,
+        "top_titles": [
           "Turkey’s Post-Crisis Housing Policies Deepened Inequality - Bioengineer.org",
           "Photographer from Pinar del Río Reflects on the Unchecked Rise of the Dollar - CubaHeadlines",
-          "Peter Schiff Predicts Gold Boom, Says Political Shift Threatens To Send Inflation Soaring — ‘Sign Of Things To Come’ - Yahoo Finance"
+          "Indonesia Might Be Heading into a Deep Political Crisis - Left Voice"
         ]
       },
       "rate_shock": {
-        "n_articles": 2,
-        "n_sources": 2,
-        "z": -1.139,
-        "baseline_points": 48,
+        "n_articles": 6,
+        "n_sources": 5,
+        "z": -0.4,
+        "baseline_points": 49,
         "measure": "키워드별 합산",
-        "n_split": 2,
+        "n_split": 6,
         "saturated": false,
         "top_titles": [
-          "Why gold is losing its shine: Goldman breaks down the recent sell-off - Yahoo Finance",
-          "PSKY Stock Rallies For 12 Straight Sessions — Paramount Demands $1.88B Bond From State Prosecutors Over Delayed Warner Merger - Stocktwits"
+          "Bond Market Triggers Wall Street Risk Warnings As Long Yields Surge - Stocktwits",
+          "Dow Jones Futures Rise, Oil Prices Fall, Oracle Jumps; CPI Inflation Data To Inform Fed - Investor's Business Daily",
+          "JPY/AUD (JPYAUD=X) interactive chart - Yahoo Finance UK"
         ]
       }
     },
