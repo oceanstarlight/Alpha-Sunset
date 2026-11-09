@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-11-09T07:06:52+00:00",
+  "collected_at": "2026-11-09T20:00:03+00:00",
   "as_of": "2026-11-06",
   "level": "WATCH",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "VIX(변동성)(VIXCLS) z=+9.14, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.99",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=+9.14, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.99, 미 10년물 금리(DGS10) z=-1.44",
+      "원인": "VIX(변동성)(VIXCLS) z=+9.14",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=+9.14, 미 10년물 금리(DGS10) z=-1.44, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.13",
       "결과": "활성"
     },
     {
@@ -32,15 +32,14 @@
   "market": {
     "active": true,
     "triggered": [
-      "VIXCLS",
-      "BAMLH0A0HYM2"
+      "VIXCLS"
     ],
     "zscores": {
       "VIXCLS": 9.14,
       "T10Y2Y": -1.02,
       "DGS10": -1.44,
       "DCOILWTICO": -0.18,
-      "BAMLH0A0HYM2": 2.99
+      "BAMLH0A0HYM2": -1.13
     }
   },
   "flow": {
@@ -61,113 +60,111 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 19,
-        "n_sources": 16,
-        "z": 0.41,
-        "baseline_points": 51,
+        "n_articles": 16,
+        "n_sources": 15,
+        "z": -0.025,
+        "baseline_points": 52,
         "measure": "키워드별 합산",
-        "n_split": 19,
+        "n_split": 16,
         "saturated": false,
         "top_titles": [
-          "Paraguay President Santiago Peña resigns following bank collapse - CoastTV",
-          "Stocks to watch, Nov 6: Adani Ports, Rajesh Power, Hexaware Tech, Blue Cloud, HCC, STL Networks, Knowledge Marine, Ashoka Buildcon, Lokesh Machines, Anondita - TradingView",
-          "Impeached Paraguay leader charged over shock collapse of bank - Kuwait Times"
+          "Paraguay Bank Failure - Post Register",
+          "Teachers strike in Paraguay to demand pension fund protections following bank's collapse - Journal-News.com",
+          "Paraguay Bank Failure - WV News"
         ]
       },
       "credit_event": {
-        "n_articles": 29,
-        "n_sources": 27,
-        "z": -1.616,
-        "baseline_points": 51,
+        "n_articles": 70,
+        "n_sources": 63,
+        "z": 0.108,
+        "baseline_points": 52,
         "measure": "키워드별 합산",
-        "n_split": 29,
+        "n_split": 70,
         "saturated": false,
         "top_titles": [
-          "Children's Place Inc Says Co Files For Chapter 11 Bankruptcy - TradingView",
-          "Why did The Children's Place file for bankruptcy? Falling sales, heavy debt and fewer shoppers - Nacionale",
-          "On the Record for Monday, Nov. 9, 2026 - Texarkana Gazette"
+          "The Children’s Place files for Chapter 11 bankruptcy - NJBIZ",
+          "Children’s Place Files for Bankruptcy With Plans to Sell Assets - WSJ",
+          "US debt limit will arrive soon, and X-date could get 'uncomfortably close' when Congress is on break - Fortune"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 6,
-        "n_sources": 6,
-        "z": -1.04,
-        "baseline_points": 51,
+        "n_articles": 11,
+        "n_sources": 9,
+        "z": 0.847,
+        "baseline_points": 52,
         "measure": "키워드별 합산",
-        "n_split": 6,
+        "n_split": 11,
         "saturated": false,
         "top_titles": [
-          "Saudi banks face years of pricier funding as lending outpaces deposits, Fitch warns - EnterpriseAM",
-          "Kospi Opens Lower Near 5,000 as Foreign Investors Sell - bloomingbit",
-          "Textile firms struggle to protect margins as energy, labour costs bite in FY26 - The Business Standard"
+          "The RBA is fighting inflation, but is it creating Australia’s next Credit Crunch? - Livewire Markets",
+          "Satya Micro Capital to sell its housing finance arm to address liquidity crunch - The Economic Times",
+          "Videos - Kitco"
         ]
       },
       "geopolitical": {
-        "n_articles": 81,
-        "n_sources": 70,
-        "z": -1.859,
-        "baseline_points": 51,
+        "n_articles": 117,
+        "n_sources": 103,
+        "z": -0.521,
+        "baseline_points": 52,
         "measure": "키워드별 합산",
-        "n_split": 81,
+        "n_split": 117,
         "saturated": false,
         "top_titles": [
-          "Iran acquires oil facilities in China to bypass US sanctions, leaked document shows - Iran International",
-          "'Masha and the Bear': Ukraine sanctions Russian cartoon - DW.com",
-          "Woman robbed, sexually assaulted at gunpoint in Gresham home invasion - NBC 5 Chicago"
+          "Woman reportedly choked during armed Hollywood Hills home invasion - KTLA",
+          "Canada announces fresh Russia-related sanctions - Reuters",
+          "When sanctions meet corruption: Iran and the risk of conflict — Part 1 - Devpolicy Blog from the Development Policy Centre"
         ]
       },
       "trade_policy": {
-        "n_articles": 82,
-        "n_sources": 69,
-        "z": -0.691,
-        "baseline_points": 51,
+        "n_articles": 128,
+        "n_sources": 108,
+        "z": 0.706,
+        "baseline_points": 52,
         "measure": "키워드별 합산",
-        "n_split": 82,
+        "n_split": 128,
         "saturated": false,
         "top_titles": [
-          "China extends suspensions of 24% tariff on US goods, port fees on US ships for two months - Reuters",
-          "China extends suspension of 24% tariff on US imports for two months - Central Oregon Daily",
-          "China extends suspension of 24% tariff on US imports for two months By Reuters - Investing.com"
+          "US, China officially extend trade war truce by 2 months - Supply Chain Dive",
+          "China extends US trade truce by two months - Reuters",
+          "The Democrats’ partial return to tariff sanity - Financial Times"
         ]
       },
       "pandemic": {
-        "n_articles": 68,
-        "n_sources": 53,
-        "z": -1.539,
-        "baseline_points": 51,
+        "n_articles": 192,
+        "n_sources": 165,
+        "z": 1.071,
+        "baseline_points": 52,
         "measure": "키워드별 합산",
-        "n_split": 68,
+        "n_split": 192,
         "saturated": false,
         "top_titles": [
-          "UNICEF Humanitarian Situation Report No. 3 (BVD Outbreak in DRC: Regional Preparedness and Readiness in Neighboring and At-Risk Countries), Aug-Sept 2026 - ReliefWeb",
-          "New outbreak of mpox in Anchorage prompts advisory from state health officials - Anchorage Daily News",
-          "Mexico measles outbreak results in 50 deaths - Outbreak News Today"
+          "Secret Service puts White House on brief lockdown after car rams through secure area with Trump home in DC - New York Post",
+          "Dade County Schools on lockdown following threat near library - Local 3 News",
+          "Bundibugyo ebolavirus: A wake-up call for pandemic preparedness - IDSA"
         ]
       },
       "fx_shock": {
-        "n_articles": 1,
-        "n_sources": 1,
-        "z": -1.799,
-        "baseline_points": 51,
+        "n_articles": 0,
+        "n_sources": 0,
+        "z": -2.254,
+        "baseline_points": 52,
         "measure": "키워드별 합산",
-        "n_split": 1,
+        "n_split": 0,
         "saturated": false,
-        "top_titles": [
-          "Indonesia Might Be Heading into a Deep Political Crisis - Left Voice"
-        ]
+        "top_titles": []
       },
       "rate_shock": {
-        "n_articles": 5,
-        "n_sources": 5,
-        "z": -0.568,
-        "baseline_points": 51,
+        "n_articles": 10,
+        "n_sources": 9,
+        "z": 0.35,
+        "baseline_points": 52,
         "measure": "키워드별 합산",
-        "n_split": 5,
+        "n_split": 10,
         "saturated": false,
         "top_titles": [
-          "The Fed’s $6.75 Trillion Balance Sheet Is Growing Again — Should Americans Be Worried? - Yahoo Finance",
-          "Peter Schiff Warns ‘Mother Of All Bond Bear Markets’ Is Coming — ‘Something’s Going To Break’ - Stocktwits",
-          "UK Firms Pared Hiring in Turbulent Weeks Before Budget, REC Says - Bloomberg.com"
+          "Dow Jones Futures Rise, Oil Prices Fall, Oracle Jumps; CPI Inflation Data To Inform Fed - Investor's Business Daily",
+          "Eurozone bond yields edge lower as oil prices ease, investors await US inflation data - The Economic Times",
+          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com"
         ]
       }
     },
