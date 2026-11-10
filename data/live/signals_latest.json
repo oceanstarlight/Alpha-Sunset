@@ -1,13 +1,13 @@
 {
-  "collected_at": "2026-11-09T20:00:03+00:00",
-  "as_of": "2026-11-06",
-  "level": "WATCH",
+  "collected_at": "2026-11-10T03:46:33+00:00",
+  "as_of": "2026-11-09",
+  "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "VIX(변동성)(VIXCLS) z=+9.14",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=+9.14, 미 10년물 금리(DGS10) z=-1.44, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.13",
-      "결과": "활성"
+      "원인": "임계 초과 지표 없음",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 달러 인덱스(DTWEXBGS) z=+1.16, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.13, VIX(변동성)(VIXCLS) z=-1.09",
+      "결과": "비활성"
     },
     {
       "단계": "자금 흐름(C)",
@@ -23,22 +23,21 @@
     },
     {
       "단계": "종합 등급",
-      "원인": "A=활성, C=비활성, B=비활성",
+      "원인": "A=비활성, C=비활성, B=비활성",
       "근거": "등급 규칙(사전 등록 v2·v3): ALERT = B ∧ (A ∨ C), WATCH = 하나 이상 활성",
-      "결과": "WATCH → 1단계: 자금 이상 알림"
+      "결과": "NONE → 조치 없음"
     }
   ],
   "money_alert": false,
   "market": {
-    "active": true,
-    "triggered": [
-      "VIXCLS"
-    ],
+    "active": false,
+    "triggered": [],
     "zscores": {
-      "VIXCLS": 9.14,
+      "VIXCLS": -1.09,
       "T10Y2Y": -1.02,
-      "DGS10": -1.44,
-      "DCOILWTICO": -0.18,
+      "DGS10": 0.39,
+      "DEXKOUS": 1.05,
+      "DTWEXBGS": 1.16,
       "BAMLH0A0HYM2": -1.13
     }
   },
@@ -60,106 +59,108 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 16,
-        "n_sources": 15,
-        "z": -0.025,
-        "baseline_points": 52,
-        "measure": "키워드별 합산",
-        "n_split": 16,
-        "saturated": false,
-        "top_titles": [
-          "Paraguay Bank Failure - Post Register",
-          "Teachers strike in Paraguay to demand pension fund protections following bank's collapse - Journal-News.com",
-          "Paraguay Bank Failure - WV News"
-        ]
-      },
-      "credit_event": {
-        "n_articles": 70,
-        "n_sources": 63,
-        "z": 0.108,
-        "baseline_points": 52,
-        "measure": "키워드별 합산",
-        "n_split": 70,
-        "saturated": false,
-        "top_titles": [
-          "The Children’s Place files for Chapter 11 bankruptcy - NJBIZ",
-          "Children’s Place Files for Bankruptcy With Plans to Sell Assets - WSJ",
-          "US debt limit will arrive soon, and X-date could get 'uncomfortably close' when Congress is on break - Fortune"
-        ]
-      },
-      "liquidity_crisis": {
         "n_articles": 11,
-        "n_sources": 9,
-        "z": 0.847,
-        "baseline_points": 52,
+        "n_sources": 11,
+        "z": -0.75,
+        "baseline_points": 53,
         "measure": "키워드별 합산",
         "n_split": 11,
         "saturated": false,
         "top_titles": [
+          "Paraguay Bank Failure - Post Register",
+          "Teachers strike in Paraguay to demand pension fund protections following bank's collapse | World News | 2news.com - KTVN",
+          "Paraguay Bank Failure - WV News"
+        ]
+      },
+      "credit_event": {
+        "n_articles": 85,
+        "n_sources": 75,
+        "z": 0.724,
+        "baseline_points": 53,
+        "measure": "키워드별 합산",
+        "n_split": 85,
+        "saturated": false,
+        "top_titles": [
+          "Filing Alert: The Children's Place Chapter 11 - Bondoro",
+          "The Children’s Place bankruptcy filing sets bidding in December - Digital Commerce 360",
+          "The Children’s Place files for Chapter 11 bankruptcy - NJBIZ"
+        ]
+      },
+      "liquidity_crisis": {
+        "n_articles": 12,
+        "n_sources": 11,
+        "z": 1.207,
+        "baseline_points": 53,
+        "measure": "키워드별 합산",
+        "n_split": 12,
+        "saturated": false,
+        "top_titles": [
           "The RBA is fighting inflation, but is it creating Australia’s next Credit Crunch? - Livewire Markets",
           "Satya Micro Capital to sell its housing finance arm to address liquidity crunch - The Economic Times",
-          "Videos - Kitco"
+          "Power sector arrears: Upstream supplies at risk as recoveries surge to Rs169.27bn: SNGPL - Business Recorder"
         ]
       },
       "geopolitical": {
-        "n_articles": 117,
-        "n_sources": 103,
-        "z": -0.521,
-        "baseline_points": 52,
-        "measure": "키워드별 합산",
-        "n_split": 117,
-        "saturated": false,
-        "top_titles": [
-          "Woman reportedly choked during armed Hollywood Hills home invasion - KTLA",
-          "Canada announces fresh Russia-related sanctions - Reuters",
-          "When sanctions meet corruption: Iran and the risk of conflict — Part 1 - Devpolicy Blog from the Development Policy Centre"
-        ]
-      },
-      "trade_policy": {
         "n_articles": 128,
-        "n_sources": 108,
-        "z": 0.706,
-        "baseline_points": 52,
+        "n_sources": 114,
+        "z": -0.126,
+        "baseline_points": 53,
         "measure": "키워드별 합산",
         "n_split": 128,
         "saturated": false,
         "top_titles": [
-          "US, China officially extend trade war truce by 2 months - Supply Chain Dive",
-          "China extends US trade truce by two months - Reuters",
-          "The Democrats’ partial return to tariff sanity - Financial Times"
+          "Brazil deploys national security force to Indigenous territory following invasion - news - Mongabay",
+          "Legal fight escalates over physician’s sanctions for past drug use - Iowa Capital Dispatch",
+          "Hollywood Hills armed home invasion leaves mother, sons and neighborhood shaken - CBS News"
+        ]
+      },
+      "trade_policy": {
+        "n_articles": 135,
+        "n_sources": 103,
+        "z": 0.909,
+        "baseline_points": 53,
+        "measure": "키워드별 합산",
+        "n_split": 135,
+        "saturated": false,
+        "top_titles": [
+          "Canada says it is extending tariff relief on some US imports - Reuters",
+          "Nvidia’s Next Headache: New Push For Export Controls in Wake of Spy Scandal - The Information",
+          "US, China officially extend trade war truce by 2 months - Supply Chain Dive"
         ]
       },
       "pandemic": {
-        "n_articles": 192,
-        "n_sources": 165,
-        "z": 1.071,
-        "baseline_points": 52,
+        "n_articles": 222,
+        "n_sources": 191,
+        "z": 1.669,
+        "baseline_points": 53,
         "measure": "키워드별 합산",
-        "n_split": 192,
-        "saturated": false,
+        "n_split": 222,
+        "saturated": true,
         "top_titles": [
           "Secret Service puts White House on brief lockdown after car rams through secure area with Trump home in DC - New York Post",
-          "Dade County Schools on lockdown following threat near library - Local 3 News",
-          "Bundibugyo ebolavirus: A wake-up call for pandemic preparedness - IDSA"
+          "Two security breaches near White House prompt brief lockdown - Al Jazeera",
+          "New outbreak of mpox in Anchorage prompts advisory from state health officials - Alaska Public Media"
         ]
       },
       "fx_shock": {
-        "n_articles": 0,
-        "n_sources": 0,
-        "z": -2.254,
-        "baseline_points": 52,
+        "n_articles": 1,
+        "n_sources": 1,
+        "z": -1.625,
+        "baseline_points": 53,
         "measure": "키워드별 합산",
-        "n_split": 0,
+        "n_split": 1,
         "saturated": false,
-        "top_titles": []
+        "top_titles": [
+          "KOSPI, Kosdaq surge; buy sidecars triggered in both markets - 디지털투데이"
+        ]
       },
       "rate_shock": {
-        "n_articles": 10,
-        "n_sources": 9,
-        "z": 0.35,
-        "baseline_points": 52,
+        "n_articles": 14,
+        "n_sources": 10,
+        "z": 1.082,
+        "baseline_points": 53,
         "measure": "키워드별 합산",
-        "n_split": 10,
+        "n_split": 14,
         "saturated": false,
         "top_titles": [
           "Dow Jones Futures Rise, Oil Prices Fall, Oracle Jumps; CPI Inflation Data To Inform Fed - Investor's Business Daily",
