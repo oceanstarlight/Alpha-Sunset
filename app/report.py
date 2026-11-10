@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from datetime import datetime
 from pathlib import Path
 
@@ -66,3 +67,10 @@ def save_report(text: str, out_dir: Path, name: str) -> Path:
     path = out_dir / f"{name}.md"
     path.write_text(text, encoding="utf-8")
     return path
+
+
+def report_link(name: str) -> str:
+    """알림에 넣을 리포트 주소. Actions에서는 실행 중인 브랜치의 GitHub 주소, 로컬에서는 저장소 상대 경로."""
+    rel = f"data/live/reports/{name}.md"
+    repo = os.environ.get("GITHUB_REPOSITORY")
+    return f"https://github.com/{repo}/blob/{os.environ.get('GITHUB_REF_NAME') or 'main'}/{rel}" if repo else rel

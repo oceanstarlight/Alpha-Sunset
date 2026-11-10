@@ -25,11 +25,9 @@ def test_run_scenario_rule_provider_end_to_end(monkeypatch):
 
 
 def test_ondemand_topics_and_event_without_detected_event():
-    import json
+    from tests.conftest import kr_accumulating
 
-    from app.config import ROOT_DIR
-
-    kr = json.loads((ROOT_DIR / "data" / "live" / "kr_latest.json").read_text(encoding="utf-8"))
+    kr = kr_accumulating()
     topics, default, why = services.ondemand_topics(kr)
     assert default in topics and "기사 수가 가장 많은" in why  # 기준선 축적 중 → 기사 수 최다 주제
     e = services.ondemand_event(kr, default, local=True)

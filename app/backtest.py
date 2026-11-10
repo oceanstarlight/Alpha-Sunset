@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 
 from app.config import load_config
-from app.schemas import Briefing, Channel, Label, Verdict
+from app.schemas import Briefing, Label, Verdict
 
 
 def precision_recall(predicted: set, expected: set) -> tuple[float | None, float | None]:

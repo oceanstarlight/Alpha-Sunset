@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from app.ingest.mapper import ColumnMap, MappingSpec, check_units, merge, rule_mapping, unit_from_header
+from app.ingest.mapper import ColumnMap, rule_mapping, unit_from_header
 from app.ingest.pipeline import ingest
 from app.ingest.profile import profile_text
 from app.ingest.reader import read_csv_bytes

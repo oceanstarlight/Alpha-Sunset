@@ -80,10 +80,16 @@ def market_panel():
     return services.market_panel()
 
 
+@st.cache_resource(show_spinner=False)
+def replay_results(event_id: str) -> list:
+    """사건 전후(−30일~+14일) Sentinel 재생 — 신호 표·판단 근거가 같은 결과를 함께 쓴다 (재생 1회)."""
+    e = events_by_id()[event_id]
+    return sentinel.replay(market_panel(), [e], e.date - timedelta(days=30), e.date + timedelta(days=14))
+
+
 @st.cache_data(show_spinner=False)
 def replay_signals(event_id: str) -> pd.DataFrame:
-    e = events_by_id()[event_id]
-    results = sentinel.replay(market_panel(), [e], e.date - timedelta(days=30), e.date + timedelta(days=14))
+    results = replay_results(event_id)
     return pd.DataFrame([{"날짜": r.as_of, "등급": r.level.value,
                           "자금 이상 알림": r.market.active or bool(r.flow and r.flow.active),
                           "시장 신호(A)": r.market.active, "자금 흐름(C)": bool(r.flow and r.flow.active),
@@ -94,8 +100,7 @@ def replay_signals(event_id: str) -> pd.DataFrame:
 @st.cache_data(show_spinner=False)
 def replay_chains(event_id: str) -> dict[str, list[dict]]:
     """재생 구간의 첫 자금 이상 알림일·첫 ALERT일 판단 근거."""
-    e = events_by_id()[event_id]
-    results = sentinel.replay(market_panel(), [e], e.date - timedelta(days=30), e.date + timedelta(days=14))
+    results = replay_results(event_id)
     out = {}
     first_money = next((r for r in results if r.market.active or (r.flow and r.flow.active)), None)
     first_alert = next((r for r in results if r.level == AlertLevel.ALERT), None)
@@ -765,7 +770,7 @@ with tab_approve:
 
 with tab_input:
     from app.ingest.mapper import ColumnMap, MappingSpec
-    from app.ingest.pipeline import ingest, pick_sheet, propose
+    from app.ingest.pipeline import pick_sheet, propose
     from app.ingest.profile import profile_text
     from app.ingest.reader import read_file
     from app.ingest.schema import FIELDS

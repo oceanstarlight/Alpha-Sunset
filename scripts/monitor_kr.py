@@ -28,7 +28,7 @@ from app.agents.sentinel import AlertLevel, MarketSignal  # noqa: E402
 from app.config import ROOT_DIR, load_config  # noqa: E402
 from app.data import korea  # noqa: E402
 from app.notify import Notifier, format_message  # noqa: E402
-from app.report import build_report, save_report  # noqa: E402
+from app.report import build_report, report_link, save_report  # noqa: E402
 
 LIVE_DIR = ROOT_DIR / "data" / "live"
 STATE_DIR = ROOT_DIR / ".kr_state"
@@ -78,7 +78,7 @@ def global_state() -> tuple[bool, MarketSignal | None, list[str]]:
     return bool(g["news"]["active"]), market, [c["event_type"] for c in g["news"]["clusters"]]
 
 
-def try_briefing(result: local.LocalResult, global_types: list[str]):
+def try_briefing(result: local.LocalResult, global_types: list[str], today: date):
     """로컬 ALERT → 대응안 브리핑 (Gemini 필요). 실패하면 None (리포트는 판단 근거만으로 생성)."""
     try:
         from app.agents import orchestrator
@@ -91,7 +91,8 @@ def try_briefing(result: local.LocalResult, global_types: list[str]):
         parts += [f"{w.disclosure.corp_name} {w.disclosure.report_nm}" for w in result.warnings if w.confirmed]
         parts += [f"해외 사건 신호: {t}" for t in global_types]
         llm = LLMClient(db_mode="live")
-        event = structure_event(llm, "\n".join(parts), f"live_kr_{date.today():%Y%m%d}", date.today())
+        # Actions 러너는 UTC라 date.today()가 KST 아침(00~09시)에 전날이 된다 → KST 기준 날짜를 받는다
+        event = structure_event(llm, "\n".join(parts), f"live_kr_{today:%Y%m%d}", today)
         return orchestrator.run_live_briefing(event, load_panel(sentinel.panel_series_ids()), llm)
     except Exception as e:
         print(f"브리핑 생성 실패: {type(e).__name__}: {e}")
@@ -165,15 +166,14 @@ def main() -> int:
     # 알림
     notifier = Notifier(STATE_DIR / "notify_state.json")
     sent = {}
-    repo = os.environ.get("GITHUB_REPOSITORY")
-    report_link = None
+    link = None
     if level == AlertLevel.ALERT:
-        briefing = try_briefing(result, global_types)
+        briefing = try_briefing(result, global_types, now.date())
         name = f"{now:%Y%m%d_%H%M}_kr_alert"
         save_report(build_report(f"로컬 대응안 리포트 {now:%Y-%m-%d %H:%M}", now, chain, linkage, briefing), LIVE_DIR / "reports", name)
-        report_link = f"https://github.com/{repo}/blob/main/data/live/reports/{name}.md" if repo else f"data/live/reports/{name}.md"
+        link = report_link(name)
         key = "alert:" + ",".join(sorted({c.event_type for c in kr_news.clusters} | set(global_types)))
-        sent[key] = notifier.send(key, format_message("🔴 2단계: 대응안", chain, report_link))
+        sent[key] = notifier.send(key, format_message("🔴 2단계: 대응안", chain, link))
     elif result.money_alert:
         sent[f"money:{now.date()}"] = notifier.send(f"money:{now.date()}", format_message("🟠 1단계: 자금 이상 알림", chain))
     for w in warnings:
@@ -185,15 +185,15 @@ def main() -> int:
             [{"단계": "수집", "원인": "; ".join(real_failures[:5]), "근거": "연속 실패 횟수 기준 (사전 등록 v5)", "결과": "감시 공백 경고"}]))
 
     # 저장 (커밋 대상은 의미 있는 변화가 있을 때만)
-    out = local.to_json(result) | {"notes": sorted(set(notes)), "alerts_sent": sent, "report": report_link}
-    changed = args.daily or level.value != run_state["last_level"] or bool(warnings) or report_link is not None
+    out = local.to_json(result) | {"notes": sorted(set(notes)), "alerts_sent": sent, "report": link}
+    changed = args.daily or level.value != run_state["last_level"] or bool(warnings) or link is not None
     delivered = {k: v for k, v in sent.items() if v == "sent"}
     if changed or delivered:  # 커밋되는 실행만 감사 기록 (체인이 저장소와 어긋나지 않게)
         changed = True
         local.write_json(LIVE_DIR / "kr_latest.json", out)
         audit.log("kr_run", {"level": level.value, "prev_level": run_state["last_level"], "money_alert": result.money_alert,
                              "news_status": kr_news.status, "warnings": [w.disclosure.rcept_no for w in warnings],
-                             "report": report_link, "alerts_sent": sent}, source="monitor_kr")
+                             "report": link, "alerts_sent": sent}, source="monitor_kr")
     run_state["last_level"] = level.value
     RUN_STATE.write_text(json.dumps(run_state))
     if os.environ.get("GITHUB_OUTPUT"):

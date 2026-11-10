@@ -12,7 +12,6 @@
 from __future__ import annotations
 
 import json
-import os
 import sys
 import tempfile
 from datetime import datetime, timezone
@@ -22,7 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app import audit, services  # noqa: E402
 from app.notify import Notifier, format_message  # noqa: E402
-from app.report import build_report, save_report  # noqa: E402
+from app.report import build_report, report_link, save_report  # noqa: E402
 
 LIVE_DIR = services.LIVE_SIGNALS_PATH.parent
 HISTORY_PATH = LIVE_DIR / "signals_history.jsonl"
@@ -42,8 +41,7 @@ def notify(result: dict) -> dict:
         name = f"{now:%Y%m%d_%H%M}_global_alert"
         save_report(build_report(f"글로벌 대응안 리포트 {now:%Y-%m-%d %H:%M} UTC", now, chain, None, briefing),
                     LIVE_DIR / "reports", name)
-        repo = os.environ.get("GITHUB_REPOSITORY")
-        link = f"https://github.com/{repo}/blob/main/data/live/reports/{name}.md" if repo else f"data/live/reports/{name}.md"
+        link = report_link(name)
         key = "global_alert:" + ",".join(sorted(c["event_type"] for c in news["clusters"]))
         sent[key] = notifier.send(key, format_message("🔴 글로벌 2단계: 대응안", chain, link))
     elif result["money_alert"]:
