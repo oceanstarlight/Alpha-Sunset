@@ -1,14 +1,11 @@
 """탭 상단 요약·그래프 (app/dashboard.py)."""
 
-import json
-
 import pandas as pd
 
 from app import dashboard, services
-from app.config import ROOT_DIR
 from tests.conftest import kr_accumulating
 
-KR = json.loads((ROOT_DIR / "data" / "live" / "kr_latest.json").read_text(encoding="utf-8"))
+KR = kr_accumulating()  # 수집기가 덮어쓰는 kr_latest.json의 뉴스 상태를 고정한 사본
 
 
 def test_watch_local_none_explains_why():
@@ -34,7 +31,7 @@ def test_briefing_and_approval_summary():
     s = dashboard.briefing(b)
     assert b.match.doc_fits[0].doc_id in s.bullets[0] and s.tone in ("red", "orange", "green")
     assert dashboard.briefing(b, kind="scenario").tone == "blue"
-    assert dashboard.briefing(b, kind="ondemand").headline.startswith("▶ 직접 실행")
+    assert dashboard.briefing(b, kind="ondemand").headline.startswith("직접 실행")
     recs = [{"action": "approval", "actor": "kim", "ts": "2026-10-24T10:00:00", "data": {"run_id": b.run_id, "decision": "approved"}},
             {"action": "feedback", "actor": "kim", "ts": "x", "data": {"run_id": b.run_id, "label": "useful"}},
             {"action": "feedback", "actor": "kim", "ts": "x", "data": {"run_id": "other", "label": "useful"}}]

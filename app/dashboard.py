@@ -16,18 +16,25 @@ import pandas as pd
 
 from app.config import load_config
 
-# dataviz 기본 팔레트 (references/palette.md)
-GOOD, WARNING, SERIOUS, CRITICAL = "#0ca30c", "#fab219", "#ec835a", "#d03b3b"
-BLUE, BLUE_LIGHT, ORANGE = "#2a78d6", "#86b6ef", "#eb6834"
-MUTED, NEUTRAL = "#898781", "#c3c2b7"
+# 팔레트: 크기 비교는 네이비 한 색(UI 강조색과 같은 계열), 상태색은 의미에만, 비교 기준(우연·평소)은 웜그레이.
+# 값은 .streamlit/config.toml 테마 색과 맞춘다.
+GOOD, WARNING, SERIOUS, CRITICAL = "#2f7d4f", "#d08a1c", "#c8642f", "#c03a32"
+BLUE, BLUE_LIGHT, ORANGE = "#1f4e89", "#9db8d9", "#b98a52"
+MUTED, NEUTRAL = "#85837c", "#cfcdc5"
 # Streamlit은 지정 높이에 제목·축·범례까지 포함해 맞춘다 → 막대 영역 + 여유분으로 잡는다
-CHROME = 120
+CHROME = 84
 
 
 def _h(rows: int, per: int = 34, minimum: int = 3) -> int:
     return per * max(rows, minimum) + CHROME
 
-TONE_ICON = {"red": "🔴", "orange": "🟠", "green": "🟢", "gray": "⚪", "blue": "🔵"}
+# 상태 톤 → Streamlit 마크다운 배지 색 (:red-badge[...]). 이모지 대신 배지·점으로 표시한다.
+TONE_BADGE = {"red": "red", "orange": "orange", "green": "green", "gray": "gray", "blue": "blue"}
+
+
+def tag(text: str, tone: str) -> str:
+    return f":{TONE_BADGE.get(tone, 'gray')}-badge[{text}]"
+
 LEVEL_TONE = {"ALERT": "red", "WATCH": "orange", "NONE": "green"}
 LEVEL_KO = {"ALERT": "ALERT · 대응안", "WATCH": "WATCH · 자금 이상 감시", "NONE": "NONE · 이상 없음"}
 VERDICT_KO = {"applicable": "적용", "partial": "부분", "not_applicable": "부적용", "uncertain": "불확실"}
@@ -40,11 +47,6 @@ class Summary:
     headline: str
     bullets: list[str] = field(default_factory=list)
 
-    @property
-    def icon(self) -> str:
-        return TONE_ICON.get(self.tone, "⚪")
-
-
 # ---------- 요약 ----------
 
 
@@ -55,40 +57,41 @@ def _max_abs(z: dict[str, float | None]) -> tuple[str, float] | None:
 
 def _signal_line(name: str, z: dict, triggered: list, th: float) -> str:
     if triggered:
-        return f"**{name}**: 🔴 임계 초과 {', '.join(triggered)} (기준 |z| ≥ {th})"
+        return f"**{name}** {tag('임계 초과', 'red')} {', '.join(triggered)} (기준 |z| ≥ {th})"
     top = _max_abs(z)
     if top is None:
-        return f"**{name}**: ⚪ 데이터 없음"
+        return f"**{name}** {tag('데이터 없음', 'gray')}"
     near = abs(top[1]) >= 0.75 * th
-    return f"**{name}**: {'🟠 임계 근접' if near else '🟢 정상'} — 최대 {top[0]} z {top[1]:+.2f} (기준 ±{th})"
+    state = tag('임계 근접', 'orange') if near else tag('정상', 'green')
+    return f"**{name}** {state} 최대 {top[0]} z {top[1]:+.2f} (기준 ±{th})"
 
 
 def _news_line(name: str, news: dict | None, min_points: int) -> str:
     if not news:
-        return f"**{name}**: ⚪ 데이터 없음"
+        return f"**{name}** {tag('데이터 없음', 'gray')}"
     clusters = news.get("clusters") or []
     if clusters:
         tops = ", ".join(f"{c['event_type']}({c.get('n_sources', '?')}곳)" for c in clusters[:3])
-        return f"**{name}**: 🔴 기사량 급증 {tops}"
+        return f"**{name}** {tag('기사량 급증', 'red')} {tops}"
     status = news.get("status", "ok")
     if status == "unavailable":
         pts = [o.get("baseline_points") for o in (news.get("observations") or {}).values() if o.get("baseline_points") is not None]
         if pts and min(pts) < min_points:
-            return f"**{name}**: ⚪ 판단 불가 — 기준선 축적 중 {min(pts)}/{min_points} (‘사건 없음’이 확인된 건 아님)"
-        return f"**{name}**: ⚪ 판단 불가 — 조회 실패"
+            return f"**{name}** {tag('판단 불가', 'gray')} 기준선 축적 중 {min(pts)}/{min_points} (‘사건 없음’이 확인된 건 아님)"
+        return f"**{name}** {tag('판단 불가', 'gray')} 조회 실패"
     if status == "partial":
-        return f"**{name}**: 🟢 판단된 주제에서는 급증 없음 (일부 주제 판단 불가)"
-    return f"**{name}**: 🟢 급증 없음"
+        return f"**{name}** {tag('급증 없음', 'green')} 판단된 주제 기준 (일부 주제 판단 불가)"
+    return f"**{name}** {tag('급증 없음', 'green')}"
 
 
 def _next_step(level: str, news: dict | None) -> str:
     if level == "ALERT":
-        return "→ **할 일**: 대응안 브리핑을 확인하고 승인 탭에서 결정"
+        return "**할 일** — 대응안 브리핑을 확인하고 승인 페이지에서 결정"
     if level == "WATCH":
-        return "→ **할 일**: 사건 확인 전까지 감시 유지 (자동 대응안은 ALERT에서만) · 지금 보려면 브리핑 탭 ▶ 지금 브리핑 실행"
+        return "**할 일** — 사건 확인 전까지 감시 유지 (자동 대응안은 ALERT에서만). 지금 보려면 브리핑 › 지금 브리핑 실행"
     if news and news.get("status") == "unavailable":
-        return "→ **할 일**: 없음. 사건 판단은 기준선이 차면 시작 · 지금 보려면 브리핑 탭 ▶ 지금 브리핑 실행"
-    return "→ **할 일**: 없음 · 지금 보려면 브리핑 탭 ▶ 지금 브리핑 실행"
+        return "**할 일** — 없음. 사건 판단은 기준선이 차면 시작. 지금 보려면 브리핑 › 지금 브리핑 실행"
+    return "**할 일** — 없음. 지금 보려면 브리핑 › 지금 브리핑 실행"
 
 
 def watch_local(loc: dict) -> Summary:
@@ -103,9 +106,9 @@ def watch_local(loc: dict) -> Summary:
     ]
     warns = loc.get("warnings") or []
     if warns:
-        bullets.append(f"**DART 공시**: 🟠 신용 경고 {len(warns)}건 ({', '.join(w['corp_name'] for w in warns[:3])})")
+        bullets.append(f"**DART 공시** {tag(f'신용 경고 {len(warns)}건', 'orange')} {', '.join(w['corp_name'] for w in warns[:3])}")
     if loc.get("money_alert"):
-        bullets.append("**1단계 자금 이상 알림**: 🟠 발동 (5영업일 중 지속 기준 충족)")
+        bullets.append(f"**1단계 자금 이상 알림** {tag('발동', 'orange')} 5영업일 중 지속 기준 충족")
     bullets.append(_next_step(level, loc.get("kr_news")))
     return Summary(LEVEL_TONE.get(level, "gray"), f"로컬 등급 {LEVEL_KO.get(level, level)} · 기준 {loc.get('as_of', '-')} KST", bullets)
 
@@ -120,7 +123,7 @@ def watch_global(sig: dict) -> Summary:
         _news_line("사건(B, 뉴스)", sig.get("news"), cfg["news"]["baseline_min_points"]),
     ]
     if sig.get("money_alert"):
-        bullets.append("**1단계 자금 이상 알림**: 🟠 발동")
+        bullets.append(f"**1단계 자금 이상 알림** {tag('발동', 'orange')}")
     bullets.append(_next_step(level, sig.get("news")))
     return Summary(LEVEL_TONE.get(level, "gray"), f"글로벌 등급 {LEVEL_KO.get(level, level)} · 기준일 {sig.get('as_of', '-')}", bullets)
 
@@ -147,9 +150,9 @@ def briefing(b: Any, kind: str = "auto") -> Summary:
     else:
         bullets.append("**문서**: 판정된 문서 없음")
     gaps = [g.value for g in b.match.gaps]
-    bullets.append(f"**대응 공백 채널**: {'🔴 ' + ', '.join(gaps) if gaps else '🟢 없음'}")
+    bullets.append(f"**대응 공백 채널** {tag(', '.join(gaps), 'red') if gaps else tag('없음', 'green')}")
     if b.exposure_entities:
-        bullets.append(f"**동일 발행자 보유**: 🔴 {', '.join(p.nodes[-2] for p in b.exposure_entities[:3])}")
+        bullets.append(f"**동일 발행자 보유** {tag('주의', 'red')} {', '.join(p.nodes[-2] for p in b.exposure_entities[:3])}")
     if b.exposure_top:
         p = b.exposure_top[0]
         bullets.append(f"**가장 큰 노출**: {' → '.join(p.nodes[1:])} (비중 {p.weight:.1%}, risk {p.risk_score:.3f})")
@@ -158,9 +161,9 @@ def briefing(b: Any, kind: str = "auto") -> Summary:
     roles = {a.partition('] ')[0].lstrip('[') for a in b.actions_to_check if '] ' in a}
     bullets.append(f"**확인 항목**: {len(b.actions_to_check)}개 · 담당 {len(roles)}곳")
     if b.match.low_confidence:
-        bullets.append("⚠️ 판정 평균 신뢰도 낮음 — 사람 확인 필요")
-    bullets.append("→ **할 일**: 아래 1위 문서 조항과 확인 항목 검토 후 승인 탭에서 결정")
-    prefix = {"scenario": "🧪 가정 시나리오 · ", "ondemand": "▶ 직접 실행 · "}.get(kind, "")
+        bullets.append(f"{tag('신뢰도 낮음', 'orange')} 판정 평균 신뢰도가 낮아 사람 확인 필요")
+    bullets.append("**할 일** — 1위 문서 조항과 확인 항목을 검토한 뒤 승인 페이지에서 결정")
+    prefix = {"scenario": "가정 시나리오 · ", "ondemand": "직접 실행 · "}.get(kind, "")
     head = prefix + (b.event.title if kind == "ondemand" else f"{LEVEL_KO.get(level, level)} · {b.event.title}")
     return Summary("blue" if kind != "auto" else LEVEL_TONE.get(level, "gray"), head, bullets)
 
@@ -179,7 +182,7 @@ def approval(b: Any, records: list[dict]) -> Summary:
     useful = sum(r["data"].get("label") == "useful" for r in fb)
     bullets = [f"**브리핑**: {b.event.title} (run {b.run_id})",
                f"**문서 피드백**: {len(fb)}건 (유용 {useful} · 부적합 {len(fb) - useful})",
-               "→ **할 일**: " + ("없음 (결정 기록됨, 감사 로그에 남음)" if last else "문서별 유용/부적합 표시 후 승인 또는 반려")]
+               "**할 일** — " + ("없음 (결정 기록됨, 감사 로그에 남음)" if last else "문서별 유용/부적합 표시 후 승인 또는 반려")]
     return Summary(tone, head, bullets)
 
 
@@ -192,7 +195,7 @@ def learner(enabled: bool, docs: list[dict], delta: float | None) -> Summary:
     top = sorted(docs, key=lambda d: -(d.get("useful") or 0))[:3]
     if top and useful:
         bullets.append("**유용 피드백 상위**: " + ", ".join(f"{d['doc_id']}({d['useful']})" for d in top if d.get("useful")))
-    bullets.append("→ 문서는 삭제·폐기하지 않는다. protected 문서는 항상 후보")
+    bullets.append("문서는 삭제·폐기하지 않는다. protected 문서는 항상 후보")
     return Summary("blue" if enabled else "gray", f"학습 층 {'ON' if enabled else 'OFF'}", bullets)
 
 
@@ -200,14 +203,14 @@ def data_input(portfolio: Any, holdings: list[dict] | None, playbooks: list | No
     bullets = []
     if portfolio is not None:
         n = len(holdings or [])
-        bullets.append(f"**포트폴리오**: 🟢 {portfolio.institution} · 종목 {n}개 반영 중")
+        bullets.append(f"**포트폴리오** {tag('업로드 반영', 'green')} {portfolio.institution} · 종목 {n}개")
     else:
-        bullets.append("**포트폴리오**: ⚪ 기본(합성) 사용 중 — 엑셀·CSV를 올리면 노출 분석에 반영")
+        bullets.append(f"**포트폴리오** {tag('기본(합성)', 'gray')} 엑셀·CSV를 올리면 노출 분석에 반영")
     if playbooks:
-        bullets.append(f"**대응 문서**: 🟢 업로드 {len(playbooks)}개 · 조항 {sum(len(p.clauses) for p in playbooks)}개 반영 중")
+        bullets.append(f"**대응 문서** {tag('업로드 반영', 'green')} {len(playbooks)}개 · 조항 {sum(len(p.clauses) for p in playbooks)}개")
     else:
-        bullets.append("**대응 문서**: ⚪ 기본(합성 12개) 사용 중 — PDF·워드를 올리면 조항으로 분해해 반영")
-    bullets.append("→ 보유 종목명은 외부 LLM에 보내지 않는다 (표 구조 요약만 전송, 끌 수 있음)")
+        bullets.append(f"**대응 문서** {tag('기본(합성 12개)', 'gray')} PDF·워드를 올리면 조항으로 분해해 반영")
+    bullets.append("보유 종목명은 외부 LLM에 보내지 않는다 (표 구조 요약만 전송, 끌 수 있음)")
     tone = "green" if portfolio is not None or playbooks else "gray"
     return Summary(tone, "업로드 데이터 반영 상태", bullets)
 
@@ -335,7 +338,8 @@ def lead_chart(v6: dict) -> alt.Chart | None:
     order = df.sort_values("날짜")["사건"].tolist()  # 두 층이 같은 시간순 축을 쓰게 명시
     x = alt.X("사건:N", sort=order, scale=alt.Scale(domain=order), title=None, axis=alt.Axis(labelAngle=-45, labelOverlap=False))
     scale = alt.Scale(domain=["사전 알림", "사건 후 포착", "놓침"], range=[BLUE, BLUE_LIGHT, NEUTRAL])
-    color = alt.Color("결과:N", scale=scale, legend=alt.Legend(orient="bottom", title=None))
+    color = alt.Color("결과:N", scale=scale,
+                      legend=alt.Legend(orient="bottom", title=None, values=["사전 알림", "사건 후 포착", "놓침"]))
     tip = ["사건", "날짜", "선행일", "결과"]
     bars = alt.Chart(df[df["결과"] == "사전 알림"]).mark_bar(cornerRadiusEnd=4).encode(
         x=x, y=alt.Y("선행일:Q", title="사건 전 첫 알림 (일)"), color=color, tooltip=tip)
@@ -416,11 +420,6 @@ class Step:
     detail: str
     tab: str
 
-    @property
-    def icon(self) -> str:
-        return TONE_ICON.get(self.tone, "⚪")
-
-
 def step_data(portfolio: Any, playbooks: list | None) -> Step:
     parts = ([f"포트폴리오 {portfolio.institution}"] if portfolio is not None else []) + \
             ([f"문서 {len(playbooks)}개"] if playbooks else [])
@@ -443,7 +442,7 @@ def _news_detail(news: dict | None, min_points: int) -> str:
 def step_watch(signals: dict | None, local: bool) -> Step:
     scope = "한국" if local else "글로벌"
     if not signals:
-        return Step("②", "감시", "gray", f"{scope} 결과 없음", "감시 탭에서 조회", "감시")
+        return Step("②", "감시", "gray", f"{scope} 결과 없음", "감시 페이지에서 조회", "감시")
     level = signals.get("level", "NONE")
     news = signals.get("kr_news") if local else signals.get("news")
     min_points = load_config()["korea" if local else "sentinel"]["news"]["baseline_min_points"]
@@ -461,7 +460,7 @@ def step_watch_replay(first_alert: Any, money_days: int, event_date: Any) -> Ste
 
 def step_briefing(b: Any, kind: str | None) -> Step:
     if b is None:
-        return Step("③", "브리핑", "gray", "없음", "▶ 지금 브리핑 실행 (라이브)", "브리핑")
+        return Step("③", "브리핑", "gray", "없음", "라이브 모드에서 지금 브리핑 실행", "브리핑")
     label = {"scenario": "가정 시나리오", "ondemand": "직접 실행"}.get(kind or "auto", "자동 감지")
     top = b.match.doc_fits[0] if b.match.doc_fits else None
     detail = f"1위 {top.doc_id} {top.fit_score:.2f}" if top else "판정 문서 없음"

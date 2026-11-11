@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import threading
 from pathlib import Path
 
 import chromadb
@@ -17,6 +18,7 @@ from app.llm.client import LLMClient
 from app.schemas import Clause, Event, Playbook
 
 COLLECTION = "clauses"
+_BUILD_LOCK = threading.Lock()  # Streamlit 스레드 동시 생성(확인→삭제→생성) 경합 방지
 
 
 def clause_document(clause: Clause) -> str:
@@ -58,26 +60,34 @@ class ClauseIndex:
             path = st.chroma_dir if provider == "gemini" else st.data_dir / f"chroma_{provider}"
         self._client = chromadb.PersistentClient(path=str(path))
         fp = _fingerprint(list(self.clauses.values()), llm.embed_model)
-        try:
-            col = self._client.get_collection(COLLECTION, embedding_function=None)
-            if (col.metadata or {}).get("fingerprint") != fp:
-                self._client.delete_collection(COLLECTION)
-                col = None
-        except Exception:
+        with _BUILD_LOCK:
             col = None
-        if col is None:
-            col = self._build(fp)
+            try:
+                col = self._client.get_collection(COLLECTION, embedding_function=None)
+            except Exception:
+                col = None
+            # 지문이 다르거나, 이전 빌드가 중간에 실패해 조항 수가 모자라면 다시 만든다
+            if col is not None and ((col.metadata or {}).get("fingerprint") != fp or col.count() != len(self.clauses)):
+                try:
+                    self._client.delete_collection(COLLECTION)
+                except Exception:
+                    pass
+                col = None
+            if col is None:
+                col = self._build(fp)
         self.col = col
 
     def _build(self, fp: str):
-        col = self._client.create_collection(
-            COLLECTION, embedding_function=None, metadata={"hnsw:space": "cosine", "fingerprint": fp}
-        )
         ids = list(self.clauses)
         docs = [clause_document(self.clauses[i]) for i in ids]
+        # 임베딩을 먼저 계산한다: 실패하면 컬렉션을 만들지 않아 빈 색인(지문만 맞음)이 남지 않는다
         embeddings = self.llm.embed(docs, purpose="index_clauses")
-        col.add(ids=ids, embeddings=embeddings, documents=docs,
-                metadatas=[{"doc_id": self.clauses[i].doc_id, "protected": self.clauses[i].protected} for i in ids])
+        col = self._client.get_or_create_collection(
+            COLLECTION, embedding_function=None, metadata={"hnsw:space": "cosine", "fingerprint": fp}
+        )
+        if ids:
+            col.upsert(ids=ids, embeddings=embeddings, documents=docs,
+                       metadatas=[{"doc_id": self.clauses[i].doc_id, "protected": self.clauses[i].protected} for i in ids])
         return col
 
     def search(self, query: str, top_k: int) -> list[Clause]:

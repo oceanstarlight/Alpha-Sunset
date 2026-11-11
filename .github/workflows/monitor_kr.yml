@@ -83,5 +83,9 @@ jobs:
           git add data/live
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
           git commit -m "chore: 로컬 감시 결과 $(TZ=Asia/Seoul date +'%F %H:%M')"
-          for i in 1 2 3; do git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0; sleep $((i*5)); done
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0
+            git rebase --abort || true  # 충돌로 멈춘 rebase를 풀고 다시 시도
+            sleep $((i*5))
+          done
           exit 1

@@ -56,6 +56,8 @@ class RunContext:
     llm: LLMClient
     panel: dict
     live: bool = False
+    # False = 사용자가 넣은 가정 사건·감시가 확인하지 않은 직접 실행 → 등급에서 사건 확정(B)으로 치지 않는다
+    event_confirmed: bool = True
     holdings: list[dict] | None = None  # 업로드 보유 종목 (사건 기관 동일 이름 확인용)
     portfolio_note: str = ""  # 예: 업로드 포트폴리오 가정 분석
     executed: list[str] = field(default_factory=list)
@@ -98,12 +100,35 @@ def record_trace(ctx: RunContext, tool: str, args: dict, output: Any) -> None:
 # ---------- 도구 ----------
 
 
-def tool_get_market_signals(ctx: RunContext, **_) -> dict:
+def _market_as_of(ctx: RunContext) -> date:
+    """시장 신호 기준일. 라이브는 패널의 마지막 관측일 (FRED는 하루 늦게 공표 → 오늘 날짜로 보면 주말·공휴일에 빠짐).
+    단 마지막 관측이 stale_days보다 오래됐으면 오늘로 둬서 오래된 값이 신호로 쓰이지 않게 한다."""
+    if not ctx.live:
+        return ctx.as_of
+    last = max((s.index[-1] for s in ctx.panel.values() if len(s)), default=None)
+    if last is None:
+        return ctx.as_of
+    last = min(last.date(), ctx.as_of)
+    stale = sentinel_agent._sentinel_cfg()["market"]["stale_days"]
+    return last if (ctx.as_of - last).days <= stale else ctx.as_of
+
+
+def _compute_signals(ctx: RunContext) -> None:
     view = sentinel_agent.AsOfPanel(ctx.panel, as_of=None if ctx.live else ctx.as_of)
-    ctx.market = sentinel_agent.market_signal(view, ctx.as_of)
+    ctx.market = sentinel_agent.market_signal(view, _market_as_of(ctx))
     ctx.flow = sentinel_agent.flow_signal(view, ctx.as_of) if sentinel_agent.flow_enabled() else None
-    ctx.news = sentinel_agent.card_news_signal(ctx.events, ctx.as_of)
-    level = sentinel_agent.grade(ctx.market, ctx.news, ctx.flow)
+    ctx.news = sentinel_agent.card_news_signal(ctx.events, ctx.as_of)  # 사건 선택(search_events)용
+
+
+def _grade(ctx: RunContext) -> AlertLevel:
+    """확인되지 않은 사건(가정·직접 실행)은 사건 확정(B)에 넣지 않는다 → 시장·자금만 켜져도 WATCH까지."""
+    news = ctx.news if ctx.event_confirmed else sentinel_agent.NewsSignal(as_of=ctx.as_of)
+    return sentinel_agent.grade(ctx.market, news, ctx.flow)
+
+
+def tool_get_market_signals(ctx: RunContext, **_) -> dict:
+    _compute_signals(ctx)
+    level = _grade(ctx)
     return {"as_of": ctx.as_of.isoformat(), "level": level.value, "market_active": ctx.market.active,
             "triggered_series": ctx.market.triggered,
             "zscores": {k: round(v, 2) for k, v in ctx.market.zscores.items()},
@@ -227,7 +252,9 @@ def tool_build_briefing(ctx: RunContext, **_) -> dict:
     if missing:
         raise ToolError(f"build_briefing 거부: {', '.join(missing)} 미실행")
     event = _require_event(ctx)
-    level = sentinel_agent.grade(ctx.market, ctx.news, ctx.flow) if ctx.market and ctx.news else AlertLevel.NONE
+    if ctx.market is None or ctx.news is None:  # LLM이 get_market_signals를 건너뛰어도 등급이 조용히 NONE이 되지 않게
+        _compute_signals(ctx)
+    level = _grade(ctx) if ctx.market and ctx.news else AlertLevel.NONE
     actions = clean_actions(ctx.llm, aggregate_actions(ctx.match, ctx.index.clauses))
     evidence = [j.clause_id for f in ctx.match.doc_fits for j in f.judgments if j.evidence_quote] + event.sources
     ctx.briefing = Briefing(
@@ -302,7 +329,11 @@ def run_agent_loop(ctx: RunContext, task: str) -> None:
     tools = _tool_declarations()
     contents = [types.Content(role="user", parts=[types.Part(text=task)])]
     for _ in range(max_steps):
-        reply = ctx.llm.chat(contents, purpose="orchestrator", tools=tools, system=ORCH_SYSTEM)
+        try:
+            reply = ctx.llm.chat(contents, purpose="orchestrator", tools=tools, system=ORCH_SYSTEM)
+        except LLMUnavailableError as e:  # 키 없음·재시도 소진 → orchestrate가 정해진 순서로 마저 실행
+            record_trace(ctx, "llm_unavailable", {}, {"error": str(e), "executed": list(ctx.executed)})
+            return
         calls = [p.function_call for p in (reply.parts or []) if p.function_call]
         if not calls:
             break
@@ -406,7 +437,7 @@ ONDEMAND_NOTE = "직접 실행 — 자동 감시가 사건을 확인하지 않�
 
 def run_scenario_briefing(event: Event, panel: dict, llm: LLMClient | None = None, portfolio: Portfolio | None = None,
                           holdings: list[dict] | None = None, playbooks: list | None = None,
-                          note_head: str = SCENARIO_NOTE) -> Briefing:
+                          note_head: str = SCENARIO_NOTE, event_confirmed: bool = False) -> Briefing:
     """사용자가 실행한 브리핑 (가정 시나리오·직접 실행). sandbox DB — 라이브 학습 기록과 섞지 않는다. 시장·자금 신호는 현재값."""
     from app.corpus import load_portfolio
 
@@ -416,6 +447,7 @@ def run_scenario_briefing(event: Event, panel: dict, llm: LLMClient | None = Non
     note = " · ".join(x for x in (note_head, pf_note, doc_note) if x)
     ctx = new_context(mode="sandbox", as_of=event.date, events=[event], portfolio=portfolio or load_portfolio(),
                       index=index, llm=llm, panel=panel, live=True, holdings=holdings, portfolio_note=note)
+    ctx.event_confirmed = event_confirmed
     return orchestrate(ctx, f"{event.date.isoformat()} 기준 가정 사건의 대응문서 적합도와 노출을 분석해 브리핑을 만들어라.")
 
 

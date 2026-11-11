@@ -22,8 +22,13 @@ def to_number(v) -> float | None:
     if isinstance(v, (int, float)):
         return None if isinstance(v, float) and math.isnan(v) else float(v)
     s = str(v).strip().replace(",", "").replace("%", "")
+    for sym in ("₩", "￦", "$", "원"):  # 통화 기호·단위 글자 (예: '₩1,000', '1,000원')
+        s = s.replace(sym, "")
+    s = s.strip()
     if s.startswith("(") and s.endswith(")"):
         s = "-" + s[1:-1]
+    elif s[:1] in ("△", "▲"):  # 국내 회계 표기의 음수 (예: '△1,000')
+        s = "-" + s[1:].strip()
     try:
         return float(s)
     except ValueError:
@@ -93,7 +98,7 @@ def profile_sheet(sheet: Sheet, mask: bool = True, n_samples: int = 5) -> SheetP
     headers = [str(v).strip() if v is not None else "" for v in rows[h]] if rows else []
     data = rows[h + 1:]
     total_rows = [h + 1 + i for i, r in enumerate(data)
-                  if any(isinstance(v, str) and v.strip().lower() in TOTAL_WORDS for v in r[:3])]
+                  if any(isinstance(v, str) and re.sub(r"\s+", "", v).lower() in TOTAL_WORDS for v in r[:3])]
     cols = []
     for j, name in enumerate(headers):
         vals = [r[j] for r in data if j < len(r) and r[j] not in (None, "")]

@@ -123,3 +123,44 @@ def test_rate_limit_error_is_retried(monkeypatch):
     fake.generate_content = flaky
     assert client.generate("q", purpose="test", response_schema=Answer) == Answer(value=4)
     assert calls["n"] == 2
+
+
+def test_non_retryable_sdk_error_becomes_unavailable():
+    client, fake = make_client()
+
+    def boom(**kw):
+        raise ConnectionError("network down")
+
+    fake.generate_content = boom
+    with pytest.raises(LLMUnavailableError) as ei:
+        client.generate("q", purpose="test")
+    assert isinstance(ei.value.__cause__, ConnectionError)
+
+
+def test_long_rate_limit_wait_is_not_slept(monkeypatch):
+    import app.llm.client as mod
+
+    slept = []
+    monkeypatch.setattr(mod.time, "sleep", lambda s: slept.append(s))
+    client, fake = make_client()
+
+    class RateLimited(Exception):
+        code = 429
+
+    def limited(**kw):
+        raise RateLimited("Please retry in 3600s.")
+
+    fake.generate_content = limited
+    with pytest.raises(LLMUnavailableError):
+        client.generate("q", purpose="test")
+    assert all(s <= mod.MAX_RETRY_WAIT_S for s in slept)
+
+
+def test_embed_sends_chunks_of_at_most_100():
+    client, fake = make_client()
+    texts = [f"t{i}" for i in range(250)]
+    out = client.embed(texts, purpose="emb")
+    assert [len(c) for c in fake.embed_calls] == [100, 100, 50]
+    assert out == [[float(len(t)), 1.0] for t in texts]
+    client.embed(texts, purpose="emb")  # 전부 캐시 적중
+    assert len(fake.embed_calls) == 3

@@ -154,3 +154,17 @@ def test_low_fit_triggers_one_requery(tmp_path, monkeypatch):
     result = match(EVENT, index, llm)
     judged = {jj.clause_id for f in result.doc_fits for jj in f.judgments}
     assert len(judged) > 2  # top_k=1 + protected 1 → 재검색으로 후보 추가
+
+
+def test_failed_index_build_does_not_leave_empty_index(tmp_path):
+    playbooks = [Playbook(doc_id=d, title=d, version="1", year=2020, origin_event="x", synthetic=True,
+                          clauses=[c for c in CLAUSES if c.doc_id == d]) for d in "ABR"]
+
+    class DownLLM(FakeLLM):
+        def embed(self, texts, purpose):
+            raise RuntimeError("embed 실패")
+
+    with pytest.raises(RuntimeError):
+        ClauseIndex(playbooks, DownLLM(), path=tmp_path / "chroma")
+    index = ClauseIndex(playbooks, FakeLLM(), path=tmp_path / "chroma")  # 같은 지문이라도 다시 만든다
+    assert index.col.count() == len(CLAUSES)

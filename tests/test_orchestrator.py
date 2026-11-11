@@ -153,3 +153,24 @@ def test_uploaded_portfolio_and_holdings_flow_into_briefing(tmp_path):
     assert all(p.nodes[1].startswith("U-") for p in b.exposure_top)  # 업로드 노드로 노출 계산
     assert [p.nodes[2] for p in b.exposure_entities if p.nodes[1] == "업로드 직접 보유"] == ["SILICON VALLEY BANK"]
     assert b.exposure_note.startswith("업로드 가정 분석")
+
+
+def test_llm_unavailable_falls_back_to_deterministic(ctx_factory):
+    from app.llm.client import LLMUnavailableError
+
+    class DownLLM(FakeLLM):
+        def chat(self, contents, purpose, tools, system=None):
+            raise LLMUnavailableError("429 재시도 소진")
+
+    ctx = ctx_factory(DownLLM())
+    b = orch.orchestrate(ctx, "task")
+    tools = [r["tool"] for r in orch.get_trace(ctx.trace_id)]
+    assert tools[:2] == ["llm_unavailable", "fallback"] and tools[2:] == orch.TOOL_ORDER
+    assert b is not None
+
+
+def test_build_briefing_computes_signals_when_skipped(ctx_factory):
+    ctx = ctx_factory(FakeLLM())
+    for name in ["search_events", "retrieve_clauses", "judge_clauses", "compute_exposure", "build_briefing"]:
+        assert "error" not in orch.execute_tool(ctx, name)
+    assert ctx.market is not None and ctx.news is not None and ctx.briefing is not None

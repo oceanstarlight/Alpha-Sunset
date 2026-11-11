@@ -33,7 +33,7 @@
 | **Matcher** (적합도 판단) | 조항 검색(ChromaDB, protected 조항 항상 포함) → 조항별 적용/부분적용/부적용 판정(Gemini). 근거 인용문이 조항 원문·사건 요약의 실제 문구인지 코드로 검증, 실패 시 `uncertain` |
 | **Exposure** (노출 경고) | 기관 → 직접·위탁운용사·거래상대방 → 프록시 펀드(SEC N-PORT 보유내역) → 발행자·국가 그래프. 사건 기관과 같은 발행자, 사건 지역과 직접 겹치는 핵심 경로는 별도 표시 |
 | **Orchestrator** | Gemini 함수 호출로 도구 순서를 정한다. 도구 입력·상태는 코드가 보유(LLM이 데이터를 조작하지 못함). 판정·노출 분석 전 브리핑 생성은 코드로 거부. 모든 호출은 trace로 저장 |
-| **세계 금융 지도** (메인 탭) | 세계 지도 위 원으로 사건 지역(심각도)·국가별 보유 비중·영향도(노출 경로 risk 합)를 표시 |
+| **노출 지도** (분석 › 노출 지도) | 세계 지도 위 원으로 사건 지역(심각도)·국가별 보유 비중·영향도(노출 경로 risk 합)를 표시 |
 | **대응 문서 입력** | 기관의 PDF·워드 위기 대응 매뉴얼을 조항으로 나눠(원문 보존) 플레이북으로 변환. LLM은 전제·조치·담당 속성만 채우고, 담당·법규 보호는 원문 근거가 있을 때만 인정 |
 | **엑셀 입출력** | 형식이 제각각인 보유내역 엑셀·CSV를 공통 스키마(N-PORT·ISO 기준)로 변환. 라이브러리가 읽고 LLM은 표 구조 요약만 보고 매핑 규칙을 제안, 숫자는 코드가 변환·검증. 대응안은 엑셀로 내보내기 |
 | **Learner** (알파 썬셋) | 인용·피드백 이력으로 문서 검색 우선순위를 보정 (최대 ±15%, protected 하한, 기본 OFF) |
@@ -115,9 +115,9 @@ cp .env.example .env      # GEMINI_API_KEY, SEC_USER_AGENT
 - **API 키 없이도** 백테스트 재생은 동작한다. 커밋된 LLM 응답 캐시(`data/llm_cache.db`)로 같은 결과를 재현한다.
 - 배포: Streamlit Community Cloud (`ui/streamlit_app.py`, Python 3.11, Secrets에 `GEMINI_API_KEY`·`SEC_USER_AGENT`).
 - 판정 엔진 바꾸기 (`LLM_PROVIDER`, 기본 `gemini`): `openai_compatible`(+ `LLM_BASE_URL`·`LLM_MODEL`·`LLM_EMBED_MODEL`·`LLM_API_KEY` — Ollama·vLLM·사내 게이트웨이) 또는 `rule`(LLM 없이 규칙 판정, 정확도 낮음).
-- 감사 로그: 승인 탭 맨 아래에서 체인 검증·내려받기. 자동 감시 기록은 `data/live/audit/`에 커밋된다.
-- 직접 실행 브리핑: 모드 '라이브' → 브리핑 탭 '▶ 지금 브리핑 실행' — 사건이 없어도 현재 감시 신호로 바로 브리핑한다.
-- 시나리오 브리핑: 감시 등급이 NONE이어도 모드 '라이브' → 브리핑 탭 '🧪 시나리오 브리핑'에 가정 사건을 넣으면 대응 문서·노출·승인까지 쓸 수 있다 (결과는 '가정 시나리오'로 표시).
+- 감사 로그: 승인 페이지 맨 아래에서 체인 검증·내려받기. 자동 감시 기록은 `data/live/audit/`에 커밋된다.
+- 직접 실행 브리핑: 모드 '라이브' → 브리핑 '지금 브리핑 실행' — 사건이 없어도 현재 감시 신호로 바로 브리핑한다.
+- 시나리오 브리핑: 감시 등급이 NONE이어도 모드 '라이브' → 브리핑 '시나리오 브리핑'에 가정 사건을 넣으면 대응 문서·노출·승인까지 쓸 수 있다 (결과는 '가정 시나리오'로 표시).
 - 정시 실행: 외부 무료 cron이 워크플로를 호출한다 — 설정은 [`docs/scheduler.md`](docs/scheduler.md), 정시성 점검은 `python -m scripts.check_schedule --days 7`.
 - 조항 평가 재현: `python -m scripts.run_clause_eval` → `data/backtest/clause_eval.json`.
 
@@ -152,9 +152,10 @@ app/
   data/        fred · korea(ECOS·DART·Google 뉴스 RSS) · nport 클라이언트
   ingest/      엑셀·CSV 보유내역 / PDF·워드 대응 문서 입력 변환
   llm/         단일 LLM 래퍼(gemini · openai_compatible · rule) + 응답 캐시
-  backtest*.py 지표(글로벌·한국·v6 확대 검증) · geo.py(지도 집계) · dashboard.py(탭 요약·그래프)
+  backtest*.py 지표(글로벌·한국·v6 확대 검증) · geo.py(지도 집계) · dashboard.py(페이지 요약·그래프)
   services.py  UI 진입 함수 · audit.py(해시 체인 감사 로그) · notify.py(텔레그램) · report.py · export.py(엑셀)
-ui/streamlit_app.py   7탭 UI (세계 금융 지도 / 감시 / 브리핑 / 승인 / 백테스트 / 학습 층 / 데이터 입력)
+ui/streamlit_app.py   진입점: 사이드바 내비(운영: 감시·브리핑·승인 / 분석: 노출 지도·백테스트·학습 층 / 데이터: 데이터 입력)·보기 설정·업무 흐름 띠
+ui/common.py · ui/views/*.py · ui/style.css   공통 컴포넌트 · 페이지 7개 · 화면 보정 (테마는 .streamlit/config.toml, 폰트 Pretendard OFL은 ui/static/)
 data/          사건 카드 · 플레이북 · 포트폴리오 · 라벨 · FRED · N-PORT · 백테스트 결과
 docs/          plans.md(계획·결정 기록) · Current.md(진행 현황)
 ```

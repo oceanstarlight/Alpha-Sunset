@@ -3,9 +3,11 @@ name: collect-signals
 # 3시간마다 (뉴스 기준선 누적 + 글로벌 텔레그램 알림)
 # 정시 실행 (B3): 외부 cron(cron-job.org)이 workflow_dispatch로 호출한다 — docs/scheduler.md.
 # schedule은 예비: 최근 150분 안에 실행이 있었으면 건너뛴다.
+# 예비 시각 :17 = 슬롯(KST 00:05부터 3시간마다 = UTC 0·3·…·21시 5분) + 12분 → 외부 호출 실행을 보고 건너뛸 수 있고,
+# 대신 돌 때도 check_schedule 허용 30분 안에 든다 (GitHub 예약 지연 여유 약 18분).
 on:
   schedule:
-    - cron: "37 */3 * * *"
+    - cron: "17 */3 * * *"
   workflow_dispatch:
 
 permissions:
@@ -55,5 +57,9 @@ jobs:
           git add data/live
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
           git commit -m "chore: 일일 시그널 수집 $(date -u +%F)"
-          for i in 1 2 3; do git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0; sleep $((i*5)); done
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0
+            git rebase --abort || true  # 충돌로 멈춘 rebase를 풀고 다시 시도
+            sleep $((i*5))
+          done
           exit 1

@@ -81,6 +81,11 @@ def kr_flow_signal(panel: dict[str, pd.Series], as_of: date) -> sentinel.FlowSig
     if s is None:
         return None
     s = s.loc[: pd.Timestamp(as_of)]
+    stale_days = _kr_market_cfg()["stale_days"]  # 시장 신호(latest_zscore)와 같은 지연 기준
+    if s.empty or (pd.Timestamp(as_of) - s.index[-1]).days > stale_days:
+        last = s.index[-1].date() if not s.empty else None
+        return sentinel.FlowSignal(as_of=as_of, zscores={}, triggered=[], active=False,
+                                   note=f"마지막 관측 {last or '없음'} — {stale_days}일 넘게 지연되어 판단 제외")
     zscores = {}
     for sid, x in (("FOREIGN_NET_KOSPI", s), ("FOREIGN_NET_5D", s.rolling(fcfg["cumulative_days"]).sum().dropna())):
         hist = x.iloc[-(gcfg["lookback_obs"] + 1): -1]
@@ -272,14 +277,33 @@ class LocalResult:
     global_news_active: bool
     warnings: list[DartWarning] = field(default_factory=list)
     linkage: dict | None = None
+    # 1단계 알림 지속성 (끝나는 5영업일 중 min_active일 이상 A_kr∨C_kr) — 백테스트(kr_daily)와 같은 규칙.
+    # None이면(이력 패널 없음) 오늘 하루 활성으로 대신한다.
+    money_persistent: bool | None = None
+
+    @property
+    def money_today(self) -> bool:
+        """오늘 A_kr ∨ C_kr (등급 계산용, 하루 기준)."""
+        return bool((self.kr_market and self.kr_market.active) or (self.kr_flow and self.kr_flow.active))
 
     @property
     def money_alert(self) -> bool:
-        return bool((self.kr_market and self.kr_market.active) or (self.kr_flow and self.kr_flow.active))
+        """1단계 자금 이상 알림 — 지속성 규칙을 통과해야 울린다 (평상시 알림 비율이 백테스트 측정치와 같게)."""
+        return self.money_today if self.money_persistent is None else self.money_persistent
 
     @property
     def event_confirmed(self) -> bool:
         return bool((self.kr_news and self.kr_news.active) or self.global_news_active or any(w.confirmed for w in self.warnings))
+
+
+def kr_money_persistent(panel: dict[str, pd.Series], on: date) -> bool:
+    """오늘(마지막 영업일)까지 5영업일 중 min_active일 이상 A_kr∨C_kr인가 — backtest_kr.kr_daily와 같은 계산."""
+    from app.backtest_kr import kr_daily
+
+    if not panel:
+        return False
+    day = pd.bdate_range(end=pd.Timestamp(on), periods=1)
+    return bool(kr_daily(panel, day)["money_alert"].fillna(False).iloc[-1])
 
 
 def local_grade(kr_market: MarketSignal | None, kr_flow, kr_news: KrNewsSignal | None, global_news_active: bool,
@@ -312,7 +336,7 @@ def explain_local(r: LocalResult) -> list[dict[str, str]]:
                       "결과": "활성" if m.active else "비활성"})
     if r.kr_flow is not None:
         f = r.kr_flow
-        chain.append({"단계": "외국인 자금(C_kr)", "원인": _z(f.zscores, f.triggered) or "임계 초과 없음",
+        chain.append({"단계": "외국인 자금(C_kr)", "원인": _z(f.zscores, f.triggered) or f.note or "임계 초과 없음",
                       "근거": f"외국인 순매수 수준 z, 규칙 |z| ≥ {_cfg()['thresholds']['flow_z']} ({RULE})",
                       "결과": "활성" if f.active else "비활성"})
     if r.kr_news is not None:
@@ -343,11 +367,16 @@ def explain_local(r: LocalResult) -> list[dict[str, str]]:
                       "근거": (links or "상관 데이터 없음") + f" · 한국 노출 비중 {lk['exposure_link']['kr_weight']}. {lk['caveat']}",
                       "결과": "연관 근거 약함" if lk["weak"] else "연관 근거 있음"})
     action = {AlertLevel.ALERT: "2단계: 대응안 리포트 생성", AlertLevel.NONE: "조치 없음",
-              AlertLevel.WATCH: "1단계: 자금 이상 알림" if r.money_alert else ("사건 경고 알림" if r.warnings or r.event_confirmed else "관찰")}[r.level]
+              AlertLevel.WATCH: "1단계: 자금 이상 알림" if r.money_alert else (
+                  "사건 경고 알림" if r.warnings or r.event_confirmed else
+                  "관찰 (자금 이상이 지속 기준 미달)" if r.money_today else "관찰")}[r.level]
+    window = load_config()["korea"]["thresholds"]["min_active"]
     chain.append({"단계": "로컬 종합 등급",
-                  "원인": f"A_kr/C_kr={'활성' if r.money_alert else '비활성'}, 사건(B_any)={'확정' if r.event_confirmed else '미확정'}, "
-                          f"DART 경고 {len(r.warnings)}건",
-                  "근거": f"로컬 ALERT = (한국 사건 ∨ 해외 사건 ∨ 확정 DART) ∧ (A_kr ∨ C_kr) ({RULE})",
+                  "원인": f"A_kr/C_kr 오늘 {'활성' if r.money_today else '비활성'}"
+                          + (f" · 5영업일 지속 {'충족' if r.money_persistent else '미달'}" if r.money_persistent is not None else "")
+                          + f", 사건(B_any)={'확정' if r.event_confirmed else '미확정'}, DART 경고 {len(r.warnings)}건",
+                  "근거": f"로컬 ALERT = (한국 사건 ∨ 해외 사건 ∨ 확정 DART) ∧ (A_kr ∨ C_kr) · "
+                          f"1단계 알림 = 끝나는 5영업일 중 {window}일 이상 A_kr ∨ C_kr ({RULE})",
                   "결과": f"{r.level.value} → {action}"})
     return chain
 
@@ -355,6 +384,7 @@ def explain_local(r: LocalResult) -> list[dict[str, str]]:
 def to_json(r: LocalResult) -> dict:
     return {
         "as_of": r.as_of.isoformat(timespec="minutes"), "level": r.level.value, "money_alert": r.money_alert,
+        "money_today": r.money_today,
         "event_confirmed": r.event_confirmed,
         "kr_market": asdict(r.kr_market) if r.kr_market else None,
         "kr_flow": asdict(r.kr_flow) if r.kr_flow else None,

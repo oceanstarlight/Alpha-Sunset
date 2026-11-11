@@ -48,15 +48,22 @@ def test_live_returns_none_without_news(monkeypatch):
     assert services.run_live(signals) is None
 
 
+UI_PAGES = ["views/monitor.py", "views/briefing.py", "views/approval.py", "views/exposure_map.py",
+            "views/backtest.py", "views/learner.py", "views/data_input.py"]
+
+
 def test_ui_renders_without_exceptions():
     from streamlit.testing.v1 import AppTest
 
     app = Path(__file__).resolve().parent.parent / "ui" / "streamlit_app.py"
     at = AppTest.from_file(str(app), default_timeout=120).run()
     assert not at.exception
-    assert len(at.tabs) == 7
     at.sidebar.selectbox[0].set_value("svb_2023").run()
     assert not at.exception
+    for page in UI_PAGES:  # 사이드바 내비게이션의 모든 페이지가 예외 없이 그려진다
+        at.switch_page(page).run()
+        assert not at.exception, page
+    at.switch_page("views/briefing.py").run()
     assert any("SVB" in m.value or "실리콘밸리" in m.value for m in at.markdown)
 
 
@@ -82,6 +89,8 @@ def test_all_ui_tables_serialize_to_arrow(monkeypatch):
     app = Path(__file__).resolve().parent.parent / "ui" / "streamlit_app.py"
     at = AppTest.from_file(str(app), default_timeout=120).run()
     at.sidebar.selectbox[0].set_value("svb_2023").run()
+    for page in UI_PAGES:
+        at.switch_page(page).run()
     assert seen and not bad, bad
 
 
@@ -109,7 +118,7 @@ def test_ui_live_mode_renders_map_with_collected_signals(monkeypatch, tmp_path):
     assert radio["시장"].value == "local"  # 기본은 로컬(대한민국)
     radio["모드"].set_value("라이브").run()
     assert not at.exception
-    at.button[0].click().run()  # 감시 탭 '수집 결과 보기'
+    next(b for b in at.button if b.label == "수집 결과 보기").click().run()  # 감시 페이지(기본)
     assert not at.exception
     assert any("판단 불가" in e.value for e in at.error)
     {r.label: r for r in at.sidebar.radio}["시장"].set_value("global").run()  # 표시 범위만 바뀌고 데이터는 그대로
@@ -121,15 +130,18 @@ def test_ui_data_input_tab_converts_sample_and_applies_portfolio():
 
     app = Path(__file__).resolve().parent.parent / "ui" / "streamlit_app.py"
     at = AppTest.from_file(str(app), default_timeout=120).run()
+    at.switch_page("views/data_input.py").run()
     box = next(s for s in at.selectbox if s.label == "또는 예시 파일")
     box.set_value("broker_balance.xlsx").run()
     assert not at.exception
     next(b for b in at.button if b.label == "이 포트폴리오로 분석").click().run()
     assert not at.exception
     assert at.session_state["uploaded_portfolio"].nodes
-    at.run()  # 지도 탭은 입력 탭보다 먼저 그려지므로 다음 실행에서 반영
-    assert any("업로드" in c.value for c in at.caption)  # 지도 탭이 업로드 포트폴리오를 쓴다
-    assert any(r.label == "포트폴리오" for r in at.radio)  # 브리핑 탭에 업로드 가정 분석 선택이 생긴다
+    at.switch_page("views/exposure_map.py").run()
+    assert not at.exception
+    assert any("업로드" in c.value for c in at.caption)  # 노출 지도가 업로드 포트폴리오를 쓴다
+    at.switch_page("views/briefing.py").run()
+    assert any(r.label == "포트폴리오" for r in at.radio)  # 브리핑에 업로드 가정 분석 선택이 생긴다
     assert at.session_state["uploaded_holdings"][0]["name"]
 
 
@@ -152,9 +164,52 @@ def test_ui_document_upload_section_sets_playbooks():
 
     app = Path(__file__).resolve().parent.parent / "ui" / "streamlit_app.py"
     at = AppTest.from_file(str(app), default_timeout=120).run()
+    at.switch_page("views/data_input.py").run()
     next(m for m in at.multiselect if m.label == "또는 예시 문서").set_value(["PB-BANK.docx"]).run()
     assert not at.exception
     next(b for b in at.button if b.label == "이 문서로 분석").click().run()
     assert not at.exception and at.session_state["uploaded_playbooks"][0].doc_id == "UP-PB-BANK"
-    at.run()
-    assert any(b.label.startswith("업로드 데이터로 분석") for b in at.button)  # 브리핑 탭에 가정 분석 버튼
+    at.switch_page("views/briefing.py").run()
+    assert any(b.label.startswith("업로드 데이터로 분석") for b in at.button)  # 브리핑에 가정 분석 버튼
+
+
+def test_feedback_row_is_not_a_citation():
+    b = services.load_saved_briefing("svb_2023")
+    services.submit_feedback(Feedback(run_id=b.run_id, doc_id="PB-BANK", label="not_fit", user_id="u1"), b)
+    conn = connect("sandbox")
+    assert conn.execute("SELECT cited FROM shadow_log").fetchone()[0] == 0
+    conn.close()
+    assert services.get_priority()["docs"][0]["cited"] == 0
+
+
+def test_refresh_reuses_result_fetched_within_debounce(monkeypatch):
+    calls = []
+    monkeypatch.setattr(services, "compute_signals", lambda rss=None, fred_cache_dir=None: calls.append(1) or
+                        {"fetched_at": services.time.time()})
+    monkeypatch.setattr(services, "_signal_cache", {})
+    services.get_signals(refresh=True)
+    services.get_signals(refresh=True)  # 더블클릭
+    assert len(calls) == 1
+    services._signal_cache["signals"]["fetched_at"] -= services.REFRESH_DEBOUNCE_SEC + 1
+    services.get_signals(refresh=True)
+    assert len(calls) == 2
+
+
+def test_run_live_briefs_strongest_cluster(monkeypatch):
+    seen = {}
+
+    class Stop(Exception):
+        pass
+
+    def fake_structure(llm, text, event_id, on):
+        seen["text"], seen["id"] = text, event_id
+        raise Stop
+
+    monkeypatch.setattr(services, "structure_event", fake_structure)
+    clusters = [{"label": "약", "event_type": "trade_policy", "n_articles": 50, "n_sources": 30, "z": 3.1},
+                {"label": "강", "event_type": "banking_stress", "n_articles": 40, "n_sources": 25, "z": 5.0}]
+    import pytest
+
+    with pytest.raises(Stop):
+        services.run_live({"news": {"clusters": clusters}, "panel": {}})
+    assert seen["text"].startswith("강") and seen["id"].endswith("banking_stress")

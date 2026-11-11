@@ -138,3 +138,57 @@ def test_report_link_follows_running_branch(monkeypatch):
     assert report_link("x") == "https://github.com/o/r/blob/dev/data/live/reports/x.md"
     monkeypatch.setenv("GITHUB_REF_NAME", "")
     assert report_link("x").startswith("https://github.com/o/r/blob/main/")
+
+
+def test_kr_flow_signal_inactive_when_stale():
+    idx = pd.bdate_range("2024-01-01", periods=80)
+    s = pd.Series(np.r_[np.zeros(79), 1e6] + np.arange(80), index=idx)
+    fresh = local.kr_flow_signal({"FOREIGN_NET_KOSPI": s}, idx[-1].date())
+    assert fresh.zscores and fresh.note == ""
+    stale = local.kr_flow_signal({"FOREIGN_NET_KOSPI": s}, (idx[-1] + pd.Timedelta(days=30)).date())
+    assert not stale.active and stale.zscores == {} and "지연" in stale.note
+
+
+def test_rss_skips_items_with_bad_pubdate():
+    xml = """<rss><channel>
+    <item><title>a</title><link>https://x.com/1</link><pubDate>Mon, 10 Nov 2026 01:00:00 GMT</pubDate></item>
+    <item><title>b</title><link>https://x.com/2</link></item>
+    <item><title>c</title><link>https://x.com/3</link><pubDate>garbage</pubDate></item>
+    <item><title>d</title><link>https://x.com/4</link><pubDate>Mon, 10 Nov 2026 02:00:00</pubDate></item>
+    </channel></rss>"""
+    http = httpx.Client(transport=httpx.MockTransport(lambda req: httpx.Response(200, text=xml)))
+    items = korea.GoogleNewsRss(http=http).search("q", datetime(2026, 11, 9, tzinfo=KST))
+    assert [i.title for i in items] == ["a", "d"] and all(i.published.tzinfo for i in items)
+
+
+def test_kr_money_alert_requires_persistence():
+    """로컬 1단계 알림은 백테스트와 같은 지속성 규칙 — 하루 반짝 활성은 알림이 아니다."""
+    from datetime import datetime
+
+    from app.agents import local
+    from app.agents.sentinel import AlertLevel, MarketSignal
+
+    m = MarketSignal(as_of=datetime(2026, 11, 11).date(), active=True, triggered=["KOSPI"], zscores={"KOSPI": -3.0})
+    one_day = local.LocalResult(datetime(2026, 11, 11), AlertLevel.WATCH, m, None, None, False, money_persistent=False)
+    assert one_day.money_today and not one_day.money_alert
+    chain = local.explain_local(one_day)
+    assert "지속 미달" in chain[-1]["원인"] and "지속 기준 미달" in chain[-1]["결과"]
+    sustained = local.LocalResult(datetime(2026, 11, 11), AlertLevel.WATCH, m, None, None, False, money_persistent=True)
+    assert sustained.money_alert and "1단계" in local.explain_local(sustained)[-1]["결과"]
+    legacy = local.LocalResult(datetime(2026, 11, 11), AlertLevel.WATCH, m, None, None, False)  # 이력 없음 → 하루 기준
+    assert legacy.money_alert
+
+
+def test_kr_money_persistent_matches_backtest_rule():
+    import pandas as pd
+
+    from app.agents import local
+    from app.backtest_kr import kr_daily, load_ecos_panel
+
+    panel = load_ecos_panel()
+    if not panel:
+        return
+    day = max(s.index[-1] for s in panel.values() if len(s))
+    expected = bool(kr_daily(panel, pd.bdate_range(end=day, periods=1))["money_alert"].fillna(False).iloc[-1])
+    assert local.kr_money_persistent(panel, day.date()) == expected
+    assert local.kr_money_persistent({}, day.date()) is False

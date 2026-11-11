@@ -64,3 +64,60 @@ def test_uploaded_playbooks_get_separate_index_and_note(monkeypatch, tmp_path):
     index, note = orch._index([r.playbook], FakeLLM())
     assert set(index.clauses) == {c.clause_id for c in r.playbook.clauses}
     assert "업로드 1개" in note
+
+
+def test_korean_filenames_get_distinct_doc_and_clause_ids():
+    a = ingest_document("제1조 유동성 위기 시 자금팀은 즉시 보고한다.\n".encode(), "위기대응.txt")
+    b = ingest_document("제1조 신용 경색 시 리스크관리팀은 한도를 점검한다.\n".encode(), "유동성계획.txt")
+    assert a.playbook.doc_id.startswith("UP-DOC-") and a.playbook.doc_id != b.playbook.doc_id
+    assert {c.clause_id for c in a.playbook.clauses}.isdisjoint(c.clause_id for c in b.playbook.clauses)
+    assert ingest_document((SAMPLES / "PB-BANK.docx").read_bytes(), "PB-BANK.docx").playbook.doc_id == "UP-PB-BANK"  # 영문 이름은 그대로
+
+
+def test_unreadable_documents_raise_readable_value_error():
+    import io
+    import zipfile
+
+    import pytest
+    from pypdf import PdfWriter
+
+    def pdf(**enc):
+        w = PdfWriter()
+        w.add_blank_page(100, 100)
+        if enc:
+            w.encrypt(**enc)
+        b = io.BytesIO()
+        w.write(b)
+        return b.getvalue()
+
+    def zip_with(name):
+        b = io.BytesIO()
+        with zipfile.ZipFile(b, "w") as z:
+            z.writestr(name, "<x/>")
+        return b.getvalue()
+
+    cases = [(b"%PDF-1.4 garbage", "a.pdf", "PDF를 읽지 못했다"), (pdf(user_password="secret"), "enc.pdf", "암호"),
+             (b"PK\x03\x04junk", "b.docx", "워드"), (zip_with("xl/workbook.xml"), "c.xlsx", "워드"),
+             (zip_with("word/document.xml"), "d.docx", "워드 문서를 읽지 못했다"),
+             (bytes(range(256)) * 4, "e.txt", "인코딩"), (b"\x00\x01\x02\x03ab" * 50, "f.txt", "텍스트 문서가 아니다")]
+    for data, name, msg in cases:
+        with pytest.raises(ValueError, match=msg):
+            ingest_document(data, name)
+    # 권한 암호만 걸린 PDF는 빈 암호로 열린다 (글자 없음 → OCR 안내)
+    r = ingest_document(pdf(user_password="", owner_password="owner"), "perm.pdf")
+    assert "OCR" in r.chain[0]["결과"]
+
+
+def test_cp949_text_document_decoded():
+    r = ingest_document("제1조 유동성 위기 시 자금팀은 즉시 점검한다.\n".encode("cp949"), "plan.txt")
+    assert r.playbook.clauses[0].text.startswith("제1조 유동성 위기")
+
+
+def test_protect_keywords_are_specific():
+    from app.ingest.documents import rule_attrs
+
+    for s in ("제3조 대응 방법은 다음과 같다.", "제4조 법인 카드 한도를 점검한다.", "제5조 보고서를 작성한다.", "제6조 확인 가능한 자금을 쓴다."):
+        assert rule_attrs(RawClause(s)).protected == "none", s
+    assert rule_attrs(RawClause("제7조 자본시장법에 따라 공시한다.")).protected == "regulatory"
+    assert rule_attrs(RawClause("제8조 감독 규정 준수 여부를 확인한다.")).protected == "regulatory"
+    assert rule_attrs(RawClause("제9조 예금보험 한도를 확인한다.")).protected == "insurance"

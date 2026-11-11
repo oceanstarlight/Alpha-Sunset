@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import threading
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -19,7 +20,13 @@ from typing import Any
 
 from app.config import get_settings
 
+try:  # POSIX 전용 — 다른 OS에서는 프로세스 내 잠금만 쓴다
+    import fcntl
+except ImportError:  # pragma: no cover
+    fcntl = None  # type: ignore[assignment]
+
 GENESIS = "0" * 64
+_LOCK = threading.Lock()  # Streamlit 스레드끼리 "마지막 줄 읽기 → 추가" 경합 방지 (프로세스 간은 flock)
 
 
 def audit_dir() -> Path:
@@ -66,12 +73,15 @@ def append(action: str, data: dict[str, Any] | None = None, actor: str = "system
     """한 줄 추가. 감사 기록 실패가 본 작업을 막지 않도록 호출부는 log()를 쓴다."""
     p = path_for(source)
     p.parent.mkdir(parents=True, exist_ok=True)
-    last = _last(p)
-    rec = {"seq": (last["seq"] + 1) if last else 1, "ts": datetime.now(timezone.utc).isoformat(), "source": source,
-           "action": action, "actor": actor, "data": data or {}, "prev_hash": last["hash"] if last else GENESIS}
-    rec["hash"] = _digest(rec)
-    with open(p, "a", encoding="utf-8") as f:
+    with _LOCK, open(p, "a", encoding="utf-8") as f:
+        if fcntl is not None:
+            fcntl.flock(f.fileno(), fcntl.LOCK_EX)  # 파일을 닫을 때 풀린다
+        last = _last(p)
+        rec = {"seq": (last["seq"] + 1) if last else 1, "ts": datetime.now(timezone.utc).isoformat(), "source": source,
+               "action": action, "actor": actor, "data": data or {}, "prev_hash": last["hash"] if last else GENESIS}
+        rec["hash"] = _digest(rec)
         f.write(json.dumps(rec, ensure_ascii=False, sort_keys=True) + "\n")
+        f.flush()
     return rec
 
 
