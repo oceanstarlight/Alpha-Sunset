@@ -327,6 +327,9 @@
   - ④ 로컬 1단계 알림에 백테스트와 같은 지속성 규칙 (끝나는 5영업일 중 2일, `local.kr_money_persistent` = `backtest_kr.kr_daily`) — README 기재 규칙과 코드 일치. 등급(ALERT·WATCH)은 그대로 하루 기준
   - ⑤ 가정 시나리오·감시가 확인하지 않은 직접 실행은 사건 확정(B)으로 치지 않음 → 최대 WATCH. 감시가 급증으로 탐지한 주제를 직접 실행하면 ALERT
 - ⏳ 결정 대기: ② 백테스트 입력의 제목·지속기간 등 사후 정보 ③ 학습 층 기록에 재생·시나리오 섞임 (둘 다 사전 등록 필요할 수 있음)
+- ✅ 동작 점검 (2026-11-11): pytest 220 passed, validate_data 통과, 로컬 앱 7페이지 × 시장·모드 전환 오류 0
+  - ✅ 수정: ALERT 시 라이브 LLM 호출로 `data/llm_cache.db`가 바뀌어 `pull --rebase`가 거부되던 문제 (collect-signals #89 실패, ALERT 리포트·알림 상태 미반영) → 커밋 후 캐시 변경을 버림 (사용자 결정 A, collect_signals·monitor_kr 둘 다)
+  - ⚠️ 외부 cron 호출(`workflow_dispatch`) 최근 3일 0건 → 정시율 collect-signals 11%·monitor-kr daily 0% (cron-job.org 설정 확인 필요, 사용자 확인 대기)
 
 ## ⏳ 추가 계획
 - 실행 위치 정리 (사용자 결정 대기): 앱만 PC / 앱+감시 모두 PC(30분 주기 로컬 실행 스크립트) 중 선택 → cron-job.org 설정 여부 (#29는 외부 cron 없이도 기존 주기로 동작하게 맞춰 둠)

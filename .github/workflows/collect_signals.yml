@@ -57,6 +57,10 @@ jobs:
           git add data/live
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
           git commit -m "chore: 일일 시그널 수집 $(date -u +%F)"
+          # 라이브 LLM 호출로 바뀐 캐시(data/llm_cache.db)는 버린다 — 백테스트 재현용 캐시는 그대로 두고,
+          # 남은 변경이 pull --rebase를 막지 않게 한다
+          git checkout -- data/llm_cache.db 2>/dev/null || true
+          git status --short --untracked-files=no  # 그래도 남은 변경이 있으면 원인 확인용
           for i in 1 2 3; do
             git pull --rebase origin "${GITHUB_REF_NAME}" && git push && exit 0
             git rebase --abort || true  # 충돌로 멈춘 rebase를 풀고 다시 시도
