@@ -78,3 +78,12 @@ def test_toggle_is_logged():
     conn = connect("sandbox")
     assert [tuple(r) for r in conn.execute("SELECT enabled FROM learner_toggle_log ORDER BY id")] == [(1,), (0,)]
     conn.close()
+
+
+def test_toggle_survives_restart():
+    learner.set_enabled(True)
+    learner._override = None  # 프로세스 재시작 흉내
+    assert learner.is_enabled() is True
+    learner.set_enabled(False)
+    learner._override = None
+    assert learner.is_enabled() is False

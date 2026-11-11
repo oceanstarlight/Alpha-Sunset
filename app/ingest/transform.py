@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
@@ -11,7 +12,7 @@ from pathlib import Path
 import pandas as pd
 
 from app.config import ROOT_DIR
-from app.ingest.mapper import MappingSpec
+from app.ingest.mapper import MappingSpec, check_units, unit_from_header
 from app.ingest.profile import ISIN_RE, SheetProfile, to_number
 from app.ingest.reader import Sheet
 from app.ingest.schema import Holding
@@ -23,7 +24,9 @@ KO_COUNTRY = {"한국": "KR", "대한민국": "KR", "국내": "KR", "미국": "U
               "네덜란드": "NL", "싱가포르": "SG", "브라질": "BR", "멕시코": "MX", "인도네시아": "ID", "아일랜드": "IE",
               "룩셈부르크": "LU", "케이맨": "KY", "케이맨제도": "KY", "스웨덴": "SE", "덴마크": "DK", "스페인": "ES", "이탈리아": "IT"}
 EN_COUNTRY_EXTRA = {"Korea (South)": "KR", "Korea": "KR", "Republic of Korea": "KR", "United States of America": "US",
-                    "USA": "US", "UK": "GB", "Cayman Islands": "KY", "European Union": "EU"}
+                    "USA": "US", "UK": "GB", "Cayman Islands": "KY", "European Union": "EU", "Korea, Republic of": "KR",
+                    "Korea, Rep.": "KR", "South Korea": "KR"}
+_EN_COUNTRY_LOWER = {k.lower(): v for k, v in EN_COUNTRY_EXTRA.items()}
 ASSET_WORDS = [  # (키워드, 자산군) — 앞에서부터 먼저 일치하는 것
     (("선물", "옵션", "스왑", "futures", "future", "option", "swap", "forward", "derivative"), "derivatives"),
     (("국채", "국고채", "treasury", "government", "sovereign", "통안"), "govt_bond"),
@@ -65,12 +68,12 @@ def norm_country(v) -> str | None:
     s = str(v).strip()
     if not s or s in ("-", "nan"):
         return None
-    if len(s) == 2 and s.isascii() and s.isalpha():
-        return s.upper()
     if s in KO_COUNTRY:
         return KO_COUNTRY[s]
-    if s in EN_COUNTRY_EXTRA:
-        return EN_COUNTRY_EXTRA[s]
+    if s.lower() in _EN_COUNTRY_LOWER:  # 별칭 먼저 ('UK' → GB) 확인한 뒤 2글자 코드로 본다
+        return _EN_COUNTRY_LOWER[s.lower()]
+    if len(s) == 2 and s.isascii() and s.isalpha():
+        return s.upper()
     from app import geo
 
     return geo.code_for_name(s)
@@ -96,19 +99,43 @@ def norm_holding_type(v) -> str:
     return "direct"
 
 
+def _failed(spec: MappingSpec, why: str, evidence: str) -> IngestResult:
+    """변환 실패 결과 (apply_spec의 '변환된 행 없음'과 같은 모양)."""
+    chain = [{"단계": "매핑 규칙", "원인": f"방식 {spec.method}, 헤더 {spec.header_row}행", "근거": evidence, "결과": "데이터 0행 변환"},
+             {"단계": "변환", "원인": why, "근거": "헤더·매핑 확인 필요", "결과": "실패"}]
+    return IngestResult(pd.DataFrame(), chain, [], spec)
+
+
+def _cell_text(v) -> str:
+    """셀 값을 글자로. 엑셀 숫자 셀의 정수(5930.0)는 '5930'으로 (종목코드 앞자리 0 복원용)."""
+    if isinstance(v, float) and v.is_integer():
+        return str(int(v))
+    return str(v).strip()
+
+
+def _norm_word(s: str) -> str:
+    return re.sub(r"\s+", "", s).lower()
+
+
 def apply_spec(sheet: Sheet, profile: SheetProfile, spec: MappingSpec) -> IngestResult:
+    if not sheet.rows:
+        return _failed(spec, "빈 파일 (읽은 행 없음)", f"시트 '{sheet.name}' 행 0개")
+    if not 1 <= spec.header_row <= len(sheet.rows):
+        return _failed(spec, f"헤더 행 번호 {spec.header_row}이 범위(1~{len(sheet.rows)}) 밖", f"시트 '{sheet.name}' 행 {len(sheet.rows)}개")
     h = spec.header_row - 1
     headers = [str(v).strip() if v is not None else "" for v in sheet.rows[h]]
     idx = {name: i for i, name in enumerate(headers)}
-    skip = [w.lower() for w in spec.skip_if_contains]
+    skip = [w.strip().lower() for w in spec.skip_if_contains]
+    skip_compact = {_norm_word(w) for w in skip if w} | {"총" + _norm_word(w) for w in skip if w}  # '합 계'·'총 합계'·'Total '
     recs, dropped = [], []
     width = len([x for x in headers if x])
     misaligned = 0
     for r_no, row in enumerate(sheet.rows[h + 1:], start=h + 2):
         if not any(v not in (None, "") for v in row):
             continue
-        first = " ".join(str(v) for v in row[:3] if v is not None).strip().lower()
-        if any(w and (first == w or first.startswith(w + " ") or first.endswith(" " + w)) for w in skip):
+        first = re.sub(r"\s+", " ", " ".join(str(v) for v in row[:3] if v is not None)).strip().lower()
+        if (any(w and (first == w or first.startswith(w + " ") or first.endswith(" " + w)) for w in skip)
+                or any(isinstance(v, str) and _norm_word(v) in skip_compact for v in row[:3])):
             dropped.append({"row": r_no, "reason": f"합계·소계 행 ('{first[:20]}')"})
             continue
         if len([v for v in row if v not in (None, "")]) and len(row) < width:
@@ -124,7 +151,7 @@ def apply_spec(sheet: Sheet, profile: SheetProfile, spec: MappingSpec) -> Ingest
                 x = to_number(v)
                 rec["weight"] = None if x is None else (x / 100 if cm.percent else x)
             else:
-                rec[cm.field] = None if v in (None, "", "-") else str(v).strip()
+                rec[cm.field] = None if v in (None, "", "-") else _cell_text(v)
         if not rec.get("name") and not rec.get("isin") and not rec.get("local_code") and not rec.get("ticker"):
             dropped.append({"row": r_no, "reason": "종목명·식별자 없음 (빈 행·주석 추정)"})
             continue
@@ -144,6 +171,8 @@ def apply_spec(sheet: Sheet, profile: SheetProfile, spec: MappingSpec) -> Ingest
 
     # 식별자: 값 형식으로 나눠 담는다 (ISIN·국내 코드가 한 열에 섞인 단말 내보내기 대응)
     from app.ingest.profile import KR_CODE_RE
+    for col in [c for c in ("isin", "local_code") if c in df]:  # 숫자 셀로 읽혀 앞자리 0이 빠진 국내 코드 (5930 → 005930)
+        df[col] = df[col].map(lambda x: x.zfill(6) if isinstance(x, str) and x.isdigit() and len(x) < 6 else x)
     for col in [c for c in ("isin", "local_code", "ticker") if c in df]:
         vals = df[col].astype(str)
         is_isin = vals.str.match(ISIN_RE.pattern) & df[col].notna()
@@ -236,18 +265,34 @@ def preset_key(profile: SheetProfile) -> str:
 def save_preset(profile: SheetProfile, spec: MappingSpec, label: str = "") -> Path:
     PRESET_DIR.mkdir(parents=True, exist_ok=True)
     path = PRESET_DIR / f"{preset_key(profile)}.json"
-    path.write_text(json.dumps({"label": label, "signature": profile.signature, "spec": spec.model_dump()},
-                               ensure_ascii=False, indent=2), encoding="utf-8")
+    path.write_text(json.dumps({"label": label, "signature": profile.signature, "profile_header_row": profile.header_row,
+                                "spec": spec.model_dump()}, ensure_ascii=False, indent=2), encoding="utf-8")
     return path
 
 
 def load_preset(profile: SheetProfile) -> MappingSpec | None:
+    """저장 양식은 헤더 이름으로만 찾는다. 헤더 행 위치와 단위(헤더 위 '단위: 억원' 등)는 파일마다 다를 수 있으므로
+    이번 파일에서 다시 판정한다 (저장값을 그대로 믿지 않는다)."""
     path = PRESET_DIR / f"{preset_key(profile)}.json"
     if not path.exists():
         return None
-    spec = MappingSpec.model_validate(json.loads(path.read_text(encoding="utf-8"))["spec"])
+    saved = json.loads(path.read_text(encoding="utf-8"))
+    spec = MappingSpec.model_validate(saved["spec"])
     spec.method = "preset"
-    return spec
+    # 헤더 행: 이번 파일의 추정 위치 + 저장 때 사람이 고친 차이(저장 당시 추정 대비)
+    offset = spec.header_row - (saved["profile_header_row"] + 1) if "profile_header_row" in saved else 0
+    header_row = profile.header_row + 1 + offset
+    if header_row != spec.header_row:
+        spec.notes.append(f"저장 양식 헤더 {spec.header_row}행 → 이번 파일 {header_row}행으로 다시 판정")
+        spec.header_row = header_row
+    by_header = {c.header: c for c in profile.columns}
+    for cm in spec.columns:  # 단위 표기가 이번 파일에서 사라졌으면 저장된 환산을 취소 (check_units는 표기가 있을 때만 교정)
+        c = by_header.get(cm.source)
+        if cm.field == "amount" and c is not None and cm.multiplier != 1.0 and "단위 표기" in cm.reason \
+                and unit_from_header(c.header, c.number_format, profile.preamble)[0] == 1.0:
+            spec.notes.append(f"amount '{cm.source}': 저장 양식 ×{cm.multiplier:g}의 단위 표기가 이번 파일에 없음 → 환산 취소")
+            cm.multiplier = 1.0
+    return check_units(spec, profile)
 
 
 # ---------- 포트폴리오로 변환 (Exposure 입력) ----------
@@ -257,7 +302,11 @@ def to_portfolio(df: pd.DataFrame, institution: str = "업로드 포트폴리오
     """국가·자산군·섹터별로 묶어 직접 보유 노드로 만든다 (비중 합 1로 정규화)."""
     from app.schemas import Portfolio, PortfolioNode
 
+    if df.empty or "holding_type" not in df:
+        raise ValueError("변환된 보유 종목이 없어 포트폴리오를 만들 수 없다. 헤더·열 매핑을 확인한다.")
     d = df[df["holding_type"].fillna("direct") != "counterparty"].copy()
+    if d.empty:
+        raise ValueError("직접·위탁 보유 종목이 없다 (거래상대방 행만 있음). 보유 형태 열을 확인한다.")
     d["weight"] = d["weight"].fillna(0).clip(lower=0)
     d["country"] = d["country"].fillna("GLOBAL")
     d["sector"] = d["sector"].fillna("")
@@ -265,7 +314,9 @@ def to_portfolio(df: pd.DataFrame, institution: str = "업로드 포트폴리오
                                                                          top=("name", "first")).reset_index()
     g = g.sort_values("weight", ascending=False)
     head, tail = g.head(max_nodes - 1), g.iloc[max_nodes - 1:]
-    total = float(g["weight"].sum()) or 1.0
+    total = float(g["weight"].sum())
+    if total <= 0:
+        raise ValueError("비중 합계가 0이다 (비중·평가금액 열이 없거나 모두 0·음수). 비중 또는 평가금액 열을 지정한다.")
     nodes = []
     for i, r in enumerate(head.itertuples(), start=1):
         nodes.append(PortfolioNode(id=f"U-{i:03d}", name=f"{r.country} {r.asset_class} {r.sector}".strip() + f" ({r.n}종목, 예: {r.top})",

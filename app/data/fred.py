@@ -22,9 +22,13 @@ def fetch_series(series_id: str, cache_dir: Path = CACHE_DIR) -> pd.Series:
     """FRED에서 전체 이력을 내려받아 캐시에 저장한다."""
     resp = httpx.get(FRED_CSV_URL, params={"id": series_id}, timeout=20, follow_redirects=True)
     resp.raise_for_status()
+    # 먼저 파싱해 본다: 오류 페이지 등 잘못된 응답이 기존의 정상 캐시를 덮어쓰지 않게
+    s = _parse(io.StringIO(resp.text), series_id)
+    if s.empty:
+        raise ValueError(f"FRED {series_id}: 응답에 관측값이 없다")
     cache_dir.mkdir(parents=True, exist_ok=True)
     _cache_path(series_id, cache_dir).write_text(resp.text, encoding="utf-8")
-    return _parse(io.StringIO(resp.text), series_id)
+    return s
 
 
 def load_series(series_id: str, cache_dir: Path = CACHE_DIR, refresh: bool = False) -> pd.Series:

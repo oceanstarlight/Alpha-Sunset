@@ -23,7 +23,18 @@ MODE_DB: dict[str, DbMode] = {"live": "live", "backtest": "sandbox", "sim": "san
 
 
 def is_enabled() -> bool:
-    return get_settings().learner_enabled if _override is None else _override
+    """프로세스 내 설정 → 없으면 learner_toggle_log(sandbox) 마지막 기록 → 없으면 설정 기본값. 재시작 후에도 토글 유지."""
+    if _override is not None:
+        return _override
+    try:
+        conn = connect("sandbox")
+        try:
+            row = conn.execute("SELECT enabled FROM learner_toggle_log ORDER BY id DESC LIMIT 1").fetchone()
+        finally:
+            conn.close()
+    except Exception:  # DB 문제로 화면이 깨지지 않게 기본값 사용
+        row = None
+    return bool(row["enabled"]) if row is not None else get_settings().learner_enabled
 
 
 def set_enabled(enabled: bool, db: DbMode = "sandbox") -> None:

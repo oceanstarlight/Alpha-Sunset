@@ -98,11 +98,15 @@ def record_trace(ctx: RunContext, tool: str, args: dict, output: Any) -> None:
 # ---------- 도구 ----------
 
 
-def tool_get_market_signals(ctx: RunContext, **_) -> dict:
+def _compute_signals(ctx: RunContext) -> None:
     view = sentinel_agent.AsOfPanel(ctx.panel, as_of=None if ctx.live else ctx.as_of)
     ctx.market = sentinel_agent.market_signal(view, ctx.as_of)
     ctx.flow = sentinel_agent.flow_signal(view, ctx.as_of) if sentinel_agent.flow_enabled() else None
     ctx.news = sentinel_agent.card_news_signal(ctx.events, ctx.as_of)
+
+
+def tool_get_market_signals(ctx: RunContext, **_) -> dict:
+    _compute_signals(ctx)
     level = sentinel_agent.grade(ctx.market, ctx.news, ctx.flow)
     return {"as_of": ctx.as_of.isoformat(), "level": level.value, "market_active": ctx.market.active,
             "triggered_series": ctx.market.triggered,
@@ -227,6 +231,8 @@ def tool_build_briefing(ctx: RunContext, **_) -> dict:
     if missing:
         raise ToolError(f"build_briefing 거부: {', '.join(missing)} 미실행")
     event = _require_event(ctx)
+    if ctx.market is None or ctx.news is None:  # LLM이 get_market_signals를 건너뛰어도 등급이 조용히 NONE이 되지 않게
+        _compute_signals(ctx)
     level = sentinel_agent.grade(ctx.market, ctx.news, ctx.flow) if ctx.market and ctx.news else AlertLevel.NONE
     actions = clean_actions(ctx.llm, aggregate_actions(ctx.match, ctx.index.clauses))
     evidence = [j.clause_id for f in ctx.match.doc_fits for j in f.judgments if j.evidence_quote] + event.sources
@@ -302,7 +308,11 @@ def run_agent_loop(ctx: RunContext, task: str) -> None:
     tools = _tool_declarations()
     contents = [types.Content(role="user", parts=[types.Part(text=task)])]
     for _ in range(max_steps):
-        reply = ctx.llm.chat(contents, purpose="orchestrator", tools=tools, system=ORCH_SYSTEM)
+        try:
+            reply = ctx.llm.chat(contents, purpose="orchestrator", tools=tools, system=ORCH_SYSTEM)
+        except LLMUnavailableError as e:  # 키 없음·재시도 소진 → orchestrate가 정해진 순서로 마저 실행
+            record_trace(ctx, "llm_unavailable", {}, {"error": str(e), "executed": list(ctx.executed)})
+            return
         calls = [p.function_call for p in (reply.parts or []) if p.function_call]
         if not calls:
             break

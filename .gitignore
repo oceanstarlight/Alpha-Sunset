@@ -8,6 +8,11 @@ __pycache__/
 # 런타임 데이터 (llm_cache.db 등 재현용 데이터는 커밋 대상)
 data/live.db
 data/sandbox.db
+*.db-journal
+*.db-wal
+*.db-shm
+# 업로드 양식 저장 (사용자별 런타임 데이터)
+data/ingest/presets/
 data/chroma/
 data/chroma_ablation/
 data/chroma_uploaded/

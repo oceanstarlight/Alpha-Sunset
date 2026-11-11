@@ -128,7 +128,12 @@ class GoogleNewsRss:
                 time.sleep(2)
         out = []
         for item in ET.fromstring(resp.content).iter("item"):
-            published = email.utils.parsedate_to_datetime(item.findtext("pubDate"))
+            try:  # pubDate 누락·형식 오류 기사는 건너뛴다 (한 기사 때문에 주제 전체를 잃지 않게)
+                published = email.utils.parsedate_to_datetime(item.findtext("pubDate") or "")
+            except (TypeError, ValueError, IndexError):
+                continue
+            if published.tzinfo is None:  # 시간대 없는 날짜는 UTC로 본다
+                published = published.replace(tzinfo=timezone.utc)
             if published < since:
                 continue
             src = item.find("source")

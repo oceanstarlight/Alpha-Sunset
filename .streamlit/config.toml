@@ -1,5 +1,55 @@
 [server]
 headless = true
+# ui/static/ 폰트(Pretendard, OFL)를 앱에서 직접 제공 — 외부 CDN 없이 동작
+enableStaticServing = true
 
 [browser]
 gatherUsageStats = false
+
+[client]
+# 우측 상단 Deploy·개발 메뉴 숨김 (보는 사람용 화면)
+toolbarMode = "minimal"
+
+# ---------- 테마: 딥 네이비 + 뉴트럴 ----------
+# 강조색은 네이비 하나. 빨강·주황·초록은 상태 의미(ALERT·WATCH·정상)에만 쓴다.
+# app/dashboard.py 그래프 팔레트와 값을 맞춘다.
+[theme]
+base = "light"
+primaryColor = "#1f3a5f"
+backgroundColor = "#f6f6f3"
+secondaryBackgroundColor = "#eeede8"
+textColor = "#1b1f24"
+borderColor = "#e2e0d9"
+dataframeBorderColor = "#e8e6df"
+dataframeHeaderBackgroundColor = "#f3f2ee"
+linkColor = "#1f4e89"
+linkUnderline = false
+showWidgetBorder = true
+showSidebarBorder = true
+baseRadius = "6px"
+buttonRadius = "6px"
+baseFontSize = 14
+font = "Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif"
+headingFont = "Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif"
+headingFontWeights = [700, 650, 600, 600, 600, 600]
+headingFontSizes = ["1.625rem", "1.25rem", "1.0625rem", "0.9375rem", "0.875rem", "0.8125rem"]
+metricValueFontSize = "1.5rem"
+metricValueFontWeight = 600
+redColor = "#c03a32"
+orangeColor = "#c27a14"
+yellowColor = "#b8901a"
+greenColor = "#2f7d4f"
+blueColor = "#1f4e89"
+violetColor = "#6b5aa6"
+grayColor = "#77756e"
+chartCategoricalColors = ["#1f4e89", "#9db8d9", "#b98a52", "#2f7d4f", "#6b5aa6", "#cfcdc5"]
+
+[[theme.fontFaces]]
+family = "Pretendard"
+url = "app/static/PretendardVariable.woff2"
+weight = "45 920"
+style = "normal"
+
+[theme.sidebar]
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f3f2ee"

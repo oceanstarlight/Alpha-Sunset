@@ -17,8 +17,11 @@ from app.ingest.schema import FIELDS
 Field = Literal["name", "isin", "ticker", "local_code", "amount", "currency", "weight", "asset_class", "country",
                 "sector", "holding_type", "manager"]
 
-UNIT_WORDS = [("조원", 1e12), ("억원", 1e8), ("억 원", 1e8), ("백만원", 1e6), ("백만 원", 1e6), ("천원", 1e3),
-              ("천 원", 1e3), ("mn", 1e6), ("million", 1e6), ("thousand", 1e3), ("bn", 1e9)]
+# 공백을 지우고 찾는다. 긴 단위부터 (예: '십억원'이 '억원'으로, '백만원'이 '만원'으로 잡히지 않게)
+UNIT_WORDS = sorted([("조원", 1e12), ("천억원", 1e11), ("십억원", 1e9), ("억원", 1e8), ("천만원", 1e7), ("백만원", 1e6),
+                     ("만원", 1e4), ("천원", 1e3), ("billion", 1e9), ("million", 1e6), ("thousand", 1e3), ("'000", 1e3)],
+                    key=lambda w: -len(w[0]))
+TOKEN_UNITS = [("bn", 1e9), ("mn", 1e6)]  # 짧은 영문 약어는 독립 단어일 때만 (예: 'Column'의 mn 제외)
 
 
 TEXT_FIELDS = {"name", "asset_class", "country", "sector", "holding_type", "manager", "currency"}
@@ -48,9 +51,12 @@ def _norm(s: str) -> str:
 
 
 def _unit_word(text: str) -> tuple[float, str] | None:
-    t = text.replace(" ", "").lower()
+    t = re.sub(r"\s+", "", text).lower()
     for word, mult in UNIT_WORDS:
-        if word.replace(" ", "") in t:
+        if word in t:
+            return mult, word
+    for word, mult in TOKEN_UNITS:
+        if re.search(rf"(?<![a-z]){word}(?![a-z])", text.lower()):
             return mult, word
     return None
 

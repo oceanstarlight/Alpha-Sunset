@@ -13,6 +13,7 @@ from app.agents import orchestrator, sentinel
 from app.agents.matcher import structure_event
 from app.config import ROOT_DIR, get_settings
 from app.data.fred import load_panel
+from app.data.korea import KST
 from app.db import DbMode, connect
 from app.llm.client import LLMClient
 from app.schemas import Briefing, Event, Feedback
@@ -20,6 +21,7 @@ from app.schemas import Briefing, Event, Feedback
 BACKTEST_DIR = ROOT_DIR / "data" / "backtest"
 LIVE_SIGNALS_PATH = ROOT_DIR / "data" / "live" / "signals_latest.json"
 SIGNAL_TTL_SEC = 3600
+REFRESH_DEBOUNCE_SEC = 60  # 새로고침 연타(더블클릭)는 직전 조회 결과를 재사용
 
 _signal_cache: dict[str, Any] = {}
 
@@ -46,6 +48,11 @@ def _money_alert_now(panel: dict, as_of) -> bool:
     return bool(money_alert_days(panel, pd.DatetimeIndex([pd.Timestamp(as_of)])).iloc[0])
 
 
+def _today_kst() -> date:
+    """서버(Streamlit Cloud·Actions)는 UTC라 date.today()가 KST 아침(00~09시)에 전날이 된다 → KST 기준 날짜."""
+    return datetime.now(KST).date()
+
+
 def compute_signals(rss: Any = None, fred_cache_dir: Path | None = None, now: datetime | None = None) -> dict:
     """최신 시그널 A/B/C와 등급. B는 Google 뉴스 RSS 주제별 기사 수 (기준선은 수집기 누적 이력)."""
     try:
@@ -54,16 +61,26 @@ def compute_signals(rss: Any = None, fred_cache_dir: Path | None = None, now: da
         fred_error = None
     except Exception as e:  # 네트워크 실패 시 커밋된 캐시로 계산
         panel, fred_error = market_panel(refresh=False), str(e)
-    today = date.today()
-    last_obs = max(s.index[-1] for s in panel.values()).date()
+    today = _today_kst()
+    # 빈 시리즈(조회 실패·관측 없음)는 건너뛴다. 전부 비면 오늘 기준 (z 없음 → 비활성)
+    last_obs = max((s.index[-1] for s in panel.values() if len(s)), default=None)
+    last_obs = last_obs.date() if last_obs is not None else today
     market = sentinel.market_signal(sentinel.AsOfPanel(panel), last_obs)
     flow = sentinel.flow_signal(sentinel.AsOfPanel(panel), today) if sentinel.flow_enabled() else None
+    own_http = None
     if rss is None:
+        import httpx
+
         from app.data.korea import GoogleNewsRss
 
-        rss = GoogleNewsRss(http=__import__("httpx").Client(timeout=10, follow_redirects=True), lang="en-US", region="US")
+        own_http = httpx.Client(timeout=10, follow_redirects=True)
+        rss = GoogleNewsRss(http=own_http, lang="en-US", region="US")
     now = now or datetime.now(timezone.utc)
-    articles, legacy, fetch_errors = sentinel.fetch_rss_topics(rss, now)
+    try:
+        articles, legacy, fetch_errors = sentinel.fetch_rss_topics(rss, now)
+    finally:
+        if own_http is not None:  # 직접 만든 연결 풀은 닫는다 (새로고침마다 소켓 누수 방지)
+            own_http.close()
     news, rows, obs = sentinel.rss_news_signal(articles, read_global_history(), now, fetch_errors, legacy)
     level = sentinel.grade(market, news, flow)
     chain = sentinel.explain(sentinel.SentinelResult(as_of=last_obs, level=level, market=market, news=news, flow=flow))
@@ -109,13 +126,15 @@ def list_local_reports() -> list[Path]:
 
 
 def get_signals(refresh: bool = False, rss: Any = None) -> dict:
-    """refresh=False면 일일 수집 결과를 쓰고, 없거나 refresh=True면 직접 조회한다 (1시간 캐시)."""
+    """refresh=False면 일일 수집 결과를 쓰고, 없거나 refresh=True면 직접 조회한다 (1시간 캐시).
+
+    refresh=True여도 60초 안에 직접 조회한 결과가 있으면 재사용한다 (새로고침 연타 방지)."""
     if not refresh:
         collected = load_collected_signals()
         if collected:
             return collected
     cached = _signal_cache.get("signals")
-    if cached and not refresh and time.time() - cached["fetched_at"] < SIGNAL_TTL_SEC:
+    if cached and time.time() - cached["fetched_at"] < (REFRESH_DEBOUNCE_SEC if refresh else SIGNAL_TTL_SEC):
         return cached
     import tempfile
 
@@ -133,10 +152,12 @@ def run_live(signals: dict | None = None, portfolio=None, holdings: list[dict] |
     clusters = signals["news"]["clusters"]
     if not clusters:
         return None
-    top = clusters[0]
+    # 설정 순서가 아니라 가장 강한 군집 (z 최대, 같으면 언론사 수) — 동률이면 앞선 군집
+    top = max(clusters, key=lambda c: (c["z"] if c.get("z") is not None else float("-inf"), c.get("n_sources") or 0))
     llm = LLMClient(db_mode="live")
     text = f"{top['label']}\n(뉴스 군집: {top['event_type']}, 기사 {top['n_articles']}건, 출처 {top['n_sources']}곳)"
-    event = structure_event(llm, text, f"live_{date.today():%Y%m%d}_{top['event_type']}", date.today())
+    today = _today_kst()
+    event = structure_event(llm, text, f"live_{today:%Y%m%d}_{top['event_type']}", today)
     b = orchestrator.run_live_briefing(event, signals["panel"], llm, portfolio=portfolio, holdings=holdings,
                                        playbooks=playbooks)
     audit_briefing(b, "live", llm.provider, portfolio, playbooks, source=audit_source)
@@ -151,9 +172,9 @@ def scenario_event(event_type: str, description: str, title: str = "", channels:
     from app.schemas import Channel, Duration, EventType
 
     etype = EventType(event_type)
-    on = on or date.today()
+    on = on or _today_kst()
     desc = description.strip()
-    return Event(id=f"scenario_{datetime.now():%Y%m%d_%H%M%S}_{etype.value}", date=on,
+    return Event(id=f"scenario_{datetime.now(KST):%Y%m%d_%H%M%S}_{etype.value}", date=on,
                  title=title.strip() or (desc.splitlines()[0][:80] if desc else etype.value), summary=desc or etype.value,
                  type=etype, channels=[Channel(c) for c in channels] if channels else RULE_CHANNELS[etype],
                  regions=regions or [], entities=entities or [], duration=Duration(duration), severity=severity,
@@ -186,7 +207,9 @@ def ondemand_topics(signals: dict) -> tuple[list[str], str | None, str]:
     obs = news.get("observations") or {}
     topics = list(obs)
     if news.get("clusters"):
-        top = news["clusters"][0]["event_type"]
+        # run_live와 같은 기준: z가 가장 높은 군집, 같으면 언론사 수
+        top = max(news["clusters"], key=lambda c: (c.get("z") if c.get("z") is not None else float("-inf"),
+                                                    c.get("n_sources") or 0))["event_type"]
         return topics, top, "기사량 급증으로 탐지된 사건"
     scored = [(t, o["z"]) for t, o in obs.items() if o.get("z") is not None]
     if scored:
@@ -218,8 +241,8 @@ def ondemand_event(signals: dict, topic: str, local: bool, on: date | None = Non
         top = sorted(((k, v) for k, v in z.items() if v is not None), key=lambda kv: -abs(kv[1]))[:3]
         lines.append("시장 z: " + ", ".join(f"{k} {v:+.2f}" for k, v in top))
     etype = EventType(topic) if topic in EventType._value2member_map_ else EventType.other
-    on = on or date.today()
-    return Event(id=f"ondemand_{datetime.now():%Y%m%d_%H%M%S}_{etype.value}", date=on,
+    on = on or _today_kst()
+    return Event(id=f"ondemand_{datetime.now(KST):%Y%m%d_%H%M%S}_{etype.value}", date=on,
                  title=f"현재 신호 점검 — {etype.value} ({'대한민국' if local else '글로벌'}, {on})", summary="\n".join(lines),
                  type=etype, channels=RULE_CHANNELS[etype], regions=["KR"] if local else ["GLOBAL"],
                  duration=Duration.weeks, severity={"ALERT": 4, "WATCH": 3}.get(level, 2),
@@ -266,8 +289,10 @@ def load_saved_briefing(event_id: str) -> Briefing | None:
 def _find_mode(run_id: str) -> DbMode | None:
     for mode in ("live", "sandbox"):
         conn = connect(mode)
-        hit = conn.execute("SELECT 1 FROM briefings WHERE run_id = ?", (run_id,)).fetchone()
-        conn.close()
+        try:
+            hit = conn.execute("SELECT 1 FROM briefings WHERE run_id = ?", (run_id,)).fetchone()
+        finally:
+            conn.close()
         if hit:
             return mode
     return None
@@ -292,16 +317,19 @@ def submit_feedback(fb: Feedback, briefing: Briefing | None = None) -> None:
     briefing = briefing or orchestrator.get_briefing(fb.run_id, mode)
     rank = next((i for i, f in enumerate(briefing.match.doc_fits, start=1) if f.doc_id == fb.doc_id), None) if briefing else None
     conn = connect(mode)
-    with conn:
-        conn.execute("INSERT INTO feedback (run_id, doc_id, label, user_id, ts) VALUES (?, ?, ?, ?, ?)",
-                     (fb.run_id, fb.doc_id, fb.label, fb.user_id, fb.ts.isoformat()))
-        if briefing:
-            conn.execute(
-                "INSERT INTO shadow_log (event_id, doc_id, event_type, cited, rank, feedback, mode, ts) VALUES (?, ?, ?, 1, ?, ?, ?, ?)",
-                (briefing.event.id, fb.doc_id, briefing.event.type.value, rank, fb.label,
-                 "live" if mode == "live" else "backtest", fb.ts.isoformat()),
-            )
-    conn.close()
+    try:
+        with conn:
+            conn.execute("INSERT INTO feedback (run_id, doc_id, label, user_id, ts) VALUES (?, ?, ?, ?, ?)",
+                         (fb.run_id, fb.doc_id, fb.label, fb.user_id, fb.ts.isoformat()))
+            if briefing:
+                # cited=0: 피드백 행은 인용이 아니다 (인용은 브리핑 생성 시 기록). not_fit이 인용 수·우선순위를 올리지 않게
+                conn.execute(
+                    "INSERT INTO shadow_log (event_id, doc_id, event_type, cited, rank, feedback, mode, ts) VALUES (?, ?, ?, 0, ?, ?, ?, ?)",
+                    (briefing.event.id, fb.doc_id, briefing.event.type.value, rank, fb.label,
+                     "live" if mode == "live" else "backtest", fb.ts.isoformat()),
+                )
+    finally:
+        conn.close()
     audit.log("feedback", {"run_id": fb.run_id, "doc_id": fb.doc_id, "label": fb.label, "rank": rank}, actor=fb.user_id)
 
 
@@ -314,10 +342,12 @@ def learner_enabled() -> bool:
 def get_priority(mode: DbMode = "sandbox") -> dict:
     """문서별 인용·피드백 집계 (shadow_log)와 학습 층 상태."""
     conn = connect(mode)
-    rows = [dict(r) for r in conn.execute(
-        "SELECT doc_id, SUM(cited) AS cited, SUM(feedback = 'useful') AS useful, SUM(feedback = 'not_fit') AS not_fit, "
-        "COUNT(DISTINCT event_id) AS events FROM shadow_log GROUP BY doc_id ORDER BY cited DESC, doc_id")]
-    conn.close()
+    try:
+        rows = [dict(r) for r in conn.execute(
+            "SELECT doc_id, SUM(cited) AS cited, SUM(feedback = 'useful') AS useful, SUM(feedback = 'not_fit') AS not_fit, "
+            "COUNT(DISTINCT event_id) AS events FROM shadow_log GROUP BY doc_id ORDER BY cited DESC, doc_id")]
+    finally:
+        conn.close()
     return {"learner_enabled": learner_enabled(), "engine": "plans.md 5.4 (app/agents/learner.py)", "docs": rows}
 
 
@@ -354,13 +384,16 @@ def record_approval(briefing: Briefing, decision: str, user_id: str, note: str =
     """브리핑 승인·반려 (사람의 최종 결정)를 trace에 남긴다."""
     mode: DbMode = _find_mode(briefing.run_id) or "sandbox"
     conn = connect(mode)
-    with conn:
-        step = conn.execute("SELECT COALESCE(MAX(step), 0) + 1 FROM traces WHERE trace_id = ?", (briefing.trace_id,)).fetchone()[0]
-        conn.execute(
-            "INSERT INTO traces (trace_id, step, tool, input_summary, output_summary, ts) VALUES (?, ?, 'human_approval', ?, ?, ?)",
-            (briefing.trace_id, step, json.dumps({"user_id": user_id, "note": note}, ensure_ascii=False), decision,
-             datetime.now(timezone.utc).isoformat()),
-        )
-    conn.close()
+    try:
+        with conn:  # MAX(step)+1 → INSERT 사이에 다른 쓰기가 끼어 같은 step이 나오지 않게 쓰기 잠금을 먼저 잡는다
+            conn.execute("BEGIN IMMEDIATE")
+            step = conn.execute("SELECT COALESCE(MAX(step), 0) + 1 FROM traces WHERE trace_id = ?", (briefing.trace_id,)).fetchone()[0]
+            conn.execute(
+                "INSERT INTO traces (trace_id, step, tool, input_summary, output_summary, ts) VALUES (?, ?, 'human_approval', ?, ?, ?)",
+                (briefing.trace_id, step, json.dumps({"user_id": user_id, "note": note}, ensure_ascii=False), decision,
+                 datetime.now(timezone.utc).isoformat()),
+            )
+    finally:
+        conn.close()
     audit.log("approval", {"run_id": briefing.run_id, "trace_id": briefing.trace_id, "event_id": briefing.event.id,
                            "decision": decision, "note": note}, actor=user_id)

@@ -81,6 +81,11 @@ def kr_flow_signal(panel: dict[str, pd.Series], as_of: date) -> sentinel.FlowSig
     if s is None:
         return None
     s = s.loc[: pd.Timestamp(as_of)]
+    stale_days = _kr_market_cfg()["stale_days"]  # 시장 신호(latest_zscore)와 같은 지연 기준
+    if s.empty or (pd.Timestamp(as_of) - s.index[-1]).days > stale_days:
+        last = s.index[-1].date() if not s.empty else None
+        return sentinel.FlowSignal(as_of=as_of, zscores={}, triggered=[], active=False,
+                                   note=f"마지막 관측 {last or '없음'} — {stale_days}일 넘게 지연되어 판단 제외")
     zscores = {}
     for sid, x in (("FOREIGN_NET_KOSPI", s), ("FOREIGN_NET_5D", s.rolling(fcfg["cumulative_days"]).sum().dropna())):
         hist = x.iloc[-(gcfg["lookback_obs"] + 1): -1]
@@ -312,7 +317,7 @@ def explain_local(r: LocalResult) -> list[dict[str, str]]:
                       "결과": "활성" if m.active else "비활성"})
     if r.kr_flow is not None:
         f = r.kr_flow
-        chain.append({"단계": "외국인 자금(C_kr)", "원인": _z(f.zscores, f.triggered) or "임계 초과 없음",
+        chain.append({"단계": "외국인 자금(C_kr)", "원인": _z(f.zscores, f.triggered) or f.note or "임계 초과 없음",
                       "근거": f"외국인 순매수 수준 z, 규칙 |z| ≥ {_cfg()['thresholds']['flow_z']} ({RULE})",
                       "결과": "활성" if f.active else "비활성"})
     if r.kr_news is not None:

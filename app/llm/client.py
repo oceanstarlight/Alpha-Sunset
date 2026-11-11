@@ -27,6 +27,8 @@ T = TypeVar("T", bound=BaseModel)
 
 
 RETRYABLE_CODES = {429, 500, 503}
+MAX_RETRY_WAIT_S = 90.0  # 429 "retry in Xs" 안내가 이보다 길면 기다리지 않고 포기 (UI 스레드 장시간 정지 방지)
+EMBED_BATCH = 100  # Gemini batchEmbedContents 한 번에 최대 100개
 PROVIDERS = ("gemini", "openai_compatible", "rule")
 HASH_DIM = 256
 
@@ -91,13 +93,19 @@ class LLMClient:
             self._last_call = time.monotonic()
             try:
                 return fn(**kwargs)
+            except (LLMUnavailableError, LLMResponseError):
+                raise
             except Exception as e:
                 code = getattr(e, "code", None)
                 if code not in RETRYABLE_CODES or attempt == self.rate_limit_retries:
-                    raise
+                    # SDK·httpx 원본 예외는 호출부 폴백(LLMUnavailableError만 잡음)을 우회하므로 감싼다
+                    raise LLMUnavailableError(f"LLM 호출 실패 ({type(e).__name__}): {e}") from e
                 m = re.search(r"retry in ([\d.]+)s", str(e))
                 # 429는 서버 안내 시간, 503·500(일시 과부하)은 점증 대기
-                time.sleep(float(m.group(1)) + 1 if m else 15 * (attempt + 1))
+                delay = float(m.group(1)) + 1 if m else 15 * (attempt + 1)
+                if delay > MAX_RETRY_WAIT_S:
+                    raise LLMUnavailableError(f"LLM 재시도 대기 {delay:.0f}s가 상한 {MAX_RETRY_WAIT_S:.0f}s 초과: {e}") from e
+                time.sleep(delay)
 
     def _log(self, model: str, purpose: str, cache_hit: bool, in_tokens: int = 0, out_tokens: int = 0) -> None:
         conn = connect(self.db_mode)
@@ -223,11 +231,12 @@ class LLMClient:
                 results[i] = v
                 self.cache.set(keys[i], "embed", self.embed_model, json.dumps(v))
             return results  # type: ignore[return-value]
-        if miss_idx:
-            resp = self._call(self.sdk.models.embed_content, model=self.embed_model, contents=[texts[i] for i in miss_idx])
+        for start in range(0, len(miss_idx), EMBED_BATCH):  # 배치 상한(100)씩 나눠 호출, 청크마다 바로 캐시
+            chunk = miss_idx[start:start + EMBED_BATCH]
+            resp = self._call(self.sdk.models.embed_content, model=self.embed_model, contents=[texts[i] for i in chunk])
             # 임베딩 API는 출력 토큰이 없고 입력 토큰 수를 응답에 주지 않는다
             self._log(self.embed_model, purpose, cache_hit=False)
-            for i, emb in zip(miss_idx, resp.embeddings):
+            for i, emb in zip(chunk, resp.embeddings):
                 results[i] = list(emb.values)
                 self.cache.set(keys[i], "embed", self.embed_model, json.dumps(results[i]))
         return results  # type: ignore[return-value]

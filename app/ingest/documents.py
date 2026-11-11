@@ -8,8 +8,10 @@ LLM이 없으면 규칙만으로 조항 분해·담당·보호 후보를 채우�
 
 from __future__ import annotations
 
+import hashlib
 import io
 import re
+import unicodedata
 from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
@@ -32,8 +34,12 @@ CLAUSE_START = re.compile(
 )
 HEADING_HINT = re.compile(r"^(?:제\s*\d+\s*장|[IVX]+\.|#+\s)")
 ROLE_RE = re.compile(r"(?:담당\s*[:：]\s*)?([가-힣A-Za-z]{1,12}(?:팀|부서|본부|위원회|센터))")
-PROTECT_WORDS = {"regulatory": ["감독", "보고", "법", "규정", "금융위", "금감원", "공시", "인가", "신고"],
-                 "insurance": ["보험", "부보", "예금보험", "보상"]}
+# 보호 후보 키워드 — 구체적인 법령·기관·의무 표현만 (예전의 '법'·'보고'는 '방법'·'법인'·'보고서'까지 잡았다)
+# 띄어쓰기가 있는 표현만 공백을 무시하고 찾는다 (전체를 붙여 찾으면 '확인 가능'이 '인가'로 잡힌다)
+PROTECT_WORDS = {"regulatory": ["법령", "법규", "감독규정", "감독기관", "감독당국", "금융위원회", "금융위", "금융감독원", "금감원",
+                                "자본시장법", "은행법", "보험업법", "규정 준수", "공시", "인허가", "당국에 신고"],
+                 "insurance": ["예금보험", "예금자보호", "보험"]}
+TEXT_ENCODINGS = ("utf-8-sig", "cp949")  # 텍스트 문서 (reader.ENCODINGS의 latin-1은 무엇이든 읽어 깨진 글자를 숨기므로 쓰지 않는다)
 
 
 @dataclass
@@ -53,31 +59,85 @@ class DocParse:
 # ---------- 읽기 ----------
 
 
+def _is_docx(data: bytes) -> bool:
+    """워드 문서인지 (xlsx·hwpx 같은 다른 zip은 제외)."""
+    import zipfile
+
+    try:
+        with zipfile.ZipFile(io.BytesIO(data)) as z:
+            return "word/document.xml" in z.namelist()
+    except zipfile.BadZipFile:
+        return False
+
+
 def read_document(data: bytes, filename: str) -> DocParse:
+    """읽지 못하는 파일(손상·암호·지원하지 않는 형식)은 ValueError(한국어 설명)로 알린다."""
     name = filename.lower()
     if name.endswith(".pdf") or data[:4] == b"%PDF":
-        from pypdf import PdfReader
-
-        paras = []
-        for i, page in enumerate(PdfReader(io.BytesIO(data)).pages, start=1):
-            paras += [(line, "", f"p.{i}") for line in _pdf_lines(page.extract_text() or "")]
-        notes = [] if paras else ["PDF에서 글자를 읽지 못함 (스캔 이미지일 수 있음 → OCR 필요)"]
-        return DocParse(Path(filename).stem, paras, notes)
+        return _read_pdf(data, filename)
     if name.endswith(".docx") or data[:2] == b"PK":
-        from docx import Document
+        if not _is_docx(data):
+            raise ValueError(f"'{filename}'은 워드(.docx) 문서가 아니다 (손상되었거나 xlsx·hwpx 등 다른 형식). PDF·DOCX·TXT로 올린다.")
+        try:
+            return _read_docx(data, filename)
+        except Exception as e:
+            raise ValueError(f"'{filename}' 워드 문서를 읽지 못했다 (손상 의심: {type(e).__name__}).") from e
+    return _read_text(data, filename)
 
-        doc = Document(io.BytesIO(data))
-        paras = [(p.text, p.style.name if p.style is not None else "", f"문단 {i}") for i, p in enumerate(doc.paragraphs, 1)
-                 if p.text.strip()]
-        for t_i, table in enumerate(doc.tables, 1):  # 표 안의 조항도 읽는다
-            for r_i, row in enumerate(table.rows, 1):
-                cells = [c.text.strip() for c in row.cells if c.text.strip()]
-                if cells:
-                    paras.append((" | ".join(dict.fromkeys(cells)), "Table", f"표{t_i} 행{r_i}"))
-        title = doc.core_properties.title or Path(filename).stem
-        return DocParse(title, paras)
-    text = data.decode("utf-8-sig", errors="replace")
+
+def _read_pdf(data: bytes, filename: str) -> DocParse:
+    from pypdf import PdfReader
+
+    try:
+        reader = PdfReader(io.BytesIO(data))
+        locked = reader.is_encrypted and not reader.decrypt("")  # 권한 암호만 걸린 PDF는 빈 암호로 열린다
+        pages = [] if locked else list(reader.pages)
+    except Exception as e:
+        raise ValueError(f"'{filename}' PDF를 읽지 못했다 (손상되었거나 암호화: {type(e).__name__}).") from e
+    if locked:
+        raise ValueError(f"'{filename}'은 암호가 걸린 PDF다. 암호를 풀어 저장한 뒤 올린다.")
+    paras, bad = [], []
+    for i, page in enumerate(pages, start=1):
+        try:
+            text = page.extract_text() or ""
+        except Exception:  # 한 쪽이 깨져도 나머지 쪽은 읽는다
+            bad.append(i)
+            continue
+        paras += [(line, "", f"p.{i}") for line in _pdf_lines(text)]
+    notes = [] if paras else ["PDF에서 글자를 읽지 못함 (스캔 이미지일 수 있음 → OCR 필요)"]
+    if bad:
+        notes.append(f"읽지 못한 쪽 {len(bad)}개 (p.{', p.'.join(map(str, bad[:5]))})")
+    return DocParse(Path(filename).stem, paras, notes)
+
+
+def _read_text(data: bytes, filename: str) -> DocParse:
+    for enc in TEXT_ENCODINGS:
+        try:
+            text = data.decode(enc)
+            break
+        except UnicodeDecodeError:
+            continue
+    else:
+        raise ValueError(f"'{filename}'의 글자 인코딩을 읽지 못했다 (UTF-8·CP949가 아님). PDF·DOCX·TXT(UTF-8)로 올린다.")
+    junk = sum(ch == "\ufffd" or (unicodedata.category(ch) == "Cc" and ch not in "\t\n\r\f") for ch in text)
+    if text and junk / len(text) > 0.1:
+        raise ValueError(f"'{filename}'은 텍스트 문서가 아니다 (깨진 글자·제어 문자 {junk / len(text):.0%}). PDF·DOCX·TXT로 올린다.")
     return DocParse(Path(filename).stem, [(l.rstrip(), "", f"줄 {i}") for i, l in enumerate(text.splitlines(), 1) if l.strip()])
+
+
+def _read_docx(data: bytes, filename: str) -> DocParse:
+    from docx import Document
+
+    doc = Document(io.BytesIO(data))
+    paras = [(p.text, p.style.name if p.style is not None else "", f"문단 {i}") for i, p in enumerate(doc.paragraphs, 1)
+             if p.text.strip()]
+    for t_i, table in enumerate(doc.tables, 1):  # 표 안의 조항도 읽는다
+        for r_i, row in enumerate(table.rows, 1):
+            cells = [c.text.strip() for c in row.cells if c.text.strip()]
+            if cells:
+                paras.append((" | ".join(dict.fromkeys(cells)), "Table", f"표{t_i} 행{r_i}"))
+    title = doc.core_properties.title or Path(filename).stem
+    return DocParse(title, paras)
 
 
 def _pdf_lines(text: str) -> list[str]:
@@ -168,7 +228,7 @@ def rule_attrs(raw: RawClause) -> ClauseAttrs:
     role = ROLE_RE.search(raw.text)
     prot, ev = "none", ""
     for kind, words in PROTECT_WORDS.items():
-        hit = next((w for w in words if w in raw.text), None)
+        hit = next((w for w in words if (_norm(w) in _norm(raw.text) if " " in w else w in raw.text)), None)
         if hit:
             prot, ev = kind, hit
             break
@@ -232,7 +292,13 @@ class DocIngestResult:
 def ingest_document(data: bytes, filename: str, doc_id: str | None = None, llm=None) -> DocIngestResult:
     parse = read_document(data, filename)
     raws = split_clauses(parse)
-    doc_id = doc_id or re.sub(r"[^A-Za-z0-9]+", "-", Path(filename).stem).strip("-").upper()[:20] or "DOC"
+    if doc_id is None:
+        stem = Path(filename).stem
+        slug = re.sub(r"[^A-Za-z0-9]+", "-", stem).strip("-").upper()[:20]
+        # 한글 파일명은 영숫자만 남기면 비거나 겹친다 ('위기대응.docx' → 'DOC') → 본문 해시를 붙여 구분 (영문 파일명은 그대로)
+        if not slug or not stem.isascii():
+            slug = f"{slug or 'DOC'}-{hashlib.sha1(data).hexdigest()[:6].upper()}"
+        doc_id = slug
     doc_id = f"UP-{doc_id}"
     attrs = llm_attrs(raws, llm) if (llm is not None and raws) else [None] * len(raws)
     roles = {m.group(1) for r in raws for m in ROLE_RE.finditer(r.text)}

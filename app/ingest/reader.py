@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 ENCODINGS = ("utf-8-sig", "cp949", "euc-kr", "latin-1")
+OLE_MAGIC = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"  # 엑셀 97-2003(.xls) 등 OLE 복합 문서
 LARGE_BYTES = 20 * 1024 * 1024  # 이보다 크면 read_only 스트리밍 (병합 셀 정보 생략)
 
 
@@ -21,7 +22,8 @@ class Sheet:
 
 
 def read_csv_bytes(data: bytes, name: str = "csv") -> Sheet:
-    for enc in ENCODINGS:
+    # UTF-16 (엑셀 '유니코드 텍스트' 저장) — BOM으로 판별
+    for enc in (("utf-16",) + ENCODINGS if data[:2] in (b"\xff\xfe", b"\xfe\xff") else ENCODINGS):
         try:
             text = data.decode(enc)
             break
@@ -58,6 +60,8 @@ def read_xlsx_bytes(data: bytes, merged_rows: int = 30) -> list[Sheet]:
 def read_file(path_or_bytes: Path | bytes, filename: str | None = None) -> list[Sheet]:
     data = path_or_bytes.read_bytes() if isinstance(path_or_bytes, Path) else path_or_bytes
     name = (filename or (path_or_bytes.name if isinstance(path_or_bytes, Path) else "")).lower()
+    if data[:8] == OLE_MAGIC:
+        raise ValueError("엑셀 97-2003(.xls)은 지원하지 않는다. .xlsx로 저장해 올린다.")
     if name.endswith((".xlsx", ".xlsm")) or data[:2] == b"PK":
         return read_xlsx_bytes(data)
     return [read_csv_bytes(data, Path(name).stem if name else "csv")]

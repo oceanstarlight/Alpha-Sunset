@@ -57,6 +57,23 @@ def test_sources_are_separate_files():
     assert all(audit.verify(s).ok for s in audit.sources())
 
 
+def test_concurrent_appends_keep_chain():
+    import threading
+
+    def worker(t):
+        for i in range(20):
+            audit.append("feedback", {"t": t, "i": i})
+
+    threads = [threading.Thread(target=worker, args=(t,)) for t in range(8)]
+    for th in threads:
+        th.start()
+    for th in threads:
+        th.join()
+    v = audit.verify("app")
+    assert v.ok and v.n == 160
+    assert [r["seq"] for r in audit.read("app")] == list(range(1, 161))
+
+
 def test_log_never_raises(monkeypatch):
     monkeypatch.setattr(audit, "append", lambda *a, **k: (_ for _ in ()).throw(OSError("disk full")))
     audit.log("x")  # 예외 없이 통과

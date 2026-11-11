@@ -96,6 +96,7 @@ class FlowSignal:
     zscores: dict[str, float]
     triggered: list[str]
     active: bool
+    note: str = ""  # 예: 마지막 관측이 오래되어 판단 제외
 
 
 def flow_signal(panel: AsOfPanel, as_of: date) -> FlowSignal:
