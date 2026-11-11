@@ -156,7 +156,10 @@ def main() -> int:
         linkage = local.linkage_evidence(global_market, kr_market, links)  # 글로벌 수집은 하루 1회라 t−1 신호는 global_market 자체
 
     level = local.local_grade(kr_market, kr_flow, kr_news, global_active, warnings)
-    result = local.LocalResult(now, level, kr_market, kr_flow, kr_news, global_active, warnings, linkage)
+    # 1단계 알림은 백테스트와 같은 지속성 규칙 (5영업일 중 min_active일) — 하루 반짝 신호로 알림이 가지 않게
+    persistent = local.kr_money_persistent(panel, now.date()) if panel else None
+    result = local.LocalResult(now, level, kr_market, kr_flow, kr_news, global_active, warnings, linkage,
+                               money_persistent=persistent)
     chain = local.explain_local(result)
 
     # 수집 실패 연속 (키 미설정·기준선 축적은 실패가 아님)

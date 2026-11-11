@@ -41,7 +41,8 @@ def ondemand_panel() -> None:
         if c2.button("지금 브리핑 실행", type="primary", key="od_run", icon=":material/play_arrow:", width="stretch"):
             event = services.ondemand_event(sig, topic, local=ui.is_local())
             with st.spinner("에이전트 실행 중 (직접 실행)…"):
-                st.session_state["live_briefing"] = services.run_ondemand(event, **ui.uploaded_args())
+                st.session_state["live_briefing"] = services.run_ondemand(
+                    event, confirmed=services.topic_confirmed(sig, topic), **ui.uploaded_args())
             st.rerun()
         st.caption(f"기본 선택: {why}")
 

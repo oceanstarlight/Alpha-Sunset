@@ -49,3 +49,68 @@ def test_run_ondemand_rule_provider(monkeypatch):
     assert services.briefing_kind(b) == "ondemand" and b.match.doc_fits
     assert "직접 실행" in b.exposure_note
     assert audit.read("app")[-1]["data"]["mode"] == "ondemand"
+
+
+def _hot_panel(days: int = 400, as_of=None):
+    """마지막 날 VIX·HY 스프레드가 급등한 합성 패널 (시장 신호 A 활성)."""
+    import numpy as np
+    import pandas as pd
+
+    from app.agents import sentinel
+
+    end = pd.Timestamp(as_of or services._today_kst())
+    idx = pd.bdate_range(end=end, periods=days)
+    rng = np.random.default_rng(0)
+    panel = {}
+    for sid in sentinel.panel_series_ids():
+        s = pd.Series(20 + rng.normal(0, 0.2, len(idx)).cumsum() * 0.05, index=idx)
+        s.iloc[-1] = s.iloc[-2] + 25  # 하루 급등
+        panel[sid] = s
+    return panel
+
+
+def test_unconfirmed_event_is_not_graded_alert(monkeypatch):
+    """가정 시나리오·확인 안 된 직접 실행은 시장 신호가 켜져도 ALERT가 아니다 (사건 확정 B로 치지 않음)."""
+    monkeypatch.setenv("LLM_PROVIDER", "rule")
+    panel = _hot_panel()
+    monkeypatch.setattr(services, "live_panel", lambda: panel)
+    e = services.scenario_event("banking_stress", "지역은행 뱅크런", regions=["US"])
+    b = services.run_scenario(e)
+    assert b.alert_level.value == "WATCH"
+    glob = {"level": "NONE", "market": {"zscores": {}}, "news": {"clusters": [], "observations": {
+        "banking_stress": {"n_articles": 10, "n_sources": 8, "z": None}}}}
+    od = services.ondemand_event(glob, "banking_stress", local=False)
+    assert services.run_ondemand(od, confirmed=services.topic_confirmed(glob, "banking_stress")).alert_level.value == "WATCH"
+    # 감시가 기사량 급증으로 확인한 주제를 직접 실행하면 사건 확정 → ALERT
+    glob["news"]["clusters"] = [{"event_type": "banking_stress", "z": 4.0, "n_sources": 30}]
+    assert services.topic_confirmed(glob, "banking_stress")
+    assert services.run_ondemand(od, confirmed=True).alert_level.value == "ALERT"
+
+
+def test_live_briefing_market_signal_uses_fresh_panel_last_observation(monkeypatch):
+    """커밋된 FRED 캐시(오래됨)가 아니라 최신 패널의 마지막 관측일로 시장 신호를 계산한다 (주말·공표 지연 포함)."""
+    from datetime import timedelta
+
+    from app.agents import orchestrator
+
+    monkeypatch.setenv("LLM_PROVIDER", "rule")
+    today = services._today_kst()
+    panel = _hot_panel(as_of=today - timedelta(days=3))  # 마지막 관측 3일 전 (stale_days 5 이내)
+    e = services.scenario_event("banking_stress", "지역은행 뱅크런", regions=["US"])
+    ctx_seen = {}
+    real = orchestrator.orchestrate
+
+    def spy(ctx, task):
+        ctx_seen["ctx"] = ctx
+        return real(ctx, task)
+
+    monkeypatch.setattr(orchestrator, "orchestrate", spy)
+    monkeypatch.setattr(services, "live_panel", lambda: panel)
+    services.run_scenario(e)
+    ctx = ctx_seen["ctx"]
+    assert ctx.market.zscores and ctx.market.active  # 오래된 캐시였다면 zscores가 비어 있음
+    assert ctx.market.as_of == today - timedelta(days=3)
+    # 마지막 관측이 stale_days보다 오래되면 신호로 쓰지 않는다
+    monkeypatch.setattr(services, "live_panel", lambda: _hot_panel(as_of=today - timedelta(days=30)))
+    services.run_scenario(e)
+    assert not ctx_seen["ctx"].market.zscores

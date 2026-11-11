@@ -30,6 +30,31 @@ def market_panel(refresh: bool = False) -> dict:
     return load_panel(sentinel.panel_series_ids(), refresh=refresh)
 
 
+_panel_cache: dict[str, Any] = {}
+
+
+def live_panel() -> dict:
+    """라이브·직접 실행·시나리오 브리핑용 최신 FRED 패널 (1시간 캐시).
+
+    커밋된 data/fred는 백테스트 재현용이라 갱신되지 않는다 → 그대로 쓰면 최신 관측이 오래돼 시장 신호(A)가 늘 꺼진다.
+    임시 폴더로 새로 받아 커밋 캐시를 덮어쓰지 않고, 실패하면 커밋 캐시로 대신한다(오래된 값은 신호 계산에서 제외됨).
+    """
+    cached = _panel_cache.get("panel")
+    if cached and time.time() - cached["fetched_at"] < SIGNAL_TTL_SEC:
+        return cached["panel"]
+    import tempfile
+
+    try:
+        with tempfile.TemporaryDirectory() as tmp:
+            panel = load_panel(sentinel.panel_series_ids(), cache_dir=Path(tmp), refresh=True)
+    except Exception:  # 네트워크 실패 → 커밋 캐시 (짧게 캐시해 매 실행마다 재시도하지 않게)
+        panel = market_panel()
+        _panel_cache["panel"] = {"panel": panel, "fetched_at": time.time() - SIGNAL_TTL_SEC + 300}
+        return panel
+    _panel_cache["panel"] = {"panel": panel, "fetched_at": time.time()}
+    return panel
+
+
 GLOBAL_NEWS_HISTORY = ROOT_DIR / "data" / "live" / "global_news_history.jsonl"
 
 
@@ -142,6 +167,8 @@ def get_signals(refresh: bool = False, rss: Any = None) -> dict:
         result = compute_signals(rss, fred_cache_dir=Path(tmp))
     result["source"] = "live"
     _signal_cache["signals"] = result
+    if result.get("panel") and not result.get("fred_error"):  # 방금 받은 최신 패널은 브리핑에서도 재사용
+        _panel_cache["panel"] = {"panel": result["panel"], "fetched_at": result["fetched_at"]}
     return result
 
 
@@ -158,7 +185,9 @@ def run_live(signals: dict | None = None, portfolio=None, holdings: list[dict] |
     text = f"{top['label']}\n(뉴스 군집: {top['event_type']}, 기사 {top['n_articles']}건, 출처 {top['n_sources']}곳)"
     today = _today_kst()
     event = structure_event(llm, text, f"live_{today:%Y%m%d}_{top['event_type']}", today)
-    b = orchestrator.run_live_briefing(event, signals["panel"], llm, portfolio=portfolio, holdings=holdings,
+    # 수집기 결과(source=collector)에 붙은 패널은 커밋된 FRED 캐시라 오래됐다 → 최신 패널로 등급 계산
+    panel = signals["panel"] if signals.get("source") == "live" and not signals.get("fred_error") else live_panel()
+    b = orchestrator.run_live_briefing(event, panel, llm, portfolio=portfolio, holdings=holdings,
                                        playbooks=playbooks)
     audit_briefing(b, "live", llm.provider, portfolio, playbooks, source=audit_source)
     return b
@@ -182,12 +211,12 @@ def scenario_event(event_type: str, description: str, title: str = "", channels:
 
 
 def run_scenario(event: Event, portfolio=None, holdings: list[dict] | None = None, playbooks: list | None = None) -> Briefing:
-    """가정 시나리오 브리핑. 시장·자금 신호는 커밋된 FRED 캐시의 최신값."""
+    """가정 시나리오 브리핑. 시장·자금 신호는 최신 FRED 값, 사건은 가정이라 등급의 사건 확정(B)으로 치지 않는다."""
     from app.config import get_settings
 
     llm = LLMClient(db_mode="sandbox")
-    b = orchestrator.run_scenario_briefing(event, load_panel(sentinel.panel_series_ids()), llm, portfolio=portfolio,
-                                           holdings=holdings, playbooks=playbooks)
+    b = orchestrator.run_scenario_briefing(event, live_panel(), llm, portfolio=portfolio,
+                                           holdings=holdings, playbooks=playbooks, event_confirmed=False)
     audit_briefing(b, "scenario", get_settings().llm_provider, portfolio, playbooks)
     return b
 
@@ -249,11 +278,21 @@ def ondemand_event(signals: dict, topic: str, local: bool, on: date | None = Non
                  sources=["감시 신호 (Google 뉴스 RSS·FRED·ECOS)"])
 
 
-def run_ondemand(event: Event, portfolio=None, holdings: list[dict] | None = None, playbooks: list | None = None) -> Briefing:
-    """직접 실행 브리핑 (사건 미확인 상태 포함). sandbox 기록, 감사 로그 mode=ondemand."""
+def topic_confirmed(signals: dict, topic: str) -> bool:
+    """직접 실행 주제가 감시에서 기사량 급증(사건 확정 B)으로 탐지된 주제인가."""
+    news = signals.get("news") or signals.get("kr_news") or {}
+    return topic in {c.get("event_type") for c in news.get("clusters") or []}
+
+
+def run_ondemand(event: Event, portfolio=None, holdings: list[dict] | None = None, playbooks: list | None = None,
+                 confirmed: bool = False) -> Briefing:
+    """직접 실행 브리핑 (사건 미확인 상태 포함). sandbox 기록, 감사 로그 mode=ondemand.
+
+    confirmed=False(감시가 확인하지 않은 주제)면 등급의 사건 확정(B)으로 치지 않아 ALERT가 되지 않는다."""
     llm = LLMClient(db_mode="sandbox")
-    b = orchestrator.run_scenario_briefing(event, load_panel(sentinel.panel_series_ids()), llm, portfolio=portfolio,
-                                           holdings=holdings, playbooks=playbooks, note_head=orchestrator.ONDEMAND_NOTE)
+    b = orchestrator.run_scenario_briefing(event, live_panel(), llm, portfolio=portfolio,
+                                           holdings=holdings, playbooks=playbooks, note_head=orchestrator.ONDEMAND_NOTE,
+                                           event_confirmed=confirmed)
     audit_briefing(b, "ondemand", get_settings().llm_provider, portfolio, playbooks)
     return b
 

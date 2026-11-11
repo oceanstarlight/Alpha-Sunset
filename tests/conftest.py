@@ -38,3 +38,11 @@ def reset_learner_toggle(monkeypatch):
     from app.agents import learner
 
     monkeypatch.setattr(learner, "_override", None)
+
+
+@pytest.fixture(autouse=True)
+def offline_live_panel(monkeypatch):
+    """라이브 브리핑용 최신 FRED 패널 조회를 막고 커밋된 캐시를 쓴다 (테스트는 네트워크 없이)."""
+    from app import services
+
+    monkeypatch.setattr(services, "live_panel", lambda: services.market_panel())
