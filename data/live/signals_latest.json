@@ -1,13 +1,13 @@
 {
-  "collected_at": "2026-11-10T21:24:53+00:00",
-  "as_of": "2026-11-09",
-  "level": "NONE",
+  "collected_at": "2026-11-11T01:27:55+00:00",
+  "as_of": "2026-11-10",
+  "level": "WATCH",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "VIX(변동성)(VIXCLS) z=-2.60",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=-2.60, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.49, 달러 인덱스(DTWEXBGS) z=+1.16",
-      "결과": "비활성"
+      "원인": "VIX(변동성)(VIXCLS) z=-2.60, 미 장단기 금리차(T10Y2Y) z=-2.40",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=-2.60, 미 장단기 금리차(T10Y2Y) z=-2.40, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.49",
+      "결과": "활성"
     },
     {
       "단계": "자금 흐름(C)",
@@ -23,20 +23,21 @@
     },
     {
       "단계": "종합 등급",
-      "원인": "A=비활성, C=비활성, B=비활성",
+      "원인": "A=활성, C=비활성, B=비활성",
       "근거": "등급 규칙(사전 등록 v2·v3): ALERT = B ∧ (A ∨ C), WATCH = 하나 이상 활성",
-      "결과": "NONE → 조치 없음"
+      "결과": "WATCH → 1단계: 자금 이상 알림"
     }
   ],
   "money_alert": false,
   "market": {
-    "active": false,
+    "active": true,
     "triggered": [
-      "VIXCLS"
+      "VIXCLS",
+      "T10Y2Y"
     ],
     "zscores": {
       "VIXCLS": -2.6,
-      "T10Y2Y": -1.02,
+      "T10Y2Y": -2.4,
       "DGS10": 0.39,
       "DEXKOUS": 1.05,
       "DTWEXBGS": 1.16,
@@ -61,40 +62,40 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 28,
-        "n_sources": 26,
-        "z": 1.753,
-        "baseline_points": 55,
+        "n_articles": 29,
+        "n_sources": 24,
+        "z": 1.835,
+        "baseline_points": 56,
         "measure": "키워드별 합산",
-        "n_split": 28,
+        "n_split": 29,
         "saturated": false,
         "top_titles": [
           "Paraguay Bank Failure - Bluefield Daily Telegraph",
           "Paraguay Crisis: Bank Fails, President Impeached - NewsForKids.net",
-          "Ousted Paraguayan president placed under house arrest after bank collapse - New Castle News"
+          "Ripple-linked Uphold faces withdrawal delays amid ‘bank run’ claims - Protos | Informed crypto news"
         ]
       },
       "credit_event": {
-        "n_articles": 93,
-        "n_sources": 84,
-        "z": 1.029,
-        "baseline_points": 55,
+        "n_articles": 101,
+        "n_sources": 89,
+        "z": 1.341,
+        "baseline_points": 56,
         "measure": "키워드별 합산",
-        "n_split": 93,
+        "n_split": 101,
         "saturated": false,
         "top_titles": [
           "November 10, 2026 Press Release - Minnesota Attorney General's Office",
           "Why the Credit Default Swap Market—Red Hot in the AI Trade—Is Vital for CFOs - WSJ",
-          "Children’s Place Files Chapter 11, Launches Sale Process - ABF Journal"
+          "Updated default retry behavior for AWS SDKs and tools - Amazon Web Services (AWS)"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 10,
-        "n_sources": 8,
-        "z": 0.422,
-        "baseline_points": 55,
+        "n_articles": 7,
+        "n_sources": 6,
+        "z": -0.713,
+        "baseline_points": 56,
         "measure": "키워드별 합산",
-        "n_split": 10,
+        "n_split": 7,
         "saturated": false,
         "top_titles": [
           "Saudi Liquidity Squeeze Adds to Economic Stress for Crown Prince - Bloomberg.com",
@@ -103,73 +104,73 @@
         ]
       },
       "geopolitical": {
-        "n_articles": 162,
-        "n_sources": 138,
-        "z": 1.084,
-        "baseline_points": 55,
+        "n_articles": 157,
+        "n_sources": 134,
+        "z": 0.884,
+        "baseline_points": 56,
         "measure": "키워드별 합산",
-        "n_split": 162,
+        "n_split": 157,
         "saturated": false,
         "top_titles": [
-          "Iraq bars plane carrying Iran's soccer team from landing in Basra over US sanctions, officials say - Reuters",
-          "Bill Belichick’s ex-girlfriend Jordon Hudson sues Airbnb owners alleging privacy invasion - The New York Times",
-          "Marvel Cosmic Invasion's Doctor Doom-Themed DLC Gives It The Post-Game Tail It Was Missing - Game Informer"
+          "Iraq bars plane carrying Iran's soccer team from landing in Basra over US sanctions, officials say - Al-Monitor",
+          "DLC REVIEW – “Marvel Cosmic Invasion: The Siege of Castle Doom” is badass but also needs refinement - SmashPad",
+          "Russian Push to Escape Dollar for Yuan Collapses Under Sanctions - Bloomberg.com"
         ]
       },
       "trade_policy": {
-        "n_articles": 121,
-        "n_sources": 99,
-        "z": 0.463,
-        "baseline_points": 55,
+        "n_articles": 109,
+        "n_sources": 91,
+        "z": 0.088,
+        "baseline_points": 56,
         "measure": "키워드별 합산",
-        "n_split": 121,
+        "n_split": 109,
         "saturated": false,
         "top_titles": [
-          "Tariff Update: Where Things Stand After the Supreme Court Ruling - Tax Foundation",
-          "Tariff-ied! – Substantial Transformation - The National Law Review",
-          "U.S. Extends Trade Truce with China for Two Months - Sandler, Travis & Rosenberg, P.A."
+          "Here’s How Some Footwear Companies Are Using Tariff Refunds - WWD",
+          "THE WORLD BRACES as Trump’s Canada Tariff Stand-Off Escalates: McGeever - EnergyNow.com",
+          "Tariff Update: Where Things Stand After the Supreme Court Ruling - Tax Foundation"
         ]
       },
       "pandemic": {
-        "n_articles": 173,
-        "n_sources": 137,
-        "z": 0.589,
-        "baseline_points": 55,
+        "n_articles": 157,
+        "n_sources": 130,
+        "z": 0.257,
+        "baseline_points": 56,
         "measure": "키워드별 합산",
-        "n_split": 173,
+        "n_split": 157,
         "saturated": false,
         "top_titles": [
           "Threatening phone call prompts Northville High School to go into lockdown - ClickOnDetroit | WDIV Local 4",
-          "Shadow Ridge High School placed on lockdown after reported threat - FOX5 Vegas",
-          "Murfreesboro schools ‘secure and safe,’ under ‘precautionary lockdown’ after reported threat - WSMV"
+          "Lockdown lifted following reported threat at Shadow Ridge High School - FOX5 Vegas",
+          "Blackman Elementary, Middle and High school lockdown lifted after reported threat - WZTV"
         ]
       },
       "fx_shock": {
         "n_articles": 3,
         "n_sources": 3,
-        "z": -0.553,
-        "baseline_points": 55,
+        "z": -0.546,
+        "baseline_points": 56,
         "measure": "키워드별 합산",
         "n_split": 3,
         "saturated": false,
         "top_titles": [
+          "Korea secures up to 19 billion dollars in rapid CMIM emergency funding - Chosunbiz",
           "Falling Kyat and Rising Prices Deepen Financial Strain in Myanmar - Shan Herald Agency for News",
-          "KOSPI, Kosdaq surge; buy sidecars triggered in both markets - 디지털투데이",
           "Nestlé, Brewers Lead N129.4bn Payments to Foreign Parent Companies - Brand Icon Image"
         ]
       },
       "rate_shock": {
-        "n_articles": 12,
-        "n_sources": 11,
-        "z": 0.693,
-        "baseline_points": 55,
+        "n_articles": 16,
+        "n_sources": 14,
+        "z": 1.428,
+        "baseline_points": 56,
         "measure": "키워드별 합산",
-        "n_split": 12,
+        "n_split": 16,
         "saturated": false,
         "top_titles": [
-          "October CPI sparks December Fed hike fears as yields surge and tech stocks slide - Yahoo Finance Singapore",
-          "US Treasury yields surge as hot CPI revives Fed tightening bets - Investing.com",
-          "US Treasury yields surge as October CPI inflation exceeds forecasts - Beinsure"
+          "Bond yields surge most in 19 months as traders brace for Fed rate hikes - CNN",
+          "Bond yields surge most in 19 months as traders brace for Fed rate hikes - KRDO",
+          "October CPI sparks December Fed hike fears as yields surge and tech stocks slide - Yahoo Finance UK"
         ]
       }
     },
