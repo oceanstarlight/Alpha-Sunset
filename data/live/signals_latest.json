@@ -1,18 +1,18 @@
 {
-  "collected_at": "2026-11-11T01:27:55+00:00",
+  "collected_at": "2026-11-12T02:18:29+00:00",
   "as_of": "2026-11-10",
-  "level": "WATCH",
+  "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "VIX(변동성)(VIXCLS) z=-2.60, 미 장단기 금리차(T10Y2Y) z=-2.40",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=-2.60, 미 장단기 금리차(T10Y2Y) z=-2.40, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.49",
-      "결과": "활성"
+      "원인": "미 장단기 금리차(T10Y2Y) z=-2.40",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 장단기 금리차(T10Y2Y) z=-2.40, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.49, 달러 인덱스(DTWEXBGS) z=+1.16",
+      "결과": "비활성"
     },
     {
       "단계": "자금 흐름(C)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.50, 미 은행 예금(DPSACBW027SBOG) z=+0.02, 해외 공적 미국채 보관(WMTSECL1) z=-1.10, 지급준비금(WRESBAL) z=+0.58",
+      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.32, 미 은행 예금(DPSACBW027SBOG) z=+0.02, 해외 공적 미국채 보관(WMTSECL1) z=-1.10, 지급준비금(WRESBAL) z=+0.58",
       "결과": "비활성"
     },
     {
@@ -23,20 +23,19 @@
     },
     {
       "단계": "종합 등급",
-      "원인": "A=활성, C=비활성, B=비활성",
+      "원인": "A=비활성, C=비활성, B=비활성",
       "근거": "등급 규칙(사전 등록 v2·v3): ALERT = B ∧ (A ∨ C), WATCH = 하나 이상 활성",
-      "결과": "WATCH → 1단계: 자금 이상 알림"
+      "결과": "NONE → 조치 없음"
     }
   ],
   "money_alert": false,
   "market": {
-    "active": true,
+    "active": false,
     "triggered": [
-      "VIXCLS",
       "T10Y2Y"
     ],
     "zscores": {
-      "VIXCLS": -2.6,
+      "VIXCLS": -0.3,
       "T10Y2Y": -2.4,
       "DGS10": 0.39,
       "DEXKOUS": 1.05,
@@ -48,7 +47,7 @@
     "active": false,
     "triggered": [],
     "zscores": {
-      "WRMFNS": -0.5,
+      "WRMFNS": -0.32,
       "DPSACBW027SBOG": 0.02,
       "WMTSECL1": -1.1,
       "WRESBAL": 0.58
@@ -62,115 +61,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 29,
-        "n_sources": 24,
-        "z": 1.835,
-        "baseline_points": 56,
+        "n_articles": 21,
+        "n_sources": 20,
+        "z": 0.635,
+        "baseline_points": 57,
         "measure": "키워드별 합산",
-        "n_split": 29,
+        "n_split": 21,
         "saturated": false,
         "top_titles": [
-          "Paraguay Bank Failure - Bluefield Daily Telegraph",
-          "Paraguay Crisis: Bank Fails, President Impeached - NewsForKids.net",
-          "Ripple-linked Uphold faces withdrawal delays amid ‘bank run’ claims - Protos | Informed crypto news"
+          "Paraguay on Watch for Downgrade at Fitch After Bank Collapse - Bloomberg",
+          "Democratic senators seek to remove US-Israel defense cooperation from spending bill - Jewish Telegraphic Agency",
+          "Bank Executive Compensation in the Age of Digital Bank Runs: Who Should Bear Systemic Risk? - https://economy.ac/"
         ]
       },
       "credit_event": {
-        "n_articles": 101,
-        "n_sources": 89,
-        "z": 1.341,
-        "baseline_points": 56,
+        "n_articles": 82,
+        "n_sources": 74,
+        "z": 0.528,
+        "baseline_points": 57,
         "measure": "키워드별 합산",
-        "n_split": 101,
+        "n_split": 82,
         "saturated": false,
         "top_titles": [
-          "November 10, 2026 Press Release - Minnesota Attorney General's Office",
-          "Why the Credit Default Swap Market—Red Hot in the AI Trade—Is Vital for CFOs - WSJ",
-          "Updated default retry behavior for AWS SDKs and tools - Amazon Web Services (AWS)"
+          "The Children's Place files for bankruptcy reorganization as closures loom - The Business Journals",
+          "Case Summary: Mercer International Chapter 11 - Bondoro",
+          "Bankruptcy filing, WARN list addition paint bleak outlook for Fort Payne Children's Place facility - rocketcitynow.com"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 7,
-        "n_sources": 6,
-        "z": -0.713,
-        "baseline_points": 56,
+        "n_articles": 10,
+        "n_sources": 8,
+        "z": 0.432,
+        "baseline_points": 57,
         "measure": "키워드별 합산",
-        "n_split": 7,
+        "n_split": 10,
         "saturated": false,
         "top_titles": [
-          "Saudi Liquidity Squeeze Adds to Economic Stress for Crown Prince - Bloomberg.com",
-          "Blackstone to invest Rs 5,000 crore in IIFL Finance for 16% stake as company raises Rs 6,414 crore - The Economic Times",
-          "India doesn’t have a savings problem. It has a savings incentive problem - The Economic Times"
+          "Saudi Arabia faces liquidity crunch even as oil exports rebound to pre-war levels - Middle East Eye",
+          "SNB sees no signs of a credit crunch - finews.com",
+          "Saudi Liquidity Squeeze Adds to Challenges for Crown Prince - Bloomberg.com"
         ]
       },
       "geopolitical": {
-        "n_articles": 157,
-        "n_sources": 134,
-        "z": 0.884,
-        "baseline_points": 56,
+        "n_articles": 131,
+        "n_sources": 112,
+        "z": -0.063,
+        "baseline_points": 57,
         "measure": "키워드별 합산",
-        "n_split": 157,
+        "n_split": 131,
         "saturated": false,
         "top_titles": [
-          "Iraq bars plane carrying Iran's soccer team from landing in Basra over US sanctions, officials say - Al-Monitor",
-          "DLC REVIEW – “Marvel Cosmic Invasion: The Siege of Castle Doom” is badass but also needs refinement - SmashPad",
-          "Russian Push to Escape Dollar for Yuan Collapses Under Sanctions - Bloomberg.com"
+          "EU envoys agree new Russia sanctions listings on banks, shadow fleet and misinformation - Reuters",
+          "Trump planning new military assault or tighter sanctions, say Iranian officials - The Guardian",
+          "North Little Rock couple sentenced in home invasion and killing - The Arkansas Democrat-Gazette"
         ]
       },
       "trade_policy": {
-        "n_articles": 109,
-        "n_sources": 91,
-        "z": 0.088,
-        "baseline_points": 56,
+        "n_articles": 100,
+        "n_sources": 83,
+        "z": -0.192,
+        "baseline_points": 57,
         "measure": "키워드별 합산",
-        "n_split": 109,
+        "n_split": 100,
         "saturated": false,
         "top_titles": [
-          "Here’s How Some Footwear Companies Are Using Tariff Refunds - WWD",
-          "THE WORLD BRACES as Trump’s Canada Tariff Stand-Off Escalates: McGeever - EnergyNow.com",
-          "Tariff Update: Where Things Stand After the Supreme Court Ruling - Tax Foundation"
+          "Canada’s ambassador warns Trump tariffs are driving up costs, threatening U.S. investment - CNBC",
+          "Mexico says crackdown on Asian steel shipments is paying off as US tariff talks advance - Reuters",
+          "Cost of baby formula at all-time high amid US trade war with Canada - NBC 5 Chicago"
         ]
       },
       "pandemic": {
-        "n_articles": 157,
-        "n_sources": 130,
-        "z": 0.257,
-        "baseline_points": 56,
+        "n_articles": 180,
+        "n_sources": 144,
+        "z": 0.725,
+        "baseline_points": 57,
         "measure": "키워드별 합산",
-        "n_split": 157,
+        "n_split": 180,
         "saturated": false,
         "top_titles": [
-          "Threatening phone call prompts Northville High School to go into lockdown - ClickOnDetroit | WDIV Local 4",
-          "Lockdown lifted following reported threat at Shadow Ridge High School - FOX5 Vegas",
-          "Blackman Elementary, Middle and High school lockdown lifted after reported threat - WZTV"
+          "Capitola Beach closed after 9 children sickened by E. coli outbreak, health officials say - ABC7 Bay Area",
+          "Ebola tops 11,000 cases in Congo's deadliest outbreak - NPR",
+          "She’s delivered 2,000 babies. The measles outbreak changed her mind about vaccines. - NBC News"
         ]
       },
       "fx_shock": {
-        "n_articles": 3,
-        "n_sources": 3,
-        "z": -0.546,
-        "baseline_points": 56,
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": 0.974,
+        "baseline_points": 57,
         "measure": "키워드별 합산",
-        "n_split": 3,
+        "n_split": 6,
         "saturated": false,
         "top_titles": [
-          "Korea secures up to 19 billion dollars in rapid CMIM emergency funding - Chosunbiz",
-          "Falling Kyat and Rising Prices Deepen Financial Strain in Myanmar - Shan Herald Agency for News",
-          "Nestlé, Brewers Lead N129.4bn Payments to Foreign Parent Companies - Brand Icon Image"
+          "Kim Dong-hyun’s apartment, bought for 10 billion won, plunges to 8.8 billion won: “Big losses in crypto, too” (‘GreeGura’) - 스포츠조선",
+          "The Tequila Crisis of 1994: How Mexico’s Peso Collapse Spread - EBC Financial Group",
+          "Dentons advises international lender-shareholders on successful exit from AccessBank Azerbaijan - Dentons"
         ]
       },
       "rate_shock": {
         "n_articles": 16,
-        "n_sources": 14,
-        "z": 1.428,
-        "baseline_points": 56,
+        "n_sources": 15,
+        "z": 1.391,
+        "baseline_points": 57,
         "measure": "키워드별 합산",
         "n_split": 16,
         "saturated": false,
         "top_titles": [
-          "Bond yields surge most in 19 months as traders brace for Fed rate hikes - CNN",
-          "Bond yields surge most in 19 months as traders brace for Fed rate hikes - KRDO",
-          "October CPI sparks December Fed hike fears as yields surge and tech stocks slide - Yahoo Finance UK"
+          "GBP/USD approaches breaking point as US yields surge - FOREX.com",
+          "UK Gilts Get Pulled into the US Bond Selloff - Bloomberg.com",
+          "US Treasury yields surge, Wall Street falls on inflation surprise - سانا"
         ]
       }
     },
