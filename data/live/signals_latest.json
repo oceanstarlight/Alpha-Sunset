@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-11-12T11:24:14+00:00",
-  "as_of": "2026-11-10",
+  "collected_at": "2026-11-12T20:00:02+00:00",
+  "as_of": "2026-11-11",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "미 장단기 금리차(T10Y2Y) z=-2.40",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 장단기 금리차(T10Y2Y) z=-2.40, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.49, 달러 인덱스(DTWEXBGS) z=+1.16",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 장단기 금리차(T10Y2Y) z=-2.40, VIX(변동성)(VIXCLS) z=-1.18, 달러 인덱스(DTWEXBGS) z=+1.16",
       "결과": "비활성"
     },
     {
@@ -35,12 +35,12 @@
       "T10Y2Y"
     ],
     "zscores": {
-      "VIXCLS": -0.3,
+      "VIXCLS": -1.18,
       "T10Y2Y": -2.4,
       "DGS10": 0.39,
       "DEXKOUS": 1.05,
       "DTWEXBGS": 1.16,
-      "BAMLH0A0HYM2": -1.49
+      "BAMLH0A0HYM2": -0.75
     }
   },
   "flow": {
@@ -61,12 +61,12 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 19,
-        "n_sources": 19,
-        "z": 0.343,
-        "baseline_points": 58,
+        "n_articles": 16,
+        "n_sources": 15,
+        "z": -0.09,
+        "baseline_points": 59,
         "measure": "키워드별 합산",
-        "n_split": 19,
+        "n_split": 16,
         "saturated": false,
         "top_titles": [
           "Ueno Bank collapse freezes nearly 3 million accounts and triggers Paraguay's biggest political crisis in years - Latin Times",
@@ -75,100 +75,100 @@
         ]
       },
       "credit_event": {
-        "n_articles": 74,
-        "n_sources": 68,
-        "z": 0.192,
-        "baseline_points": 58,
+        "n_articles": 85,
+        "n_sources": 77,
+        "z": 0.648,
+        "baseline_points": 59,
         "measure": "키워드별 합산",
-        "n_split": 74,
+        "n_split": 85,
         "saturated": false,
         "top_titles": [
-          "Collections are coming for millions of student loans in default - Stateline",
-          "Collections are coming for millions of student loans in default - News From The States",
-          "SEC, DOL Push Default E-Delivery; Industry Pushes Back - WhatTheyThink"
+          "Nvidia Default Risk Nears Record High as Board Weighs CEO’s Fate - Bloomberg.com",
+          "Prudential Urges DC Plans to Make Lifetime Income a Default - plansponsor",
+          "Collections are coming for millions of student loans in default - Stateline"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 9,
-        "n_sources": 8,
-        "z": 0.046,
-        "baseline_points": 58,
+        "n_articles": 12,
+        "n_sources": 12,
+        "z": 1.199,
+        "baseline_points": 59,
         "measure": "키워드별 합산",
-        "n_split": 9,
+        "n_split": 12,
         "saturated": false,
         "top_titles": [
           "Saudi Arabia faces liquidity crunch even as oil exports rebound to pre-war levels - Middle East Eye",
-          "SNB sees no signs of a credit crunch - finews.com",
-          "New budget figures set ‘Herculean task’ for Victoria’s next government - The Age"
+          "Crunch Fitness Seeks to Borrow $800 Million in ABS Bond Sale - Athletech News",
+          "Bitcoin market faces liquidity crunch and capital outflows, challenging recovery prospects. - Pluang"
         ]
       },
       "geopolitical": {
-        "n_articles": 122,
-        "n_sources": 103,
-        "z": -0.388,
-        "baseline_points": 58,
+        "n_articles": 144,
+        "n_sources": 116,
+        "z": 0.418,
+        "baseline_points": 59,
         "measure": "키워드별 합산",
-        "n_split": 122,
+        "n_split": 144,
         "saturated": false,
         "top_titles": [
-          "EU to approve more sanctions on Russia on Monday, France says - Reuters",
-          "IJ Spotlight: Russia Sanctions - Global Investigative Journalism Network (GIJN)",
-          "October 2026 — Monthly analysis of Russian fossil fuel exports and sanctions - Centre for Research on Energy and Clean Air"
+          "UK sanctions Russia's Slavneft in latest move against oil producers - Reuters",
+          "Latest Salvo in VK v. Apple Sanctions-Related Litigation - Transnational Litigation Blog",
+          "Terrifying home invasion of popular exec rocks Hollywood — as armed gangs use new tactics to target power players - Page Six"
         ]
       },
       "trade_policy": {
-        "n_articles": 104,
-        "n_sources": 84,
-        "z": -0.065,
-        "baseline_points": 58,
+        "n_articles": 130,
+        "n_sources": 101,
+        "z": 0.757,
+        "baseline_points": 59,
         "measure": "키워드별 합산",
-        "n_split": 104,
+        "n_split": 130,
         "saturated": false,
         "top_titles": [
           "EU set to delay 10% tariff on electric cars from UK, FT reports - Reuters",
-          "Canada’s ambassador warns Trump tariffs are driving up costs, threatening U.S. investment - CNBC",
-          "American importers are one step closer to receiving $166 billion in universal tariff refunds - Fortune"
+          "Tariff Relief for Importers: What Companies Should Watch For - Clark Hill",
+          "Excess Capacity Tariffs: Will They or Won’t They? Part 2 - Sandler, Travis & Rosenberg, P.A."
         ]
       },
       "pandemic": {
-        "n_articles": 175,
-        "n_sources": 140,
-        "z": 0.613,
-        "baseline_points": 58,
+        "n_articles": 162,
+        "n_sources": 127,
+        "z": 0.338,
+        "baseline_points": 59,
         "measure": "키워드별 합산",
-        "n_split": 175,
+        "n_split": 162,
         "saturated": false,
         "top_titles": [
-          "Congo Ebola outbreak still out of control after six months, MSF says - Reuters",
+          "Popular California beach closed amid E. coli outbreak - Los Angeles Times",
           "WHO Health Emergencies EPI-WIN webinar: Update on the current Ebola Bundibugyo virus disease outbreak - World Health Organization (WHO)",
-          "Capitola Beach closed after 9 children sickened by E. coli outbreak, health officials say - ABC7 Bay Area"
+          "Lockdown lifted at Children's Wisconsin after bomb threat; origin under investigation - WISN"
         ]
       },
       "fx_shock": {
         "n_articles": 2,
         "n_sources": 2,
-        "z": -1.063,
-        "baseline_points": 58,
+        "z": -1.044,
+        "baseline_points": 59,
         "measure": "키워드별 합산",
         "n_split": 2,
         "saturated": false,
         "top_titles": [
-          "Dentons advises international lender-shareholders on successful exit from AccessBank Azerbaijan - Dentons",
-          "Original Sin in Economics: Why Dollar Debt Can Amplify Currency Crises - EBC Financial Group"
+          "Original Sin in Economics: Why Dollar Debt Can Amplify Currency Crises - EBC Financial Group",
+          "Why RBI wants to cap select overseas remittances at ₹50 Lakh to save rupees | Explained - The Hindu"
         ]
       },
       "rate_shock": {
-        "n_articles": 4,
-        "n_sources": 3,
-        "z": -0.839,
-        "baseline_points": 58,
+        "n_articles": 5,
+        "n_sources": 5,
+        "z": -0.643,
+        "baseline_points": 59,
         "measure": "키워드별 합산",
-        "n_split": 4,
+        "n_split": 5,
         "saturated": false,
         "top_titles": [
           "GBP/USD approaches breaking point as US yields surge - FOREX.com",
-          "UK Gilts Get Pulled into the US Bond Selloff - Bloomberg.com",
-          "Stocks Head Into Bond Holiday With Treasury Yield Gap at 25 Basis Points - TechStock²"
+          "GBP/USD Approaches Breaking Point as US Yields Surge - Investing.com",
+          "US Treasury Yields Surge as Inflation Revives Fed Rate Hike Fears: What It Means for Bitcoin - Programming Insider"
         ]
       }
     },
