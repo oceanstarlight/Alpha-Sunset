@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-11-12T20:00:02+00:00",
-  "as_of": "2026-11-11",
+  "collected_at": "2026-11-13T01:53:08+00:00",
+  "as_of": "2026-11-12",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "미 장단기 금리차(T10Y2Y) z=-2.40",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 장단기 금리차(T10Y2Y) z=-2.40, VIX(변동성)(VIXCLS) z=-1.18, 달러 인덱스(DTWEXBGS) z=+1.16",
+      "원인": "미 10년물 금리(DGS10) z=+2.22",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+2.22, VIX(변동성)(VIXCLS) z=-1.18, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.75",
       "결과": "비활성"
     },
     {
@@ -32,14 +32,13 @@
   "market": {
     "active": false,
     "triggered": [
-      "T10Y2Y"
+      "DGS10"
     ],
     "zscores": {
       "VIXCLS": -1.18,
-      "T10Y2Y": -2.4,
-      "DGS10": 0.39,
-      "DEXKOUS": 1.05,
-      "DTWEXBGS": 1.16,
+      "T10Y2Y": -0.3,
+      "DGS10": 2.22,
+      "DCOILWTICO": -0.06,
       "BAMLH0A0HYM2": -0.75
     }
   },
@@ -61,94 +60,94 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 16,
-        "n_sources": 15,
-        "z": -0.09,
-        "baseline_points": 59,
+        "n_articles": 18,
+        "n_sources": 16,
+        "z": 0.2,
+        "baseline_points": 60,
         "measure": "키워드별 합산",
-        "n_split": 16,
+        "n_split": 18,
         "saturated": false,
         "top_titles": [
+          "Paraguay Central Bank Pays $644M to Ueno Depositors - Global Finance Magazine",
           "Ueno Bank collapse freezes nearly 3 million accounts and triggers Paraguay's biggest political crisis in years - Latin Times",
-          "Paraguay on Watch for Downgrade at Fitch After Bank Collapse - Bloomberg.com",
-          "Democratic senators seek to remove US-Israel defense cooperation from spending bill - Jewish Telegraphic Agency"
+          "Paraguay on Watch for Downgrade at Fitch After Bank Collapse - Bloomberg.com"
         ]
       },
       "credit_event": {
-        "n_articles": 85,
-        "n_sources": 77,
-        "z": 0.648,
-        "baseline_points": 59,
+        "n_articles": 104,
+        "n_sources": 94,
+        "z": 1.437,
+        "baseline_points": 60,
         "measure": "키워드별 합산",
-        "n_split": 85,
+        "n_split": 104,
         "saturated": false,
         "top_titles": [
           "Nvidia Default Risk Nears Record High as Board Weighs CEO’s Fate - Bloomberg.com",
-          "Prudential Urges DC Plans to Make Lifetime Income a Default - plansponsor",
-          "Collections are coming for millions of student loans in default - Stateline"
+          "Case Summary: The Children's Place Chapter 11 - Bondoro",
+          "Prudential Urges DC Plans to Make Lifetime Income a Default - plansponsor"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 12,
-        "n_sources": 12,
-        "z": 1.199,
-        "baseline_points": 59,
+        "n_articles": 10,
+        "n_sources": 10,
+        "z": 0.409,
+        "baseline_points": 60,
         "measure": "키워드별 합산",
-        "n_split": 12,
+        "n_split": 10,
         "saturated": false,
         "top_titles": [
-          "Saudi Arabia faces liquidity crunch even as oil exports rebound to pre-war levels - Middle East Eye",
-          "Crunch Fitness Seeks to Borrow $800 Million in ABS Bond Sale - Athletech News",
-          "Bitcoin market faces liquidity crunch and capital outflows, challenging recovery prospects. - Pluang"
+          "Bitcoin market faces liquidity crunch and capital outflows, challenging recovery prospects. - Pluang",
+          "USD/SGD (SGD=X) live rate, chart and news - Yahoo Finance Singapore",
+          "Stablecoin Supply Shrinks $14.2B: Is a Crypto Liquidity Crunch Near? - Coin Gabbar"
         ]
       },
       "geopolitical": {
-        "n_articles": 144,
-        "n_sources": 116,
-        "z": 0.418,
-        "baseline_points": 59,
+        "n_articles": 142,
+        "n_sources": 117,
+        "z": 0.34,
+        "baseline_points": 60,
         "measure": "키워드별 합산",
-        "n_split": 144,
+        "n_split": 142,
         "saturated": false,
         "top_titles": [
           "UK sanctions Russia's Slavneft in latest move against oil producers - Reuters",
-          "Latest Salvo in VK v. Apple Sanctions-Related Litigation - Transnational Litigation Blog",
-          "Terrifying home invasion of popular exec rocks Hollywood — as armed gangs use new tactics to target power players - Page Six"
+          "Security Council, 10270th Meeting (PM) Yemen Sanctions - UN Meetings Coverage and Press Releases",
+          "‘Huge caravans’ of migrants in Mexico represents invasion of US: Trump - NewsNation"
         ]
       },
       "trade_policy": {
-        "n_articles": 130,
-        "n_sources": 101,
-        "z": 0.757,
-        "baseline_points": 59,
+        "n_articles": 146,
+        "n_sources": 109,
+        "z": 1.255,
+        "baseline_points": 60,
         "measure": "키워드별 합산",
-        "n_split": 130,
+        "n_split": 146,
         "saturated": false,
         "top_titles": [
-          "EU set to delay 10% tariff on electric cars from UK, FT reports - Reuters",
-          "Tariff Relief for Importers: What Companies Should Watch For - Clark Hill",
-          "Excess Capacity Tariffs: Will They or Won’t They? Part 2 - Sandler, Travis & Rosenberg, P.A."
+          "Trump slaps 100% tariff on some pharmaceutical drugs via executive order - ABC News - Breaking News, Latest News and Videos",
+          "‘A high probability’: Congress pushes tighter export controls following Nvidia scandal - Semafor",
+          "Mexico's Sheinbaum pushes back on Trump’s tariff threat, says no caravans have reached U.S. border since 2025 - Spectrum News"
         ]
       },
       "pandemic": {
-        "n_articles": 162,
-        "n_sources": 127,
-        "z": 0.338,
-        "baseline_points": 59,
+        "n_articles": 132,
+        "n_sources": 110,
+        "z": -0.29,
+        "baseline_points": 60,
         "measure": "키워드별 합산",
-        "n_split": 162,
+        "n_split": 132,
         "saturated": false,
         "top_titles": [
           "Popular California beach closed amid E. coli outbreak - Los Angeles Times",
-          "WHO Health Emergencies EPI-WIN webinar: Update on the current Ebola Bundibugyo virus disease outbreak - World Health Organization (WHO)",
-          "Lockdown lifted at Children's Wisconsin after bomb threat; origin under investigation - WISN"
+          "Doctor on frontlines of Todd County measles outbreak says it could ‘overwhelm’ health system - MPR News",
+          "CDC reports six measles deaths in 2026 as US battles worst outbreak in 35 years - The Guardian"
         ]
       },
       "fx_shock": {
         "n_articles": 2,
         "n_sources": 2,
-        "z": -1.044,
-        "baseline_points": 59,
+        "z": -1.026,
+        "baseline_points": 60,
         "measure": "키워드별 합산",
         "n_split": 2,
         "saturated": false,
@@ -158,17 +157,17 @@
         ]
       },
       "rate_shock": {
-        "n_articles": 5,
-        "n_sources": 5,
-        "z": -0.643,
-        "baseline_points": 59,
+        "n_articles": 10,
+        "n_sources": 9,
+        "z": 0.286,
+        "baseline_points": 60,
         "measure": "키워드별 합산",
-        "n_split": 5,
+        "n_split": 10,
         "saturated": false,
         "top_titles": [
-          "GBP/USD approaches breaking point as US yields surge - FOREX.com",
+          "Gold, silver slide as Treasury yields surge, Fed hike concerns intensify - Kitco PM Report - Kitco",
           "GBP/USD Approaches Breaking Point as US Yields Surge - Investing.com",
-          "US Treasury Yields Surge as Inflation Revives Fed Rate Hike Fears: What It Means for Bitcoin - Programming Insider"
+          "China's Huafa gains 'full support' of local government amid bond selloff - The Standard (HK)"
         ]
       }
     },
