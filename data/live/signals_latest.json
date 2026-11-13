@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-13T01:53:08+00:00",
+  "collected_at": "2026-11-13T11:06:59+00:00",
   "as_of": "2026-11-12",
   "level": "NONE",
   "chain": [
@@ -60,114 +60,114 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 18,
-        "n_sources": 16,
-        "z": 0.2,
-        "baseline_points": 60,
+        "n_articles": 20,
+        "n_sources": 17,
+        "z": 0.49,
+        "baseline_points": 61,
         "measure": "키워드별 합산",
-        "n_split": 18,
+        "n_split": 20,
         "saturated": false,
         "top_titles": [
           "Paraguay Central Bank Pays $644M to Ueno Depositors - Global Finance Magazine",
-          "Ueno Bank collapse freezes nearly 3 million accounts and triggers Paraguay's biggest political crisis in years - Latin Times",
-          "Paraguay on Watch for Downgrade at Fitch After Bank Collapse - Bloomberg.com"
+          "Paraguay on Watch for Downgrade at Fitch After Bank Collapse - Bloomberg.com",
+          "Democratic senators seek to remove US-Israel defense cooperation from spending bill - The Pittsburgh Jewish Chronicle"
         ]
       },
       "credit_event": {
-        "n_articles": 104,
-        "n_sources": 94,
-        "z": 1.437,
-        "baseline_points": 60,
+        "n_articles": 107,
+        "n_sources": 100,
+        "z": 1.526,
+        "baseline_points": 61,
         "measure": "키워드별 합산",
-        "n_split": 104,
+        "n_split": 107,
         "saturated": false,
         "top_titles": [
+          "Collections are coming for millions of student loans in default - Perryville Republic Monitor",
           "Nvidia Default Risk Nears Record High as Board Weighs CEO’s Fate - Bloomberg.com",
-          "Case Summary: The Children's Place Chapter 11 - Bondoro",
-          "Prudential Urges DC Plans to Make Lifetime Income a Default - plansponsor"
+          "Case Summary: The Children's Place Chapter 11 - Bondoro"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 10,
-        "n_sources": 10,
-        "z": 0.409,
-        "baseline_points": 60,
+        "n_articles": 8,
+        "n_sources": 7,
+        "z": -0.367,
+        "baseline_points": 61,
         "measure": "키워드별 합산",
-        "n_split": 10,
+        "n_split": 8,
         "saturated": false,
         "top_titles": [
           "Bitcoin market faces liquidity crunch and capital outflows, challenging recovery prospects. - Pluang",
-          "USD/SGD (SGD=X) live rate, chart and news - Yahoo Finance Singapore",
-          "Stablecoin Supply Shrinks $14.2B: Is a Crypto Liquidity Crunch Near? - Coin Gabbar"
+          "Crunch Fitness Seeks to Borrow $800 Million in ABS Bond Sale - Athletech News",
+          "Bitcoin dips below $69K amid heavy liquidations and shrinking market liquidity. - Pluang"
         ]
       },
       "geopolitical": {
-        "n_articles": 142,
-        "n_sources": 117,
-        "z": 0.34,
-        "baseline_points": 60,
-        "measure": "키워드별 합산",
-        "n_split": 142,
-        "saturated": false,
-        "top_titles": [
-          "UK sanctions Russia's Slavneft in latest move against oil producers - Reuters",
-          "Security Council, 10270th Meeting (PM) Yemen Sanctions - UN Meetings Coverage and Press Releases",
-          "‘Huge caravans’ of migrants in Mexico represents invasion of US: Trump - NewsNation"
-        ]
-      },
-      "trade_policy": {
-        "n_articles": 146,
-        "n_sources": 109,
-        "z": 1.255,
-        "baseline_points": 60,
-        "measure": "키워드별 합산",
-        "n_split": 146,
-        "saturated": false,
-        "top_titles": [
-          "Trump slaps 100% tariff on some pharmaceutical drugs via executive order - ABC News - Breaking News, Latest News and Videos",
-          "‘A high probability’: Congress pushes tighter export controls following Nvidia scandal - Semafor",
-          "Mexico's Sheinbaum pushes back on Trump’s tariff threat, says no caravans have reached U.S. border since 2025 - Spectrum News"
-        ]
-      },
-      "pandemic": {
         "n_articles": 132,
-        "n_sources": 110,
-        "z": -0.29,
-        "baseline_points": 60,
+        "n_sources": 117,
+        "z": -0.033,
+        "baseline_points": 61,
         "measure": "키워드별 합산",
         "n_split": 132,
         "saturated": false,
         "top_titles": [
-          "Popular California beach closed amid E. coli outbreak - Los Angeles Times",
-          "Doctor on frontlines of Todd County measles outbreak says it could ‘overwhelm’ health system - MPR News",
-          "CDC reports six measles deaths in 2026 as US battles worst outbreak in 35 years - The Guardian"
+          "Yemen’s Houthis renew strikes on Saudi Arabia as UNSC extends sanctions - Al Jazeera",
+          "UK sanctions Russia's Slavneft in latest move against oil producers - Reuters",
+          "‘Huge caravans’ of migrants in Mexico represents invasion of US: Trump - NewsNation"
+        ]
+      },
+      "trade_policy": {
+        "n_articles": 141,
+        "n_sources": 113,
+        "z": 1.071,
+        "baseline_points": 61,
+        "measure": "키워드별 합산",
+        "n_split": 141,
+        "saturated": false,
+        "top_titles": [
+          "‘We will sue them’: Canada threatens Stellantis as Trump trade war reshapes Jeep production plans - CNBC",
+          "Watch Analyst Sees Stricter US Export Controls After Nvidia - Bloomberg.com",
+          "Could US Export Controls Put $3 Billion in China’s Nvidia-Powered AI Projects at Risk? - Modern Diplomacy"
+        ]
+      },
+      "pandemic": {
+        "n_articles": 132,
+        "n_sources": 108,
+        "z": -0.287,
+        "baseline_points": 61,
+        "measure": "키워드별 합산",
+        "n_split": 132,
+        "saturated": false,
+        "top_titles": [
+          "CDC reports six measles deaths in 2026 as US battles worst outbreak in 35 years - The Guardian",
+          "6 months into DRC’s Ebola outbreak, women and girls face increasing maternal deaths and violence - International Rescue Committee",
+          "Popular California beach closed amid E. coli outbreak - Los Angeles Times"
         ]
       },
       "fx_shock": {
         "n_articles": 2,
         "n_sources": 2,
-        "z": -1.026,
-        "baseline_points": 60,
+        "z": -1.008,
+        "baseline_points": 61,
         "measure": "키워드별 합산",
         "n_split": 2,
         "saturated": false,
         "top_titles": [
-          "Original Sin in Economics: Why Dollar Debt Can Amplify Currency Crises - EBC Financial Group",
+          "U.S. Government's July Coordinated Yen-Buying Intervention Totaled ¥79.4 Billion, New York Fed Discloses in Quarterly Report - BigGo Finance",
           "Why RBI wants to cap select overseas remittances at ₹50 Lakh to save rupees | Explained - The Hindu"
         ]
       },
       "rate_shock": {
-        "n_articles": 10,
-        "n_sources": 9,
-        "z": 0.286,
-        "baseline_points": 60,
+        "n_articles": 12,
+        "n_sources": 11,
+        "z": 0.655,
+        "baseline_points": 61,
         "measure": "키워드별 합산",
-        "n_split": 10,
+        "n_split": 12,
         "saturated": false,
         "top_titles": [
           "Gold, silver slide as Treasury yields surge, Fed hike concerns intensify - Kitco PM Report - Kitco",
-          "GBP/USD Approaches Breaking Point as US Yields Surge - Investing.com",
-          "China's Huafa gains 'full support' of local government amid bond selloff - The Standard (HK)"
+          "Bond Selloff Deepens as Rising Energy Prices Stoke Inflation Fears - EnergyNow.com",
+          "Bitcoin plunges below $70,000 as bond yields surge and Fed rate fears grow - Ednews.net"
         ]
       }
     },

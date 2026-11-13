@@ -85,3 +85,4 @@
 {"collected_at": "2026-11-12T11:24:14+00:00", "as_of": "2026-11-10", "level": "NONE", "money_alert": false, "market": ["T10Y2Y"], "flow": [], "news_status": "ok", "news_errors": 0, "clusters": [], "alerts_sent": {}}
 {"collected_at": "2026-11-12T20:00:02+00:00", "as_of": "2026-11-11", "level": "NONE", "money_alert": false, "market": ["T10Y2Y"], "flow": [], "news_status": "ok", "news_errors": 0, "clusters": [], "alerts_sent": {}}
 {"collected_at": "2026-11-13T01:53:08+00:00", "as_of": "2026-11-12", "level": "NONE", "money_alert": false, "market": ["DGS10"], "flow": [], "news_status": "ok", "news_errors": 0, "clusters": [], "alerts_sent": {}}
+{"collected_at": "2026-11-13T11:06:59+00:00", "as_of": "2026-11-12", "level": "NONE", "money_alert": false, "market": ["DGS10"], "flow": [], "news_status": "ok", "news_errors": 0, "clusters": [], "alerts_sent": {}}
