@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-13T01:18+09:00",
+  "as_of": "2026-11-13T11:35+09:00",
   "level": "NONE",
   "money_alert": false,
   "money_today": false,
@@ -7,8 +7,8 @@
   "kr_market": {
     "as_of": "2026-11-13",
     "zscores": {
-      "KOSPI": 0.6870700577108946,
-      "USDKRW": -0.8078560515326612,
+      "KOSPI": -0.21924252524613966,
+      "USDKRW": -0.5106098703217808,
       "KTB3Y": -0.08282932050645977,
       "CREDIT_KR": -0.5336135368366359,
       "CD91": -0.21308576232082532
@@ -19,8 +19,8 @@
   "kr_flow": {
     "as_of": "2026-11-13",
     "zscores": {
-      "FOREIGN_NET_KOSPI": 1.1475961239036503,
-      "FOREIGN_NET_5D": -6.13609822242509e-06
+      "FOREIGN_NET_KOSPI": 0.9031980421913863,
+      "FOREIGN_NET_5D": 0.8488521912601725
     },
     "triggered": [],
     "active": false,
@@ -31,46 +31,46 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 11,
+        "n_articles": 10,
         "n_sources": 10,
-        "z": -0.2688130074516857,
-        "baseline_points": 100
+        "z": -0.40373640587303333,
+        "baseline_points": 102
       },
       "credit_event": {
-        "n_articles": 26,
-        "n_sources": 20,
-        "z": -1.36665124652726,
-        "baseline_points": 100
+        "n_articles": 23,
+        "n_sources": 18,
+        "z": -1.486449153065392,
+        "baseline_points": 102
       },
       "liquidity_crisis": {
-        "n_articles": 6,
-        "n_sources": 6,
-        "z": -2.0226423547311403,
-        "baseline_points": 100
+        "n_articles": 13,
+        "n_sources": 13,
+        "z": -0.9569891048358128,
+        "baseline_points": 102
       },
       "fx_shock": {
-        "n_articles": 34,
-        "n_sources": 29,
-        "z": -0.8964909073777637,
-        "baseline_points": 100
+        "n_articles": 45,
+        "n_sources": 41,
+        "z": -0.3553959513784269,
+        "baseline_points": 102
       },
       "trade_policy": {
-        "n_articles": 83,
+        "n_articles": 73,
         "n_sources": 52,
-        "z": 1.0921285752311705,
-        "baseline_points": 100
+        "z": 0.5823986984419561,
+        "baseline_points": 102
       },
       "geopolitical": {
-        "n_articles": 113,
-        "n_sources": 77,
-        "z": -0.3437002863085903,
-        "baseline_points": 100
+        "n_articles": 98,
+        "n_sources": 73,
+        "z": -1.0808674306784298,
+        "baseline_points": 102
       },
       "pandemic": {
-        "n_articles": 22,
-        "n_sources": 21,
-        "z": -1.2564033636909413,
-        "baseline_points": 100
+        "n_articles": 26,
+        "n_sources": 23,
+        "z": -0.9612266187673071,
+        "baseline_points": 102
       }
     },
     "notes": []
@@ -81,7 +81,7 @@
     {
       "단계": "한국 시장(A_kr)",
       "원인": "임계 초과 지표 없음",
-      "근거": "ECOS 일별 1일 변화 z (기준일 2026-11-13), 규칙 |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0 (사전 등록 v5). 관측: 코스피 z=+0.69, 원/달러 z=-0.81, 국고채 3년 z=-0.08, 회사채AA−국고채 3년 금리차 z=-0.53, CD 91일 z=-0.21",
+      "근거": "ECOS 일별 1일 변화 z (기준일 2026-11-13), 규칙 |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0 (사전 등록 v5). 관측: 코스피 z=-0.22, 원/달러 z=-0.51, 국고채 3년 z=-0.08, 회사채AA−국고채 3년 금리차 z=-0.53, CD 91일 z=-0.21",
       "결과": "비활성"
     },
     {
