@@ -1,18 +1,18 @@
 {
-  "collected_at": "2026-11-13T11:06:59+00:00",
+  "collected_at": "2026-11-13T19:47:23+00:00",
   "as_of": "2026-11-12",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "미 10년물 금리(DGS10) z=+2.22",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+2.22, VIX(변동성)(VIXCLS) z=-1.18, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.75",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+2.22, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.85, VIX(변동성)(VIXCLS) z=+0.76",
       "결과": "비활성"
     },
     {
       "단계": "자금 흐름(C)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.32, 미 은행 예금(DPSACBW027SBOG) z=+0.02, 해외 공적 미국채 보관(WMTSECL1) z=-1.10, 지급준비금(WRESBAL) z=+0.58",
+      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.32, 미 은행 예금(DPSACBW027SBOG) z=+0.02, 해외 공적 미국채 보관(WMTSECL1) z=-0.81, 지급준비금(WRESBAL) z=+0.47",
       "결과": "비활성"
     },
     {
@@ -35,11 +35,11 @@
       "DGS10"
     ],
     "zscores": {
-      "VIXCLS": -1.18,
+      "VIXCLS": 0.76,
       "T10Y2Y": -0.3,
       "DGS10": 2.22,
       "DCOILWTICO": -0.06,
-      "BAMLH0A0HYM2": -0.75
+      "BAMLH0A0HYM2": -1.85
     }
   },
   "flow": {
@@ -48,8 +48,8 @@
     "zscores": {
       "WRMFNS": -0.32,
       "DPSACBW027SBOG": 0.02,
-      "WMTSECL1": -1.1,
-      "WRESBAL": 0.58
+      "WMTSECL1": -0.81,
+      "WRESBAL": 0.47
     }
   },
   "news": {
@@ -61,113 +61,113 @@
     "observations": {
       "banking_stress": {
         "n_articles": 20,
-        "n_sources": 17,
-        "z": 0.49,
-        "baseline_points": 61,
+        "n_sources": 18,
+        "z": 0.485,
+        "baseline_points": 62,
         "measure": "키워드별 합산",
         "n_split": 20,
         "saturated": false,
         "top_titles": [
-          "Paraguay Central Bank Pays $644M to Ueno Depositors - Global Finance Magazine",
-          "Paraguay on Watch for Downgrade at Fitch After Bank Collapse - Bloomberg.com",
-          "Democratic senators seek to remove US-Israel defense cooperation from spending bill - The Pittsburgh Jewish Chronicle"
+          "Ueno Bank collapse traps November wages and leaves 7,000 workers across five countries without jobs - Latin Times",
+          "Paraguay Counts the Cost as Ueno Bank Exhausts Santiago Peña’s Political Credit - LatinAmerican Post",
+          "Democratic senators seek to remove US-Israel defence cooperation from spending bill - South African Jewish Report"
         ]
       },
       "credit_event": {
-        "n_articles": 107,
-        "n_sources": 100,
-        "z": 1.526,
-        "baseline_points": 61,
+        "n_articles": 85,
+        "n_sources": 78,
+        "z": 0.581,
+        "baseline_points": 62,
         "measure": "키워드별 합산",
-        "n_split": 107,
+        "n_split": 85,
         "saturated": false,
         "top_titles": [
-          "Collections are coming for millions of student loans in default - Perryville Republic Monitor",
-          "Nvidia Default Risk Nears Record High as Board Weighs CEO’s Fate - Bloomberg.com",
-          "Case Summary: The Children's Place Chapter 11 - Bondoro"
+          "Exclusive | Baker McKenzie Looks to Abandon the Billable Hour as Default - WSJ",
+          "Heavy Seas Beer Files for Chapter 11 Bankruptcy, Will Keep Brewing - Beer Street Journal",
+          "SUN: Heavy Seas Beer says it’s staying open after bankruptcy filing - WBFF"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 8,
+        "n_articles": 7,
         "n_sources": 7,
-        "z": -0.367,
-        "baseline_points": 61,
+        "z": -0.752,
+        "baseline_points": 62,
         "measure": "키워드별 합산",
-        "n_split": 8,
+        "n_split": 7,
         "saturated": false,
         "top_titles": [
-          "Bitcoin market faces liquidity crunch and capital outflows, challenging recovery prospects. - Pluang",
-          "Crunch Fitness Seeks to Borrow $800 Million in ABS Bond Sale - Athletech News",
-          "Bitcoin dips below $69K amid heavy liquidations and shrinking market liquidity. - Pluang"
+          "Bitcoin dips below $69K amid heavy liquidations and shrinking market liquidity. - Pluang",
+          "M&S to launch new flexible payment plan to spread out costs - should YOU use it? - The Sun",
+          "He Yi blames Southeast Asian scam networks for Binance freeze rumors - Cryptopolitan"
         ]
       },
       "geopolitical": {
-        "n_articles": 132,
-        "n_sources": 117,
-        "z": -0.033,
-        "baseline_points": 61,
+        "n_articles": 125,
+        "n_sources": 109,
+        "z": -0.294,
+        "baseline_points": 62,
         "measure": "키워드별 합산",
-        "n_split": 132,
+        "n_split": 125,
         "saturated": false,
         "top_titles": [
-          "Yemen’s Houthis renew strikes on Saudi Arabia as UNSC extends sanctions - Al Jazeera",
-          "UK sanctions Russia's Slavneft in latest move against oil producers - Reuters",
-          "‘Huge caravans’ of migrants in Mexico represents invasion of US: Trump - NewsNation"
+          "Supreme Court takes on Trump border ‘invasion’ proclamation - Courthouse News",
+          "Too late, too narrow: EU audit of Russia trade sanctions exposes accountability gap - Howl.Link",
+          "Ice hockey: Russia threatens sanctions against Canada, Germany - DW.com"
         ]
       },
       "trade_policy": {
-        "n_articles": 141,
-        "n_sources": 113,
-        "z": 1.071,
-        "baseline_points": 61,
+        "n_articles": 151,
+        "n_sources": 123,
+        "z": 1.368,
+        "baseline_points": 62,
         "measure": "키워드별 합산",
-        "n_split": 141,
+        "n_split": 151,
         "saturated": false,
         "top_titles": [
-          "‘We will sue them’: Canada threatens Stellantis as Trump trade war reshapes Jeep production plans - CNBC",
-          "Watch Analyst Sees Stricter US Export Controls After Nvidia - Bloomberg.com",
-          "Could US Export Controls Put $3 Billion in China’s Nvidia-Powered AI Projects at Risk? - Modern Diplomacy"
+          "China Extends Suspension of Rare Earth Export Controls - Thompson Hine",
+          "Two Views: Trump’s Failed Import Tariff Policy Added to Inflation - American Enterprise Institute - AEI",
+          "Bessent blames Commerce Dept over lack of export controls for Nvidia partner Megaspeed - Reuters"
         ]
       },
       "pandemic": {
-        "n_articles": 132,
-        "n_sources": 108,
-        "z": -0.287,
-        "baseline_points": 61,
+        "n_articles": 146,
+        "n_sources": 124,
+        "z": 0.011,
+        "baseline_points": 62,
         "measure": "키워드별 합산",
-        "n_split": 132,
+        "n_split": 146,
         "saturated": false,
         "top_titles": [
-          "CDC reports six measles deaths in 2026 as US battles worst outbreak in 35 years - The Guardian",
-          "6 months into DRC’s Ebola outbreak, women and girls face increasing maternal deaths and violence - International Rescue Committee",
-          "Popular California beach closed amid E. coli outbreak - Los Angeles Times"
+          "DR Congo Ebola outbreak: Unrest fuelled by armed groups holds back response - UN News",
+          "Nearby ‘law enforcement activity’ prompts lockdown at Powell high, middle and elementary, KCS says - WVLT",
+          "Texas youth prison lockdown criticized in state oversight report - KUT"
         ]
       },
       "fx_shock": {
         "n_articles": 2,
         "n_sources": 2,
-        "z": -1.008,
-        "baseline_points": 61,
+        "z": -0.992,
+        "baseline_points": 62,
         "measure": "키워드별 합산",
         "n_split": 2,
         "saturated": false,
         "top_titles": [
           "U.S. Government's July Coordinated Yen-Buying Intervention Totaled ¥79.4 Billion, New York Fed Discloses in Quarterly Report - BigGo Finance",
-          "Why RBI wants to cap select overseas remittances at ₹50 Lakh to save rupees | Explained - The Hindu"
+          "Does Africa’s Founder-CEO Exit Wave Have a Nigerian Accent? - Launch Base Africa"
         ]
       },
       "rate_shock": {
-        "n_articles": 12,
-        "n_sources": 11,
-        "z": 0.655,
-        "baseline_points": 61,
+        "n_articles": 10,
+        "n_sources": 10,
+        "z": 0.274,
+        "baseline_points": 62,
         "measure": "키워드별 합산",
-        "n_split": 12,
+        "n_split": 10,
         "saturated": false,
         "top_titles": [
           "Gold, silver slide as Treasury yields surge, Fed hike concerns intensify - Kitco PM Report - Kitco",
-          "Bond Selloff Deepens as Rising Energy Prices Stoke Inflation Fears - EnergyNow.com",
-          "Bitcoin plunges below $70,000 as bond yields surge and Fed rate fears grow - Ednews.net"
+          "Bitcoin plunges below $70,000 as bond yields surge and Fed rate fears grow - Ednews.net",
+          "India bond selloff may continue as Treasury rout, fresh debt sale hurt - TradingView"
         ]
       }
     },
