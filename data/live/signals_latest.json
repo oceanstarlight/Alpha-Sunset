@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-14T01:29:18+00:00",
+  "collected_at": "2026-11-14T10:34:01+00:00",
   "as_of": "2026-11-13",
   "level": "NONE",
   "chain": [
@@ -60,12 +60,12 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 16,
-        "n_sources": 15,
-        "z": -0.11,
-        "baseline_points": 63,
+        "n_articles": 15,
+        "n_sources": 13,
+        "z": -0.258,
+        "baseline_points": 64,
         "measure": "키워드별 합산",
-        "n_split": 16,
+        "n_split": 15,
         "saturated": false,
         "top_titles": [
           "Ueno Bank collapse traps November wages and leaves 7,000 workers across five countries without jobs - Latin Times",
@@ -74,99 +74,97 @@
         ]
       },
       "credit_event": {
-        "n_articles": 72,
-        "n_sources": 64,
-        "z": 0.038,
-        "baseline_points": 63,
+        "n_articles": 62,
+        "n_sources": 53,
+        "z": -0.379,
+        "baseline_points": 64,
         "measure": "키워드별 합산",
-        "n_split": 72,
+        "n_split": 62,
         "saturated": false,
         "top_titles": [
           "Filing Alert: Commerce Ag Chapter 11 - Bondoro",
-          "Upcoming Richland Two Board of Trustees Meeting - Richland School District 2",
-          "CDL files for Chapter 11 protection - The Iola Register"
+          "A Car-Dependent Florida Community Voted to Make Multimodal Infrastructure Its Default - Streetsblog USA",
+          "Upcoming Richland Two Board of Trustees Meeting - Richland School District 2"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 10,
         "n_sources": 10,
-        "z": 0.427,
-        "baseline_points": 63,
+        "z": 0.423,
+        "baseline_points": 64,
         "measure": "키워드별 합산",
         "n_split": 10,
         "saturated": false,
         "top_titles": [
           "EVFM: Q3 profit contrasts with a severe liquidity crunch and December debt maturities - TradingView",
-          "Bitcoin dips below $69K amid heavy liquidations and shrinking market liquidity. - Pluang",
+          "Jensen Huang's Departure Prompts Financial Firms to Consider Exiting... 670 Trillion Won AI Financing Plan Falters - 파이낸셜뉴스",
           "M&S to launch new flexible payment plan to spread out costs - should YOU use it? - The Sun"
         ]
       },
       "geopolitical": {
-        "n_articles": 154,
-        "n_sources": 137,
-        "z": 0.799,
-        "baseline_points": 63,
+        "n_articles": 131,
+        "n_sources": 116,
+        "z": -0.078,
+        "baseline_points": 64,
         "measure": "키워드별 합산",
-        "n_split": 154,
+        "n_split": 131,
         "saturated": false,
         "top_titles": [
+          "Waialua engineer sentenced for evading Iran sanctions - Honolulu Star-Advertiser",
           "Trump’s ‘invasion’ asylum ban to face justices - Roll Call",
-          "Supreme Court takes on Trump border ‘invasion’ proclamation - Courthouse News",
-          "US declares three Guatemalan gangs to be terrorist groups, imposes sanctions - ABC News - Breaking News, Latest News and Videos"
+          "$20,000 jewelry safe taken in SLO County home invasion; teens arrested - KMPH Fox 26"
         ]
       },
       "trade_policy": {
-        "n_articles": 158,
-        "n_sources": 130,
-        "z": 1.557,
-        "baseline_points": 63,
+        "n_articles": 142,
+        "n_sources": 121,
+        "z": 1.02,
+        "baseline_points": 64,
         "measure": "키워드별 합산",
-        "n_split": 158,
+        "n_split": 142,
         "saturated": false,
         "top_titles": [
-          "China Extends Suspension of Rare Earth Export Controls - Thompson Hine",
-          "Slotkin, Warren Push FTC to Rein in Companies Withholding Tariff Refunds from Consumers - U.S. Senate (.gov)",
-          "Two Views: Trump’s Failed Import Tariff Policy Added to Inflation - American Enterprise Institute - AEI"
+          "Managing U.S. Tariff Costs: Options for Importers - Kroll",
+          "3 U.S. Steel Stocks With Tariff Exposure Retail Investors Are Watching - Yahoo Finance",
+          "The migrant caravan crossing Mexico that has triggered Trump’s new tariff threat: ‘Our fear is that the Mexican president will send us back’ - EL PAÍS English"
         ]
       },
       "pandemic": {
-        "n_articles": 170,
-        "n_sources": 144,
-        "z": 0.522,
-        "baseline_points": 63,
+        "n_articles": 163,
+        "n_sources": 138,
+        "z": 0.367,
+        "baseline_points": 64,
         "measure": "키워드별 합산",
-        "n_split": 170,
+        "n_split": 163,
         "saturated": false,
         "top_titles": [
+          "Lockdown Defense Leads To Home-Opening Victory For UT Martin - UTM Athletics",
           "New Mexico bacterial outbreak spreads in unhoused population - Source New Mexico",
-          "Pennsylvania records 7th measles death as outbreak climbs to 1,542 cases - American Hospital Association",
-          "Ebola outbreak update as of November 11 - Outbreak News Today"
+          "Pennsylvania records 7th measles death as outbreak climbs to 1,542 cases - American Hospital Association"
         ]
       },
       "fx_shock": {
-        "n_articles": 1,
-        "n_sources": 1,
-        "z": -1.481,
-        "baseline_points": 63,
+        "n_articles": 0,
+        "n_sources": 0,
+        "z": -1.944,
+        "baseline_points": 64,
         "measure": "키워드별 합산",
-        "n_split": 1,
+        "n_split": 0,
         "saturated": false,
-        "top_titles": [
-          "Does Africa’s Founder-CEO Exit Wave Have a Nigerian Accent? - Launch Base Africa"
-        ]
+        "top_titles": []
       },
       "rate_shock": {
-        "n_articles": 6,
-        "n_sources": 6,
-        "z": -0.481,
-        "baseline_points": 63,
+        "n_articles": 4,
+        "n_sources": 4,
+        "z": -0.854,
+        "baseline_points": 64,
         "measure": "키워드별 합산",
-        "n_split": 6,
+        "n_split": 4,
         "saturated": false,
         "top_titles": [
-          "Bitcoin plunges below $70,000 as bond yields surge and Fed rate fears grow - Ednews.net",
-          "India bond selloff may continue as Treasury rout, fresh debt sale hurt - TradingView",
-          "India bond selloff may continue as Treasury rout, fresh debt sale hurt - BusinessLine"
+          "UK and Eurozone Bond Yields Surge Amid Rate Hike Expectations - GuruFocus",
+          "Global Bond Investors Brace for Continued Volatility as Treasury Yields Surge - azat.tv",
+          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com"
         ]
       }
     },
