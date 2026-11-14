@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-14T10:34:01+00:00",
+  "collected_at": "2026-11-14T18:11:27+00:00",
   "as_of": "2026-11-13",
   "level": "NONE",
   "chain": [
@@ -60,111 +60,112 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 15,
-        "n_sources": 13,
-        "z": -0.258,
-        "baseline_points": 64,
+        "n_articles": 8,
+        "n_sources": 7,
+        "z": -1.305,
+        "baseline_points": 65,
         "measure": "키워드별 합산",
-        "n_split": 15,
+        "n_split": 8,
         "saturated": false,
         "top_titles": [
           "Ueno Bank collapse traps November wages and leaves 7,000 workers across five countries without jobs - Latin Times",
           "Paraguay Counts the Cost as Ueno Bank Exhausts Santiago Peña’s Political Credit - LatinAmerican Post",
-          "The smartest city in the world just made the dumbest choice imaginable - New York Post"
+          "Teachers strike in Paraguay to demand pension fund protections following bank's collapse - Bluefield Daily Telegraph"
         ]
       },
       "credit_event": {
-        "n_articles": 62,
-        "n_sources": 53,
-        "z": -0.379,
-        "baseline_points": 64,
+        "n_articles": 47,
+        "n_sources": 42,
+        "z": -1.004,
+        "baseline_points": 65,
         "measure": "키워드별 합산",
-        "n_split": 62,
+        "n_split": 47,
         "saturated": false,
         "top_titles": [
+          "The Children’s Place files Chapter 11 bankruptcy - Times-Journal",
           "Filing Alert: Commerce Ag Chapter 11 - Bondoro",
-          "A Car-Dependent Florida Community Voted to Make Multimodal Infrastructure Its Default - Streetsblog USA",
-          "Upcoming Richland Two Board of Trustees Meeting - Richland School District 2"
+          "A Car-Dependent Florida Community Voted to Make Multimodal Infrastructure Its Default - Streetsblog USA"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 10,
         "n_sources": 10,
-        "z": 0.423,
-        "baseline_points": 64,
+        "z": 0.42,
+        "baseline_points": 65,
         "measure": "키워드별 합산",
         "n_split": 10,
         "saturated": false,
         "top_titles": [
           "EVFM: Q3 profit contrasts with a severe liquidity crunch and December debt maturities - TradingView",
-          "Jensen Huang's Departure Prompts Financial Firms to Consider Exiting... 670 Trillion Won AI Financing Plan Falters - 파이낸셜뉴스",
-          "M&S to launch new flexible payment plan to spread out costs - should YOU use it? - The Sun"
+          "Bitcoin falls below $70K amid institutional wit... - Pluang",
+          "Jensen Huang's Departure Prompts Financial Firms to Consider Exiting... 670 Trillion Won AI Financing Plan Falters - 파이낸셜뉴스"
         ]
       },
       "geopolitical": {
-        "n_articles": 131,
-        "n_sources": 116,
-        "z": -0.078,
-        "baseline_points": 64,
+        "n_articles": 122,
+        "n_sources": 107,
+        "z": -0.42,
+        "baseline_points": 65,
         "measure": "키워드별 합산",
-        "n_split": 131,
+        "n_split": 122,
         "saturated": false,
         "top_titles": [
-          "Waialua engineer sentenced for evading Iran sanctions - Honolulu Star-Advertiser",
-          "Trump’s ‘invasion’ asylum ban to face justices - Roll Call",
-          "$20,000 jewelry safe taken in SLO County home invasion; teens arrested - KMPH Fox 26"
+          "Why did the Bay of Pigs invasion of Cuba fail? - Britannica",
+          "Hemmati Mocks Bessent’s Iran Sanctions Threats: “It’s Too Early to Talk About Winter” - WANA News Agency",
+          "Waialua engineer sentenced for evading Iran sanctions - Honolulu Star-Advertiser"
         ]
       },
       "trade_policy": {
-        "n_articles": 142,
-        "n_sources": 121,
-        "z": 1.02,
-        "baseline_points": 64,
+        "n_articles": 111,
+        "n_sources": 93,
+        "z": 0.043,
+        "baseline_points": 65,
         "measure": "키워드별 합산",
-        "n_split": 142,
+        "n_split": 111,
         "saturated": false,
         "top_titles": [
-          "Managing U.S. Tariff Costs: Options for Importers - Kroll",
-          "3 U.S. Steel Stocks With Tariff Exposure Retail Investors Are Watching - Yahoo Finance",
-          "The migrant caravan crossing Mexico that has triggered Trump’s new tariff threat: ‘Our fear is that the Mexican president will send us back’ - EL PAÍS English"
+          "Nvidia Scandal Deals Blow to Trump’s Tariff Strategy - Newsweek",
+          "Democrats want to kill some of Trump's tariffs — but that might not end the trade war - Castanet",
+          "The countries fighting back against Trump's tariff tirade - DW.com"
         ]
       },
       "pandemic": {
-        "n_articles": 163,
-        "n_sources": 138,
-        "z": 0.367,
-        "baseline_points": 64,
+        "n_articles": 143,
+        "n_sources": 124,
+        "z": -0.068,
+        "baseline_points": 65,
         "measure": "키워드별 합산",
-        "n_split": 163,
+        "n_split": 143,
         "saturated": false,
         "top_titles": [
           "Lockdown Defense Leads To Home-Opening Victory For UT Martin - UTM Athletics",
-          "New Mexico bacterial outbreak spreads in unhoused population - Source New Mexico",
-          "Pennsylvania records 7th measles death as outbreak climbs to 1,542 cases - American Hospital Association"
+          "U.S. likely to lose measles elimination status as Pa. continues to see more cases - WHYY",
+          "New Mexico bacterial outbreak spreads in unhoused population - Source New Mexico"
         ]
       },
       "fx_shock": {
-        "n_articles": 0,
-        "n_sources": 0,
-        "z": -1.944,
-        "baseline_points": 64,
+        "n_articles": 1,
+        "n_sources": 1,
+        "z": -1.386,
+        "baseline_points": 65,
         "measure": "키워드별 합산",
-        "n_split": 0,
+        "n_split": 1,
         "saturated": false,
-        "top_titles": []
+        "top_titles": [
+          "Qamishlo vegetable, fruit market closes in protest over currency crisis - ANHA"
+        ]
       },
       "rate_shock": {
-        "n_articles": 4,
-        "n_sources": 4,
-        "z": -0.854,
-        "baseline_points": 64,
+        "n_articles": 2,
+        "n_sources": 2,
+        "z": -1.222,
+        "baseline_points": 65,
         "measure": "키워드별 합산",
-        "n_split": 4,
+        "n_split": 2,
         "saturated": false,
         "top_titles": [
           "UK and Eurozone Bond Yields Surge Amid Rate Hike Expectations - GuruFocus",
-          "Global Bond Investors Brace for Continued Volatility as Treasury Yields Surge - azat.tv",
-          "Trump Blinks as Big, Bad Bond Market Bares its Teeth: McGeever - EnergyNow.com"
+          "Global Bond Investors Brace for Continued Volatility as Treasury Yields Surge - azat.tv"
         ]
       }
     },
