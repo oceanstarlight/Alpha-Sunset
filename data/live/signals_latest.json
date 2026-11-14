@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-14T18:11:27+00:00",
+  "collected_at": "2026-11-14T22:30:14+00:00",
   "as_of": "2026-11-13",
   "level": "NONE",
   "chain": [
@@ -60,94 +60,94 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 8,
-        "n_sources": 7,
-        "z": -1.305,
-        "baseline_points": 65,
+        "n_articles": 6,
+        "n_sources": 5,
+        "z": -1.576,
+        "baseline_points": 66,
         "measure": "키워드별 합산",
-        "n_split": 8,
+        "n_split": 6,
         "saturated": false,
         "top_titles": [
-          "Ueno Bank collapse traps November wages and leaves 7,000 workers across five countries without jobs - Latin Times",
           "Paraguay Counts the Cost as Ueno Bank Exhausts Santiago Peña’s Political Credit - LatinAmerican Post",
-          "Teachers strike in Paraguay to demand pension fund protections following bank's collapse - Bluefield Daily Telegraph"
+          "Teachers strike in Paraguay to demand pension fund protections following bank's collapse - Bluefield Daily Telegraph",
+          "The smartest city in the world just made the dumbest choice imaginable - New York Post"
         ]
       },
       "credit_event": {
-        "n_articles": 47,
-        "n_sources": 42,
-        "z": -1.004,
-        "baseline_points": 65,
+        "n_articles": 33,
+        "n_sources": 31,
+        "z": -1.576,
+        "baseline_points": 66,
         "measure": "키워드별 합산",
-        "n_split": 47,
+        "n_split": 33,
         "saturated": false,
         "top_titles": [
+          "Usher Seeks Default Judgment Against Lawyer in Battle Over $700,000 Loan - Complex",
           "The Children’s Place files Chapter 11 bankruptcy - Times-Journal",
-          "Filing Alert: Commerce Ag Chapter 11 - Bondoro",
-          "A Car-Dependent Florida Community Voted to Make Multimodal Infrastructure Its Default - Streetsblog USA"
+          "Filing Alert: Commerce Ag Chapter 11 - Bondoro"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 10,
-        "n_sources": 10,
-        "z": 0.42,
-        "baseline_points": 65,
+        "n_articles": 7,
+        "n_sources": 6,
+        "z": -0.777,
+        "baseline_points": 66,
         "measure": "키워드별 합산",
-        "n_split": 10,
+        "n_split": 7,
         "saturated": false,
         "top_titles": [
-          "EVFM: Q3 profit contrasts with a severe liquidity crunch and December debt maturities - TradingView",
-          "Bitcoin falls below $70K amid institutional wit... - Pluang",
-          "Jensen Huang's Departure Prompts Financial Firms to Consider Exiting... 670 Trillion Won AI Financing Plan Falters - 파이낸셜뉴스"
+          "Bitcoin drops below $64K and Ethereum nears $1,... - Pluang",
+          "Jensen Huang's Departure Prompts Financial Firms to Consider Exiting... 670 Trillion Won AI Financing Plan Falters - 파이낸셜뉴스",
+          "Bitcoin falls below $70K amid institutional wit... - Pluang"
         ]
       },
       "geopolitical": {
-        "n_articles": 122,
-        "n_sources": 107,
-        "z": -0.42,
-        "baseline_points": 65,
+        "n_articles": 96,
+        "n_sources": 87,
+        "z": -1.41,
+        "baseline_points": 66,
         "measure": "키워드별 합산",
-        "n_split": 122,
+        "n_split": 96,
         "saturated": false,
         "top_titles": [
-          "Why did the Bay of Pigs invasion of Cuba fail? - Britannica",
-          "Hemmati Mocks Bessent’s Iran Sanctions Threats: “It’s Too Early to Talk About Winter” - WANA News Agency",
-          "Waialua engineer sentenced for evading Iran sanctions - Honolulu Star-Advertiser"
+          "Ice hockey: Russia threatens sanctions against Canada, Germany - DW.com",
+          "Manchester City face another year of uncertainty! Premier League charges could result in sanctions in 2027 after appeal hearing - Yahoo Sports",
+          "Why did the Bay of Pigs invasion of Cuba fail? - Britannica"
         ]
       },
       "trade_policy": {
-        "n_articles": 111,
-        "n_sources": 93,
-        "z": 0.043,
-        "baseline_points": 65,
+        "n_articles": 94,
+        "n_sources": 81,
+        "z": -0.488,
+        "baseline_points": 66,
         "measure": "키워드별 합산",
-        "n_split": 111,
+        "n_split": 94,
         "saturated": false,
         "top_titles": [
-          "Nvidia Scandal Deals Blow to Trump’s Tariff Strategy - Newsweek",
-          "Democrats want to kill some of Trump's tariffs — but that might not end the trade war - Castanet",
-          "The countries fighting back against Trump's tariff tirade - DW.com"
+          "Commerce Department under pressure for delaying export controls on Nvidia chips - NPR",
+          "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
+          "Mexico’s week in review: Trump renews tariff threats as Sheinbaum prepares for China - Mexico News Daily"
         ]
       },
       "pandemic": {
-        "n_articles": 143,
-        "n_sources": 124,
-        "z": -0.068,
-        "baseline_points": 65,
+        "n_articles": 96,
+        "n_sources": 79,
+        "z": -1.089,
+        "baseline_points": 66,
         "measure": "키워드별 합산",
-        "n_split": 143,
+        "n_split": 96,
         "saturated": false,
         "top_titles": [
-          "Lockdown Defense Leads To Home-Opening Victory For UT Martin - UTM Athletics",
-          "U.S. likely to lose measles elimination status as Pa. continues to see more cases - WHYY",
-          "New Mexico bacterial outbreak spreads in unhoused population - Source New Mexico"
+          "US Stands to Lose Measles Elimination Status as Multiple States Face The Worst Outbreaks in Nearly Three Decades - Health Policy Watch",
+          "U.S. loses measles elimination status, according to reports, as Pa. battles largest outbreak in 3 decades - WHYY",
+          "Lockdown Defense Leads To Home-Opening Victory For UT Martin - UTM Athletics"
         ]
       },
       "fx_shock": {
         "n_articles": 1,
         "n_sources": 1,
-        "z": -1.386,
-        "baseline_points": 65,
+        "z": -1.355,
+        "baseline_points": 66,
         "measure": "키워드별 합산",
         "n_split": 1,
         "saturated": false,
@@ -156,16 +156,15 @@
         ]
       },
       "rate_shock": {
-        "n_articles": 2,
-        "n_sources": 2,
-        "z": -1.222,
-        "baseline_points": 65,
+        "n_articles": 1,
+        "n_sources": 1,
+        "z": -1.388,
+        "baseline_points": 66,
         "measure": "키워드별 합산",
-        "n_split": 2,
+        "n_split": 1,
         "saturated": false,
         "top_titles": [
-          "UK and Eurozone Bond Yields Surge Amid Rate Hike Expectations - GuruFocus",
-          "Global Bond Investors Brace for Continued Volatility as Treasury Yields Surge - azat.tv"
+          "Yield On 10-Year U.S. Treasury At Highest Level Since 2002 - Baystreet.ca"
         ]
       }
     },
