@@ -1,18 +1,18 @@
 {
-  "collected_at": "2026-11-13T19:47:23+00:00",
-  "as_of": "2026-11-12",
+  "collected_at": "2026-11-14T01:29:18+00:00",
+  "as_of": "2026-11-13",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "미 10년물 금리(DGS10) z=+2.22",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+2.22, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.85, VIX(변동성)(VIXCLS) z=+0.76",
+      "원인": "미 10년물 금리(DGS10) z=+2.64",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+2.64, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.85, 미 장단기 금리차(T10Y2Y) z=+1.08",
       "결과": "비활성"
     },
     {
       "단계": "자금 흐름(C)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.32, 미 은행 예금(DPSACBW027SBOG) z=+0.02, 해외 공적 미국채 보관(WMTSECL1) z=-0.81, 지급준비금(WRESBAL) z=+0.47",
+      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.32, 미 은행 예금(DPSACBW027SBOG) z=+0.59, 해외 공적 미국채 보관(WMTSECL1) z=-0.81, 지급준비금(WRESBAL) z=+0.47",
       "결과": "비활성"
     },
     {
@@ -36,8 +36,8 @@
     ],
     "zscores": {
       "VIXCLS": 0.76,
-      "T10Y2Y": -0.3,
-      "DGS10": 2.22,
+      "T10Y2Y": 1.08,
+      "DGS10": 2.64,
       "DCOILWTICO": -0.06,
       "BAMLH0A0HYM2": -1.85
     }
@@ -47,7 +47,7 @@
     "triggered": [],
     "zscores": {
       "WRMFNS": -0.32,
-      "DPSACBW027SBOG": 0.02,
+      "DPSACBW027SBOG": 0.59,
       "WMTSECL1": -0.81,
       "WRESBAL": 0.47
     }
@@ -60,114 +60,113 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 20,
-        "n_sources": 18,
-        "z": 0.485,
-        "baseline_points": 62,
+        "n_articles": 16,
+        "n_sources": 15,
+        "z": -0.11,
+        "baseline_points": 63,
         "measure": "키워드별 합산",
-        "n_split": 20,
+        "n_split": 16,
         "saturated": false,
         "top_titles": [
           "Ueno Bank collapse traps November wages and leaves 7,000 workers across five countries without jobs - Latin Times",
           "Paraguay Counts the Cost as Ueno Bank Exhausts Santiago Peña’s Political Credit - LatinAmerican Post",
-          "Democratic senators seek to remove US-Israel defence cooperation from spending bill - South African Jewish Report"
+          "The smartest city in the world just made the dumbest choice imaginable - New York Post"
         ]
       },
       "credit_event": {
-        "n_articles": 85,
-        "n_sources": 78,
-        "z": 0.581,
-        "baseline_points": 62,
+        "n_articles": 72,
+        "n_sources": 64,
+        "z": 0.038,
+        "baseline_points": 63,
         "measure": "키워드별 합산",
-        "n_split": 85,
+        "n_split": 72,
         "saturated": false,
         "top_titles": [
-          "Exclusive | Baker McKenzie Looks to Abandon the Billable Hour as Default - WSJ",
-          "Heavy Seas Beer Files for Chapter 11 Bankruptcy, Will Keep Brewing - Beer Street Journal",
-          "SUN: Heavy Seas Beer says it’s staying open after bankruptcy filing - WBFF"
+          "Filing Alert: Commerce Ag Chapter 11 - Bondoro",
+          "Upcoming Richland Two Board of Trustees Meeting - Richland School District 2",
+          "CDL files for Chapter 11 protection - The Iola Register"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 7,
-        "n_sources": 7,
-        "z": -0.752,
-        "baseline_points": 62,
-        "measure": "키워드별 합산",
-        "n_split": 7,
-        "saturated": false,
-        "top_titles": [
-          "Bitcoin dips below $69K amid heavy liquidations and shrinking market liquidity. - Pluang",
-          "M&S to launch new flexible payment plan to spread out costs - should YOU use it? - The Sun",
-          "He Yi blames Southeast Asian scam networks for Binance freeze rumors - Cryptopolitan"
-        ]
-      },
-      "geopolitical": {
-        "n_articles": 125,
-        "n_sources": 109,
-        "z": -0.294,
-        "baseline_points": 62,
-        "measure": "키워드별 합산",
-        "n_split": 125,
-        "saturated": false,
-        "top_titles": [
-          "Supreme Court takes on Trump border ‘invasion’ proclamation - Courthouse News",
-          "Too late, too narrow: EU audit of Russia trade sanctions exposes accountability gap - Howl.Link",
-          "Ice hockey: Russia threatens sanctions against Canada, Germany - DW.com"
-        ]
-      },
-      "trade_policy": {
-        "n_articles": 151,
-        "n_sources": 123,
-        "z": 1.368,
-        "baseline_points": 62,
-        "measure": "키워드별 합산",
-        "n_split": 151,
-        "saturated": false,
-        "top_titles": [
-          "China Extends Suspension of Rare Earth Export Controls - Thompson Hine",
-          "Two Views: Trump’s Failed Import Tariff Policy Added to Inflation - American Enterprise Institute - AEI",
-          "Bessent blames Commerce Dept over lack of export controls for Nvidia partner Megaspeed - Reuters"
-        ]
-      },
-      "pandemic": {
-        "n_articles": 146,
-        "n_sources": 124,
-        "z": 0.011,
-        "baseline_points": 62,
-        "measure": "키워드별 합산",
-        "n_split": 146,
-        "saturated": false,
-        "top_titles": [
-          "DR Congo Ebola outbreak: Unrest fuelled by armed groups holds back response - UN News",
-          "Nearby ‘law enforcement activity’ prompts lockdown at Powell high, middle and elementary, KCS says - WVLT",
-          "Texas youth prison lockdown criticized in state oversight report - KUT"
-        ]
-      },
-      "fx_shock": {
-        "n_articles": 2,
-        "n_sources": 2,
-        "z": -0.992,
-        "baseline_points": 62,
-        "measure": "키워드별 합산",
-        "n_split": 2,
-        "saturated": false,
-        "top_titles": [
-          "U.S. Government's July Coordinated Yen-Buying Intervention Totaled ¥79.4 Billion, New York Fed Discloses in Quarterly Report - BigGo Finance",
-          "Does Africa’s Founder-CEO Exit Wave Have a Nigerian Accent? - Launch Base Africa"
-        ]
-      },
-      "rate_shock": {
         "n_articles": 10,
         "n_sources": 10,
-        "z": 0.274,
-        "baseline_points": 62,
+        "z": 0.427,
+        "baseline_points": 63,
         "measure": "키워드별 합산",
         "n_split": 10,
         "saturated": false,
         "top_titles": [
-          "Gold, silver slide as Treasury yields surge, Fed hike concerns intensify - Kitco PM Report - Kitco",
+          "EVFM: Q3 profit contrasts with a severe liquidity crunch and December debt maturities - TradingView",
+          "Bitcoin dips below $69K amid heavy liquidations and shrinking market liquidity. - Pluang",
+          "M&S to launch new flexible payment plan to spread out costs - should YOU use it? - The Sun"
+        ]
+      },
+      "geopolitical": {
+        "n_articles": 154,
+        "n_sources": 137,
+        "z": 0.799,
+        "baseline_points": 63,
+        "measure": "키워드별 합산",
+        "n_split": 154,
+        "saturated": false,
+        "top_titles": [
+          "Trump’s ‘invasion’ asylum ban to face justices - Roll Call",
+          "Supreme Court takes on Trump border ‘invasion’ proclamation - Courthouse News",
+          "US declares three Guatemalan gangs to be terrorist groups, imposes sanctions - ABC News - Breaking News, Latest News and Videos"
+        ]
+      },
+      "trade_policy": {
+        "n_articles": 158,
+        "n_sources": 130,
+        "z": 1.557,
+        "baseline_points": 63,
+        "measure": "키워드별 합산",
+        "n_split": 158,
+        "saturated": false,
+        "top_titles": [
+          "China Extends Suspension of Rare Earth Export Controls - Thompson Hine",
+          "Slotkin, Warren Push FTC to Rein in Companies Withholding Tariff Refunds from Consumers - U.S. Senate (.gov)",
+          "Two Views: Trump’s Failed Import Tariff Policy Added to Inflation - American Enterprise Institute - AEI"
+        ]
+      },
+      "pandemic": {
+        "n_articles": 170,
+        "n_sources": 144,
+        "z": 0.522,
+        "baseline_points": 63,
+        "measure": "키워드별 합산",
+        "n_split": 170,
+        "saturated": false,
+        "top_titles": [
+          "New Mexico bacterial outbreak spreads in unhoused population - Source New Mexico",
+          "Pennsylvania records 7th measles death as outbreak climbs to 1,542 cases - American Hospital Association",
+          "Ebola outbreak update as of November 11 - Outbreak News Today"
+        ]
+      },
+      "fx_shock": {
+        "n_articles": 1,
+        "n_sources": 1,
+        "z": -1.481,
+        "baseline_points": 63,
+        "measure": "키워드별 합산",
+        "n_split": 1,
+        "saturated": false,
+        "top_titles": [
+          "Does Africa’s Founder-CEO Exit Wave Have a Nigerian Accent? - Launch Base Africa"
+        ]
+      },
+      "rate_shock": {
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": -0.481,
+        "baseline_points": 63,
+        "measure": "키워드별 합산",
+        "n_split": 6,
+        "saturated": false,
+        "top_titles": [
           "Bitcoin plunges below $70,000 as bond yields surge and Fed rate fears grow - Ednews.net",
-          "India bond selloff may continue as Treasury rout, fresh debt sale hurt - TradingView"
+          "India bond selloff may continue as Treasury rout, fresh debt sale hurt - TradingView",
+          "India bond selloff may continue as Treasury rout, fresh debt sale hurt - BusinessLine"
         ]
       }
     },
