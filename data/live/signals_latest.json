@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-14T22:30:14+00:00",
+  "collected_at": "2026-11-15T06:42:23+00:00",
   "as_of": "2026-11-13",
   "level": "NONE",
   "chain": [
@@ -60,111 +60,114 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 6,
-        "n_sources": 5,
-        "z": -1.576,
-        "baseline_points": 66,
+        "n_articles": 13,
+        "n_sources": 11,
+        "z": -0.504,
+        "baseline_points": 67,
         "measure": "키워드별 합산",
-        "n_split": 6,
+        "n_split": 13,
         "saturated": false,
         "top_titles": [
           "Paraguay Counts the Cost as Ueno Bank Exhausts Santiago Peña’s Political Credit - LatinAmerican Post",
           "Teachers strike in Paraguay to demand pension fund protections following bank's collapse - Bluefield Daily Telegraph",
-          "The smartest city in the world just made the dumbest choice imaginable - New York Post"
+          "The $209 Billion Collapse Of Silicon Valley Bank Nick Kurtz (QXmJuukRKS) - Unisba Media"
         ]
       },
       "credit_event": {
-        "n_articles": 33,
-        "n_sources": 31,
-        "z": -1.576,
-        "baseline_points": 66,
+        "n_articles": 30,
+        "n_sources": 29,
+        "z": -1.66,
+        "baseline_points": 67,
         "measure": "키워드별 합산",
-        "n_split": 33,
+        "n_split": 30,
         "saturated": false,
         "top_titles": [
+          "Boise State Volleyball secures win by default after Fresno State travel issues - KTVB",
           "Usher Seeks Default Judgment Against Lawyer in Battle Over $700,000 Loan - Complex",
-          "The Children’s Place files Chapter 11 bankruptcy - Times-Journal",
-          "Filing Alert: Commerce Ag Chapter 11 - Bondoro"
+          "The Children’s Place files Chapter 11 bankruptcy - Times-Journal"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 7,
-        "n_sources": 6,
-        "z": -0.777,
-        "baseline_points": 66,
+        "n_articles": 6,
+        "n_sources": 5,
+        "z": -1.167,
+        "baseline_points": 67,
         "measure": "키워드별 합산",
-        "n_split": 7,
+        "n_split": 6,
         "saturated": false,
         "top_titles": [
+          "The world is facing a new credit crunch - The Telegraph",
           "Bitcoin drops below $64K and Ethereum nears $1,... - Pluang",
-          "Jensen Huang's Departure Prompts Financial Firms to Consider Exiting... 670 Trillion Won AI Financing Plan Falters - 파이낸셜뉴스",
           "Bitcoin falls below $70K amid institutional wit... - Pluang"
         ]
       },
       "geopolitical": {
-        "n_articles": 96,
-        "n_sources": 87,
-        "z": -1.41,
-        "baseline_points": 66,
+        "n_articles": 78,
+        "n_sources": 76,
+        "z": -2.062,
+        "baseline_points": 67,
         "measure": "키워드별 합산",
-        "n_split": 96,
+        "n_split": 78,
         "saturated": false,
         "top_titles": [
-          "Ice hockey: Russia threatens sanctions against Canada, Germany - DW.com",
-          "Manchester City face another year of uncertainty! Premier League charges could result in sanctions in 2027 after appeal hearing - Yahoo Sports",
-          "Why did the Bay of Pigs invasion of Cuba fail? - Britannica"
+          "Pirate invasion brings Golden Age of Piracy to Beaufort for one weekend - WCTI",
+          "John Wick Faces Off Against Ballerina in This Invasion Thriller Officially Leaving HBO Max - Collider",
+          "Bahrain Votes in Favor of UN Security Council Resolution Renewing Yemen Sanctions Regime - Yemen Online"
         ]
       },
       "trade_policy": {
-        "n_articles": 94,
-        "n_sources": 81,
-        "z": -0.488,
-        "baseline_points": 66,
+        "n_articles": 86,
+        "n_sources": 76,
+        "z": -0.735,
+        "baseline_points": 67,
         "measure": "키워드별 합산",
-        "n_split": 94,
+        "n_split": 86,
         "saturated": false,
         "top_titles": [
           "Commerce Department under pressure for delaying export controls on Nvidia chips - NPR",
-          "Trump administration pays out milestone $100 billion in tariff refunds - ABC News - Breaking News, Latest News and Videos",
+          "The countries fighting back against Trump's tariff tirade - DW.com",
           "Mexico’s week in review: Trump renews tariff threats as Sheinbaum prepares for China - Mexico News Daily"
         ]
       },
       "pandemic": {
-        "n_articles": 96,
-        "n_sources": 79,
-        "z": -1.089,
-        "baseline_points": 66,
+        "n_articles": 76,
+        "n_sources": 63,
+        "z": -1.506,
+        "baseline_points": 67,
         "measure": "키워드별 합산",
-        "n_split": 96,
+        "n_split": 76,
         "saturated": false,
         "top_titles": [
-          "US Stands to Lose Measles Elimination Status as Multiple States Face The Worst Outbreaks in Nearly Three Decades - Health Policy Watch",
+          "DRC Ebola outbreak 'growing exponentially,' UN says - DW.com",
           "U.S. loses measles elimination status, according to reports, as Pa. battles largest outbreak in 3 decades - WHYY",
-          "Lockdown Defense Leads To Home-Opening Victory For UT Martin - UTM Athletics"
+          "Ebola outbreak remains out of control in Congo 6 months into response - ClickOnDetroit | WDIV Local 4"
         ]
       },
       "fx_shock": {
-        "n_articles": 1,
-        "n_sources": 1,
-        "z": -1.355,
-        "baseline_points": 66,
+        "n_articles": 2,
+        "n_sources": 2,
+        "z": -0.844,
+        "baseline_points": 67,
         "measure": "키워드별 합산",
-        "n_split": 1,
+        "n_split": 2,
         "saturated": false,
         "top_titles": [
-          "Qamishlo vegetable, fruit market closes in protest over currency crisis - ANHA"
+          "Qamishlo vegetable, fruit market closes in protest over currency crisis - ANHA",
+          "Comparative Analysis of Nigeria’s Foreign Investment Dynamics - THISDAYLIVE"
         ]
       },
       "rate_shock": {
-        "n_articles": 1,
-        "n_sources": 1,
-        "z": -1.388,
-        "baseline_points": 66,
+        "n_articles": 3,
+        "n_sources": 3,
+        "z": -0.983,
+        "baseline_points": 67,
         "measure": "키워드별 합산",
-        "n_split": 1,
+        "n_split": 3,
         "saturated": false,
         "top_titles": [
-          "Yield On 10-Year U.S. Treasury At Highest Level Since 2002 - Baystreet.ca"
+          "Treasury Yields Snap Back on Ugly Inflation, Rough 10-Year & 30-Year Treasury Auctions. Bond Bloodbath Returns - Wolf Street",
+          "Yield On 10-Year U.S. Treasury At Highest Level Since 2002 - Baystreet.ca",
+          "Wall Street is watching a troubling move in Treasury yields - Yahoo Finance"
         ]
       }
     },
