@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-15T16:25:47+00:00",
+  "collected_at": "2026-11-15T22:54:22+00:00",
   "as_of": "2026-11-13",
   "level": "NONE",
   "chain": [
@@ -62,92 +62,92 @@
       "banking_stress": {
         "n_articles": 10,
         "n_sources": 10,
-        "z": -0.944,
-        "baseline_points": 68,
+        "z": -0.931,
+        "baseline_points": 69,
         "measure": "키워드별 합산",
         "n_split": 10,
         "saturated": false,
         "top_titles": [
           "Teachers strike in Paraguay to demand pension fund protections following bank's collapse - Ottumwa Courier",
-          "The $209 Billion Collapse Of Silicon Valley Bank Nick Kurtz (QXmJuukRKS) - Unisba Media",
-          "Podcast Release: Reciprocal Deposits, the 21st Century ROAD to Housing Act, and the Future of Banking: A Conversation with Rob Blackwell of IntraFi [Podcast] - The National Law Review"
+          "Podcast Release: Reciprocal Deposits, the 21st Century ROAD to Housing Act, and the Future of Banking: A Conversation with Rob Blackwell of IntraFi [Podcast] - The National Law Review",
+          "Korean Banks Deliver 25 Trillion Won in Social Value, Yet Face More Demands - Seoul Economic Daily"
         ]
       },
       "credit_event": {
-        "n_articles": 29,
-        "n_sources": 28,
-        "z": -1.656,
-        "baseline_points": 68,
+        "n_articles": 27,
+        "n_sources": 26,
+        "z": -1.693,
+        "baseline_points": 69,
         "measure": "키워드별 합산",
-        "n_split": 29,
+        "n_split": 27,
         "saturated": false,
         "top_titles": [
-          "Chicago’s third CFO resignation this year raises specter of default - The Last Ward | Austin Berg",
-          "Hamilton Reserve Bank faces US$4.5M involuntary Chapter 11 bankruptcy petition in New York - OffshoreAlert",
-          "My Take | The dollar’s reign endures not by merit but by default - South China Morning Post"
+          "Meta Fined €805 Million in Italy Over Facebook’s Default Photo Gallery Access - Security Affairs",
+          "My Take | The dollar’s reign endures not by merit but by default - South China Morning Post",
+          "Stoli Resumes U.S. Operations After Creditor Deal Following Bankruptcy Filing - Vinetur"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 7,
-        "n_sources": 7,
-        "z": -0.749,
-        "baseline_points": 68,
+        "n_articles": 9,
+        "n_sources": 9,
+        "z": 0.058,
+        "baseline_points": 69,
         "measure": "키워드별 합산",
-        "n_split": 7,
+        "n_split": 9,
         "saturated": false,
         "top_titles": [
+          "Brookfield Returns Keys on Beaudry Tower as Global Credit Crunch Builds - News and Statistics - IndexBox",
           "The world is facing a new credit crunch - The Telegraph",
-          "War-driven liquidity crunch weighs on Saudi growth plans - EnterpriseAM",
           "Interest rate increases pressure global borrowing, Telegraph notes - Traders Union"
         ]
       },
       "geopolitical": {
-        "n_articles": 61,
-        "n_sources": 59,
-        "z": -2.616,
-        "baseline_points": 68,
+        "n_articles": 65,
+        "n_sources": 61,
+        "z": -2.333,
+        "baseline_points": 69,
         "measure": "키워드별 합산",
-        "n_split": 61,
+        "n_split": 65,
         "saturated": false,
         "top_titles": [
           "Haaland 'incredibly happy' at Man City, not thinking about possible sanctions - ESPN",
-          "Iran - Nuclear Deal, Sanctions, Diplomacy - Britannica",
-          "Thousands run Cuba’s Marabana marathon as many protest US sanctions - Oskaloosa Herald"
+          "At Cuba’s Marabana marathon, many protest U.S. sanctions - Los Angeles Times",
+          "EU announces new sanctions following interception of oil tanker linked to Russia's ghost fleet in Mediterranean - European Interest"
         ]
       },
       "trade_policy": {
-        "n_articles": 51,
-        "n_sources": 47,
-        "z": -1.831,
-        "baseline_points": 68,
+        "n_articles": 65,
+        "n_sources": 57,
+        "z": -1.34,
+        "baseline_points": 69,
         "measure": "키워드별 합산",
-        "n_split": 51,
+        "n_split": 65,
         "saturated": false,
         "top_titles": [
-          "Commerce Department under pressure for delaying export controls on Nvidia chips - NPR",
-          "How auto trade policy could change after Democrats’ midterm wins - Automotive News",
-          "China Warns US on New Chip Export Controls - CASRAI"
+          "Opinion | The Success of President Trump’s Tariff Policy - WSJ",
+          "Can China and the US Settle the Tariff Fight at Their First Trade Council Meeting? - Modern Diplomacy",
+          "US-China Trade Council Meets on $60B Tariff Deal and Agricultural Trade - News and Statistics - IndexBox"
         ]
       },
       "pandemic": {
-        "n_articles": 80,
-        "n_sources": 67,
-        "z": -1.384,
-        "baseline_points": 68,
+        "n_articles": 88,
+        "n_sources": 74,
+        "z": -1.184,
+        "baseline_points": 69,
         "measure": "키워드별 합산",
-        "n_split": 80,
+        "n_split": 88,
         "saturated": false,
         "top_titles": [
-          "Syria launches vaccination campaign to stop polio outbreak in Deir ez-Zor - World Health Organization (WHO)",
-          "Ebola Outbreak Reaches 11,145 Cases, 5437 Deaths - Contagion Live",
-          "Ebola outbreak remains out of control in Congo 6 months into response - ABC News - Breaking News, Latest News and Videos"
+          "Ebola outbreak remains out of control in Congo 6 months into response - PBS",
+          "Africa CDC says Ebola outbreak in DR Congo ‘still not under control’ - Al Jazeera",
+          "Africa CDC says Ebola outbreak still out of control six months since it was declared - Reuters"
         ]
       },
       "fx_shock": {
         "n_articles": 2,
         "n_sources": 2,
-        "z": -0.833,
-        "baseline_points": 68,
+        "z": -0.823,
+        "baseline_points": 69,
         "measure": "키워드별 합산",
         "n_split": 2,
         "saturated": false,
@@ -157,16 +157,17 @@
         ]
       },
       "rate_shock": {
-        "n_articles": 2,
-        "n_sources": 2,
-        "z": -1.157,
-        "baseline_points": 68,
+        "n_articles": 4,
+        "n_sources": 4,
+        "z": -0.763,
+        "baseline_points": 69,
         "measure": "키워드별 합산",
-        "n_split": 2,
+        "n_split": 4,
         "saturated": false,
         "top_titles": [
+          "GBP/USD approaches breaking point as US yields surge - StoneX",
           "Treasury Yields Snap Back on Ugly Inflation, Rough 10-Year & 30-Year Treasury Auctions. Bond Bloodbath Returns - Wolf Street",
-          "Wall Street is watching a troubling move in Treasury yields - Yahoo Finance"
+          "U.S. bond market braces for Fed signals after yield surge - Traders Union"
         ]
       }
     },
