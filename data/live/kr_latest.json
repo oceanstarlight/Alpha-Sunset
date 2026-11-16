@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-11-16T10:56+09:00",
-  "level": "NONE",
+  "as_of": "2026-11-16T11:43+09:00",
+  "level": "WATCH",
   "money_alert": false,
   "money_today": false,
   "event_confirmed": false,
@@ -37,45 +37,58 @@
         "baseline_points": 107
       },
       "credit_event": {
-        "n_articles": 33,
-        "n_sources": 26,
-        "z": -0.9631817733065445,
+        "n_articles": 39,
+        "n_sources": 33,
+        "z": -0.6706734012806214,
         "baseline_points": 107
       },
       "liquidity_crisis": {
-        "n_articles": 15,
-        "n_sources": 14,
-        "z": -0.6269302277539865,
+        "n_articles": 14,
+        "n_sources": 13,
+        "z": -0.7669751846844177,
         "baseline_points": 107
       },
       "fx_shock": {
         "n_articles": 47,
-        "n_sources": 32,
+        "n_sources": 31,
         "z": -0.2454579471417693,
         "baseline_points": 107
       },
       "trade_policy": {
-        "n_articles": 55,
+        "n_articles": 60,
         "n_sources": 40,
-        "z": -0.32067574896042156,
+        "z": -0.07311221982070207,
         "baseline_points": 107
       },
       "geopolitical": {
-        "n_articles": 96,
-        "n_sources": 73,
-        "z": -1.1071264645653247,
+        "n_articles": 105,
+        "n_sources": 79,
+        "z": -0.6680149384630152,
         "baseline_points": 107
       },
       "pandemic": {
-        "n_articles": 30,
+        "n_articles": 32,
         "n_sources": 28,
-        "z": -0.6321289523227925,
+        "z": -0.5018056423063402,
         "baseline_points": 107
       }
     },
     "notes": []
   },
-  "warnings": [],
+  "warnings": [
+    {
+      "corp_name": "코람코더원리츠",
+      "stock_code": "417310",
+      "corp_cls": "Y",
+      "report_nm": "주요사항보고서(해산사유발생)",
+      "rcept_no": "20261116000179",
+      "rcept_dt": "2026-11-16",
+      "url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116000179",
+      "keyword": "해산사유발생",
+      "confirmed": false,
+      "n_sources": 3
+    }
+  ],
   "linkage": null,
   "chain": [
     {
@@ -97,13 +110,21 @@
       "결과": "비활성"
     },
     {
+      "단계": "DART 신용 공시",
+      "원인": "코람코더원리츠(417310) 주요사항보고서(해산사유발생) (2026-11-16)",
+      "근거": "공시 원문 https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116000179 · 키워드 '해산사유발생' · 기업명 기사 언론사 3곳 (확정 기준 48시간 내 10곳, 사전 등록 v5)",
+      "결과": "사건 경고 (대응안 없음, 알림만)"
+    },
+    {
       "단계": "로컬 종합 등급",
-      "원인": "A_kr/C_kr 오늘 비활성 · 5영업일 지속 미달, 사건(B_any)=미확정, DART 경고 0건",
+      "원인": "A_kr/C_kr 오늘 비활성 · 5영업일 지속 미달, 사건(B_any)=미확정, DART 경고 1건",
       "근거": "로컬 ALERT = (한국 사건 ∨ 해외 사건 ∨ 확정 DART) ∧ (A_kr ∨ C_kr) · 1단계 알림 = 끝나는 5영업일 중 2일 이상 A_kr ∨ C_kr (사전 등록 v5)",
-      "결과": "NONE → 조치 없음"
+      "결과": "WATCH → 사건 경고 알림"
     }
   ],
   "notes": [],
-  "alerts_sent": {},
+  "alerts_sent": {
+    "dart:20261116000179:False": "sent"
+  },
   "report": null
 }
