@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-11-16T06:38:48+00:00",
+  "collected_at": "2026-11-16T19:40:32+00:00",
   "as_of": "2026-11-13",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "미 10년물 금리(DGS10) z=+2.64",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+2.64, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-1.85, 미 장단기 금리차(T10Y2Y) z=+1.08",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+2.64, 미 장단기 금리차(T10Y2Y) z=+1.08, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+0.54",
       "결과": "비활성"
     },
     {
@@ -17,9 +17,9 @@
     },
     {
       "단계": "사건 신호(B)",
-      "원인": "사건 군집 없음",
+      "원인": "조회 실패 2/8건",
       "근거": "규칙: 최근 24시간 기사 수 z ≥ 3.0 (직전 30일 관측 기준선) AND 언론사 ≥ 20곳, 출처 Google 뉴스 RSS",
-      "결과": "비활성"
+      "결과": "비활성 (일부 조회 실패)"
     },
     {
       "단계": "종합 등급",
@@ -35,11 +35,11 @@
       "DGS10"
     ],
     "zscores": {
-      "VIXCLS": 0.76,
+      "VIXCLS": 0.34,
       "T10Y2Y": 1.08,
       "DGS10": 2.64,
       "DCOILWTICO": -0.06,
-      "BAMLH0A0HYM2": -1.85
+      "BAMLH0A0HYM2": 0.54
     }
   },
   "flow": {
@@ -54,121 +54,96 @@
   },
   "news": {
     "active": false,
-    "status": "ok",
+    "status": "partial",
     "n_queries": 8,
-    "errors": [],
+    "errors": [
+      "credit_event: Google 뉴스 RSS 실패 (HTTPStatusError)",
+      "trade_policy: Google 뉴스 RSS 실패 (HTTPStatusError)"
+    ],
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 11,
-        "n_sources": 11,
-        "z": -0.77,
-        "baseline_points": 70,
+        "n_articles": 10,
+        "n_sources": 10,
+        "z": -0.911,
+        "baseline_points": 71,
         "measure": "키워드별 합산",
-        "n_split": 11,
+        "n_split": 10,
         "saturated": false,
         "top_titles": [
-          "Teachers strike in Paraguay to demand pension fund protections following bank's collapse - Ottumwa Courier",
-          "Podcast Release: Reciprocal Deposits, the 21st Century ROAD to Housing Act, and the Future of Banking: A Conversation with Rob Blackwell of IntraFi [Podcast] - The National Law Review",
-          "Monopoly Round-Up: Microsoft, the FAA, and Our Soviet Indifference to System Collapse. - BIG by Matt Stoller"
-        ]
-      },
-      "credit_event": {
-        "n_articles": 28,
-        "n_sources": 27,
-        "z": -1.607,
-        "baseline_points": 70,
-        "measure": "키워드별 합산",
-        "n_split": 28,
-        "saturated": false,
-        "top_titles": [
-          "Meta Fined €805 Million in Italy Over Facebook’s Default Photo Gallery Access - Security Affairs",
-          "Hamilton Reserve Bank hit with involuntary Chapter 11 petition over US$4.5M in depositor claims - OffshoreAlert",
-          "Stoli Resumes U.S. Operations After Creditor Deal Following Bankruptcy Filing - Vinetur"
+          "Fed’s Barr flags bank run and debt risks from rapid AI adoption - StreetInsider",
+          "Paraguay’s ousted president moved to military prison after reports of gym and suite in custody - CoastTV",
+          "Bank appointments being made entirely on merit: Finance Minister - Bangladesh Sangbad Sangstha (BSS)"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 12,
         "n_sources": 12,
-        "z": 1.264,
-        "baseline_points": 70,
+        "z": 1.241,
+        "baseline_points": 71,
         "measure": "키워드별 합산",
         "n_split": 12,
         "saturated": false,
         "top_titles": [
-          "Brookfield Returns Keys on Beaudry Tower as Global Credit Crunch Builds - News and Statistics - IndexBox",
-          "Interest rate increases pressure global borrowing, Telegraph notes - Traders Union",
-          "Aave enables Bitcoin as collateral to boost DeF... - Pluang"
+          "Institutional investors rethink alternatives amid liquidity crunch - InvestmentNews",
+          "\"The Biggest Competition For Capital I Have Seen in 50 years in Finance,\" Larry Fink Sounds The Alarm As Public Worldwide Debt Hits $110 Trillion, While $13 Trillion Of Corporate Debt Must Be Refinanced In The Next 5 Years - 24/7 Wall St.",
+          "USD/SGD (SGD=X) live rate, chart and news - Yahoo Finance Singapore"
         ]
       },
       "geopolitical": {
-        "n_articles": 90,
-        "n_sources": 84,
-        "z": -1.367,
-        "baseline_points": 70,
+        "n_articles": 179,
+        "n_sources": 130,
+        "z": 1.716,
+        "baseline_points": 71,
         "measure": "키워드별 합산",
-        "n_split": 90,
-        "saturated": false,
+        "n_split": 179,
+        "saturated": true,
         "top_titles": [
-          "Blinken warns US ground invasion of Iran would be 'absolute disaster' as Tehran escalates attacks - Fox News",
-          "'Masha and the Bear': Ukraine sanctions Russian cartoon - DW.com",
-          "At Cuba’s Marabana marathon, many protest U.S. sanctions - Los Angeles Times"
-        ]
-      },
-      "trade_policy": {
-        "n_articles": 83,
-        "n_sources": 74,
-        "z": -0.759,
-        "baseline_points": 70,
-        "measure": "키워드별 합산",
-        "n_split": 83,
-        "saturated": false,
-        "top_titles": [
-          "Opinion | The Success of President Trump’s Tariff Policy - WSJ",
-          "The Next Push on US Chip Export Controls - Kharon",
-          "The Tariff Debate: Who Is Really Paying the Bill? - Substack"
+          "The EU extends sanctions to nearly all major Russian banks - EEAS",
+          "Working in Cape Cod’s waters, he saw an unusual clam. It was the start of an invasion - The Guardian",
+          "EU expands Russia sanctions list by 145 names and entities - Reuters"
         ]
       },
       "pandemic": {
-        "n_articles": 100,
-        "n_sources": 89,
-        "z": -0.908,
-        "baseline_points": 70,
+        "n_articles": 141,
+        "n_sources": 129,
+        "z": -0.021,
+        "baseline_points": 71,
         "measure": "키워드별 합산",
-        "n_split": 100,
+        "n_split": 141,
         "saturated": false,
         "top_titles": [
-          "Ebola outbreak remains out of control in Congo 6 months into response - PBS",
-          "CPS Must Better Track Overtime, Extra Pay After Spending Soared Post-Pandemic: Watchdog - WTTW News",
-          "Congo Ebola Outbreak Defies Control as Conflict, Hunger Fuel Crisis Six Months In - Bloomberg.com"
+          "Walnut High School on lockdown after report of possible man with gun on campus, deputies say - ABC7 Los Angeles",
+          "Seabee Base on lockdown after suspicious package reported - WLOX",
+          "US braces for loss of measles elimination status amid worst outbreak in decades - The Hill"
         ]
       },
       "fx_shock": {
-        "n_articles": 4,
-        "n_sources": 4,
-        "z": 0.16,
-        "baseline_points": 70,
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": 1.139,
+        "baseline_points": 71,
         "measure": "키워드별 합산",
-        "n_split": 4,
+        "n_split": 6,
         "saturated": false,
         "top_titles": [
+          "Economy: Tinubu Has Done More Than Other Previous Administrations, IMPI Claims - https://thefact.ng/",
           "Milei Campaigned on Dollarizing Argentina. As President, He Stopped Talking About It. - Reason Magazine",
-          "Peter Schiff Warns 'Final Stages' Of Economic Collapse Are Here — 'We May Not Make It Through This Republican Administration' - Yahoo Finance",
           "Roger J Kerr says the FX markets are telling us the RBNZ is well behind the 8-ball with its timid approach - Forex Factory"
         ]
       },
       "rate_shock": {
-        "n_articles": 10,
+        "n_articles": 12,
         "n_sources": 10,
-        "z": 0.373,
-        "baseline_points": 70,
+        "z": 0.748,
+        "baseline_points": 71,
         "measure": "키워드별 합산",
-        "n_split": 10,
+        "n_split": 12,
         "saturated": false,
         "top_titles": [
           "GBP/USD approaches breaking point as US yields surge - StoneX",
-          "Indian bond selloff to persist after Treasuries see worst week in seven months - TradingView",
-          "After US Treasury Yields Surge Past 5%, Wall Street Zeroes In on Warsh's Remarks Tonight and October Meeting Minutes - BigGo Finance"
+          "Yields surge and stocks gain despite AI sector threat, James Stanley notes - Traders Union",
+          "Indian bond selloff to persist after Treasuries see worst week in seven months - TradingView"
         ]
       }
     },
