@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-16T11:43+09:00",
+  "as_of": "2026-11-16T15:30+09:00",
   "level": "WATCH",
   "money_alert": false,
   "money_today": false,
@@ -33,44 +33,44 @@
       "banking_stress": {
         "n_articles": 3,
         "n_sources": 3,
-        "z": -1.2955801848990467,
-        "baseline_points": 107
+        "z": -1.26424835180375,
+        "baseline_points": 109
       },
       "credit_event": {
-        "n_articles": 39,
-        "n_sources": 33,
-        "z": -0.6706734012806214,
-        "baseline_points": 107
+        "n_articles": 45,
+        "n_sources": 41,
+        "z": -0.36426823669094727,
+        "baseline_points": 109
       },
       "liquidity_crisis": {
-        "n_articles": 14,
-        "n_sources": 13,
-        "z": -0.7669751846844177,
-        "baseline_points": 107
+        "n_articles": 15,
+        "n_sources": 14,
+        "z": -0.6171106125535517,
+        "baseline_points": 109
       },
       "fx_shock": {
-        "n_articles": 47,
+        "n_articles": 45,
         "n_sources": 31,
-        "z": -0.2454579471417693,
-        "baseline_points": 107
+        "z": -0.34139586108043574,
+        "baseline_points": 109
       },
       "trade_policy": {
-        "n_articles": 60,
-        "n_sources": 40,
-        "z": -0.07311221982070207,
-        "baseline_points": 107
+        "n_articles": 64,
+        "n_sources": 41,
+        "z": 0.12969312601717076,
+        "baseline_points": 109
       },
       "geopolitical": {
-        "n_articles": 105,
-        "n_sources": 79,
-        "z": -0.6680149384630152,
-        "baseline_points": 107
+        "n_articles": 107,
+        "n_sources": 82,
+        "z": -0.555066896437851,
+        "baseline_points": 109
       },
       "pandemic": {
-        "n_articles": 32,
-        "n_sources": 28,
-        "z": -0.5018056423063402,
-        "baseline_points": 107
+        "n_articles": 38,
+        "n_sources": 30,
+        "z": -0.10107122164238208,
+        "baseline_points": 109
       }
     },
     "notes": []
@@ -86,7 +86,7 @@
       "url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116000179",
       "keyword": "해산사유발생",
       "confirmed": false,
-      "n_sources": 3
+      "n_sources": 4
     }
   ],
   "linkage": null,
@@ -112,7 +112,7 @@
     {
       "단계": "DART 신용 공시",
       "원인": "코람코더원리츠(417310) 주요사항보고서(해산사유발생) (2026-11-16)",
-      "근거": "공시 원문 https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116000179 · 키워드 '해산사유발생' · 기업명 기사 언론사 3곳 (확정 기준 48시간 내 10곳, 사전 등록 v5)",
+      "근거": "공시 원문 https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116000179 · 키워드 '해산사유발생' · 기업명 기사 언론사 4곳 (확정 기준 48시간 내 10곳, 사전 등록 v5)",
       "결과": "사건 경고 (대응안 없음, 알림만)"
     },
     {
@@ -124,7 +124,7 @@
   ],
   "notes": [],
   "alerts_sent": {
-    "dart:20261116000179:False": "sent"
+    "dart:20261116000179:False": "duplicate"
   },
   "report": null
 }
