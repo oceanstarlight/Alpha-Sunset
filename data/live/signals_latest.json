@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-11-16T19:40:32+00:00",
-  "as_of": "2026-11-13",
+  "collected_at": "2026-11-17T03:57:04+00:00",
+  "as_of": "2026-11-16",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "미 10년물 금리(DGS10) z=+2.64",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+2.64, 미 장단기 금리차(T10Y2Y) z=+1.08, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+0.54",
+      "원인": "임계 초과 지표 없음",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=+1.03, 미 장단기 금리차(T10Y2Y) z=+0.72, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+0.54",
       "결과": "비활성"
     },
     {
@@ -17,7 +17,7 @@
     },
     {
       "단계": "사건 신호(B)",
-      "원인": "조회 실패 2/8건",
+      "원인": "조회 실패 1/8건",
       "근거": "규칙: 최근 24시간 기사 수 z ≥ 3.0 (직전 30일 관측 기준선) AND 언론사 ≥ 20곳, 출처 Google 뉴스 RSS",
       "결과": "비활성 (일부 조회 실패)"
     },
@@ -31,14 +31,14 @@
   "money_alert": false,
   "market": {
     "active": false,
-    "triggered": [
-      "DGS10"
-    ],
+    "triggered": [],
     "zscores": {
       "VIXCLS": 0.34,
-      "T10Y2Y": 1.08,
-      "DGS10": 2.64,
+      "T10Y2Y": 0.72,
+      "DGS10": 1.03,
+      "DEXKOUS": 0.19,
       "DCOILWTICO": -0.06,
+      "DTWEXBGS": 0.31,
       "BAMLH0A0HYM2": 0.54
     }
   },
@@ -57,93 +57,106 @@
     "status": "partial",
     "n_queries": 8,
     "errors": [
-      "credit_event: Google 뉴스 RSS 실패 (HTTPStatusError)",
-      "trade_policy: Google 뉴스 RSS 실패 (HTTPStatusError)"
+      "geopolitical: Google 뉴스 RSS 실패 (HTTPStatusError)"
     ],
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 10,
-        "n_sources": 10,
-        "z": -0.911,
-        "baseline_points": 71,
+        "n_articles": 13,
+        "n_sources": 13,
+        "z": -0.452,
+        "baseline_points": 72,
         "measure": "키워드별 합산",
-        "n_split": 10,
+        "n_split": 13,
         "saturated": false,
         "top_titles": [
-          "Fed’s Barr flags bank run and debt risks from rapid AI adoption - StreetInsider",
-          "Paraguay’s ousted president moved to military prison after reports of gym and suite in custody - CoastTV",
-          "Bank appointments being made entirely on merit: Finance Minister - Bangladesh Sangbad Sangstha (BSS)"
+          "The Fed Is Worried AI Agents Could Trigger a Bank Run - Gizmodo",
+          "Bank outage vs. bank failure: is your money still safe? - qz.com",
+          "Fed’s Barr flags bank run and debt risks from rapid AI adoption - Investing.com"
+        ]
+      },
+      "credit_event": {
+        "n_articles": 78,
+        "n_sources": 65,
+        "z": 0.407,
+        "baseline_points": 71,
+        "measure": "키워드별 합산",
+        "n_split": 78,
+        "saturated": false,
+        "top_titles": [
+          "Why the Credit Default Swap Market—Red Hot in the AI Trade—Is Vital for CFOs - WSJ",
+          "World AMR Awareness Week 2026: One Health, One Action: Prevent AMR Now - World Health Organization (WHO)",
+          "AG Jennings alerts Delaware veterans to Trajector bankruptcy filing - WDEL"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 12,
-        "n_sources": 12,
-        "z": 1.241,
-        "baseline_points": 71,
+        "n_articles": 13,
+        "n_sources": 13,
+        "z": 1.619,
+        "baseline_points": 72,
         "measure": "키워드별 합산",
-        "n_split": 12,
+        "n_split": 13,
         "saturated": false,
         "top_titles": [
+          "Builder-lender deals hit by credit crunch, material costs - National Mortgage News",
           "Institutional investors rethink alternatives amid liquidity crunch - InvestmentNews",
-          "\"The Biggest Competition For Capital I Have Seen in 50 years in Finance,\" Larry Fink Sounds The Alarm As Public Worldwide Debt Hits $110 Trillion, While $13 Trillion Of Corporate Debt Must Be Refinanced In The Next 5 Years - 24/7 Wall St.",
-          "USD/SGD (SGD=X) live rate, chart and news - Yahoo Finance Singapore"
+          "[Workhorse Group Q3 2026 Earnings Call] Revenue Jumps 72% to $6.1M, But $10M TerraPod Deal and Liquidity Crunch Dominate - BigGo Finance"
         ]
       },
-      "geopolitical": {
-        "n_articles": 179,
-        "n_sources": 130,
-        "z": 1.716,
+      "trade_policy": {
+        "n_articles": 163,
+        "n_sources": 134,
+        "z": 1.725,
         "baseline_points": 71,
         "measure": "키워드별 합산",
-        "n_split": 179,
-        "saturated": true,
+        "n_split": 163,
+        "saturated": false,
         "top_titles": [
-          "The EU extends sanctions to nearly all major Russian banks - EEAS",
-          "Working in Cape Cod’s waters, he saw an unusual clam. It was the start of an invasion - The Guardian",
-          "EU expands Russia sanctions list by 145 names and entities - Reuters"
+          "Several companies are using Trump tariff refunds for corporate bonuses - The Guardian",
+          "Tariff Refunds Are Going To Executive Bonuses At These Companies, Report Says - Forbes",
+          "Congress could soon rein in Trump’s tariffs on Canada. Here’s what that could look like. - Atlantic Council"
         ]
       },
       "pandemic": {
-        "n_articles": 141,
-        "n_sources": 129,
-        "z": -0.021,
-        "baseline_points": 71,
+        "n_articles": 172,
+        "n_sources": 151,
+        "z": 0.645,
+        "baseline_points": 72,
         "measure": "키워드별 합산",
-        "n_split": 141,
+        "n_split": 172,
         "saturated": false,
         "top_titles": [
-          "Walnut High School on lockdown after report of possible man with gun on campus, deputies say - ABC7 Los Angeles",
-          "Seabee Base on lockdown after suspicious package reported - WLOX",
-          "US braces for loss of measles elimination status amid worst outbreak in decades - The Hill"
+          "UNICEF: Children make up 35% of Ebola deaths in DR Congo outbreak - CIDRAP",
+          "US braces for loss of measles elimination status amid worst outbreak in decades - The Hill",
+          "Suspect in custody after report of man with gun triggers lockdown at Walnut HS, deputies say - ABC7 Los Angeles"
         ]
       },
       "fx_shock": {
+        "n_articles": 7,
+        "n_sources": 7,
+        "z": 1.61,
+        "baseline_points": 72,
+        "measure": "키워드별 합산",
+        "n_split": 7,
+        "saturated": false,
+        "top_titles": [
+          "The British Pound’s Historic Plunge — and a Remarkably Timed Elliott Wave Forecast - Elliott Wave International",
+          "Economy: Tinubu Has Done More Than Other Previous Administrations, IMPI Claims - https://thefact.ng/",
+          "India Inc.’s Sudden Craving for Dollars Is a Dangerous Gamble - Bloomberg.com"
+        ]
+      },
+      "rate_shock": {
         "n_articles": 6,
         "n_sources": 6,
-        "z": 1.139,
-        "baseline_points": 71,
+        "z": -0.398,
+        "baseline_points": 72,
         "measure": "키워드별 합산",
         "n_split": 6,
         "saturated": false,
         "top_titles": [
-          "Economy: Tinubu Has Done More Than Other Previous Administrations, IMPI Claims - https://thefact.ng/",
-          "Milei Campaigned on Dollarizing Argentina. As President, He Stopped Talking About It. - Reason Magazine",
-          "Roger J Kerr says the FX markets are telling us the RBNZ is well behind the 8-ball with its timid approach - Forex Factory"
-        ]
-      },
-      "rate_shock": {
-        "n_articles": 12,
-        "n_sources": 10,
-        "z": 0.748,
-        "baseline_points": 71,
-        "measure": "키워드별 합산",
-        "n_split": 12,
-        "saturated": false,
-        "top_titles": [
-          "GBP/USD approaches breaking point as US yields surge - StoneX",
+          "S.Korean conglomerates pay down net $9.2 bn in bonds as yields surge - KED Global",
           "Yields surge and stocks gain despite AI sector threat, James Stanley notes - Traders Union",
-          "Indian bond selloff to persist after Treasuries see worst week in seven months - TradingView"
+          "EURUSD Falls to 2026 Low as US Treasury Yields Surge - VT Markets"
         ]
       }
     },
