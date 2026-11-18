@@ -1,18 +1,18 @@
 {
-  "collected_at": "2026-11-18T01:00:03+00:00",
-  "as_of": "2026-11-17",
-  "level": "WATCH",
+  "collected_at": "2026-11-18T11:50:47+00:00",
+  "as_of": "2026-10-16",
+  "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
-      "원인": "VIX(변동성)(VIXCLS) z=+2.10, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.00",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=+2.10, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.00, 미 10년물 금리(DGS10) z=-0.76",
-      "결과": "활성"
+      "원인": "미 10년물 금리(DGS10) z=-2.23",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=-2.23, 미 장단기 금리차(T10Y2Y) z=+0.76, 미 하이일드 스프레드(BAMLH0A0HYM2) z=-0.42",
+      "결과": "비활성"
     },
     {
       "단계": "자금 흐름(C)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.32, 미 은행 예금(DPSACBW027SBOG) z=+0.59, 해외 공적 미국채 보관(WMTSECL1) z=-0.81, 지급준비금(WRESBAL) z=+0.47",
+      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.61, 미 은행 예금(DPSACBW027SBOG) z=+1.04, 해외 공적 미국채 보관(WMTSECL1) z=-0.55, 지급준비금(WRESBAL) z=-0.14",
       "결과": "비활성"
     },
     {
@@ -23,35 +23,33 @@
     },
     {
       "단계": "종합 등급",
-      "원인": "A=활성, C=비활성, B=비활성",
+      "원인": "A=비활성, C=비활성, B=비활성",
       "근거": "등급 규칙(사전 등록 v2·v3): ALERT = B ∧ (A ∨ C), WATCH = 하나 이상 활성",
-      "결과": "WATCH → 1단계: 자금 이상 알림"
+      "결과": "NONE → 조치 없음"
     }
   ],
-  "money_alert": true,
+  "money_alert": false,
   "market": {
-    "active": true,
+    "active": false,
     "triggered": [
-      "VIXCLS",
-      "BAMLH0A0HYM2"
+      "DGS10"
     ],
     "zscores": {
-      "VIXCLS": 2.1,
-      "T10Y2Y": 0.37,
-      "DGS10": -0.76,
-      "DEXKOUS": 0.19,
-      "DTWEXBGS": 0.31,
-      "BAMLH0A0HYM2": 2.0
+      "VIXCLS": -0.36,
+      "T10Y2Y": 0.76,
+      "DGS10": -2.23,
+      "DCOILWTICO": 0.22,
+      "BAMLH0A0HYM2": -0.42
     }
   },
   "flow": {
     "active": false,
     "triggered": [],
     "zscores": {
-      "WRMFNS": -0.32,
-      "DPSACBW027SBOG": 0.59,
-      "WMTSECL1": -0.81,
-      "WRESBAL": 0.47
+      "WRMFNS": -0.61,
+      "DPSACBW027SBOG": 1.04,
+      "WMTSECL1": -0.55,
+      "WRESBAL": -0.14
     }
   },
   "news": {
@@ -62,40 +60,40 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 18,
-        "n_sources": 17,
-        "z": 0.308,
-        "baseline_points": 74,
+        "n_articles": 16,
+        "n_sources": 16,
+        "z": 0.002,
+        "baseline_points": 75,
         "measure": "키워드별 합산",
-        "n_split": 18,
+        "n_split": 16,
         "saturated": false,
         "top_titles": [
           "Fed Issues Possible Bank Run Warning As Outages Fuel Wild Nov. 17 ‘Blackout’ Theories - Forbes",
           "Fernando Nikolic: Custodia holds 100% reserves, cannot face a bank run - Traders Union",
-          "Paraguay’s ousted president moved to military prison after reports of gym and suite in custody - News-Press NOW"
+          "Grand marshal announced for Grand Rapids Santa Parade - WZZM13.com"
         ]
       },
       "credit_event": {
-        "n_articles": 55,
-        "n_sources": 49,
-        "z": -0.514,
-        "baseline_points": 73,
+        "n_articles": 71,
+        "n_sources": 63,
+        "z": 0.134,
+        "baseline_points": 74,
         "measure": "키워드별 합산",
-        "n_split": 55,
+        "n_split": 71,
         "saturated": false,
         "top_titles": [
+          "World AMR Awareness Week 2026: One Health, One Action: Prevent AMR Now - World Health Organization (WHO)",
           "‘Do not search Amazon’: Meta’s Muse now shops elsewhere by default - GeekWire",
-          "Collections are coming for millions of student loans in default - WABE",
-          "A Permanent $7.5 Million Subchapter V Debt Limit: Implications for Small Business Debtors and Their Creditors - Loeb & Loeb LLP"
+          "Heavy Seas Beer founder explains changes, Chapter 11 bankruptcy protection - CBS News"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 14,
+        "n_articles": 16,
         "n_sources": 14,
-        "z": 1.968,
-        "baseline_points": 74,
+        "z": 2.683,
+        "baseline_points": 75,
         "measure": "키워드별 합산",
-        "n_split": 14,
+        "n_split": 16,
         "saturated": false,
         "top_titles": [
           "Prairie Operating Faces Higher Well Costs, Liquidity Crunch - Hart Energy",
@@ -104,80 +102,77 @@
         ]
       },
       "geopolitical": {
-        "n_articles": 155,
-        "n_sources": 123,
-        "z": 0.828,
-        "baseline_points": 73,
+        "n_articles": 174,
+        "n_sources": 141,
+        "z": 1.458,
+        "baseline_points": 74,
         "measure": "키워드별 합산",
-        "n_split": 155,
-        "saturated": false,
+        "n_split": 174,
+        "saturated": true,
         "top_titles": [
           "Home invasion suspect arrested following brief standoff, Denton police say - WFAA",
-          "Britain sanctions Israeli settlement firms in push to protect two-state solution - Reuters",
-          "Denton resident shot in home invasion, person in custody, police say - NBC 5 Dallas-Fort Worth"
+          "Xi, Putin blast Western 'protectionism' and sanctions as Trump lands in China - Reuters",
+          "As Trump Threatens Invasion, Cubans Worry About Future - Inkstick Media"
         ]
       },
       "trade_policy": {
-        "n_articles": 171,
-        "n_sources": 136,
-        "z": 1.815,
-        "baseline_points": 73,
+        "n_articles": 151,
+        "n_sources": 119,
+        "z": 1.185,
+        "baseline_points": 74,
         "measure": "키워드별 합산",
-        "n_split": 171,
+        "n_split": 151,
         "saturated": false,
         "top_titles": [
-          "China and Canada expand tariff relief while relations with the U.S. are strained - PBS",
-          "These Mass. businesses are waiting on tariff refunds. Others aren't holding their breath. - WGBH",
-          "The Next Push on US Chip Export Controls - Kharon"
+          "Trump slaps additional 50% tariff on certain Canadian goods - ABC News - Breaking News, Latest News and Videos",
+          "Several companies are using Trump tariff refunds for corporate bonuses - The Guardian",
+          "What's at stake for Trump and Xi in Shenzhen: A trade truce deadline, new export controls, and Iran - Fortune"
         ]
       },
       "pandemic": {
-        "n_articles": 178,
-        "n_sources": 148,
-        "z": 0.765,
-        "baseline_points": 74,
+        "n_articles": 174,
+        "n_sources": 145,
+        "z": 0.67,
+        "baseline_points": 75,
         "measure": "키워드별 합산",
-        "n_split": 178,
+        "n_split": 174,
         "saturated": false,
         "top_titles": [
+          "26 More Measles Cases in New York, but Outbreak Appears to Be Easing - The New York Times",
           "Human travel drove Ebola spread in DR Congo, outbreak reconstruction suggests - CIDRAP",
-          "US loses measles elimination status amid worst outbreak since 1991 - The Guardian",
-          "Schools in El Dorado County put on lockdown after ‘swatting’ call, sheriff says - KCRA"
+          "San Diego High School lockdown lifted after report of person with weapon unfounded - FOX 5 San Diego & KUSI News"
         ]
       },
       "fx_shock": {
-        "n_articles": 6,
-        "n_sources": 6,
-        "z": 1.084,
-        "baseline_points": 74,
+        "n_articles": 2,
+        "n_sources": 2,
+        "z": -0.874,
+        "baseline_points": 75,
         "measure": "키워드별 합산",
-        "n_split": 6,
+        "n_split": 2,
         "saturated": false,
         "top_titles": [
-          "Severe produce shortages hit Al-Darbasiyah and Al-Malikiyah amid currency crisis - المرصد السوري لحقوق الإنسان",
-          "Fiscal fears deepen sell-off in Brazilian currency and bonds - Valor International",
-          "Libya Trade Network calls for urgent action amid rising pressure on the dinar - The Libya Observer"
+          "Libya Trade Network calls for urgent action amid rising pressure on the dinar - The Libya Observer",
+          "The Pros and Cons of U.S. Swap Lines in a Dollar Collapse - Vocal"
         ]
       },
       "rate_shock": {
-        "n_articles": 8,
+        "n_articles": 9,
         "n_sources": 8,
-        "z": -0.01,
-        "baseline_points": 74,
+        "z": 0.183,
+        "baseline_points": 75,
         "measure": "키워드별 합산",
-        "n_split": 8,
+        "n_split": 9,
         "saturated": false,
         "top_titles": [
           "GBP/USD approaches breaking point as US yields surge - StoneX",
-          "JetBlue's Bond Selloff Prompts a Message From the CEO - TradingView",
-          "US markets edge lower on Tuesday ahead of Nvidia earnings; bond yields surge after fed official's hawkish comments - Upstox"
+          "Hedge funds helped fuel government bond selloff, ECB's Vujcic says - TradingView",
+          "JetBlue's Bond Selloff Prompts a Message From the CEO - TradingView"
         ]
       }
     },
     "source": "Google 뉴스 RSS"
   },
-  "fred_error": null,
-  "alerts_sent": {
-    "global_money:2026-11-18": "sent"
-  }
+  "fred_error": "The read operation timed out",
+  "alerts_sent": {}
 }
