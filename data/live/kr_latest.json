@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-18T13:16+09:00",
+  "as_of": "2026-11-18T16:29+09:00",
   "level": "WATCH",
   "money_alert": false,
   "money_today": false,
@@ -31,46 +31,46 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 17,
-        "n_sources": 15,
-        "z": 0.5845395360692224,
-        "baseline_points": 113
+        "n_articles": 20,
+        "n_sources": 16,
+        "z": 0.9811691040582102,
+        "baseline_points": 115
       },
       "credit_event": {
-        "n_articles": 42,
-        "n_sources": 25,
-        "z": -0.533210255124815,
-        "baseline_points": 113
+        "n_articles": 43,
+        "n_sources": 26,
+        "z": -0.46819246656285685,
+        "baseline_points": 115
       },
       "liquidity_crisis": {
-        "n_articles": 18,
-        "n_sources": 16,
-        "z": -0.15902402897988543,
-        "baseline_points": 113
+        "n_articles": 16,
+        "n_sources": 14,
+        "z": -0.4402405847925204,
+        "baseline_points": 115
       },
       "fx_shock": {
-        "n_articles": 30,
-        "n_sources": 23,
-        "z": -1.0098367901143035,
-        "baseline_points": 113
+        "n_articles": 25,
+        "n_sources": 20,
+        "z": -1.2385499635886457,
+        "baseline_points": 115
       },
       "trade_policy": {
-        "n_articles": 61,
-        "n_sources": 40,
-        "z": -0.059655737018758065,
-        "baseline_points": 113
+        "n_articles": 58,
+        "n_sources": 39,
+        "z": -0.20915528441710754,
+        "baseline_points": 115
       },
       "geopolitical": {
-        "n_articles": 104,
-        "n_sources": 78,
-        "z": -0.7181426437924924,
-        "baseline_points": 113
+        "n_articles": 99,
+        "n_sources": 72,
+        "z": -0.9632867955306484,
+        "baseline_points": 115
       },
       "pandemic": {
-        "n_articles": 37,
-        "n_sources": 30,
-        "z": -0.13491887365906416,
-        "baseline_points": 113
+        "n_articles": 34,
+        "n_sources": 29,
+        "z": -0.3345829396305203,
+        "baseline_points": 115
       }
     },
     "notes": []
@@ -124,7 +124,7 @@
   ],
   "notes": [],
   "alerts_sent": {
-    "dart:20261116000179:False": "duplicate"
+    "dart:20261116000179:False": "sent"
   },
   "report": null
 }
