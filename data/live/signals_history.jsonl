@@ -98,3 +98,4 @@
 {"collected_at": "2026-11-16T19:40:32+00:00", "as_of": "2026-11-13", "level": "NONE", "money_alert": false, "market": ["DGS10"], "flow": [], "news_status": "partial", "news_errors": 2, "clusters": [], "alerts_sent": {}}
 {"collected_at": "2026-11-17T03:57:04+00:00", "as_of": "2026-11-16", "level": "NONE", "money_alert": false, "market": [], "flow": [], "news_status": "partial", "news_errors": 1, "clusters": [], "alerts_sent": {}}
 {"collected_at": "2026-11-17T16:07:40+00:00", "as_of": "2026-11-16", "level": "WATCH", "money_alert": true, "market": ["VIXCLS", "BAMLH0A0HYM2"], "flow": [], "news_status": "ok", "news_errors": 0, "clusters": [], "alerts_sent": {"global_money:2026-11-17": "failed:ConnectError"}}
+{"collected_at": "2026-11-18T01:00:03+00:00", "as_of": "2026-11-17", "level": "WATCH", "money_alert": true, "market": ["VIXCLS", "BAMLH0A0HYM2"], "flow": [], "news_status": "ok", "news_errors": 0, "clusters": [], "alerts_sent": {"global_money:2026-11-18": "sent"}}

@@ -787,3 +787,11 @@
 {"ts": "2026-11-17T16:07:40.764320+00:00", "event_type": "pandemic", "n_articles": 87, "n_sources": 77, "n_split": 169, "n_sources_split": 137}
 {"ts": "2026-11-17T16:07:40.764320+00:00", "event_type": "fx_shock", "n_articles": 4, "n_sources": 4, "n_split": 5, "n_sources_split": 5}
 {"ts": "2026-11-17T16:07:40.764320+00:00", "event_type": "rate_shock", "n_articles": 1, "n_sources": 1, "n_split": 7, "n_sources_split": 6}
+{"ts": "2026-11-18T01:00:03.164644+00:00", "event_type": "banking_stress", "n_articles": 7, "n_sources": 7, "n_split": 18, "n_sources_split": 17}
+{"ts": "2026-11-18T01:00:03.164644+00:00", "event_type": "credit_event", "n_articles": 43, "n_sources": 40, "n_split": 55, "n_sources_split": 49}
+{"ts": "2026-11-18T01:00:03.164644+00:00", "event_type": "liquidity_crisis", "n_articles": 7, "n_sources": 7, "n_split": 14, "n_sources_split": 14}
+{"ts": "2026-11-18T01:00:03.164644+00:00", "event_type": "geopolitical", "n_articles": 94, "n_sources": 75, "n_split": 155, "n_sources_split": 123}
+{"ts": "2026-11-18T01:00:03.164644+00:00", "event_type": "trade_policy", "n_articles": 91, "n_sources": 79, "n_split": 171, "n_sources_split": 136}
+{"ts": "2026-11-18T01:00:03.164644+00:00", "event_type": "pandemic", "n_articles": 91, "n_sources": 82, "n_split": 178, "n_sources_split": 148}
+{"ts": "2026-11-18T01:00:03.164644+00:00", "event_type": "fx_shock", "n_articles": 4, "n_sources": 4, "n_split": 6, "n_sources_split": 6}
+{"ts": "2026-11-18T01:00:03.164644+00:00", "event_type": "rate_shock", "n_articles": 3, "n_sources": 3, "n_split": 8, "n_sources_split": 8}

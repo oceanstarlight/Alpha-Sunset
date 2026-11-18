@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-11-17T16:07:40+00:00",
-  "as_of": "2026-11-16",
+  "collected_at": "2026-11-18T01:00:03+00:00",
+  "as_of": "2026-11-17",
   "level": "WATCH",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "VIX(변동성)(VIXCLS) z=+2.10, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.00",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=+2.10, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.00, 미 10년물 금리(DGS10) z=+1.03",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=+2.10, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+2.00, 미 10년물 금리(DGS10) z=-0.76",
       "결과": "활성"
     },
     {
@@ -37,10 +37,9 @@
     ],
     "zscores": {
       "VIXCLS": 2.1,
-      "T10Y2Y": 0.72,
-      "DGS10": 1.03,
+      "T10Y2Y": 0.37,
+      "DGS10": -0.76,
       "DEXKOUS": 0.19,
-      "DCOILWTICO": -0.06,
       "DTWEXBGS": 0.31,
       "BAMLH0A0HYM2": 2.0
     }
@@ -63,115 +62,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
+        "n_articles": 18,
+        "n_sources": 17,
+        "z": 0.308,
+        "baseline_points": 74,
+        "measure": "키워드별 합산",
+        "n_split": 18,
+        "saturated": false,
+        "top_titles": [
+          "Fed Issues Possible Bank Run Warning As Outages Fuel Wild Nov. 17 ‘Blackout’ Theories - Forbes",
+          "Fernando Nikolic: Custodia holds 100% reserves, cannot face a bank run - Traders Union",
+          "Paraguay’s ousted president moved to military prison after reports of gym and suite in custody - News-Press NOW"
+        ]
+      },
+      "credit_event": {
+        "n_articles": 55,
+        "n_sources": 49,
+        "z": -0.514,
+        "baseline_points": 73,
+        "measure": "키워드별 합산",
+        "n_split": 55,
+        "saturated": false,
+        "top_titles": [
+          "‘Do not search Amazon’: Meta’s Muse now shops elsewhere by default - GeekWire",
+          "Collections are coming for millions of student loans in default - WABE",
+          "A Permanent $7.5 Million Subchapter V Debt Limit: Implications for Small Business Debtors and Their Creditors - Loeb & Loeb LLP"
+        ]
+      },
+      "liquidity_crisis": {
         "n_articles": 14,
         "n_sources": 14,
-        "z": -0.298,
-        "baseline_points": 73,
+        "z": 1.968,
+        "baseline_points": 74,
         "measure": "키워드별 합산",
         "n_split": 14,
         "saturated": false,
         "top_titles": [
-          "‘A Possible Stampede’—Fed Issues Serious Bank Run Warning As Outages Fuel Wild November 17 ‘Blackout’ Theories - Forbes",
-          "The Fed Is Worried AI Agents Could Trigger a Bank Run - Gizmodo",
-          "Bank outage vs. bank failure: is your money still safe? - qz.com"
-        ]
-      },
-      "credit_event": {
-        "n_articles": 69,
-        "n_sources": 57,
-        "z": 0.046,
-        "baseline_points": 72,
-        "measure": "키워드별 합산",
-        "n_split": 69,
-        "saturated": false,
-        "top_titles": [
-          "Why the Credit Default Swap Market—Red Hot in the AI Trade—Is Vital for CFOs - WSJ",
-          "Meditations: Exploring the Default Mode Network, Illumination and Revolution - Davis Vanguard",
-          "World AMR Awareness Week 2026: One Health, One Action: Prevent AMR Now - World Health Organization (WHO)"
-        ]
-      },
-      "liquidity_crisis": {
-        "n_articles": 11,
-        "n_sources": 9,
-        "z": 0.79,
-        "baseline_points": 73,
-        "measure": "키워드별 합산",
-        "n_split": 11,
-        "saturated": false,
-        "top_titles": [
+          "Prairie Operating Faces Higher Well Costs, Liquidity Crunch - Hart Energy",
           "Russell Napier: French capital controls will spark a global credit crunch - ETF Stream",
-          "Revolut's Martin Gilbert warns of looming liquidity crunch in private markets, sees blockchain as solution - Crypto Briefing",
           "Revolut plans four blockchain funds to tackle private market liquidity crunch - Crypto News"
         ]
       },
       "geopolitical": {
-        "n_articles": 175,
-        "n_sources": 139,
-        "z": 1.535,
-        "baseline_points": 72,
+        "n_articles": 155,
+        "n_sources": 123,
+        "z": 0.828,
+        "baseline_points": 73,
         "measure": "키워드별 합산",
-        "n_split": 175,
-        "saturated": true,
+        "n_split": 155,
+        "saturated": false,
         "top_titles": [
+          "Home invasion suspect arrested following brief standoff, Denton police say - WFAA",
           "Britain sanctions Israeli settlement firms in push to protect two-state solution - Reuters",
-          "EU Maintains Sanctions Pressure on Russia Amid Diplomatic Efforts - Morgan Lewis",
-          "Brazil deploy security forces to Indigenous territory after invasion - Genocide Watch"
+          "Denton resident shot in home invasion, person in custody, police say - NBC 5 Dallas-Fort Worth"
         ]
       },
       "trade_policy": {
-        "n_articles": 194,
-        "n_sources": 151,
-        "z": 2.624,
-        "baseline_points": 72,
+        "n_articles": 171,
+        "n_sources": 136,
+        "z": 1.815,
+        "baseline_points": 73,
         "measure": "키워드별 합산",
-        "n_split": 194,
+        "n_split": 171,
         "saturated": false,
         "top_titles": [
-          "China and Canada Expand Tariff Relief as Xi Meets Carney - Bloomberg.com",
-          "How Trump and Xi went from tariff war to trade truce - Reuters",
-          "Nvidia creates board committee to oversee export controls - Politico"
+          "China and Canada expand tariff relief while relations with the U.S. are strained - PBS",
+          "These Mass. businesses are waiting on tariff refunds. Others aren't holding their breath. - WGBH",
+          "The Next Push on US Chip Export Controls - Kharon"
         ]
       },
       "pandemic": {
-        "n_articles": 169,
-        "n_sources": 137,
-        "z": 0.574,
-        "baseline_points": 73,
+        "n_articles": 178,
+        "n_sources": 148,
+        "z": 0.765,
+        "baseline_points": 74,
         "measure": "키워드별 합산",
-        "n_split": 169,
+        "n_split": 178,
         "saturated": false,
         "top_titles": [
-          "Congo's Ebola outbreak is spreading and killing at a record pace - Reuters",
-          "UNICEF: Children make up 35% of Ebola deaths in DR Congo outbreak - CIDRAP",
-          "Student detained after report of man with gun triggers lockdown at Walnut HS, deputies say - ABC7 Los Angeles"
+          "Human travel drove Ebola spread in DR Congo, outbreak reconstruction suggests - CIDRAP",
+          "US loses measles elimination status amid worst outbreak since 1991 - The Guardian",
+          "Schools in El Dorado County put on lockdown after ‘swatting’ call, sheriff says - KCRA"
         ]
       },
       "fx_shock": {
-        "n_articles": 5,
-        "n_sources": 5,
-        "z": 0.603,
-        "baseline_points": 73,
+        "n_articles": 6,
+        "n_sources": 6,
+        "z": 1.084,
+        "baseline_points": 74,
         "measure": "키워드별 합산",
-        "n_split": 5,
+        "n_split": 6,
         "saturated": false,
         "top_titles": [
           "Severe produce shortages hit Al-Darbasiyah and Al-Malikiyah amid currency crisis - المرصد السوري لحقوق الإنسان",
           "Fiscal fears deepen sell-off in Brazilian currency and bonds - Valor International",
-          "India Inc.’s sudden craving for dollars is a dangerous gamble - bfsi.economictimes.indiatimes.com"
+          "Libya Trade Network calls for urgent action amid rising pressure on the dinar - The Libya Observer"
         ]
       },
       "rate_shock": {
-        "n_articles": 7,
-        "n_sources": 6,
-        "z": -0.204,
-        "baseline_points": 73,
+        "n_articles": 8,
+        "n_sources": 8,
+        "z": -0.01,
+        "baseline_points": 74,
         "measure": "키워드별 합산",
-        "n_split": 7,
+        "n_split": 8,
         "saturated": false,
         "top_titles": [
-          "US markets edge lower on Tuesday ahead of Nvidia earnings; bond yields surge after fed official's hawkish comments - Upstox",
-          "Rising real rates are a real problem for debt-heavy governments - Yahoo! Finance Canada",
-          "Mortgage Rates Hold Near 7.50% Despite Tech Stock Slide - The Truth About Mortgage"
+          "GBP/USD approaches breaking point as US yields surge - StoneX",
+          "JetBlue's Bond Selloff Prompts a Message From the CEO - TradingView",
+          "US markets edge lower on Tuesday ahead of Nvidia earnings; bond yields surge after fed official's hawkish comments - Upstox"
         ]
       }
     },
@@ -179,6 +178,6 @@
   },
   "fred_error": null,
   "alerts_sent": {
-    "global_money:2026-11-17": "failed:ConnectError"
+    "global_money:2026-11-18": "sent"
   }
 }
