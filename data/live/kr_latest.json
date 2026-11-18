@@ -1,23 +1,23 @@
 {
-  "as_of": "2026-11-18T16:29+09:00",
-  "level": "WATCH",
+  "as_of": "2026-11-19T01:44+09:00",
+  "level": "NONE",
   "money_alert": false,
   "money_today": false,
   "event_confirmed": false,
   "kr_market": {
-    "as_of": "2026-11-18",
+    "as_of": "2026-11-19",
     "zscores": {
       "KOSPI": -0.7699225990994921,
       "USDKRW": 0.5432701836677007,
-      "KTB3Y": -0.4509880371488139,
-      "CREDIT_KR": 0.38138797221631254,
-      "CD91": -0.21055068711999664
+      "KTB3Y": 0.1543649617364557,
+      "CREDIT_KR": -0.6664001485982678,
+      "CD91": -0.8632643750961065
     },
     "triggered": [],
     "active": false
   },
   "kr_flow": {
-    "as_of": "2026-11-18",
+    "as_of": "2026-11-19",
     "zscores": {
       "FOREIGN_NET_KOSPI": -0.29828096576910895,
       "FOREIGN_NET_5D": 0.6293987254383764
@@ -31,70 +31,57 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 20,
-        "n_sources": 16,
-        "z": 0.9811691040582102,
-        "baseline_points": 115
+        "n_articles": 14,
+        "n_sources": 11,
+        "z": 0.16580516912738044,
+        "baseline_points": 114
       },
       "credit_event": {
-        "n_articles": 43,
-        "n_sources": 26,
-        "z": -0.46819246656285685,
-        "baseline_points": 115
+        "n_articles": 32,
+        "n_sources": 23,
+        "z": -1.0102344583041583,
+        "baseline_points": 114
       },
       "liquidity_crisis": {
-        "n_articles": 16,
-        "n_sources": 14,
-        "z": -0.4402405847925204,
-        "baseline_points": 115
+        "n_articles": 12,
+        "n_sources": 11,
+        "z": -0.9938340511880616,
+        "baseline_points": 114
       },
       "fx_shock": {
-        "n_articles": 25,
-        "n_sources": 20,
-        "z": -1.2385499635886457,
-        "baseline_points": 115
+        "n_articles": 21,
+        "n_sources": 18,
+        "z": -1.4300171375053468,
+        "baseline_points": 114
       },
       "trade_policy": {
-        "n_articles": 58,
-        "n_sources": 39,
-        "z": -0.20915528441710754,
-        "baseline_points": 115
+        "n_articles": 51,
+        "n_sources": 42,
+        "z": -0.5404295469297119,
+        "baseline_points": 114
       },
       "geopolitical": {
-        "n_articles": 99,
-        "n_sources": 72,
-        "z": -0.9632867955306484,
-        "baseline_points": 115
+        "n_articles": 98,
+        "n_sources": 69,
+        "z": -0.9892650126280721,
+        "baseline_points": 114
       },
       "pandemic": {
         "n_articles": 34,
-        "n_sources": 29,
-        "z": -0.3345829396305203,
-        "baseline_points": 115
+        "n_sources": 30,
+        "z": -0.3094738777933751,
+        "baseline_points": 114
       }
     },
     "notes": []
   },
-  "warnings": [
-    {
-      "corp_name": "코람코더원리츠",
-      "stock_code": "417310",
-      "corp_cls": "Y",
-      "report_nm": "주요사항보고서(해산사유발생)",
-      "rcept_no": "20261116000179",
-      "rcept_dt": "2026-11-16",
-      "url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116000179",
-      "keyword": "해산사유발생",
-      "confirmed": false,
-      "n_sources": 5
-    }
-  ],
+  "warnings": [],
   "linkage": null,
   "chain": [
     {
       "단계": "한국 시장(A_kr)",
       "원인": "임계 초과 지표 없음",
-      "근거": "ECOS 일별 1일 변화 z (기준일 2026-11-18), 규칙 |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0 (사전 등록 v5). 관측: 코스피 z=-0.77, 원/달러 z=+0.54, 국고채 3년 z=-0.45, 회사채AA−국고채 3년 금리차 z=+0.38, CD 91일 z=-0.21",
+      "근거": "ECOS 일별 1일 변화 z (기준일 2026-11-19), 규칙 |z| ≥ 2.5 지표 2개 이상 또는 |z| ≥ 4.0 (사전 등록 v5). 관측: 코스피 z=-0.77, 원/달러 z=+0.54, 국고채 3년 z=+0.15, 회사채AA−국고채 3년 금리차 z=-0.67, CD 91일 z=-0.86",
       "결과": "비활성"
     },
     {
@@ -110,21 +97,13 @@
       "결과": "비활성"
     },
     {
-      "단계": "DART 신용 공시",
-      "원인": "코람코더원리츠(417310) 주요사항보고서(해산사유발생) (2026-11-16)",
-      "근거": "공시 원문 https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116000179 · 키워드 '해산사유발생' · 기업명 기사 언론사 5곳 (확정 기준 48시간 내 10곳, 사전 등록 v5)",
-      "결과": "사건 경고 (대응안 없음, 알림만)"
-    },
-    {
       "단계": "로컬 종합 등급",
-      "원인": "A_kr/C_kr 오늘 비활성 · 5영업일 지속 미달, 사건(B_any)=미확정, DART 경고 1건",
+      "원인": "A_kr/C_kr 오늘 비활성 · 5영업일 지속 미달, 사건(B_any)=미확정, DART 경고 0건",
       "근거": "로컬 ALERT = (한국 사건 ∨ 해외 사건 ∨ 확정 DART) ∧ (A_kr ∨ C_kr) · 1단계 알림 = 끝나는 5영업일 중 2일 이상 A_kr ∨ C_kr (사전 등록 v5)",
-      "결과": "WATCH → 사건 경고 알림"
+      "결과": "NONE → 조치 없음"
     }
   ],
   "notes": [],
-  "alerts_sent": {
-    "dart:20261116000179:False": "sent"
-  },
+  "alerts_sent": {},
   "report": null
 }
