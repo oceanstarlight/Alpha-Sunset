@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-11-18T12:40+09:00",
+  "as_of": "2026-11-18T13:16+09:00",
   "level": "WATCH",
   "money_alert": false,
   "money_today": false,
@@ -31,45 +31,45 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 14,
-        "n_sources": 13,
-        "z": 0.18822173061428965,
+        "n_articles": 17,
+        "n_sources": 15,
+        "z": 0.5845395360692224,
         "baseline_points": 113
       },
       "credit_event": {
-        "n_articles": 29,
-        "n_sources": 16,
-        "z": -1.1919872650309156,
+        "n_articles": 42,
+        "n_sources": 25,
+        "z": -0.533210255124815,
         "baseline_points": 113
       },
       "liquidity_crisis": {
-        "n_articles": 16,
-        "n_sources": 15,
-        "z": -0.4420116711015714,
+        "n_articles": 18,
+        "n_sources": 16,
+        "z": -0.15902402897988543,
         "baseline_points": 113
       },
       "fx_shock": {
-        "n_articles": 28,
+        "n_articles": 30,
         "n_sources": 23,
-        "z": -1.1091505910567894,
+        "z": -1.0098367901143035,
         "baseline_points": 113
       },
       "trade_policy": {
         "n_articles": 61,
-        "n_sources": 39,
+        "n_sources": 40,
         "z": -0.059655737018758065,
         "baseline_points": 113
       },
       "geopolitical": {
-        "n_articles": 106,
+        "n_articles": 104,
         "n_sources": 78,
-        "z": -0.6173350428626146,
+        "z": -0.7181426437924924,
         "baseline_points": 113
       },
       "pandemic": {
-        "n_articles": 36,
-        "n_sources": 31,
-        "z": -0.20149456240786004,
+        "n_articles": 37,
+        "n_sources": 30,
+        "z": -0.13491887365906416,
         "baseline_points": 113
       }
     },
