@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-11-18T20:37:58+00:00",
-  "as_of": "2026-11-17",
+  "collected_at": "2026-11-19T02:38:03+00:00",
+  "as_of": "2026-11-18",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=+1.61, VIX(변동성)(VIXCLS) z=+1.22, 미 10년물 금리(DGS10) z=-0.76",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=+1.61, VIX(변동성)(VIXCLS) z=+1.22, 미 장단기 금리차(T10Y2Y) z=-1.00",
       "결과": "비활성"
     },
     {
@@ -34,8 +34,8 @@
     "triggered": [],
     "zscores": {
       "VIXCLS": 1.22,
-      "T10Y2Y": 0.37,
-      "DGS10": -0.76,
+      "T10Y2Y": -1.0,
+      "DGS10": -0.54,
       "DEXKOUS": 0.19,
       "DCOILWTICO": 0.02,
       "DTWEXBGS": 0.31,
@@ -60,38 +60,38 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 18,
-        "n_sources": 18,
-        "z": 0.308,
-        "baseline_points": 76,
+        "n_articles": 17,
+        "n_sources": 17,
+        "z": 0.152,
+        "baseline_points": 77,
         "measure": "키워드별 합산",
-        "n_split": 18,
+        "n_split": 17,
         "saturated": false,
         "top_titles": [
           "The Fed's AI Bank Run Nightmare Is Suddenly Coming True - Forbes",
-          "Grand marshal announced for Grand Rapids Santa Parade - WZZM13.com",
-          "StreetInsider.com - StreetInsider"
+          "Losses from Paraguay bank failure could reach $1 billion, Central Bank chief tells AFP - Gulf News",
+          "CertiK verifies XRP Ledger and Partior self-attestations under GL1 toolkit - CryptoRank"
         ]
       },
       "credit_event": {
-        "n_articles": 92,
-        "n_sources": 78,
-        "z": 0.983,
-        "baseline_points": 75,
+        "n_articles": 110,
+        "n_sources": 91,
+        "z": 1.699,
+        "baseline_points": 76,
         "measure": "키워드별 합산",
-        "n_split": 92,
+        "n_split": 110,
         "saturated": false,
         "top_titles": [
-          "Why the Credit Default Swap Market—Red Hot in the AI Trade—Is Vital for CFOs - WSJ",
-          "Filing Alert: Bravo Underground Chapter 11 - Bondoro",
-          "Alzheimer's Disease Neuroimaging Initiative study links white matter integrity to default mode network organization in cognitive impairment - EurekAlert!"
+          "Today, Over 1 Million Older Student Loan Borrowers Are Likely in Default - New America",
+          "New Site-to-Site VPN connections will default to recommended cryptography - Amazon Web Services (AWS)",
+          "KFC franchisee files for Chapter 11 bankruptcy: See list of stores at risk of closing - kens5.com"
         ]
       },
       "liquidity_crisis": {
         "n_articles": 8,
         "n_sources": 8,
-        "z": -0.442,
-        "baseline_points": 76,
+        "z": -0.439,
+        "baseline_points": 77,
         "measure": "키워드별 합산",
         "n_split": 8,
         "saturated": false,
@@ -102,72 +102,73 @@
         ]
       },
       "geopolitical": {
-        "n_articles": 169,
-        "n_sources": 136,
-        "z": 1.261,
-        "baseline_points": 75,
+        "n_articles": 166,
+        "n_sources": 134,
+        "z": 1.14,
+        "baseline_points": 76,
         "measure": "키워드별 합산",
-        "n_split": 169,
+        "n_split": 166,
         "saturated": true,
         "top_titles": [
+          "Home Invasion and Shooting Incident Reported in Galliano - Lafourche Parish Sheriff's Office",
           "Fears grow that US will put Nobel-winning judge under sanctions after Myanmar genocide ruling - The Guardian",
-          "US sanctions Hezbollah-linked charity in push against Iran's proxies, Treasury says - Al-Monitor",
-          "Home Invasion and Shooting Incident Reported in Galliano - Lafourche Parish Sheriff's Office"
+          "US steps up pressure on Iran-backed Hezbollah with new sanctions - Al Jazeera"
         ]
       },
       "trade_policy": {
-        "n_articles": 151,
-        "n_sources": 119,
-        "z": 1.166,
-        "baseline_points": 75,
+        "n_articles": 137,
+        "n_sources": 114,
+        "z": 0.745,
+        "baseline_points": 76,
         "measure": "키워드별 합산",
-        "n_split": 151,
+        "n_split": 137,
         "saturated": false,
         "top_titles": [
           "The Supreme Court Blocked Trump’s Tariffs, But Americans Are Still Paying the Price - Balls and Strikes",
-          "ProPublica: Stanley Black & Decker, TJX Execs Reap Tariff Refunds - CPA Practice Advisor",
-          "Will shoppers receive any savings from tariff refunds? Experts explain - ABC News - Breaking News, Latest News and Videos"
+          "‘AI Diffusion’ 2.0: BIS Introduces New Export Controls on Advanced GPUs and Overseas Data Centers - Skadden, Arps, Slate, Meagher & Flom",
+          "Tariff Repeal Options Would Have Very Different Price Effects - Tax Policy Center"
         ]
       },
       "pandemic": {
-        "n_articles": 175,
-        "n_sources": 152,
-        "z": 0.685,
-        "baseline_points": 76,
+        "n_articles": 180,
+        "n_sources": 139,
+        "z": 0.788,
+        "baseline_points": 77,
         "measure": "키워드별 합산",
-        "n_split": 175,
+        "n_split": 180,
         "saturated": false,
         "top_titles": [
           "Analysis finds no definitive link between hantavirus that caused cruise ship outbreak and outbreak strain in Argentina - CIDRAP",
-          "Millbrook High School on lockdown - WRAL",
-          "26 More Measles Cases in New York, but Outbreak Appears to Be Easing - The New York Times"
+          "Pennsylvania confirms eighth measles-related death amid US outbreak - Reuters",
+          "Lockdown lifted after terroristic threat at Pasadena hospital, police say - ABC13 Houston"
         ]
       },
       "fx_shock": {
-        "n_articles": 2,
-        "n_sources": 2,
-        "z": -0.864,
-        "baseline_points": 76,
+        "n_articles": 3,
+        "n_sources": 3,
+        "z": -0.367,
+        "baseline_points": 77,
         "measure": "키워드별 합산",
-        "n_split": 2,
+        "n_split": 3,
         "saturated": false,
         "top_titles": [
           "Bohemian Currency: We shouldn’t stress about easy come-easy go, little high-little low of the rupee - The Economic Times",
-          "India Inc.’s sudden craving for dollars is a dangerous gamble - cfo.economictimes.indiatimes.com"
+          "India Inc.’s sudden craving for dollars is a dangerous gamble - cfo.economictimes.indiatimes.com",
+          "Can a Currency Swap Prevent a Dollar Collapse? - Vocal"
         ]
       },
       "rate_shock": {
         "n_articles": 5,
         "n_sources": 5,
-        "z": -0.597,
-        "baseline_points": 76,
+        "z": -0.591,
+        "baseline_points": 77,
         "measure": "키워드별 합산",
         "n_split": 5,
         "saturated": false,
         "top_titles": [
           "GBP/USD approaches breaking point as US yields surge - StoneX",
-          "Hedge funds helped fuel government bond selloff, ECB's Vujcic says - TradingView",
-          "Markets should help discipline France over high debt, ECB says - 93.3 The Drive"
+          "Japan bond yields surge to 3.75%, hiding a quiet Bitcoin trap - CryptoSlate",
+          "Hedge funds helped fuel government bond selloff, ECB's Vujcic says - TradingView"
         ]
       }
     },
