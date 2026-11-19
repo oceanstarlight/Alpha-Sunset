@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-11-19T11:47:41+00:00",
+  "collected_at": "2026-11-19T20:43:10+00:00",
   "as_of": "2026-11-18",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 하이일드 스프레드(BAMLH0A0HYM2) z=+1.61, VIX(변동성)(VIXCLS) z=+1.22, 미 장단기 금리차(T10Y2Y) z=-1.00",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 장단기 금리차(T10Y2Y) z=-1.00, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+0.69, 미 10년물 금리(DGS10) z=-0.54",
       "결과": "비활성"
     },
     {
@@ -33,13 +33,13 @@
     "active": false,
     "triggered": [],
     "zscores": {
-      "VIXCLS": 1.22,
+      "VIXCLS": -0.46,
       "T10Y2Y": -1.0,
       "DGS10": -0.54,
       "DEXKOUS": 0.19,
       "DCOILWTICO": 0.02,
       "DTWEXBGS": 0.31,
-      "BAMLH0A0HYM2": 1.61
+      "BAMLH0A0HYM2": 0.69
     }
   },
   "flow": {
@@ -60,115 +60,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 9,
-        "n_sources": 9,
-        "z": -1.088,
-        "baseline_points": 78,
+        "n_articles": 14,
+        "n_sources": 14,
+        "z": -0.3,
+        "baseline_points": 79,
         "measure": "키워드별 합산",
-        "n_split": 9,
+        "n_split": 14,
         "saturated": false,
         "top_titles": [
           "Losses From Paraguay Bank Failure Could Reach $1 Bn: Central Bank Chief - Barron's",
-          "The Fed's AI Bank Run Nightmare Is Suddenly Coming True - Forbes",
-          "Losses from Paraguay bank failure could reach $1 billion, Central Bank chief tells AFP - Gulf News"
+          "Losses from Paraguay bank failure could reach $1 billion, Central Bank chief tells AFP - Gulf News",
+          "Problems at AMD (AMD) - Hunterbrook"
         ]
       },
       "credit_event": {
-        "n_articles": 103,
-        "n_sources": 93,
-        "z": 1.377,
-        "baseline_points": 77,
+        "n_articles": 87,
+        "n_sources": 79,
+        "z": 0.715,
+        "baseline_points": 78,
         "measure": "키워드별 합산",
-        "n_split": 103,
+        "n_split": 87,
         "saturated": false,
         "top_titles": [
-          "Today, Over 1 Million Older Student Loan Borrowers Are Likely in Default - New America",
-          "World AMR Awareness Week 2026: One Health, One Action: Prevent AMR Now - World Health Organization (WHO)",
-          "New Site-to-Site VPN connections will default to recommended cryptography - Amazon Web Services (AWS)"
+          "Filing Alert: Pharmacal Health & Wellness Solutions Chapter 11 - Bondoro",
+          "Private credit default rate nearly doubles in Q3 - Alternative Credit Investor",
+          "KFC franchisee files for bankruptcy. How many in Knoxville will close? - Knoxville News Sentinel"
         ]
       },
       "liquidity_crisis": {
+        "n_articles": 14,
+        "n_sources": 12,
+        "z": 1.84,
+        "baseline_points": 79,
+        "measure": "키워드별 합산",
+        "n_split": 14,
+        "saturated": false,
+        "top_titles": [
+          "Solar demand is soaring, but manufacturers face a growing credit crunch in FY27 - The Federal",
+          "Bitcoin Standard Author Saifedean Ammous Says Anthropic and OpenAI May Be 'Massively Overvalued' - BigGo Finance",
+          "Budget measures, withholding tax on invoices: exemption up to 3,000 euros from 2028 - Il Sole 24 ORE"
+        ]
+      },
+      "geopolitical": {
+        "n_articles": 138,
+        "n_sources": 110,
+        "z": 0.19,
+        "baseline_points": 78,
+        "measure": "키워드별 합산",
+        "n_split": 138,
+        "saturated": false,
+        "top_titles": [
+          "Europe tightens sanctions on Russia. America loosens them - The Economist",
+          "Defense Export Controls to be Further Eased - Sandler, Travis & Rosenberg, P.A.",
+          "INPEX sanctions Ichthys LNG expansion project, awards contract - Oil & Gas Journal"
+        ]
+      },
+      "trade_policy": {
+        "n_articles": 117,
+        "n_sources": 97,
+        "z": 0.151,
+        "baseline_points": 78,
+        "measure": "키워드별 합산",
+        "n_split": 117,
+        "saturated": false,
+        "top_titles": [
+          "Defense Export Controls to be Further Eased - Sandler, Travis & Rosenberg, P.A.",
+          "Opinion | A Lesson on the Economics of Tariff Leverage - WSJ",
+          "What impact will the Shenzhen summit have on the US-China trade war? - France 24"
+        ]
+      },
+      "pandemic": {
+        "n_articles": 202,
+        "n_sources": 154,
+        "z": 1.246,
+        "baseline_points": 79,
+        "measure": "키워드별 합산",
+        "n_split": 202,
+        "saturated": false,
+        "top_titles": [
+          "Person of interest detained as Liberty Hill High School remains on lockdown Thursday afternoon - KVUE",
+          "Five Conroe ISD schools on lockdown; district says no known threat - Houston Chronicle",
+          "BREAKING: Bomb threat prompts lockdown at Alexandria City High School campuses - ALXnow"
+        ]
+      },
+      "fx_shock": {
         "n_articles": 6,
         "n_sources": 6,
-        "z": -1.191,
-        "baseline_points": 78,
+        "z": 1.116,
+        "baseline_points": 79,
         "measure": "키워드별 합산",
         "n_split": 6,
         "saturated": false,
         "top_titles": [
-          "Solar demand is soaring, but manufacturers face a growing credit crunch in FY27 - The Federal",
-          "Bally’s secures $560M in financing as Chicago casino deadline slides to 2027 - The Business Journals",
-          "stUSDS Liquidity Crunch Leaves Sky Depositors Waiting to Redeem USDS - Coin Gabbar"
-        ]
-      },
-      "geopolitical": {
-        "n_articles": 142,
-        "n_sources": 123,
-        "z": 0.326,
-        "baseline_points": 77,
-        "measure": "키워드별 합산",
-        "n_split": 142,
-        "saturated": false,
-        "top_titles": [
-          "Europe tightens sanctions on Russia. America loosens them - The Economist",
-          "Home Invasion and Shooting Incident Reported in Galliano - Lafourche Parish Sheriff's Office",
-          "U.S. Sanctions Hizballah Front Organization and Iran-Backed Financial Network - U.S. Virtual Embassy Iran (.gov)"
-        ]
-      },
-      "trade_policy": {
-        "n_articles": 136,
-        "n_sources": 115,
-        "z": 0.709,
-        "baseline_points": 77,
-        "measure": "키워드별 합산",
-        "n_split": 136,
-        "saturated": false,
-        "top_titles": [
-          "We’re Publishing the Tariff Refunds the Government Has Refused to Disclose - ProPublica",
-          "The Supreme Court Blocked Trump’s Tariffs, But Americans Are Still Paying the Price - Balls and Strikes",
-          "The bill for Trump’s trade war is coming due—at home and abroad - Fortune"
-        ]
-      },
-      "pandemic": {
-        "n_articles": 197,
-        "n_sources": 153,
-        "z": 1.153,
-        "baseline_points": 78,
-        "measure": "키워드별 합산",
-        "n_split": 197,
-        "saturated": false,
-        "top_titles": [
-          "Direct Relief Delivers 53 Tons of Medical Aid to Combat Record DRC Ebola Outbreak - Direct Relief",
-          "Pennsylvania confirms eighth measles-related death amid US outbreak - Reuters",
-          "Millbrook High School lockdown lifted: Threat, fight led to police investigation - WRAL"
-        ]
-      },
-      "fx_shock": {
-        "n_articles": 3,
-        "n_sources": 3,
-        "z": -0.364,
-        "baseline_points": 78,
-        "measure": "키워드별 합산",
-        "n_split": 3,
-        "saturated": false,
-        "top_titles": [
-          "Bohemian Currency: We shouldn’t stress about easy come-easy go, little high-little low of the rupee - The Economic Times",
-          "Crack-Up Boom Explained: Is the US Dollar Approaching Its Endgame? - PGurus",
-          "Euro Approaches the 1,000 Peso Mark in Cuba Once Again - CubaHeadlines"
+          "Milei’s Legacy Depends on Dollarization - Latinvex",
+          "Lots More on the Protests and Financial Crisis in Iran | Odd Lots - finance.biggo.com",
+          "Crack-Up Boom Explained: Is the US Dollar Approaching Its Endgame? - PGurus"
         ]
       },
       "rate_shock": {
-        "n_articles": 3,
-        "n_sources": 3,
-        "z": -0.979,
-        "baseline_points": 78,
+        "n_articles": 4,
+        "n_sources": 4,
+        "z": -0.77,
+        "baseline_points": 79,
         "measure": "키워드별 합산",
-        "n_split": 3,
+        "n_split": 4,
         "saturated": false,
         "top_titles": [
           "GBP/USD approaches breaking point as US yields surge - StoneX",
           "Japan bond yields surge to 3.75%, hiding a quiet Bitcoin trap - CryptoSlate",
-          "US Treasury yields surge above 5%: Why borrowers face higher costs while investors get better returns - The Economic Times"
+          "2 ETFs to Watch for Outsized Volume on European Equities & Bonds - Yahoo Finance Singapore"
         ]
       }
     },
