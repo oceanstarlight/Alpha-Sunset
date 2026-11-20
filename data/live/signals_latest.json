@@ -1,12 +1,12 @@
 {
-  "collected_at": "2026-11-19T20:43:10+00:00",
-  "as_of": "2026-11-18",
+  "collected_at": "2026-11-20T02:22:44+00:00",
+  "as_of": "2026-11-19",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 장단기 금리차(T10Y2Y) z=-1.00, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+0.69, 미 10년물 금리(DGS10) z=-0.54",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=-0.76, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+0.69, VIX(변동성)(VIXCLS) z=-0.46",
       "결과": "비활성"
     },
     {
@@ -34,11 +34,9 @@
     "triggered": [],
     "zscores": {
       "VIXCLS": -0.46,
-      "T10Y2Y": -1.0,
-      "DGS10": -0.54,
-      "DEXKOUS": 0.19,
+      "T10Y2Y": 0.38,
+      "DGS10": -0.76,
       "DCOILWTICO": 0.02,
-      "DTWEXBGS": 0.31,
       "BAMLH0A0HYM2": 0.69
     }
   },
@@ -60,115 +58,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 14,
-        "n_sources": 14,
-        "z": -0.3,
-        "baseline_points": 79,
+        "n_articles": 13,
+        "n_sources": 13,
+        "z": -0.453,
+        "baseline_points": 80,
         "measure": "키워드별 합산",
-        "n_split": 14,
+        "n_split": 13,
         "saturated": false,
         "top_titles": [
-          "Losses From Paraguay Bank Failure Could Reach $1 Bn: Central Bank Chief - Barron's",
-          "Losses from Paraguay bank failure could reach $1 billion, Central Bank chief tells AFP - Gulf News",
-          "Problems at AMD (AMD) - Hunterbrook"
+          "Losses from Paraguay bank failure could reach $1 bn: Central Bank chief - AFP.com",
+          "Problems at AMD (AMD) - Hunterbrook",
+          "Rubio says ‘We are not under systemic attack’ after banking, flight outages - Jefferson City News Tribune"
         ]
       },
       "credit_event": {
-        "n_articles": 87,
-        "n_sources": 79,
-        "z": 0.715,
-        "baseline_points": 78,
+        "n_articles": 95,
+        "n_sources": 86,
+        "z": 1.028,
+        "baseline_points": 79,
         "measure": "키워드별 합산",
-        "n_split": 87,
+        "n_split": 95,
         "saturated": false,
         "top_titles": [
           "Filing Alert: Pharmacal Health & Wellness Solutions Chapter 11 - Bondoro",
-          "Private credit default rate nearly doubles in Q3 - Alternative Credit Investor",
-          "KFC franchisee files for bankruptcy. How many in Knoxville will close? - Knoxville News Sentinel"
+          "Bug Tussel is in default. Here’s what that means for Marathon County taxpayers. - Wausau Pilot & Review",
+          "Carrying the Legacy Forward - Richland School District 2"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 14,
-        "n_sources": 12,
-        "z": 1.84,
-        "baseline_points": 79,
+        "n_articles": 11,
+        "n_sources": 9,
+        "z": 0.677,
+        "baseline_points": 80,
         "measure": "키워드별 합산",
-        "n_split": 14,
+        "n_split": 11,
         "saturated": false,
         "top_titles": [
+          "Brazil Farm Credit Crunch Deepens as New Rules Make Lending Uneconomical - The AgriBiz",
           "Solar demand is soaring, but manufacturers face a growing credit crunch in FY27 - The Federal",
-          "Bitcoin Standard Author Saifedean Ammous Says Anthropic and OpenAI May Be 'Massively Overvalued' - BigGo Finance",
-          "Budget measures, withholding tax on invoices: exemption up to 3,000 euros from 2028 - Il Sole 24 ORE"
+          "Sardinia's economy is in turmoil: GDP is rising, but businesses are suffering from price increases, credit crunch, and a job crisis. - L'Unione Sarda"
         ]
       },
       "geopolitical": {
-        "n_articles": 138,
-        "n_sources": 110,
-        "z": 0.19,
-        "baseline_points": 78,
+        "n_articles": 135,
+        "n_sources": 113,
+        "z": 0.088,
+        "baseline_points": 79,
         "measure": "키워드별 합산",
-        "n_split": 138,
+        "n_split": 135,
         "saturated": false,
         "top_titles": [
-          "Europe tightens sanctions on Russia. America loosens them - The Economist",
-          "Defense Export Controls to be Further Eased - Sandler, Travis & Rosenberg, P.A.",
-          "INPEX sanctions Ichthys LNG expansion project, awards contract - Oil & Gas Journal"
+          "US Committee Urges Sanctions Over China’s Detention of Panama-Flagged Ships - The Maritime Executive",
+          "Somalia orders UAE ambassador to leave, citing 'invasion' - Reuters",
+          "The Sanctions Puzzle: 10 Key Areas to Watch in 2027 and Beyond - Skadden, Arps, Slate, Meagher & Flom"
         ]
       },
       "trade_policy": {
-        "n_articles": 117,
-        "n_sources": 97,
-        "z": 0.151,
-        "baseline_points": 78,
+        "n_articles": 119,
+        "n_sources": 99,
+        "z": 0.209,
+        "baseline_points": 79,
         "measure": "키워드별 합산",
-        "n_split": 117,
+        "n_split": 119,
         "saturated": false,
         "top_titles": [
           "Defense Export Controls to be Further Eased - Sandler, Travis & Rosenberg, P.A.",
           "Opinion | A Lesson on the Economics of Tariff Leverage - WSJ",
-          "What impact will the Shenzhen summit have on the US-China trade war? - France 24"
+          "Canada sees little US movement on tariff relief, sources say - Reuters"
         ]
       },
       "pandemic": {
-        "n_articles": 202,
-        "n_sources": 154,
-        "z": 1.246,
-        "baseline_points": 79,
+        "n_articles": 188,
+        "n_sources": 139,
+        "z": 0.921,
+        "baseline_points": 80,
         "measure": "키워드별 합산",
-        "n_split": 202,
+        "n_split": 188,
         "saturated": false,
         "top_titles": [
-          "Person of interest detained as Liberty Hill High School remains on lockdown Thursday afternoon - KVUE",
-          "Five Conroe ISD schools on lockdown; district says no known threat - Houston Chronicle",
-          "BREAKING: Bomb threat prompts lockdown at Alexandria City High School campuses - ALXnow"
+          "Lockdown lifted at Liberty Hill High School; person of interest detained by police - KVUE",
+          "Wisconsin's measles outbreak: Here's what it means for Dane County - Public Health Madison & Dane County",
+          "Zyon McCollum: Playing Lockdown Defense | Salty Dogs - Tampa Bay Buccaneers"
         ]
       },
       "fx_shock": {
-        "n_articles": 6,
-        "n_sources": 6,
-        "z": 1.116,
-        "baseline_points": 79,
+        "n_articles": 5,
+        "n_sources": 5,
+        "z": 0.609,
+        "baseline_points": 80,
         "measure": "키워드별 합산",
-        "n_split": 6,
+        "n_split": 5,
         "saturated": false,
         "top_titles": [
           "Milei’s Legacy Depends on Dollarization - Latinvex",
-          "Lots More on the Protests and Financial Crisis in Iran | Odd Lots - finance.biggo.com",
+          "If I Could Only Own 2 ETFs For The Rest Of My Life - Seeking Alpha",
           "Crack-Up Boom Explained: Is the US Dollar Approaching Its Endgame? - PGurus"
         ]
       },
       "rate_shock": {
         "n_articles": 4,
         "n_sources": 4,
-        "z": -0.77,
-        "baseline_points": 79,
+        "z": -0.763,
+        "baseline_points": 80,
         "measure": "키워드별 합산",
         "n_split": 4,
         "saturated": false,
         "top_titles": [
           "GBP/USD approaches breaking point as US yields surge - StoneX",
-          "Japan bond yields surge to 3.75%, hiding a quiet Bitcoin trap - CryptoSlate",
-          "2 ETFs to Watch for Outsized Volume on European Equities & Bonds - Yahoo Finance Singapore"
+          "Stock Market Today, Nov. 19: Dow Plunges 1,100 Points as the S&P 500 Suffers Its 6th Straight Day of Losses - Yahoo Finance",
+          "Runway Growth Finance: A Near-50% Discount To NAV And A 21% Dividend Yield (Upgrade) - Seeking Alpha"
         ]
       }
     },
