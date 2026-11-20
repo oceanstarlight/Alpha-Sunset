@@ -1,18 +1,18 @@
 {
-  "collected_at": "2026-11-20T11:47:45+00:00",
+  "collected_at": "2026-11-20T20:27:34+00:00",
   "as_of": "2026-11-19",
   "level": "NONE",
   "chain": [
     {
       "단계": "시장 신호(A)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: 미 10년물 금리(DGS10) z=-0.76, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+0.69, VIX(변동성)(VIXCLS) z=-0.46",
+      "근거": "FRED 1일 변화 z-score (직전 252영업일 기준), 규칙: |z| ≥ 2.0 지표 2개 이상 또는 |z| ≥ 4.0. 상위: VIX(변동성)(VIXCLS) z=+1.74, 미 하이일드 스프레드(BAMLH0A0HYM2) z=+0.87, 미 10년물 금리(DGS10) z=-0.76",
       "결과": "비활성"
     },
     {
       "단계": "자금 흐름(C)",
       "원인": "임계 초과 지표 없음",
-      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.90, 미 은행 예금(DPSACBW027SBOG) z=+0.59, 해외 공적 미국채 보관(WMTSECL1) z=-0.81, 지급준비금(WRESBAL) z=+0.47",
+      "근거": "FRED 주간 자금 흐름 (공표 시차 반영), 규칙: |z| ≥ 3.5 하나 이상. 관측: 개인 MMF 잔액(WRMFNS) z=-0.90, 미 은행 예금(DPSACBW027SBOG) z=+0.59, 해외 공적 미국채 보관(WMTSECL1) z=+1.26, 지급준비금(WRESBAL) z=+0.27",
       "결과": "비활성"
     },
     {
@@ -33,11 +33,11 @@
     "active": false,
     "triggered": [],
     "zscores": {
-      "VIXCLS": -0.46,
+      "VIXCLS": 1.74,
       "T10Y2Y": 0.38,
       "DGS10": -0.76,
       "DCOILWTICO": 0.02,
-      "BAMLH0A0HYM2": 0.69
+      "BAMLH0A0HYM2": 0.87
     }
   },
   "flow": {
@@ -46,8 +46,8 @@
     "zscores": {
       "WRMFNS": -0.9,
       "DPSACBW027SBOG": 0.59,
-      "WMTSECL1": -0.81,
-      "WRESBAL": 0.47
+      "WMTSECL1": 1.26,
+      "WRESBAL": 0.27
     }
   },
   "news": {
@@ -58,115 +58,115 @@
     "clusters": [],
     "observations": {
       "banking_stress": {
-        "n_articles": 15,
-        "n_sources": 15,
-        "z": -0.137,
-        "baseline_points": 81,
+        "n_articles": 13,
+        "n_sources": 12,
+        "z": -0.451,
+        "baseline_points": 82,
         "measure": "키워드별 합산",
-        "n_split": 15,
+        "n_split": 13,
         "saturated": false,
         "top_titles": [
-          "Ueno Bank collapse prompts Paraguayans to explore Bitcoin alternatives - TradingView",
-          "Ian Jackson Nearly Kills Rick Pitino Then Scores 22 Points - Yahoo Sports",
-          "Problems at AMD (AMD) - Hunterbrook"
+          "QuickCheck: Did Bank Negara warn the public to withdraw their savings over cyberattack fears? - The Star",
+          "Worker runs: How compensation design can curb contagious departures like that at Weil, Gotschal & Manges - CEPR",
+          "‘We Have A Real Issue’—Sudden Bitcoin Plunge Leaves Crypto Braced For A Massive Price Crash - Forbes"
         ]
       },
       "credit_event": {
-        "n_articles": 85,
-        "n_sources": 75,
-        "z": 0.616,
-        "baseline_points": 80,
+        "n_articles": 71,
+        "n_sources": 60,
+        "z": 0.049,
+        "baseline_points": 81,
         "measure": "키워드별 합산",
-        "n_split": 85,
+        "n_split": 71,
         "saturated": false,
         "top_titles": [
-          "Filing Alert: DKW Communications Chapter 11 - Bondoro",
-          "Ubuntu Core Desktop targets 28.04 debut, with default status in its sights - The Register",
-          "Jade Presents, Tickets300 to remain in Chapter 11 as judge approves liquidation plan - InForum"
+          "Filing Alert: 232 Old River Edge NJ Chapter 11 - Bondoro",
+          "Secure Networking: The New Default for Partner Growth - Cisco Blogs",
+          "King’s BBQ files for Chapter 11 bankruptcy - WITN"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 11,
-        "n_sources": 11,
-        "z": 0.671,
-        "baseline_points": 81,
+        "n_articles": 7,
+        "n_sources": 6,
+        "z": -0.829,
+        "baseline_points": 82,
         "measure": "키워드별 합산",
-        "n_split": 11,
+        "n_split": 7,
         "saturated": false,
         "top_titles": [
-          "Brazil Farm Credit Crunch Deepens as New Rules Make Lending Uneconomical - The AgriBiz",
-          "Sardinia's economy is in turmoil: GDP is rising, but businesses are suffering from price increases, credit crunch, and a job crisis. - L'Unione Sarda",
-          "XAUUSD: Gold Slides Toward $3,500, Heads for Worst Week Since March - TradingView"
+          "XAUUSD: Gold Slides Toward $3,500, Heads for Worst Week Since March - TradingView",
+          "Record profits, yet massive foreign capital outflows! South Korea's stock market faces a liquidity crunch - 富途牛牛",
+          "The Selling Spreads After Anthropic IPO Flops - SilverTrade"
         ]
       },
       "geopolitical": {
-        "n_articles": 142,
-        "n_sources": 126,
-        "z": 0.324,
-        "baseline_points": 80,
+        "n_articles": 128,
+        "n_sources": 121,
+        "z": -0.154,
+        "baseline_points": 81,
         "measure": "키워드별 합산",
-        "n_split": 142,
+        "n_split": 128,
         "saturated": false,
         "top_titles": [
           "The EU extends sanctions to nearly all major Russian banks - European External Action Service (EEAS)",
-          "Rights groups urge sanctions after top UN court finds Myanmar committed genocide against Rohingya - Temple Daily Telegram",
-          "Merz Says Russia Could See Gradual Sanctions Relief in Exchange for Ukraine Peace Concessions - Kyiv Post"
+          "Bellingrath Road resident shot during reported home invasion, MCSO says - FOX10 News",
+          "What's wrong with Manchester City? Boss won't blame looming sanctions - Yahoo Sports"
         ]
       },
       "trade_policy": {
-        "n_articles": 117,
-        "n_sources": 104,
-        "z": 0.149,
-        "baseline_points": 80,
+        "n_articles": 116,
+        "n_sources": 96,
+        "z": 0.118,
+        "baseline_points": 81,
         "measure": "키워드별 합산",
-        "n_split": 117,
+        "n_split": 116,
         "saturated": false,
         "top_titles": [
-          "China's Solar Exports Surge 21% as U.S. Tariff Deadline Looms - Crude Oil Prices Today | OilPrice.com",
-          "Tariff refunds worth millions are helping fund corporate bonuses - Scripps News",
-          "Defense Export Controls to be Further Eased - Sandler, Travis & Rosenberg, P.A."
+          "BIS Issues Export Controls on Remote Access Chips & Rescinds AI Diffusion Rule - Thompson Hine",
+          "The Push and Pull of U.S.-China Trade Policy - Sandler, Travis & Rosenberg, P.A.",
+          "See which Florida companies received millions in Trump tariff refunds - Miami Herald"
         ]
       },
       "pandemic": {
-        "n_articles": 214,
-        "n_sources": 147,
-        "z": 1.479,
-        "baseline_points": 81,
+        "n_articles": 210,
+        "n_sources": 154,
+        "z": 1.364,
+        "baseline_points": 82,
         "measure": "키워드별 합산",
-        "n_split": 214,
+        "n_split": 210,
         "saturated": true,
         "top_titles": [
-          "Quinnipiac University ends lockdown after more than 5 hours of uncertainty over 'possible gunman' - WUSA9",
-          "Quinnipiac lockdown lifted after gunman report - NBC Connecticut",
-          "Zyon McCollum: Playing Lockdown Defense | Salty Dogs - Tampa Bay Buccaneers"
+          "Mandeville High School lockdown lifted following threat - WDSU",
+          "Crescenta Valley High School placed on lockdown after report of possible bomb threat - NBC Los Angeles",
+          "Crescenta Valley High School on lockdown due to reported threat - KTLA"
         ]
       },
       "fx_shock": {
-        "n_articles": 6,
-        "n_sources": 6,
-        "z": 1.097,
-        "baseline_points": 81,
+        "n_articles": 5,
+        "n_sources": 5,
+        "z": 0.59,
+        "baseline_points": 82,
         "measure": "키워드별 합산",
-        "n_split": 6,
+        "n_split": 5,
         "saturated": false,
         "top_titles": [
           "From a long-term perspective, the KOSPI has not fallen for two consecutive years since the currency.. - 매일경제",
-          "Milei’s Legacy Depends on Dollarization - Latinvex",
-          "Peter Schiff says there’s something ‘most investors don’t understand’ about gold as it crashes — is the glitter gone? - Yahoo Finance"
+          "Peter Schiff says there’s something ‘most investors don’t understand’ about gold as it crashes — is the glitter gone? - Yahoo Finance",
+          "The House Article | Putin is closer to breaking Ukraine than Britain’s brave talk admits - Politics Home"
         ]
       },
       "rate_shock": {
-        "n_articles": 9,
+        "n_articles": 8,
         "n_sources": 7,
-        "z": 0.231,
-        "baseline_points": 81,
+        "z": 0.031,
+        "baseline_points": 82,
         "measure": "키워드별 합산",
-        "n_split": 9,
+        "n_split": 8,
         "saturated": false,
         "top_titles": [
           "GBP/USD approaches breaking point as US yields surge - StoneX",
           "Gold and bitcoin face pressure as U.S. real yields surge - Traders Union",
-          "United CFO Plays Down JetBlue Deal Chatter: ‘Very Large Debt Balance’ - Skift"
+          "Argentina Hit Hard by Global Turmoil as Bonds Slip Into Distress - Bloomberg.com"
         ]
       }
     },
