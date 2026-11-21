@@ -1,5 +1,5 @@
 {
-  "collected_at": "2026-11-21T02:23:33+00:00",
+  "collected_at": "2026-11-21T11:14:13+00:00",
   "as_of": "2026-11-20",
   "level": "NONE",
   "chain": [
@@ -60,113 +60,113 @@
       "banking_stress": {
         "n_articles": 10,
         "n_sources": 10,
-        "z": -0.922,
-        "baseline_points": 83,
+        "z": -0.912,
+        "baseline_points": 84,
         "measure": "키워드별 합산",
         "n_split": 10,
         "saturated": false,
         "top_titles": [
+          "ALEXANDER JONES: Purple as a mountain sunset - The Sanford Herald",
           "Fed's Cook says central bank watching AI industry financing - AOL.com",
-          "What Happened To Big Law? - Defector",
-          "‘We Have A Real Issue’—Sudden Bitcoin Plunge Leaves Crypto Braced For A Massive Price Crash - Forbes"
+          "What Happened To Big Law? - Defector"
         ]
       },
       "credit_event": {
-        "n_articles": 63,
-        "n_sources": 50,
-        "z": -0.273,
-        "baseline_points": 82,
+        "n_articles": 54,
+        "n_sources": 47,
+        "z": -0.636,
+        "baseline_points": 83,
         "measure": "키워드별 합산",
-        "n_split": 63,
+        "n_split": 54,
         "saturated": false,
         "top_titles": [
+          "King’s BBQ files for Chapter 11 bankruptcy - WITN",
           "Secure Networking: The New Default for Partner Growth - Cisco Blogs",
-          "Filing Alert: 232 Old River Edge NJ Chapter 11 - Bondoro",
-          "KFC franchisee Tasty Chick’n files for Chapter 11 bankruptcy after three years of falling sales - Click2Houston"
+          "Filing Alert: 232 Old River Edge NJ Chapter 11 - Bondoro"
         ]
       },
       "liquidity_crisis": {
-        "n_articles": 8,
-        "n_sources": 7,
-        "z": -0.447,
-        "baseline_points": 83,
+        "n_articles": 13,
+        "n_sources": 9,
+        "z": 1.438,
+        "baseline_points": 84,
         "measure": "키워드별 합산",
-        "n_split": 8,
+        "n_split": 13,
         "saturated": false,
         "top_titles": [
           "Gold and silver suffer brutal losses as liquidity crunch deepens, but analysts see signs of a bottom - Kitco",
-          "XAUUSD: Gold Slides Toward $3,500, Heads for Worst Week Since March - TradingView",
-          "Record profits, yet massive foreign capital outflows! South Korea's stock market faces a liquidity crunch - 富途牛牛"
+          "PTAP/C19 – The \"Last Resort\" For Ginnie Mae Issuers Facing A Liquidity Crunch - Legal 500",
+          "Liquidity Crunch Spreads From Stocks, Gold to Crypto, Triggering $2.3 Billion in Liquidations - bloomingbit"
         ]
       },
       "geopolitical": {
-        "n_articles": 139,
-        "n_sources": 122,
-        "z": 0.223,
-        "baseline_points": 82,
+        "n_articles": 133,
+        "n_sources": 115,
+        "z": 0.015,
+        "baseline_points": 83,
         "measure": "키워드별 합산",
-        "n_split": 139,
+        "n_split": 133,
         "saturated": false,
         "top_titles": [
           "Rights groups urge sanctions after ICJ finds Myanmar guilty of genocide against Rohingya - PBS",
-          "After license revocation and prison, Iowa attorney faces more sanctions - Iowa Capital Dispatch",
-          "US Treasury sanctions Iranian 'trustees' collecting oil revenues - Reuters"
+          "US Treasury sanctions Iranian 'trustees' collecting oil revenues - Reuters",
+          "Housekeeper held down during Encino home invasion - NBC Los Angeles"
         ]
       },
       "trade_policy": {
-        "n_articles": 110,
-        "n_sources": 96,
-        "z": -0.06,
-        "baseline_points": 82,
+        "n_articles": 101,
+        "n_sources": 87,
+        "z": -0.329,
+        "baseline_points": 83,
         "measure": "키워드별 합산",
-        "n_split": 110,
+        "n_split": 101,
         "saturated": false,
         "top_titles": [
-          "BIS Issues Export Controls on Remote Access Chips & Rescinds AI Diffusion Rule - Thompson Hine",
-          "Tariff refunds for public companies - FlowingData",
-          "U.S. senator says Canada should make interim tariff agreement, let Congress 'legislate' long-term deal - Yahoo News Canada"
+          "Export controls are broader than you think, but they buy more security with coordination - CEPR",
+          "Updates on the evolving tariff landscape for pharmaceutical and medical device companies - PwC",
+          "BIS Issues Export Controls on Remote Access Chips & Rescinds AI Diffusion Rule - Thompson Hine"
         ]
       },
       "pandemic": {
-        "n_articles": 190,
-        "n_sources": 146,
-        "z": 0.908,
-        "baseline_points": 83,
+        "n_articles": 146,
+        "n_sources": 119,
+        "z": -0.054,
+        "baseline_points": 84,
         "measure": "키워드별 합산",
-        "n_split": 190,
+        "n_split": 146,
         "saturated": false,
         "top_titles": [
           "Pennsylvania reports 8th measles death as outbreak continues - American Hospital Association",
-          "Students dismissed after brief lockdown lifted at Port Charlotte High School Friday afternoon - Gulf Coast News and Weather",
-          "US measles cases near 6,000 mark as outbreak worsens - Reuters"
+          "US measles cases near 6,000 mark as outbreak worsens - Reuters",
+          "Students dismissed after brief lockdown lifted at Port Charlotte High School Friday afternoon - Gulf Coast News and Weather"
         ]
       },
       "fx_shock": {
-        "n_articles": 5,
-        "n_sources": 5,
-        "z": 0.585,
-        "baseline_points": 83,
+        "n_articles": 3,
+        "n_sources": 3,
+        "z": -0.414,
+        "baseline_points": 84,
         "measure": "키워드별 합산",
-        "n_split": 5,
+        "n_split": 3,
         "saturated": false,
         "top_titles": [
-          "From a long-term perspective, the KOSPI has not fallen for two consecutive years since the currency.. - 매일경제",
-          "Peter Schiff says there’s something ‘most investors don’t understand’ about gold as it crashes — is the glitter gone? - Yahoo Finance",
-          "Shilling returns to Ksh130 as reports point to competing pressures - 5050 Markets"
+          "Peter Schiff Says Gold's $2,000 Pullback Could Be A Warning — 'Stocks Will Ultimately Fall Much Further' - Yahoo Finance",
+          "Shilling returns to Ksh130 as reports point to competing pressures - 5050 Markets",
+          "Why Kenyan shilling crossing Ksh130 against dollar may not signal a crisis - People Daily"
         ]
       },
       "rate_shock": {
-        "n_articles": 8,
-        "n_sources": 5,
-        "z": 0.031,
-        "baseline_points": 83,
+        "n_articles": 9,
+        "n_sources": 6,
+        "z": 0.232,
+        "baseline_points": 84,
         "measure": "키워드별 합산",
-        "n_split": 8,
+        "n_split": 9,
         "saturated": false,
         "top_titles": [
-          "GBP/USD approaches breaking point as US yields surge - StoneX",
-          "Gold and bitcoin face pressure as U.S. real yields surge - Traders Union",
-          "Argentina Hit Hard by Global Turmoil as Bonds Slip Into Distress - Bloomberg.com"
+          "Argentina Hit Hard by Global Turmoil as Bonds Slip Into Distress - Bloomberg.com",
+          "Argentina Bonds Enter Distressed Territory for First Time in Two Years Amid Global Risk-Off - TradingView",
+          "Tech Stocks Suffer Worst Week Since 2020 as Anthropic Faces Day Two Decline - Morningstar"
         ]
       }
     },
